@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/public/legalDeclaration-addedit';
-import {showSucMsg, getQueryString} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import { Form } from 'antd';
+import { getQueryString } from 'common/js/util';
+import DetailUtil from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.publicLegalDeclarationAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class LegalDeclarationAddedit extends React.Component {
+@Form.create()
+class LegalDeclarationAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

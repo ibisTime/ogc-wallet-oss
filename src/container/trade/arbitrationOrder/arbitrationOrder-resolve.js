@@ -1,21 +1,11 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/trade/arbitrationOrder/arbitrationOrder-resolve';
+import { Form } from 'antd';
 import {getQueryString, moneyFormat, showSucMsg, getUserId} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
-@DetailWrapper(
-    state => state.tradeArbitrationOrderResolve,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class ArbitrationOrderResolve extends React.Component {
+@Form.create()
+class ArbitrationOrderResolve extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

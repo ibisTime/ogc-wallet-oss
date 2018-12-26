@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/public/warmReminding-addedit';
-import {showSucMsg, getQueryString} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import { Form } from 'antd';
+import { getQueryString } from 'common/js/util';
+import DetailUtil from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.publicWarmRemindingAddedit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class WarmRemindingAddedit extends React.Component {
+@Form.create()
+class WarmRemindingAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

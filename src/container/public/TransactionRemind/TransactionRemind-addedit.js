@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/public/TransactionRemind-addedit';
-import {showSucMsg, getQueryString} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import { Form } from 'antd';
+import { getQueryString } from 'common/js/util';
+import DetailUtil from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.publicTransactionRemindAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class TransactionRemindAddedit extends React.Component {
+@Form.create()
+class TransactionRemindAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

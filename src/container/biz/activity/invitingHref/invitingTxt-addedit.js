@@ -1,21 +1,11 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/activity/invitingHref/invitingTxt-addedit';
-import {showSucMsg} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import { Form } from 'antd';
+import { showSucMsg } from 'common/js/util';
+import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
-@DetailWrapper(
-    state => state.activityInvitingTxtAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class InvitingTxtAddedit extends React.Component {
+@Form.create()
+class InvitingTxtAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'id',

@@ -1,21 +1,11 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/user/kycCheck/kycCheck-addedit';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, getUserName, showSucMsg} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
-@DetailWrapper(
-    state => state.userKycCheckAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class KycCheckAddedit extends React.Component {
+@Form.create()
+class KycCheckAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

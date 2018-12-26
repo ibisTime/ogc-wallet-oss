@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/system/assign';
-import {getQueryString} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import { Form } from 'antd';
+import { getQueryString } from 'common/js/util';
+import DetailUtil from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.systemAssign,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class Assign extends React.Component {
+@Form.create()
+class Assign extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('userId', this.props.location.search);

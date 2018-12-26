@@ -1,22 +1,12 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/user/channelDealerCommissions/channelDealerCommissions-settlement';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat, dateTimeFormat, showSucMsg, dateFormat} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 import {CION_FMVP} from 'common/js/config';
 
-@DetailWrapper(
-    state => state.userChannelDealerCommissionsSettlement,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class ChannelDealerCommissionsSettlement extends React.Component {
+@Form.create()
+class ChannelDealerCommissionsSettlement extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

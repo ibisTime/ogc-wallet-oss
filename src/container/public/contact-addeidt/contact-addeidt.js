@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/public/contact-addedit';
-import {showSucMsg, getQueryString} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import { Form } from 'antd';
+import { getQueryString } from 'common/js/util';
+import DetailUtil from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.publicContactAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class ContactAddeidt extends React.Component {
+@Form.create()
+class ContactAddeidt extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

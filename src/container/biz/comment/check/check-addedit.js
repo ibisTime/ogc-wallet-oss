@@ -1,21 +1,11 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/biz/comment/check-addedit';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat, getUserId, showSucMsg, dateTimeFormat} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
-@DetailWrapper(
-    state => state.commentCheckAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class CheckAddEdit extends React.Component {
+@Form.create()
+class CheckAddEdit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

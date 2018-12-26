@@ -1,21 +1,11 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/accept/payment/payment-addedit';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 import {SYS_USER, CION_FMVP} from 'common/js/config';
 
-@DetailWrapper(
-    state => state.acceptPaymentAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class PaymentAddedit extends React.Component {
+@Form.create()
+class PaymentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

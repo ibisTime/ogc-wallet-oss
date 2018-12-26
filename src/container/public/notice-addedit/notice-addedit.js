@@ -1,22 +1,12 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/public/notice-addedit';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, getUserName, showSucMsg} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 import {SYSTEM_CODE} from 'common/js/config';
 import fetch from 'common/js/fetch';
 
-@DetailWrapper(
-    state => state.publicNoticeAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class NoticeAddEdit extends React.Component {
+@Form.create()
+class NoticeAddEdit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

@@ -1,21 +1,11 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/accept/buyOrder/buyOrder-addedit';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
-@DetailWrapper(
-    state => state.acceptBuyOrderAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class BuyOrderAddedit extends React.Component {
+@Form.create()
+class BuyOrderAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

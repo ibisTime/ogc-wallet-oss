@@ -1,14 +1,14 @@
 import CalendarLocale from 'rc-calendar/lib/locale/zh_CN';
 
 const locale = {
-    lang: {
-        placeholder: '请选择日期',
-        rangePlaceholder: ['开始日期', '结束日期'],
-        ...CalendarLocale
-    },
-    timePickerLocale: {
-        placeholder: '请选择时间'
-    }
+  lang: {
+    placeholder: '请选择日期',
+    rangePlaceholder: ['开始日期', '结束日期'],
+    ...CalendarLocale
+  },
+  timePickerLocale: {
+    placeholder: '请选择时间'
+  }
 };
 
 // should add whitespace between char in Button

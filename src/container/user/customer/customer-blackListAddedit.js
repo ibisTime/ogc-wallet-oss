@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/user/customer/customer-blackListAddedit';
+import { Form } from 'antd';
 import {getQueryString, getUserName} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import DetailUtil from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.userCustomerBlackListAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class CustomerAddedit extends React.Component {
+@Form.create()
+class CustomerBlackListAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -57,4 +47,4 @@ class CustomerAddedit extends React.Component {
     }
 }
 
-export default CustomerAddedit;
+export default CustomerBlackListAddedit;

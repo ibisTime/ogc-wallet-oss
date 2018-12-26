@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/system/user-resetPwd';
+import { Form } from 'antd';
 import {getQueryString, getUserName} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
+import DetailUtil from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.systemUserResetPwd,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class UserResetPwd extends React.Component {
+@Form.create()
+class UserResetPwd extends DetailUtil {
     constructor(props) {
         super(props);
         this.userId = getQueryString('userId', this.props.location.search);

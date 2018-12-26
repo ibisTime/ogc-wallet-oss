@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/user/historyDivideList/historyDivideList-divide';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, getUserId} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.userHistoryDivideListDivide,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class HistoryDivideListDivide extends React.Component {
+@Form.create()
+class HistoryDivideListDivide extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);

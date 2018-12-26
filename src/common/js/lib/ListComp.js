@@ -1,25 +1,24 @@
 import React from 'react';
-import {getWorkbook} from 'common/js/xlsx-util';
-import {Form, Select, DatePicker, Input, Button, Table} from 'antd';
+import { getWorkbook } from 'common/js/xlsx-util';
+import { Form, Select, DatePicker, Input, Button, Table } from 'antd';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import {
     moneyFormat, dateTimeFormat, dateFormat, tempString,
-    showWarnMsg, showSucMsg, showDelConfirm, getUserId,
-    dateListFormat, getUserName
+    showWarnMsg, showSucMsg, showDelConfirm, getUserId
 } from 'common/js/util';
-import {PIC_PREFIX} from 'common/js/config';
-import {getOwnerBtns} from 'api/menu';
-import {getDictList} from 'api/dict';
-import {getCoinList} from 'api/coin';
+import { PIC_PREFIX } from 'common/js/config';
+import { getOwnerBtns } from 'api/menu';
+import { getDictList } from 'api/dict';
 import fetch from 'common/js/fetch';
+import CSearchSelect from 'component/cSearchSelect/cSearchSelect';
 import locale from './date-locale';
 import cityData from './city';
 
 moment.locale('zh-cn');
 const FormItem = Form.Item;
 const Option = Select.Option;
-const {RangePicker} = DatePicker;
+const { RangePicker } = DatePicker;
 const DATE_FORMAT = 'YYYY-MM-DD';
 const DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
@@ -39,17 +38,13 @@ export default class ListComponent extends React.Component {
             searchParams: {}
         };
     }
-    componentDidMount() {
-        let _this = this;
-        this.setCoinDate();
-    }
+
     buildList = (options) => {
         this.options = {
             ...this.options,
             ...options
         };
         if (this.first) {
-            this.setCoinDate();
             this.options.pageCode && this.getPageData();
             if (this.options.buttons) {
                 this.addOwnerBtns();
@@ -108,11 +103,11 @@ export default class ListComponent extends React.Component {
                 obj.render = f.render;
             } else {
                 obj.render = (v) => {
-                    return f.nowrap ? <span style={{whiteSpace: 'nowrap'}}>{dateListFormat(v)}</span> : dateListFormat(v);
+                    return f.nowrap ? <span style={{whiteSpace: 'nowrap'}}>{dateFormat(v)}</span> : dateFormat(v);
                 };
-                this.addRender(f, dateListFormat);
+                this.addRender(f, dateFormat);
             }
-        } else if (f.type === 'select' || f.type === 'provSelect') {
+        } else if (f.type === 'select' || f.type === 'provSelect' || f.type === 'citySelect') {
             if (f.key) {
                 f.keyName = f.keyName || 'dkey';
                 f.valueName = f.valueName || 'dvalue';
@@ -140,13 +135,11 @@ export default class ListComponent extends React.Component {
             }
             this.addRender(f, (val) => this.renderSelect(val, f));
         } else if (f.type === 'img') {
-            obj.render = (value) => <img src={PIC_PREFIX + value}/>;
+            obj.render = (value) => value ? <img style={{maxWidth: 40, maxHeight: 40}} src={PIC_PREFIX + value}/> : '';
         }
-        if (f.amount || f.coinAmount) {
-            obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, '', f.coin)}</span>;
-            if (!f.render) {
-                f.render = (v, d) => moneyFormat(v, '', f.coin);
-            }
+        if (f.amount) {
+            obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, d)}</span>;
+            this.addRender(f, moneyFormat);
         }
         if (!obj.render) {
             if (f.render) {
@@ -158,30 +151,6 @@ export default class ListComponent extends React.Component {
         }
 
         callback && callback(obj);
-    }
-
-    // 获取已有币种， 保存币种列表
-    setCoinDate = () => {
-        getCoinList().then(data => {
-            let coinList = [];
-            let coinData = {};
-            data.map(d => {
-                coinData[d.symbol] = {
-                    coin: d.symbol,
-                    unit: '1e' + d.unit,
-                    name: d.cname,
-                    type: d.type,
-                    status: d.status
-                };
-                coinList.push({
-                    key: d.symbol,
-                    value: d.cname
-                });
-            });
-
-            window.sessionStorage.setItem('coinData', JSON.stringify(coinData));
-            window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
-        });
     }
 
     renderSelect(value, f) {
@@ -213,31 +182,27 @@ export default class ListComponent extends React.Component {
             ...this.getRealSearchParams(this.props.searchParam),
             ...this.options.searchParams
         }).then(data => {
-            if(!data.list && data.length > 0) {
-                data.list = data;
-                data.totalCount = data.length;
-            }
             if (!data.list.length) {
                 this.props.cancelFetching();
                 showWarnMsg('暂无数据');
             } else {
-                    let titles = [];
-                    let bodys = [];
-                    data.list.forEach((d, i) => {
-                        let temp = [];
-                        this.options.fields.forEach(f => {
-                            if (i === 0) {
-                                titles.push(f.title);
-                            }
-                            temp.push(f.render(d[f.field], d));
-                        });
-                        bodys.push(temp);
+                let titles = [];
+                let bodys = [];
+                data.list.forEach((d, i) => {
+                    let temp = [];
+                    this.options.fields.forEach(f => {
+                        if (i === 0) {
+                            titles.push(f.title);
+                        }
+                        temp.push(f.render(d[f.field], d));
                     });
-                    let result = [titles].concat(bodys);
-                    const wb = getWorkbook();
-                    wb.getSheet(result, 'SheetJS');
-                    wb.downloadXls('表格导出');
-                    this.props.cancelFetching();
+                    bodys.push(temp);
+                });
+                let result = [titles].concat(bodys);
+                const wb = getWorkbook();
+                wb.getSheet(result, 'SheetJS');
+                wb.downloadXls('表格导出');
+                this.props.cancelFetching();
             }
         }).catch(this.props.cancelFetching);
     }
@@ -344,7 +309,6 @@ export default class ListComponent extends React.Component {
                     let keyName = this.options.rowKey || 'code';
                     let param = {};
                     param[keyName] = selectedRowKeys[0];
-                    param.updater = getUserName();
                     this.options.beforeDelete && this.options.beforeDelete(param);
                     this.props.doFetching();
                     fetch(this.options.deleteCode, param).then(data => {
@@ -361,7 +325,7 @@ export default class ListComponent extends React.Component {
         switch (url) {
             case 'add':
                 btnEvent.add
-                    ? btnEvent.add()
+                    ? btnEvent.add(this.state.selectedRowKeys, this.state.selectedRows)
                     : this.props.history.push(`${this.props.location.pathname}/addedit`);
                 break;
             case 'edit':
@@ -375,7 +339,7 @@ export default class ListComponent extends React.Component {
                     : this.goDetail(true);
                 break;
             case 'delete':
-                btnEvent.delete
+                btnEvent.detail
                     ? btnEvent.delete(this.state.selectedRowKeys, this.state.selectedRows)
                     : this.delete();
                 break;
@@ -411,13 +375,6 @@ export default class ListComponent extends React.Component {
 
     getOwnerBtns() {
         getOwnerBtns(this.props.parentCode).then(data => {
-            /*
-            * @hss, 2018/09/18
-            * happyMoney 修改菜单排序
-            * */
-            data.sort((x, y) => {
-                return x['orderNo'].localeCompare(y['orderNo']);
-            });
             this.props.setBtnList(data);
         }).catch(() => {
         });
@@ -462,15 +419,11 @@ export default class ListComponent extends React.Component {
             ...searchParam
         }).then(data => {
             this.props.cancelFetching();
-            if(!data.list && data.length > 0) {
-                data = data.map((d, i) => ({
-                    ...d,
-                    code: i
-                }));
-                data.list = data;
-                data.totalCount = data.length;
+            if (data instanceof Array) {
+                this.props.setTableData(data);
+            } else {
+                this.props.setTableData(data.list);
             }
-            this.props.setTableData(data.list);
             this.props.setPagination({
                 ...pagination,
                 current,
@@ -495,7 +448,6 @@ export default class ListComponent extends React.Component {
         if (this.options.userDataAfter) {
             useData = this.options.userDataAfter(useData);
         }
-
         return (
             <div>
                 {searchFields.length ? (
@@ -531,13 +483,17 @@ export default class ListComponent extends React.Component {
         const {getFieldDecorator} = this.props.form;
         const children = [];
         fields.forEach(v => {
-            children.push(
-                <FormItem key={v.field} label={v.title}>
-                    {getFieldDecorator(`${v.field}`, {initialValue: this.props.searchParam[v.field]})(
-                        this.getItemByType(v.type, v)
-                    )}
-                </FormItem>
-            );
+            if (v.type === 'select' && v.pageCode) {
+              children.push(this.getItemByType(v.type, v));
+            } else {
+              children.push(
+                  <FormItem key={v.field} label={v.title}>
+                      {getFieldDecorator(`${v.field}`, {initialValue: this.props.searchParam[v.field]})(
+                          this.getItemByType(v.type, v)
+                      )}
+                  </FormItem>
+              );
+            }
         });
         children.push(
             <FormItem key='searchBtn'>
@@ -551,6 +507,7 @@ export default class ListComponent extends React.Component {
     getItemByType(type, item) {
         switch (type) {
             case 'provSelect':
+            case 'citySelect':
             case 'select':
                 return item.pageCode ? this.getSearchSelectItem(item) : this.getSelectItem(item);
             case 'date':
@@ -578,21 +535,42 @@ export default class ListComponent extends React.Component {
         </Select>;
     }
 
+    // getSearchSelectItem(item) {
+    //     return <Select
+    //         mode="combobox"
+    //         showArrow={false}
+    //         filterOption={false}
+    //         onSearch={v => this.searchSelectChange(v, item)}
+    //         optionLabelProp="children"
+    //         style={{width: 200}}
+    //         placeholder="请输入关键字搜索">
+    //         {item.data ? item.data.map(d => (
+    //             <Option key={d[item.keyName]} value={d[item.keyName]}>
+    //                 {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d)}
+    //             </Option>
+    //         )) : null}
+    //     </Select>;
+    // }
+    // 获取搜索框类型的控件
     getSearchSelectItem(item) {
-        return <Select
-            mode="combobox"
-            showArrow={false}
-            filterOption={false}
-            onSearch={v => this.searchSelectChange(v, item)}
-            optionLabelProp="children"
-            style={{width: 200}}
-            placeholder="请输入关键字搜索">
-            {item.data ? item.data.map(d => (
-                <Option key={d[item.keyName]} value={d[item.keyName]}>
-                    {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d)}
-                </Option>
-            )) : null}
-        </Select>;
+      const props = {
+        initVal: this.props.searchParam[item.field],
+        params: item.params,
+        rules: [],
+        inline: true,
+        pageCode: item.pageCode,
+        searchName: item.searchName,
+        field: item.field,
+        label: item.title,
+        keyName: item.keyName,
+        valueName: item.valueName,
+        onChange: item.onChange,
+        getFieldDecorator: this.props.form.getFieldDecorator,
+        getFieldValue: this.props.form.getFieldValue,
+        getFieldError: this.props.form.getFieldError,
+        isLoaded: true
+      };
+      return <CSearchSelect key={item.field} {...props} />;
     }
 
     getDateItem(item, isTime = false) {

@@ -6,12 +6,9 @@ import {
     dateFormat
 } from 'common/js/util';
 import {getRoleList} from 'api/company';
-import {getPageMyNotice, getPageMyCompanysystem} from 'api/home';
+// import {getPageMyNotice, getPageMyCompanysystem} from 'api/home';
 import './home.css';
 import userPhoto from '../../images/home-userPhoto.png';
-// import iconMore from '../../images/home-icon-more.png';
-// import noData from '../../images/noData.png';
-// import iconLi from '../../images/home-icon-li.png';
 
 class Home extends React.Component {
     constructor(props) {

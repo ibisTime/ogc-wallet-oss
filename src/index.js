@@ -21,7 +21,7 @@ const Dashboard = asyncComponent(() => import('component/dashboard/dashboard'));
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <div>
+            <div style={{height: '100%'}}>
                 <AuthRoute></AuthRoute>
                 <Switch>
                     <Route path='/login' component={Login}></Route>

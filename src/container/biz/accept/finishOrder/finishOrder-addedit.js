@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-    initStates,
-    doFetching,
-    cancelFetching,
-    setSelectData,
-    setPageData,
-    restore
-} from '@redux/trade/finishOrder/finishOrder-addedit';
+import { Form } from 'antd';
+import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat} from 'common/js/util';
-import {DetailWrapper} from 'common/js/build-detail';
 
-@DetailWrapper(
-    state => state.tradeFinishOrderAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
-)
-class FinishOrderAddedit extends React.Component {
+@Form.create()
+class FinishOrderAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
