@@ -169,6 +169,26 @@ import { statisticsOTCTransactions } from './redux/statistics/OTCTransactions/OT
 import { statisticsUserBBProfitLoss } from './redux/statistics/userBBProfitLoss/userBBProfitLoss';
 // 用户返佣统计
 import { statisticsUserReturnCommission } from './redux/statistics/userReturnCommission/userReturnCommission';
+// 应用列表管理
+import { bizApplicationList } from './redux/biz/applicationList/applicationList';
+import { bizApplicationListHelpSet } from './redux/biz/applicationList/applicationListHelpSet';
+
+// 量化理财管理
+import { bizBuyAgreement } from './redux/biz/financial/buyAgreement';
+import { bizInvestFlow } from './redux/biz/financial/investFlow';
+import { bizInvestFlowAll } from './redux/biz/financial/investFlowAll';
+import { bizProductsApprove } from './redux/biz/financial/productsApprove';
+import { bizProductsRaise } from './redux/biz/financial/productsRaise';
+import { bizProductsRaisefail } from './redux/biz/financial/productsRaisefail';
+import { bizProductsRaiseSuccess } from './redux/biz/financial/productsRaiseSuccess';
+import { bizProductsRepay } from './redux/biz/financial/productsRepay';
+import { bizRepaymentPlan } from './redux/biz/financial/repaymentPlan';
+import { bizProducts } from './redux/biz/financial/products';
+import { bizSetDivRate } from './redux/biz/financial/setDivRate';
+
+// 红包管理
+import { bizReceiveQuery } from './redux/biz/redPacket/receiveQuery';
+import { bizRedPacketQuery } from './redux/biz/redPacket/redPacketQuery';
 
 export default combineReducers({
     user,
@@ -278,5 +298,22 @@ export default combineReducers({
     statisticsOTCClosingTime,
     statisticsOTCTransactions,
     statisticsUserBBProfitLoss,
-    statisticsUserReturnCommission
+    statisticsUserReturnCommission,
+    // 应用列表管理
+    bizApplicationList,
+    bizApplicationListHelpSet,
+    bizBuyAgreement,
+    bizInvestFlow,
+    bizInvestFlowAll,
+    bizProductsApprove,
+    bizProductsRaise,
+    bizProductsRaisefail,
+    bizProductsRaiseSuccess,
+    bizProductsRepay,
+    bizRepaymentPlan,
+    bizProducts,
+    bizSetDivRate,
+    // 红包管理
+    bizReceiveQuery,
+    bizRedPacketQuery
 });

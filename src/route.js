@@ -590,6 +590,76 @@ const ROUTES = [
     {
         path: '/statistics/userReturnCommission',
         component: asyncComponent(() => import('container/statistics/userReturnCommission/userReturnCommission'))
+    },
+    // 系统管理 -- 应用平台管理
+    {
+        path: '/biz/applicationList',
+        component: asyncComponent(() => import('container/biz/applicationList/applicationList'))
+    },
+    // 系统管理 -- 应用平台管理 - 新增修改
+    {
+        path: '/biz/applicationList/addedit',
+        component: asyncComponent(() => import('container/biz/applicationList/applicationList-addedit'))
+    },
+    // 系统管理 -- 应用平台管理 - 问答
+    {
+        path: '/biz/applicationList/applicationListHelpSet',
+        component: asyncComponent(() => import('container/biz/applicationList/applicationListHelpSet'))
+    },
+    // 系统管理 -- 应用平台管理 - 问答 - 新增修改
+    {
+        path: '/biz/applicationList/applicationListHelpSet/addedit',
+        component: asyncComponent(() => import('container/biz/applicationList/applicationListHelpSet-addedit'))
+    },
+    // 系统管理 -- 量化理财管理-产品管理
+    {
+        path: '/bizFinancial/products',
+        component: asyncComponent(() => import('container/biz/financial/products/products'))
+    },
+    // 系统管理 -- 量化理财管理-产品管理-新增修改
+    {
+        path: '/bizFinancial/products/addedit',
+        component: asyncComponent(() => import('container/biz/financial/products/products-addedit'))
+    },
+    // 系统管理 -- 量化理财管理-产品管理-审核详情
+    {
+        path: '/bizFinancial/products/detail',
+        component: asyncComponent(() => import('container/biz/financial/products/products-detail'))
+    },
+    // 系统管理 -- 量化理财管理-待上架产品
+    {
+        path: '/bizFinancial/productsApprove',
+        component: asyncComponent(() => import('container/biz/financial/order/productsApprove'))
+    },
+    // 系统管理 -- 量化理财管理-募集中产品
+    {
+        path: '/bizFinancial/productsRaise',
+        component: asyncComponent(() => import('container/biz/financial/order/productsRaise'))
+    },
+    // 系统管理 -- 量化理财管理-募集成功产品
+    {
+        path: '/bizFinancial/productsRaiseSuccess',
+        component: asyncComponent(() => import('container/biz/financial/order/productsRaiseSuccess'))
+    },
+    // 系统管理 -- 量化理财管理-募集失败产品
+    {
+        path: '/bizFinancial/productsRaisefail',
+        component: asyncComponent(() => import('container/biz/financial/order/productsRaisefail'))
+    },
+    // 系统管理 -- 量化理财管理-已还款产品
+    {
+        path: '/bizFinancial/productsRepay',
+        component: asyncComponent(() => import('container/biz/financial/order/productsRepay'))
+    },
+    // 系统管理 -- 红包管理-红包查询
+    {
+        path: '/biz/redPacketQuery',
+        component: asyncComponent(() => import('container/biz/redPacket/redPacketQuery'))
+    },
+    // 系统管理 -- 红包管理-详情
+    {
+        path: '/biz/redPacketQuery/addedit',
+        component: asyncComponent(() => import('container/biz/redPacket/redPacketQuery-addedit'))
     }
 ];
 
