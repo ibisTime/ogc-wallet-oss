@@ -101,8 +101,8 @@ class ProductsRaiseSuccess extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '625510',
-            searchParams:{
-                statusList:['7']
+            searchParams: {
+                statusList: ['7']
             },
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {

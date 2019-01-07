@@ -37,7 +37,7 @@ class RedPacketQuery extends React.Component {
             title: '用户',
             field: 'userId',
             formatter: function (v, data) {
-                return data.sendUserMobile + '(' + data.sendUserNickname + ')'
+                return data.sendUserMobile + '(' + data.sendUserNickname + ')';
             },
             type: 'select',
             pageCode: '805120',
