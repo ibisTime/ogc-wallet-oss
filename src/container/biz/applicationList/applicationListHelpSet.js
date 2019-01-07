@@ -14,7 +14,8 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showSucMsg,
+    getQueryString
 } from 'common/js/util';
 
 @listWrapper(
@@ -28,28 +29,46 @@ import {
     }
 )
 class ApplicationListHelpSet extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = getQueryString('code', this.props.location.search);
+    }
     render() {
         const fields = [{
-            title: '备注',
-            field: 'remark'
+            title: 'id',
+            field: 'id',
+            visible: false
+        }, {
+            title: '问题',
+            field: 'question',
+            search: true
+        }, {
+            title: '序号',
+            field: 'orderNo'
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '625410',
-            btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                        // } else if (selectedRows[0].status !== '1') {
-                        //     showWarnMsg('当前记录不可修改');
-                    } else {
-                        this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
-                    }
+            pageCode: '625425',
+            searchParams: {
+                refType: 'DAPP',
+                refCode: this.code
+            },
+            deleteCode: '625421',
+            btnEvent: [{
+                code: 'add',
+                name: '新增'
+            }, {
+                code: 'add',
+                name: '修改'
+            }, {
+                code: 'goBack',
+                name: '返回',
+                check: false,
+                handler: () => {
+                    this.props.history.push(-1);
                 }
-            }
+            }]
         });
     }
 }

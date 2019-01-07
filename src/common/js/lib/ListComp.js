@@ -10,6 +10,7 @@ import {
 import { PIC_PREFIX } from 'common/js/config';
 import { getOwnerBtns } from 'api/menu';
 import { getDictList } from 'api/dict';
+import {getCoinList} from 'api/coin';
 import fetch from 'common/js/fetch';
 import CSearchSelect from 'component/cSearchSelect/cSearchSelect';
 import locale from './date-locale';
@@ -38,7 +39,33 @@ export default class ListComponent extends React.Component {
             searchParams: {}
         };
     }
+    componentDidMount() {
+        let _this = this;
+        this.setCoinDate();
+    }
+    // 获取已有币种， 保存币种列表
+    setCoinDate = () => {
+        getCoinList().then(data => {
+            let coinList = [];
+            let coinData = {};
+            data.map(d => {
+                coinData[d.symbol] = {
+                    coin: d.symbol,
+                    unit: '1e' + d.unit,
+                    name: d.cname,
+                    type: d.type,
+                    status: d.status
+                };
+                coinList.push({
+                    key: d.symbol,
+                    value: d.cname
+                });
+            });
 
+            window.sessionStorage.setItem('coinData', JSON.stringify(coinData));
+            window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
+        });
+    }
     buildList = (options) => {
         this.options = {
             ...this.options,

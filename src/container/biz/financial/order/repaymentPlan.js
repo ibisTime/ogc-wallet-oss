@@ -14,7 +14,8 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showSucMsg,
+    getQueryString
 } from 'common/js/util';
 
 @listWrapper(
@@ -28,15 +29,66 @@ import {
     }
 )
 class RepaymentPlan extends React.Component {
+    constructor(props) {
+        super(props);
+        this.productCode = getQueryString('productCode', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search);
+        this.status = getQueryString('status', this.props.location.search);
+    }
     render() {
         const fields = [{
-            title: '备注',
-            field: 'remark'
+            title: '应还本金',
+            field: 'principalTotal',
+            render: function (v, data) {
+                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            }
+        }, {
+            title: '应还利息',
+            field: 'interestTotal',
+            render: function (v, data) {
+                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            }
+        }, {
+            title: '应还本息',
+            field: 'amountTotal',
+            render: function (v, data) {
+                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            }
+        }, {
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            key: 'repay_plan_status',
+            search: true
+        }, {
+            title: '已还本金',
+            field: 'principalYet',
+            render: function (v, data) {
+                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            }
+        }, {
+            title: '已还利息',
+            field: 'interestYet',
+            render: function (v, data) {
+                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            }
+        }, {
+            title: '已还本息',
+            field: 'amountYet',
+            render: function (v, data) {
+                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            }
+        }, {
+            title: '还款时间',
+            field: 'repayDatetime',
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '625410',
+            pageCode: '625540',
+            searchParams: {
+                productCode: this.productCode
+            },
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

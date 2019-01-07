@@ -14,7 +14,8 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showSucMsg,
+    dateTimeFormat
 } from 'common/js/util';
 
 @listWrapper(
@@ -30,23 +31,84 @@ import {
 class RedPacketQuery extends React.Component {
     render() {
         const fields = [{
-            title: '备注',
-            field: 'remark'
+            title: '红包编号',
+            field: 'code'
+        }, {
+            title: '用户',
+            field: 'userId',
+            formatter: function (v, data) {
+                return data.sendUserMobile + '(' + data.sendUserNickname + ')'
+            },
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                updater: '',
+                kind: 'C'
+            },
+            keyName: 'userId',
+            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
+            searchName: 'mobile',
+            search: true
+        }, {
+            title: '币种',
+            field: 'symbol',
+            type: 'select',
+            pageCode: '802265',
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            search: true
+        }, {
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'red_packet_type',
+            search: true
+        }, {
+            title: '红包总个数',
+            field: 'sendNum'
+        }, {
+            title: '红包总额',
+            field: 'totalCount'
+        }, {
+            title: '已领取个数',
+            field: 'receivedNum'
+        }, {
+            title: '已领取总额',
+            field: 'receivedCount'
+        }, {
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            key: 'red_packet_status',
+            search: true
+        }, {
+            field: 'createDateTime',
+            title: '发送时间',
+            type: 'date',
+            rangedate: ['dateStart', 'dateEnd'],
+            render: dateTimeFormat,
+            search: true
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '625410',
+            pageCode: '623009',
+            beforeSearch: function (data) {
+                if (data.status) {
+                    var statusList = [];
+                    statusList.push(data.status);
+                    data.statusList = statusList;
+                }
+                return data;
+            },
             btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
+                receiveQuery: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                        // } else if (selectedRows[0].status !== '1') {
-                        //     showWarnMsg('当前记录不可修改');
                     } else {
-                        this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/biz/receiveQuery?code=${selectedRowKeys[0]}`);
                     }
                 }
             }

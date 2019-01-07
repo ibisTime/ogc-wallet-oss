@@ -16,16 +16,33 @@ class SetDivRateAddedit extends DetailUtil {
 
     render() {
         const fields = [{
+            title: '说明',
+            field: 'remark1',
+            readonly: true,
+            formatter: (v, data) => {
+                return data.remark;
+            }
+        }, {
+            title: '说明',
             field: 'remark',
-            title: '备注'
+            hidden: true
+        }, {
+            title: '数值',
+            field: 'cvalue',
+            required: true,
+            number: true
         }];
         return this.props.buildDetail({
             fields,
+            key: 'id',
             code: this.code,
             view: this.view,
-            addCode: '802000',
-            editCode: '802002',
-            detailCode: '802006'
+            editCode: '630042',
+            detailCode: '630046',
+            beforeSubmit: function(data) {
+                data.type = 'invite_pop';
+                return data;
+            }
         });
     }
 }
