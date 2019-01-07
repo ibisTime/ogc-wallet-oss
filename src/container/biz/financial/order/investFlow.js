@@ -14,8 +14,11 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showSucMsg,
+    getQueryString,
+    getUserId
 } from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -28,28 +31,94 @@ import {
     }
 )
 class InvestFlow extends React.Component {
+    constructor(props) {
+        super(props);
+        this.investCode = getQueryString('investCode', this.props.location.search);
+    }
     render() {
         const fields = [{
-            title: '备注',
-            field: 'remark'
+            title: '认购用户',
+            field: 'userId',
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                kind: 'C',
+                updater: ''
+            },
+            keyName: 'userId',
+            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
+            searchName: 'mobile',
+            render: function (v, data) {
+                return data.userInfo.nickname;
+            },
+            search: true
+        }, {
+            title: '认购用户手机号',
+            field: 'mobile',
+            render: function (v, data) {
+                return data.userInfo.mobile;
+            }
+        }, {
+            title: '产品名称',
+            field: 'name',
+            render: function (v, data) {
+                return data.productInfo.name;
+            }
+        }, {
+            title: '产品币种',
+            field: 'symbol',
+            render: function (v, data) {
+                return data.productInfo.symbol;
+            }
+        }, {
+            title: '认购金额',
+            field: 'amount',
+            render: function (v, data) {
+                return moneyFormat(v.toString(), '', data.productInfo.symbol);
+            }
+        }, {
+            title: '认购预期收益',
+            field: 'income',
+            render: function (v, data) {
+                return moneyFormat(v.toString(), '', data.productInfo.symbol);
+            }
+        }, {
+            title: '认购本金',
+            field: 'principal',
+            render: function (v, data) {
+                return moneyFormat(v.toString(), '', data.productInfo.symbol);
+            }
+        }, {
+            title: '创建时间',
+            field: 'createDatetime',
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '625410',
-            btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
+            pageCode: '625530',
+            searchParams: {
+                investCode: this.investCode,
+                type: '0'
+            },
+            buttons: [{
+                code: 'goBack',
+                name: '认购明细',
+                handler: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                        // } else if (selectedRows[0].status !== '1') {
-                        //     showWarnMsg('当前记录不可修改');
                     } else {
-                        this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
+                        this.props.history.push();
                     }
+                },
+                check: true
+            }, {
+                title: '返回',
+                handler: (param) => {
+                    this.props.history.go(-1);
                 }
-            }
+            }]
         });
     }
 }

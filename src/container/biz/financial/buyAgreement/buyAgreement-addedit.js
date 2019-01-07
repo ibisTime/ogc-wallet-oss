@@ -17,16 +17,25 @@ class BuyAgreementAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'remark',
-            title: '备注'
+            title: '说明',
+            readonly: true,
+            required: true
+        }, {
+            field: 'cvalue',
+            title: '内容',
+            type: 'textarea',
+            required: true
         }];
         return this.props.buildDetail({
             fields,
             key: 'id',
             code: this.code,
-            view: this.view,
-            addCode: '802000',
-            editCode: '802002',
-            detailCode: '802006'
+            detailCode: 630046,
+            editCode: 630042,
+            beforeSubmit: (data) => {
+                data.remark = this.props.pageData.remark;
+                return data;
+            }
         });
     }
 }
