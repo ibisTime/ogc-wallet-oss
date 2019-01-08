@@ -39,7 +39,7 @@ class ProductsApprove extends React.Component {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             params: {
                 status: '0'
             },

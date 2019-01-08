@@ -81,7 +81,7 @@ class ProductsDetail extends DetailUtil {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             params: {
                 status: '0'
             },
@@ -224,8 +224,7 @@ class ProductsDetail extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            detailCode: '625511',
-            buttons: this.buttons
+            detailCode: '625511'
         });
     }
 }

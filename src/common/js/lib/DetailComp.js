@@ -675,6 +675,8 @@ export default class DetailComp extends React.Component {
       }
       if (v.amount) {
         values[v.field] = moneyParse(values[v.field], v.amountRate);
+      } else if (v.coinAmount) {
+        values[v.field] = moneyParse(values[v.field], v.amountRate, v.coin);
       } else if (v.type === 'citySelect') {
         let mid = values[v.field].map(a => a === '全部' ? '' : a);
         v.cFields.forEach((f, i) => {

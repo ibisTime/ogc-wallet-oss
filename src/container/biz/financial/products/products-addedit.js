@@ -3,10 +3,11 @@ import {Form} from 'antd';
 import {
     getQueryString,
     moneyFormat,
-    dateTimeFormat
+    dateTimeFormat,
+    getUserName
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
-
+let setSymbol = null;
 @Form.create()
 class ProductsAddedit extends DetailUtil {
     constructor(props) {
@@ -33,7 +34,7 @@ class ProductsAddedit extends DetailUtil {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             params: {
                 status: '0'
             },
@@ -41,7 +42,12 @@ class ProductsAddedit extends DetailUtil {
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
             required: true,
-            readonly: !!this.code
+            readonly: !!this.code,
+            onChange: function() {
+                setTimeout(() => {
+                  setSymbol = document.querySelector('.ant-select-search__field').value.split('-')[0];
+                }, 1000);
+            }
         }, {
             title: '币种',
             field: 'symbol1',
@@ -71,13 +77,17 @@ class ProductsAddedit extends DetailUtil {
             range: [0, 100],
             rate: true,
             formatter: function (v, data) {
+              if(v) {
                 return v * 100;
+              }
+              return '';
             }
         }, {
             title: '总募集金额',
             field: 'amount',
             coinAmount: true,
             required: true,
+            coin: setSymbol,
             formatter: function (v, data) {
                 return moneyFormat(v.toString(), '', data.symbol);
             }
@@ -86,6 +96,7 @@ class ProductsAddedit extends DetailUtil {
             field: 'successAmount',
             coinAmount: true,
             required: true,
+            coin: setSymbol,
             formatter: function (v, data) {
                 return moneyFormat(v.toString(), '', data.symbol);
             }
@@ -100,12 +111,15 @@ class ProductsAddedit extends DetailUtil {
             'Z+': true,
             required: true
         }, {
-            title: '募集时间',
-            type: 'date',
-            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
-            formatter: dateTimeFormat,
-            twoDate: true,
-            required: true
+          title: '募集开始时间',
+          field: 'startDatetime',
+          type: 'datetime',
+          required: true
+        }, {
+          title: '募集结束时间',
+          field: 'endDatetime',
+          type: 'datetime',
+          required: true
         }, {
             title: '起息时间',
             field: 'incomeDatetime',
@@ -119,7 +133,7 @@ class ProductsAddedit extends DetailUtil {
         }, {
             title: '还款日',
             field: 'repayDatetime',
-            type: 'date',
+            type: 'datetime',
             required: true
         }, {
             title: '回款方式',
@@ -179,7 +193,17 @@ class ProductsAddedit extends DetailUtil {
             view: this.view,
             addCode: '625500',
             editCode: '625501',
-            detailCode: '625511'
+            detailCode: '625511',
+            beforeSubmit: (data) => {
+                data.creator = getUserName();
+                data.isPublish = '0';
+                if(this.isEdit) {
+                    data.symbol = data.symbol1;
+                    delete data.symbol1;
+                    data.isPublish = '1';
+                }
+                return data;
+            }
         });
     }
 }

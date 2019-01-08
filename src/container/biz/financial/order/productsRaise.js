@@ -37,13 +37,14 @@ class ProductsRaise extends React.Component {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             params: {
                 status: '0'
             },
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
+            render: (v, data) => v,
             search: true
         }, {
             title: '类型',
@@ -98,6 +99,8 @@ class ProductsRaise extends React.Component {
                 key: '6',
                 value: '停止交易'
             }],
+            keyName: 'key',
+            keyValue: 'value',
             required: true,
             search: true
         }, {

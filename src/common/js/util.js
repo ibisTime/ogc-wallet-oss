@@ -2,6 +2,7 @@ import cookies from 'browser-cookies';
 import { message, Modal } from 'antd';
 import moment from 'moment';
 import { PIC_PREFIX, DATE_FORMAT, MONTH_FORMAT, DATETIME_FORMAT } from './config';
+import './lib/BigDecimal';
 
 /**
  * 保存用户登录信息
@@ -204,7 +205,7 @@ export function moneyFormat(money, format, coin, isRe = false) {
  */
 export function moneyParse(money, rate, coin) {
     let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
-
+    console.log(unit);
     if (isUndefined(money)) {
         return '-';
     }
