@@ -636,6 +636,16 @@ const ROUTES = [
         path: '/bizFinancial/productsRaise',
         component: asyncComponent(() => import('container/biz/financial/order/productsRaise'))
     },
+    // 系统管理 -- 量化理财管理-募集中产品-认购记录汇总
+   {
+        path: '/bizFinancial/investFlowAll',
+        component: asyncComponent(() => import('container/biz/financial/order/investFlowAll'))
+    },
+    // 系统管理 -- 量化理财管理-募集完成产品-认购记录汇总
+    {
+        path: '/bizFinancial/repaymentPlan',
+        component: asyncComponent(() => import('container/biz/financial/order/repaymentPlan'))
+    },
     // 系统管理 -- 量化理财管理-募集成功产品
     {
         path: '/bizFinancial/productsRaiseSuccess',

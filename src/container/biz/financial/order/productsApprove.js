@@ -14,7 +14,9 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showMsgfirm,
+    showSucMsg,
+    getUserName
 } from 'common/js/util';
 
 @listWrapper(
@@ -37,7 +39,7 @@ class ProductsApprove extends React.Component {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             params: {
                 status: '0'
             },
@@ -100,19 +102,46 @@ class ProductsApprove extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '625410',
+            pageCode: '625510',
+            searchParams: {
+              statusList: ['2']
+            },
             btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
+                detail: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                        // } else if (selectedRows[0].status !== '1') {
-                        //     showWarnMsg('当前记录不可修改');
                     } else {
-                        this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/bizFinancial/products/addedit?v=1&code=${selectedRowKeys[0]}`);
                     }
+                },
+                up: (selectedRowKeys, selectedRows) => {
+                  function toUp() {
+                    fetch('625503', {
+                      code: selectedRowKeys[0],
+                      updater: getUserName(),
+                      remark: selectedRows[0].remark || '平台上架'
+                    }).then(data => {
+                      if(data) {
+                        showWarnMsg('上架成功');
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 1500);
+                      }
+                    });
+                  }
+                  if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                  } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                  } else {
+                    if (selectedRows[0].status !== '2') {
+                      showWarnMsg('该状态下不可上架');
+                      return false;
+                    }
+                    showMsgfirm('primary', '上架产品', '产品上架后不可下架,确定上架该产品？', toUp);
+                  }
                 }
             }
         });

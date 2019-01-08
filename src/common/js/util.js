@@ -328,6 +328,22 @@ export function showErrMsg(msg, time = 2) {
   showMsg(msg, 'error', time);
 }
 
+export function showMsgfirm(okType, title, content, onOk, onCancel) {
+  Modal.confirm({
+    okType,
+    title,
+    content,
+    okText: '确定',
+    cancelText: '取消',
+    onOk() {
+      onOk && onOk();
+    },
+    onCancel() {
+      onCancel && onCancel();
+    }
+  });
+}
+
 export function showConfirm({okType = 'primary', onOk, onCancel}) {
   Modal.confirm({
     okType,
