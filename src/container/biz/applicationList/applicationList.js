@@ -81,7 +81,6 @@ class ApplicationList extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
             pageCode: '625410',
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {
