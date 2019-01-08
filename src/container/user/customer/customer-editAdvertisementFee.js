@@ -32,7 +32,7 @@ class CustomerEditAdvertisementFee extends DetailUtil {
             min: '0',
             required: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'userId',
             code: this.code,

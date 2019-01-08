@@ -41,7 +41,7 @@ class ProductsRaiseSuccess extends React.Component {
           title: '币种',
           field: 'symbol',
           type: 'select',
-          pageCode: '802265',
+          pageCode: '802005',
           params: {
             status: '0'
           },
@@ -114,8 +114,6 @@ class ProductsRaiseSuccess extends React.Component {
                   showWarnMsg('请选择记录');
                 } else if (selectedRowKeys.length > 1) {
                   showWarnMsg('请选择一条记录');
-                  // } else if (selectedRows[0].status !== '1') {
-                  //     showWarnMsg('当前记录不可修改');
                 } else {
                   this.props.history.push(`/bizFinancial/products/addedit?v=1&code=${selectedRowKeys[0]}`);
                 }

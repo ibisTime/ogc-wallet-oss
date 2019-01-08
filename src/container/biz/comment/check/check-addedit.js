@@ -154,7 +154,7 @@ class CheckAddEdit extends DetailUtil {
                 handler: () => this.props.history.go(-1)
             }];
         }
-        return this.props.buildDetail(config);
+        return this.buildDetail(config);
     }
 }
 

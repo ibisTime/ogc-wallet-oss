@@ -32,7 +32,7 @@ class SysParamAddEdit extends DetailUtil {
             type: 'datetime',
             readonly: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'id',
             code: this.code,

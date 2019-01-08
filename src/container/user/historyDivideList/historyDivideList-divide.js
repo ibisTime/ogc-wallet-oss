@@ -27,7 +27,7 @@ class HistoryDivideListDivide extends DetailUtil {
             field: 'remark',
             title: '备注'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'id',
             addCode: '802410',

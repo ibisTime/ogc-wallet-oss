@@ -108,7 +108,7 @@ class ArbitrationOrderAddedit extends DetailUtil {
             field: 'remark',
             readonly: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,

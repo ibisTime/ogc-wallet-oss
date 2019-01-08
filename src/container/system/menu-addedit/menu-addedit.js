@@ -56,7 +56,7 @@ class MenuAddEdit extends DetailUtil {
             field: 'remark',
             maxlength: 250
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,

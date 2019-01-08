@@ -68,7 +68,7 @@ class RedPacketQueryAddedit extends DetailUtil {
             field: 'bestHandCount',
             title: '手气最佳金额'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,

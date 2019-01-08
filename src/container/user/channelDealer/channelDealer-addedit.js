@@ -63,7 +63,7 @@ class ChannelDealerAddedit extends DetailUtil {
             required: true,
             hidden: !!this.code
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'userId',
             code: this.code,

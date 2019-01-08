@@ -37,7 +37,7 @@ class DataDictAddEdit extends DetailUtil {
             field: 'remark',
             maxlength: 250
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'id',
             code: this.code,

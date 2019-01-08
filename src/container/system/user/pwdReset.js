@@ -38,7 +38,7 @@ class PwdReset extends React.Component {
             title: '备注',
             field: 'remark'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'userId',
             code: this.code,

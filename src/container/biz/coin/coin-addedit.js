@@ -160,7 +160,7 @@ class CoinAddedit extends DetailUtil {
             field: 'remark',
             title: '备注'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'id',
             code: this.code,

@@ -37,7 +37,7 @@ class ProductsRaisefail extends React.Component {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             params: {
                 status: '0'
             },
@@ -114,6 +114,20 @@ class ProductsRaisefail extends React.Component {
                         //     showWarnMsg('当前记录不可修改');
                     } else {
                         this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
+                    }
+                },
+                investFlowAll: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                    var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9'};
+                    if (!statusList[selectedRows[0].status]) {
+                            showWarnMsg('该产品还未开始募集！');
+                        return;
+                    }
+                     this.props.history.push(`/bizFinancial/investFlowAll?code=${selectedRows[0].code}&menu=raisefail`);
                     }
                 }
             }

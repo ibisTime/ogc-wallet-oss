@@ -23,7 +23,7 @@ class UserResetPwd extends DetailUtil {
             type: 'password',
             required: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             addCode: 630055,

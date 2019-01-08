@@ -94,7 +94,7 @@ class ArbitrationOrderResolve extends DetailUtil {
             normalArea: true,
             required: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,

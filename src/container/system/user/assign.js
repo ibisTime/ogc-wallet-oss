@@ -34,7 +34,7 @@ class Assign extends DetailUtil {
             maxlength: 250
         }];
 
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'userId',
             code: this.code,

@@ -7,7 +7,7 @@ import { Spin } from 'antd';
  */
 export default (loadComponent, placeholder = null) => {
   class AsyncComponent extends React.Component {
-    unmount = false
+    unmount = false;
     constructor(props) {
       super(props);
       this.state = {

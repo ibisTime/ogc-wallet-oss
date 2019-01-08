@@ -103,7 +103,7 @@ class DataCheckAddedit extends DetailUtil {
     }
 
     render() {
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields: this.fields,
             key: 'id',
             code: this.code,

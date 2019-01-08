@@ -170,7 +170,7 @@ class ProductsDetail extends DetailUtil {
             type: 'textarea',
             required: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,

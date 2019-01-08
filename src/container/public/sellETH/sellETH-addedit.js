@@ -30,7 +30,7 @@ class BuyADSAddedit extends DetailUtil {
             type: 'textarea',
             normalArea: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'id',
             code: this.code,

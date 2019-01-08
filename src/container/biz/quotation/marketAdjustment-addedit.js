@@ -29,7 +29,7 @@ class MarketAdjustmentAddedit extends DetailUtil {
             required: true,
             number: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'id',
             code: this.code,
