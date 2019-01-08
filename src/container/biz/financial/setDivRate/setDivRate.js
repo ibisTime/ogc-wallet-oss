@@ -30,23 +30,27 @@ import {
 class SetDivRate extends React.Component {
     render() {
         const fields = [{
-            title: '备注',
-            field: 'remark'
+            field: 'remark',
+            title: '规则名称'
+        }, {
+            field: 'cvalue',
+            title: '数值'
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '625410',
+            pageCode: '630045',
+            searchParams: {
+                type: 'invite_pop'
+            },
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                        // } else if (selectedRows[0].status !== '1') {
-                        //     showWarnMsg('当前记录不可修改');
                     } else {
-                        this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/rules/setDivRate/addedit?code=${selectedRowKeys[0]}&ckey=${selectedRows[0].ckey}`);
                     }
                 }
             }

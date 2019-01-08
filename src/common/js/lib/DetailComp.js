@@ -22,6 +22,7 @@ import CMonth from 'component/cMonth/cMonth';
 import CCitySelect from 'component/cCitySelect/cCitySelect';
 import CCheckbox from 'component/cCheckbox/cCheckbox';
 import CTreeSelect from 'component/cTreeSelect/cTreeSelect';
+import {getCoinList} from 'api/coin';
 
 const { Item: FormItem } = Form;
 const { Panel } = Collapse;
@@ -101,10 +102,34 @@ export default class DetailComp extends React.Component {
   }
   // 获取页面详情数据
   getDetailInfo() {
+    this.setCoinDate();
     let key = this.options.key || 'code';
     let param = {[key]: this.options.code};
     this.options.beforeDetail && this.options.beforeDetail(param);
     return fetch(this.options.detailCode, param);
+  }
+  // 获取已有币种， 保存币种列表
+  setCoinDate = () => {
+      getCoinList().then(data => {
+          let coinList = [];
+          let coinData = {};
+          data.map(d => {
+              coinData[d.symbol] = {
+                  'coin': d.symbol,
+                  'unit': '1e' + d.unit,
+                  'name': d.cname,
+                  'type': d.type,
+                  'status': d.status
+              };
+              coinList.push({
+                  key: d.symbol,
+                  value: d.cname
+              });
+          });
+
+          window.sessionStorage.setItem('coinData', JSON.stringify(coinData));
+          window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
+      });
   }
   // 获取所有页面所需的数据
   getInfos(list) {

@@ -11,22 +11,37 @@ class ApplicationListHelpSetAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.refCode = getQueryString('refCode', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
 
     render() {
         const fields = [{
-            field: 'remark',
-            title: '备注'
+            title: '问题',
+            field: 'question',
+            required: true
+        }, {
+            title: '答案',
+            field: 'answer',
+            type: 'textarea',
+            required: true
+        }, {
+            title: '序号',
+            field: 'orderNo',
+            required: true
         }];
         return this.props.buildDetail({
             fields,
             key: 'id',
             code: this.code,
             view: this.view,
-            addCode: '802000',
-            editCode: '802002',
-            detailCode: '802006'
+            addCode: '625420',
+            editCode: '625422',
+            detailCode: '625426',
+            beforeSubmit: function(data) {
+                data.refCode = this.refCode;
+                return data;
+            }
         });
     }
 }
