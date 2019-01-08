@@ -2,7 +2,9 @@ import React from 'react';
 import {Form} from 'antd';
 import {
     getQueryString,
-    moneyFormat
+    moneyFormat,
+    showSucMsg,
+    getUserName
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
@@ -12,6 +14,54 @@ class ProductsDetail extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.isDetail = !!getQueryString('isDetail', this.props.location.search);
+        this.isCheck = !!getQueryString('isCheck', this.props.location.search);
+        this.buttons = [];
+        if(this.isCheck) {
+            this.buttons = [{
+                title: '通过',
+                handler: (param) => {
+                    var data = {
+                        code: this.code,
+                        approveResult: '1',
+                        approver: getUserName()
+                    };
+                    this.props.doFetching();
+                    fetch(625502, data).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.props.cancelFetching);
+                },
+                check: true,
+                type: 'primary'
+            }, {
+                title: '不通过',
+                handler: (param) => {
+                    var data = {
+                        code: this.code,
+                        approveResult: '0',
+                        approver: getUserName()
+                    };
+                    this.props.doFetching();
+                    fetch(625502, data).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.props.cancelFetching);
+                },
+                check: true
+            }, {
+                title: '返回',
+                handler: (param) => {
+                    this.props.history.go(-1);
+                }
+            }];
+        }
     }
 
     render() {
@@ -174,7 +224,8 @@ class ProductsDetail extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            detailCode: '625511'
+            detailCode: '625511',
+            buttons: this.buttons
         });
     }
 }

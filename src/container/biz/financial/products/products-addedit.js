@@ -13,6 +13,7 @@ class ProductsAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.isEdit = !!getQueryString('isEdit', this.props.location.search);
     }
 
     render() {

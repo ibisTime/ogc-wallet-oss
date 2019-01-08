@@ -114,8 +114,10 @@ class InvestFlow extends React.Component {
                 },
                 check: true
             }, {
-                title: '返回',
-                handler: (param) => {
+                code: 'goBack',
+                name: '返回',
+                check: false,
+                handler: () => {
                     this.props.history.go(-1);
                 }
             }]

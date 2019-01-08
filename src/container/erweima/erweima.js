@@ -36,9 +36,7 @@ class Erweima extends React.Component {
             valueName: '{{bizCode.DATA}}-{{customerName.DATA}}',
             multiple: true
         }];
-        return this
-            .props
-            .buildDetail({
+        return this.props.buildDetail({
                 fields,
                 detailCode: 632156,
                 buttons: [{

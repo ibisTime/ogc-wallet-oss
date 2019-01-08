@@ -56,7 +56,7 @@ class ReceiveQueryAddedit extends DetailUtil {
             title: '归集阀值',
             field: 'collectStart',
             formatter: function (v, data) {
-                return moneyFormat(data.collectStartString, '', data.symbol)
+                return moneyFormat(data.collectStartString, '', data.symbol);
             },
             coinAmount: true,
             required: true,
@@ -65,7 +65,7 @@ class ReceiveQueryAddedit extends DetailUtil {
             title: '取现手续费',
             field: 'withdrawFee',
             formatter: function (v, data) {
-                return moneyFormat(data.withdrawFeeString, '', data.symbol)
+                return moneyFormat(data.withdrawFeeString, '', data.symbol);
             },
             coinAmount: true,
             required: true,
@@ -75,7 +75,7 @@ class ReceiveQueryAddedit extends DetailUtil {
             field: 'collectStartString',
             required: true,
             formatter: function (v, data) {
-                return moneyFormat(v, '', data.symbol)
+                return moneyFormat(v, '', data.symbol);
             },
             readonly: !!this.symbol,
             hidden: !this.isDetail
@@ -84,7 +84,7 @@ class ReceiveQueryAddedit extends DetailUtil {
             field: 'withdrawFeeString',
             required: true,
             formatter: function (v, data) {
-                return moneyFormat(v, '', data.symbol)
+                return moneyFormat(v, '', data.symbol);
             },
             readonly: !!this.symbol,
             hidden: !this.isDetail
@@ -92,7 +92,7 @@ class ReceiveQueryAddedit extends DetailUtil {
             title: '合约地址',
             field: 'contractAddress',
             required: true,
-            readonly: !!this.symbol,
+            readonly: !!this.symbol
         }, {
             title: '合约ABI',
             field: 'contractABI',
@@ -145,7 +145,7 @@ class ReceiveQueryAddedit extends DetailUtil {
                     data.symbol = this.symbol;
                 }
                 return data;
-            },
+            }
         });
     }
 }

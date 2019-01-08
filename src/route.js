@@ -636,30 +636,55 @@ const ROUTES = [
         path: '/bizFinancial/productsRaise',
         component: asyncComponent(() => import('container/biz/financial/order/productsRaise'))
     },
-    // 系统管理 -- 量化理财管理-募集中产品-认购记录汇总
-   {
-        path: '/bizFinancial/investFlowAll',
+    // 系统管理 -- 量化理财管理-募集中产品-认购明细
+    {
+        path: '/bizFinancial/productsRaise/investFlowAll',
         component: asyncComponent(() => import('container/biz/financial/order/investFlowAll'))
     },
-    // 系统管理 -- 量化理财管理-募集完成产品-认购记录汇总
+    // 系统管理 -- 量化理财管理-募集中产品-认购明细
     {
-        path: '/bizFinancial/repaymentPlan',
-        component: asyncComponent(() => import('container/biz/financial/order/repaymentPlan'))
+        path: '/bizFinancial/productsRaise/investFlow',
+        component: asyncComponent(() => import('container/biz/financial/order/investFlow'))
     },
     // 系统管理 -- 量化理财管理-募集成功产品
     {
         path: '/bizFinancial/productsRaiseSuccess',
         component: asyncComponent(() => import('container/biz/financial/order/productsRaiseSuccess'))
     },
+    // 系统管理 -- 量化理财管理-募集成功产品-认购明细
+    {
+        path: '/bizFinancial/productsRaiseSuccess/investFlowAll',
+        component: asyncComponent(() => import('container/biz/financial/order/investFlowAll'))
+    },
+    // 系统管理 -- 量化理财管理-募集成功产品-还款计划
+    {
+        path: '/bizFinancial/productsRaiseSuccess/repaymentPlan',
+        component: asyncComponent(() => import('container/biz/financial/order/repaymentPlan'))
+    },
     // 系统管理 -- 量化理财管理-募集失败产品
     {
         path: '/bizFinancial/productsRaisefail',
         component: asyncComponent(() => import('container/biz/financial/order/productsRaisefail'))
     },
+    // 系统管理 -- 量化理财管理-募集失败产品-认购明细
+    {
+        path: '/bizFinancial/productsRaisefail/investFlowAll',
+        component: asyncComponent(() => import('container/biz/financial/order/investFlowAll'))
+    },
     // 系统管理 -- 量化理财管理-已还款产品
     {
         path: '/bizFinancial/productsRepay',
         component: asyncComponent(() => import('container/biz/financial/order/productsRepay'))
+    },
+    // 系统管理 -- 量化理财管理-已还款产品-认购明细
+    {
+        path: '/bizFinancial/productsRepay/investFlowAll',
+        component: asyncComponent(() => import('container/biz/financial/order/investFlowAll'))
+    },
+    // 系统管理 -- 量化理财管理-募集成功产品-还款计划
+    {
+        path: '/bizFinancial/productsRepay/repaymentPlan',
+        component: asyncComponent(() => import('container/biz/financial/order/repaymentPlan'))
     },
     // 系统管理 -- 红包管理-红包查询
     {
@@ -670,6 +695,11 @@ const ROUTES = [
     {
         path: '/biz/redPacketQuery/addedit',
         component: asyncComponent(() => import('container/biz/redPacket/redPacketQuery-addedit'))
+    },
+    // 系统管理 -- 红包管理-红包查询
+    {
+        path: '/biz/redPacketQuery/receiveQuery',
+        component: asyncComponent(() => import('container/biz/redPacket/receiveQuery'))
     }
 ];
 
