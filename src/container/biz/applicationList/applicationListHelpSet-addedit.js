@@ -30,7 +30,7 @@ class ApplicationListHelpSetAddedit extends DetailUtil {
             field: 'orderNo',
             required: true
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'id',
             code: this.code,

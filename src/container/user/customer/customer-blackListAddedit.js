@@ -33,7 +33,7 @@ class CustomerBlackListAddedit extends DetailUtil {
             field: 'remark',
             title: '备注'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,

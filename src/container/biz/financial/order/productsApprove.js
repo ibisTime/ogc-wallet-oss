@@ -14,8 +14,10 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showSucMsg,
+    getUserName
 } from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -100,18 +102,46 @@ class ProductsApprove extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '625410',
+            pageCode: '625510',
+            searchParams: {
+                statusList: ['2']
+            },
             btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
+                detail: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                        // } else if (selectedRows[0].status !== '1') {
-                        //     showWarnMsg('当前记录不可修改');
                     } else {
-                        this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/bizFinancial/products/detail?code=${selectedRowKeys[0]}&isDetail=1`);
+                    }
+                },
+                up: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '2') {
+                        showWarnMsg('不是可以上架的状态');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `产品上架后不可下架,确定上架该产品？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return fetch(625503, {
+                                    code: selectedRows[0].code,
+                                    updater: getUserName(),
+                                    remark: selectedRows[0].remark || '平台上架'
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
                     }
                 }
             }

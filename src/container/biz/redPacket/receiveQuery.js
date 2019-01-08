@@ -87,7 +87,7 @@ class ReceiveQuery extends React.Component {
             title: '红包发送人',
             field: 'redPacketUser',
             render: function (v, data) {
-                return data.redPacketInfo.sendUserMobile + '(' + data.redPacketInfo.sendUserNickname + ')'
+                return data.redPacketInfo.sendUserMobile + '(' + data.redPacketInfo.sendUserNickname + ')';
             }
         }, {
             title: '红包总个数',

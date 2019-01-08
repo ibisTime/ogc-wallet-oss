@@ -171,7 +171,7 @@ class SaleTradeAddedit extends DetailUtil {
             field: 'updateDatetime',
             type: 'datetime'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'adsCode',
             code: this.code,

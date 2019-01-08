@@ -14,7 +14,8 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showSucMsg,
+    getQueryString
 } from 'common/js/util';
 
 @listWrapper(
@@ -28,6 +29,18 @@ import {
     }
 )
 class InvestFlowAll extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = getQueryString('code', this.props.location.search);
+        this.menu = getQueryString('menu', this.props.location.search);
+        this.menuList = {
+            'raise': '/bizFinancial/productsRaise',
+            'raisefail': '/bizFinancial/productsRaisefail',
+            'raiseSuccess': '/bizFinancial/productsRaiseSuccess',
+            'repay': '/bizFinancial/productsRepay'
+        };
+    }
+
     render() {
         const fields = [{
             title: '认购用户',
@@ -100,9 +113,24 @@ class InvestFlowAll extends React.Component {
             fields,
             pageCode: '625525',
             buttons: [{
-                title: '返回',
-                handler: (param) => {
-                    this.props.history.go(-1);
+                code: 'userInvestFlow',
+                name: '认购明细',
+                handler: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push('/bizFinancial/productsRaise/investFlow');
+                    }
+                },
+                check: true
+            }, {
+                code: 'goBack',
+                name: '返回',
+                check: false,
+                handler: () => {
+                    this.props.history.go(this.menuList[this.menu]);
                 }
             }]
         });
