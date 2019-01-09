@@ -44,6 +44,7 @@ class ProductsRaisefail extends React.Component {
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
+            render: (v, data) => v,
             search: true
         }, {
             title: '类型',
@@ -111,7 +112,7 @@ class ProductsRaisefail extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/bizFinancial/products/detail?code=${selectedRowKeys[0]}&isDetail=1`);
+                        this.props.history.push(`/bizFinancial/products/detail?v=1&code=${selectedRowKeys[0]}&isDetail=1`);
                     }
                 },
                 investFlowAll: (selectedRowKeys, selectedRows) => {
@@ -123,7 +124,7 @@ class ProductsRaisefail extends React.Component {
                     } else if (!statusList[selectedRows[0].status]) {
                         showWarnMsg('该产品还未开始募集！');
                     } else {
-                        this.props.history.push(`/bizFinancial/productsRaisefail/investFlowAll?code=${selectedRowKeys[0]}&menu=raisefail'`);
+                        this.props.history.push(`/bizFinancial/productsRaisefail/investFlowAll?code=${selectedRowKeys[0]}&menu=raisefail`);
                     }
                 }
             }

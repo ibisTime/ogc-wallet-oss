@@ -36,9 +36,6 @@ class UserAddedit extends DetailUtil {
             valueName: 'name',
             required: true,
             hidden: this.code
-        }, {
-            title: '备注',
-            field: 'remark'
         }];
         return this.buildDetail({
             fields,

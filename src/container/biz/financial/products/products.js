@@ -14,8 +14,10 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
-    showSucMsg
+    showSucMsg,
+    getUserName
 } from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -145,7 +147,7 @@ class Products extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是待确认状态');
                     } else {
-                        this.props.history.push(`/bizFinancial/products/addedit?code=${selectedRowKeys[0]}&isCheck=1`);
+                        this.props.history.push(`/bizFinancial/products/detail?v=1&code=${selectedRowKeys[0]}&isCheck=1`);
                     }
                 }
             }

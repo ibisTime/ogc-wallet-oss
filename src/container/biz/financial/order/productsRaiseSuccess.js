@@ -48,7 +48,8 @@ class ProductsRaiseSuccess extends React.Component {
           keyName: 'symbol',
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
           searchName: 'symbol',
-          search: true
+          search: true,
+          render: (v, data) => v
         }, {
             title: '类型',
             field: 'type',
@@ -115,7 +116,7 @@ class ProductsRaiseSuccess extends React.Component {
                 } else if (selectedRowKeys.length > 1) {
                   showWarnMsg('请选择一条记录');
                 } else {
-                  this.props.history.push(`/bizFinancial/products/addedit?v=1&code=${selectedRowKeys[0]}`);
+                  this.props.history.push(`/bizFinancial/products/detail?v=1&code=${selectedRowKeys[0]}&isDetail=1`);
                 }
               },
               investFlowAll: (selectedRowKeys, selectedRows) => {

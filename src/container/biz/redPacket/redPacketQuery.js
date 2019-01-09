@@ -53,11 +53,12 @@ class RedPacketQuery extends React.Component {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
-            search: true
+            search: true,
+            render: (v, data) => v
         }, {
             title: '类型',
             field: 'type',

@@ -686,20 +686,24 @@ const ROUTES = [
         path: '/bizFinancial/productsRepay/repaymentPlan',
         component: asyncComponent(() => import('container/biz/financial/order/repaymentPlan'))
     },
-    // 系统管理 -- 红包管理-红包查询
+    // 红包管理-红包查询
     {
-        path: '/biz/redPacketQuery',
+        path: '/bizRedPacket/redPacketQuery',
         component: asyncComponent(() => import('container/biz/redPacket/redPacketQuery'))
     },
     // 系统管理 -- 红包管理-详情
     {
-        path: '/biz/redPacketQuery/addedit',
+        path: '/bizRedPacket/redPacketQuery/addedit',
         component: asyncComponent(() => import('container/biz/redPacket/redPacketQuery-addedit'))
     },
-    // 系统管理 -- 红包管理-红包查询
+    // 红包管理-红包记录领取查询
     {
-        path: '/biz/redPacketQuery/receiveQuery',
+        path: '/bizReceive/receiveQuery',
         component: asyncComponent(() => import('container/biz/redPacket/receiveQuery'))
+    },
+    {
+        path: '/bizReceive/receiveQuery/addedit',
+        component: asyncComponent(() => import('container/biz/redPacket/receiveQuery-addedit'))
     }
 ];
 

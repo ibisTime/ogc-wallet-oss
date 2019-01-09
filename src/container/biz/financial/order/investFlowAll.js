@@ -112,6 +112,9 @@ class InvestFlowAll extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '625525',
+            searchParams: {
+              productCode: this.code
+            },
             buttons: [{
                 code: 'userInvestFlow',
                 name: '认购明细',
@@ -130,7 +133,7 @@ class InvestFlowAll extends React.Component {
                 name: '返回',
                 check: false,
                 handler: () => {
-                    this.props.history.go(this.menuList[this.menu]);
+                    this.props.history.push(this.menuList[this.menu]);
                 }
             }]
         });

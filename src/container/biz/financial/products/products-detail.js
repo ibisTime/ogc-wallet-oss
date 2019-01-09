@@ -7,6 +7,7 @@ import {
     getUserName
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
+import fetch from 'common/js/fetch';
 
 @Form.create()
 class ProductsDetail extends DetailUtil {
@@ -26,10 +27,8 @@ class ProductsDetail extends DetailUtil {
                         approveResult: '1',
                         approver: getUserName()
                     };
-                    this.props.doFetching();
                     fetch(625502, data).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
@@ -45,10 +44,8 @@ class ProductsDetail extends DetailUtil {
                         approveResult: '0',
                         approver: getUserName()
                     };
-                    this.props.doFetching();
                     fetch(625502, data).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
@@ -61,6 +58,13 @@ class ProductsDetail extends DetailUtil {
                     this.props.history.go(-1);
                 }
             }];
+        }else {
+            this.buttons = [{
+                title: '返回',
+                handler: (param) => {
+                  this.props.history.go(-1);
+                }
+              }];
         }
     }
 
@@ -224,7 +228,8 @@ class ProductsDetail extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            detailCode: '625511'
+            detailCode: '625511',
+            buttons: this.buttons
         });
     }
 }

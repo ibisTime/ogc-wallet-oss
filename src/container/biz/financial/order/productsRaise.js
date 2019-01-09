@@ -100,8 +100,7 @@ class ProductsRaise extends React.Component {
                 value: '停止交易'
             }],
             keyName: 'key',
-            keyValue: 'value',
-            required: true,
+            valueName: 'value',
             search: true
         }, {
             title: '更新时间',
@@ -124,7 +123,7 @@ class ProductsRaise extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/bizFinancial/products/detail?code=${selectedRowKeys[0]}&isDetail=1`);
+                        this.props.history.push(`/bizFinancial/products/detail?v=1&code=${selectedRowKeys[0]}&isDetail=1`);
                     }
                 },
                 investFlowAll: (selectedRowKeys, selectedRows) => {
@@ -136,7 +135,7 @@ class ProductsRaise extends React.Component {
                     } else if (!statusList[selectedRows[0].status]) {
                         showWarnMsg('该产品还未开始募集！');
                     } else {
-                        this.props.history.push(`/bizFinancial/productsRaise/investFlowAll?code=${selectedRowKeys[0]}&menu=raise'`);
+                        this.props.history.push(`/bizFinancial/productsRaise/investFlowAll?code=${selectedRowKeys[0]}&menu=raise`);
                     }
                 }
             }

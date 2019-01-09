@@ -4,9 +4,11 @@ import {
     getQueryString,
     moneyFormat,
     dateTimeFormat,
-    getUserName
+    getUserName,
+    showSucMsg
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
+import fetch from 'common/js/fetch';
 let setSymbol = null;
 @Form.create()
 class ProductsAddedit extends DetailUtil {
@@ -15,6 +17,66 @@ class ProductsAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.isEdit = !!getQueryString('isEdit', this.props.location.search);
+        this.isCheck = !!getQueryString('isCheck', this.props.location.search);
+        this.api = null;
+        if(!this.view && this.isEdit) {
+          this.api = 625501;
+        }else if(!this.view) {
+          this.api = 625500;
+        }
+        if(!this.view) {
+          this.buttons = [{
+            title: '保存',
+            handler: (param) => {
+              param.isPublish = '0';
+              param.creator = getUserName();
+              param.code = this.code;
+              if(this.isEdit) {
+                  param.symbol = param.symbol1;
+                  delete param.symbol1;
+              }
+              fetch(this.api, param).then(() => {
+                showSucMsg('操作成功');
+                setTimeout(() => {
+                  this.props.history.go(-1);
+                }, 1000);
+              }).catch(this.props.cancelFetching);
+            },
+            check: true,
+            type: 'primary'
+          }, {
+            title: '提交',
+            handler: (param) => {
+              param.isPublish = '1';
+              param.code = this.code;
+              if(this.isEdit) {
+                param.symbol = param.symbol1;
+                delete param.symbol1;
+              }
+              param.creator = getUserName();
+              fetch(this.api, param).then(() => {
+                showSucMsg('操作成功');
+                setTimeout(() => {
+                  this.props.history.go(-1);
+                }, 1000);
+              }).catch(this.props.cancelFetching);
+            },
+            check: true,
+            type: 'primary'
+          }, {
+            title: '返回',
+            handler: (param) => {
+              this.props.history.go(-1);
+            }
+          }];
+        }else {
+          this.buttons = [{
+            title: '返回',
+            handler: (param) => {
+              this.props.history.go(-1);
+            }
+          }];
+        }
     }
 
     render() {
@@ -43,10 +105,12 @@ class ProductsAddedit extends DetailUtil {
             searchName: 'symbol',
             required: true,
             readonly: !!this.code,
-            onChange: function() {
-                setTimeout(() => {
-                  setSymbol = document.querySelector('.ant-select-search__field').value.split('-')[0];
-                }, 1000);
+            onChange: () => {
+                if(!this.isEdit && !this.isCheck && !this.view) {
+                  setTimeout(() => {
+                    setSymbol = document.querySelector('.ant-select-search__field').value.split('-')[0];
+                  }, 1000);
+                }
             }
         }, {
             title: '币种',
@@ -191,19 +255,8 @@ class ProductsAddedit extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            addCode: '625500',
-            editCode: '625501',
             detailCode: '625511',
-            beforeSubmit: (data) => {
-                data.creator = getUserName();
-                data.isPublish = '0';
-                if(this.isEdit) {
-                    data.symbol = data.symbol1;
-                    delete data.symbol1;
-                    data.isPublish = '1';
-                }
-                return data;
-            }
+            buttons: this.buttons
         });
     }
 }

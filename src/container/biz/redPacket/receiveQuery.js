@@ -56,7 +56,7 @@ class ReceiveQuery extends React.Component {
             title: '币种',
             field: 'symbol',
             type: 'select',
-            pageCode: '802265',
+            pageCode: '802005',
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
@@ -113,15 +113,7 @@ class ReceiveQuery extends React.Component {
             pageCode: '623010',
             searchParams: {
                 redPacketCode: this.code
-            },
-            buttons: [{
-                code: 'goBack',
-                name: '返回',
-                check: false,
-                handler: () => {
-                    this.props.history.push(-1);
-                }
-            }]
+            }
         });
     }
 }
