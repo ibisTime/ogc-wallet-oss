@@ -190,6 +190,39 @@ import { bizSetDivRate } from './redux/biz/financial/setDivRate';
 import { bizReceiveQuery } from './redux/biz/redPacket/receiveQuery';
 import { bizRedPacketQuery } from './redux/biz/redPacket/redPacketQuery';
 
+/* BTC财务管理 */
+// 平台账户
+import {BTCFinancePlatformAccount} from './redux/BTC-finance/platformAccount/platformAccount';
+
+// 分发地址
+import {BTCFinanceDiviAddress} from './redux/BTC-finance/diviAddress/diviAddress';
+import {BTCFinanceDiviAddressLedger} from './redux/BTC-finance/diviAddress/diviAddress-ledger';
+
+// 充币管理
+// 线下充值
+import {BTCFinanceOfflineRecharge} from './redux/BTC-finance/offlineRecharge/offlineRecharge';
+import {BTCFinanceOfflineRechargeAddEdit} from './redux/BTC-finance/offlineRecharge/offlineRecharge-addedit';
+import {BTCFinanceOfflineRechargeDetail} from './redux/BTC-finance/offlineRecharge/offlineRecharge-detail';
+
+// 充值查询
+import {BTCFinanceOfflineRechargeQuery} from './redux/BTC-finance/offlineRecharge/offlineRechargeQuery';
+
+// 提币管理
+// 提币地址
+import {BTCFinanceTBAddress} from './redux/BTC-finance/TBAddress/TBAddress';
+
+// 线下提币
+import {BTCFinanceTBunderline} from './redux/BTC-finance/TBunderline/TBunderline';
+import {BTCFinanceTBunderlineAddEdit} from './redux/BTC-finance/TBunderline/TBunderline-addedit';
+import {BTCFinanceTBunderlineMultiCheck} from './redux/BTC-finance/TBunderline/TBunderline-multiCheck';
+
+// 归集管理
+import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
+import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
+import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery';
+import {BTCFinanceGJAddressQueryAddEdit} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery-addedit';
+import {BTCFinanceGJManuallyAddEdit} from './redux/BTC-finance/GJManually/GJManually-addedit';
+
 export default combineReducers({
     user,
     menu,
@@ -315,5 +348,27 @@ export default combineReducers({
     bizSetDivRate,
     // 红包管理
     bizReceiveQuery,
-    bizRedPacketQuery
+    bizRedPacketQuery,
+    /* BTC 财务管理 */
+    // 平台账户
+    BTCFinancePlatformAccount,
+    // 分发地址
+    BTCFinanceDiviAddress,
+    BTCFinanceDiviAddressLedger,
+    // 充币管理
+    BTCFinanceOfflineRecharge,
+    BTCFinanceOfflineRechargeAddEdit,
+    BTCFinanceOfflineRechargeDetail,
+    BTCFinanceOfflineRechargeQuery,
+    // 提币管理
+    BTCFinanceTBAddress,
+    BTCFinanceTBunderline,
+    BTCFinanceTBunderlineAddEdit,
+    BTCFinanceTBunderlineMultiCheck,
+    // 归集管理
+    BTCFinanceGJAddress,
+    BTCFinanceGJAddressAddEdit,
+    BTCFinanceGJAddressQuery,
+    BTCFinanceGJAddressQueryAddEdit,
+    BTCFinanceGJManuallyAddEdit
 });

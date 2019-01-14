@@ -704,6 +704,91 @@ const ROUTES = [
     {
         path: '/bizReceive/receiveQuery/addedit',
         component: asyncComponent(() => import('container/biz/redPacket/receiveQuery-addedit'))
+    },
+
+    // BTC财务管理
+    // 平台账户
+    {
+    path: '/BTC-finance/platformAccount',
+    component: asyncComponent(() => import('container/BTC-finance/platformAccount/platformAccount'))
+    },
+    {
+    path: '/BTC-finance/platformAccount/ledger',
+    component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
+    },
+
+    // 分发地址
+    {
+    path: '/BTC-finance/diviAddress',
+    component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress'))
+    },
+    {
+    path: '/BTC-finance/diviAddress/addedit',
+    component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-ledger'))
+    },
+
+    // 充币管理
+    // 线下充值
+    {
+    path: '/BTC-finance/offlineRecharge',
+    component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRecharge'))
+    },
+    {
+    path: '/BTC-finance/offlineRecharge/addedit',
+    component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRecharge-addedit'))
+    },
+    {
+    path: '/BTC-finance/offlineRecharge/detail',
+    component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRecharge-detail'))
+    },
+
+    // 充值查询
+    {
+    path: '/BTC-finance/offlineRechargeQuery',
+    component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRechargeQuery'))
+    },
+
+    // 提币管理
+    // 提币地址
+    {
+    path: '/BTC-finance/TBAddress',
+    component: asyncComponent(() => import('container/BTC-finance/TBAddress/TBAddress'))
+    },
+
+    // 线下提币
+    {
+    path: '/BTC-finance/TBunderline',
+    component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
+    },
+    {
+    path: '/BTC-finance/TBunderline/addedit',
+    component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-addedit'))
+    },
+    {
+    path: '/BTC-finance/TBunderline/multiCheck',
+    component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
+    },
+
+    // 归集地址
+    {
+    path: '/BTC-finance/GJAddress',
+    component: asyncComponent(() => import('container/BTC-finance/GJAddress/GJAddress'))
+    },
+    {
+    path: '/BTC-finance/GJAddress/addedit',
+    component: asyncComponent(() => import('container/BTC-finance/GJAddress/GJAddress-addedit'))
+    },
+    {
+    path: '/BTC-finance/GJAddressQuery',
+    component: asyncComponent(() => import('container/BTC-finance/GJAddressQuery/GJAddressQuery'))
+    },
+    {
+    path: '/BTC-finance/GJAddressQuery/addedit',
+    component: asyncComponent(() => import('container/BTC-finance/GJAddressQuery/GJAddressQuery-addedit'))
+    },
+    {
+    path: '/BTC-finance/GJManually',
+    component: asyncComponent(() => import('container/BTC-finance/GJManually/GJManually-addedit'))
     }
 ];
 
