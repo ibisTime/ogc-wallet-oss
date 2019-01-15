@@ -38,7 +38,8 @@ class OfflineRecharge extends React.Component {
             // 窗口是否显示
             isVisible: false,
             // code
-            codeList: []
+            codeList: [],
+            currency: 'BTC'
         };
     }
 
@@ -67,12 +68,30 @@ class OfflineRecharge extends React.Component {
                 isVisible: flag
             });
         }
-    }
+    };
     render() {
         const fields = [{
             field: 'code',
             title: '编号',
             search: true
+        }, {
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          render: (v, data) => v,
+          search: true,
+          onChange: (v) => {
+            this.setState({
+              currency: v
+            });
+          }
         }, {
             field: 'accountName',
             title: '户名',
@@ -133,7 +152,7 @@ class OfflineRecharge extends React.Component {
             pageCode: '802345',
             searchParams: {
                 channelType: '90',
-                currency: 'BTC'
+                currency: this.state.currency
             },
             singleSelect: false,
             btnEvent: {

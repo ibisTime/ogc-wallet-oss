@@ -29,8 +29,32 @@ import {
     }
 )
 class GJAddressQuery extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          currency: 'BTC'
+        };
+    }
     render() {
         const fields = [{
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          render: (v, data) => v,
+          search: true,
+          onChange: (v) => {
+            this.setState({
+              currency: v
+            });
+          }
+        }, {
             field: 'amount',
             title: '交易数量',
             coin: 'BTC',
@@ -59,7 +83,7 @@ class GJAddressQuery extends React.Component {
             fields,
             pageCode: '802365',
             searchParams: {
-                currency: 'BTC'
+                currency: this.state.currency
             }
         });
     }

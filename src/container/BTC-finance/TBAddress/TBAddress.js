@@ -33,6 +33,19 @@ import fetch from 'common/js/fetch';
 class TBAddress extends React.Component {
     render() {
         const fields = [{
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          render: (v, data) => v,
+          search: true
+        }, {
             field: 'address',
             title: '地址'
         }, {

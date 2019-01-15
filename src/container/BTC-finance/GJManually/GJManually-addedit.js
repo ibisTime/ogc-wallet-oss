@@ -38,7 +38,7 @@ class GJManuallyAddedit extends DetailUtil {
                         content: `所有余额大于${param.balanceStart}的地址都将进行归集，确定进行操作吗？`,
                         onOk: () => {
                             this.props.doFetching();
-                            fetch(802362, param).then(() => {
+                            fetch(802360, param).then(() => {
                                 showSucMsg('操作成功');
                                 this.props.form.setFieldsValue({
                                     'balanceStart': ''

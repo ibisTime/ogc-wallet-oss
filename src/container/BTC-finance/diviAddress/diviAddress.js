@@ -31,6 +31,19 @@ import {
 class BTCDiviAddress extends React.Component {
     render() {
         const fields = [{
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          render: (v, data) => v,
+          search: true
+        }, {
             field: 'address',
             title: '地址',
             search: true
@@ -57,18 +70,7 @@ class BTCDiviAddress extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802565',
-            btnEvent: {
-                diviLedger: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/BTC-finance/diviAddress/ledger?address=${selectedRowKeys[0]}`);
-                    }
-                }
-            }
+            pageCode: '802505'
         });
     }
 }

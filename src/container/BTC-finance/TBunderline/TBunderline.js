@@ -33,11 +33,35 @@ import fetch from 'common/js/fetch';
     }
 )
 class TBunderline extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currency: 'BTC'
+        };
+    }
     render() {
         const fields = [{
             field: 'code',
             title: '编号',
             search: true
+        }, {
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          render: (v, data) => v,
+          search: true,
+          onChange: (v) => {
+            this.setState({
+              currency: v
+            });
+          }
         }, {
             field: 'accountName',
             title: '账号',
@@ -128,7 +152,7 @@ class TBunderline extends React.Component {
             fields,
             pageCode: '802355',
             searchParams: {
-                currency: 'BTC'
+                currency: this.state.currency
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {

@@ -58,10 +58,13 @@ class CommunityAddedit extends DetailUtil {
             editCode: '630502',
             detailCode: '630507',
             beforeSubmit: (data) => {
+                debugger;
+                let { pageData } = this.state;
                 data.location = 'community';
                 data.enPic = data.pic;
                 if (this.code) {
-                    data.type = this.props.pageData.type;
+                    console.log('1', pageData.type);
+                    data.type = pageData.type;
                 }
                 return data;
             }

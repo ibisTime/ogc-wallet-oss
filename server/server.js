@@ -13,7 +13,6 @@ app.use('/api', function (req, res) {
     var url = 'http://120.26.6.213:5801/forward-service/api';
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
-
     axios.post(url, param).then((response) => {
         var ret = response.data
         if (typeof ret === 'string') {

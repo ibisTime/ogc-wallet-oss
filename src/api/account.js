@@ -25,7 +25,7 @@ export function getListUserAccount(params) {
     return fetch(802301, params);
 }
 export function gettotalAcount() {
-    return fetch(630900);
+    return fetch(802300);
 }
 
 /**

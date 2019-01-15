@@ -191,8 +191,10 @@ import { bizReceiveQuery } from './redux/biz/redPacket/receiveQuery';
 import { bizRedPacketQuery } from './redux/biz/redPacket/redPacketQuery';
 
 /* BTC财务管理 */
-// 平台账户
+// 查询地址
 import {BTCFinancePlatformAccount} from './redux/BTC-finance/platformAccount/platformAccount';
+// 平台账户
+import {addressQuery} from './redux/BTC-finance/addressQuery';
 
 // 分发地址
 import {BTCFinanceDiviAddress} from './redux/BTC-finance/diviAddress/diviAddress';
@@ -350,6 +352,8 @@ export default combineReducers({
     bizReceiveQuery,
     bizRedPacketQuery,
     /* BTC 财务管理 */
+    // 查询币种
+    addressQuery,
     // 平台账户
     BTCFinancePlatformAccount,
     // 分发地址

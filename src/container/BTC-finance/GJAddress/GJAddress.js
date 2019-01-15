@@ -33,6 +33,19 @@ import fetch from 'common/js/fetch';
 class GJAddress extends React.Component {
     render() {
         const fields = [{
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          render: (v, data) => v,
+          search: true
+        }, {
             field: 'address',
             title: '地址',
             search: true
@@ -60,7 +73,7 @@ class GJAddress extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802585',
+            pageCode: '802525',
             searchParams: {
                 type: 'W'
             },

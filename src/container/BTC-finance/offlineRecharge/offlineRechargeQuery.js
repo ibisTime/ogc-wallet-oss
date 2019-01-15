@@ -28,11 +28,35 @@ import {
     }
 )
 class OfflineRechargeQuery extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currency: 'BTC'
+        };
+    }
     render() {
         const fields = [{
             field: 'code',
             title: '编号',
             search: true
+        }, {
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          render: (v) => v,
+          search: true,
+          onChange: (v) => {
+            this.setState({
+              currency: v
+            });
+          }
         }, {
             field: 'accountName',
             title: '户名',
@@ -91,7 +115,7 @@ class OfflineRechargeQuery extends React.Component {
             fields,
             pageCode: '802345',
             searchParams: {
-                currency: 'BTC',
+                currency: this.state.currency,
                 channelType: '1'
             },
             btnEvent: {
