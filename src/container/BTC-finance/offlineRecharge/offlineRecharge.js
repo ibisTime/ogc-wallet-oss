@@ -39,9 +39,18 @@ class OfflineRecharge extends React.Component {
             isVisible: false,
             // code
             codeList: [],
-            currency: 'BTC'
+            currency: ''
         };
     }
+
+      componentDidMount() {
+        let clearParams = document.getElementById('clearParams');
+        clearParams.addEventListener('click', () => {
+          this.setState({
+            currency: ''
+          });
+        });
+      }
 
     setModalVisible = (flag, param) => {
         // 操作

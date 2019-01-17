@@ -32,8 +32,16 @@ class GJAddressQuery extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          currency: 'BTC'
+          currency: ''
         };
+    }
+    componentDidMount() {
+      let clearParams = document.getElementById('clearParams');
+      clearParams.addEventListener('click', () => {
+        this.setState({
+          currency: ''
+        });
+      });
     }
     render() {
         const fields = [{

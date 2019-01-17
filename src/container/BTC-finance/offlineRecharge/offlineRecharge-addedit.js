@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'antd';
+import { Form, Modal } from 'antd';
 import {
     initStates,
     doFetching,
@@ -14,6 +14,7 @@ import fetch from 'common/js/fetch';
 import DetailUtil from 'common/js/build-detail';
 
 let accountNumber = null;
+let currency = '';
 @Form.create()
 class OfflineRechargeAddedit extends DetailUtil {
     constructor(props) {
@@ -22,11 +23,24 @@ class OfflineRechargeAddedit extends DetailUtil {
         this.view = !!getQueryString('v', this.props.location.search);
         this.isCheck = !!getQueryString('isCheck', this.props.location.search);
         this.isapply = !!getQueryString('isapply', this.props.location.search);
-        this.currency = getQueryString('isapply', this.props.location.search);
     }
 
     render() {
         let fields = [{
+          field: 'currency',
+          title: '币种类型',
+          type: 'select',
+          pageCode: '802005',
+          params: {
+            status: '0'
+          },
+          keyName: 'symbol',
+          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+          searchName: 'symbol',
+          onChange: (v) => {
+            currency = v;
+          }
+        }, {
             field: 'userId',
             title: '充值用户',
             required: true,
@@ -36,10 +50,17 @@ class OfflineRechargeAddedit extends DetailUtil {
             valueName: '{{realName.DATA}}({{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             onChange: (v, data) => {
-                if (v) {
-                    getListUserAccount({userId: v, currency: this.currency}).then((d) => {
+                if (v && currency) {
+                    getListUserAccount({userId: v, currency: currency}).then((d) => {
                       accountNumber = d[0].accountNumber;
                     });
+                }else if(!currency) {
+                  Modal.confirm({
+                    title: '',
+                    content: '请先选择币种类型',
+                    onOk() {},
+                    onCancel() {}
+                  });
                 }
             },
             formatter: (v, data) => {

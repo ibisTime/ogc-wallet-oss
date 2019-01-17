@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Card, Row, Col, Button, Spin} from 'antd';
 import {initData} from '@redux/BTC-finance/platformAccount/serviceCharge';
-import {moneyFormat} from 'common/js/util';
+import {moneyFormat, getQueryString} from 'common/js/util';
 
 const {Meta} = Card;
 
@@ -21,7 +21,7 @@ class PlatformAccount extends React.Component {
 
     render() {
         const unsettledLoan = this.props.unsettledLoan;
-        const symbol = 'BTC';
+        const symbol = getQueryString('symbol', this.props.location.search);
 
         return (
             <div>

@@ -11,12 +11,9 @@ import {
     setSearchData
 } from '@redux/BTC-finance/diviAddress/diviAddress';
 import {listWrapper} from 'common/js/build-list';
-import {
-    moneyFormat,
-    getCoinList,
-    dateTimeFormat,
-    showWarnMsg
-} from 'common/js/util';
+import {moneyFormat, getCoinList, dateTimeFormat, showWarnMsg} from 'common/js/util';
+
+let setSymbol = 'BTC';
 
 @listWrapper(
     state => ({
@@ -31,7 +28,7 @@ import {
 class BTCDiviAddress extends React.Component {
     render() {
         const fields = [{
-          field: 'currency',
+          field: 'symbol',
           title: '币种类型',
           type: 'select',
           pageCode: '802005',
@@ -42,7 +39,10 @@ class BTCDiviAddress extends React.Component {
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
           searchName: 'symbol',
           render: (v, data) => v,
-          search: true
+          search: true,
+          onChange(v) {
+            setSymbol = v;
+          }
         }, {
             field: 'address',
             title: '地址',
@@ -64,13 +64,17 @@ class BTCDiviAddress extends React.Component {
         }, {
             field: 'balance',
             title: '当前余额',
-            coin: 'BTC',
-            coinAmount: true
+            render(v, data) {
+              return moneyFormat(v, '', data.symbol);
+            }
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802505'
+            pageCode: '802505',
+            searchParams: {
+                symbol: setSymbol
+            }
         });
     }
 }

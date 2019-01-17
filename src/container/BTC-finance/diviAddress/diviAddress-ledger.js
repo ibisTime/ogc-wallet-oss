@@ -38,6 +38,9 @@ class DiviAddress extends React.Component {
 
     render() {
         const fields = [{
+          field: 'currency',
+          title: '币种类型'
+        }, {
             title: '交易HASH',
             field: 'hash'
         }, {

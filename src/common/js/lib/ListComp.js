@@ -525,7 +525,7 @@ export default class ListComponent extends React.Component {
         children.push(
             <FormItem key='searchBtn'>
                 <Button type="primary" htmlType="submit">搜索</Button>
-                <Button style={{marginLeft: 8}} onClick={this.handleReset}>重置</Button>
+                <Button id='clearParams' style={{marginLeft: 8}} onClick={this.handleReset}>重置</Button>
             </FormItem>
         );
         return children;

@@ -83,13 +83,31 @@ class TBAddress extends React.Component {
             },
             btnEvent: {
                 add: (selectedRowKeys, selectedRows) => {
+                  let selectHtml = document.createElement('select');
+                  selectHtml.id = 'symSelect';
+                  selectHtml.style.height = '30px';
+                  selectHtml.style.width = '80%';
+                  selectHtml.style.borderRadius = '4px';
+                  selectHtml.style.borderColor = '#ccc';
+                  selectHtml.style.paddingLeft = '5px';
+                  selectHtml.style.backgroundColor = '#fff';
+                  fetch(802005, {limit: 20, start: 1}).then((data) => {
+                    data.list.forEach((item, index) => {
+                      selectHtml.options[index] = new Option(item.symbol, item.symbol);
+                    });
+                  });
+                    setTimeout(() => {
+                      document.querySelector('.ant-modal-confirm-content').appendChild(selectHtml);
+                    }, 0);
                     Modal.confirm({
+                        title: '请选择币种',
                         okText: '确认',
                         cancelText: '取消',
-                        content: `确认生成提币地址？`,
+                        content: '',
                         onOk: () => {
                             this.props.doFetching();
-                            fetch(802510, {}).then(() => {
+                            let symbol = document.getElementById('symSelect').value;
+                            fetch(802510, {symbol}).then(() => {
                                 this.props.getPageData();
                                 showSucMsg('操作成功');
                             }).catch(() => {
