@@ -19,7 +19,7 @@ class InvitingTxtAddedit extends DetailUtil {
             hidden: true,
             value: '邀请好友链接文本'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             key: 'ckey',
             code: 'invite_url',
@@ -29,11 +29,11 @@ class InvitingTxtAddedit extends DetailUtil {
                 title: '保存',
                 check: true,
                 handler: (params) => {
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(630042, params).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
-                    }).catch(this.props.cancelFetching);
+                        this.cancelFetching();
+                    }).catch(this.cancelFetching);
                 }
             }]
         });

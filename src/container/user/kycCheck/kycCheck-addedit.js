@@ -54,14 +54,14 @@ class KycCheckAddedit extends DetailUtil {
                     param.approveResult = '1';
                     param.id = this.code;
                     param.approveUser = getUserName();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(805132, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true,
                 type: 'primary'
@@ -71,14 +71,14 @@ class KycCheckAddedit extends DetailUtil {
                     param.approveResult = '0';
                     param.id = this.code;
                     param.approveUser = getUserName();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(805132, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true
             }, {

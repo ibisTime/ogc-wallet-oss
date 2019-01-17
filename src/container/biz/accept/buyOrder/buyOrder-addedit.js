@@ -11,7 +11,12 @@ class BuyOrderAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.isSale = !!getQueryString('isSale', this.props.location.search);
-        this.buttons = [];
+        this.buttons = [{
+          title: '返回',
+          handler: () => {
+            this.props.history.go(-1);
+          }
+        }];
         if(this.isSale) {
             this.buttons = [{
                 title: '确认到账',
@@ -19,14 +24,14 @@ class BuyOrderAddedit extends DetailUtil {
                     param.result = '1';
                     param.code = this.code;
                     param.userId = getUserId();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(625274, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true,
                 type: 'primary'
@@ -36,19 +41,19 @@ class BuyOrderAddedit extends DetailUtil {
                     param.result = '0';
                     param.code = this.code;
                     param.userId = getUserId();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(625274, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true
             }, {
                 title: '返回',
-                handler: (param) => {
+                handler: () => {
                     this.props.history.go(-1);
                 }
             }];
@@ -113,7 +118,7 @@ class BuyOrderAddedit extends DetailUtil {
             title: '备注',
             field: 'remark'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,

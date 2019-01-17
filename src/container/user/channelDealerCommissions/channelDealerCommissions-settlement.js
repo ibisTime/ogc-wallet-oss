@@ -92,14 +92,14 @@ class ChannelDealerCommissionsSettlement extends DetailUtil {
                         handleResult: '1',
                         handleNote: param.handleNote
                     };
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802390, data).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true,
                 type: 'primary'
@@ -111,14 +111,14 @@ class ChannelDealerCommissionsSettlement extends DetailUtil {
                         handleResult: '0',
                         handleNote: param.handleNote
                     };
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802390, data).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true
             }, {

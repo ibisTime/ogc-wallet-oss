@@ -81,7 +81,7 @@ class PaymentAddedit extends DetailUtil {
             field: 'remark',
             title: '备注'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,
@@ -89,8 +89,8 @@ class PaymentAddedit extends DetailUtil {
             editCode: '802022',
             detailCode: '802027',
             beforeSubmit: (params) => {
-            //     let bank = this.props.selectData.bankCode.find(v => v.bankCode === params.bankCode);
-                params.bankCode = this.props.pageData.bankCode;
+                let { pageData } = this.state;
+                params.bankCode = pageData.bankCode;
                 params.bankName = '支付宝';
             //     if (this.isAlipay === '1') {
                 params.subbranch = '支付宝';

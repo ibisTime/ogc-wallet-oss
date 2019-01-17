@@ -87,17 +87,17 @@ class CustomerAccount extends React.Component {
             data.direction = param.direction;
             data.amount = param.amount;
             data.updater = getUserId();
-            this.props.doFetching();
+            this.doFetching();
             fetch(802380, data).then(() => {
                 this.setState({
                     isVisible: flag
                 });
                 showSucMsg('操作成功');
-                this.props.cancelFetching();
+                this.cancelFetching();
                 setTimeout(() => {
                     this.props.getPageData();
                 }, 1000);
-            }).catch(this.props.cancelFetching);
+            }).catch(this.cancelFetching);
         } else {
             // 显示
             this.setState({

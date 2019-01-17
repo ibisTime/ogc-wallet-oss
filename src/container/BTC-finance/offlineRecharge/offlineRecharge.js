@@ -182,6 +182,9 @@ class OfflineRecharge extends React.Component {
                     } else {
                         this.props.history.push(`/BTC-finance/offlineRecharge/detail?v=1&code=${selectedRowKeys[0]}`);
                     }
+                },
+                add: (selectedRowKeys, selectedRows) => {
+                  this.props.history.push(`/BTC-finance/offlineRecharge/addedit?isapply=${this.state.currency}`);
                 }
             }
         })}

@@ -34,7 +34,7 @@ class TBunderlineMultiCheck extends DetailUtil {
             valueName: '{{address.DATA}}',
             searchName: 'address'
         }];
-        return this.props.buildDetail({
+        return this.buildDetail({
             fields,
             code: '',
             view: this.view,
@@ -45,20 +45,20 @@ class TBunderlineMultiCheck extends DetailUtil {
                     params.mAddressId = address.id;
                     params.code = this.code;
                     params.approveUser = getUserId();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802353, params).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true,
                 type: 'primary'
             }, {
                 title: '返回',
-                handler: (param) => {
+                handler: () => {
                     this.props.history.go(-1);
                 }
             }]

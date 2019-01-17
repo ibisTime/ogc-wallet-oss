@@ -46,7 +46,6 @@ class AddressQuery extends React.Component {
         code: 'userAccount',
         name: '平台账户',
         handler: (rowKeys) => {
-          console.log(rowKeys[0]);
           if (!rowKeys.length) {
             showWarnMsg('请选择记录');
           } else if (rowKeys.length > 1) {

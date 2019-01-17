@@ -64,7 +64,12 @@ class OfflineRechargeDetail extends DetailUtil {
             title: '充值说明'
         }];
 
-        let buttons = [];
+        let buttons = [{
+          title: '返回',
+          handler: (param) => {
+            this.props.history.go(-1);
+          }
+        }];
         if (this.isCheck || (this.code && !this.isCheck)) {
             fields = fields.concat([{
                 field: 'payNote',
@@ -80,14 +85,14 @@ class OfflineRechargeDetail extends DetailUtil {
                     param.payResult = '1';
                     param.codeList = [this.code];
                     param.payUser = getUserName();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802341, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true,
                 type: 'primary'
@@ -97,14 +102,14 @@ class OfflineRechargeDetail extends DetailUtil {
                     param.payResult = '0';
                     param.codeList = [this.code];
                     param.payUser = getUserName();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802341, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true
             }, {

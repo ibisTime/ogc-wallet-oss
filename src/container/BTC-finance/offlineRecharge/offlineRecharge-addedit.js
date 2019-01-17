@@ -12,6 +12,8 @@ import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/ut
 import {getListUserAccount} from 'api/account';
 import fetch from 'common/js/fetch';
 import DetailUtil from 'common/js/build-detail';
+
+let accountNumber = null;
 @Form.create()
 class OfflineRechargeAddedit extends DetailUtil {
     constructor(props) {
@@ -19,6 +21,8 @@ class OfflineRechargeAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.isCheck = !!getQueryString('isCheck', this.props.location.search);
+        this.isapply = !!getQueryString('isapply', this.props.location.search);
+        this.currency = getQueryString('isapply', this.props.location.search);
     }
 
     render() {
@@ -33,8 +37,8 @@ class OfflineRechargeAddedit extends DetailUtil {
             searchName: 'keyword',
             onChange: (v, data) => {
                 if (v) {
-                    getListUserAccount({userId: v, currency: 'BTC'}).then((d) => {
-                        this.props.setPageData({'accountNumber': d[0].accountNumber});
+                    getListUserAccount({userId: v, currency: this.currency}).then((d) => {
+                      accountNumber = d[0].accountNumber;
                     });
                 }
             },
@@ -58,16 +62,22 @@ class OfflineRechargeAddedit extends DetailUtil {
             }
         }, {
             field: 'payCardInfo',
-            title: '打币渠道'
+            title: '支付渠道'
         }, {
             field: 'payCardNo',
-            title: '打币地址'
+            title: '支付卡号'
         }, {
             field: 'applyNote',
-            title: '充值说明'
+            title: '充值说明',
+            required: true
         }];
 
-        let buttons = [];
+        let buttons = [{
+          title: '返回',
+          handler: () => {
+            this.props.history.go(-1);
+          }
+        }];
         if (this.isCheck || (this.code && !this.isCheck)) {
             fields = fields.concat([{
                 field: 'payNote',
@@ -83,14 +93,14 @@ class OfflineRechargeAddedit extends DetailUtil {
                     param.payResult = '1';
                     param.codeList = [this.code];
                     param.payUser = getUserName();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802341, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true,
                 type: 'primary'
@@ -100,23 +110,47 @@ class OfflineRechargeAddedit extends DetailUtil {
                     param.payResult = '0';
                     param.codeList = [this.code];
                     param.payUser = getUserName();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802341, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true
             }, {
                 title: '返回',
-                handler: (param) => {
+                handler: () => {
                     this.props.history.go(-1);
                 }
             }];
         }
+      if (this.isapply) {
+        buttons = [{
+          title: '确定',
+          handler: (param) => {
+            param.applyUser = getUserName();
+            param.accountNumber = accountNumber;
+            this.doFetching();
+            fetch(802340, param).then(() => {
+              showSucMsg('操作成功');
+              this.cancelFetching();
+              setTimeout(() => {
+                this.props.history.go(-1);
+              }, 1000);
+            }).catch(this.cancelFetching);
+          },
+          check: true,
+          type: 'primary'
+        }, {
+          title: '返回',
+          handler: () => {
+            this.props.history.go(-1);
+          }
+        }];
+      }
         return this.buildDetail({
             fields,
             code: this.code,

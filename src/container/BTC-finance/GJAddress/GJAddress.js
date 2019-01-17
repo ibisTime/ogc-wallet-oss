@@ -76,34 +76,6 @@ class GJAddress extends React.Component {
             pageCode: '802525',
             searchParams: {
                 type: 'W'
-            },
-            btnEvent: {
-                dele: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status === '1') {
-                        showWarnMsg('已经是无效地址，无需重复弃用');
-                    } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确认弃用地址？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                fetch(802581, {
-                                    id: selectedRowKeys[0]
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
-                            }
-                        });
-                    }
-                }
             }
         });
     }

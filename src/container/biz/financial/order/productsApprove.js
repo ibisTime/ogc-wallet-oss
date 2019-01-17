@@ -91,8 +91,7 @@ class ProductsApprove extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            key: 'product_status',
-            required: true
+            key: 'product_status'
         }, {
             title: '更新时间',
             field: 'updateDatetime',

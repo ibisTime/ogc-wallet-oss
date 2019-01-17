@@ -37,13 +37,19 @@ class List extends React.Component {
             field: 'nickname',
             title: '评论人',
             render: (v, data) => {
-                return data.user.nickname;
+                if(data.user) {
+                  return data.user.nickname;
+                }
+                return '';
             }
         }, {
             field: 'objUser',
             title: '评论对象',
             render: (v, data) => {
-                return data.objectUser.nickname;
+                if(data.objectUser) {
+                  return data.objectUser.nickname;
+                }
+                return '';
             }
         }, {
             field: 'commentDatetime',

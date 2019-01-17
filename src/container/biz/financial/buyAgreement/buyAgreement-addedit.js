@@ -33,7 +33,8 @@ class BuyAgreementAddedit extends DetailUtil {
             detailCode: 630046,
             editCode: 630042,
             beforeSubmit: (data) => {
-                data.remark = this.props.pageData.remark;
+                let { pageData } = this.state;
+                data.remark = pageData.remark;
                 return data;
             }
         });

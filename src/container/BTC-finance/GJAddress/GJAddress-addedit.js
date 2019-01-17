@@ -15,13 +15,24 @@ import DetailUtil from 'common/js/build-detail';
 class GJAddressAddedit extends DetailUtil {
   render() {
     let fields = [{
+      field: 'symbol',
+      title: '币种类型',
+      type: 'select',
+      pageCode: '802005',
+      params: {
+        status: '0'
+      },
+      keyName: 'symbol',
+      valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+      searchName: 'symbol'
+    }, {
       field: 'address',
       title: '地址'
     }];
 
     return this.buildDetail({
       fields,
-      addCode: '802580'
+      addCode: '802520'
     });
   }
 }

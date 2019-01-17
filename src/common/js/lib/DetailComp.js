@@ -185,6 +185,9 @@ export default class DetailComp extends React.Component {
             }
           });
         }
+        if(this.options._keys) {
+          getRealValue({...this.options});
+        }
         if (this.options.afterDetail) {
           this.options.afterDetail();
         }

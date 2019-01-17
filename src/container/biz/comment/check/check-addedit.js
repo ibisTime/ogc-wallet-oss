@@ -14,16 +14,16 @@ class CheckAddEdit extends DetailUtil {
     }
 
     checkComment(approveResult, params) {
-        this.props.doFetching();
+        this.doFetching();
         params.approveResult = approveResult;
         params.approver = getUserId();
         fetch(628270, params).then(() => {
-            this.props.cancelFetching();
+            this.cancelFetching();
             showSucMsg('操作成功');
             setTimeout(() => {
                 this.props.history.go(-1);
             }, 1000);
-        }).catch(this.props.cancelFetching);
+        }).catch(this.cancelFetching);
     }
 
     render() {

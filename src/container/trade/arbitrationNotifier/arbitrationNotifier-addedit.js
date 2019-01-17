@@ -27,7 +27,8 @@ class ArbitrationNotifierAddedit extends DetailUtil {
             editCode: '630032',
             detailCode: '630037',
             beforeSubmit: (data) => {
-                data.remark = this.props.pageData.remark;
+                let { pageData } = this.state;
+                data.remark = pageData.remark;
                 data.parentKey = 'zc_sms_notice';
                 data.dkey = data.dvalue;
                 data.type = 1;

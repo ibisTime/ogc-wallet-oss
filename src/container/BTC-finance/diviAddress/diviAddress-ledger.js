@@ -86,7 +86,7 @@ class DiviAddress extends React.Component {
             title: '网络记账时间',
             type: 'datatime'
         }];
-        return this.props.buildList({
+        return this.buildList({
             fields,
             rowKey: 'id',
             pageCode: '802590',

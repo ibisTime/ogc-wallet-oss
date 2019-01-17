@@ -77,7 +77,7 @@ class TBAddress extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802575',
+            pageCode: '802515',
             searchParams: {
                 type: 'M'
             },
@@ -89,7 +89,7 @@ class TBAddress extends React.Component {
                         content: `确认生成提币地址？`,
                         onOk: () => {
                             this.props.doFetching();
-                            fetch(802570, {}).then(() => {
+                            fetch(802510, {}).then(() => {
                                 this.props.getPageData();
                                 showSucMsg('操作成功');
                             }).catch(() => {
@@ -97,32 +97,6 @@ class TBAddress extends React.Component {
                             });
                         }
                     });
-                },
-                dele: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status === '1') {
-                        showWarnMsg('已经是无效地址，无需重复弃用');
-                    } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确认弃用地址？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                fetch(802571, {
-                                    id: selectedRowKeys[0]
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
-                            }
-                        });
-                    }
                 }
             }
         });

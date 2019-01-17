@@ -25,18 +25,8 @@ class TBunderlineAddedit extends DetailUtil {
             field: 'accountNumber',
             title: '充值账户',
             required: true,
-            // type: 'select',
-            // pageCode: '802300',
-            // params: {
-            //     currency: 'BTC',
-            //     type: 'C'
-            // },
-            // keyName: 'accountNumber',
-            // valueName: '{{realName.DATA}}',
-            // searchName: 'accountNumber',
-            // help: '支持户名查询',
             formatter: (v, data) => {
-                return data.applyUserInfo ? data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email : '';
+                return data.withdraw.applyUserInfo ? data.withdraw.applyUserInfo.realName ? data.withdraw.applyUserInfo.realName : data.withdraw.applyUserInfo.mobile ? data.withdraw.applyUserInfo.mobile : data.withdraw.applyUserInfo.email : '';
             }
         }, {
             field: 'amount',
@@ -45,59 +35,79 @@ class TBunderlineAddedit extends DetailUtil {
             coinAmount: true,
             coin: 'BTC',
             formatter: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                return moneyFormat(data.withdraw.amount, '', data.withdraw.currency);
             }
         }, {
             field: 'fee',
             title: '手续费',
             required: true,
             formatter: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                return moneyFormat(data.withdraw.fee, '', data.currency);
             }
         }, {
             field: 'actualAmount',
             title: '到账金额',
             required: true,
             formatter: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                return moneyFormat(data.withdraw.actualAmount, '', data.currency);
             }
         }, {
             field: 'payCardInfo',
             title: '区块链类型',
             value: 'BTC',
             readonly: true,
-            required: true
+            required: true,
+            formatter: (v, data) => {
+                return data.withdraw.payCardInfo;
+            }
         }, {
             field: 'payCardNo',
             title: '提现地址',
-            required: true
+            required: true,
+          formatter: (v, data) => {
+            return data.withdraw.payCardNo;
+          }
         }];
 
         if (!this.isCheck && this.view) {
             fields = fields.concat([{
                 field: 'channelOrder',
-                title: '交易hash'
+                title: '交易hash',
+              formatter: (v, data) => {
+                return data.withdraw.channelOrder;
+              }
             }, {
                 field: 'payFee',
                 title: '矿工费',
                 formatter: (v, data) => {
-                    return moneyFormat(v, '', data.currency);
+                    return moneyFormat(data.withdraw.payFee, '', data.currency);
                 }
             }]);
         }
 
         fields = fields.concat([{
             field: 'applyNote',
-            title: '申请说明'
+            title: '申请说明',
+          formatter: (v, data) => {
+            return data.withdraw.applyNote;
+          }
         }]);
 
-        let buttons = [];
+        let buttons = [{
+          title: '返回',
+          handler: () => {
+            this.props.history.go(-1);
+          }
+        }];
         if (this.isCheck) {
             fields = fields.concat([{
                 field: 'approveNote',
                 title: '审核意见',
                 readonly: !this.isCheck,
-                required: true
+                required: true,
+              formatter: (v, data) => {
+                return data.withdraw.approveNote;
+              }
             }]);
             buttons = [{
                 title: '通过',
@@ -105,14 +115,14 @@ class TBunderlineAddedit extends DetailUtil {
                     param.approveResult = '1';
                     param.codeList = [this.code];
                     param.approveUser = getUserId();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802352, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true,
                 type: 'primary'
@@ -122,14 +132,14 @@ class TBunderlineAddedit extends DetailUtil {
                     param.approveResult = '0';
                     param.codeList = [this.code];
                     param.approveUser = getUserId();
-                    this.props.doFetching();
+                    this.doFetching();
                     fetch(802352, param).then(() => {
                         showSucMsg('操作成功');
-                        this.props.cancelFetching();
+                        this.cancelFetching();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
-                    }).catch(this.props.cancelFetching);
+                    }).catch(this.cancelFetching);
                 },
                 check: true
             }, {
