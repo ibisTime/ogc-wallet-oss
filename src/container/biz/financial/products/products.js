@@ -127,7 +127,7 @@ class Products extends React.Component {
                     } else if (selectedRows[0].status !== '0' && selectedRows[0].status !== '3') {
                         showWarnMsg('不是可修改状态');
                     } else {
-                        this.props.history.push(`/bizFinancial/products/addedit?code=${selectedRowKeys[0]}&isEdit=1`);
+                        this.props.history.push(`/bizFinancial/products/addedit?code=${selectedRowKeys[0]}&isEdit=1&coin=${selectedRows[0].symbol}`);
                     }
                 },
                 detail: (selectedRowKeys, selectedRows) => {

@@ -9,7 +9,7 @@ import {
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
-let setSymbol = null;
+let setSymbol = getQueryString('coin');
 @Form.create()
 class ProductsAddedit extends DetailUtil {
     constructor(props) {
