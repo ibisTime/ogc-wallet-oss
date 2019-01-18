@@ -22,6 +22,7 @@ import {
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
+let currency = '';
 @listWrapper(
     state => ({
         ...state.BTCFinanceTBunderline,
@@ -33,18 +34,10 @@ import fetch from 'common/js/fetch';
     }
 )
 class TBunderline extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currency: ''
-        };
-    }
       componentDidMount() {
         let clearParams = document.getElementById('clearParams');
         clearParams.addEventListener('click', () => {
-          this.setState({
-            currency: ''
-          });
+          currency = '';
         });
       }
     render() {
@@ -66,9 +59,13 @@ class TBunderline extends React.Component {
           render: (v, data) => v,
           search: true,
           onChange: (v) => {
-            this.setState({
-              currency: v
-            });
+            setTimeout(() => {
+              let clearSpan = document.querySelector('.ant-select-selection__clear');
+              clearSpan.addEventListener('click', () => {
+                currency = '';
+              });
+            }, 0);
+            currency = v;
           }
         }, {
             field: 'accountName',
@@ -160,7 +157,7 @@ class TBunderline extends React.Component {
             fields,
             pageCode: '802355',
             searchParams: {
-                currency: this.state.currency
+                currency
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {

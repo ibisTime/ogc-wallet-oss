@@ -759,6 +759,11 @@ const ROUTES = [
         path: '/BTC-finance/TBAddress',
         component: asyncComponent(() => import('container/BTC-finance/TBAddress/TBAddress'))
     },
+      // 补给地址
+      {
+        path: '/BTC-finance/supplyAddress',
+        component: asyncComponent(() => import('container/BTC-finance/supplyAddress/supplyAddress'))
+      },
 
     // 线下提币
     {

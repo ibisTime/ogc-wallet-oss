@@ -9,12 +9,11 @@ import {
     restore
 } from '@redux/BTC-finance/offlineRecharge/offlineRecharge-addedit';
 import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/util';
-import {getListUserAccount} from 'api/account';
 import fetch from 'common/js/fetch';
 import DetailUtil from 'common/js/build-detail';
 
 let accountNumber = null;
-let currency = '';
+let currency = getQueryString('coin');
 @Form.create()
 class OfflineRechargeAddedit extends DetailUtil {
     constructor(props) {
@@ -36,10 +35,7 @@ class OfflineRechargeAddedit extends DetailUtil {
           },
           keyName: 'symbol',
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-          searchName: 'symbol',
-          onChange: (v) => {
-            currency = v;
-          }
+          searchName: 'symbol'
         }, {
             field: 'userId',
             title: '充值用户',
@@ -49,20 +45,6 @@ class OfflineRechargeAddedit extends DetailUtil {
             keyName: 'userId',
             valueName: '{{realName.DATA}}({{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
-            onChange: (v, data) => {
-                if (v && currency) {
-                    getListUserAccount({userId: v, currency: currency}).then((d) => {
-                      accountNumber = d[0].accountNumber;
-                    });
-                }else if(!currency) {
-                  Modal.confirm({
-                    title: '',
-                    content: '请先选择币种类型',
-                    onOk() {},
-                    onCancel() {}
-                  });
-                }
-            },
             formatter: (v, data) => {
                 let mobile = data.payer.mobile ? '-' + data.payer.mobile : '';
                 let email = data.payer.email ? '-' + data.payer.email : '';
@@ -77,7 +59,7 @@ class OfflineRechargeAddedit extends DetailUtil {
             field: 'amount',
             required: true,
             coinAmount: true,
-            coin: 'BTC',
+            coin: currency,
             formatter: (v, data) => {
                 return v ? moneyFormat(v, '', data.currency) : '';
             }

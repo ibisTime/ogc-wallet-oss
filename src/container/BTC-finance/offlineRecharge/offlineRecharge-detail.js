@@ -9,7 +9,6 @@ import {
     restore
 } from '@redux/BTC-finance/offlineRecharge/offlineRecharge-detail';
 import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/util';
-import {getListUserAccount} from 'api/account';
 import fetch from 'common/js/fetch';
 import DetailUtil from 'common/js/build-detail';
 @Form.create()

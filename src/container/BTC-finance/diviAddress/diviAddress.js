@@ -26,6 +26,12 @@ let setSymbol = 'BTC';
     }
 )
 class BTCDiviAddress extends React.Component {
+  componentDidMount() {
+    let clearParams = document.getElementById('clearParams');
+    clearParams.addEventListener('click', () => {
+      setSymbol = 'BTC';
+    });
+  }
     render() {
         const fields = [{
           field: 'symbol',
@@ -41,6 +47,12 @@ class BTCDiviAddress extends React.Component {
           render: (v, data) => v,
           search: true,
           onChange(v) {
+            setTimeout(() => {
+              let clearSpan = document.querySelector('.ant-select-selection__clear');
+              clearSpan.addEventListener('click', () => {
+                setSymbol = 'BTC';
+              });
+            }, 0);
             setSymbol = v;
           }
         }, {

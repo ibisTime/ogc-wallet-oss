@@ -20,6 +20,7 @@ import {
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
+let currency = 'BTC';
 @listWrapper(
     state => ({
         ...state.BTCFinanceTBAddress,
@@ -31,9 +32,15 @@ import fetch from 'common/js/fetch';
     }
 )
 class TBAddress extends React.Component {
+  componentDidMount() {
+    let clearParams = document.getElementById('clearParams');
+    clearParams.addEventListener('click', () => {
+      currency = 'BTC';
+    });
+  }
     render() {
         const fields = [{
-          field: 'currency',
+          field: 'symbol',
           title: '币种类型',
           type: 'select',
           pageCode: '802005',
@@ -44,7 +51,16 @@ class TBAddress extends React.Component {
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
           searchName: 'symbol',
           render: (v, data) => v,
-          search: true
+          search: true,
+          onChange: (v) => {
+            setTimeout(() => {
+              let clearSpan = document.querySelector('.ant-select-selection__clear');
+              clearSpan.addEventListener('click', () => {
+                currency = 'BTC';
+              });
+            }, 0);
+            currency = v;
+          }
         }, {
             field: 'address',
             title: '地址'
@@ -79,7 +95,7 @@ class TBAddress extends React.Component {
             rowKey: 'id',
             pageCode: '802515',
             searchParams: {
-                type: 'M'
+              symbol: currency
             },
             btnEvent: {
                 add: (selectedRowKeys, selectedRows) => {

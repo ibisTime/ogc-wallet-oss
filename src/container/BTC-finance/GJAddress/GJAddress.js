@@ -43,7 +43,7 @@ class GJAddress extends React.Component {
           keyName: 'symbol',
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
           searchName: 'symbol',
-          render: (v, data) => v,
+          render: (v) => v,
           search: true
         }, {
             field: 'address',

@@ -225,6 +225,9 @@ import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddressQuery/GJAdd
 import {BTCFinanceGJAddressQueryAddEdit} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery-addedit';
 import {BTCFinanceGJManuallyAddEdit} from './redux/BTC-finance/GJManually/GJManually-addedit';
 
+// 补给地址
+import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
+
 export default combineReducers({
     user,
     menu,
@@ -374,5 +377,6 @@ export default combineReducers({
     BTCFinanceGJAddressAddEdit,
     BTCFinanceGJAddressQuery,
     BTCFinanceGJAddressQueryAddEdit,
-    BTCFinanceGJManuallyAddEdit
+    BTCFinanceGJManuallyAddEdit,
+    BTCFinanceSupplyAddress
 });

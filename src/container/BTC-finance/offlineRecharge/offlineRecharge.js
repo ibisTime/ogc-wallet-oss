@@ -21,6 +21,7 @@ import {
 import OfflineRechargeCheck from 'component/offlineRecharge-check/offlineRecharge-check';
 import fetch from 'common/js/fetch';
 
+let currency = '';
 @listWrapper(
     state => ({
         ...state.BTCFinanceOfflineRecharge,
@@ -38,17 +39,14 @@ class OfflineRecharge extends React.Component {
             // 窗口是否显示
             isVisible: false,
             // code
-            codeList: [],
-            currency: ''
+            codeList: []
         };
     }
 
       componentDidMount() {
         let clearParams = document.getElementById('clearParams');
         clearParams.addEventListener('click', () => {
-          this.setState({
-            currency: ''
-          });
+          currency = '';
         });
       }
 
@@ -97,9 +95,13 @@ class OfflineRecharge extends React.Component {
           render: (v, data) => v,
           search: true,
           onChange: (v) => {
-            this.setState({
-              currency: v
-            });
+            setTimeout(() => {
+              let clearSpan = document.querySelector('.ant-select-selection__clear');
+              clearSpan.addEventListener('click', () => {
+                currency = '';
+              });
+            }, 0);
+            currency = v;
           }
         }, {
             field: 'accountName',
@@ -161,7 +163,7 @@ class OfflineRecharge extends React.Component {
             pageCode: '802345',
             searchParams: {
                 channelType: '90',
-                currency: this.state.currency
+                currency
             },
             singleSelect: false,
             btnEvent: {
@@ -189,7 +191,7 @@ class OfflineRecharge extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/BTC-finance/offlineRecharge/detail?v=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/BTC-finance/offlineRecharge/detail?v=1&code=${selectedRowKeys[0]}&coin=${selectedRows[0].currency}`);
                     }
                 },
                 add: (selectedRowKeys, selectedRows) => {
