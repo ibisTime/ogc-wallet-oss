@@ -1,11 +1,13 @@
 import React from 'react';
-import {Form} from 'antd';
+import {Form, message} from 'antd';
 import {
     getQueryString,
     moneyFormat,
     dateTimeFormat,
     getUserName,
-    showSucMsg
+    showSucMsg,
+    addDate,
+    dateFormat
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
@@ -80,6 +82,9 @@ class ProductsAddedit extends DetailUtil {
     }
 
     render() {
+        function getElementFn(el) {
+          return document.getElementById(el).children[0].children[0];
+        }
         const fields = [{
             title: '名称（中文简体）',
             field: 'nameZhCn',
@@ -87,10 +92,6 @@ class ProductsAddedit extends DetailUtil {
         }, {
             title: '名称（英文）',
             field: 'nameEn',
-            required: true
-        }, {
-            title: '名称（韩文）',
-            field: 'nameKo',
             required: true
         }, {
             title: '币种',
@@ -183,7 +184,23 @@ class ProductsAddedit extends DetailUtil {
           title: '募集结束时间',
           field: 'endDatetime',
           type: 'datetime',
-          required: true
+          required: true,
+          onChange(data) {
+            let limitDay = +(document.getElementById('limitDays').value.trim());
+            let startTime = new Date(getElementFn('startDatetime').value).getTime();
+            if(new Date(data._d).getTime() < startTime) {
+              message.warning('请选择大于募集开始的时间');
+              return;
+            }
+            if(!limitDay) {
+              message.warning('请选择产品期限');
+              return;
+            }
+            // 起息时间
+            getElementFn('incomeDatetime').value = addDate(data._d, 1);
+            getElementFn('arriveDatetime').value = addDate(data._d, limitDay);
+            getElementFn('repayDatetime').value = dateFormat(addDate(data._d, limitDay + 1));
+          }
         }, {
             title: '起息时间',
             field: 'incomeDatetime',
@@ -216,11 +233,6 @@ class ProductsAddedit extends DetailUtil {
             type: 'textarea',
             required: true
         }, {
-            title: '购买属性（韩文）',
-            field: 'buyDescKo',
-            type: 'textarea',
-            required: true
-        }, {
             title: '赎回属性（中文简体）',
             field: 'redeemDescZhCn',
             type: 'textarea',
@@ -231,11 +243,6 @@ class ProductsAddedit extends DetailUtil {
             type: 'textarea',
             required: true
         }, {
-            title: '赎回属性（韩文）',
-            field: 'redeemDescKo',
-            type: 'textarea',
-            required: true
-        }, {
             title: '说明书（中文简体）',
             field: 'directionsZhCn',
             type: 'textarea',
@@ -243,11 +250,6 @@ class ProductsAddedit extends DetailUtil {
         }, {
             title: '说明书（英文）',
             field: 'directionsEn',
-            type: 'textarea',
-            required: true
-        }, {
-            title: '说明书（韩文）',
-            field: 'directionsKo',
             type: 'textarea',
             required: true
         }];

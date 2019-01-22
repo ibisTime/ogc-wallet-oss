@@ -78,10 +78,6 @@ class ProductsDetail extends DetailUtil {
             field: 'nameEn',
             required: true
         }, {
-            title: '名称（韩文）',
-            field: 'nameKo',
-            required: true
-        }, {
             title: '币种',
             field: 'symbol',
             type: 'select',
@@ -190,11 +186,6 @@ class ProductsDetail extends DetailUtil {
             type: 'textarea',
             required: true
         }, {
-            title: '购买属性（韩文）',
-            field: 'buyDescKo',
-            type: 'textarea',
-            required: true
-        }, {
             title: '赎回属性（中文简体）',
             field: 'redeemDescZhCn',
             type: 'textarea',
@@ -202,11 +193,6 @@ class ProductsDetail extends DetailUtil {
         }, {
             title: '赎回属性（英文）',
             field: 'redeemDescEn',
-            type: 'textarea',
-            required: true
-        }, {
-            title: '赎回属性（韩文）',
-            field: 'redeemDescKo',
             type: 'textarea',
             required: true
         }, {
@@ -218,11 +204,6 @@ class ProductsDetail extends DetailUtil {
             title: '说明书（英文）',
             field: 'directionsEn',
             type: 'textarea'
-        }, {
-            title: '说明书（韩文）',
-            field: 'directionsKo',
-            type: 'textarea',
-            required: true
         }];
         return this.buildDetail({
             fields,

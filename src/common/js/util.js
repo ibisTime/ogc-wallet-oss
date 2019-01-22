@@ -157,6 +157,14 @@ export function dateTimeFormat(date) {
   return formatDate(date, 'yyyy-MM-dd hh:mm:ss');
 }
 
+// 日期加法
+export function addDate(date, days, format) {
+  var d = new Date(date);
+  d.setDate(d.getDate() + days);
+  var m = d.getMonth() + 1;
+  return dateTimeFormat(d.getFullYear() + '-' + m + '-' + d.getDate());
+}
+
 /**
  * 金额格式转化 根据币种格式化金额
  * @param money 金额

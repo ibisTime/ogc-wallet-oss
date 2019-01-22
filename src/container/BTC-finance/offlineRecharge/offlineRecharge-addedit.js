@@ -37,6 +37,7 @@ class OfflineRechargeAddedit extends DetailUtil {
           keyName: 'symbol',
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
           searchName: 'symbol',
+          required: true,
           onChange: (v) => {
             currency = v;
           }
