@@ -28,6 +28,17 @@ let setSymbol = 'BTC';
 class BTCDiviAddress extends React.Component {
   componentDidMount() {
     let clearParams = document.getElementById('clearParams');
+    let symInputList = document.querySelectorAll('.ant-select-search__field');
+    let symPloList = document.querySelectorAll('.ant-select-selection__placeholder');
+    setTimeout(() => {
+      symInputList.forEach((item, index) => {
+        if(item.id === 'symbol') {
+          item.value = 'BTC';
+          console.log(item);
+          symPloList[index].style.display = 'none';
+        }
+      });
+    }, 100);
     clearParams.addEventListener('click', () => {
       setSymbol = 'BTC';
     });
@@ -44,7 +55,7 @@ class BTCDiviAddress extends React.Component {
           keyName: 'symbol',
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
           searchName: 'symbol',
-          render: (v, data) => v,
+          render: (v) => v,
           search: true,
           onChange(v) {
             setTimeout(() => {

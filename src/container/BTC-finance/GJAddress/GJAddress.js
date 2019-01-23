@@ -33,7 +33,7 @@ import fetch from 'common/js/fetch';
 class GJAddress extends React.Component {
     render() {
         const fields = [{
-          field: 'currency',
+          field: 'symbol',
           title: '币种类型',
           type: 'select',
           pageCode: '802005',

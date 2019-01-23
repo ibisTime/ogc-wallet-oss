@@ -10,6 +10,7 @@ import {systemPwdReset} from './redux/system/pwdReset';
 import {systemDataDict} from './redux/system/dataDict';
 import {publicBanner} from './redux/public/banner';
 import {publicAboutus} from './redux/public/aboutus';
+import {publicQuantitative} from './redux/public/quantitative';
 import {publicContact} from './redux/public/contact';
 import {publicPrivacy} from './redux/public/privacy';
 import {publicRegister} from './redux/public/register';
@@ -241,6 +242,7 @@ export default combineReducers({
     // public
     publicBanner,
     publicAboutus,
+    publicQuantitative,
     publicContact,
     publicPrivacy,
     publicRegister,

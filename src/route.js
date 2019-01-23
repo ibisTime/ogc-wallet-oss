@@ -64,6 +64,14 @@ const ROUTES = [
         path: '/public/aboutus/addedit',
         component: asyncComponent(() => import('container/public/aboutus-addedit/aboutus-addedit'))
     },
+      {
+        path: '/public/quantitative',
+        component: asyncComponent(() => import('container/public/quantitative/quantitative'))
+      },
+  {
+    path: '/public/quantitative/addedit',
+    component: asyncComponent(() => import('container/public/quantitative/quantitative-addedit'))
+  },
     {
         path: '/public/contact',
         component: asyncComponent(() => import('container/public/contact/contact'))

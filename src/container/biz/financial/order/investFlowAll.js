@@ -54,32 +54,32 @@ class InvestFlowAll extends React.Component {
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
             searchName: 'mobile',
-            formatter: function (v, data) {
-                return data.userInfo.nickname;
+            render: function (v, data) {
+                return data.userInfo.nickname || data.userInfo.loginName;
             },
             search: true
         }, {
             title: '认购用户手机号',
             field: 'mobile',
-            formatter: function (v, data) {
+            render: function (v, data) {
                 return data.userInfo.mobile;
             }
         }, {
             title: '产品名称',
             field: 'name',
-            formatter: function (v, data) {
+            render: function (v, data) {
                 return data.productInfo.nameZhCn;
             }
         }, {
             title: '产品币种',
             field: 'symbol',
-            formatter: function (v, data) {
+            render: function (v, data) {
                 return data.productInfo.symbol;
             }
         }, {
             title: '投资总金额',
             field: 'investAmount',
-            formatter: function (v, data) {
+            render: function (v, data) {
                 return moneyFormat(v.toString(), '', data.productInfo.symbol);
             }
         }, {
@@ -88,13 +88,13 @@ class InvestFlowAll extends React.Component {
         }, {
             title: '预期收益',
             field: 'expectIncome',
-            formatter: function (v, data) {
+            render: function (v, data) {
                 return moneyFormat(v.toString(), '', data.productInfo.symbol);
             }
         }, {
             title: '实际到账收益',
             field: 'income',
-            formatter: function (v, data) {
+            render: function (v, data) {
                 return moneyFormat(v.toString(), '', data.productInfo.symbol);
             }
         }, {
