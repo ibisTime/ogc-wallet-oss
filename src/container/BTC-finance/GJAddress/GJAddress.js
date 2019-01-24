@@ -19,7 +19,7 @@ import {
     showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
-
+let setSymbol = 'BTC';
 @listWrapper(
     state => ({
         ...state.BTCFinanceGJAddress,
@@ -31,6 +31,22 @@ import fetch from 'common/js/fetch';
     }
 )
 class GJAddress extends React.Component {
+    componentDidMount() {
+      let clearParams = document.getElementById('clearParams');
+      let symInputList = document.querySelectorAll('.ant-select-search__field');
+      let symPloList = document.querySelectorAll('.ant-select-selection__placeholder');
+      setTimeout(() => {
+        symInputList.forEach((item, index) => {
+          if(item.id === 'symbol') {
+            item.value = setSymbol + '-比特币';
+            symPloList[index].style.display = 'none';
+          }
+        });
+      }, 500);
+      clearParams.addEventListener('click', () => {
+        setSymbol = 'BTC';
+      });
+    }
     render() {
         const fields = [{
           field: 'symbol',
@@ -44,7 +60,16 @@ class GJAddress extends React.Component {
           valueName: '{{symbol.DATA}}-{{cname.DATA}}',
           searchName: 'symbol',
           render: (v) => v,
-          search: true
+          search: true,
+          onChange(v) {
+            setTimeout(() => {
+              let clearSpan = document.querySelector('.ant-select-selection__clear');
+              clearSpan.addEventListener('click', () => {
+                setSymbol = 'BTC';
+              });
+            }, 0);
+            setSymbol = v;
+          }
         }, {
             field: 'address',
             title: '地址',
@@ -75,7 +100,8 @@ class GJAddress extends React.Component {
             rowKey: 'id',
             pageCode: '802525',
             searchParams: {
-                type: 'W'
+              type: 'W',
+              symbol: setSymbol
             }
         });
     }

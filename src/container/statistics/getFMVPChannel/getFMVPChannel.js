@@ -35,7 +35,7 @@ class GetFMVPChannel extends React.Component {
             title: '次数'
         }, {
             field: 'totalCount',
-            title: 'FMVP币数量'
+            title: 'BTC币数量'
         }];
         return this.props.buildList({
             fields,

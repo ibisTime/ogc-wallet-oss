@@ -48,7 +48,7 @@ export default class BuyFMVPTimeDistribution extends React.Component {
     getOption = () => ({
         animation: false,
         title: {
-            text: '承兑商购买FMVP时间分布',
+            text: '承兑商购买BTC时间分布',
             textStyle: {
                 fontWeight: '400',
                 fontSize: '15',

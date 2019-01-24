@@ -56,10 +56,10 @@ class Payment extends React.Component {
             type: 'select',
             data: [{
                 'key': '0',
-                'value': '不可用'
+                'value': '可用'
             }, {
                 'key': '1',
-                'value': '可用'
+                'value': '不可用'
             }],
             keyName: 'key',
             valueName: 'value',
@@ -74,11 +74,7 @@ class Payment extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 802025,
-            deleteCode: 802021,
-            searchParams: {
-                userId: SYS_USER
-            },
+            pageCode: 802033,
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

@@ -50,10 +50,12 @@ class PaymentAddedit extends DetailUtil {
                 } else {
                     this.isAlipay = '0';
                 }
-                this.props.form.setFieldsValue({
+                if(data) {
+                  this.props.form.setFieldsValue({
                     'subbranch': data.bankName,
                     'bankName': data.bankName
-                });
+                  });
+                }
             }
         }, {
             field: 'bankName',
@@ -85,9 +87,8 @@ class PaymentAddedit extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            addCode: '802020',
             editCode: '802022',
-            detailCode: '802027',
+            detailCode: '802032',
             beforeSubmit: (params) => {
                 let { pageData } = this.state;
                 params.bankCode = pageData.bankCode;

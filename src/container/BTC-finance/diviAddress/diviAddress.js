@@ -33,12 +33,11 @@ class BTCDiviAddress extends React.Component {
     setTimeout(() => {
       symInputList.forEach((item, index) => {
         if(item.id === 'symbol') {
-          item.value = 'BTC';
-          console.log(item);
+          item.value = setSymbol + '-比特币';
           symPloList[index].style.display = 'none';
         }
       });
-    }, 100);
+    }, 500);
     clearParams.addEventListener('click', () => {
       setSymbol = 'BTC';
     });

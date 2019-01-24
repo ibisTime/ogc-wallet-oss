@@ -34,6 +34,16 @@ let currency = 'BTC';
 class TBAddress extends React.Component {
   componentDidMount() {
     let clearParams = document.getElementById('clearParams');
+    let symInputList = document.querySelectorAll('.ant-select-search__field');
+    let symPloList = document.querySelectorAll('.ant-select-selection__placeholder');
+    setTimeout(() => {
+      symInputList.forEach((item, index) => {
+        if(item.id === 'symbol') {
+          item.value = currency + '-比特币';
+          symPloList[index].style.display = 'none';
+        }
+      });
+    }, 500);
     clearParams.addEventListener('click', () => {
       currency = 'BTC';
     });

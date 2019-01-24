@@ -44,16 +44,10 @@ class FMVPConsumptionRatio extends React.Component {
             title: '邮箱'
         }, {
             field: 'totalAcceptBuy',
-            title: '承兑购买MVP个数'
+            title: '承兑购买BTC个数'
         }, {
             field: 'totalAcceptSell',
-            title: '承兑出售MVP个数'
-        }, {
-            field: 'totalGameIn',
-            title: '游戏转入MVP个数'
-        }, {
-            field: 'totalGameOut',
-            title: '游戏转出MVP个数'
+            title: '承兑出售BTC个数'
         }];
         return this.props.buildList({
             fields,
