@@ -1,7 +1,6 @@
 import {getPageAccount} from 'api/account';
 import {SYS_USER} from 'common/js/config';
-
-const SYMBOL = 'BTC';
+import {getQueryString} from 'common/js/util';
 const PREFIX = 'BTC_FINANCE_PLATFORMACCOUNT_';
 const SET_UNSEETTLEDLOAN = PREFIX + 'SET_UNSEETTLEDLOAN';
 const LOADING = PREFIX + 'LOADING';
@@ -41,11 +40,11 @@ function setUnsettledLoan(data) {
 }
 
 // 初始化页面数据
-export function initData() {
+export function initData(currency) {
     return dispatch => {
         dispatch(doFetching());
         getPageAccount({
-            currency: SYMBOL,
+            currency,
             type: 'P'
         }).then((data) => {
             let param = {};

@@ -25,6 +25,9 @@ import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
 class UserReturnCommission extends React.Component {
     render() {
         const fields = [{
+          field: 'symbol',
+          title: '币种类型'
+        }, {
             field: 'name',
             title: '类型'
         }, {

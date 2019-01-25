@@ -101,19 +101,6 @@ class InvestFlow extends React.Component {
                 type: '0'
             },
             buttons: [{
-                code: 'userInvestFlow',
-                name: '认购明细',
-                handler: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push('-1');
-                    }
-                },
-                check: true
-            }, {
                 code: 'goBack',
                 name: '返回',
                 check: false,

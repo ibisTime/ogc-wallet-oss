@@ -408,11 +408,6 @@ const ROUTES = [
     },
 
     // 行情管理
-    // 交易对管理
-    {
-        path: '/quotation/tradePair',
-        component: asyncComponent(() => import('container/biz/quotation/tradePair'))
-    },
     // BTC行情
     {
         path: '/quotation/quotationBTC',
@@ -422,11 +417,6 @@ const ROUTES = [
     {
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
-    },
-    // X行情
-    {
-        path: '/quotation/quotationX',
-        component: asyncComponent(() => import('container/biz/quotation/quotationX'))
     },
     // 法币汇率
     {
@@ -468,15 +458,6 @@ const ROUTES = [
         path: '/rules/advertisingFee/addedit',
         component: asyncComponent(() => import('container/rules/advertisingFee/advertisingFee-addedit'))
     },
-    // 币币交易手续费规则
-    {
-        path: '/rules/simuOrderRule',
-        component: asyncComponent(() => import('container/rules/simuOrderRule/simuOrderRule'))
-    },
-    {
-        path: '/rules/simuOrderRule/addedit',
-        component: asyncComponent(() => import('container/rules/simuOrderRule/simuOrderRule-addedit'))
-    },
     // 提币手续费规则
     {
         path: '/rules/withdrawUserFee',
@@ -494,15 +475,6 @@ const ROUTES = [
     {
         path: '/rules/acceptRule/addedit',
         component: asyncComponent(() => import('container/rules/acceptRule/acceptRule-addedit'))
-    },
-    // 游戏配置
-    {
-        path: '/rules/gameConfig',
-        component: asyncComponent(() => import('container/rules/gameConfig/gameConfig'))
-    },
-    {
-        path: '/rules/gameConfig/addedit',
-        component: asyncComponent(() => import('container/rules/gameConfig/gameConfig-addedit'))
     },
     // 业务管理 -- 评论管理 -- 关键字管理
     {
@@ -539,12 +511,12 @@ const ROUTES = [
         path: '/statistics/userHoldingCurrency',
         component: asyncComponent(() => import('container/statistics/userHoldingCurrency/userHoldingCurrency'))
     },
-    // 统计分析 -- 平台统计 -- 承兑商购买FMVP时间分布
+    // 统计分析 -- 平台统计 -- 承兑商购买BTC时间分布
     {
         path: '/statistics/buyFMVPTimeDistribution',
         component: asyncComponent(() => import('container/statistics/buyFMVPTimeDistribution/buyFMVPTimeDistribution'))
     },
-    // 统计分析 -- 平台统计 -- 承兑商FMVP统计
+    // 统计分析 -- 平台统计 -- 承兑商BTC统计
     {
         path: '/statistics/acceptFMVP',
         component: asyncComponent(() => import('container/statistics/acceptFMVP/acceptFMVP'))
@@ -554,27 +526,17 @@ const ROUTES = [
         path: '/statistics/channelReturnCommission',
         component: asyncComponent(() => import('container/statistics/channelReturnCommission/channelReturnCommission'))
     },
-    // 统计分析 -- 平台统计 -- 币币交易情况统计
-    {
-        path: '/statistics/currencyTransaction',
-        component: asyncComponent(() => import('container/statistics/currencyTransaction/currencyTransaction'))
-    },
-    // 统计分析 -- 平台统计 -- FMVP消耗比例
+    // 统计分析 -- 平台统计 -- BTC消耗比例
     {
         path: '/statistics/FMVPConsumptionRatio',
         component: asyncComponent(() => import('container/statistics/FMVPConsumptionRatio/FMVPConsumptionRatio'))
     },
-    // 统计分析 -- 平台统计 -- FMVP变现统计
+    // 统计分析 -- 平台统计 -- BTC变现统计
     {
         path: '/statistics/FMVPRecharge',
         component: asyncComponent(() => import('container/statistics/FMVPRecharge/FMVPRecharge'))
     },
-    // 统计分析 -- 平台统计 -- 游戏FMVP统计
-    {
-        path: '/statistics/gameFMVP',
-        component: asyncComponent(() => import('container/statistics/gameFMVP/gameFMVP'))
-    },
-    // 统计分析 -- 平台统计 -- 获取FMVP途径
+    // 统计分析 -- 平台统计 -- 获取BTC途径
     {
         path: '/statistics/getFMVPChannel',
         component: asyncComponent(() => import('container/statistics/getFMVPChannel/getFMVPChannel'))
@@ -588,11 +550,6 @@ const ROUTES = [
     {
         path: '/statistics/OTCTransactions',
         component: asyncComponent(() => import('container/statistics/OTCTransactions/OTCTransactions'))
-    },
-    // 统计分析 -- 平台统计 -- 用户币币盈亏统计
-    {
-        path: '/statistics/userBBProfitLoss',
-        component: asyncComponent(() => import('container/statistics/userBBProfitLoss/userBBProfitLoss'))
     },
     // 统计分析 -- 平台统计 -- 用户返佣统计
     {

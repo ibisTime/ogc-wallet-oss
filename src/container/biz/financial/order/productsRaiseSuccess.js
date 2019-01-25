@@ -130,7 +130,7 @@ class ProductsRaiseSuccess extends React.Component {
                     showWarnMsg('该产品还未开始募集！');
                     return;
                   }
-                  this.props.history.push(`/bizFinancial/investFlowAll?code=${selectedRows[0].code}&menu=raiseSuccess`);
+                  this.props.history.push(`/bizFinancial/productsRaise/investFlowAll?code=${selectedRows[0].code}&menu=raiseSuccess`);
                 }
               },
               repaymentPlan: (selectedRowKeys, selectedRows) => {

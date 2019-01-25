@@ -102,17 +102,12 @@ import {acceptFinishOrder} from './redux/accept/finishOrder/finishOrder';
 import {bizCoin} from './redux/biz/coin/coin';
 
 // 行情管理
-// 交易对管理
-import {quotationTradePair} from './redux/biz/quotation/tradePair';
 
 // BTC行情
 import {quotationQuotationBTC} from './redux/biz/quotation/quotationBTC';
 
 // ETH行情
 import {quotationQuotationETH} from './redux/biz/quotation/quotationETH';
-
-// X行情
-import {quotationQuotationX} from './redux/biz/quotation/quotationX';
 
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
@@ -128,17 +123,11 @@ import {activityInvitingFriends} from './redux/activity/invitingFriends/inviting
 // 广告费规则
 import {rulesAdvertisingFee} from './redux/rules/advertisingFee/advertisingFee';
 
-// 币币交易手续费规则
-import {rulesSimuOrderRule} from './redux/rules/simuOrderRule/simuOrderRule';
-
 // 提币手续费规则
 import {rulesWithdrawUserFee} from './redux/rules/withdrawUserFee/withdrawUserFee';
 
 // 承兑商手续费规则
 import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
-
-// 游戏配置
-import {rulesGameConfig} from './redux/rules/gameConfig/gameConfig';
 
 // 业务管理--评论管理
 import { commentKeywords } from './redux/biz/comment/keywords';
@@ -152,22 +141,16 @@ import { statisticsUserHoldingCurrency } from './redux/statistics/userHoldingCur
 import { statisticsAcceptFMVP } from './redux/statistics/acceptFMVP/acceptFMVP';
 // 渠道商返佣统计
 import { statisticsChannelReturnCommission } from './redux/statistics/channelReturnCommission/channelReturnCommission';
-// 币币交易情况统计
-import { statisticsCurrencyTransaction } from './redux/statistics/currencyTransaction/currencyTransaction';
 // FMVP消耗比例
 import { statisticsFMVPConsumptionRatio } from './redux/statistics/FMVPConsumptionRatio/FMVPConsumptionRatio';
 // FMVP变现统计
 import { statisticsFMVPRecharge } from './redux/statistics/FMVPRecharge/FMVPRecharge';
-// 游戏FMVP统计
-import { statisticsGameFMVP } from './redux/statistics/gameFMVP/gameFMVP';
 // 获取FMVP途径
 import { statisticsGetFMVPChannel } from './redux/statistics/getFMVPChannel/getFMVPChannel';
 // CC交易OTC成交时间统计
 import { statisticsOTCClosingTime } from './redux/statistics/OTCClosingTime/OTCClosingTime';
 // OTC交易情况统计
 import { statisticsOTCTransactions } from './redux/statistics/OTCTransactions/OTCTransactions';
-// 用户币币盈亏统计
-import { statisticsUserBBProfitLoss } from './redux/statistics/userBBProfitLoss/userBBProfitLoss';
 // 用户返佣统计
 import { statisticsUserReturnCommission } from './redux/statistics/userReturnCommission/userReturnCommission';
 // 应用列表管理
@@ -302,10 +285,8 @@ export default combineReducers({
     // 币种管理
     bizCoin,
     // 行情管理
-    quotationTradePair,
     quotationQuotationBTC,
     quotationQuotationETH,
-    quotationQuotationX,
     quotationExchangeRate,
     quotationMarketAdjustment,
     // 活动管理
@@ -315,13 +296,10 @@ export default combineReducers({
     // 广告费规则
     rulesAdvertisingFee,
     // 币币交易手续费规则
-    rulesSimuOrderRule,
     // 提币手续费规则
     rulesWithdrawUserFee,
     // 承兑商手续费规则
     rulesAcceptRule,
-    // 游戏配置
-    rulesGameConfig,
     // 业务管理 评论管理
     commentKeywords,
     commentCheck,
@@ -330,14 +308,11 @@ export default combineReducers({
     statisticsUserHoldingCurrency,
     statisticsAcceptFMVP,
     statisticsChannelReturnCommission,
-    statisticsCurrencyTransaction,
     statisticsFMVPConsumptionRatio,
     statisticsFMVPRecharge,
-    statisticsGameFMVP,
     statisticsGetFMVPChannel,
     statisticsOTCClosingTime,
     statisticsOTCTransactions,
-    statisticsUserBBProfitLoss,
     statisticsUserReturnCommission,
     // 应用列表管理
     bizApplicationList,

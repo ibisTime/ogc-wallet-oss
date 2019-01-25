@@ -12,6 +12,9 @@ import {
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 let setSymbol = getQueryString('coin');
+function getElementFn(el) {
+  return document.getElementById(el).children[0].children[0];
+}
 @Form.create()
 class ProductsAddedit extends DetailUtil {
     constructor(props) {
@@ -33,6 +36,9 @@ class ProductsAddedit extends DetailUtil {
               param.isPublish = '0';
               param.creator = getUserName();
               param.code = this.code;
+              param.repayDatetime = getElementFn('repayDatetime').value;
+              param.incomeDatetime = getElementFn('incomeDatetime').value;
+              param.arriveDatetime = getElementFn('arriveDatetime').value;
               if(this.isEdit) {
                   param.symbol = param.symbol1;
                   delete param.symbol1;
@@ -51,6 +57,12 @@ class ProductsAddedit extends DetailUtil {
             handler: (param) => {
               param.isPublish = '1';
               param.code = this.code;
+              param.repayDatetime = getElementFn('repayDatetime').value;
+              param.incomeDatetime = getElementFn('incomeDatetime').value;
+              param.arriveDatetime = getElementFn('arriveDatetime').value;
+              if(!param.repayDatetime || !param.incomeDatetime || !param.arriveDatetime) {
+                message.warning('请填写完整');
+              }
               if(this.isEdit) {
                 param.symbol = param.symbol1;
                 delete param.symbol1;
@@ -82,9 +94,6 @@ class ProductsAddedit extends DetailUtil {
     }
 
     render() {
-        function getElementFn(el) {
-          return document.getElementById(el).children[0].children[0];
-        }
         const fields = [{
             title: '名称（中文简体）',
             field: 'nameZhCn',
@@ -204,18 +213,15 @@ class ProductsAddedit extends DetailUtil {
         }, {
             title: '起息时间',
             field: 'incomeDatetime',
-            type: 'datetime',
-            required: true
+            type: 'datetime'
         }, {
             title: '到期时间',
             field: 'arriveDatetime',
-            type: 'datetime',
-            required: true
+            type: 'datetime'
         }, {
             title: '还款日',
             field: 'repayDatetime',
-            type: 'datetime',
-            required: true
+            type: 'datetime'
         }, {
             title: '回款方式',
             field: 'paymentType',
