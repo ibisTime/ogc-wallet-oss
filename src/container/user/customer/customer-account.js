@@ -53,12 +53,6 @@ class CustomerAccount extends React.Component {
                 }
             }
         }, {
-            code: 'accountSummary',
-            name: '账户概要',
-            handler: (selectedRowKeys, selectedRows) => {
-                this.accountSummary(selectedRowKeys, selectedRows);
-            }
-        }, {
             code: 'ledgerQuery',
             name: '流水查询',
             handler: (selectedRowKeys, selectedRows) => {
@@ -114,17 +108,6 @@ class CustomerAccount extends React.Component {
             showWarnMsg('请选择一条记录');
         } else {
             this.props.history.push(`/user/customer/ledgerQuery?code=${selectedRowKeys[0]}`);
-        }
-    }
-
-    // 账户概要
-    accountSummary = (selectedRowKeys, selectedRows) => {
-        if (!selectedRowKeys.length) {
-            showWarnMsg('请选择记录');
-        } else if (selectedRowKeys.length > 1) {
-            showWarnMsg('请选择一条记录');
-        } else {
-            this.props.history.push(`/user/customer/accountSummary?userId=${selectedRows[0].userId}&coin=${selectedRows[0].currency}`);
         }
     }
 

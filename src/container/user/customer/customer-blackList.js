@@ -40,14 +40,6 @@ class CustomerBlackList extends React.Component {
                 }
             }
         }, {
-            field: 'mobile',
-            title: '手机号',
-            render: (v, data) => {
-                if(data.userInfo) {
-                    return data.userInfo.mobile;
-                }
-            }
-        }, {
             field: 'userId',
             title: '手机号',
             type: 'select',
@@ -63,13 +55,16 @@ class CustomerBlackList extends React.Component {
             search: true,
             noVisible: true
         }, {
-            field: 'email',
-            title: '邮箱',
-            render: (v, data) => {
-                if(data.userInfo) {
-                    return data.userInfo.mobile;
-                }
+          field: 'loginName',
+          title: '手机号/邮箱',
+          render: (v, data) => {
+            if(data.userInfo) {
+              return data.userInfo.loginName;
             }
+            if(v) {
+                return v;
+            }
+          }
         }, {
             field: 'createDatetime',
             title: '拉黑时间',

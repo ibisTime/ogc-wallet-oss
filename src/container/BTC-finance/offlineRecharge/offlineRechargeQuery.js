@@ -82,16 +82,10 @@ class OfflineRechargeQuery extends React.Component {
             search: true,
             noVisible: true
         }, {
-            field: 'mobile',
-            title: '手机号',
+            field: 'loginName',
+            title: '手机号/邮箱',
             render: (v, data) => {
-                return data.payer ? data.payer.mobile : '';
-            }
-        }, {
-            field: 'email',
-            title: '邮箱',
-            render: (v, data) => {
-                return data.payer ? data.payer.email : '';
+                return data.payer ? data.payer.loginName : '-';
             }
         }, {
             field: 'amount',
@@ -130,7 +124,7 @@ class OfflineRechargeQuery extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/BTC-finance/offlineRecharge/addedit?v=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/BTC-finance/offlineRecharge/detail?v=1&code=${selectedRowKeys[0]}`);
                     }
                 }
             }

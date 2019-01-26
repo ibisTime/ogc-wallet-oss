@@ -72,7 +72,7 @@ class CustomerLedgerQuery extends React.Component {
             field: 'bizType',
             title: '业务类型',
             type: 'select',
-            key: this.isPlat ? 'jour_biz_type_plat' : 'jour_biz_type_user',
+            key: this.isPlat ? 'frezon_jour_biz_type_user' : 'jour_biz_type_user',
             search: true
         }, {
             field: 'transAmountString',

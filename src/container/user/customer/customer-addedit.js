@@ -13,17 +13,12 @@ class CustomerAddedit extends DetailUtil {
 
     render() {
         const fields = [{
-            field: 'mobile',
-            title: '手机号',
-            required: true,
-            readonly: this.view
-        }, {
             title: '昵称',
             field: 'nickname',
             readonly: this.view
         }, {
-            field: 'email',
-            title: '邮箱'
+          field: 'loginName',
+          title: '手机号/邮箱'
         }, {
             field: 'kind',
             title: '类型',

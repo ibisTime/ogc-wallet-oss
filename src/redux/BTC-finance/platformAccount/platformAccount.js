@@ -49,7 +49,7 @@ export function initData(currency) {
         }).then((data) => {
             let param = {};
             data.list.map(d => {
-                param[d.accountNumber] = d;
+                param[d.userId] = d;
             });
             dispatch(setUnsettledLoan(param));
         });

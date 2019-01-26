@@ -13,14 +13,12 @@ const {Meta} = Card;
 class PlatformAccount extends React.Component {
     constructor(props) {
       super(props);
-      let symbol = getQueryString('symbol').toLocaleUpperCase();
       this.state = {
         symbol: getQueryString('symbol'),
-        accountType: `SYS_ACOUNT_${symbol}`,
-        accountTypeCold: `SYS_ACOUNT_${symbol}_COLD`,
-        accountTypeHb: `SYS_ACOUNT_${symbol}_HB`,
-        accountTypeLhlc: `SYS_ACOUNT_${symbol}_LHLC`,
-        accountTypeM: `SYS_ACOUNT_${symbol}_M`
+        accountType: `SYS_USER_WITHDRAW`,
+        accountTypeCold: `SYS_USER_COLD`,
+        accountTypeLhlc: `SYS_USER_LHLC`,
+        accountTypeM: `SYS_USER_INCOME`
       };
     }
     componentDidMount() {
@@ -37,6 +35,7 @@ class PlatformAccount extends React.Component {
 
     render() {
         const unsettledLoan = this.props.unsettledLoan;
+        console.log(unsettledLoan, unsettledLoan[this.state.accountTypeCold]);
         return (
             <div>
               <div style={{'margin-bottom': '30px'}}>
@@ -70,6 +69,14 @@ class PlatformAccount extends React.Component {
                             {/* <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button> */}
                         </div>}</Card>
                     </Col>
+                  <Col style={{marginBottom: '30px', width: '390px', float: 'left'}}>
+                    <Card title="量化理财账户余额 " extra={
+                      moneyFormat(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].amount : '0', '', this.state.symbol)
+                    }>{<div style={{width: '100%', textAlign: 'center'}}>
+                      <Button onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '')} type="primary" style={{marginTop: '15px'}}>资金流水</Button>
+                      {/* <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button> */}
+                    </div>}</Card>
+                  </Col>
                 </Row>
             </div>
         );

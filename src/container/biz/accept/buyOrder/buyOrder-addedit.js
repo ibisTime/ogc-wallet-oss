@@ -72,11 +72,20 @@ class BuyOrderAddedit extends DetailUtil {
                 return data.user ? data.user.nickname : '';
             }
         }, {
-            title: '手机号',
-            field: 'userMobile',
-            formatter: (v, data) => {
-                return data.user ? data.user.mobile : '';
+          field: 'receiveBank',
+          title: '收款方式'
+        }, {
+          field: 'receiveCardNo',
+          title: '卡号'
+        }, {
+          title: '手机号/邮箱',
+          field: 'loginName',
+          formatter(v, data) {
+            if(data.user) {
+              return data.user.loginName;
             }
+            return '-';
+          }
         }, {
             field: 'tradeCoin',
             title: '币种'
@@ -114,6 +123,9 @@ class BuyOrderAddedit extends DetailUtil {
         }, {
             field: 'receiveCardNo',
             title: '付款账号'
+        }, {
+          title: '附言',
+          field: 'postscript'
         }, {
             title: '备注',
             field: 'remark'

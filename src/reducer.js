@@ -17,7 +17,6 @@ import {publicRegister} from './redux/public/register';
 import {publicBuyADS} from './redux/public/buyADS';
 import {publicSellETH} from './redux/public/sellETH';
 import {publicTransactionRemind} from './redux/public/TransactionRemind';
-import {publicNotice} from './redux/public/notice';
 import {publicCommunity} from './redux/public/community';
 import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
@@ -97,14 +96,16 @@ import {acceptSaleOrder} from './redux/accept/saleOrder/saleOrder';
 // 已完成订单
 import {acceptFinishOrder} from './redux/accept/finishOrder/finishOrder';
 
-// 币种管理
-// 币种管理
-import {bizCoin} from './redux/biz/coin/coin';
+// 已取消订单
+import {acceptCancelOrder} from './redux/accept/cancelOrder/cancelOrder';
 
 // 行情管理
 
 // BTC行情
 import {quotationQuotationBTC} from './redux/biz/quotation/quotationBTC';
+
+// 承兑商行情
+import {quotationQuotationCDS} from './redux/biz/quotation/quotationCDS';
 
 // ETH行情
 import {quotationQuotationETH} from './redux/biz/quotation/quotationETH';
@@ -133,26 +134,6 @@ import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
 import { commentKeywords } from './redux/biz/comment/keywords';
 import { commentCheck } from './redux/biz/comment/check';
 import { commentList } from './redux/biz/comment/list';
-
-// 统计分析
-// 用户持币情况
-import { statisticsUserHoldingCurrency } from './redux/statistics/userHoldingCurrency/userHoldingCurrency';
-// 承兑商FMVP统计
-import { statisticsAcceptFMVP } from './redux/statistics/acceptFMVP/acceptFMVP';
-// 渠道商返佣统计
-import { statisticsChannelReturnCommission } from './redux/statistics/channelReturnCommission/channelReturnCommission';
-// FMVP消耗比例
-import { statisticsFMVPConsumptionRatio } from './redux/statistics/FMVPConsumptionRatio/FMVPConsumptionRatio';
-// FMVP变现统计
-import { statisticsFMVPRecharge } from './redux/statistics/FMVPRecharge/FMVPRecharge';
-// 获取FMVP途径
-import { statisticsGetFMVPChannel } from './redux/statistics/getFMVPChannel/getFMVPChannel';
-// CC交易OTC成交时间统计
-import { statisticsOTCClosingTime } from './redux/statistics/OTCClosingTime/OTCClosingTime';
-// OTC交易情况统计
-import { statisticsOTCTransactions } from './redux/statistics/OTCTransactions/OTCTransactions';
-// 用户返佣统计
-import { statisticsUserReturnCommission } from './redux/statistics/userReturnCommission/userReturnCommission';
 // 应用列表管理
 import { bizApplicationList } from './redux/biz/applicationList/applicationList';
 import { bizApplicationListHelpSet } from './redux/biz/applicationList/applicationListHelpSet';
@@ -232,7 +213,6 @@ export default combineReducers({
     publicBuyADS,
     publicSellETH,
     publicTransactionRemind,
-    publicNotice,
     publicCommunity,
     publicWarmReminding,
     publicLegalDeclaration,
@@ -282,10 +262,10 @@ export default combineReducers({
     acceptSaleOrder,
     // 已完成订单
     acceptFinishOrder,
-    // 币种管理
-    bizCoin,
+    acceptCancelOrder,
     // 行情管理
     quotationQuotationBTC,
+    quotationQuotationCDS,
     quotationQuotationETH,
     quotationExchangeRate,
     quotationMarketAdjustment,
@@ -304,16 +284,6 @@ export default combineReducers({
     commentKeywords,
     commentCheck,
     commentList,
-    // 统计分析
-    statisticsUserHoldingCurrency,
-    statisticsAcceptFMVP,
-    statisticsChannelReturnCommission,
-    statisticsFMVPConsumptionRatio,
-    statisticsFMVPRecharge,
-    statisticsGetFMVPChannel,
-    statisticsOTCClosingTime,
-    statisticsOTCTransactions,
-    statisticsUserReturnCommission,
     // 应用列表管理
     bizApplicationList,
     bizApplicationListHelpSet,

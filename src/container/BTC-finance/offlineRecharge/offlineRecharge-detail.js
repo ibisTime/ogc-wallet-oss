@@ -28,16 +28,10 @@ class OfflineRechargeDetail extends DetailUtil {
                 return data.payer ? data.payer.nickname : '';
             }
         }, {
-            field: 'mobile',
-            title: '手机号',
+            field: 'loginName',
+            title: '手机号/邮箱',
             formatter: (v, data) => {
-                return data.payer ? data.payer.mobile : '';
-            }
-        }, {
-            field: 'email',
-            title: '邮箱',
-            formatter: (v, data) => {
-                return data.payer ? data.payer.email : '';
+                return data.payer ? data.payer.loginName : '-';
             }
         }, {
             field: 'accountNumber',

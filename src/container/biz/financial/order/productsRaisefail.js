@@ -105,29 +105,36 @@ class ProductsRaisefail extends React.Component {
             searchParams: {
                 statusList: ['9']
             },
-            btnEvent: {
-                detail: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/bizFinancial/products/detail?v=1&code=${selectedRowKeys[0]}&isDetail=1`);
-                    }
+              buttons: [{
+                code: 'detail',
+                name: '详情',
+                handler: (rowKeys) => {
+                  if (!rowKeys.length) {
+                    showWarnMsg('请选择记录');
+                  } else if (rowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                  } else {
+                    this.props.history.push(`/bizFinancial/products/detail?v=1&code=${rowKeys[0]}&isDetail=1`);
+                  }
                 },
-                investFlowAll: (selectedRowKeys, selectedRows) => {
-                    var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9'};
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (!statusList[selectedRows[0].status]) {
-                        showWarnMsg('该产品还未开始募集！');
-                    } else {
-                        this.props.history.push(`/bizFinancial/productsRaisefail/investFlowAll?code=${selectedRowKeys[0]}&menu=raisefail`);
-                    }
-                }
-            }
+                check: false
+              }, {
+                code: 'investFlowAll',
+                name: '认购记录汇总',
+                handler: (rowKeys) => {
+                  var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9'};
+                  if (!rowKeys.length) {
+                    showWarnMsg('请选择记录');
+                  } else if (rowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                  } else if (!statusList[rowKeys[0].status]) {
+                    showWarnMsg('该产品还未开始募集！');
+                  } else {
+                    this.props.history.push(`/bizFinancial/productsRaisefail/investFlowAll?code=${rowKeys[0]}&menu=raisefail`);
+                  }
+                },
+                check: false
+              }]
         });
     }
 }

@@ -20,6 +20,9 @@ class GJAddressQueryAddedit extends DetailUtil {
     }
     render() {
         let fields = [{
+          field: 'currency',
+          title: '币种类型'
+        }, {
             field: 'amount',
             title: '交易数量',
             coin: 'BTC',
@@ -36,20 +39,8 @@ class GJAddressQueryAddedit extends DetailUtil {
             title: '去方归集地址',
             field: 'toAddress'
         }, {
-            title: '交易HASH',
-            field: 'txHash'
-        }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'collect_status'
-        }, {
             field: 'confirmDatetime',
             title: '区块确认时间',
-            type: 'datetime'
-        }, {
-            field: 'createDatetime',
-            title: '归集时间',
             type: 'datetime'
         }];
 

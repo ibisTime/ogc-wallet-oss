@@ -28,10 +28,6 @@ import {
 class FinishOrder extends React.Component {
     render() {
         const fields = [{
-            field: 'code',
-            title: '编号',
-            search: true
-        }, {
             title: '下单人',
             field: 'nickname',
             render: (v, data) => {
@@ -44,11 +40,14 @@ class FinishOrder extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-            title: '手机号',
-            field: 'userMobile',
-            render: (v, data) => {
-                return data.user ? data.user.mobile : '';
+          title: '手机号/邮箱',
+          field: 'loginName',
+          render(v, data) {
+            if(data.user) {
+              return data.user.loginName;
             }
+            return '-';
+          }
         }, {
             field: 'tradeCoin',
             title: '币种',
@@ -85,6 +84,9 @@ class FinishOrder extends React.Component {
             field: 'createDatetime',
             title: '下单时间',
             type: 'datetime'
+        }, {
+          title: '附言',
+          field: 'postscript'
         }, {
             title: '备注',
             field: 'remark'

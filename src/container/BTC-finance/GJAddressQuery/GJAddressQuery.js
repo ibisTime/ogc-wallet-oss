@@ -65,24 +65,17 @@ class GJAddressQuery extends React.Component {
             coin: 'BTC',
             coinAmount: true
         }, {
-        //     field: 'fromAddress',
-        //     title: '来方归集'
-        // }, {
-            title: '去方归集地址',
-            field: 'toAddress'
+          field: 'fromAddress',
+          title: '来方归集'
         }, {
-            title: '交易HASH',
-            field: 'txHash'
+          title: '矿工费',
+          field: 'txFee',
+          coin: 'BTC',
+          coinAmount: true
         }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'collect_status',
-            search: true
-        }, {
-            field: 'createDatetime',
-            title: '归集时间',
-            type: 'datetime'
+          field: 'confirmDatetime',
+          title: '区块确认时间',
+          type: 'datetime'
         }];
         return this.props.buildList({
             fields,

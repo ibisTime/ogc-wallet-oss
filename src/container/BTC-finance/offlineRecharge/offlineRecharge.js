@@ -123,16 +123,10 @@ class OfflineRecharge extends React.Component {
             search: true,
             noVisible: true
         }, {
-            field: 'mobile',
-            title: '手机号',
+            field: 'loginName',
+            title: '手机号/邮箱',
             render: (v, data) => {
-                return data.payer ? data.payer.mobile : '';
-            }
-        }, {
-            field: 'email',
-            title: '邮箱',
-            render: (v, data) => {
-                return data.payer ? data.payer.email : '';
+                return data.payer ? data.payer.loginName : '-';
             }
         }, {
             field: 'amount',
@@ -165,7 +159,6 @@ class OfflineRecharge extends React.Component {
                 channelType: '90',
                 currency
             },
-            singleSelect: false,
             btnEvent: {
                 check: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

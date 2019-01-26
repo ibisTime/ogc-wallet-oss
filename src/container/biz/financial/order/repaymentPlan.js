@@ -15,9 +15,11 @@ import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getQueryString
+    getQueryString,
+    getUserName
 } from 'common/js/util';
-
+import fetch from 'common/js/fetch';
+let symbol = getQueryString('symbol');
 @listWrapper(
     state => ({
         ...state.bizRepaymentPlan,
@@ -31,28 +33,27 @@ import {
 class RepaymentPlan extends React.Component {
     constructor(props) {
         super(props);
-        this.productCode = getQueryString('productCode', this.props.location.search);
-        this.symbol = getQueryString('symbol', this.props.location.search);
-        this.status = getQueryString('status', this.props.location.search);
+        this.productCode = getQueryString('productCode');
+        this.status = getQueryString('status');
     }
     render() {
         const fields = [{
             title: '应还本金',
             field: 'principalTotal',
-            render: function (v, data) {
-                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            render(v, data) {
+                return v ? moneyFormat(v.toString(), '', symbol) : '-';
             }
         }, {
             title: '应还利息',
             field: 'interestTotal',
-            render: function (v, data) {
-                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            render(v, data) {
+                return v ? moneyFormat(v.toString(), '', symbol) : '-';
             }
         }, {
             title: '应还本息',
             field: 'amountTotal',
-            render: function (v, data) {
-                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            render(v, data) {
+                return v ? moneyFormat(v.toString(), '', symbol) : '-';
             }
         }, {
             title: '状态',
@@ -63,20 +64,20 @@ class RepaymentPlan extends React.Component {
         }, {
             title: '已还本金',
             field: 'principalYet',
-            render: function (v, data) {
-                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            render(v, data) {
+                return v ? moneyFormat(v.toString(), '', symbol) : '-';
             }
         }, {
             title: '已还利息',
             field: 'interestYet',
-            render: function (v, data) {
-                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            render(v, data) {
+                return v ? moneyFormat(v.toString(), '', symbol) : '-';
             }
         }, {
             title: '已还本息',
             field: 'amountYet',
-            render: function (v, data) {
-                return v ? moneyFormat(v.toString(), '', this.symbol) : '-';
+            render(v, data) {
+                return v ? moneyFormat(v.toString(), '', symbol) : '-';
             }
         }, {
             title: '还款时间',
@@ -89,19 +90,41 @@ class RepaymentPlan extends React.Component {
             searchParams: {
                 productCode: this.productCode
             },
-            btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                        // } else if (selectedRows[0].status !== '1') {
-                        //     showWarnMsg('当前记录不可修改');
-                    } else {
-                        this.props.history.push(`/biz/applicationList?code=${selectedRowKeys[0]}`);
+            buttons: [{
+              name: '还款',
+              handler: (param) => {
+                if (!param.length) {
+                  showWarnMsg('请选择记录');
+                } else if (param.length > 1) {
+                  showWarnMsg('请选择一条记录');
+                } else {
+                  param.code = this.productCode;
+                  param.repayUser = getUserName();
+                  Modal.confirm({
+                    okText: '确认',
+                    cancelText: '取消',
+                    content: `是否还款?`,
+                    onOk: () => {
+                      this.props.doFetching();
+                      fetch(625504, param).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.getPageData();
+                      }).catch(() => {
+                        this.props.cancelFetching();
+                      });
                     }
+                  });
                 }
-            }
+              },
+              check: true
+            }, {
+              name: '返回',
+              code: 'back',
+              handler: () => {
+                this.props.history.go(-1);
+              },
+              check: true
+            }]
         });
     }
 }

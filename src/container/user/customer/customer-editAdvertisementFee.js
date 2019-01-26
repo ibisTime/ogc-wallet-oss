@@ -13,14 +13,13 @@ class CustomerEditAdvertisementFee extends DetailUtil {
 
     render() {
         const fields = [{
-            field: 'mobile',
-            title: '手机号',
-            required: true,
-            readonly: true
-        }, {
             title: '昵称',
             field: 'nickname',
             readonly: true
+        }, {
+          field: 'loginName',
+          title: '手机号/邮箱',
+          readonly: true
         }, {
             field: 'realName',
             title: '真实姓名',

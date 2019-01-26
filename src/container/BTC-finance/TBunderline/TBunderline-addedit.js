@@ -42,14 +42,14 @@ class TBunderlineAddedit extends DetailUtil {
             title: '手续费',
             required: true,
             formatter: (v, data) => {
-                return moneyFormat(data.withdraw.fee, '', data.currency);
+                return moneyFormat(data.withdraw.fee, '', data.withdraw.currency);
             }
         }, {
             field: 'actualAmount',
             title: '到账金额',
             required: true,
             formatter: (v, data) => {
-                return moneyFormat(data.withdraw.actualAmount, '', data.currency);
+                return moneyFormat(data.withdraw.actualAmount, '', data.withdraw.currency);
             }
         }, {
             field: 'payCardInfo',

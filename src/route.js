@@ -121,14 +121,6 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/TransactionRemind/TransactionRemind-addedit'))
     },
     {
-        path: '/public/notice',
-        component: asyncComponent(() => import('container/public/notice/notice'))
-    },
-    {
-        path: '/public/notice/addedit',
-        component: asyncComponent(() => import('container/public/notice-addedit/notice-addedit'))
-    },
-    {
         path: '/public/banner',
         component: asyncComponent(() => import('container/public/banner/banner'))
     },
@@ -395,16 +387,14 @@ const ROUTES = [
         path: '/accept/finishOrder/addedit',
         component: asyncComponent(() => import('container/biz/accept/finishOrder/finishOrder-addedit'))
     },
-
-    // 币种管理
-    // 币种管理
+    // 已取消订单
     {
-        path: '/biz/coin',
-        component: asyncComponent(() => import('container/biz/coin/coin'))
+      path: '/accept/cancelOrder',
+      component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder'))
     },
     {
-        path: '/biz/coin/addedit',
-        component: asyncComponent(() => import('container/biz/coin/coin-addedit'))
+      path: '/accept/cancelOrder/addedit',
+      component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder-addedit'))
     },
 
     // 行情管理
@@ -418,21 +408,11 @@ const ROUTES = [
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
     },
-    // 法币汇率
+    // 承兑商行情
     {
-        path: '/quotation/exchangeRate',
-        component: asyncComponent(() => import('container/biz/quotation/exchangeRate'))
+      path: '/quotation/quotationCDS',
+      component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
     },
-    // 市价调节值
-    {
-        path: '/quotation/marketAdjustment',
-        component: asyncComponent(() => import('container/biz/quotation/marketAdjustment'))
-    },
-    {
-        path: '/quotation/marketAdjustment/addedit',
-        component: asyncComponent(() => import('container/biz/quotation/marketAdjustment-addedit'))
-    },
-
     // 活动管理
     // 邀请好友
     {
@@ -506,56 +486,6 @@ const ROUTES = [
         path: '/comment/list/addedit',
         component: asyncComponent(() => import('container/biz/comment/check/check-addedit'))
     },
-    // 统计分析 -- 个人统计 -- 用户持币情况统计
-    {
-        path: '/statistics/userHoldingCurrency',
-        component: asyncComponent(() => import('container/statistics/userHoldingCurrency/userHoldingCurrency'))
-    },
-    // 统计分析 -- 平台统计 -- 承兑商购买BTC时间分布
-    {
-        path: '/statistics/buyFMVPTimeDistribution',
-        component: asyncComponent(() => import('container/statistics/buyFMVPTimeDistribution/buyFMVPTimeDistribution'))
-    },
-    // 统计分析 -- 平台统计 -- 承兑商BTC统计
-    {
-        path: '/statistics/acceptFMVP',
-        component: asyncComponent(() => import('container/statistics/acceptFMVP/acceptFMVP'))
-    },
-    // 统计分析 -- 平台统计 -- 渠道商返佣统计
-    {
-        path: '/statistics/channelReturnCommission',
-        component: asyncComponent(() => import('container/statistics/channelReturnCommission/channelReturnCommission'))
-    },
-    // 统计分析 -- 平台统计 -- BTC消耗比例
-    {
-        path: '/statistics/FMVPConsumptionRatio',
-        component: asyncComponent(() => import('container/statistics/FMVPConsumptionRatio/FMVPConsumptionRatio'))
-    },
-    // 统计分析 -- 平台统计 -- BTC变现统计
-    {
-        path: '/statistics/FMVPRecharge',
-        component: asyncComponent(() => import('container/statistics/FMVPRecharge/FMVPRecharge'))
-    },
-    // 统计分析 -- 平台统计 -- 获取BTC途径
-    {
-        path: '/statistics/getFMVPChannel',
-        component: asyncComponent(() => import('container/statistics/getFMVPChannel/getFMVPChannel'))
-    },
-    // 统计分析 -- 平台统计 -- CC交易OTC成交时间统计
-    {
-        path: '/statistics/OTCClosingTime',
-        component: asyncComponent(() => import('container/statistics/OTCClosingTime/OTCClosingTime'))
-    },
-    // 统计分析 -- 平台统计 -- OTC交易情况统计
-    {
-        path: '/statistics/OTCTransactions',
-        component: asyncComponent(() => import('container/statistics/OTCTransactions/OTCTransactions'))
-    },
-    // 统计分析 -- 平台统计 -- 用户返佣统计
-    {
-        path: '/statistics/userReturnCommission',
-        component: asyncComponent(() => import('container/statistics/userReturnCommission/userReturnCommission'))
-    },
     // 系统管理 -- 应用平台管理
     {
         path: '/biz/applicationList',
@@ -623,7 +553,7 @@ const ROUTES = [
     },
     // 系统管理 -- 量化理财管理-募集成功产品-还款计划
     {
-        path: '/bizFinancial/productsRaiseSuccess/repaymentPlan',
+        path: '/bizFinancial/repaymentPlan',
         component: asyncComponent(() => import('container/biz/financial/order/repaymentPlan'))
     },
     // 系统管理 -- 量化理财管理-募集失败产品

@@ -39,6 +39,7 @@ class ProductsAddedit extends DetailUtil {
               param.repayDatetime = getElementFn('repayDatetime').value;
               param.incomeDatetime = getElementFn('incomeDatetime').value;
               param.arriveDatetime = getElementFn('arriveDatetime').value;
+              param.expectYield = +param.expectYield / 100;
               if(this.isEdit) {
                   param.symbol = param.symbol1;
                   delete param.symbol1;
@@ -60,6 +61,7 @@ class ProductsAddedit extends DetailUtil {
               param.repayDatetime = getElementFn('repayDatetime').value;
               param.incomeDatetime = getElementFn('incomeDatetime').value;
               param.arriveDatetime = getElementFn('arriveDatetime').value;
+              param.expectYield = +param.expectYield / 100;
               if(!param.repayDatetime || !param.incomeDatetime || !param.arriveDatetime) {
                 message.warning('请填写完整');
               }

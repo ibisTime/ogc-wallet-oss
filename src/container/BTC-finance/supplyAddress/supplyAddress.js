@@ -102,8 +102,8 @@ class SupplyAddress extends React.Component {
           selectHtml.style.borderColor = '#ccc';
           selectHtml.style.paddingLeft = '5px';
           selectHtml.style.backgroundColor = '#fff';
-          fetch(802005, {limit: 20, start: 1}).then((data) => {
-            data.list.forEach((item, index) => {
+          fetch(802009).then((data) => {
+            data.forEach((item, index) => {
               selectHtml.options[index] = new Option(item.symbol, item.symbol);
             });
           });

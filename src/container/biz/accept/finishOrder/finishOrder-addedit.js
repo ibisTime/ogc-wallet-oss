@@ -23,11 +23,14 @@ class FinishOrderAddedit extends DetailUtil {
                 return data.user ? data.user.nickname : '';
             }
         }, {
-            title: '手机号',
-            field: 'userMobile',
-            formatter: (v, data) => {
-                return data.user ? data.user.mobile : '';
+          title: '手机号/邮箱',
+          field: 'loginName',
+          formatter(v, data) {
+            if(data.user) {
+              return data.user.loginName;
             }
+            return '-';
+          }
         }, {
             field: 'tradeCoin',
             title: '币种'

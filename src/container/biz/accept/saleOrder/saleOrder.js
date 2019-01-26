@@ -29,10 +29,6 @@ import {
 class SaleOrder extends React.Component {
     render() {
         const fields = [{
-            field: 'code',
-            title: '编号',
-            search: true
-        }, {
             title: '下单人',
             field: 'sellUser',
             render: (v, data) => {
@@ -45,11 +41,20 @@ class SaleOrder extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-            title: '手机号',
-            field: 'userMobile',
-            render: (v, data) => {
-                return data.user ? data.user.mobile : '';
+          field: 'receiveBank',
+          title: '付款方式'
+        }, {
+          field: 'receiveCardNo',
+          title: '卡号'
+        }, {
+          title: '手机号/邮箱',
+          field: 'loginName',
+          render(v, data) {
+            if(data.user) {
+              return data.user.loginName;
             }
+            return '-';
+          }
         }, {
             field: 'tradeCoin',
             title: '币种',
@@ -86,6 +91,9 @@ class SaleOrder extends React.Component {
             field: 'createDatetime',
             title: '下单时间',
             type: 'datetime'
+        }, {
+          title: '附言',
+          field: 'postscript'
         }, {
             title: '备注',
             field: 'remark'

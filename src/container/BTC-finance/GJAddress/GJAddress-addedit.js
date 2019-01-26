@@ -18,13 +18,9 @@ class GJAddressAddedit extends DetailUtil {
       field: 'symbol',
       title: '币种类型',
       type: 'select',
-      pageCode: '802005',
-      params: {
-        status: '0'
-      },
-      keyName: 'symbol',
-      valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-      searchName: 'symbol'
+      listCode: '802009',
+      keyName: 'id',
+      valueName: 'symbol'
     }, {
       field: 'address',
       title: '地址'

@@ -33,10 +33,6 @@ import fetch from 'common/js/fetch';
 class BuyOrder extends React.Component {
     render() {
         const fields = [{
-            field: 'code',
-            title: '编号',
-            search: true
-        }, {
             title: '下单人',
             field: 'buyUser',
             render: (v, data) => {
@@ -49,10 +45,19 @@ class BuyOrder extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-            title: '手机号',
-            field: 'userMobile',
-            render: (v, data) => {
-                return data.user ? data.user.mobile : '';
+          field: 'receiveBank',
+          title: '收款方式'
+        }, {
+          field: 'receiveCardNo',
+          title: '卡号'
+        }, {
+            title: '手机号/邮箱',
+            field: 'loginName',
+            render(v, data) {
+                if(data.user) {
+                    return data.user.loginName;
+                }
+                return '-';
             }
         }, {
             field: 'tradeCoin',
@@ -91,8 +96,11 @@ class BuyOrder extends React.Component {
             title: '下单时间',
             type: 'datetime'
         }, {
-            title: '备注',
-            field: 'remark'
+            title: '附言',
+            field: 'postscript'
+        }, {
+          title: '备注',
+          field: 'remark'
         }];
         return this.props.buildList({
             fields,
