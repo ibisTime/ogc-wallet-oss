@@ -28,11 +28,14 @@ import {
 class FinishOrder extends React.Component {
     render() {
         const fields = [{
-            title: '下单人',
+            title: '下单人(手机号/邮箱)',
             field: 'nickname',
-            render: (v, data) => {
-                return data.user ? data.user.nickname : '';
-            },
+          render(v, data) {
+            if(data.user) {
+              return data.user.loginName;
+            }
+            return '-';
+          },
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -40,14 +43,19 @@ class FinishOrder extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-          title: '手机号/邮箱',
-          field: 'loginName',
-          render(v, data) {
-            if(data.user) {
-              return data.user.loginName;
-            }
-            return '-';
-          }
+          title: '类型',
+          field: 'type',
+          type: 'select',
+          data: [{
+            key: '0',
+            value: '购买'
+          }, {
+            key: '1',
+            value: '出售'
+          }],
+          keyName: 'key',
+          valueName: 'value',
+          search: true
         }, {
             field: 'tradeCoin',
             title: '币种',
@@ -78,7 +86,12 @@ class FinishOrder extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            key: 'accept_order_status',
+          data: [{
+            key: '2',
+            value: '已完成'
+          }],
+          keyName: 'key',
+          valueName: 'value',
             search: true
         }, {
             field: 'createDatetime',

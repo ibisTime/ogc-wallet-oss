@@ -19,7 +19,7 @@ class GJAddressAddedit extends DetailUtil {
       title: '币种类型',
       type: 'select',
       listCode: '802009',
-      keyName: 'id',
+      keyName: 'symbol',
       valueName: 'symbol'
     }, {
       field: 'address',

@@ -4,6 +4,7 @@ import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat} from 'common/js/util';
 import {SYS_USER, CION_FMVP} from 'common/js/config';
 
+let bankName = '';
 @Form.create()
 class PaymentAddedit extends DetailUtil {
     constructor(props) {
@@ -15,70 +16,52 @@ class PaymentAddedit extends DetailUtil {
 
     render() {
         const fields = [{
-            field: 'userId',
-            title: '收款类型',
-            value: 'SYS_USER',
-            hidden: true
-        }, {
-            field: 'type',
-            title: '收款类型',
-            value: '1',
-            hidden: true
-        }, {
-            field: 'currency',
-            title: '币种',
-            required: true,
-            value: CION_FMVP,
-            hidden: true
-        }, {
             field: 'realName',
-            title: '户名'
+            title: '户名',
+            required: true
         }, {
             field: 'bankCode',
-            title: '名称',
+            title: '银行名称',
             required: true,
             type: 'select',
             listCode: 802116,
             keyName: 'bankCode',
             valueName: '{{bankName.DATA}}',
             searchName: 'bankName',
-            value: 'alipay',
-            readonly: true,
-            onChange: (v, data) => {
-                if (v === 'alipay') {
-                    this.isAlipay = '1';
-                } else {
-                    this.isAlipay = '0';
-                }
-                if(data) {
-                  this.props.form.setFieldsValue({
-                    'subbranch': data.bankName,
-                    'bankName': data.bankName
+            onChange(v, data) {
+                if(Array.isArray(data)) {
+                  data.forEach(item => {
+                    if(item.bankCode === v) {
+                      bankName = item.bankName;
+                    }
                   });
                 }
             }
         }, {
-            field: 'bankName',
-            title: '银行名称',
-            required: true,
-            value: '支付宝',
-            hidden: true
-        }, {
             field: 'subbranch',
-            title: '支行',
-            required: true,
-            value: '支付宝',
-            hidden: this.isAlipay === '1'
+            title: '支行'
+        }, {
+          field: 'bankName',
+          title: '银行名称',
+          hidden: true
         }, {
             field: 'bankcardNumber',
-            title: '卡号'
+            title: '卡号',
+            required: true
         }, {
-            field: 'pic',
-            title: '二维码图片',
-            type: 'img',
-            single: true,
-            required: true,
-            hidden: this.isAlipay !== '1'
+          field: 'bindMobile',
+          title: '绑定手机号'
+        }, {
+          field: 'pic',
+          title: '收款码',
+          type: 'img',
+          single: true
+        }, {
+          field: 'status',
+          title: '状态',
+          type: 'select',
+          required: true,
+          key: 'bank_card_status'
         }, {
             field: 'remark',
             title: '备注'
@@ -90,12 +73,9 @@ class PaymentAddedit extends DetailUtil {
             editCode: '802022',
             detailCode: '802032',
             beforeSubmit: (params) => {
-                let { pageData } = this.state;
-                params.bankCode = pageData.bankCode;
-                params.bankName = '支付宝';
-            //     if (this.isAlipay === '1') {
-                params.subbranch = '支付宝';
-            //     }
+              if(bankName) {
+                params.bankName = bankName;
+              }
                 return params;
             }
         });

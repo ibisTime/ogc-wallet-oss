@@ -25,13 +25,15 @@ class GJAddressQueryAddedit extends DetailUtil {
         }, {
             field: 'amount',
             title: '交易数量',
-            coin: 'BTC',
-            coinAmount: true
+            formatter(v) {
+                return v ? moneyFormat(v, '', 'BTC') : '-';
+            }
         }, {
             title: '矿工费',
             field: 'txFee',
-            coin: 'BTC',
-            coinAmount: true
+            formatter(v) {
+                return v ? moneyFormat(v, '', 'BTC') : '-';
+            }
         }, {
             field: 'fromAddress',
             title: '来方归集'

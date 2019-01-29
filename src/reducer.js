@@ -8,7 +8,6 @@ import {systemSysParam} from './redux/system/sysParam';
 import {systemUser} from './redux/system/user';
 import {systemPwdReset} from './redux/system/pwdReset';
 import {systemDataDict} from './redux/system/dataDict';
-import {publicBanner} from './redux/public/banner';
 import {publicAboutus} from './redux/public/aboutus';
 import {publicQuantitative} from './redux/public/quantitative';
 import {publicContact} from './redux/public/contact';
@@ -204,7 +203,6 @@ export default combineReducers({
     systemSysParam,
     systemDataDict,
     // public
-    publicBanner,
     publicAboutus,
     publicQuantitative,
     publicContact,

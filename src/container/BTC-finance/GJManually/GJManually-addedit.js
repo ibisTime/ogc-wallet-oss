@@ -23,9 +23,15 @@ class GJManuallyAddedit extends DetailUtil {
       field: 'symbol',
       title: '币种类型',
       type: 'select',
-      listCode: '802009',
+      pageCode: '802005',
+      params: {
+        status: '0'
+      },
       keyName: 'symbol',
-      valueName: 'symbol',
+      valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+      searchName: 'symbol',
+      search: true,
+      render: (v) => v,
       required: true
     }, {
       title: '被归集地址',

@@ -37,22 +37,6 @@ class CustomerAccount extends React.Component {
         };
         this.buttons = [];
         this.buttons = [{
-            code: 'editAmount',
-            name: '调账',
-            handler: (selectedRowKeys, selectedRows) => {
-                if (!selectedRowKeys.length) {
-                    showWarnMsg('请选择记录');
-                } else if (selectedRowKeys.length > 1) {
-                    showWarnMsg('请选择一条记录');
-                } else {
-                    this.setState({
-                        accountNumber: selectedRowKeys[0],
-                        coin: selectedRows[0].currency
-                    });
-                    this.editAmount(true);
-                }
-            }
-        }, {
             code: 'ledgerQuery',
             name: '流水查询',
             handler: (selectedRowKeys, selectedRows) => {
@@ -70,34 +54,6 @@ class CustomerAccount extends React.Component {
                 }
             }
         }];
-    }
-
-    // 调账
-    editAmount = (flag, param) => {
-        // 操作
-        if (!flag && param) {
-            let data = {};
-            data.accountNumber = this.state.accountNumber;
-            data.direction = param.direction;
-            data.amount = param.amount;
-            data.updater = getUserId();
-            this.doFetching();
-            fetch(802380, data).then(() => {
-                this.setState({
-                    isVisible: flag
-                });
-                showSucMsg('操作成功');
-                this.cancelFetching();
-                setTimeout(() => {
-                    this.props.getPageData();
-                }, 1000);
-            }).catch(this.cancelFetching);
-        } else {
-            // 显示
-            this.setState({
-                isVisible: flag
-            });
-        }
     }
 
     // 流水查询

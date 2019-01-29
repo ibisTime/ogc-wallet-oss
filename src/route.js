@@ -121,14 +121,6 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/TransactionRemind/TransactionRemind-addedit'))
     },
     {
-        path: '/public/banner',
-        component: asyncComponent(() => import('container/public/banner/banner'))
-    },
-    {
-        path: '/public/banner/addedit',
-        component: asyncComponent(() => import('container/public/banner-addedit/banner-addedit'))
-    },
-    {
         path: '/public/community',
         component: asyncComponent(() => import('container/public/community/community'))
     },

@@ -71,7 +71,7 @@ class CustomerAddedit extends DetailUtil {
         }, {
             field: 'isRealname',
             title: '是否实名',
-            render: (v, data) => {
+          formatter: (v, data) => {
                 return data.realName ? '是' : '否';
             }
         }, {

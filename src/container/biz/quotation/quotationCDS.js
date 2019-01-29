@@ -28,14 +28,31 @@ class quotationCDS extends React.Component {
       title: '币种',
       field: 'symbol'
     }, {
+      title: '类型',
+      field: 'type',
+      type: 'select',
+      data: [
+        {
+          key: '0',
+          value: '买入'
+        },
+        {
+          key: '1',
+          value: '卖出'
+        }
+      ],
+      keyName: 'key',
+      valueName: 'value',
+      search: true
+    }, {
       title: '计价币种',
-      field: 'referCurrency'
+      field: 'CNY',
+      render() {
+        return 'CNY';
+      }
     }, {
       title: '最新价',
-      field: 'lastPrice'
-    }, {
-      title: '来源',
-      field: 'origin'
+      field: 'price'
     }, {
       title: '更新时间',
       field: 'updateDatetime',
@@ -44,10 +61,7 @@ class quotationCDS extends React.Component {
     return this.props.buildList({
       fields,
       rowKey: 'id',
-      pageCode: '650202',
-      searchParams: {
-        type: '0'
-      }
+      pageCode: '650202'
     });
   }
 }

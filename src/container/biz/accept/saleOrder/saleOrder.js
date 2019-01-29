@@ -29,11 +29,14 @@ import {
 class SaleOrder extends React.Component {
     render() {
         const fields = [{
-            title: '下单人',
+            title: '下单人(手机号/邮箱)',
             field: 'sellUser',
-            render: (v, data) => {
-                return data.user ? data.user.nickname : '';
-            },
+          render(v, data) {
+            if(data.user) {
+              return data.user.loginName;
+            }
+            return '-';
+          },
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -46,15 +49,6 @@ class SaleOrder extends React.Component {
         }, {
           field: 'receiveCardNo',
           title: '卡号'
-        }, {
-          title: '手机号/邮箱',
-          field: 'loginName',
-          render(v, data) {
-            if(data.user) {
-              return data.user.loginName;
-            }
-            return '-';
-          }
         }, {
             field: 'tradeCoin',
             title: '币种',
@@ -85,7 +79,15 @@ class SaleOrder extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            key: 'accept_order_status',
+              data: [{
+                key: '0',
+                value: '待收款'
+              }, {
+                key: '1',
+                value: '已收款'
+              }],
+              keyName: 'key',
+              valueName: 'value',
             search: true
         }, {
             field: 'createDatetime',
@@ -102,7 +104,8 @@ class SaleOrder extends React.Component {
             fields,
             pageCode: 625285,
             searchParams: {
-                type: '1'
+                type: '1',
+                statusList: ['0', '1']
             },
             btnEvent: {
                 // 购买

@@ -19,7 +19,6 @@ import {
     getUserId
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
-
 @listWrapper(
     state => ({
         ...state.acceptBuyOrder,
@@ -33,11 +32,14 @@ import fetch from 'common/js/fetch';
 class BuyOrder extends React.Component {
     render() {
         const fields = [{
-            title: '下单人',
-            field: 'buyUser',
-            render: (v, data) => {
-                return data.user ? data.user.nickname : '';
-            },
+            title: '下单人(手机号/邮箱)',
+            field: 'loginName',
+          render(v, data) {
+            if(data.user) {
+              return data.user.loginName;
+            }
+            return '-';
+          },
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -50,15 +52,6 @@ class BuyOrder extends React.Component {
         }, {
           field: 'receiveCardNo',
           title: '卡号'
-        }, {
-            title: '手机号/邮箱',
-            field: 'loginName',
-            render(v, data) {
-                if(data.user) {
-                    return data.user.loginName;
-                }
-                return '-';
-            }
         }, {
             field: 'tradeCoin',
             title: '币种',
@@ -89,7 +82,15 @@ class BuyOrder extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            key: 'accept_order_status',
+            data: [{
+                key: '0',
+                value: '待支付'
+            }, {
+              key: '1',
+              value: '已支付'
+            }],
+            keyName: 'key',
+            valueName: 'value',
             search: true
         }, {
             field: 'createDatetime',
@@ -106,7 +107,8 @@ class BuyOrder extends React.Component {
             fields,
             pageCode: 625285,
             searchParams: {
-                type: '0'
+                type: '0',
+                statusList: ['0', '1']
             },
             singleSelect: false,
             btnEvent: {

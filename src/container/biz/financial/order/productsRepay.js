@@ -140,7 +140,7 @@ class ProductsRepay extends React.Component {
                     showWarnMsg('该产品还没有还款计划！');
                     return;
                   }
-                  this.props.history.push(`/bizFinancial/repaymentPlan?code=${selectedRows[0].code}&symbol=${selectedRows[0].symbol}&status=${selectedRows[0].status}`);
+                  this.props.history.push(`/bizFinancial/repaymentPlan?type=yhkuan&productCode=${selectedRows[0].code}&symbol=${selectedRows[0].symbol}&status=${selectedRows[0].status}`);
                 }
               }
             }

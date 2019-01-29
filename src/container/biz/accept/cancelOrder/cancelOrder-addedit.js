@@ -40,6 +40,19 @@ class CancelOrderAddedit extends DetailUtil {
         return '-';
       }
     }, {
+      title: '类型',
+      field: 'type',
+      type: 'select',
+      data: [{
+        key: '0',
+        value: '购买'
+      }, {
+        key: '1',
+        value: '出售'
+      }],
+      keyName: 'key',
+      valueName: 'value'
+    }, {
       field: 'tradeCoin',
       title: '币种'
     }, {

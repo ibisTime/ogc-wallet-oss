@@ -71,16 +71,10 @@ class TBunderlineAddedit extends DetailUtil {
 
         if (!this.isCheck && this.view) {
             fields = fields.concat([{
-                field: 'channelOrder',
-                title: '交易hash',
-              formatter: (v, data) => {
-                return data.withdraw.channelOrder;
-              }
-            }, {
                 field: 'payFee',
                 title: '矿工费',
                 formatter: (v, data) => {
-                    return moneyFormat(data.withdraw.payFee, '', data.currency);
+                    return moneyFormat(data.withdraw.payFee, '', data.withdraw.currency);
                 }
             }]);
         }

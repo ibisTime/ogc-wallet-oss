@@ -12,6 +12,7 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {getQueryString, moneyFormat, moneyFormatSubtract, getCoinList, showWarnMsg} from 'common/js/util';
 import {SYS_USER} from 'common/js/config';
+import { getDictList } from 'api/dict';
 
 @listWrapper(
     state => ({
@@ -72,7 +73,7 @@ class CustomerLedgerQuery extends React.Component {
             field: 'bizType',
             title: '业务类型',
             type: 'select',
-            key: this.isPlat ? 'frezon_jour_biz_type_user' : 'jour_biz_type_user',
+            key: this.isPlat ? 'jour_biz_type_plat' : 'jour_biz_type_user',
             search: true
         }, {
             field: 'transAmountString',
@@ -97,17 +98,8 @@ class CustomerLedgerQuery extends React.Component {
             title: '创建时间',
             type: 'datetime'
         }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'jour_status',
-            search: true
-        }, {
             field: 'bizNote',
             title: '生成说明'
-        }, {
-            field: 'remark',
-            title: '备注'
         }];
         return this.props.buildList({
             fields,

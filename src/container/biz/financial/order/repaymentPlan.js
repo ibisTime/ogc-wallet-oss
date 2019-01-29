@@ -35,6 +35,53 @@ class RepaymentPlan extends React.Component {
         super(props);
         this.productCode = getQueryString('productCode');
         this.status = getQueryString('status');
+        this.type = getQueryString('type');
+        this.buttons = [{
+          name: '返回',
+          code: 'back',
+          handler: () => {
+            this.props.history.go(-1);
+          },
+          check: true
+        }];
+        if(!this.type) {
+          this.buttons = [{
+            name: '还款',
+            handler: (rowKey) => {
+              if (!rowKey.length) {
+                showWarnMsg('请选择记录');
+              } else if (rowKey.length > 1) {
+                showWarnMsg('请选择一条记录');
+              } else {
+                let param = {};
+                param.code = rowKey[0];
+                param.repayUser = getUserName();
+                Modal.confirm({
+                  okText: '确认',
+                  cancelText: '取消',
+                  content: `是否还款?`,
+                  onOk: () => {
+                    this.props.doFetching();
+                    fetch(625504, param).then(() => {
+                      showSucMsg('操作成功');
+                      this.props.getPageData();
+                    }).catch(() => {
+                      this.props.cancelFetching();
+                    });
+                  }
+                });
+              }
+            },
+            check: true
+          }, {
+            name: '返回',
+            code: 'back',
+            handler: () => {
+              this.props.history.go(-1);
+            },
+            check: true
+          }];
+        }
     }
     render() {
         const fields = [{
@@ -88,43 +135,10 @@ class RepaymentPlan extends React.Component {
             fields,
             pageCode: '625540',
             searchParams: {
-                productCode: this.productCode
+                productCode: this.productCode,
+                status: '1'
             },
-            buttons: [{
-              name: '还款',
-              handler: (param) => {
-                if (!param.length) {
-                  showWarnMsg('请选择记录');
-                } else if (param.length > 1) {
-                  showWarnMsg('请选择一条记录');
-                } else {
-                  param.code = this.productCode;
-                  param.repayUser = getUserName();
-                  Modal.confirm({
-                    okText: '确认',
-                    cancelText: '取消',
-                    content: `是否还款?`,
-                    onOk: () => {
-                      this.props.doFetching();
-                      fetch(625504, param).then(() => {
-                        showSucMsg('操作成功');
-                        this.props.getPageData();
-                      }).catch(() => {
-                        this.props.cancelFetching();
-                      });
-                    }
-                  });
-                }
-              },
-              check: true
-            }, {
-              name: '返回',
-              code: 'back',
-              handler: () => {
-                this.props.history.go(-1);
-              },
-              check: true
-            }]
+            buttons: this.buttons
         });
     }
 }
