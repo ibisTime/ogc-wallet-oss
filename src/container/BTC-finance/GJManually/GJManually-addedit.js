@@ -42,14 +42,19 @@ class GJManuallyAddedit extends DetailUtil {
       type: 'select',
       required: true,
       pageCode: '802300',
+      params: {
+        type: 'C'
+      },
       keyName: 'accountNumber',
       valueName: '{{currency.DATA}}-{{address.DATA}}',
+      searchName: 'address',
       onChange: (v) => {
         if (v && symbol) {
           fetch(802300, {
             currency: symbol,
             limit: '10',
             start: '1',
+            type: 'C',
             orderColumn: 'amount',
             orderDir: 'desc'
           }).then((data) => {

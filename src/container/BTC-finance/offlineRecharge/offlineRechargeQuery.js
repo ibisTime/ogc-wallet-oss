@@ -97,10 +97,10 @@ class OfflineRechargeQuery extends React.Component {
             field: 'bizNote',
             title: '充值说明'
         }, {
-            field: 'applyDatetime',
-            title: '申请时间',
+            field: 'payDatetime',
+            title: '到账时间',
             type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
+            rangedate: ['payDateStart', 'payDateEnd'],
             render: dateTimeFormat,
             search: true
         }, {
