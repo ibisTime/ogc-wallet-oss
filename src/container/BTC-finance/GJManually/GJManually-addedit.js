@@ -11,7 +11,7 @@ import {
 import {getQueryString, moneyFormat, showSucMsg, showMsgfirm} from 'common/js/util';
 import fetch from 'common/js/fetch';
 import DetailUtil from 'common/js/build-detail';
-let symbolData = [];
+let symbol = '';
 @Form.create()
 class GJManuallyAddedit extends DetailUtil {
     constructor(props) {
@@ -32,12 +32,43 @@ class GJManuallyAddedit extends DetailUtil {
       searchName: 'symbol',
       search: true,
       render: (v) => v,
-      required: true
+      required: true,
+      onChange: (v) => {
+        symbol = v;
+      }
     }, {
       title: '被归集地址',
       field: 'address',
+      type: 'select',
       required: true,
-      min: '0'
+      pageCode: '802300',
+      keyName: 'accountNumber',
+      valueName: '{{currency.DATA}}-{{address.DATA}}',
+      onChange: (v) => {
+        if (v && symbol) {
+          fetch(802300, {
+            currency: symbol,
+            limit: '10',
+            start: '1',
+            orderColumn: 'amount',
+            orderDir: 'desc'
+          }).then((data) => {
+            this.setState({
+              selectData: {
+                ...this.state.selectData,
+                address: data
+              }
+            });
+          }).catch(() => {});
+        }else if(!symbol) {
+          Modal.confirm({
+            title: '',
+            content: '请先选择币种类型',
+            onOk() {},
+            onCancel() {}
+          });
+        }
+      }
     }];
     return this.buildDetail({
       fields,

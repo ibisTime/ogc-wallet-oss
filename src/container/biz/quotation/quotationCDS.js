@@ -54,6 +54,10 @@ class quotationCDS extends React.Component {
       title: '最新价',
       field: 'price'
     }, {
+      title: '创建时间',
+      field: 'createDatetime',
+      type: 'date'
+    }, {
       title: '更新时间',
       field: 'updateDatetime',
       type: 'datetime'

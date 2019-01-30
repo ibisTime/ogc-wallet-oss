@@ -4,7 +4,7 @@ import { Form, Button, Spin, Modal, Carousel, Tooltip,
 import { getDictList } from 'api/dict';
 import { getQiniuToken } from 'api/general';
 import {
-  isUndefined, showSucMsg, showErrMsg, showWarnMsg, getUserId,
+  isUndefined, showSucMsg, showErrMsg, showWarnMsg, getUserId, getUserName,
   moneyParse, getRules, getRealValue, dateFormat, dateTimeFormat } from 'common/js/util';
 import fetch from 'common/js/fetch';
 import { UPLOAD_URL, PIC_PREFIX, PIC_BASEURL_L, formItemLayout,
@@ -726,7 +726,7 @@ export default class DetailComp extends React.Component {
         values[v.field] = values[v.field] ? values[v.field].join(',') : '';
       }
     });
-    values.updater = values.updater || getUserId();
+    values.updater = values.updater || getUserName();
     return values;
   }
   // 保存并校验错误

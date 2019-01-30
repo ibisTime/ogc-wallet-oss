@@ -100,7 +100,7 @@ class CustomerBlackList extends React.Component {
                                 cancelText: '取消',
                                 content: `确定删除？`,
                                 onOk: () => {
-                                    this.doFetching();
+                                    this.props.doFetching();
                                     return fetch(805241, {
                                         idList: idList,
                                         updater: getUserName()
@@ -108,7 +108,7 @@ class CustomerBlackList extends React.Component {
                                         this.props.getPageData();
                                         showSucMsg('操作成功');
                                     }).catch(() => {
-                                        this.cancelFetching();
+                                        this.props.cancelFetching();
                                     });
                                 }
                             });

@@ -12,6 +12,8 @@ import {
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 let setSymbol = getQueryString('coin');
+let ele = document.createElement('span');
+let divEle = document.createElement('div');
 function getElementFn(el) {
   return document.getElementById(el).children[0].children[0];
 }
@@ -36,9 +38,15 @@ class ProductsAddedit extends DetailUtil {
               param.isPublish = '0';
               param.creator = getUserName();
               param.code = this.code;
-              param.repayDatetime = getElementFn('repayDatetime').value;
-              param.incomeDatetime = getElementFn('incomeDatetime').value;
-              param.arriveDatetime = getElementFn('arriveDatetime').value;
+              if(getElementFn('repayDatetime').value) {
+                param.repayDatetime = getElementFn('repayDatetime').value;
+              }
+              if(getElementFn('incomeDatetime').value) {
+                param.incomeDatetime = getElementFn('incomeDatetime').value;
+              }
+              if(getElementFn('arriveDatetime').value) {
+                param.arriveDatetime = getElementFn('arriveDatetime').value;
+              }
               param.expectYield = +param.expectYield / 100;
               if(this.isEdit) {
                   param.symbol = param.symbol1;
@@ -58,9 +66,15 @@ class ProductsAddedit extends DetailUtil {
             handler: (param) => {
               param.isPublish = '1';
               param.code = this.code;
-              param.repayDatetime = getElementFn('repayDatetime').value;
-              param.incomeDatetime = getElementFn('incomeDatetime').value;
-              param.arriveDatetime = getElementFn('arriveDatetime').value;
+              if(getElementFn('repayDatetime').value) {
+                param.repayDatetime = getElementFn('repayDatetime').value;
+              }
+              if(getElementFn('incomeDatetime').value) {
+                param.incomeDatetime = getElementFn('incomeDatetime').value;
+              }
+              if(getElementFn('arriveDatetime').value) {
+                param.arriveDatetime = getElementFn('arriveDatetime').value;
+              }
               param.expectYield = +param.expectYield / 100;
               if(!param.repayDatetime || !param.incomeDatetime || !param.arriveDatetime) {
                 message.warning('请填写完整');
@@ -174,15 +188,28 @@ class ProductsAddedit extends DetailUtil {
             required: true,
             coin: setSymbol,
             formatter: function (v, data) {
+                let parElement = document.getElementById('successAmount').parentNode.parentNode;
+                divEle.style.fontSize = '14px';
+                divEle.innerText = '(募集的数量大于或等于此数值，即满标)';
+                parElement.appendChild(divEle);
                 return moneyFormat(v.toString(), '', data.symbol);
             }
         }, {
             title: '总份数',
             field: 'totalFen',
             'Z+': true,
-            required: true
+            required: true,
+            onChange(v) {
+              let allValue = document.getElementById('amount').value.trim();
+              let parElement = document.getElementById('totalFen').parentNode.parentNode;
+              if(allValue) {
+                ele.style.marginLeft = '10px';
+                ele.innerText = '每份：' + (+allValue / +v).toFixed(2);
+                parElement.appendChild(ele);
+              }
+            }
         }, {
-            title: '限购份数',
+            title: '单人限购份数',
             field: 'limitFen',
             'Z+': true,
             required: true
@@ -223,7 +250,7 @@ class ProductsAddedit extends DetailUtil {
         }, {
             title: '还款日',
             field: 'repayDatetime',
-            type: 'datetime'
+            type: 'date'
         }, {
             title: '回款方式',
             field: 'paymentType',

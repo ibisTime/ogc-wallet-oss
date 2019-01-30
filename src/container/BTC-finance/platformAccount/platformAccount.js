@@ -26,6 +26,7 @@ class PlatformAccount extends React.Component {
     }
 
     goFlow(accountNumber) {
+      console.log(accountNumber);
         if(accountNumber) {
           this.props.history.push(`/BTC-finance/platformAccount/ledger?isPlat=1&code=${accountNumber}`);
         }else {

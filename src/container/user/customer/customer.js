@@ -123,7 +123,7 @@ class Customer extends React.Component {
                             Modal.confirm({
                                 okText: '确认',
                                 cancelText: '取消',
-                                content: `确定禁止用户登录？`,
+                                content: `确定允许用户登录？`,
                                 onOk: () => {
                                     this.props.doFetching();
                                     return activateUser(userIdList).then(() => {
