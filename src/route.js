@@ -682,10 +682,6 @@ const ROUTES = [
     {
         path: '/BTC-finance/GJAddressQuery/addedit',
         component: asyncComponent(() => import('container/BTC-finance/GJAddressQuery/GJAddressQuery-addedit'))
-    },
-    {
-        path: '/BTC-finance/GJManually',
-        component: asyncComponent(() => import('container/BTC-finance/GJManually/GJManually-addedit'))
     }
 ];
 
