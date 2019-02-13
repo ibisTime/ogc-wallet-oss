@@ -104,7 +104,7 @@ class ProductsRepay extends React.Component {
             rowKey: 'id',
             pageCode: '625510',
             searchParams: {
-                statusList: ['8']
+                statusList: ['9']
             },
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {
@@ -122,7 +122,7 @@ class ProductsRepay extends React.Component {
                 } else if (selectedRowKeys.length > 1) {
                   showWarnMsg('请选择一条记录');
                 } else {
-                  var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9'};
+                  var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '10': '10'};
                   if (!statusList[selectedRows[0].status]) {
                     showWarnMsg('该产品还未开始募集！');
                     return;
@@ -136,11 +136,11 @@ class ProductsRepay extends React.Component {
                 } else if (selectedRowKeys.length > 1) {
                   showWarnMsg('请选择一条记录');
                 } else {
-                  if (selectedRows[0].status !== '7' && selectedRows[0].status !== '5' && selectedRows[0].status !== '8') {
+                  if (selectedRows[0].status !== '7' && selectedRows[0].status !== '6' && selectedRows[0].status !== '8' && selectedRows[0].status !== '9') {
                     showWarnMsg('该产品还没有还款计划！');
                     return;
                   }
-                  this.props.history.push(`/bizFinancial/repaymentPlan?type=yhkuan&productCode=${selectedRows[0].code}&symbol=${selectedRows[0].symbol}&status=${selectedRows[0].status}`);
+                  this.props.history.push(`/bizFinancial/repaymentPlan?productCode=${selectedRows[0].code}&symbol=${selectedRows[0].symbol}&status=${selectedRows[0].status}`);
                 }
               }
             }

@@ -9,6 +9,13 @@ class InvitingFriendsAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.cData = {
+            ctype: getQueryString('ctype'),
+            ckey: {
+              cDate: /_date/,
+              cSymbol: /_symbol/
+            }
+        };
     }
 
     render() {
@@ -23,11 +30,35 @@ class InvitingFriendsAddedit extends DetailUtil {
             title: '说明',
             field: 'remark',
             hidden: true
-        }, {
+        }];
+        console.log(this.cData.ctype, this.cData.ckey.cSymbol, this.cData.ctype.match(this.cData.ckey.cSymbol));
+        if(this.cData.ctype.match(this.cData.ckey.cDate)) {
+          fields.push({
             title: '数值',
             field: 'cvalue',
-            required: true
-        }];
+            required: true,
+            type: 'datetime'
+          });
+        } else if(this.cData.ctype.match(this.cData.ckey.cSymbol)) {
+          fields.push({
+            title: '数值',
+            field: 'cvalue',
+            required: true,
+            type: 'select',
+            pageCode: '802005',
+            params: {
+              status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}'
+          });
+        } else {
+            fields.push({
+              title: '数值',
+              field: 'cvalue',
+              required: true
+            });
+        }
         return this.buildDetail({
             fields,
             key: 'id',

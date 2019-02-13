@@ -44,7 +44,7 @@ class RepaymentPlan extends React.Component {
           },
           check: true
         }];
-        if(!this.type) {
+        if(this.type) {
           this.buttons = [{
             name: '还款',
             handler: (rowKey) => {
@@ -135,8 +135,7 @@ class RepaymentPlan extends React.Component {
             fields,
             pageCode: '625540',
             searchParams: {
-                productCode: this.productCode,
-                status: '1'
+                productCode: this.productCode
             },
             buttons: this.buttons
         });

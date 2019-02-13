@@ -37,7 +37,9 @@ class InvestFlowAll extends React.Component {
             'raise': '/bizFinancial/productsRaise',
             'raisefail': '/bizFinancial/productsRaisefail',
             'raiseSuccess': '/bizFinancial/productsRaiseSuccess',
-            'repay': '/bizFinancial/productsRepay'
+            'repay': '/bizFinancial/productsRepay',
+            'bearing': '/bizFinancial/productsBearing',
+            'can': '/bizFinancial/productsCan'
         };
     }
 
@@ -124,7 +126,7 @@ class InvestFlowAll extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push('/bizFinancial/productsRaise/investFlow');
+                        this.props.history.push('/bizFinancial/productsRaise/investFlow?investCode=' + selectedRows[0].code);
                     }
                 },
                 check: true

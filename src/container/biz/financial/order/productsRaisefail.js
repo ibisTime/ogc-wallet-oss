@@ -103,7 +103,7 @@ class ProductsRaisefail extends React.Component {
             fields,
             pageCode: '625510',
             searchParams: {
-                statusList: ['9']
+                statusList: ['10']
             },
               buttons: [{
                 code: 'detail',
@@ -121,13 +121,13 @@ class ProductsRaisefail extends React.Component {
               }, {
                 code: 'investFlowAll',
                 name: '认购记录汇总',
-                handler: (rowKeys) => {
-                  var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9'};
+                handler: (rowKeys, rowResults) => {
+                  var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '10': '10'};
                   if (!rowKeys.length) {
                     showWarnMsg('请选择记录');
                   } else if (rowKeys.length > 1) {
                     showWarnMsg('请选择一条记录');
-                  } else if (!statusList[rowKeys[0].status]) {
+                  } else if (!statusList[rowResults[0].status]) {
                     showWarnMsg('该产品还未开始募集！');
                   } else {
                     this.props.history.push(`/bizFinancial/productsRaisefail/investFlowAll?code=${rowKeys[0]}&menu=raisefail`);

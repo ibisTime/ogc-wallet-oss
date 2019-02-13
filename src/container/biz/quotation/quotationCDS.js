@@ -23,6 +23,13 @@ import {dateTimeFormat} from 'common/js/util';
   }
 )
 class quotationCDS extends React.Component {
+  componentDidMount() {
+    let pHtml = document.createElement('p');
+    pHtml.innerHTML = '行情更新间隔时间为10s';
+    pHtml.style.margin = '0';
+    let dHtml = document.querySelector('.tools-wrapper');
+    dHtml.insertBefore(pHtml, dHtml.childNodes[0]);
+  }
   render() {
     const fields = [{
       title: '币种',

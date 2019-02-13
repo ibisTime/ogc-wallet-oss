@@ -89,18 +89,7 @@ class ProductsRaise extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            data: [{
-                key: '4',
-                value: '即将开始'
-            }, {
-                key: '5',
-                value: '募集中'
-            }, {
-                key: '6',
-                value: '停止交易'
-            }],
-            keyName: 'key',
-            valueName: 'value',
+            key: 'product_status',
             search: true
         }, {
             title: '更新时间',
@@ -114,7 +103,7 @@ class ProductsRaise extends React.Component {
             fields,
             pageCode: '625510',
             searchParams: {
-                statusList: ['4', '5', '6']
+                statusList: ['4', '5']
             },
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {
@@ -127,7 +116,7 @@ class ProductsRaise extends React.Component {
                     }
                 },
                 investFlowAll: (selectedRowKeys, selectedRows) => {
-                    var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9'};
+                    var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '10': '10'};
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {

@@ -107,7 +107,7 @@ class ProductsRaiseSuccess extends React.Component {
             fields,
             pageCode: '625510',
             searchParams: {
-                statusList: ['7']
+                statusList: ['6']
             },
             btnEvent: {
               detail: (selectedRowKeys, selectedRows) => {
@@ -125,7 +125,7 @@ class ProductsRaiseSuccess extends React.Component {
                 } else if (selectedRowKeys.length > 1) {
                   showWarnMsg('请选择一条记录');
                 } else {
-                  var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9'};
+                  var statusList = {'5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '10': '10'};
                   if (!statusList[selectedRows[0].status]) {
                     showWarnMsg('该产品还未开始募集！');
                     return;
@@ -139,7 +139,7 @@ class ProductsRaiseSuccess extends React.Component {
                 } else if (selectedRowKeys.length > 1) {
                   showWarnMsg('请选择一条记录');
                 } else {
-                  if (selectedRows[0].status !== '7' && selectedRows[0].status !== '5' && selectedRows[0].status !== '8') {
+                  if (selectedRows[0].status !== '6' && selectedRows[0].status !== '7' && selectedRows[0].status !== '8' && selectedRows[0].status !== '9') {
                     showWarnMsg('该产品还没有还款计划！');
                     return;
                   }

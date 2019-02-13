@@ -7,6 +7,8 @@ import {
     getUserName,
     showSucMsg,
     addDate,
+    HhMmSsDate,
+    H0M0S0Date,
     dateFormat
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
@@ -14,6 +16,7 @@ import fetch from 'common/js/fetch';
 let setSymbol = getQueryString('coin');
 let ele = document.createElement('span');
 let divEle = document.createElement('div');
+let dateData = {};
 function getElementFn(el) {
   return document.getElementById(el).children[0].children[0];
 }
@@ -234,23 +237,60 @@ class ProductsAddedit extends DetailUtil {
               message.warning('请选择产品期限');
               return;
             }
-            // 起息时间
-            getElementFn('incomeDatetime').value = addDate(data._d, 1);
-            getElementFn('arriveDatetime').value = addDate(data._d, limitDay);
-            getElementFn('repayDatetime').value = dateFormat(addDate(data._d, limitDay + 1));
+            // 改变起息时间
+            setTimeout(() => {
+              getElementFn('arriveDatetime').style.width = '200px';
+              getElementFn('incomeDatetime').style.width = '200px';
+              getElementFn('incomeDatetime').value = H0M0S0Date(data._d, 1);
+              getElementFn('arriveDatetime').value = HhMmSsDate(data._d, limitDay);
+              getElementFn('repayDatetime').value = dateFormat(addDate(data._d, limitDay + 1));
+            }, 0);
           }
         }, {
             title: '起息时间',
             field: 'incomeDatetime',
-            type: 'datetime'
+            type: 'date',
+            onChange(v) {
+              setTimeout(() => {
+                let limitDay = +(document.getElementById('limitDays').value.trim());
+                getElementFn('incomeDatetime').value = H0M0S0Date(v._d, 0);
+                getElementFn('arriveDatetime').value = HhMmSsDate(v._d, limitDay - 1);
+                getElementFn('repayDatetime').value = dateFormat(addDate(v._d, limitDay));
+                if(dateData) {
+                  dateData.incomeDatetime = H0M0S0Date(v._d, 0);
+                  dateData.arriveDatetime = HhMmSsDate(v._d, limitDay - 1);
+                }
+              }, 0);
+            }
         }, {
             title: '到期时间',
             field: 'arriveDatetime',
-            type: 'datetime'
+            type: 'date',
+            onChange(v) {
+              setTimeout(() => {
+                getElementFn('arriveDatetime').value = HhMmSsDate(v._d, 0);
+                getElementFn('repayDatetime').value = dateFormat(addDate(v._d, 1));
+                if(dateData && dateData.incomeDatetime) {
+                  getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                }else if(dateData) {
+                  dateData.arriveDatetime = HhMmSsDate(v._d, 0);
+                }
+              }, 0);
+            }
         }, {
             title: '还款日',
             field: 'repayDatetime',
-            type: 'date'
+            type: 'date',
+            onChange() {
+              setTimeout(() => {
+                if(dateData && dateData.incomeDatetime) {
+                  getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                }
+                if(dateData && dateData.arriveDatetime) {
+                  getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+                }
+              }, 0);
+            }
         }, {
             title: '回款方式',
             field: 'paymentType',

@@ -162,7 +162,23 @@ export function addDate(date, days, format) {
   var d = new Date(date);
   d.setDate(d.getDate() + days);
   var m = d.getMonth() + 1;
-  return dateTimeFormat(d.getFullYear() + '-' + m + '-' + d.getDate());
+  return dateFormat(d.getFullYear() + '-' + m + '-' + d.getDate());
+}
+
+// 日期加23时分秒
+export function HhMmSsDate(date, days, format) {
+  var d = new Date(date);
+  d.setDate(d.getDate() + days);
+  var m = d.getMonth() + 1;
+  return dateFormat(d.getFullYear() + '-' + m + '-' + d.getDate()) + ' 23:59:59';
+}
+
+// 日期加0时分秒
+export function H0M0S0Date(date, days, format) {
+  var d = new Date(date);
+  d.setDate(d.getDate() + days);
+  var m = d.getMonth() + 1;
+  return dateFormat(d.getFullYear() + '-' + m + '-' + d.getDate()) + ' 00:00:00';
 }
 
 /**
