@@ -146,6 +146,7 @@ import { bizProductsRaise } from './redux/biz/financial/productsRaise';
 import { bizProductsRaisefail } from './redux/biz/financial/productsRaisefail';
 import { bizProductsBearing } from './redux/biz/financial/productsBearing';
 import { bizProductsCan } from './redux/biz/financial/productsCan';
+import { bizProductsWill } from './redux/biz/financial/productsWill';
 import { bizProductsRaiseSuccess } from './redux/biz/financial/productsRaiseSuccess';
 import { bizProductsRepay } from './redux/biz/financial/productsRepay';
 import { bizRepaymentPlan } from './redux/biz/financial/repaymentPlan';
@@ -293,6 +294,7 @@ export default combineReducers({
     bizProductsRaise,
     bizProductsRaisefail,
     bizProductsCan,
+    bizProductsWill,
     bizProductsBearing,
     bizProductsRaiseSuccess,
     bizProductsRepay,

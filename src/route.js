@@ -563,6 +563,11 @@ const ROUTES = [
       path: '/bizFinancial/productsBearing',
       component: asyncComponent(() => import('container/biz/financial/order/productsBearing'))
     },
+    // 系统管理 -- 量化理财管理-即将募集产品
+    {
+      path: '/bizFinancial/productsWill',
+      component: asyncComponent(() => import('container/biz/financial/order/productsWill'))
+    },
     // 系统管理 -- 量化理财管理-可还款产品
     {
       path: '/bizFinancial/productsCan',

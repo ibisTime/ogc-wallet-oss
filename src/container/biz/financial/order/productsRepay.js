@@ -101,7 +101,6 @@ class ProductsRepay extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
             pageCode: '625510',
             searchParams: {
                 statusList: ['9']

@@ -89,8 +89,7 @@ class ProductsRaise extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            key: 'product_status',
-            search: true
+            key: 'product_status'
         }, {
             title: '更新时间',
             field: 'updateDatetime',
@@ -103,7 +102,7 @@ class ProductsRaise extends React.Component {
             fields,
             pageCode: '625510',
             searchParams: {
-                statusList: ['4', '5']
+                statusList: ['5']
             },
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {

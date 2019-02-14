@@ -20,7 +20,6 @@ import {
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
-let currency = 'BTC';
 @listWrapper(
   state => ({
     ...state.BTCFinanceSupplyAddress,
@@ -32,22 +31,6 @@ let currency = 'BTC';
   }
 )
 class SupplyAddress extends React.Component {
-  componentDidMount() {
-    let clearParams = document.getElementById('clearParams');
-    let symInputList = document.querySelectorAll('.ant-select-search__field');
-    let symPloList = document.querySelectorAll('.ant-select-selection__placeholder');
-    setTimeout(() => {
-      symInputList.forEach((item, index) => {
-        if(item.id === 'symbol') {
-          item.value = currency + '-比特币';
-          symPloList[index].style.display = 'none';
-        }
-      });
-    }, 500);
-    clearParams.addEventListener('click', () => {
-      currency = 'BTC';
-    });
-  }
   render() {
     const fields = [{
       field: 'symbol',
@@ -60,20 +43,14 @@ class SupplyAddress extends React.Component {
       keyName: 'symbol',
       valueName: '{{symbol.DATA}}-{{cname.DATA}}',
       searchName: 'symbol',
-      render: (v, data) => v,
-      search: true,
-      onChange: (v) => {
-        setTimeout(() => {
-          let clearSpan = document.querySelector('.ant-select-selection__clear');
-          clearSpan.addEventListener('click', () => {
-            currency = 'BTC';
-          });
-        }, 0);
-        currency = v;
-      }
+      render: (v) => v
     }, {
       field: 'address',
       title: '地址'
+    }, {
+      field: 'balance',
+      title: '余额',
+      render: (v) => moneyFormat(v, '', 'BTC')
     }, {
       field: 'status',
       title: '状态',
@@ -90,7 +67,7 @@ class SupplyAddress extends React.Component {
       rowKey: 'id',
       pageCode: '802605',
       searchParams: {
-        symbol: currency
+        symbol: 'BTC'
       },
       btnEvent: {
         add: (selectedRowKeys, selectedRows) => {
@@ -126,6 +103,17 @@ class SupplyAddress extends React.Component {
               });
             }
           });
+        },
+        runQuery: (selectedRowKeys, selectedRows) => {
+          if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+          } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+          } else {
+            // 测试：https://testnet.blockexplorer.com/address/
+            // 正式：https://blockexplorer.com/address/
+            window.open('https://testnet.blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+          }
         }
       }
     });
