@@ -13,7 +13,6 @@ import {
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
-let setSymbol = getQueryString('coin');
 let ele = document.createElement('span');
 let divEle = document.createElement('div');
 let dateData = {};
@@ -28,6 +27,7 @@ class ProductsAddedit extends DetailUtil {
         this.view = !!getQueryString('v', this.props.location.search);
         this.isEdit = !!getQueryString('isEdit', this.props.location.search);
         this.isCheck = !!getQueryString('isCheck', this.props.location.search);
+        this.setSymbol = getQueryString('coin');
         this.api = null;
         if(!this.view && this.isEdit) {
           this.api = 625501;
@@ -58,6 +58,7 @@ class ProductsAddedit extends DetailUtil {
               fetch(this.api, param).then(() => {
                 showSucMsg('操作成功');
                 setTimeout(() => {
+                  dateData = {};
                   this.props.history.go(-1);
                 }, 1000);
               }).catch(this.props.cancelFetching);
@@ -90,6 +91,7 @@ class ProductsAddedit extends DetailUtil {
               fetch(this.api, param).then(() => {
                 showSucMsg('操作成功');
                 setTimeout(() => {
+                  dateData = {};
                   this.props.history.go(-1);
                 }, 1000);
               }).catch(this.cancelFetching);
@@ -99,6 +101,7 @@ class ProductsAddedit extends DetailUtil {
           }, {
             title: '返回',
             handler: (param) => {
+              dateData = {};
               this.props.history.go(-1);
             }
           }];
@@ -116,11 +119,27 @@ class ProductsAddedit extends DetailUtil {
         const fields = [{
             title: '名称（中文简体）',
             field: 'nameZhCn',
-            required: true
+            required: true,
+          onChange() {
+            if(dateData.incomeDatetime) {
+              setTimeout(() => {
+                getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+              }, 0);
+            }
+          }
         }, {
             title: '名称（英文）',
             field: 'nameEn',
-            required: true
+            required: true,
+          onChange() {
+            if(dateData.incomeDatetime) {
+              setTimeout(() => {
+                getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+              }, 0);
+            }
+          }
         }, {
             title: '币种',
             field: 'symbol',
@@ -137,7 +156,7 @@ class ProductsAddedit extends DetailUtil {
             onChange: () => {
                 if(!this.isEdit && !this.isCheck && !this.view) {
                   setTimeout(() => {
-                    setSymbol = document.querySelector('.ant-select-search__field').value.split('-')[0];
+                    this.setSymbol = document.querySelector('.ant-select-search__field').value.split('-')[0];
                   }, 1000);
                 }
             }
@@ -161,7 +180,17 @@ class ProductsAddedit extends DetailUtil {
             required: true,
             number: true,
             isPositive: true,
-            'Z+': true
+            'Z+': true,
+            onChange: (v) => {
+              if(dateData.incomeDatetime) {
+                setTimeout(() => {
+                  let incomeDate = new Date(dateData.incomeDatetime);
+                  getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                  getElementFn('arriveDatetime').value = HhMmSsDate(incomeDate, v - 1);
+                  getElementFn('repayDatetime').value = addDate(incomeDate, +v);
+                }, 0);
+              }
+            }
         }, {
             title: '预期年化收益率(%)',
             field: 'expectYield',
@@ -174,29 +203,53 @@ class ProductsAddedit extends DetailUtil {
                 return v * 100;
               }
               return '';
+            },
+          onChange() {
+            if(dateData.incomeDatetime) {
+              setTimeout(() => {
+                getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+              }, 0);
             }
+          }
         }, {
             title: '总募集金额',
             field: 'amount',
             coinAmount: true,
             required: true,
-            coin: setSymbol,
+            coin: this.setSymbol,
             formatter: function (v, data) {
                 return moneyFormat(v.toString(), '', data.symbol);
+            },
+          onChange() {
+            if(dateData.incomeDatetime) {
+              setTimeout(() => {
+                getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+              }, 0);
             }
+          }
         }, {
             title: '募集成功金额',
             field: 'successAmount',
             coinAmount: true,
             required: true,
-            coin: setSymbol,
+            coin: this.setSymbol,
             formatter: function (v, data) {
                 let parElement = document.getElementById('successAmount').parentNode.parentNode;
                 divEle.style.fontSize = '14px';
                 divEle.innerText = '(募集的数量大于或等于此数值，即满标)';
                 parElement.appendChild(divEle);
                 return moneyFormat(v.toString(), '', data.symbol);
+            },
+          onChange() {
+            if(dateData.incomeDatetime) {
+              setTimeout(() => {
+                getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+              }, 0);
             }
+          }
         }, {
             title: '总份数',
             field: 'totalFen',
@@ -207,20 +260,42 @@ class ProductsAddedit extends DetailUtil {
               let parElement = document.getElementById('totalFen').parentNode.parentNode;
               if(allValue) {
                 ele.style.marginLeft = '10px';
-                ele.innerText = '每份：' + (+allValue / +v).toFixed(2);
+                ele.innerText = '每份：' + (+allValue / +v).toFixed(8);
                 parElement.appendChild(ele);
+              }
+              if(dateData.incomeDatetime) {
+                setTimeout(() => {
+                  getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                  getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+                }, 0);
               }
             }
         }, {
             title: '单人限购份数',
             field: 'limitFen',
             'Z+': true,
-            required: true
+            required: true,
+          onChange() {
+            if(dateData.incomeDatetime) {
+              setTimeout(() => {
+                getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+              }, 0);
+            }
+          }
         }, {
           title: '募集开始时间',
           field: 'startDatetime',
           type: 'datetime',
-          required: true
+          required: true,
+          onChange() {
+            if(dateData.incomeDatetime) {
+              setTimeout(() => {
+                getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+              }, 0);
+            }
+          }
         }, {
           title: '募集结束时间',
           field: 'endDatetime',
@@ -243,7 +318,7 @@ class ProductsAddedit extends DetailUtil {
               getElementFn('incomeDatetime').style.width = '200px';
               getElementFn('incomeDatetime').value = H0M0S0Date(data._d, 1);
               getElementFn('arriveDatetime').value = HhMmSsDate(data._d, limitDay);
-              getElementFn('repayDatetime').value = dateFormat(addDate(data._d, limitDay + 1));
+              getElementFn('repayDatetime').value = addDate(data._d, limitDay + 1);
             }, 0);
           }
         }, {
@@ -255,7 +330,7 @@ class ProductsAddedit extends DetailUtil {
                 let limitDay = +(document.getElementById('limitDays').value.trim());
                 getElementFn('incomeDatetime').value = H0M0S0Date(v._d, 0);
                 getElementFn('arriveDatetime').value = HhMmSsDate(v._d, limitDay - 1);
-                getElementFn('repayDatetime').value = dateFormat(addDate(v._d, limitDay));
+                getElementFn('repayDatetime').value = addDate(v._d, limitDay);
                 if(dateData) {
                   dateData.incomeDatetime = H0M0S0Date(v._d, 0);
                   dateData.arriveDatetime = HhMmSsDate(v._d, limitDay - 1);
@@ -269,7 +344,7 @@ class ProductsAddedit extends DetailUtil {
             onChange(v) {
               setTimeout(() => {
                 getElementFn('arriveDatetime').value = HhMmSsDate(v._d, 0);
-                getElementFn('repayDatetime').value = dateFormat(addDate(v._d, 1));
+                getElementFn('repayDatetime').value = addDate(v._d, 1);
                 if(dateData && dateData.incomeDatetime) {
                   getElementFn('incomeDatetime').value = dateData.incomeDatetime;
                 }else if(dateData) {

@@ -36,7 +36,7 @@ class BuyOrder extends React.Component {
             field: 'loginName',
           render(v, data) {
             if(data.user) {
-              return data.user.loginName;
+              return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
             }
             return '-';
           },

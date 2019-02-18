@@ -29,6 +29,11 @@ class CustomerLedgerQuery extends React.Component {
         super(props);
         this.accountNumber = getQueryString('code', this.props.location.search) || '';
         this.isPlat = !!getQueryString('isPlat', this.props.location.search);
+        this.bizType = getQueryString('bizType', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search) || '';
+        if(this.symbol) {
+          this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
+        }
         this.buttons = [];
         this.buttons = [{
             code: 'export',
@@ -73,7 +78,7 @@ class CustomerLedgerQuery extends React.Component {
             field: 'bizType',
             title: '业务类型',
             type: 'select',
-            key: this.isPlat ? 'jour_biz_type_plat' : 'jour_biz_type_user',
+            key: this.isPlat ? this.bizType : 'jour_biz_type_user',
             search: true
         }, {
             field: 'transAmountString',

@@ -32,7 +32,7 @@ class FinishOrder extends React.Component {
             field: 'nickname',
           render(v, data) {
             if(data.user) {
-              return data.user.loginName;
+              return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
             }
             return '-';
           },

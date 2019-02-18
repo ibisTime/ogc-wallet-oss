@@ -82,7 +82,7 @@ class BuyOrderAddedit extends DetailUtil {
           field: 'loginName',
           formatter(v, data) {
             if(data.user) {
-              return data.user.loginName;
+              return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
             }
             return '-';
           }

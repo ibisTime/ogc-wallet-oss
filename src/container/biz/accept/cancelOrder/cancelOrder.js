@@ -33,7 +33,7 @@ class CancelOrder extends React.Component {
       field: 'sellUser',
       render(v, data) {
         if(data.user) {
-          return data.user.loginName;
+          return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
         }
         return '-';
       },
