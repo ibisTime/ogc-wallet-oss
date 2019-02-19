@@ -39,7 +39,8 @@ class PaymentAddedit extends DetailUtil {
             }
         }, {
             field: 'subbranch',
-            title: '支行'
+            title: '支行',
+            hidden: this.isAlipay === '1'
         }, {
           field: 'bankName',
           title: '银行名称',
@@ -55,7 +56,8 @@ class PaymentAddedit extends DetailUtil {
           field: 'pic',
           title: '收款码',
           type: 'img',
-          single: true
+          single: true,
+          hidden: this.isAlipay === '0'
         }, {
           field: 'status',
           title: '状态',

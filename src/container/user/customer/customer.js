@@ -50,6 +50,7 @@ class Customer extends React.Component {
         }, {
             field: 'userReferee',
             title: '推荐人',
+            search: true,
             render: (v, data) => {
                 if (data.refereeUser) {
                     let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
