@@ -152,6 +152,7 @@ import { bizProductsRepay } from './redux/biz/financial/productsRepay';
 import { bizRepaymentPlan } from './redux/biz/financial/repaymentPlan';
 import { bizProducts } from './redux/biz/financial/products';
 import { bizSetDivRate } from './redux/biz/financial/setDivRate';
+import { bizProductsProfit } from './redux/biz/financial/productsProfit';
 
 // 红包管理
 import { bizReceiveQuery } from './redux/biz/redPacket/receiveQuery';
@@ -301,6 +302,7 @@ export default combineReducers({
     bizRepaymentPlan,
     bizProducts,
     bizSetDivRate,
+    bizProductsProfit,
     // 红包管理
     bizReceiveQuery,
     bizRedPacketQuery,

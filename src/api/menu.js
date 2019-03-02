@@ -1,7 +1,7 @@
 import fetch from 'common/js/fetch';
 import {getRoleCode} from 'common/js/util';
 import {ROOT_MENU_CODE} from 'common/js/config';
-
+// export const ROOT_APP_CODE = 'DH201810120023250000000';
 /**
  * 获取当前菜单拥有的按钮列表
  * @param parentKey
@@ -20,6 +20,15 @@ export function getOwnerBtns(parentCode) {
  */
 export function getMenuBtnList() {
     return fetch(630017);
+}
+/**
+ * 列表获取导航
+ */
+export function getMenuAppList(data) {
+    return fetch(630508, {
+        type: 'app_menu',
+        ...data
+    });
 }
 
 /**

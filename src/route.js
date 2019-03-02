@@ -13,6 +13,11 @@ const ROUTES = [
         path: '/system/role/menu',
         component: asyncComponent(() => import('container/system/role-menu/role-menu'))
     },
+    // app导航
+    {
+        path: '/system/appmenu',
+        component: asyncComponent(() => import('container/system/role-menu/app-menu'))
+    },
     {
         path: '/system/menu',
         component: asyncComponent(() => import('container/system/menu/menu'))
@@ -507,6 +512,26 @@ const ROUTES = [
     {
         path: '/bizFinancial/products/addedit',
         component: asyncComponent(() => import('container/biz/financial/products/products-addedit'))
+    },
+    // 系统管理 -- 量化理财管理-生息中产品-今日收益
+    {
+        path: '/bizFinancial/products/yesterdayprofit',
+        component: asyncComponent(() => import('container/biz/financial/products/todayprofit'))
+    },
+    // 系统管理 -- 量化理财管理-生息中产品-今日收益详情
+    {
+        path: '/bizFinancial/yesterdayprofit/detail',
+        component: asyncComponent(() => import('container/biz/financial/products/todayprofit-detail'))
+    },
+    // 系统管理 -- 量化理财管理-生息中产品-今日收益添加
+    {
+        path: '/bizFinancial/yesterdayprofit/add',
+        component: asyncComponent(() => import('container/biz/financial/products/todayprofit-addedit'))
+    },
+    // 系统管理 -- 量化理财管理-生息中产品-今日收益修改
+    {
+        path: '/bizFinancial/todaydayprofit/addedit',
+        component: asyncComponent(() => import('container/biz/financial/products/todayprofit-edit'))
     },
     // 系统管理 -- 量化理财管理-产品管理-审核详情
     {

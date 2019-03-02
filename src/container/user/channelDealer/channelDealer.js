@@ -108,7 +108,7 @@ class ChannelDealer extends React.Component {
                         let userIdList = [];
                         for(let i = 0, len = selectedRows.length; i < len; i++) {
                             if(selectedRows[i].status === '2') {
-                                showWarnMsg(selectedRows[i].nickname + '用户已禁止登陆');
+                                showWarnMsg(selectedRows[i].nickname + '用户已禁止登录');
                                 userIdList = [];
                                 return;
                             }

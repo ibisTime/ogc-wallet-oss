@@ -9,6 +9,11 @@ export function setRoleMenus(menuCodeList, roleCode) {
         updater: getUserName()
     });
 }
+export function setAppMenus(codeList) {
+    return fetch(630509, {
+        codeList
+    });
+}
 
 //  保存节点
 export function setNodeMenus(nodeList, roleCode) {

@@ -108,9 +108,6 @@ class Products extends React.Component {
             title: '更新时间',
             field: 'updateDatetime',
             type: 'datetime'
-        }, {
-            title: '备注',
-            field: 'remark'
         }];
         return this.props.buildList({
             fields,
@@ -150,6 +147,15 @@ class Products extends React.Component {
                         this.props.history.push(`/bizFinancial/products/detail?v=1&code=${selectedRowKeys[0]}&isCheck=1`);
                     }
                 }
+                // yesterdayprofit: (keys, items) => {
+                //     if (!keys.length) {
+                //         showWarnMsg('请选择记录');
+                //     } else if (keys.length > 1) {
+                //         showWarnMsg('请选择一条记录');
+                //     } else {
+                //         this.props.history.push(`/bizFinancial/products/yesterdayprofit`);
+                //     }
+                // }
             }
         });
     }

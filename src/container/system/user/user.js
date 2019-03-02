@@ -29,10 +29,10 @@ class User extends React.Component {
         const fields = [{
             title: '关键字',
             field: 'keyword',
-            search: true,
             noVisible: true
         }, {
             title: '用户名',
+            search: true,
             field: 'loginName'
         }, {
             title: '真实姓名',

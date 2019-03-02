@@ -1,8 +1,8 @@
 import React from 'react';
 import {Form, Spin, Button, Tree} from 'antd';
-import {getMenuBtnList, getRoleMenuBtnList} from 'api/menu';
-import {setRoleMenus} from 'api/user';
-import {getQueryString, showSucMsg} from 'common/js/util';
+import {getMenuAppList, getMenuBtnList, getRoleMenuBtnList} from 'api/menu';
+import {setAppMenus} from 'api/user';
+import {getQueryString, showSucMsg, showWarnMsg} from 'common/js/util';
 import {formItemLayout, tailFormItemLayout} from 'common/js/config';
 
 const TreeNode = Tree.TreeNode;
@@ -21,13 +21,12 @@ class RoleMenu extends React.Component {
         };
         this.code = getQueryString('code');
         this.name = getQueryString('name');
-        this.treeContact = {};
     }
 
     componentDidMount() {
         Promise.all([
-            getMenuBtnList(),
-            getRoleMenuBtnList(this.code)
+            getMenuAppList(),
+            getMenuAppList({status: 1})
         ]).then(([allData, checkData]) => {
             this.getTree(allData);
             let checkedKeys = checkData.map(v => v.code);
@@ -43,11 +42,9 @@ class RoleMenu extends React.Component {
 
     getTree(data) {
         let result = {};
+        let parentKeyMap = {};
         data.forEach(v => {
-            v.parentCode = v.parentCode || 'ROOT';
-            if (v.parentCode && v.parentCode !== 'ROOT') {
-                this.treeContact[v.code] = v.parentCode;
-            }
+            v.parentCode = v.parentCode === '0' ? 'ROOT' : v.parentCode;
             if (!result[v.parentCode]) {
                 result[v.parentCode] = [];
             }
@@ -55,7 +52,9 @@ class RoleMenu extends React.Component {
                 title: v.name,
                 key: v.code
             });
+            parentKeyMap[v.code] = v.parentCode === 'ROOT' ? '' : v.parentCode;
         });
+        this.parentKeyMap = parentKeyMap;
         this.result = result;
         let tree = [];
         this.getTreeNode(result['ROOT'], tree);
@@ -95,26 +94,37 @@ class RoleMenu extends React.Component {
                     checked.splice(idx, 1);
                 }
             });
+            if (this.parentKeyMap[key]) {
+                let flag = true;
+                this.result[this.parentKeyMap[key]].forEach(r => {
+                    let idx = checked.findIndex(v => v === r.key);
+                    if (idx > -1) {
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    let idx = checked.findIndex(c => c === this.parentKeyMap[key]);
+                    checked.splice(idx, 1);
+                }
+            }
         } else {
             childrenKeys.forEach(c => {
-                let level = 3;// 菜单层级
-                let tmpl = c;
-                for (let i = 0; i <= level; i++) {
-                    if (this.treeContact[tmpl]) {
-                        tmpl = this.treeContact[tmpl];
-                        checked.push(this.treeContact[tmpl]);
-                    } else {
-                        break;
-                    }
-                }
                 let idx = checked.findIndex(v => c === v);
                 if (idx === -1) {
                     checked.push(c);
                 }
             });
+            while (this.parentKeyMap[key]) {
+                let idx = checked.findIndex(c => c === this.parentKeyMap[key]);
+                if (idx === -1) {
+                    checked.push(this.parentKeyMap[key]);
+                }
+                key = this.parentKeyMap[key];
+            }
         }
         this.setState({checkedKeys});
     }
+
     findCheckItem(arr, key) {
         if (this.findCheckItem[key]) {
             this.checkNode = this.findCheckItem[key];
@@ -157,11 +167,15 @@ class RoleMenu extends React.Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
+        if (this.state.checkedKeys.checked.length <= 0) {
+            showWarnMsg('请勾选权限');
+            return;
+        }
         this.setState({fetching: true});
-        setRoleMenus(this.state.checkedKeys.checked, this.code).then(() => {
+        setAppMenus(this.state.checkedKeys.checked, this.codeList).then(() => {
             this.setState({fetching: false});
             showSucMsg('操作成功');
-            setTimeout(() => this.props.history.go(-1), 1000);
+            // setTimeout(() => this.props.history.go(-1), 1000);
         }).catch(() => this.setState({fetching: false}));
     }
 
@@ -169,12 +183,6 @@ class RoleMenu extends React.Component {
         return (
             <Spin spinning={this.state.fetching}>
                 <Form className="detail-form-wrapper" onSubmit={this.handleSubmit}>
-                    <FormItem key='code' {...formItemLayout} label='角色编号'>
-                        <div className="readonly-text">{this.code}</div>
-                    </FormItem>
-                    <FormItem key='name' {...formItemLayout} label='角色名称'>
-                        <div className="readonly-text">{this.name}</div>
-                    </FormItem>
                     <FormItem key='treeMenu' {...formItemLayout} label='菜单权限'>
                         {this.state.treeData.length ? (
                             <Tree
@@ -192,7 +200,6 @@ class RoleMenu extends React.Component {
                     </FormItem>
                     <FormItem key='btns' {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">保存</Button>
-                        <Button style={{marginLeft: 20}} onClick={() => this.props.history.go(-1)}>返回</Button>
                     </FormItem>
                 </Form>
             </Spin>

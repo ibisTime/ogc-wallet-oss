@@ -10,6 +10,8 @@ export const SYS_USER = 'SYS_USER';
 
 // 系统根菜单编号
 export const ROOT_MENU_CODE = 'COINSM201700000000000000';
+// // 导航根菜单编号
+//  export const ROOT_APP_CODE = 'DH201810120023250000000';
 
 // FMVP 币种
 export const CION_FMVP = 'FMVP';
