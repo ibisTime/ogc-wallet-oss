@@ -16,39 +16,29 @@ class ProductsDetail extends DetailUtil {
         this.code = getQueryString('productCode', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-        this.api = null;
-        if (!this.view) {
-            this.api = 625550;
-        } else if (this.view) {
-            this.api = 625550;
+      this.buttons = [{
+        title: '保存',
+        handler: (params) => {
+          params.code = this.code;
+          params.symbol = this.symbol;
+          params.totalAmount = moneyParse(params.totalAmount, '', this.symbol);
+          params.productCode = params.code;
+          this.doFetching();
+          fetch(625550, params).then(() => {
+            showSucMsg('操作成功');
+            this.cancelFetching();
+            setTimeout(() => {
+              this.props.history.go(-1);
+            }, 1000);
+          }).catch(this.cancelFetching);
         }
-        // this.buttons = [];
-        if (this.view) {
-            this.buttons = [{
-                title: '保存',
-                handler: (params) => {
-                    params.code = this.code;
-                    params.symbol = this.symbol;
-                    params.totalAmount = moneyParse(params.totalAmount, '', this.symbol);
-                    params.productCode = params.code;
-                    console.log(this.api);
-                    this.doFetching();
-                    fetch(this.api, params).then(() => {
-                        showSucMsg('操作成功');
-                        this.cancelFetching();
-                        setTimeout(() => {
-                            this.props.history.go(-1);
-                        }, 1000);
-                    }).catch(this.cancelFetching);
-                }
-            }, {
-                code: 'back',
-                title: '返回',
-                handler: () => {
-                    this.props.history.go(-1);
-                }
-            }];
+      }, {
+        code: 'back',
+        title: '返回',
+        handler: () => {
+          this.props.history.go(-1);
         }
+      }];
     }
     render() {
         const fields = [
@@ -69,7 +59,6 @@ class ProductsDetail extends DetailUtil {
             // key: 'ckey',
             code: this.code,
             view: this.view,
-            addCode: 625550,
             buttons: this.buttons
             //  beforeSubmit: (params) => {
             //     params.productCode = this.code;
