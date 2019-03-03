@@ -60,34 +60,6 @@ class ProductsDetail extends DetailUtil {
             code: this.code,
             view: this.view,
             buttons: this.buttons
-            //  beforeSubmit: (params) => {
-            //     params.productCode = this.code;
-            //     params.totalAmount = moneyParse(params.totalAmount, '', this.symbol);
-            //     return params;
-            // }
-            // buttons: [{
-            //     title: '保存',
-            //     handler: (params) => {
-            //         params.code = this.code;
-            //         params.symbol = this.symbol;
-            //         params.totalAmount = moneyParse(params.totalAmount, '', this.symbol);
-            //         params.productCode = params.code;
-            //         this.doFetching();
-            //         fetch(625550, params).then(() => {
-            //             showSucMsg('操作成功');
-            //             this.cancelFetching();
-            //             setTimeout(() => {
-            //                 this.props.history.go(-1);
-            //             }, 1000);
-            //         }).catch(this.cancelFetching);
-            //     }
-            // }, {
-            //     code: 'back',
-            //     title: '返回',
-            //     handler: () => {
-            //         this.props.history.go(-1);
-            //     }
-            // }]
         });
     }
 }
