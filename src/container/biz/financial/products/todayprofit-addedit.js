@@ -82,13 +82,12 @@ class ProductsDetail extends DetailUtil {
                 title: '收益',
                 field: 'totalAmount',
                 required: true,
-                'Z+': true,
                 onChange: (v) => {
                   setTimeout(() => {
                     let totalAmountDiv = document.getElementById('totalAmount').parentNode.parentNode;
                     if(v && totalAmountDiv && ele) {
                       ele.style.marginLeft = '10px';
-                      ele.innerHTML = '每份收益：' + (v / this.saleNum);
+                      ele.innerHTML = '每份总收益：' + (v / this.saleNum);
                       totalAmountDiv.appendChild(ele);
                     }
                   });
