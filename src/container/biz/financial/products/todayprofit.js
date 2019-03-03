@@ -41,9 +41,11 @@ class InvestFlow extends React.Component {
         this.productCode = getQueryString('code', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
     }
+
     goFlow(productCode) {
         this.props.history.push(`/bizFinancial/yesterdayprofit/add?&productCode=${productCode}`);
     }
+
     render() {
         const fields = [{
             title: '产品编号',
@@ -51,8 +53,9 @@ class InvestFlow extends React.Component {
         }, {
             title: '收益',
             field: 'totalAmount',
-                render: function (v, data) {
-                    return v / 100000000;
+            render: (v, data) => {
+                console.log(data.symbol);
+                return moneyFormat(v.toString(), '', this.symbol);
             }
         }, {
             title: '类型',
@@ -79,12 +82,12 @@ class InvestFlow extends React.Component {
             title: '创建时间',
             type: 'datetime',
             field: 'createDatetime'
-        // }, {
-        //     title: '当前时间',
-        //     render: function (v, data) {
-        //         let todaytime = moment().format('YYYY-MM-DD HH:mm:ss');
-        //        return moment().format('YYYY-MM-DD HH:mm:ss');
-        //     }
+            // }, {
+            //     title: '当前时间',
+            //     render: function (v, data) {
+            //         let todaytime = moment().format('YYYY-MM-DD HH:mm:ss');
+            //        return moment().format('YYYY-MM-DD HH:mm:ss');
+            //     }
         }];
         return this.props.buildList({
             fields,

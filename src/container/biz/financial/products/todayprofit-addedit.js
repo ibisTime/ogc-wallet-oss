@@ -16,14 +16,8 @@ class ProductsDetail extends DetailUtil {
         this.code = getQueryString('productCode', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-        this.api = null;
-        if (!this.view) {
-            this.api = 625550;
-        } else if (this.view) {
-            this.api = 625550;
-        }
+        this.api = 625550;
         // this.buttons = [];
-        if (this.view) {
             this.buttons = [{
                 title: '保存',
                 handler: (params) => {
@@ -49,7 +43,6 @@ class ProductsDetail extends DetailUtil {
                 }
             }];
         }
-    }
     render() {
         const fields = [
             {
@@ -68,9 +61,9 @@ class ProductsDetail extends DetailUtil {
             fields,
             // key: 'ckey',
             code: this.code,
-            view: this.view,
-            addCode: 625550,
-            buttons: this.buttons
+            view: this.view
+            // addCode: 625550,
+            // buttons: this.buttons
             //  beforeSubmit: (params) => {
             //     params.productCode = this.code;
             //     params.totalAmount = moneyParse(params.totalAmount, '', this.symbol);

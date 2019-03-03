@@ -76,7 +76,7 @@ class Payment extends React.Component {
             fields,
             pageCode: 802033,
             btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
+            edit: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
@@ -87,6 +87,19 @@ class Payment extends React.Component {
                             isAlipay = '1';
                         }
                         this.props.history.push(`/accept/payment/addedit?code=${selectedRowKeys[0]}&isAlipay=${isAlipay}`);
+                    }
+                },
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        let isAlipay = '0';
+                        if (selectedRows[0].bankCode === 'alipay') {
+                            isAlipay = '1';
+                        }
+                        this.props.history.push(`/accept/payment/addedit?code=${selectedRowKeys[0]}&isAlipay=${isAlipay}&v=1`);
                     }
                 }
             }

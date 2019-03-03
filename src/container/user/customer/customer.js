@@ -48,13 +48,13 @@ class Customer extends React.Component {
             valueName: 'value',
             search: true
         }, {
-            field: 'userId',
+            field: 'userReferee',
             title: '推荐人',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            searchName: 'userReferee',
             // pageCode: '805120',
             search: true,
             render: (v, data) => {
