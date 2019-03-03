@@ -18,7 +18,6 @@ class ProductsDetail extends DetailUtil {
         this.id = getQueryString('id', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
         this.saleNum = '';
-        this.totalAmount = '';
     }
     componentWillMount() {
       fetch(625555, {id: this.id}).then(data => {
@@ -69,8 +68,8 @@ class ProductsDetail extends DetailUtil {
                     let totalAmountDiv = document.getElementById('totalAmount').parentNode.parentNode;
                     if(totalAmountDiv && ele) {
                       ele.style.marginLeft = '10px';
-                      if(v) {
-                        ele.innerHTML = '每份收益：' + (v / this.saleNum);
+                      if(v && this.saleNum) {
+                        ele.innerHTML = '每份总收益：' + (v / this.saleNum);
                         totalAmountDiv.appendChild(ele);
                       }
                     }
