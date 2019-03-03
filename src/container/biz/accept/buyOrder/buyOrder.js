@@ -19,6 +19,7 @@ import {
     getUserId
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
+
 @listWrapper(
     state => ({
         ...state.acceptBuyOrder,
@@ -33,13 +34,13 @@ class BuyOrder extends React.Component {
     render() {
         const fields = [{
             title: '下单人(手机号/邮箱)',
-            field: 'loginName',
-          render(v, data) {
-            if(data.user) {
-              return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
-            }
-            return '-';
-          },
+            field: 'buyUser',
+            render(v, data) {
+                if (data.user) {
+                    return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
+                }
+                return '-';
+            },
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -47,11 +48,11 @@ class BuyOrder extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-          field: 'receiveBank',
-          title: '收款方式'
+            field: 'receiveBank',
+            title: '收款方式'
         }, {
-          field: 'receiveCardNo',
-          title: '卡号'
+            field: 'receiveCardNo',
+            title: '卡号'
         }, {
             field: 'tradeCoin',
             title: '币种',
@@ -86,8 +87,8 @@ class BuyOrder extends React.Component {
                 key: '0',
                 value: '待支付'
             }, {
-              key: '1',
-              value: '已支付'
+                key: '1',
+                value: '已支付'
             }],
             keyName: 'key',
             valueName: 'value',
@@ -100,8 +101,8 @@ class BuyOrder extends React.Component {
             title: '附言',
             field: 'postscript'
         }, {
-          title: '备注',
-          field: 'remark'
+            title: '备注',
+            field: 'remark'
         }];
         return this.props.buildList({
             fields,
@@ -117,8 +118,8 @@ class BuyOrder extends React.Component {
                         showWarnMsg('请选择记录');
                     } else {
                         let codeList = [];
-                        for(let i = 0, len = selectedRows.length; i < len; i++) {
-                            if(selectedRows[i].status !== '1') {
+                        for (let i = 0, len = selectedRows.length; i < len; i++) {
+                            if (selectedRows[i].status !== '1') {
                                 showWarnMsg(selectedRows[i].code + '不是已支付的订单');
                                 codeList = [];
                                 return;
@@ -152,8 +153,8 @@ class BuyOrder extends React.Component {
                         showWarnMsg('请选择记录');
                     } else {
                         let codeList = [];
-                        for(let i = 0, len = selectedRows.length; i < len; i++) {
-                            if(selectedRows[i].status !== '1') {
+                        for (let i = 0, len = selectedRows.length; i < len; i++) {
+                            if (selectedRows[i].status !== '1') {
                                 showWarnMsg(selectedRows[i].code + '不是已支付的订单');
                                 codeList = [];
                                 return;

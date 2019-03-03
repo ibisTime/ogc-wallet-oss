@@ -598,10 +598,20 @@ const ROUTES = [
       path: '/bizFinancial/productsCan',
       component: asyncComponent(() => import('container/biz/financial/order/productsCan'))
     },
+    // 系统管理 -- 量化理财管理-可还款产品-- 今日收益
+    {
+        path: '/bizFinancial/productsCan/todayprofit',
+        component: asyncComponent(() => import('container/biz/financial/order/todayprofit'))
+    },
     // 系统管理 -- 量化理财管理-已还款产品
     {
         path: '/bizFinancial/productsRepay',
         component: asyncComponent(() => import('container/biz/financial/order/productsRepay'))
+    },
+    // 系统管理 -- 量化理财管理-已还款产品--今日收益
+    {
+        path: '/bizFinancial/productsRepay/todayprofit',
+        component: asyncComponent(() => import('container/biz/financial/order/todayprofit'))
     },
     // 系统管理 -- 量化理财管理-已还款产品-认购明细
     {

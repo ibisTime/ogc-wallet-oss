@@ -28,7 +28,6 @@ class PaymentAddedit extends DetailUtil {
             keyName: 'bankCode',
             valueName: '{{bankName.DATA}}',
             searchName: 'bankName',
-            hidden: this.isAlipay === '1',
             onChange(v, data) {
                 if(Array.isArray(data)) {
                   data.forEach(item => {
@@ -42,6 +41,10 @@ class PaymentAddedit extends DetailUtil {
             field: 'subbranch',
             title: '支行',
             hidden: this.isAlipay === '1'
+        }, {
+          field: 'bankName',
+          title: '银行名称',
+          hidden: true
         }, {
             field: 'bankcardNumber',
             title: '卡号',

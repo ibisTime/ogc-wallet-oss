@@ -10,7 +10,7 @@ import {
   setSearchData
 } from '@redux/biz/quotation/quotationCDS';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat} from 'common/js/util';
+import {dateTimeFormat, getCoinList} from 'common/js/util';
 
 @listWrapper(
   state => ({
@@ -33,7 +33,12 @@ class quotationCDS extends React.Component {
   render() {
     const fields = [{
       title: '币种',
-      field: 'symbol'
+      field: 'symbol',
+      type: 'select',
+      data: getCoinList(),
+      keyName: 'key',
+      valueName: 'value',
+      search: true
     }, {
       title: '类型',
       field: 'type',

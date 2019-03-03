@@ -2,6 +2,7 @@ import React from 'react';
 import {Form} from 'antd';
 import {
     getQueryString,
+    moneyParse,
     moneyFormat,
     showSucMsg,
     getUserName
@@ -14,6 +15,7 @@ class ProductsDetail extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('id', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
 
@@ -28,14 +30,15 @@ class ProductsDetail extends DetailUtil {
         }, {
             title: '收益',
             field: 'totalAmount',
-            render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.totalAmount);
-            }
+                formatter: function (v, data) {
+                    return moneyFormat(v.toString(), '', data.symbol);
+                }
         }, {
             title: '类型',
             field: 'type',
             type: 'select',
-            key: 'product_type',
+            // key: 'product_type',
+                key: 'product_day_benefit_type',
             search: true
         }, {
             title: '收益时间',

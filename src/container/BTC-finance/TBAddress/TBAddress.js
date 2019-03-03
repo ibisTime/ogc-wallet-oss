@@ -77,11 +77,16 @@ class TBAddress extends React.Component {
             field: 'address',
             title: '地址'
         }, {
-            title: '余额',
             field: 'balanceString',
-            render: (v, data) => {
-                return moneyFormat(Number(data.useAmount), '', data.currency);
+            title: '余额',
+            render: function (v, data) {
+                return moneyFormat(v.toString(), '', data.totalAmount);
             }
+            // title: '余额',
+            // field: 'balanceString',
+            // render: (v, data) => {
+            //     return moneyFormat(Number(data.useAmount), '', data.currency);
+            // }
         }, {
             field: 'status',
             title: '状态',

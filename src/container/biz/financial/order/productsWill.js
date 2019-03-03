@@ -31,7 +31,10 @@ class ProductsWill extends React.Component {
   render() {
     const fields = [{
       title: '名称（中文简体）',
-      field: 'nameZhCn',
+      field: 'name',
+      render: (v, data) => {
+        return data.nameZhCn ? data.nameZhCn : '';
+      },
       search: true
     }, {
       title: '币种',

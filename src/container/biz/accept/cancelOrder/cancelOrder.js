@@ -30,7 +30,7 @@ class CancelOrder extends React.Component {
   render() {
     const fields = [{
       title: '下单人(手机号/邮箱)',
-      field: 'sellUser',
+      field: 'userId',
       render(v, data) {
         if(data.user) {
           return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;

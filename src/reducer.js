@@ -20,6 +20,7 @@ import {publicCommunity} from './redux/public/community';
 import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
+import {biztodayprofit} from './redux/biz/financial/todayprofit';
 
 /* 业务管理 */
 // 客户管理
@@ -296,6 +297,7 @@ export default combineReducers({
     bizProductsRaisefail,
     bizProductsCan,
     bizProductsWill,
+    biztodayprofit,
     bizProductsBearing,
     bizProductsRaiseSuccess,
     bizProductsRepay,

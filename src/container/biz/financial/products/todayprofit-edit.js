@@ -32,7 +32,7 @@ class ProductsDetail extends DetailUtil {
                 field: 'totalAmount',
                 required: true,
                 formatter: function (v, data) {
-                    return moneyFormat(v.toString(), '', data.totalAmount);
+                    return moneyParse(v.toString(), '', data.totalAmount);
                 }
             }];
         return this.buildDetail({

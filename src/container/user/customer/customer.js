@@ -48,8 +48,14 @@ class Customer extends React.Component {
             valueName: 'value',
             search: true
         }, {
-            field: 'userReferee',
+            field: 'userId',
             title: '推荐人',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            // pageCode: '805120',
             search: true,
             render: (v, data) => {
                 if (data.refereeUser) {

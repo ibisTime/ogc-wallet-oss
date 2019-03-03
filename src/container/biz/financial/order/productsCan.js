@@ -31,7 +31,10 @@ class ProductsCan extends React.Component {
   render() {
     const fields = [{
       title: '名称（中文简体）',
-      field: 'nameZhCn',
+      field: 'name',
+      render: (v, data) => {
+        return data.nameZhCn ? data.nameZhCn : '';
+      },
       search: true
     }, {
       title: '币种',
@@ -106,6 +109,15 @@ class ProductsCan extends React.Component {
         statusList: ['8']
       },
       btnEvent: {
+      todayprofit: (selectedRowKeys, selectedRows) => {
+          if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+          } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+          } else {
+            this.props.history.push(`/bizFinancial/productsCan/todayprofit?code=${selectedRowKeys[0]}&symbol=${selectedRows[0].symbol}`);
+          }
+        },
         detail: (selectedRowKeys, selectedRows) => {
           if (!selectedRowKeys.length) {
             showWarnMsg('请选择记录');

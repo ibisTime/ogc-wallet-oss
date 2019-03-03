@@ -29,13 +29,13 @@ class FinishOrder extends React.Component {
     render() {
         const fields = [{
             title: '下单人(手机号/邮箱)',
-            field: 'nickname',
-          render(v, data) {
-            if(data.user) {
-              return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
-            }
-            return '-';
-          },
+            field: 'userId',
+            render(v, data) {
+                if(data.user) {
+                    return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
+                }
+                return '-';
+            },
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -82,18 +82,20 @@ class FinishOrder extends React.Component {
             render: (v, data) => {
                 return moneyFormat(v, '', data.tradeCoin);
             }
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-          data: [{
-            key: '2',
-            value: '已完成'
-          }],
-          keyName: 'key',
-          valueName: 'value',
-            search: true
-        }, {
+        },
+        // }, {
+        //     title: '状态',
+        //     field: 'status',
+        //     type: 'select',
+        //   data: [{
+        //     key: '2',
+        //     value: '已完成'
+        //   }],
+        //   keyName: 'key',
+        //   valueName: 'value',
+        //     search: true
+        // },
+            {
             field: 'createDatetime',
             title: '下单时间',
             type: 'datetime'
