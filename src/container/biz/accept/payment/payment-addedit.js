@@ -29,6 +29,9 @@ class PaymentAddedit extends DetailUtil {
             valueName: '{{bankName.DATA}}',
             searchName: 'bankName',
             hidden: this.isAlipay === '1',
+            params: {
+              type: '0'
+            },
             onChange(v, data) {
                 if(Array.isArray(data)) {
                   data.forEach(item => {
@@ -44,7 +47,7 @@ class PaymentAddedit extends DetailUtil {
             hidden: this.isAlipay === '1'
         }, {
             field: 'bankcardNumber',
-            title: '卡号',
+            title: this.isAlipay === '1' ? '账号' : '卡号',
             required: true
         }, {
           field: 'bindMobile',
@@ -72,6 +75,9 @@ class PaymentAddedit extends DetailUtil {
             editCode: '802022',
             detailCode: '802032',
             beforeSubmit: (params) => {
+              if(this.isAlipay === '1') {
+                params.bankName = '支付宝';
+              }
               if(bankName) {
                 params.bankName = bankName;
               }
