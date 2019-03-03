@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form} from 'antd';
+import {Form, message} from 'antd';
 import {
     getQueryString,
     moneyFormat,
@@ -32,6 +32,8 @@ class ProductsDetail extends DetailUtil {
                   this.props.history.go(-1);
                 }, 1000);
               }).catch(this.cancelFetching);
+            }else {
+                message.warning('请填写收益');
             }
         }
       }, {
