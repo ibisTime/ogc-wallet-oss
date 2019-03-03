@@ -49,9 +49,9 @@ class InvestFlow extends React.Component {
     render() {
         const fields = [{
             title: '产品名称',
-            field: 'productCode'
+            field: 'productName'
         }, {
-            title: '总收益',
+            title: '收益',
             field: 'totalAmount',
             render: (v, data) => {
                 console.log(data.symbol);
@@ -101,10 +101,10 @@ class InvestFlow extends React.Component {
                     //         // this.props.history.push(`/bizFinancial/yesterdayprofit/add?&productCode=${items[0].productCode}&symbol=${this.symbol}`);
                     //      // this.props.history.push(`/bizFinancial/yesterdayprofit/add?&productCode=${this.state.productCode}`);
                     // }
-                    code: 'add',
+                    code: 'edit',
                     name: '新增',
                     handler: (keys, items) => {
-                        this.props.history.push(`/bizFinancial/yesterdayprofit/add?&symbol=${this.symbol}&productCode=${this.productCode}`);
+                        this.props.history.push(`/bizFinancial/yesterdayprofit/add?&v=1&symbol=${this.symbol}&productCode=${this.productCode}`);
                     }
                 }, {
                     code: 'addedit',
@@ -124,19 +124,8 @@ class InvestFlow extends React.Component {
                             this.props.history.push(`/bizFinancial/todaydayprofit/addedit?v=1&id=${items[0].id}&symbol=${this.symbol}&productCode=${items[0].productCode}`);
                         }
                     }
-                }, {
-                    code: 'detail',
-                    name: '详情',
-                    handler: (keys, items) => {
-                        if (!keys.length) {
-                            showWarnMsg('请选择记录');
-                        } else if (keys.length > 1) {
-                            showWarnMsg('请选择一条记录');
-                        } else {
-                            this.props.history.push(`/bizFinancial/yesterdayprofit/detail?&v=1&id=${items[0].id}&symbol=${this.symbol}`);
-                        }
-                    }
-                }, {
+                },
+                {
                     code: 'goBack',
                     name: '返回',
                     check: false,

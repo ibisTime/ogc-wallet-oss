@@ -9,6 +9,12 @@ import {
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
+let ele = document.createElement('span');
+let divEle = document.createElement('div');
+let dateData = {};
+function getElementFn(el) {
+    return document.getElementById(el).children[0].children[0];
+}
 @Form.create()
 class ProductsDetail extends DetailUtil {
     constructor(props) {
@@ -50,9 +56,49 @@ class ProductsDetail extends DetailUtil {
                 field: 'productCode',
                 hidden: true
             }, {
+                title: '名称（中文简体）',
+                field: 'nameZhCn',
+                required: true,
+                readonly: !!this.code
+            }, {
+                title: '币种',
+                field: 'symbol',
+                type: 'select',
+                required: true,
+                readonly: !!this.code
+            }, {
+                title: '已售金额',
+                field: 'saleAmount',
+                amount: true,
+                required: true,
+                readonly: !!this.code,
+                formatter: function (v, data) {
+                    return moneyFormat(v.toString(), '', data.symbol);
+                }
+            }, {
                 title: '收益',
                 field: 'totalAmount',
-                required: true
+                required: true,
+                // render: (v, data) => {
+                //     return moneyParse(v.toString(), '', this.symbol);
+                // },
+                'Z+': true,
+                render: (v, data) => {
+                    console.log(data);
+                    let allValue = document.getElementById('totalAmount').value.trim();
+                    let parElement = 1;
+                    if(allValue) {
+                        ele.style.marginLeft = '10px';
+                        ele.innerText = '每份：' + (+allValue / +v).toFixed(8);
+                        parElement.appendChild(ele);
+                    }
+                    if(dateData.incomeDatetime) {
+                        setTimeout(() => {
+                            getElementFn('incomeDatetime').value = dateData.incomeDatetime;
+                            getElementFn('arriveDatetime').value = dateData.arriveDatetime;
+                        }, 0);
+                    }
+                }
             }, {
                 title: '更新人',
                 field: 'updater',
@@ -61,8 +107,10 @@ class ProductsDetail extends DetailUtil {
         return this.buildDetail({
             fields,
             // key: 'ckey',
+            detailCode: 625511,
+            editCode: 630042,
             code: this.code,
-            view: this.view,
+            // view: this.view,
             buttons: this.buttons
         });
     }

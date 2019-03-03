@@ -25,8 +25,8 @@ class ProductsDetail extends DetailUtil {
                 field: 'id',
                 hidden: true
             }, {
-            title: '产品编号',
-            field: 'productCode'
+                title: '产品名称',
+                field: 'productName'
         }, {
             title: '收益',
             field: 'totalAmount',

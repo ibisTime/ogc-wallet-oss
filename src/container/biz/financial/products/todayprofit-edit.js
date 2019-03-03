@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form} from 'antd';
+import {Form, message} from 'antd';
 import {
     getQueryString,
     moneyFormat,
@@ -15,7 +15,7 @@ class ProductsDetail extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('id', this.props.location.search);
-        // this.view = !!getQueryString('v', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search);
     }
 
     render() {
@@ -32,7 +32,7 @@ class ProductsDetail extends DetailUtil {
                 field: 'totalAmount',
                 required: true,
                 formatter: function (v, data) {
-                    return moneyParse(v.toString(), '', data.totalAmount);
+                    return moneyFormat(v.toString(), '', this.symbol);
                 }
             }];
         return this.buildDetail({
@@ -49,6 +49,7 @@ class ProductsDetail extends DetailUtil {
             buttons: [ {
                 title: '保存',
                 handler: (params) => {
+                    if(params.totalAmount) {
                     params.totalAmount = moneyParse(params.totalAmount, '', this.symbol);
                     this.doFetching();
                     fetch(625551, params).then(() => {
@@ -57,6 +58,9 @@ class ProductsDetail extends DetailUtil {
                             this.props.history.go(-1);
                         }, 1000);
                     }).catch(this.cancelFetching);
+                    }else {
+                        message.warning('请填写收益');
+                    }
                 }
             }, {
                 code: 'back',

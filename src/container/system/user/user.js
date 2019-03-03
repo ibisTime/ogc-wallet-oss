@@ -27,13 +27,12 @@ import {activateSysUser} from 'api/user';
 class User extends React.Component {
     render() {
         const fields = [{
-            title: '关键字',
-            field: 'keyword',
-            noVisible: true
-        }, {
             title: '用户名',
             search: true,
-            field: 'loginName'
+            field: 'keyword',
+            render: (v, data) => {
+                return data.loginName ? data.loginName : '';
+            }
         }, {
             title: '真实姓名',
             field: 'realName',
