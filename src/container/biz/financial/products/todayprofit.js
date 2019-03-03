@@ -119,7 +119,7 @@ class InvestFlow extends React.Component {
                         } else if (keys.length > 1) {
                             showWarnMsg('请选择一条记录');
                         } else if (times !== todaytimes) {
-                            showWarnMsg('当前记录不可修改');
+                            showWarnMsg('只可以修改今日记录');
                         } else {
                             this.props.history.push(`/bizFinancial/todaydayprofit/addedit?v=1&id=${items[0].id}&symbol=${this.symbol}&productCode=${items[0].productCode}`);
                         }

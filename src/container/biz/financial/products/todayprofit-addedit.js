@@ -78,27 +78,10 @@ class ProductsDetail extends DetailUtil {
             }, {
                 title: '收益',
                 field: 'totalAmount',
-                required: true,
+                required: true
                 // render: (v, data) => {
                 //     return moneyParse(v.toString(), '', this.symbol);
                 // },
-                'Z+': true,
-                render: (v, data) => {
-                    console.log(data);
-                    let allValue = document.getElementById('totalAmount').value.trim();
-                    let parElement = 1;
-                    if(allValue) {
-                        ele.style.marginLeft = '10px';
-                        ele.innerText = '每份：' + (+allValue / +v).toFixed(8);
-                        parElement.appendChild(ele);
-                    }
-                    if(dateData.incomeDatetime) {
-                        setTimeout(() => {
-                            getElementFn('incomeDatetime').value = dateData.incomeDatetime;
-                            getElementFn('arriveDatetime').value = dateData.arriveDatetime;
-                        }, 0);
-                    }
-                }
             }, {
                 title: '更新人',
                 field: 'updater',
