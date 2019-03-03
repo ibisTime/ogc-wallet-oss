@@ -30,15 +30,14 @@ class ProductsDetail extends DetailUtil {
         }, {
             title: '收益',
             field: 'totalAmount',
-                formatter: function (v, data) {
-                    return moneyFormat(v.toString(), '', data.symbol);
-                }
+            formatter: (v) => {
+                return moneyFormat(v.toString(), '', this.symbol);
+            }
         }, {
             title: '类型',
             field: 'type',
             type: 'select',
-            // key: 'product_type',
-                key: 'product_day_benefit_type',
+            key: 'product_day_benefit_type',
             search: true
         }, {
             title: '收益时间',
