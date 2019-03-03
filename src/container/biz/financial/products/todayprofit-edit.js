@@ -9,13 +9,21 @@ import {
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
-
+let ele = document.createElement('span');
 @Form.create()
 class ProductsDetail extends DetailUtil {
     constructor(props) {
         super(props);
-        this.code = getQueryString('id', this.props.location.search);
+        this.code = getQueryString('productCode', this.props.location.search);
+        this.id = getQueryString('id', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
+        this.saleNum = '';
+        this.totalAmount = '';
+    }
+    componentWillMount() {
+      fetch(625555, {id: this.id}).then(data => {
+        this.saleNum = data.product.saleNum;
+      });
     }
 
     render() {
@@ -28,22 +36,56 @@ class ProductsDetail extends DetailUtil {
                 field: 'productCode',
                 readonly: true
             }, {
+            title: '名称（中文简体）',
+            field: 'nameZhCn',
+            readonly: true,
+            formatter(v, data) {
+                return data.product.nameZhCn;
+            }
+          }, {
+            title: '币种',
+            field: 'symbol',
+            readonly: true,
+            formatter(v, data) {
+              return data.product.symbol;
+            }
+          }, {
+            title: '已售金额',
+            field: 'saleAmount',
+            amount: true,
+            readonly: true,
+            formatter: (v, data) => {
+              return moneyFormat(data.product.saleAmount.toString(), '', this.symbol);
+            }
+          }, {
                 title: '收益',
                 field: 'totalAmount',
                 required: true,
-                formatter: function (v, data) {
+                formatter: (v) => {
                     return moneyFormat(v.toString(), '', this.symbol);
+                },
+                onChange: (v) => {
+                  setTimeout(() => {
+                    let totalAmountDiv = document.getElementById('totalAmount').parentNode.parentNode;
+                    if(totalAmountDiv && ele) {
+                      ele.style.marginLeft = '10px';
+                      if(v) {
+                        ele.innerHTML = '每份收益：' + (v / this.saleNum);
+                        totalAmountDiv.appendChild(ele);
+                      }
+                    }
+                  }, 100);
                 }
             }];
         return this.buildDetail({
             fields,
             key: 'id',
-            code: this.code,
+            code: this.id,
             view: this.view,
             detailCode: '625555',
             editCode: 625551,
             beforeSubmit: (params) => {
-                params.id = this.code();
+                params.id = this.id;
                 return params;
             },
             buttons: [ {

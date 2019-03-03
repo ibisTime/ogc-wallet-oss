@@ -11,10 +11,7 @@ import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 let ele = document.createElement('span');
 let divEle = document.createElement('div');
-let dateData = {};
-function getElementFn(el) {
-    return document.getElementById(el).children[0].children[0];
-}
+
 @Form.create()
 class ProductsDetail extends DetailUtil {
     constructor(props) {
@@ -22,7 +19,8 @@ class ProductsDetail extends DetailUtil {
         this.code = getQueryString('productCode', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-      this.buttons = [{
+        this.saleNum = 0;
+        this.buttons = [{
         title: '保存',
         handler: (params) => {
             if(params.totalAmount) {
@@ -50,6 +48,11 @@ class ProductsDetail extends DetailUtil {
         }
       }];
     }
+    componentWillMount() {
+      fetch(625511, {code: this.code}).then(data => {
+          this.saleNum = data.saleNum;
+      });
+    }
     render() {
         const fields = [
             {
@@ -72,32 +75,23 @@ class ProductsDetail extends DetailUtil {
                 amount: true,
                 required: true,
                 readonly: !!this.code,
-                formatter: function (v, data) {
-                    return moneyFormat(v.toString(), '', data.symbol);
+                formatter: (v) => {
+                    return moneyFormat(v.toString(), '', this.symbol);
                 }
             }, {
                 title: '收益',
                 field: 'totalAmount',
                 required: true,
-                // render: (v, data) => {
-                //     return moneyParse(v.toString(), '', this.symbol);
-                // },
                 'Z+': true,
-                render: (v, data) => {
-                    console.log(data);
-                    let allValue = document.getElementById('totalAmount').value.trim();
-                    let parElement = 1;
-                    if(allValue) {
-                        ele.style.marginLeft = '10px';
-                        ele.innerText = '每份：' + (+allValue / +v).toFixed(8);
-                        parElement.appendChild(ele);
+                onChange: (v) => {
+                  setTimeout(() => {
+                    let totalAmountDiv = document.getElementById('totalAmount').parentNode.parentNode;
+                    if(v && totalAmountDiv && ele) {
+                      ele.style.marginLeft = '10px';
+                      ele.innerHTML = '每份收益：' + (v / this.saleNum);
+                      totalAmountDiv.appendChild(ele);
                     }
-                    if(dateData.incomeDatetime) {
-                        setTimeout(() => {
-                            getElementFn('incomeDatetime').value = dateData.incomeDatetime;
-                            getElementFn('arriveDatetime').value = dateData.arriveDatetime;
-                        }, 0);
-                    }
+                  });
                 }
             }, {
                 title: '更新人',
@@ -106,11 +100,9 @@ class ProductsDetail extends DetailUtil {
             }];
         return this.buildDetail({
             fields,
-            // key: 'ckey',
-            detailCode: 625511,
             editCode: 630042,
+            detailCode: 625511,
             code: this.code,
-            // view: this.view,
             buttons: this.buttons
         });
     }
