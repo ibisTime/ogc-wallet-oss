@@ -57,7 +57,7 @@ class ProductsDetail extends DetailUtil {
               return moneyFormat(data.product.saleAmount.toString(), '', this.symbol);
             }
           }, {
-                title: '收益',
+                title: '总收益',
                 field: 'totalAmount',
                 required: true,
                 formatter: (v) => {
@@ -69,7 +69,7 @@ class ProductsDetail extends DetailUtil {
                     if(totalAmountDiv && ele) {
                       ele.style.marginLeft = '10px';
                       if(v && this.saleNum) {
-                        ele.innerHTML = '每份总收益：' + (v / this.saleNum);
+                        ele.innerHTML = '每份收益：' + (v / this.saleNum);
                         totalAmountDiv.appendChild(ele);
                       }
                     }

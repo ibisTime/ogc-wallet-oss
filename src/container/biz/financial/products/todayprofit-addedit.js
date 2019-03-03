@@ -79,7 +79,7 @@ class ProductsDetail extends DetailUtil {
                     return moneyFormat(v.toString(), '', this.symbol);
                 }
             }, {
-                title: '收益',
+                title: '总收益',
                 field: 'totalAmount',
                 required: true,
                 onChange: (v) => {
@@ -87,7 +87,7 @@ class ProductsDetail extends DetailUtil {
                     let totalAmountDiv = document.getElementById('totalAmount').parentNode.parentNode;
                     if(v && totalAmountDiv && ele) {
                       ele.style.marginLeft = '10px';
-                      ele.innerHTML = '每份总收益：' + (v / this.saleNum);
+                      ele.innerHTML = '每份收益：' + (v / this.saleNum);
                       totalAmountDiv.appendChild(ele);
                     }
                   });
