@@ -29,6 +29,7 @@ class QuantitativeAddEdit extends DetailUtil {
       fields,
       key: 'id',
       code: this.code,
+      view: this.view,
       detailCode: 630046,
       editCode: 630042,
       beforeSubmit: (data) => {
