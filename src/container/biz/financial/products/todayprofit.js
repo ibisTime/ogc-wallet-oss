@@ -48,10 +48,10 @@ class InvestFlow extends React.Component {
 
     render() {
         const fields = [{
-            title: '产品编号',
+            title: '产品名称',
             field: 'productCode'
         }, {
-            title: '收益',
+            title: '总收益',
             field: 'totalAmount',
             render: (v, data) => {
                 console.log(data.symbol);
