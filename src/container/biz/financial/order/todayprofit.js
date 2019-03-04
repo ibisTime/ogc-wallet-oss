@@ -43,13 +43,13 @@ class InvestFlow extends React.Component {
 
     render() {
         const fields = [{
-            title: '产品编号',
-            field: 'productCode'
+            title: '产品名称',
+            field: 'productName'
         }, {
             title: '收益',
             field: 'totalAmount',
-            render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.totalAmount);
+            render: (v, data) => {
+                return moneyFormat(v.toString(), '', this.symbol);
             }
         }, {
             title: '类型',
@@ -76,12 +76,6 @@ class InvestFlow extends React.Component {
             title: '创建时间',
             type: 'datetime',
             field: 'createDatetime'
-        }, {
-            title: '当前时间',
-            render: function (v, data) {
-                let todaytime = moment().format('YYYY-MM-DD HH:mm:ss');
-               return moment().format('YYYY-MM-DD HH:mm:ss');
-            }
         }];
         return this.props.buildList({
             fields,

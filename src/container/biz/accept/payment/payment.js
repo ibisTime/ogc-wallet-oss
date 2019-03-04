@@ -51,19 +51,6 @@ class Payment extends React.Component {
             field: 'bankName',
             title: '名称'
         },
-            // field: 'status',
-            // hidden: true
-            // type: 'select',
-            // data: [{
-            //     'key': '0',
-            //     'value': '可用'
-            // }, {
-            //     'key': '1',
-            //     'value': '不可用'
-            // }],
-            // keyName: 'key',
-            // valueName: 'value',
-            // search: true
          {
             field: 'createDatetime',
             title: '创建时间',

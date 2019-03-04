@@ -50,7 +50,7 @@ class ProductsDetail extends DetailUtil {
     }
     componentWillMount() {
       fetch(625511, {code: this.code}).then(data => {
-          this.saleNum = data.saleNum;
+          this.saleNum = data.saleAmount / data.minAmount;
       });
     }
     render() {

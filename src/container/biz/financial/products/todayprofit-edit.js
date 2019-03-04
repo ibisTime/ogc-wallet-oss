@@ -21,7 +21,8 @@ class ProductsDetail extends DetailUtil {
     }
     componentWillMount() {
       fetch(625555, {id: this.id}).then(data => {
-        this.saleNum = data.product.saleNum;
+          this.saleNum = data.product.saleAmount / data.product.minAmount;
+        // this.saleNum = data.product.saleNum;
       });
     }
 
@@ -30,10 +31,6 @@ class ProductsDetail extends DetailUtil {
             {
                 field: 'id',
                 hidden: true
-            }, {
-                title: '产品编号',
-                field: 'productCode',
-                readonly: true
             }, {
             title: '名称（中文简体）',
             field: 'nameZhCn',
