@@ -154,6 +154,19 @@ class TBAddress extends React.Component {
                             });
                         }
                     });
+                },
+                flowQuery: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].symbol === 'BTC') {
+                        // 测试：https://testnet.blockexplorer.com/address/
+                        // 正式：https://blockexplorer.com/address/
+                        window.open('https://testnet.blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+                    } else if (selectedRows[0].symbol === 'USDT') {
+                        window.open('https://omniexplorer.info/address/' + selectedRows[0].address, '_bank');
+                    }
                 }
             }
         });
