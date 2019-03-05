@@ -97,10 +97,6 @@ class InvestFlow extends React.Component {
             },
             buttons: [
                 {
-                    // handler: (keys, items) => {
-                    //         // this.props.history.push(`/bizFinancial/yesterdayprofit/add?&productCode=${items[0].productCode}&symbol=${this.symbol}`);
-                    //      // this.props.history.push(`/bizFinancial/yesterdayprofit/add?&productCode=${this.state.productCode}`);
-                    // }
                     code: 'edit',
                     name: '新增',
                     handler: (keys, items) => {

@@ -80,7 +80,7 @@ class TBAddress extends React.Component {
             field: 'balanceString',
             title: '余额',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.totalAmount);
+                return moneyFormat(v.toString(), '', data.symbol);
             }
             // title: '余额',
             // field: 'balanceString',

@@ -77,8 +77,8 @@ class GJAddress extends React.Component {
         }, {
             field: 'balanceString',
             title: '余额',
-            render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.totalAmount);
+            render: (v, data) => {
+                return moneyFormat(v.toString(), '', data.symbol);
             }
         },
             {
