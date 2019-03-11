@@ -186,13 +186,28 @@ import {BTCFinanceTBAddress} from './redux/BTC-finance/TBAddress/TBAddress';
 import {BTCFinanceTBunderline} from './redux/BTC-finance/TBunderline/TBunderline';
 import {BTCFinanceTBunderlineAddEdit} from './redux/BTC-finance/TBunderline/TBunderline-addedit';
 import {BTCFinanceTBunderlineMultiCheck} from './redux/BTC-finance/TBunderline/TBunderline-multiCheck';
-
+import {publicNotice} from './redux/public/notice';
+import {publicNoticeAddEdit} from './redux/public/notice-addedit';
+// OTC标签设置
+import {publicOtctag} from './redux/public/otcTag';
+// OTC 国家设置
+import {publicOtcCountry} from './redux/public/otccountry';
+// OTC 支付方式设置
+import {publicOtcPayment} from './redux/public/otcpayment';
+import {publicLawRate} from './redux/public/lawrate';
+import {publicChannelBank} from './redux/public/channelbank';
+// 业务管理-- OTC管理
+import {OtcManageAdvert} from './redux/otcmanage/advert';
+import {OtcSurvivaLorDer} from './redux/otcmanage/survivalorder';
+import {OtcManageHistoricalorder} from './redux/otcmanage/historicalorder';
+import {OtcManageComment} from './redux/otcmanage/comment';
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
 import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
 import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery';
 import {BTCFinanceGJAddressQueryAddEdit} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery-addedit';
-
+import {publicBanner} from './redux/public/banner';
+import {publicBannerAddEdit} from './redux/public/banner-addedit';
 // 补给地址
 import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
 
@@ -216,6 +231,8 @@ export default combineReducers({
     publicSellETH,
     publicTransactionRemind,
     publicCommunity,
+    publicNotice,
+    publicNoticeAddEdit,
     publicWarmReminding,
     publicLegalDeclaration,
     publicRateExplain,
@@ -241,6 +258,10 @@ export default combineReducers({
     // 渠道商管理
     userChannelDealer,
     userChannelDealerLowerLevelQuery,
+    // 广告位管理
+    // public
+    publicBanner,
+    publicBannerAddEdit,
     // 待结算佣金名单
     userChannelDealerCommissions,
     userChannelDealerCommissionsChecklist,
@@ -331,5 +352,16 @@ export default combineReducers({
     BTCFinanceGJAddressAddEdit,
     BTCFinanceGJAddressQuery,
     BTCFinanceGJAddressQueryAddEdit,
-    BTCFinanceSupplyAddress
+    BTCFinanceSupplyAddress,
+    // OTC系统设置
+    publicOtctag,
+    publicOtcPayment,
+    publicOtcCountry,
+    publicLawRate,
+    publicChannelBank,
+    // 业务管理--OTC管理
+    OtcManageAdvert,
+    OtcSurvivaLorDer,
+    OtcManageHistoricalorder,
+    OtcManageComment
 });

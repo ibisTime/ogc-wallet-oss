@@ -101,6 +101,23 @@ const ROUTES = [
         path: '/public/register/addedit',
         component: asyncComponent(() => import('container/public/register-addeidt/register-addeidt'))
     },
+    // 消息公告
+    {
+        path: '/public/notice',
+        component: asyncComponent(() => import('container/public/notice/notice'))
+    },
+    {
+        path: '/public/notice/addedit',
+        component: asyncComponent(() => import('container/public/notice-addedit/notice-addedit'))
+    },
+    {
+        path: '/public/banner',
+        component: asyncComponent(() => import('container/public/banner/banner'))
+    },
+    {
+        path: '/public/banner/addedit',
+        component: asyncComponent(() => import('container/public/banner-addedit/banner-addedit'))
+    },
     {
         path: '/public/buyADS',
         component: asyncComponent(() => import('container/public/buyADS/buyADS'))
@@ -238,8 +255,6 @@ const ROUTES = [
         path: '/user/customerBlackList/addedit',
         component: asyncComponent(() => import('container/user/customer/customer-blackListAddedit'))
     },
-
-    // 渠道商管理
     // 渠道商管理
     {
         path: '/user/channelDealer',
@@ -284,7 +299,56 @@ const ROUTES = [
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory-commissions'))
     },
 
-    // OTC交易管理
+    // 系统管理--系统设置--OTC标签设置
+    {
+        path: '/system/otcTag',
+        component: asyncComponent(() => import('container/public/otcTag/otcTag'))
+    },
+    // 系统管理--系统设置--OTC标签设置--添加
+    {
+        path: '/system/otcTag/addedit',
+        component: asyncComponent(() => import('container/public/otcTag/otcTag-addedit'))
+    },
+    // 系统管理--系统设置--OTC标签设置--详情
+    {
+        path: '/system/otcTag/detail',
+        component: asyncComponent(() => import('container/public/otcTag/otcTag-addedit'))
+    },
+    // 系统管理--系统设置--OTC支付方式设置
+    {
+        path: '/system/otcpayment',
+        component: asyncComponent(() => import('container/public/otcpayment/otcpayment'))
+    },
+    // 系统管理--系统设置--OTC支付方式设置--详情
+    {
+        path: '/system/otcpayment/addedit',
+        component: asyncComponent(() => import('container/public/otcpayment/otcpayment-addedit'))
+    },
+    // 系统管理--系统设置--OTC国家设置
+    {
+        path: '/system/otccountry',
+        component: asyncComponent(() => import('container/public/otccountry/otccountry'))
+    },
+    // 系统管理--系统设置--OTC国家设置--详情
+    {
+        path: '/system/otccountry/addedit',
+        component: asyncComponent(() => import('container/public/otccountry/otccountry-addedit'))
+    },
+    // 系统管理--系统设置--法币汇率设置
+    {
+        path: '/system/lawrate',
+        component: asyncComponent(() => import('container/public/lawrate/lawrate'))
+    },
+    // 系统管理--系统设置--渠道银行设置
+    {
+        path: '/system/channelbank',
+        component: asyncComponent(() => import('container/public/channelbank/channelbank'))
+    },
+    // 系统管理--系统设置--渠道银行设置--添加
+    {
+        path: '/system/channelbank/addedit',
+        component: asyncComponent(() => import('container/public/channelbank/channelbank-addedit'))
+    },
     // 购买交易
     {
         path: '/trade/buyTrade',
@@ -303,7 +367,31 @@ const ROUTES = [
         path: '/trade/saleTrade/addedit',
         component: asyncComponent(() => import('container/trade/saleTrade/saleTrade-addedit'))
     },
-    // OTC订单管理
+    // OTC管理-- 广告
+    {
+        path: '/otcmanage/advert',
+        component: asyncComponent(() => import('container/biz/otcmanage/advert/advert'))
+    },
+    // OTC管理-- 新增广告
+    {
+        path: '/otcmanage/advert/addedit',
+        component: asyncComponent(() => import('container/biz/otcmanage/advert/advert-addedit'))
+    },
+    // 存活订单查询
+    {
+        path: '/otcmanage/survivalorder',
+        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder'))
+    },
+    // 历史订单查询
+    {
+        path: '/otcmanage/historicalorder',
+        component: asyncComponent(() => import('container/biz/otcmanage/historicalorder/historicalorder'))
+    },
+    // 评论查询
+    {
+        path: '/otcmanage/comment',
+        component: asyncComponent(() => import('container/biz/otcmanage/comment/comment'))
+    },
     // 进行中订单
     {
         path: '/trade/underWayOrder',
