@@ -30,35 +30,68 @@ import {Modal} from 'antd';
 class Advert extends React.Component {
     render() {
         const fields = [{
-            field: 'remark',
-            title: '发布人'
+            field: 'realName',
+            title: '发布人',
+            search: true,
+            render: (v, data) => {
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
+            }
         }, {
-            field: 'cvalue',
-            title: '交易对'
+            field: 'tradeCoin',
+            title: '交易对',
+            render: (v, data) => {
+                return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
+            }
         }, {
-            field: 'cvalue',
+            field: 'payType',
             title: '付款方式'
         }, {
-            field: 'cvalue',
-            title: '已有总量'
+            field: 'totalCountString',
+            title: '已有总量',
+            render: (v, data) => {
+                return moneyFormat(v, '', data.totalCountString);
+            }
         }, {
-            field: 'cvalue',
-            title: '溢价率'
+            field: 'premiumRate',
+            title: '溢价率',
+            render: (v, data) => {
+                return v * 100 + '%';
+            }
         }, {
-            field: 'cvalue',
-            title: '保护价'
+            title: '保护价',
+            field: 'protectPrice'
         }, {
-            field: 'cvalue',
+            field: 'maxTrade',
             title: '单笔最大量'
         }, {
-            field: 'cvalue',
+            field: 'minTrade',
             title: '单笔最小量'
         }, {
-            field: 'cvalue',
-            title: '付款期限'
+            field: 'payLimit',
+            title: '付款期限',
+            render: (v, data) => {
+                return data.payLimit + '分钟';
+            }
         }, {
-            field: 'cvalue',
-            title: '状态'
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            data: [ {
+                key: '0',
+                value: '上架'
+            }, {
+                key: '1',
+                value: '隐藏'
+            }, {
+                key: '2',
+                value: '已下架'
+            }, {
+                key: '3',
+                value: '删除'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
             field: 'createDatetime',
             title: '创建时间',
@@ -68,13 +101,16 @@ class Advert extends React.Component {
             fields,
             // rowKey: 'id',
             pageCode: '625225',
+            searchParams: {
+                statusList: ['0', '1', '2', '3']
+            },
             btnEvent: {
                 up: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '0') {
+                    } else if (selectedRows[0].status !== '1' && selectedRows[0].status !== '0') {
                         showWarnMsg('不是可以上架的状态');
                     } else {
                         Modal.confirm({
@@ -95,6 +131,15 @@ class Advert extends React.Component {
                                 });
                             }
                         });
+                    }
+                },
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/otcmanage/advert/addedit?&code=${selectedRowKeys[0]}&adsCode=${selectedRows[0].adsCode}`);
                     }
                 },
                 down: (keys, items) => {

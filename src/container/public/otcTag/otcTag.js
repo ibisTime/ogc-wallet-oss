@@ -32,11 +32,11 @@ import fetch from 'common/js/fetch';
 class ProductsApprove extends React.Component {
     render() {
         const fields = [{
-            title: '名称（中文简体）',
+            title: '中文名称',
             field: 'name',
             required: true
         }, {
-            title: '名称（英文）',
+            title: '英文名称',
             field: 'nameEn',
             required: true
         }, {
@@ -54,7 +54,7 @@ class ProductsApprove extends React.Component {
             valueName: 'value',
             search: true
     }, {
-            title: '排序',
+            title: '展示次序',
             field: 'orderNo',
             required: true
         }];
@@ -85,13 +85,13 @@ class ProductsApprove extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
+                    } else if (selectedRows[0].status !== '0') {
                         showWarnMsg('不是可以上架的状态');
                     } else {
                         Modal.confirm({
                             okText: '确认',
                             cancelText: '取消',
-                            content: `标签上架后不可下架,确定上架该产品？`,
+                            content: `确定上架该标签？`,
                             onOk: () => {
                                 this.props.doFetching();
                                 return fetch(625322, {
@@ -113,7 +113,7 @@ class ProductsApprove extends React.Component {
                     } else if (keys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else if (items[0].status !== '1') {
-                        showWarnMsg('该标签不可下架');
+                        showWarnMsg('该标签已下架');
                     } else {
                         Modal.confirm({
                             okText: '确认',

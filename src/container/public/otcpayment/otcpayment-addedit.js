@@ -12,10 +12,12 @@ class OtccountryAddedit extends DetailUtil {
     }
     render() {
         const fields = [{
-            title: '编号',
-            field: 'code',
-            search: true,
-            required: true
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'payment_method',
+            required: true,
+            search: true
         }, {
             title: '中文名称',
             field: 'name',
@@ -29,26 +31,6 @@ class OtccountryAddedit extends DetailUtil {
             integer: true,
             required: true,
             field: 'orderNo',
-            search: true
-        }, {
-            title: '类型',
-            field: 'type',
-            type: 'select',
-            key: 'payment_method',
-            search: true
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            data: [{
-                key: '0',
-                value: '禁用'
-            }, {
-                key: '1',
-                value: '启用'
-            }],
-            keyName: 'key',
-            valueName: 'value',
             search: true
         }];
         return this.buildDetail({

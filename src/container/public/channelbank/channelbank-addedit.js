@@ -12,6 +12,16 @@ class OtccountryAddedit extends DetailUtil {
     }
     render() {
         const fields = [{
+            title: '状态',
+            field: 'status',
+            hidden: true
+        }, {
+            title: '类型',
+            field: 'channelType',
+            type: 'select',
+            key: 'bank_card_type',
+            search: true
+        }, {
             title: '银行代号',
             required: true,
             field: 'bankCode'
@@ -44,12 +54,6 @@ class OtccountryAddedit extends DetailUtil {
             required: true,
             integer: true
         }, {
-            title: '类型',
-            field: 'channelType',
-            type: 'select',
-            key: 'bank_card_type',
-            search: true
-        }, {
             title: '状态',
             field: 'status',
             type: 'select',
@@ -63,7 +67,8 @@ class OtccountryAddedit extends DetailUtil {
             }],
             keyName: 'key',
             valueName: 'value',
-            search: true
+            search: true,
+            hidden: !this.view
         }];
         return this.buildDetail({
             fields,

@@ -32,23 +32,24 @@ import fetch from 'common/js/fetch';
 class Otcpayment extends React.Component {
     render() {
         const fields = [{
-            title: '编号',
-            field: 'code'
-        }, {
-            title: '国际编号',
+            title: '国际代码',
             field: 'interCode'
+        }, {
+            title: '国旗图片',
+            field: 'pic',
+            type: 'img'
         }, {
             title: '中文名称',
             field: 'chineseName'
         }, {
-            title: '英文名称',
+            title: '国际名称',
             field: 'interName'
         }, {
-            title: '国际简称',
+            title: '国际简码',
             field: 'interSimpleCode'
         }, {
-            title: '排序',
-            field: 'orderNo'
+            title: '所属洲际',
+            field: 'continent'
         }, {
             title: '状态',
             field: 'status',
@@ -61,8 +62,10 @@ class Otcpayment extends React.Component {
                 value: '启用'
             }],
             keyName: 'key',
-            valueName: 'value',
-            search: true
+            valueName: 'value'
+        }, {
+            title: '展示次序',
+            field: 'orderNo'
         }];
         return this.props.buildList({
             fields,

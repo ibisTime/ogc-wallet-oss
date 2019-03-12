@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'antd';
-import { getQueryString } from 'common/js/util';
+import { getQueryString, moneyFormat } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
 @Form.create()
@@ -13,33 +13,77 @@ class MarketAdjustmentAddedit extends DetailUtil {
 
     render() {
         const fields = [{
-            title: '中文名',
-            field: 'remark1',
-            readonly: true,
+            field: 'realName',
+            title: '发布人',
+            search: true,
             formatter: (v, data) => {
-                return data.remark;
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             }
         }, {
-            title: '说明',
-            field: 'remark',
-            hidden: true
+            field: 'tradeCoin',
+            title: '交易对',
+            formatter: (v, data) => {
+                return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
+            }
         }, {
-            title: '数值',
-            field: 'cvalue',
-            required: true,
-            number: true
+            field: 'payType',
+            title: '付款方式'
+        }, {
+            field: 'totalCountString',
+            title: '已有总量',
+            formatter: (v, data) => {
+                return moneyFormat(v, '', data.totalCountString);
+            }
+        }, {
+            field: 'premiumRate',
+            title: '溢价率',
+            formatter: (v, data) => {
+                return v * 100 + '%';
+            }
+        }, {
+            field: 'maxTrade',
+            title: '单笔最大量'
+        }, {
+            field: 'minTrade',
+            title: '单笔最小量'
+        }, {
+            field: 'payLimit',
+            title: '付款期限',
+            formatter: (v, data) => {
+                return data.payLimit + '分钟';
+            }
+        }, {
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            data: [ {
+                key: '0',
+                value: '上架'
+            }, {
+                key: '1',
+                value: '隐藏'
+            }, {
+                key: '2',
+                value: '已下架'
+            }, {
+                key: '3',
+                value: '删除'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
+        }, {
+            field: 'createDatetime',
+            title: '创建时间',
+            type: 'datetime'
         }];
         return this.buildDetail({
             fields,
-            key: 'id',
+            key: 'adsCode',
             code: this.code,
             view: this.view,
-            editCode: '630042',
-            detailCode: '630046',
-            beforeSubmit: function(data) {
-                data.type = 'coin_price_x';
-                return data;
-            }
+            editCode: '625221',
+            detailCode: '625226'
         });
     }
 }

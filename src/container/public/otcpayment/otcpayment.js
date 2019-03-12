@@ -31,26 +31,17 @@ import fetch from 'common/js/fetch';
 )
 class Otcpayment extends React.Component {
     render() {
-        const fields = [{
-            title: '编号',
-            field: 'code',
-            search: true
+        const fields = [ {
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'payment_method'
         }, {
             title: '中文名称',
             field: 'name'
         }, {
             title: '英文名称',
             field: 'nameEn'
-        }, {
-            title: '次序',
-            field: 'orderNo',
-            search: true
-        }, {
-            title: '类型',
-            field: 'type',
-            type: 'select',
-            key: 'payment_method',
-            search: true
         }, {
             title: '状态',
             field: 'status',
@@ -65,6 +56,9 @@ class Otcpayment extends React.Component {
             keyName: 'key',
             valueName: 'value',
             search: true
+        }, {
+            title: '次序',
+            field: 'orderNo'
         }];
         return this.props.buildList({
             fields,

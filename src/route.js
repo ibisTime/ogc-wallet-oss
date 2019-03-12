@@ -387,6 +387,11 @@ const ROUTES = [
         path: '/otcmanage/historicalorder',
         component: asyncComponent(() => import('container/biz/otcmanage/historicalorder/historicalorder'))
     },
+    // 历史订单查询-- 订单详情
+    {
+        path: '/otcmanage/historicalorder/orderdetail',
+        component: asyncComponent(() => import('container/biz/otcmanage/historicalorder/historicalorder-orderedit'))
+    },
     // 评论查询
     {
         path: '/otcmanage/comment',

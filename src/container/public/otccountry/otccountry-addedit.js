@@ -12,30 +12,24 @@ class OtccountryAddedit extends DetailUtil {
     }
     render() {
         const fields = [{
-            title: '编号',
-            field: 'code',
-            required: true
+            title: '国际代码',
+            field: 'interCode'
         }, {
-            title: '国际编号',
-            field: 'interCode',
-            required: true
+            title: '国旗图片',
+            field: 'pic',
+            type: 'img'
         }, {
             title: '中文名称',
-            field: 'chineseName',
-            required: true
+            field: 'chineseName'
         }, {
-            title: '英文名称',
-            field: 'interName',
-            required: true
+            title: '国际名称',
+            field: 'interName'
         }, {
-            title: '国际简称',
-            field: 'interSimpleCode',
-            required: true
+            title: '国际简码',
+            field: 'interSimpleCode'
         }, {
-            title: '排序',
-            field: 'orderNo',
-            required: true,
-            integer: true
+            title: '所属洲际',
+            field: 'continent'
         }, {
             title: '状态',
             field: 'status',
@@ -48,8 +42,10 @@ class OtccountryAddedit extends DetailUtil {
                 value: '启用'
             }],
             keyName: 'key',
-            valueName: 'value',
-            search: true
+            valueName: 'value'
+        }, {
+            title: '展示次序',
+            field: 'orderNo'
         }];
         return this.buildDetail({
             fields,

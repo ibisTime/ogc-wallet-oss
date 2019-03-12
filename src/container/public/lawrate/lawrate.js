@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/biz/quotation/exchangeRate';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat} from 'common/js/util';
+import {dateTimeFormat, getCoinList} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -27,7 +27,26 @@ class Lawrate extends React.Component {
         const fields = [{
             title: '币种',
             field: 'currency',
+            type: 'select',
+            keyName: 'key',
+            valueName: 'value',
+            data: [{
+                'key': 'HKD',
+                'value': 'HKD'
+            }, {
+                'key': 'USD',
+                'value': 'USD'
+            }],
+            render: (v, data) => {
+                return data ? data.currency : '';
+            },
             search: true
+        }, {
+            title: '参照币种',
+            field: 'referCurrency'
+        }, {
+            title: '汇率来源',
+            field: 'origin'
         }, {
             title: '汇率',
             field: 'rate'
@@ -35,9 +54,6 @@ class Lawrate extends React.Component {
             field: 'updateDatetime',
             title: '更新时间',
             type: 'datetime'
-        }, {
-            field: 'remark',
-            title: '备注'
         }];
         return this.props.buildList({
             fields,

@@ -34,76 +34,26 @@ class ArbitrationOrder extends React.Component {
             search: true
         }, {
             title: '被告',
-            field: 'beigao',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
+            field: 'sellUser',
             render: (v, data) => {
-                var html = '';
-                if (data.beigaoInfo) {
-                    html = data.beigaoInfo.nickname;
-                    if(data.beigaoInfo.mobile) {
-                        html += '(' + data.beigaoInfo.mobile + ')';
-                    } else {
-                        html += '(' + data.beigaoInfo.email + ')';
-                    }
-                }
-                if(v === data.tradeOrder.buyUser) {
-                    html += '-买家';
-                }else{
-                    html += '-卖家';
-                }
-                return <span style={{whiteSpace: 'nowrap'}}>{html}</span>;
+                return data ? data.sellUser + '-卖家' : '';
             }
         }, {
             title: '原告',
-            field: 'yuangao',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
+            field: 'buyUser',
             render: (v, data) => {
-                var html = '';
-                if (data.yuangaoInfo) {
-                    html = data.yuangaoInfo.nickname;
-                    if(data.yuangaoInfo.mobile) {
-                        html += '(' + data.yuangaoInfo.mobile + ')';
-                    } else {
-                        html += '(' + data.yuangaoInfo.email + ')';
-                    }
-                }
-                if(v === data.tradeOrder.buyUser) {
-                    html += '-买家';
-                }else{
-                    html += '-卖家';
-                }
-                return <span style={{whiteSpace: 'nowrap'}}>{html}</span>;
+                return data ? data.buyUser + '-买家' : '';
             }
         }, {
-            title: '针对订单编号',
-            field: 'tradeOrderCode',
-            search: true
-        }, {
-            field: 'coin',
-            title: '币种',
+            title: '交易对',
             type: 'select',
-            key: 'coin',
             render: (v, data) => {
-                if (data.tradeOrder) {
-                    return data.tradeOrder.tradeCoin;
-                }
-            }
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            key: 'arbitrate_status',
+                return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
+            },
             search: true
+        }, {
+            field: 'tradePrice',
+            title: '涉案金额'
         }, {
             title: '申请原因',
             field: 'reason'
@@ -111,31 +61,11 @@ class ArbitrationOrder extends React.Component {
             field: 'createDatetime',
             title: '申请时间',
             type: 'datetime'
-        }, {
-            title: '处理结果',
-            field: 'result',
-            type: 'select',
-            data: [{
-                'key': '0',
-                'value': '不通过'
-            }, {
-                'key': '1',
-                'value': '通过'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            search: true
-        }, {
-            field: 'updateDatetime',
-            title: '处理时间',
-            type: 'datetime'
-        }, {
-            title: '处理说明',
-            field: 'remark'
         }];
         return this.props.buildList({
             fields,
             pageCode: '625265',
+            // setstrutlist: [ '5'],
             btnEvent: {
                 resolve: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

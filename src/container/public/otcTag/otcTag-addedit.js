@@ -13,12 +13,16 @@ class OtccountryAddedit extends DetailUtil {
     }
     render() {
         const fields = [{
-            title: '名称（中文简体）',
+            title: '中文名称',
             field: 'name',
             required: true
         }, {
-            title: '名称（英文）',
+            title: '英文名称',
             field: 'nameEn',
+            required: true
+        }, {
+            title: '排序',
+            field: 'orderNo',
             required: true
         }, {
             title: '状态',
@@ -33,19 +37,15 @@ class OtccountryAddedit extends DetailUtil {
             }],
             keyName: 'key',
             valueName: 'value',
-            search: true
-        }, {
-            title: '排序',
-            field: 'orderNo',
-            required: true
+            hidden: !this.view
         }];
         return this.buildDetail({
             fields,
             code: this.code,
-            key: 'id',
             view: this.view,
+            key: 'id',
             detailCode: 625332,
-            addCode: 625330,
+            addCode: 625320,
             editCode: 625331
         });
     }

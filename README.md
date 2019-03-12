@@ -18,4 +18,4 @@ coinData: {
 coinList: [{
     key: 'BTC',
     value: '比特币'
-}]；测试
+}]；

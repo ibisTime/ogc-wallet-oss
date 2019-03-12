@@ -24,19 +24,29 @@ import {listWrapper} from 'common/js/build-list';
 class Comment extends React.Component {
     render() {
         const fields = [{
-            field: 'remark',
-            title: '说明'
+            field: 'content',
+            title: '内容'
         }, {
-            field: 'cvalue',
-            title: '数值'
+            field: 'fromUser',
+            title: '评论人'
+        }, {
+            field: 'toUser',
+            title: '被评论人'
+        }, {
+                title: '评论时间',
+                field: 'createDatetime',
+                type: 'date',
+                rangedate: ['commentDateStart', 'commentDateEnd'],
+                search: true
+            }, {
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'comment_status'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '630045',
-            searchParams: {
-                type: 'coin_price_x'
-            }
+            pageCode: 628275
         });
     }
 }
