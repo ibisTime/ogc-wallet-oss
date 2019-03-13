@@ -210,6 +210,11 @@ import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
 // 补给地址
 import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
+// 业务管理-- 营销管理
+import {StadySettLement} from './redux/marketsettlement/stadysettlement';
+import {NoOrder} from './redux/marketsettlement/noorder';
+import {StayOrder} from './redux/marketsettlement/stayorder';
+import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
 
 export default combineReducers({
     user,
@@ -363,5 +368,10 @@ export default combineReducers({
     OtcManageAdvert,
     OtcSurvivaLorDer,
     OtcManageHistoricalorder,
-    OtcManageComment
+    OtcManageComment,
+// 营销结算
+StadySettLement,
+    NoOrder,
+    StayOrder,
+    AlreadySettlement
 });

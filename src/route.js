@@ -825,7 +825,57 @@ const ROUTES = [
     {
         path: '/BTC-finance/GJAddressQuery/addedit',
         component: asyncComponent(() => import('container/BTC-finance/GJAddressQuery/GJAddressQuery-addedit'))
-    }
+    },
+    // 营销管理--营销结算--待审批订单
+    {
+        path: '/marketsettlement/stayorder',
+        component: asyncComponent(() => import('container/public/marketsettlement/stayorder/stayorder'))
+    },
+    // 营销管理--营销结算--待审批订单-- 详情
+    {
+        path: '/marketsettlement/stayorder/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/stayorder/stayorder-addedit'))
+    },
+    // 营销管理--营销结算--待结算订单
+    {
+        path: '/marketsettlement/stadysettlement',
+        component: asyncComponent(() => import('container/public/marketsettlement/stadysettlement/stadysettlement'))
+    },
+    // 营销管理--营销结算--待结算订单-- 详情
+    {
+        path: '/marketsettlement/stadysettlement/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/stadysettlement/stadysettlement-addedit'))
+    },
+    // 营销管理--营销结算--已结算订单
+    {
+        path: '/marketsettlement/alreadysettlement',
+        component: asyncComponent(() => import('container/public/marketsettlement/alreadysettlement/alreadysettlement'))
+    },
+    // 营销管理--营销结算--已结算订单--详情
+    {
+        path: '/marketsettlement/alreadysettlement/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/alreadysettlement/alreadysettlement-addedit'))
+    },
+    // 营销管理--营销结算--审批不通过订单
+    {
+        path: '/marketsettlement/noorder',
+        component: asyncComponent(() => import('container/public/marketsettlement/noorder/noorder'))
+    },
+    // 营销管理--营销结算--审批不通过订单详情
+    {
+        path: '/marketsettlement/noorder/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/noorder/noorder-addedit'))
+    },
+    // 营销管理--用户奖励
+    {
+        path: '/user/reward',
+        component: asyncComponent(() => import('container/user/reward/userreward'))
+    },
+// 营销管理--用户奖励明细
+{
+    path: '/user/rewarddeatil',
+        component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
+}
 ];
 
 export default ROUTES;

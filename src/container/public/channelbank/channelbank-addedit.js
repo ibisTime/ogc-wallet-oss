@@ -9,50 +9,59 @@ class OtccountryAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('id', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.state = {
+            ...this.state,
+            direct: false
+        };
     }
     render() {
         const fields = [{
-            title: '状态',
-            field: 'status',
-            hidden: true
-        }, {
             title: '类型',
             field: 'channelType',
             type: 'select',
-            key: 'bank_card_type',
-            search: true
+            onChange: (v) => {
+                this.setState({ direct: v });
+            },
+            key: 'bank_card_type'
         }, {
             title: '银行代号',
             required: true,
+            hidden: this.state.direct !== '0',
             field: 'bankCode'
         }, {
             title: '银行名称',
             field: 'bankName',
+            hidden: this.state.direct !== '0',
             required: true,
             search: true
         }, {
             title: '渠道给银行的代号',
-            field: 'channelBank'
+            field: 'channelBank',
+            hidden: this.state.direct !== '0'
         }, {
             title: '每日限额',
             field: 'dayAmount',
             integer: true,
-            required: true
+            required: true,
+            hidden: this.state.direct !== '0'
         }, {
             title: '每日笔数限制',
             field: 'maxOrder',
             integer: true,
-            required: true
+            required: true,
+            hidden: this.state.direct !== '0'
         }, {
             title: '每月限额',
             integer: true,
             field: 'monthAmount',
-            required: true
+            required: true,
+            hidden: this.state.direct !== '0'
         }, {
             title: '单笔限额',
             field: 'orderAmount',
             required: true,
-            integer: true
+            integer: true,
+            hidden: this.state.direct !== '0'
         }, {
             title: '状态',
             field: 'status',

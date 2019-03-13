@@ -65,7 +65,8 @@ class Historicalorder extends React.Component {
             type: 'tradeCoin',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
-            }
+            },
+            search: true
         }, {
             title: '交易价格',
             field: 'tradePrice'
