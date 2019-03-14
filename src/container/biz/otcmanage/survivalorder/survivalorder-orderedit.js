@@ -17,7 +17,7 @@ import {
     getUserName,
     getQueryString
 } from 'common/js/util';
-
+import fetch from 'common/js/fetch';
 @listWrapper(
     state => ({
         ...state.OtcSurvivaLorDerOrderedit,
@@ -141,7 +141,7 @@ class SurvivalOrderAddeditOrderedit extends React.Component {
                         this.props.buildList({
                             fields,
                             noSelect: true,
-                            // pageCode: 802320,
+                             pageCode: 802320,
                             searchParams: {
                                 userId: this.userId
                             },

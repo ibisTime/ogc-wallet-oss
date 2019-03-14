@@ -125,6 +125,7 @@ const ROUTES = [
         path: '/public/noticesystem',
         component: asyncComponent(() => import('container/public/noticesystem/noticesystem'))
     },
+    // 内部公告
     {
         path: '/public/noticesystem/addedit',
         component: asyncComponent(() => import('container/public/noticesystem/noticesystem-addedit'))

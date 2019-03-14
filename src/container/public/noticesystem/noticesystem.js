@@ -21,7 +21,7 @@ import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.publicNoticeAddEdit,
+        ...state.publicNotice,
         parentCode: state.menu.subMenuCode
     }),
     {

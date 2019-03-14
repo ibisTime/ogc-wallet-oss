@@ -13,7 +13,7 @@ export const DetailWrapper = (mapStateToProps = state => state, mapDispatchToPro
                         <WrapComponent {...this.props} buildDetail={this.buildDetail} handlePreview={this.handlePreview}
                                        o2mSKeys={this.state.o2mSKeys}></WrapComponent>
                         <ModalDetail
-                            title={this.state.modalOptions.title || ''}
+                            // title={this.state.modalOptions.title || ''}
                             visible={this.state.modalVisible}
                             hideModal={() => this.setState({modalVisible: false})}
                             options={this.state.modalOptions}></ModalDetail>
