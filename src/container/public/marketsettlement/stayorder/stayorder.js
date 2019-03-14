@@ -83,6 +83,9 @@ class Stayorder extends React.Component {
                     fields,
                     singleSelect: false,
                     pageCode: 802812,
+                    searchParams: {
+                        status: 0
+                    },
                    btnEvent: {
                         // 审核
                         check: (keys, items) => {

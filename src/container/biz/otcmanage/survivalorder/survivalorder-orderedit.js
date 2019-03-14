@@ -8,7 +8,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/otcmanage/historicalorder-orderedit';
+} from '@redux/otcmanage/survivalorder-orderedit';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -20,7 +20,7 @@ import {
 
 @listWrapper(
     state => ({
-        ...state.OtcManageHistoricalorderEdit,
+        ...state.OtcSurvivaLorDerOrderedit,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -28,10 +28,10 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class HistoricalorderOrderEdit extends React.Component {
+class SurvivalOrderAddeditOrderedit extends React.Component {
     constructor(props) {
         super(props);
-    this.userId = getQueryString('userId', this.props.location.search) || '';
+        this.userId = getQueryString('userId', this.props.location.search) || '';
         this.state = {
             userData: {
                 code: '',
@@ -153,4 +153,4 @@ class HistoricalorderOrderEdit extends React.Component {
     }
 }
 
-export default HistoricalorderOrderEdit;
+export default SurvivalOrderAddeditOrderedit;

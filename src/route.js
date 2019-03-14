@@ -69,14 +69,24 @@ const ROUTES = [
         path: '/public/aboutus/addedit',
         component: asyncComponent(() => import('container/public/aboutus-addedit/aboutus-addedit'))
     },
-      {
+    //  文章分类管理
+    {
         path: '/public/quantitative',
         component: asyncComponent(() => import('container/public/quantitative/quantitative'))
-      },
-  {
-    path: '/public/quantitative/addedit',
-    component: asyncComponent(() => import('container/public/quantitative/quantitative-addedit'))
-  },
+    },
+    {
+        path: '/public/quantitative/addedit',
+        component: asyncComponent(() => import('container/public/quantitative/quantitative-addedit'))
+    },
+    // 文章管理
+    {
+        path: '/public/quantitativecategory',
+        component: asyncComponent(() => import('container/public/quantitativecategory/quantitativecategory'))
+    },
+    {
+        path: '/public/quantitativecategory/addedit',
+        component: asyncComponent(() => import('container/public/quantitativecategory/quantitativecategory-addedit'))
+    },
     {
         path: '/public/contact',
         component: asyncComponent(() => import('container/public/contact/contact'))
@@ -108,7 +118,16 @@ const ROUTES = [
     },
     {
         path: '/public/notice/addedit',
-        component: asyncComponent(() => import('container/public/notice-addedit/notice-addedit'))
+        component: asyncComponent(() => import('container/public/notice/notice-addedit'))
+    },
+    // 内部公告
+    {
+        path: '/public/noticesystem',
+        component: asyncComponent(() => import('container/public/noticesystem/noticesystem'))
+    },
+    {
+        path: '/public/noticesystem/addedit',
+        component: asyncComponent(() => import('container/public/noticesystem/noticesystem-addedit'))
     },
     {
         path: '/public/banner',
@@ -382,6 +401,11 @@ const ROUTES = [
         path: '/otcmanage/survivalorder',
         component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder'))
     },
+    // 存活订单查询--订单详情
+    {
+        path: '/otcmanage/survivalorder/orderdetail',
+        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder-orderedit'))
+    },
     // 历史订单查询
     {
         path: '/otcmanage/historicalorder',
@@ -479,12 +503,12 @@ const ROUTES = [
     },
     // 已取消订单
     {
-      path: '/accept/cancelOrder',
-      component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder'))
+        path: '/accept/cancelOrder',
+        component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder'))
     },
     {
-      path: '/accept/cancelOrder/addedit',
-      component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder-addedit'))
+        path: '/accept/cancelOrder/addedit',
+        component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder-addedit'))
     },
 
     // 行情管理
@@ -500,8 +524,8 @@ const ROUTES = [
     },
     // 承兑商行情
     {
-      path: '/quotation/quotationCDS',
-      component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
+        path: '/quotation/quotationCDS',
+        component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
     },
     // 活动管理
     // 邀请好友
@@ -678,18 +702,18 @@ const ROUTES = [
     },
     // 系统管理 -- 量化理财管理-生息中产品
     {
-      path: '/bizFinancial/productsBearing',
-      component: asyncComponent(() => import('container/biz/financial/order/productsBearing'))
+        path: '/bizFinancial/productsBearing',
+        component: asyncComponent(() => import('container/biz/financial/order/productsBearing'))
     },
     // 系统管理 -- 量化理财管理-即将募集产品
     {
-      path: '/bizFinancial/productsWill',
-      component: asyncComponent(() => import('container/biz/financial/order/productsWill'))
+        path: '/bizFinancial/productsWill',
+        component: asyncComponent(() => import('container/biz/financial/order/productsWill'))
     },
     // 系统管理 -- 量化理财管理-可还款产品
     {
-      path: '/bizFinancial/productsCan',
-      component: asyncComponent(() => import('container/biz/financial/order/productsCan'))
+        path: '/bizFinancial/productsCan',
+        component: asyncComponent(() => import('container/biz/financial/order/productsCan'))
     },
     // 系统管理 -- 量化理财管理-可还款产品-- 今日收益
     {
@@ -737,11 +761,11 @@ const ROUTES = [
     },
 
     // BTC财务管理
-      // 查询币种
-      {
+    // 查询币种
+    {
         path: '/BTC-finance/addressQuery',
         component: asyncComponent(() => import('container/BTC-finance/addressQuery'))
-      },
+    },
     // 平台账户
     {
         path: '/BTC-finance/platformAccount',
@@ -789,11 +813,11 @@ const ROUTES = [
         path: '/BTC-finance/TBAddress',
         component: asyncComponent(() => import('container/BTC-finance/TBAddress/TBAddress'))
     },
-      // 补给地址
-      {
+    // 补给地址
+    {
         path: '/BTC-finance/supplyAddress',
         component: asyncComponent(() => import('container/BTC-finance/supplyAddress/supplyAddress'))
-      },
+    },
 
     // 线下提币
     {
@@ -872,10 +896,15 @@ const ROUTES = [
         component: asyncComponent(() => import('container/user/reward/userreward'))
     },
 // 营销管理--用户奖励明细
-{
-    path: '/user/rewarddeatil',
+    {
+        path: '/user/userrewarddeatil',
+        component: asyncComponent(() => import('container/user/reward/rewarddeatils'))
+    },
+// 营销管理--奖励明细
+    {
+        path: '/user/rewarddeatil',
         component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
-}
+    }
 ];
 
 export default ROUTES;

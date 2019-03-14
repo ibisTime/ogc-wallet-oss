@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/user/channelDealerCommissions/channelDealerSettleHistory';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, showWarnMsg, dateFormat, showSucMsg} from 'common/js/util';
+import {dateTimeFormat, getQueryString, showWarnMsg, dateFormat, showSucMsg} from 'common/js/util';
 import {activateUser} from 'api/user';
 import {CION_FMVP} from 'common/js/config';
 import CommissionsSettlement from 'component/commissions-settlement/commissions-settlement';
@@ -27,6 +27,15 @@ import fetch from 'common/js/fetch';
     }
 )
 class Rewarddeatil extends React.Component {
+    constructor(props) {
+        super(props);
+        this.userId = getQueryString('userId', this.props.location.search);
+        this.view = !!getQueryString('v', this.props.location.search);
+        this.state = {
+            ...this.state,
+            direct: false
+        };
+    }
     render() {
         const fields = [{
             field: 'realName',
@@ -52,20 +61,10 @@ class Rewarddeatil extends React.Component {
                 fields,
                 rowKey: 'id',
                 pageCode: '802401',
-                // searchParams: {
-                //     userKind: 'C'
-                // },
-                btnEvent: {
-                    reward: (selectedRowKeys, selectedRows) => {
-                        if (!selectedRowKeys.length) {
-                            showWarnMsg('请选择记录');
-                        } else if (selectedRowKeys.length > 1) {
-                            showWarnMsg('请选择一条记录');
-                        } else {
-                            this.props.history.push(`/user/commissionsHistoryList/commissions?&userId=${selectedRowKeys}`);
-                        }
-                    }
-                }
+                searchParams: {
+                    userId: this.userId
+                },
+                buttons: []
             })}
         </div>);
     }

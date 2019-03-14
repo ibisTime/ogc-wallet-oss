@@ -21,7 +21,7 @@ import {listWrapper} from 'common/js/build-list';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Advert extends React.Component {
+class SurvivalOrderAddedit extends React.Component {
     render() {
         const fields = [{
             field: 'remark',
@@ -41,4 +41,4 @@ class Advert extends React.Component {
     }
 }
 
-export default Advert;
+export default SurvivalOrderAddedit;

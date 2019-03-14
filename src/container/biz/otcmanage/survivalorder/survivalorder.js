@@ -26,7 +26,7 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Advert extends React.Component {
+class SurvivalOrder extends React.Component {
     render() {
         const fields = [{
             field: 'code',
@@ -112,10 +112,15 @@ class Advert extends React.Component {
             rowKey: 'id',
             pageCode: '625250',
             searchParams: {
-                type: 'trade_order_type'
+                statusList: ['0', '1', '2']
+            },
+            btnEvent: {
+                orderdetail: (selectedRowKeys, selectedRows) => {
+                    this.props.history.push(`/otcmanage/survivalorder/orderdetail`);
+                }
             }
         });
     }
 }
 
-export default Advert;
+export default SurvivalOrder;

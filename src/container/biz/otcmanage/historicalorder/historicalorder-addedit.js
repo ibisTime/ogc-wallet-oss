@@ -26,7 +26,7 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Advert extends React.Component {
+class HistoricalorderOrderAddEdit extends React.Component {
     render() {
         const fields = [{
             field: 'code',
@@ -129,4 +129,4 @@ class Advert extends React.Component {
     }
 }
 
-export default Advert;
+export default HistoricalorderOrderAddEdit;

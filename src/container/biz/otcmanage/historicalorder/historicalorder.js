@@ -112,18 +112,9 @@ class Historicalorder extends React.Component {
             rowKey: 'id',
             pageCode: '625250',
             searchParams: {
-                type: 'trade_order_type'
+                statusList: ['3', '4', '6', '7']
             },
             btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/otcmanage/historicalorder/orderedit?code=${selectedRowKeys[0]}&ckey=${selectedRows[0].ckey}`);
-                    }
-                },
                 orderdetail: (selectedRowKeys, selectedRows) => {
                     this.props.history.push(`/otcmanage/historicalorder/orderdetail`);
                 }

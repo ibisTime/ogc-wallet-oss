@@ -21,7 +21,7 @@ import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.publicNotice,
+        ...state.publicNoticeAddEdit,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -55,7 +55,7 @@ class Notice extends React.Component {
             fields,
             pageCode: 805305,
             searchParams: {
-                type: '0'
+                type: '2'
             },
             singleSelect: false,
             btnEvent: {

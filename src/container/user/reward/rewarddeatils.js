@@ -26,71 +26,56 @@ import fetch from 'common/js/fetch';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Userreward extends React.Component {
+class Rewarddeatil extends React.Component {
     constructor(props) {
         super(props);
-        this.code = getQueryString('userId', this.props.location.search);
+        this.userId = getQueryString('userId', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.state = {
             ...this.state,
             direct: false
         };
+        this.buttons = [{
+            name: '返回',
+            handler: () => {
+                this.props.history.go(-1);
+            }
+        }];
     }
     render() {
         const fields = [{
-            field: 'userId',
+            field: 'realName',
             title: '用户',
-            type: 'select',
-            search: true,
-            pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            render: (v, data) => {
-                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
-            }
+            search: true
         }, {
-            field: 'mobile',
+            field: 'loginName',
             title: '手机号/邮箱',
             render: (v, data) => {
-                if (data.user) {
-                    return data.user.email ? data.user.mobile + '-' + data.user.email : data.user.mobile + '-' + '';
+                if (data.loginName) {
+                    return data.email ? data.loginName + '-' + data.email : data.loginName + '-' + '';
                 }
             }
-            }, {
+        }, {
             field: 'currency',
             title: '币种'
         }, {
-            field: 'count',
+            field: 'totalAward',
             title: '奖励总数量'
         }];
         return (<div>
             {this.props.buildList({
                 fields,
                 rowKey: 'id',
-                pageCode: '802395',
-                // searchParams: {
-                //     userKind: 'C'
-                // },
-                btnEvent: {
-                    reward: (selectedRowKeys, selectedRows) => {
-                        if (!selectedRowKeys.length) {
-                            showWarnMsg('请选择记录');
-                        } else if (selectedRowKeys.length > 1) {
-                            showWarnMsg('请选择一条记录');
-                        } else {
-                            this.props.history.push(`/user/userrewarddeatil?&userId=${selectedRows[0].userId}`);
-                        }
-                    }
-                }
+                pageCode: '802401',
+                searchParams: {
+                    userId: this.userId
+                },
+                buttons: this.buttons
             })}
         </div>);
     }
-    }
+}
 
-    export
-    default
-    Userreward;
+export
+default
+Rewarddeatil;
