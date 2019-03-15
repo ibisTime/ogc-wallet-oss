@@ -115,8 +115,16 @@ class SurvivalOrder extends React.Component {
                 statusList: ['0', '1', '2']
             },
             btnEvent: {
-                orderdetail: (selectedRowKeys, selectedRows) => {
-                    this.props.history.push(`/otcmanage/survivalorder/orderdetail`);
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '1') {
+                        showWarnMsg('不是待审核的记录');
+                    } else {
+                        this.props.history.push(`/otcmanage/survivalorder/addedit?v=1&code=${selectedRows[0].code}`);
+                    }
                 }
             }
         });

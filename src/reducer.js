@@ -82,7 +82,8 @@ import {tradeArbitrationOrder} from './redux/trade/arbitrationOrder/arbitrationO
 
 // 仲裁通知人
 import {tradeArbitrationNotifier} from './redux/trade/arbitrationNotifier/arbitrationNotifier';
-
+// 提币通知人
+import {NotifierofWithdrawal} from './redux/trade/notifierofwithdrawal/notifierofwithdrawal';
 // 承兑商管理
 // 收款方式
 import {acceptPayment} from './redux/accept/payment/payment';
@@ -381,5 +382,6 @@ export default combineReducers({
     NoOrder,
     StayOrder,
     AlreadySettlement,
-    quanTitativeCategory
+    quanTitativeCategory,
+    NotifierofWithdrawal
 });

@@ -4,7 +4,7 @@ import {getQueryString} from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
 @Form.create()
-class ArbitrationNotifierAddedit extends DetailUtil {
+class NotifierofwithdrawalAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -14,7 +14,7 @@ class ArbitrationNotifierAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'type',
-            value: 1,
+            value: 0,
             hidden: true
         }, {
             field: 'startDate',
@@ -22,15 +22,6 @@ class ArbitrationNotifierAddedit extends DetailUtil {
             shijian: true,
             required: true,
             integer: true
-            // formatter: (v, data) => {
-            //     if (v < 10) {
-            //         return '0' + v + ':00';
-            //     } else if (v === 24 && data.endTime === '24') {
-            //         return '关闭';
-            //     } else {
-            //         return v + ':00';
-            //     }
-            // }
         }, {
             field: 'endDate',
             title: '结束时间',
@@ -58,7 +49,7 @@ class ArbitrationNotifierAddedit extends DetailUtil {
                 // data.remark = pageData.remark;
                 // data.parentKey = 'zc_sms_notice';
                 // data.dkey = data.dvalue;
-                data.type = 1;
+                data.type = 0;
                 return data;
             }
         });
@@ -67,4 +58,4 @@ class ArbitrationNotifierAddedit extends DetailUtil {
 
     export
     default
-    ArbitrationNotifierAddedit;
+    NotifierofwithdrawalAddedit;

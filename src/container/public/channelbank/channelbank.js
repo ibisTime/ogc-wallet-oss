@@ -66,7 +66,9 @@ class ChanelBank extends React.Component {
         }];
         return this.props.buildList({
             fields,
+            rowKey: 'id',
             pageCode: '802115',
+            deleteCode: 802111,
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

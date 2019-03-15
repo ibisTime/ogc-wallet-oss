@@ -404,8 +404,8 @@ const ROUTES = [
     },
     // 存活订单查询--订单详情
     {
-        path: '/otcmanage/survivalorder/orderdetail',
-        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder-orderedit'))
+        path: '/otcmanage/survivalorder/addedit',
+        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder-addedit'))
     },
     // 历史订单查询
     {
@@ -463,6 +463,15 @@ const ROUTES = [
     {
         path: '/trade/arbitrationNotifier/addedit',
         component: asyncComponent(() => import('container/trade/arbitrationNotifier/arbitrationNotifier-addedit'))
+    },
+    // 提币通知人
+    {
+        path: '/trade/notifierofwithdrawal',
+        component: asyncComponent(() => import('container/trade/notifierofwithdrawal/notifierofwithdrawal'))
+    },
+    {
+        path: '/trade/notifierofwithdrawal/addedit',
+        component: asyncComponent(() => import('container/trade/notifierofwithdrawal/notifierofwithdrawal-addedit'))
     },
 
     // 承兑商管理
@@ -820,7 +829,7 @@ const ROUTES = [
         component: asyncComponent(() => import('container/BTC-finance/supplyAddress/supplyAddress'))
     },
 
-    // 线下提币
+    // 散取审批
     {
         path: '/BTC-finance/TBunderline',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
@@ -832,6 +841,39 @@ const ROUTES = [
     {
         path: '/BTC-finance/TBunderline/multiCheck',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
+    },
+    // 散取广播
+    {
+        path: '/BTC-finance/TBunderlines',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
+    },
+    {
+        path: '/BTC-finance/TBunderlines/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-addedit'))
+    },
+    {
+        path: '/BTC-finance/TBunderlines/multiCheck',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
+    },
+    // 已完成散取查询
+    {
+        path: '/BTC-finance/completedquery',
+        component: asyncComponent(() => import('container/BTC-finance/completedquery/TBunderline'))
+    },
+    // 已完成散取查询 --详情
+    {
+        path: '/BTC-finance/completedquery/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/completedquery/TBunderline-addedit'))
+    },
+    // 不通过散取查询
+    {
+        path: '/BTC-finance/nopassquery',
+        component: asyncComponent(() => import('container/BTC-finance/nopassquery/TBunderline'))
+    },
+    // 不通过散取查询 --详情
+    {
+        path: '/BTC-finance/nopassquery/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/nopassquery/TBunderline-addedit'))
     },
 
     // 归集地址

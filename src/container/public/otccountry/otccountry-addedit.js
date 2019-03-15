@@ -13,36 +13,29 @@ class OtccountryAddedit extends DetailUtil {
     render() {
         const fields = [{
             title: '国际代码',
-            field: 'interCode'
+            field: 'interCode',
+            required: true
         }, {
             title: '国旗图片',
             field: 'pic',
-            type: 'img'
+            type: 'img',
+            required: true
         }, {
             title: '中文名称',
-            field: 'chineseName'
+            field: 'chineseName',
+            required: true
         }, {
             title: '国际名称',
-            field: 'interName'
+            field: 'interName',
+            required: true
         }, {
-            title: '国际简码',
+            title: '国际简称',
+            required: true,
             field: 'interSimpleCode'
         }, {
             title: '所属洲际',
+            required: true,
             field: 'continent'
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            data: [{
-                key: '0',
-                value: '禁用'
-            }, {
-                key: '1',
-                value: '启用'
-            }],
-            keyName: 'key',
-            valueName: 'value'
         }, {
             title: '展示次序',
             field: 'orderNo'
@@ -51,7 +44,9 @@ class OtccountryAddedit extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            detailCode: 625312
+            addCode: 625300,
+            detailCode: 625312,
+            editCode: 625301
         });
     }
 }

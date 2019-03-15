@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/trade/arbitrationNotifier/arbitrationNotifier';
+} from '@redux/trade/notifierofwithdrawal/notifierofwithdrawal';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.tradeArbitrationNotifier,
+        ...state.NotifierofWithdrawal,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {dateTimeFormat} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class ArbitrationNotifier extends React.Component {
+class Notifierofwithdrawal extends React.Component {
     render() {
         const fields = [{
             title: '通知时间',
@@ -43,10 +43,10 @@ class ArbitrationNotifier extends React.Component {
             pageCode: '802895',
             searchParams: {
                 // parentKey: 'zc_sms_notice'
-                type: 1
+                type: 0
             }
         });
     }
 }
 
-export default ArbitrationNotifier;
+export default Notifierofwithdrawal;
