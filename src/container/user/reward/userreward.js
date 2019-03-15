@@ -38,40 +38,29 @@ class Userreward extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'userId',
+            field: 'realName',
             title: '用户',
-            type: 'select',
-            search: true,
-            pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            render: (v, data) => {
-                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
-            }
+            search: true
         }, {
-            field: 'mobile',
+            field: 'loginName',
             title: '手机号/邮箱',
             render: (v, data) => {
-                if (data.user) {
-                    return data.user.email ? data.user.mobile + '-' + data.user.email : data.user.mobile + '-' + '';
+                if (data.loginName) {
+                    return data.email ? data.loginName + '-' + data.email : data.loginName + '-' + '';
                 }
             }
-            }, {
+        }, {
             field: 'currency',
             title: '币种'
         }, {
-            field: 'count',
+            field: 'totalAward',
             title: '奖励总数量'
         }];
         return (<div>
             {this.props.buildList({
                 fields,
                 rowKey: 'id',
-                pageCode: '802395',
+                pageCode: '802401',
                 // searchParams: {
                 //     userKind: 'C'
                 // },

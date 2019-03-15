@@ -44,29 +44,40 @@ class Rewarddeatil extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'realName',
+            field: 'userId',
             title: '用户',
-            search: true
+            type: 'select',
+            search: true,
+            pageCode: '805120',
+            params: {
+                kind: 'C'
+            },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            render: (v, data) => {
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
+            }
         }, {
-            field: 'loginName',
+            field: 'mobile',
             title: '手机号/邮箱',
             render: (v, data) => {
-                if (data.loginName) {
-                    return data.email ? data.loginName + '-' + data.email : data.loginName + '-' + '';
+                if (data.user) {
+                    return data.user.email ? data.user.mobile + '-' + data.user.email : data.user.mobile + '-' + '';
                 }
             }
         }, {
             field: 'currency',
             title: '币种'
         }, {
-            field: 'totalAward',
+            field: 'count',
             title: '奖励总数量'
         }];
         return (<div>
             {this.props.buildList({
                 fields,
                 rowKey: 'id',
-                pageCode: '802401',
+                pageCode: '802395',
                 searchParams: {
                     userId: this.userId
                 },

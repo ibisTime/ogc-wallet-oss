@@ -10,6 +10,7 @@ import {
     setSearchData
 } from '@redux/otcmanage/historicalorder-orderedit';
 import {listWrapper} from 'common/js/build-list';
+import fetch from 'common/js/fetch';
 import {
     moneyFormat,
     showWarnMsg,
@@ -31,7 +32,7 @@ import {
 class HistoricalorderOrderEdit extends React.Component {
     constructor(props) {
         super(props);
-    this.userId = getQueryString('userId', this.props.location.search) || '';
+    this.code = getQueryString('code', this.props.location.search) || '';
         this.state = {
             userData: {
                 code: '',
@@ -52,7 +53,8 @@ class HistoricalorderOrderEdit extends React.Component {
         // 直接请求
         this.props.doFetching();// loading显示
         Promise.all([
-            fetch(628279, {
+            fetch(625251, {
+                code: this.code,
                 objectUserId: this.objectUserId
                 // type: 'B'
             })
@@ -143,7 +145,7 @@ class HistoricalorderOrderEdit extends React.Component {
                             noSelect: true,
                             // pageCode: 802320,
                             searchParams: {
-                                userId: this.userId
+                                code: this.code
                             },
                             buttons: []
                         })}
