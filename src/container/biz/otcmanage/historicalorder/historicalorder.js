@@ -115,13 +115,13 @@ class Historicalorder extends React.Component {
                 statusList: ['3', '4', '6', '7']
             },
             btnEvent: {
-                orderdetail: (selectedRowKeys, selectedRows) => {
+                detail: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/otcmanage/historicalorder/orderdetail?v=1&code=${selectedRows[0].code}`);
+                        this.props.history.push(`/otcmanage/historicalorder/addedit?&code=${selectedRows[0].code}`);
                     }
                 }
             }

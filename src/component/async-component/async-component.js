@@ -7,7 +7,7 @@ import { Spin } from 'antd';
  */
 export default (loadComponent, placeholder = null) => {
   class AsyncComponent extends React.Component {
-    unmount = false;
+    unmount = false
     constructor(props) {
       super(props);
       this.state = {
@@ -32,7 +32,7 @@ export default (loadComponent, placeholder = null) => {
     render() {
       const C = this.state.component;
       return (
-        C ? <C {...this.props}></C> : <Spin></Spin>
+          C ? <C {...this.props}></C> : <Spin></Spin>
       );
     }
   }

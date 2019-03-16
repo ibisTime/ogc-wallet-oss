@@ -414,8 +414,8 @@ const ROUTES = [
     },
     // 历史订单查询-- 订单详情
     {
-        path: '/otcmanage/historicalorder/orderdetail',
-        component: asyncComponent(() => import('container/biz/otcmanage/historicalorder/historicalorder-orderedit'))
+        path: '/otcmanage/historicalorder/addedit',
+        component: asyncComponent(() => import('container/biz/otcmanage/historicalorder/historicalorder-addedit'))
     },
     // 评论查询
     {

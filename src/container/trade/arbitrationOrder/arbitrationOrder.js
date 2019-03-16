@@ -65,7 +65,10 @@ class ArbitrationOrder extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '625265',
-            setstrutlist: ['5'],
+            searchParams: {
+                strut: '5'
+            },
+            // setstrutlist: ['5'],
             btnEvent: {
                 orderdetail: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
