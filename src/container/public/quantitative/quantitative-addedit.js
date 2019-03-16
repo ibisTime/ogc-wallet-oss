@@ -12,31 +12,53 @@ class QuantitativeAddEdit extends DetailUtil {
   }
   render() {
     const fields = [{
-      field: 'id',
-      hidden: true
-    }, {
-      field: 'remark',
-      title: '内容',
-      readonly: true,
+      field: 'code',
+      title: '文章编号',
+      hidden: !this.view,
       required: true
     }, {
-      title: '内容',
-      field: 'cvalue',
-      type: 'textarea',
+      field: 'name',
+      title: '分类名称',
       required: true
+    }, {
+      field: 'orderNo',
+      title: '次序',
+      required: true
+    }, {
+      title: '状态',
+      field: 'status',
+      type: 'select',
+      data: [{
+        key: '0',
+        value: '待上架'
+      }, {
+        key: '1',
+        value: '上架中'
+      }, {
+        key: '2',
+        value: '已下架'
+      }],
+      keyName: 'key',
+      valueName: 'value',
+      search: true,
+      hidden: !this.view
+    }, {
+      field: 'updateDatetime',
+      type: 'datetime',
+      title: '最新更新时间',
+      hidden: !this.view
+    }, {
+      field: 'updater',
+      title: '最新更新人',
+      hidden: !this.view
     }];
     return this.buildDetail({
       fields,
-      key: 'id',
       code: this.code,
       view: this.view,
-      detailCode: 630046,
-      editCode: 630042,
-      beforeSubmit: (data) => {
-        let { pageData } = this.state;
-        data.remark = pageData.remark;
-        return data;
-      }
+      addCode: 802850,
+      detailCode: 802863,
+      editCode: 802851
     });
   }
 }

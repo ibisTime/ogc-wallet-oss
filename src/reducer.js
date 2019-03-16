@@ -82,7 +82,8 @@ import {tradeArbitrationOrder} from './redux/trade/arbitrationOrder/arbitrationO
 
 // 仲裁通知人
 import {tradeArbitrationNotifier} from './redux/trade/arbitrationNotifier/arbitrationNotifier';
-
+// 提币通知人
+import {NotifierofWithdrawal} from './redux/trade/notifierofwithdrawal/notifierofwithdrawal';
 // 承兑商管理
 // 收款方式
 import {acceptPayment} from './redux/accept/payment/payment';
@@ -131,33 +132,33 @@ import {rulesWithdrawUserFee} from './redux/rules/withdrawUserFee/withdrawUserFe
 import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
 
 // 业务管理--评论管理
-import { commentKeywords } from './redux/biz/comment/keywords';
-import { commentCheck } from './redux/biz/comment/check';
-import { commentList } from './redux/biz/comment/list';
+import {commentKeywords} from './redux/biz/comment/keywords';
+import {commentCheck} from './redux/biz/comment/check';
+import {commentList} from './redux/biz/comment/list';
 // 应用列表管理
-import { bizApplicationList } from './redux/biz/applicationList/applicationList';
-import { bizApplicationListHelpSet } from './redux/biz/applicationList/applicationListHelpSet';
+import {bizApplicationList} from './redux/biz/applicationList/applicationList';
+import {bizApplicationListHelpSet} from './redux/biz/applicationList/applicationListHelpSet';
 
 // 量化理财管理
-import { bizBuyAgreement } from './redux/biz/financial/buyAgreement';
-import { bizInvestFlow } from './redux/biz/financial/investFlow';
-import { bizInvestFlowAll } from './redux/biz/financial/investFlowAll';
-import { bizProductsApprove } from './redux/biz/financial/productsApprove';
-import { bizProductsRaise } from './redux/biz/financial/productsRaise';
-import { bizProductsRaisefail } from './redux/biz/financial/productsRaisefail';
-import { bizProductsBearing } from './redux/biz/financial/productsBearing';
-import { bizProductsCan } from './redux/biz/financial/productsCan';
-import { bizProductsWill } from './redux/biz/financial/productsWill';
-import { bizProductsRaiseSuccess } from './redux/biz/financial/productsRaiseSuccess';
-import { bizProductsRepay } from './redux/biz/financial/productsRepay';
-import { bizRepaymentPlan } from './redux/biz/financial/repaymentPlan';
-import { bizProducts } from './redux/biz/financial/products';
-import { bizSetDivRate } from './redux/biz/financial/setDivRate';
-import { bizProductsProfit } from './redux/biz/financial/productsProfit';
+import {bizBuyAgreement} from './redux/biz/financial/buyAgreement';
+import {bizInvestFlow} from './redux/biz/financial/investFlow';
+import {bizInvestFlowAll} from './redux/biz/financial/investFlowAll';
+import {bizProductsApprove} from './redux/biz/financial/productsApprove';
+import {bizProductsRaise} from './redux/biz/financial/productsRaise';
+import {bizProductsRaisefail} from './redux/biz/financial/productsRaisefail';
+import {bizProductsBearing} from './redux/biz/financial/productsBearing';
+import {bizProductsCan} from './redux/biz/financial/productsCan';
+import {bizProductsWill} from './redux/biz/financial/productsWill';
+import {bizProductsRaiseSuccess} from './redux/biz/financial/productsRaiseSuccess';
+import {bizProductsRepay} from './redux/biz/financial/productsRepay';
+import {bizRepaymentPlan} from './redux/biz/financial/repaymentPlan';
+import {bizProducts} from './redux/biz/financial/products';
+import {bizSetDivRate} from './redux/biz/financial/setDivRate';
+import {bizProductsProfit} from './redux/biz/financial/productsProfit';
 
 // 红包管理
-import { bizReceiveQuery } from './redux/biz/redPacket/receiveQuery';
-import { bizRedPacketQuery } from './redux/biz/redPacket/redPacketQuery';
+import {bizReceiveQuery} from './redux/biz/redPacket/receiveQuery';
+import {bizRedPacketQuery} from './redux/biz/redPacket/redPacketQuery';
 
 /* BTC财务管理 */
 // 查询地址
@@ -186,15 +187,40 @@ import {BTCFinanceTBAddress} from './redux/BTC-finance/TBAddress/TBAddress';
 import {BTCFinanceTBunderline} from './redux/BTC-finance/TBunderline/TBunderline';
 import {BTCFinanceTBunderlineAddEdit} from './redux/BTC-finance/TBunderline/TBunderline-addedit';
 import {BTCFinanceTBunderlineMultiCheck} from './redux/BTC-finance/TBunderline/TBunderline-multiCheck';
+import {publicNotice} from './redux/public/notice';
+import {publicNoticeAddEdit} from './redux/public/notice-addedit';
+// OTC标签设置
+import {publicOtctag} from './redux/public/otcTag';
+// OTC 国家设置
 
+import {publicOtcCountry} from './redux/public/otccountry';
+import {quanTitativeCategory} from './redux/public/quantitativecategory';
+
+// OTC 支付方式设置
+import {publicOtcPayment} from './redux/public/otcpayment';
+import {publicLawRate} from './redux/public/lawrate';
+import {publicChannelBank} from './redux/public/channelbank';
+// 业务管理-- OTC管理
+import {OtcManageAdvert} from './redux/otcmanage/advert';
+import {OtcSurvivaLorDerOrderedit} from './redux/otcmanage/survivalorder-orderedit';
+import {OtcSurvivaLorDer} from './redux/otcmanage/survivalorder';
+import {OtcManageHistoricalorder} from './redux/otcmanage/historicalorder';
+import {OtcManageHistoricalorderEdit} from './redux/otcmanage/historicalorder-orderedit';
+import {OtcManageComment} from './redux/otcmanage/comment';
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
 import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
 import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery';
 import {BTCFinanceGJAddressQueryAddEdit} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery-addedit';
-
+import {publicBanner} from './redux/public/banner';
+import {publicBannerAddEdit} from './redux/public/banner-addedit';
 // 补给地址
 import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
+// 业务管理-- 营销管理
+import {StadySettLement} from './redux/marketsettlement/stadysettlement';
+import {NoOrder} from './redux/marketsettlement/noorder';
+import {StayOrder} from './redux/marketsettlement/stayorder';
+import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
 
 export default combineReducers({
     user,
@@ -216,6 +242,8 @@ export default combineReducers({
     publicSellETH,
     publicTransactionRemind,
     publicCommunity,
+    publicNotice,
+    publicNoticeAddEdit,
     publicWarmReminding,
     publicLegalDeclaration,
     publicRateExplain,
@@ -241,6 +269,10 @@ export default combineReducers({
     // 渠道商管理
     userChannelDealer,
     userChannelDealerLowerLevelQuery,
+    // 广告位管理
+    // public
+    publicBanner,
+    publicBannerAddEdit,
     // 待结算佣金名单
     userChannelDealerCommissions,
     userChannelDealerCommissionsChecklist,
@@ -331,5 +363,25 @@ export default combineReducers({
     BTCFinanceGJAddressAddEdit,
     BTCFinanceGJAddressQuery,
     BTCFinanceGJAddressQueryAddEdit,
-    BTCFinanceSupplyAddress
+    BTCFinanceSupplyAddress,
+    // OTC系统设置
+    publicOtctag,
+    publicOtcPayment,
+    publicOtcCountry,
+    publicLawRate,
+    publicChannelBank,
+    // 业务管理--OTC管理
+    OtcManageAdvert,
+    OtcSurvivaLorDer,
+    OtcSurvivaLorDerOrderedit,
+    OtcManageHistoricalorder,
+    OtcManageComment,
+// 营销结算
+    StadySettLement,
+    OtcManageHistoricalorderEdit,
+    NoOrder,
+    StayOrder,
+    AlreadySettlement,
+    quanTitativeCategory,
+    NotifierofWithdrawal
 });

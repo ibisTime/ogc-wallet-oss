@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'antd';
+import {Form} from 'antd';
 import {getQueryString, moneyFormat, showSucMsg, getUserId} from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
@@ -19,73 +19,38 @@ class ArbitrationOrderResolve extends DetailUtil {
             readonly: true
         }, {
             title: '被告',
-            field: 'beigao',
+            field: 'sellUser',
             formatter: (v, data) => {
-                var html = '';
-                if (data.beigaoInfo) {
-                    html = data.beigaoInfo.nickname;
-                    if(data.beigaoInfo.mobile) {
-                        html += '(' + data.beigaoInfo.mobile + ')';
-                    } else {
-                        html += '(' + data.beigaoInfo.email + ')';
-                    }
-                }
-                if (v === data.tradeOrder.buyUser) {
-                    html += '-买家';
-                } else {
-                    html += '-卖家';
-                }
-                return html;
+                return data ? data.sellUser + '-卖家' : '';
             },
             readonly: true
         }, {
             title: '原告',
-            field: 'yuangao',
+            field: 'buyUser',
             formatter: (v, data) => {
-                var html = '';
-                if (data.yuangaoInfo) {
-                    html = data.yuangaoInfo.nickname;
-                    if(data.yuangaoInfo.mobile) {
-                        html += '(' + data.yuangaoInfo.mobile + ')';
-                    } else {
-                        html += '(' + data.yuangaoInfo.email + ')';
-                    }
-                }
-                if (v === data.tradeOrder.buyUser) {
-                    html += '-买家';
-                } else {
-                    html += '-卖家';
-                }
-                return html;
+                return data ? data.buyUser + '-买家' : '';
             },
             readonly: true
         }, {
-            title: '针对订单编号',
-            field: 'tradeOrderCode',
+            title: '交易对',
+            type: 'select',
+            formatter: (v, data) => {
+                return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
+            },
+            search: true,
             readonly: true
         }, {
-            title: '币种',
-            field: 'tradeCoin',
-            formatter: (v, data) => {
-                if (data.tradeOrder) {
-                    return data.tradeOrder.tradeCoin;
-                }
-            },
+            field: 'tradePrice',
+            title: '涉案金额',
             readonly: true
         }, {
             title: '申请原因',
-            field: 'reason',
+            field: 'arbitrateReason',
             readonly: true
         }, {
-            field: 'createDatetime',
+            field: 'arbitrateCreateDatetime',
             title: '申请时间',
             type: 'datetime',
-            readonly: true
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            key: 'arbitrate_status',
             readonly: true
         }, {
             title: '处理说明',

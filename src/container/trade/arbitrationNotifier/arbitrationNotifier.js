@@ -25,16 +25,25 @@ import {dateTimeFormat} from 'common/js/util';
 class ArbitrationNotifier extends React.Component {
     render() {
         const fields = [{
-            field: 'dvalue',
-            title: '仲裁通知手机号'
+            title: '通知时间',
+            render: (v, data) => {
+                return data ? data.startDate + '点-' + data.endDate + '点' : '';
+            }
+        }, {
+            field: 'name',
+            title: '通知人'
+        }, {
+            field: 'phone',
+            title: '通知手机号'
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            deleteCode: '630031',
-            pageCode: '630035',
+            deleteCode: '802891',
+            pageCode: '802895',
             searchParams: {
-                parentKey: 'zc_sms_notice'
+                // parentKey: 'zc_sms_notice'
+                type: 1
             }
         });
     }

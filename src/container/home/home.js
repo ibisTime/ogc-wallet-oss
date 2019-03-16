@@ -69,7 +69,9 @@ class Home extends React.Component {
                                         <samp className="date">{dateFormat(d.notice.updateDatetime)}</samp>
                                     </Link>
                                 </div>
-                            )) : <div className="noData"><img src={noData}/><p>暂无公司公告</p></div>}
+                            )) : <div className="noData"><img src={noData}/>
+                            <p>暂无公司公告</p>
+                            </div>}
                         </div>
                     </div> */}
                 </div>

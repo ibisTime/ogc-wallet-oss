@@ -69,14 +69,24 @@ const ROUTES = [
         path: '/public/aboutus/addedit',
         component: asyncComponent(() => import('container/public/aboutus-addedit/aboutus-addedit'))
     },
-      {
+    //  文章分类管理
+    {
         path: '/public/quantitative',
         component: asyncComponent(() => import('container/public/quantitative/quantitative'))
-      },
-  {
-    path: '/public/quantitative/addedit',
-    component: asyncComponent(() => import('container/public/quantitative/quantitative-addedit'))
-  },
+    },
+    {
+        path: '/public/quantitative/addedit',
+        component: asyncComponent(() => import('container/public/quantitative/quantitative-addedit'))
+    },
+    // 文章管理
+    {
+        path: '/public/quantitativecategory',
+        component: asyncComponent(() => import('container/public/quantitativecategory/quantitativecategory'))
+    },
+    {
+        path: '/public/quantitativecategory/addedit',
+        component: asyncComponent(() => import('container/public/quantitativecategory/quantitativecategory-addedit'))
+    },
     {
         path: '/public/contact',
         component: asyncComponent(() => import('container/public/contact/contact'))
@@ -100,6 +110,33 @@ const ROUTES = [
     {
         path: '/public/register/addedit',
         component: asyncComponent(() => import('container/public/register-addeidt/register-addeidt'))
+    },
+    // 消息公告
+    {
+        path: '/public/notice',
+        component: asyncComponent(() => import('container/public/notice/notice'))
+    },
+    {
+        path: '/public/notice/addedit',
+        component: asyncComponent(() => import('container/public/notice/notice-addedit'))
+    },
+    // 内部公告
+    {
+        path: '/public/noticesystem',
+        component: asyncComponent(() => import('container/public/noticesystem/noticesystem'))
+    },
+    // 内部公告
+    {
+        path: '/public/noticesystem/addedit',
+        component: asyncComponent(() => import('container/public/noticesystem/noticesystem-addedit'))
+    },
+    {
+        path: '/public/banner',
+        component: asyncComponent(() => import('container/public/banner/banner'))
+    },
+    {
+        path: '/public/banner/addedit',
+        component: asyncComponent(() => import('container/public/banner-addedit/banner-addedit'))
     },
     {
         path: '/public/buyADS',
@@ -238,8 +275,6 @@ const ROUTES = [
         path: '/user/customerBlackList/addedit',
         component: asyncComponent(() => import('container/user/customer/customer-blackListAddedit'))
     },
-
-    // 渠道商管理
     // 渠道商管理
     {
         path: '/user/channelDealer',
@@ -284,7 +319,56 @@ const ROUTES = [
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory-commissions'))
     },
 
-    // OTC交易管理
+    // 系统管理--系统设置--OTC标签设置
+    {
+        path: '/system/otcTag',
+        component: asyncComponent(() => import('container/public/otcTag/otcTag'))
+    },
+    // 系统管理--系统设置--OTC标签设置--添加
+    {
+        path: '/system/otcTag/addedit',
+        component: asyncComponent(() => import('container/public/otcTag/otcTag-addedit'))
+    },
+    // 系统管理--系统设置--OTC标签设置--详情
+    {
+        path: '/system/otcTag/detail',
+        component: asyncComponent(() => import('container/public/otcTag/otcTag-addedit'))
+    },
+    // 系统管理--系统设置--OTC支付方式设置
+    {
+        path: '/system/otcpayment',
+        component: asyncComponent(() => import('container/public/otcpayment/otcpayment'))
+    },
+    // 系统管理--系统设置--OTC支付方式设置--详情
+    {
+        path: '/system/otcpayment/addedit',
+        component: asyncComponent(() => import('container/public/otcpayment/otcpayment-addedit'))
+    },
+    // 系统管理--系统设置--OTC国家设置
+    {
+        path: '/system/otccountry',
+        component: asyncComponent(() => import('container/public/otccountry/otccountry'))
+    },
+    // 系统管理--系统设置--OTC国家设置--详情
+    {
+        path: '/system/otccountry/addedit',
+        component: asyncComponent(() => import('container/public/otccountry/otccountry-addedit'))
+    },
+    // 系统管理--系统设置--法币汇率设置
+    {
+        path: '/system/lawrate',
+        component: asyncComponent(() => import('container/public/lawrate/lawrate'))
+    },
+    // 系统管理--系统设置--渠道银行设置
+    {
+        path: '/system/channelbank',
+        component: asyncComponent(() => import('container/public/channelbank/channelbank'))
+    },
+    // 系统管理--系统设置--渠道银行设置--添加
+    {
+        path: '/system/channelbank/addedit',
+        component: asyncComponent(() => import('container/public/channelbank/channelbank-addedit'))
+    },
     // 购买交易
     {
         path: '/trade/buyTrade',
@@ -303,7 +387,41 @@ const ROUTES = [
         path: '/trade/saleTrade/addedit',
         component: asyncComponent(() => import('container/trade/saleTrade/saleTrade-addedit'))
     },
-    // OTC订单管理
+    // OTC管理-- 广告
+    {
+        path: '/otcmanage/advert',
+        component: asyncComponent(() => import('container/biz/otcmanage/advert/advert'))
+    },
+    // OTC管理-- 新增广告
+    {
+        path: '/otcmanage/advert/addedit',
+        component: asyncComponent(() => import('container/biz/otcmanage/advert/advert-addedit'))
+    },
+    // 存活订单查询
+    {
+        path: '/otcmanage/survivalorder',
+        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder'))
+    },
+    // 存活订单查询--订单详情
+    {
+        path: '/otcmanage/survivalorder/addedit',
+        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder-addedit'))
+    },
+    // 历史订单查询
+    {
+        path: '/otcmanage/historicalorder',
+        component: asyncComponent(() => import('container/biz/otcmanage/historicalorder/historicalorder'))
+    },
+    // 历史订单查询-- 订单详情
+    {
+        path: '/otcmanage/historicalorder/addedit',
+        component: asyncComponent(() => import('container/biz/otcmanage/historicalorder/historicalorder-addedit'))
+    },
+    // 评论查询
+    {
+        path: '/otcmanage/comment',
+        component: asyncComponent(() => import('container/biz/otcmanage/comment/comment'))
+    },
     // 进行中订单
     {
         path: '/trade/underWayOrder',
@@ -346,6 +464,15 @@ const ROUTES = [
         path: '/trade/arbitrationNotifier/addedit',
         component: asyncComponent(() => import('container/trade/arbitrationNotifier/arbitrationNotifier-addedit'))
     },
+    // 提币通知人
+    {
+        path: '/trade/notifierofwithdrawal',
+        component: asyncComponent(() => import('container/trade/notifierofwithdrawal/notifierofwithdrawal'))
+    },
+    {
+        path: '/trade/notifierofwithdrawal/addedit',
+        component: asyncComponent(() => import('container/trade/notifierofwithdrawal/notifierofwithdrawal-addedit'))
+    },
 
     // 承兑商管理
     // 收款方式
@@ -386,12 +513,12 @@ const ROUTES = [
     },
     // 已取消订单
     {
-      path: '/accept/cancelOrder',
-      component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder'))
+        path: '/accept/cancelOrder',
+        component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder'))
     },
     {
-      path: '/accept/cancelOrder/addedit',
-      component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder-addedit'))
+        path: '/accept/cancelOrder/addedit',
+        component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder-addedit'))
     },
 
     // 行情管理
@@ -407,8 +534,8 @@ const ROUTES = [
     },
     // 承兑商行情
     {
-      path: '/quotation/quotationCDS',
-      component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
+        path: '/quotation/quotationCDS',
+        component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
     },
     // 活动管理
     // 邀请好友
@@ -585,18 +712,18 @@ const ROUTES = [
     },
     // 系统管理 -- 量化理财管理-生息中产品
     {
-      path: '/bizFinancial/productsBearing',
-      component: asyncComponent(() => import('container/biz/financial/order/productsBearing'))
+        path: '/bizFinancial/productsBearing',
+        component: asyncComponent(() => import('container/biz/financial/order/productsBearing'))
     },
     // 系统管理 -- 量化理财管理-即将募集产品
     {
-      path: '/bizFinancial/productsWill',
-      component: asyncComponent(() => import('container/biz/financial/order/productsWill'))
+        path: '/bizFinancial/productsWill',
+        component: asyncComponent(() => import('container/biz/financial/order/productsWill'))
     },
     // 系统管理 -- 量化理财管理-可还款产品
     {
-      path: '/bizFinancial/productsCan',
-      component: asyncComponent(() => import('container/biz/financial/order/productsCan'))
+        path: '/bizFinancial/productsCan',
+        component: asyncComponent(() => import('container/biz/financial/order/productsCan'))
     },
     // 系统管理 -- 量化理财管理-可还款产品-- 今日收益
     {
@@ -644,11 +771,11 @@ const ROUTES = [
     },
 
     // BTC财务管理
-      // 查询币种
-      {
+    // 查询币种
+    {
         path: '/BTC-finance/addressQuery',
         component: asyncComponent(() => import('container/BTC-finance/addressQuery'))
-      },
+    },
     // 平台账户
     {
         path: '/BTC-finance/platformAccount',
@@ -696,13 +823,13 @@ const ROUTES = [
         path: '/BTC-finance/TBAddress',
         component: asyncComponent(() => import('container/BTC-finance/TBAddress/TBAddress'))
     },
-      // 补给地址
-      {
+    // 补给地址
+    {
         path: '/BTC-finance/supplyAddress',
         component: asyncComponent(() => import('container/BTC-finance/supplyAddress/supplyAddress'))
-      },
+    },
 
-    // 线下提币
+    // 散取审批
     {
         path: '/BTC-finance/TBunderline',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
@@ -714,6 +841,39 @@ const ROUTES = [
     {
         path: '/BTC-finance/TBunderline/multiCheck',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
+    },
+    // 散取广播
+    {
+        path: '/BTC-finance/TBunderlines',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
+    },
+    {
+        path: '/BTC-finance/TBunderlines/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-addedit'))
+    },
+    {
+        path: '/BTC-finance/TBunderlines/multiCheck',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
+    },
+    // 已完成散取查询
+    {
+        path: '/BTC-finance/completedquery',
+        component: asyncComponent(() => import('container/BTC-finance/completedquery/TBunderline'))
+    },
+    // 已完成散取查询 --详情
+    {
+        path: '/BTC-finance/completedquery/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/completedquery/TBunderline-addedit'))
+    },
+    // 不通过散取查询
+    {
+        path: '/BTC-finance/nopassquery',
+        component: asyncComponent(() => import('container/BTC-finance/nopassquery/TBunderline'))
+    },
+    // 不通过散取查询 --详情
+    {
+        path: '/BTC-finance/nopassquery/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/nopassquery/TBunderline-addedit'))
     },
 
     // 归集地址
@@ -732,6 +892,61 @@ const ROUTES = [
     {
         path: '/BTC-finance/GJAddressQuery/addedit',
         component: asyncComponent(() => import('container/BTC-finance/GJAddressQuery/GJAddressQuery-addedit'))
+    },
+    // 营销管理--营销结算--待审批订单
+    {
+        path: '/marketsettlement/stayorder',
+        component: asyncComponent(() => import('container/public/marketsettlement/stayorder/stayorder'))
+    },
+    // 营销管理--营销结算--待审批订单-- 详情
+    {
+        path: '/marketsettlement/stayorder/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/stayorder/stayorder-addedit'))
+    },
+    // 营销管理--营销结算--待结算订单
+    {
+        path: '/marketsettlement/stadysettlement',
+        component: asyncComponent(() => import('container/public/marketsettlement/stadysettlement/stadysettlement'))
+    },
+    // 营销管理--营销结算--待结算订单-- 详情
+    {
+        path: '/marketsettlement/stadysettlement/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/stadysettlement/stadysettlement-addedit'))
+    },
+    // 营销管理--营销结算--已结算订单
+    {
+        path: '/marketsettlement/alreadysettlement',
+        component: asyncComponent(() => import('container/public/marketsettlement/alreadysettlement/alreadysettlement'))
+    },
+    // 营销管理--营销结算--已结算订单--详情
+    {
+        path: '/marketsettlement/alreadysettlement/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/alreadysettlement/alreadysettlement-addedit'))
+    },
+    // 营销管理--营销结算--审批不通过订单
+    {
+        path: '/marketsettlement/noorder',
+        component: asyncComponent(() => import('container/public/marketsettlement/noorder/noorder'))
+    },
+    // 营销管理--营销结算--审批不通过订单详情
+    {
+        path: '/marketsettlement/noorder/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/noorder/noorder-addedit'))
+    },
+    // 营销管理--用户奖励
+    {
+        path: '/user/reward',
+        component: asyncComponent(() => import('container/user/reward/userreward'))
+    },
+// 营销管理--用户奖励明细
+    {
+        path: '/user/userrewarddeatil',
+        component: asyncComponent(() => import('container/user/reward/rewarddeatils'))
+    },
+// 营销管理--奖励明细
+    {
+        path: '/user/rewarddeatil',
+        component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
     }
 ];
 
