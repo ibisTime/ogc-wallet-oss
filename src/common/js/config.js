@@ -1,4 +1,4 @@
-export const SYSTEM_CODE = 'CD-OGC000020';
+export const SYSTEM_CODE = 'CD-OGC000021';
 // 七牛上传地址
 export const UPLOAD_URL = 'qn.tha.hichengdai.com';
 // 七牛图片前缀
