@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
               this.props.setTopCode('');
               this.props.history.push('/');
           }}>
-              <img src={logo}/>
+              <img style={{width: '72%', height: '42px'}} src={logo}/>
           </div>
         <Menu
           theme="dark"

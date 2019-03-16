@@ -30,7 +30,7 @@ class Login extends React.Component {
                 <div className="login-wrapper">
                     <div className='login-left'><img src={loginLeft} /></div>
                     <div className="login-wrap">
-                        <div className="title"><img style={{width: '100%'}} src={loginphot} /></div>
+                        <div className="title"><img style={{width: '205px', height: '70px'}} src={loginphot} /></div>
                         {this.props.redirectTo ? <Redirect to={this.props.redirectTo}/> : null}
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <FormItem className="form-item">
