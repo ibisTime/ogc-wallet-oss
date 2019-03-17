@@ -785,7 +785,26 @@ const ROUTES = [
         path: '/BTC-finance/platformAccount/ledger',
         component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
     },
-
+    // 平台账户 -- 营销账户余额 -- 待审批数量-- 查看订单
+    {
+        path: '/BTC-finance/platformAccount/goOrder',
+        component: asyncComponent(() => import('container/BTC-finance/platformAccount/goOrder'))
+    },
+    // 平台账户 -- 营销账户余额 -- 待结算数量-- 查看订单
+    {
+        path: '/BTC-finance/platformAccount/goStady',
+        component: asyncComponent(() => import('container/BTC-finance/platformAccount/goStay'))
+    },
+    // 平台账户 -- 营销账户余额 -- 已结算数量-- 查看订单
+    {
+        path: '/BTC-finance/platformAccount/goSettlement',
+        component: asyncComponent(() => import('container/BTC-finance/platformAccount/goSettlement'))
+    },
+    // 平台账户 -- 营销账户余额 -- 已结算数量-- 手动结算
+    {
+        path: '/BTC-finance/platformAccount/manualsettlement',
+        component: asyncComponent(() => import('container/BTC-finance/platformAccount/manualsettlement'))
+    },
     // 分发地址
     {
         path: '/BTC-finance/diviAddress',

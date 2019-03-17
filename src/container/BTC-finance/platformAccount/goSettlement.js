@@ -9,19 +9,20 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketsettlement/stadysettlement';
+} from '@redux/marketsettlement/alreadysettlement';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getUserName
+    getUserName,
+    getQueryString
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.StadySettLement,
+        ...state.AlreadySettlement,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -29,11 +30,26 @@ import fetch from 'common/js/fetch';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class StadySettlement extends React.Component {
+class Otcpayment extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+        this.accountNumber = getQueryString('code', this.props.location.search) || '';
+        this.isPlat = !!getQueryString('isPlat', this.props.location.search);
+        this.bizType = getQueryString('bizType', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search) || '';
+        if(this.symbol) {
+            this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
+        }
+    }
     render() {
         const fields = [{
             title: '订单编号',
             field: 'code'
+        }, {
+            title: '活动类型',
+            field: 'pic',
+            type: 'img'
         }, {
             title: '活动币种',
             field: 'currency',
@@ -65,9 +81,28 @@ class StadySettlement extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 802812
+            pageCode: 802812,
+            searchParams: {
+                isPlat: this.isPlat,
+                bizType: this.bizType,
+                currency: this.symbol,
+                accountNumber: this.accountNumber
+            },
+            buttons: [
+                {
+                    code: 'export',
+                    name: '导出',
+                    check: false
+                }, {
+                    code: 'goBack',
+                    name: '返回',
+                    check: false,
+                    handler: () => {
+                        this.props.history.push(-1);
+                    }
+                }]
         });
     }
 }
 
-export default StadySettlement;
+export default Otcpayment;

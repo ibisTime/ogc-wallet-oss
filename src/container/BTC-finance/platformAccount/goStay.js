@@ -15,7 +15,8 @@ import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getUserName
+    getUserName,
+    getQueryString
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -30,6 +31,30 @@ import fetch from 'common/js/fetch';
     }
 )
 class StadySettlement extends React.Component {
+    constructor(props) {
+        super(props);
+        this.accountNumber = getQueryString('code', this.props.location.search) || '';
+        this.isPlat = !!getQueryString('isPlat', this.props.location.search);
+        this.bizType = getQueryString('bizType', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search) || '';
+        if(this.symbol) {
+            this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
+        }
+        this.buttons = [];
+        this.buttons = [{
+            code: 'export',
+            name: '导出',
+            check: false
+        }, {
+            code: 'goBack',
+            name: '返回',
+            check: false,
+            handler: () => {
+                this.props.history.go(-1);
+            }
+        }];
+    }
+
     render() {
         const fields = [{
             title: '订单编号',
@@ -65,7 +90,13 @@ class StadySettlement extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 802812
+            pageCode: 802812,
+            searchParams: {
+                isPlat: this.isPlat,
+                bizType: this.bizType,
+                currency: this.symbol,
+                accountNumber: this.accountNumber
+            }
         });
     }
 }

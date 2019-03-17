@@ -9,12 +9,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketsettlement/stayorder';
+} from '@redux/marketsettlement/goorder';
 import UpDowns from 'component/up-down/up-downs';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
+    getQueryString,
     showSucMsg,
     getUserName
 } from 'common/js/util';
@@ -22,7 +23,7 @@ import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.StayOrder,
+        ...state.GoOrder,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -42,7 +43,14 @@ class Stayorder extends React.Component {
             // 上下架接口号
             biz: ''
         };
-    }
+        this.accountNumber = getQueryString('code', this.props.location.search) || '';
+        this.isPlat = !!getQueryString('isPlat', this.props.location.search);
+        this.bizType = getQueryString('bizType', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search) || '';
+        if(this.symbol) {
+            this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
+        }
+}
     setModalVisible = (updownVisible) => {
         this.setState({ updownVisible });
     }
@@ -59,7 +67,7 @@ class Stayorder extends React.Component {
             title: '申请划转数量',
             field: 'amount',
             render: (v, data) => {
-                return moneyFormat(v.toString(), ' ', data.amount);
+                return moneyFormat(v.toString(), '', data.amount);
             }
         }, {
             title: '申请人',
@@ -80,9 +88,26 @@ class Stayorder extends React.Component {
                     singleSelect: false,
                     pageCode: 802812,
                     searchParams: {
-                        status: 0
+                        status: 0,
+                        isPlat: this.isPlat,
+                        bizType: this.bizType,
+                        currency: this.symbol,
+                        accountNumber: this.accountNumber
                     },
-                   btnEvent: {
+                    buttons: [
+                        {
+                            code: 'export',
+                            name: '导出',
+                            check: false
+                        }, {
+                            code: 'goBack',
+                            name: '返回',
+                            check: false,
+                            handler: () => {
+                                this.props.history.push(-1);
+                            }
+                    }],
+                    btnEvent: {
                         // 审核
                         check: (keys, items) => {
                             console.log(keys);
@@ -110,7 +135,7 @@ class Stayorder extends React.Component {
                     }} />
             </div>
         );
-}
+    }
 }
 
 export default Stayorder;

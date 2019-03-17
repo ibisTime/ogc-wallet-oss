@@ -53,19 +53,32 @@ class PlatformAccount extends React.Component {
     }
     goOrder(accountNumber, bizType, symbol) {
         if (accountNumber) {
-            this.props.history.push(`/marketsettlement/stayorder?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+            this.props.history.push(`/BTC-finance/platformAccount/goOrder?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
         } else {
             message.warning('暂无资金流水');
         }
     }
     goStay(accountNumber, bizType, symbol) {
         if (accountNumber) {
-            this.props.history.push(`/marketsettlement/stadysettlement?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+            this.props.history.push(`/BTC-finance/platformAccount/goStady?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
         } else {
             message.warning('暂无资金流水');
         }
     }
-
+    goSettlement(accountNumber, bizType, symbol) {
+        if (accountNumber) {
+            this.props.history.push(`/BTC-finance/platformAccount/goSettlement?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+        } else {
+            message.warning('暂无资金流水');
+        }
+    }
+    gomanualsettlement(accountNumber, bizType, symbol) {
+        if (accountNumber) {
+            this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+        } else {
+            message.warning('暂无资金流水');
+        }
+    }
     render() {
         const unsettledLoan = this.props.unsettledLoan;
         const {data} = this.state;
@@ -152,7 +165,7 @@ class PlatformAccount extends React.Component {
                             </div>
                             {<div style={{width: '100%', textAlign: 'center'}}>
                                 <Button
-                                    onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '', 'jour_biz_type_lhlc', '')}
+                                    onClick={() => this.gomanualsettlement(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '', 'jour_biz_type_lhlc', '')}
                                     type="primary" style={{marginTop: '15px'}}>手动结算</Button>
                                 {/* <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button> */}
                             </div>}
