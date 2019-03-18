@@ -91,6 +91,7 @@ class StadySettlement extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: 802812,
+            buttons: this.buttons,
             searchParams: {
                 isPlat: this.isPlat,
                 bizType: this.bizType,

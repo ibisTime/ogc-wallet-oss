@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketsettlement/stadysettlement';
+} from '@redux/marketsettlement/platformrecord';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -21,7 +21,7 @@ import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.StadySettLement,
+        ...state.PlatFormRecord,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -29,22 +29,11 @@ import fetch from 'common/js/fetch';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class StadySettlement extends React.Component {
+class Otcpayment extends React.Component {
     render() {
         const fields = [{
             title: '订单编号',
             field: 'code'
-        }, {
-            title: '活动币种',
-            field: 'currency',
-            select: 'type',
-            search: true
-        }, {
-            title: '申请划转数量',
-            field: 'amount',
-            render: (v, data) => {
-                return moneyFormat(v.toString(), '', data.amount);
-            }
         }, {
             title: '申请人',
             field: 'applyUser'
@@ -65,12 +54,9 @@ class StadySettlement extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 802812,
-            searchParams: {
-                status: 2
-            }
+            pageCode: 802831
         });
     }
 }
 
-export default StadySettlement;
+export default Otcpayment;

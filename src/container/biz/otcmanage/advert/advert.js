@@ -58,9 +58,6 @@ class Advert extends React.Component {
                 return v * 100 + '%';
             }
         }, {
-            title: '保护价',
-            field: 'protectPrice'
-        }, {
             field: 'maxTrade',
             title: '单笔最大量'
         }, {
@@ -142,6 +139,15 @@ class Advert extends React.Component {
                         this.props.history.push(`/otcmanage/advert/addedit?&code=${selectedRowKeys[0]}&adsCode=${selectedRows[0].adsCode}`);
                     }
                 },
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/otcmanage/advert/addedit?&code=${selectedRows[0].code}`);
+                    }
+            },
                 down: (keys, items) => {
                     if (!keys || !keys.length) {
                         showWarnMsg('请选择记录');

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'antd';
+import {Form} from 'antd';
 import {
     initStates,
     doFetching,
@@ -8,8 +8,9 @@ import {
     setPageData,
     restore
 } from '@redux/marketsettlement/manualsettlement';
-import {getQueryString, moneyFormat} from 'common/js/util';
+import {getQueryString, getUserName, showSucMsg, moneyFormat} from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
+import fetch from 'common/js/fetch';
 
 @Form.create()
 class GJAddressQueryAddedit extends DetailUtil {
@@ -18,24 +19,52 @@ class GJAddressQueryAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.accountNumber = getQueryString('code', this.props.location.search) || '';
-        this.isPlat = !!getQueryString('isPlat', this.props.location.search);
         this.bizType = getQueryString('bizType', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search) || '';
-        if(this.symbol) {
+        if (this.symbol) {
             this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
         }
     }
+
     render() {
         const fields = [{
-            field: 'bizType',
-            title: '结算类型'
-        }, {
+            value: 1,
+            required: true,
             field: 'currency',
-            title: '具体业务'
+            hidden: true
         }, {
+            value: getUserName(),
+            required: true,
+            field: 'creator',
+            hidden: true
+        }, {
+            required: true,
+            field: 'bizType',
+            title: '结算类型',
+            type: 'select',
+            data: [{
+                key: '0',
+                value: '营销结算'
+            }],
+            keyName: 'key',
+            valueName: 'value'
+        }, {
+            required: true,
+            field: 'type',
+            title: '具体业务',
+            type: 'select',
+            data: [{
+                key: '0',
+                value: '划转结算'
+            }],
+            keyName: 'key',
+            valueName: 'value'
+        }, {
+            required: true,
             title: '打币地址',
             field: 'payCardNo'
         }, {
+            required: true,
             field: 'settleAmount',
             title: '结算数量'
         }];
@@ -44,13 +73,30 @@ class GJAddressQueryAddedit extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
+            buttons: [{
+                title: '保存',
+                check: true,
+                handler: (params) => {
+                    this.doFetching();
+                    fetch(802820, params).then(() => {
+                        showSucMsg('操作成功');
+                        this.cancelFetching();
+                    }).catch(this.cancelFetching);
+                }
+            }, {
+                code: 'goBack',
+                title: '返回',
+                check: false,
+                handler: () => {
+                    this.props.history.go(-1);
+                }
+            }],
             searchParams: {
                 isPlat: this.isPlat,
                 bizType: this.bizType,
                 currency: this.symbol,
                 accountNumber: this.accountNumber
-            },
-            addCode: '802820'
+            }
         });
     }
 }

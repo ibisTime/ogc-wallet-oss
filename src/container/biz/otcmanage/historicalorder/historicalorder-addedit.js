@@ -9,11 +9,13 @@ import {
     cancelFetching,
     setSearchData
 } from '@redux/otcmanage/historicalorder-orderedit';
+import { Button } from 'antd';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
+    dateTimeFormat,
     getUserName,
     getQueryString
 } from 'common/js/util';
@@ -38,7 +40,9 @@ class HistoricalorderOrderEdit extends React.Component {
             data: []
         };
     }
-
+    goBack = () => {
+        this.props.history.go(-1);
+    }
     componentDidMount() {
         // 直接请求
         this.props.doFetching();// loading显示
@@ -61,29 +65,19 @@ class HistoricalorderOrderEdit extends React.Component {
         const fields = [{
             field: 'code',
             title: '针对订单号'
-            // 628279
-        }, {
-            title: '评论星级',
-            field: 'invalidDatetime',
-            type: 'datetime'
         }, {
             title: '内容',
-            field: 'markDatetime',
-            type: 'datetime'
+            field: 'content'
         }, {
             title: '评论人 ',
-            field: 'releaseDatetime',
-            type: 'datetime'
+            field: 'fromUser'
         }, {
             title: '被评论人',
-            field: 'status',
-            type: 'select',
-            key: 'trade_order_status'
+            field: 'toUser'
         }, {
             title: '评论时间',
-            field: 'bsComment',
-            type: 'select',
-            key: 'comment_result'
+            field: 'createDatetime',
+            type: 'datetime'
         }];
         const { data } = this.state;
         return (
@@ -118,7 +112,7 @@ class HistoricalorderOrderEdit extends React.Component {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>广告费：</label>
-                    <span style={{marginLeft: '20px'}}>{data.realName}</span>
+                    <span style={{marginLeft: '20px'}}>{data.feeString}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>状态：</label>
@@ -126,7 +120,7 @@ class HistoricalorderOrderEdit extends React.Component {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>完成时间：</label>
-                    <span style={{marginLeft: '20px'}}>{data.updateDatetime}</span>
+                    <span style={{marginLeft: '20px'}}>{dateTimeFormat(data.createDatetime)} </span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>评论详情：</label>
@@ -134,12 +128,15 @@ class HistoricalorderOrderEdit extends React.Component {
                         this.props.buildList({
                             fields,
                             noSelect: true,
-                            pageCode: 802320,
+                            pageCode: 628275,
                             searchParams: {
-                                userId: this.userId
+                                tradeOrderCode: this.code
                             },
                             buttons: []
                         })}
+                    <div style={{width: '100%', marginTop: '15px', textAlign: 'center'}}>
+                        <Button onClick={() => this.goBack()} type="primary">返回</Button>
+                    </div>
                 </div>
             </div>
         );

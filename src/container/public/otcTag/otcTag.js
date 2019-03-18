@@ -61,6 +61,7 @@ class ProductsApprove extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '625331',
+            singleSelect: false,
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

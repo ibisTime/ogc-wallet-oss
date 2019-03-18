@@ -19,7 +19,6 @@ import {
     showSucMsg,
     getUserName
 } from 'common/js/util';
-import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -96,6 +95,24 @@ class Stayorder extends React.Component {
                     },
                     buttons: [
                         {
+                            code: 'check',
+                            name: '审核',
+                            check: false,
+                            handler: (keys, items) => {
+                                console.log(keys);
+                                if (!keys || !keys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else {
+                                    this.setState({
+                                        updownVisible: true,
+                                        codeList: keys,
+                                        biz: 802801
+                                    });
+                                    console.log(keys);
+                                }
+                            }
+                        },
+                        {
                             code: 'export',
                             name: '导出',
                             check: false
@@ -104,25 +121,25 @@ class Stayorder extends React.Component {
                             name: '返回',
                             check: false,
                             handler: () => {
-                                this.props.history.push(-1);
+                                this.props.history.go(-1);
                             }
-                    }],
-                    btnEvent: {
-                        // 审核
-                        check: (keys, items) => {
-                            console.log(keys);
-                            if (!keys || !keys.length) {
-                                showWarnMsg('请选择记录');
-                            } else {
-                                this.setState({
-                                    updownVisible: true,
-                                    codeList: keys,
-                                    biz: 802801
-                                });
-                                console.log(keys);
-                            }
-                        }
-                    }
+                    }]
+                    // btnEvent: {
+                    //     // 审核
+                    //     check: (keys, items) => {
+                    //         console.log(keys);
+                    //         if (!keys || !keys.length) {
+                    //             showWarnMsg('请选择记录');
+                    //         } else {
+                    //             this.setState({
+                    //                 updownVisible: true,
+                    //                 codeList: keys,
+                    //                 biz: 802801
+                    //             });
+                    //             console.log(keys);
+                    //         }
+                    //     }
+                    // }
                 })}
                 <UpDowns
                     updownVisible={this.state.updownVisible}

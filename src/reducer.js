@@ -202,6 +202,7 @@ import {publicLawRate} from './redux/public/lawrate';
 import {publicChannelBank} from './redux/public/channelbank';
 // 业务管理-- OTC管理
 import {OtcManageAdvert} from './redux/otcmanage/advert';
+import {OtcManageAdvertAddedit} from './redux/otcmanage/advert-addedit';
 import {OtcSurvivaLorDerOrderedit} from './redux/otcmanage/survivalorder-orderedit';
 import {OtcSurvivaLorDer} from './redux/otcmanage/survivalorder';
 import {OtcManageHistoricalorder} from './redux/otcmanage/historicalorder';
@@ -223,6 +224,7 @@ import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
 import {GoOrder} from './redux/marketsettlement/goorder';
 import {ManualSettlement} from './redux/marketsettlement/manualsettlement';
+import {PlatFormRecord} from './redux/marketsettlement/platformrecord';
 
 export default combineReducers({
     user,
@@ -387,5 +389,7 @@ export default combineReducers({
     quanTitativeCategory,
     NotifierofWithdrawal,
     GoOrder,
-    ManualSettlement
+    ManualSettlement,
+    PlatFormRecord,
+    OtcManageAdvertAddedit
 });

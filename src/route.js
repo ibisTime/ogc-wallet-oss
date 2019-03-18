@@ -776,6 +776,11 @@ const ROUTES = [
         path: '/BTC-finance/addressQuery',
         component: asyncComponent(() => import('container/BTC-finance/addressQuery'))
     },
+    // 财务管理 -- 平台账户 -- 平台结算记录
+    {
+        path: '/BTC-finance/addressQuery/record',
+        component: asyncComponent(() => import('container/BTC-finance/platformrecord/platformrecord'))
+    },
     // 平台账户
     {
         path: '/BTC-finance/platformAccount',
