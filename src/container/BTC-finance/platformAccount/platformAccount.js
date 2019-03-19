@@ -75,6 +75,8 @@ class PlatformAccount extends React.Component {
     gomanualsettlement(accountNumber, bizType, symbol) {
         if (accountNumber) {
             this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+        } else {
+            message.warning('暂无资金订单');
         }
     }
     render() {

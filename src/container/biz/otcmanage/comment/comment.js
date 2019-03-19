@@ -25,6 +25,15 @@ class Comment extends React.Component {
     render() {
         const fields = [{
             field: 'content',
+            title: '针对订单号',
+            search: true
+        }, {
+            field: 'content',
+            title: '评论星级',
+            search: true,
+            type: 'select'
+        }, {
+            field: 'content',
             title: '内容'
         }, {
             field: 'fromUser',
@@ -35,15 +44,8 @@ class Comment extends React.Component {
         }, {
                 title: '评论时间',
                 field: 'createDatetime',
-                type: 'date',
-                rangedate: ['commentDateStart', 'commentDateEnd'],
-                search: true
-            }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'comment_status'
-        }];
+                type: 'date'
+            }];
         return this.props.buildList({
             fields,
             pageCode: 628275

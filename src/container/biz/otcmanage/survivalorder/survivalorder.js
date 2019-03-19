@@ -88,19 +88,7 @@ class SurvivalOrder extends React.Component {
         }, {
             title: '状态',
             field: 'status',
-            type: 'select',
-            data: [{
-                'key': '0',
-                'value': '待支付'
-            }, {
-                'key': '1',
-                'value': '已支付'
-            }, {
-                'key': '3',
-                'value': '仲裁中'
-            }],
-            keyName: 'key',
-            valueName: 'value',
+            key: 'trade_order_status',
             search: true
         }, {
             field: 'updateDatetime',
@@ -120,8 +108,6 @@ class SurvivalOrder extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是待审核的记录');
                     } else {
                         this.props.history.push(`/otcmanage/survivalorder/addedit?v=1&code=${selectedRows[0].code}`);
                     }

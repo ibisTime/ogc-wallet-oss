@@ -60,19 +60,54 @@ class MarketAdjustmentAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'code',
-            title: '针对订单号'
+            title: '编号'
         }, {
-            title: '内容',
-            field: 'content'
+            title: '买家',
+            field: 'buyUser',
+            render: (v, data) => {
+                if (data.buyUserInfo) {
+                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
+                }
+            }
         }, {
-            title: '评论人 ',
-            field: 'fromUser'
+            title: '卖家',
+            field: 'sellUser',
+            render: (v, data) => {
+                if (data.sellUserInfo) {
+                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
+                }
+            }
         }, {
-            title: '被评论人',
-            field: 'toUser'
+            title: '交易对',
+            type: 'tradeCoin',
+            render: (v, data) => {
+                return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
+            }
         }, {
-            title: '评论时间',
-            field: 'createDatetime',
+            title: '交易价格',
+            field: 'tradePrice'
+        }, {
+            title: '交易数量',
+            field: 'countString',
+            render: (v, data) => {
+                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+            }
+        }, {
+            title: '交易金额',
+            field: 'tradeAmount'
+        }, {
+            title: '广告费',
+            field: 'feeString',
+            render: (v, data) => {
+                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+            }
+        }, {
+            title: '状态',
+            field: 'status',
+            key: 'trade_order_status'
+        }, {
+            field: 'updateDatetime',
+            title: '完成时间',
             type: 'datetime'
         }];
         const { data } = this.state;
@@ -104,25 +139,25 @@ class MarketAdjustmentAddedit extends DetailUtil {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>单笔最小量：</label>
-                    <span style={{marginLeft: '20px'}}>{data.minTrade + '分钟'}</span>
+                    <span style={{marginLeft: '20px'}}>{data.minTrade }</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>付款期限：</label>
-                    <span style={{marginLeft: '20px'}}>{data.payLimit}</span>
+                    <span style={{marginLeft: '20px'}}>{data.payLimit}分钟</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>创建时间：</label>
                     <span style={{marginLeft: '20px'}}>{dateTimeFormat(data.createDatetime)}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
-                    <label>评论详情：</label>
+                    <label>订单详情：</label>
                     {
                         this.props.buildList({
                             fields,
                             noSelect: true,
-                            pageCode: 628275,
+                            pageCode: 625250,
                             searchParams: {
-                                tradeOrderCode: this.code
+                                adsCode: this.code
                             },
                             buttons: []
                         })}

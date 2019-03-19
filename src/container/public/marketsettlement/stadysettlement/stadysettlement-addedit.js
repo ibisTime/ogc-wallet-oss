@@ -15,14 +15,8 @@ class StayorderAddedit extends DetailUtil {
             title: '订单编号',
             field: 'code'
         }, {
-            title: '活动类型',
-            field: 'pic',
-            type: 'img'
-        }, {
             title: '活动币种',
-            field: 'currency',
-            select: 'type',
-            search: true
+            field: 'currency'
         }, {
             title: '申请划转数量',
             field: 'amount',
@@ -42,18 +36,8 @@ class StayorderAddedit extends DetailUtil {
         }, {
             title: '状态',
             field: 'status',
-            data: [{
-                key: '0',
-                value: '审核中'
-            }, {
-                key: '1',
-                value: '审核通过'
-            }, {
-                key: '2',
-                value: '审核不通过'
-            }],
-            keyName: 'key',
-            valueName: 'value'
+            type: 'select',
+            key: 'transfer_status'
         }];
         return this.buildDetail({
             fields,

@@ -115,10 +115,6 @@ class HistoricalorderOrderEdit extends React.Component {
                     <span style={{marginLeft: '20px'}}>{data.feeString}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
-                    <label>状态：</label>
-                    <span style={{marginLeft: '20px'}}>{data.status}</span>
-                </div>
-                <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>完成时间：</label>
                     <span style={{marginLeft: '20px'}}>{dateTimeFormat(data.createDatetime)} </span>
                 </div>

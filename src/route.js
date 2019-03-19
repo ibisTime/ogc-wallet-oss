@@ -222,6 +222,11 @@ const ROUTES = [
         path: '/user/customer/ledgerQuery',
         component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
     },
+    // 会员流水
+    {
+        path: '/user/customer/ledgerQuerys',
+        component: asyncComponent(() => import('container/user/customer/customers-ledgerQuery'))
+    },
     {
         path: '/user/customer/accountSummary',
         component: asyncComponent(() => import('container/user/customer/customer-accountSummary'))

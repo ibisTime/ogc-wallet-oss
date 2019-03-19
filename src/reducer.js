@@ -222,6 +222,8 @@ import {StadySettLement} from './redux/marketsettlement/stadysettlement';
 import {NoOrder} from './redux/marketsettlement/noorder';
 import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
+import {AlreadySettlementResolve} from './redux/marketsettlement/alreadysettlement-resolve';
+
 import {GoOrder} from './redux/marketsettlement/goorder';
 import {ManualSettlement} from './redux/marketsettlement/manualsettlement';
 import {PlatFormRecord} from './redux/marketsettlement/platformrecord';
@@ -386,6 +388,7 @@ export default combineReducers({
     NoOrder,
     StayOrder,
     AlreadySettlement,
+    AlreadySettlementResolve,
     quanTitativeCategory,
     NotifierofWithdrawal,
     GoOrder,

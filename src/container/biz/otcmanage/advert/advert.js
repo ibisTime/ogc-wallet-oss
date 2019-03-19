@@ -47,7 +47,7 @@ class Advert extends React.Component {
             title: '付款方式'
         }, {
             field: 'totalCountString',
-            title: '已有总量',
+            title: '已有总量(BTC)',
             render: (v, data) => {
                 return moneyFormat(v, '', data.totalCountString);
             }

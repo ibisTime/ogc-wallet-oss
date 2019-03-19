@@ -89,18 +89,7 @@ class Historicalorder extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            data: [{
-                'key': '0',
-                'value': '待支付'
-            }, {
-                'key': '1',
-                'value': '已支付'
-            }, {
-                'key': '3',
-                'value': '仲裁中'
-            }],
-            keyName: 'key',
-            valueName: 'value',
+           key: 'trade_order_status',
             search: true
         }, {
             field: 'updateDatetime',

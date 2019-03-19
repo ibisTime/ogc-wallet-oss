@@ -13,7 +13,7 @@ app.use('/api', function (req, res) {
    // var url = 'http://3.1.207.21:2801/forward-service/api';
     var url = 'http://120.26.6.213:5801/forward-service/api';
     //测试
-   // var url = 'http://120.26.6.213:6801/forward-service/api';
+  // var url = 'http://120.26.6.213:6801/forward-service/api';
     // 客户
     // var url = 'http://47.97.202.123:2801/forward-service/api';
 

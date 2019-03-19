@@ -54,7 +54,7 @@ class Otcpayment extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 802831
+            pageCode: 802830
         });
     }
 }
