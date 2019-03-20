@@ -71,15 +71,16 @@ class ArbitrationOrder extends React.Component {
             // setstrutlist: ['5'],
             btnEvent: {
                 orderdetail: (selectedRowKeys, selectedRows) => {
-                    // if (!selectedRowKeys.length) {
-                    //     showWarnMsg('请选择记录');
-                    // } else if (selectedRowKeys.length > 1) {
-                    //     showWarnMsg('请选择一条记录');
-                    // //     if (selectedRows[0].status !== '0') {
-                    // //         showWarnMsg('只有待处理的订单才可以进行处理');
-                    // } else {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                        //     if (selectedRows[0].status !== '0') {
+                        //         showWarnMsg('只有待处理的订单才可以进行处理');
+                    } else {
                         this.props.history.push(`/trade/arbitrationOrder/resolve?code=${selectedRowKeys[0]}`);
                     }
+                }
             }
         });
     }

@@ -49,8 +49,10 @@ class Advert extends React.Component {
             listCode: '625350',
             keyName: 'code',
             valueName: 'name',
-            required: true,
-            title: '付款方式'
+            title: '付款方式',
+            render: (v, data) => {
+                return data.paymentName;
+            }
         }, {
             field: 'totalCountString',
             title: '已买出/购买(BTC)',

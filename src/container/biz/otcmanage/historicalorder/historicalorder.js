@@ -75,7 +75,7 @@ class Historicalorder extends React.Component {
             title: '交易金额',
             field: 'tradeAmount',
             render: (v, data) => {
-                return data.tradeAmount + data.tradeCurrency;
+                return data.tradeAmount + '-' + data.tradeCurrency;
             }
         }, {
             title: '广告费',

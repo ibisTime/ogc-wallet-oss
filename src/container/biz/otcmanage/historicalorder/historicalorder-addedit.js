@@ -13,6 +13,7 @@ import { Button } from 'antd';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
+    moneyBTC,
     showWarnMsg,
     showSucMsg,
     dateTimeFormat,
@@ -37,7 +38,9 @@ class HistoricalorderOrderEdit extends React.Component {
         this.code = getQueryString('code', this.props.location.search) || '';
         this.objectUserId = getQueryString('userId', this.props.location.search) || '';
         this.state = {
-            data: []
+            data: [],
+            buyUserInfo: [],
+            sellUserInfo: []
         };
     }
     goBack = () => {
@@ -54,7 +57,9 @@ class HistoricalorderOrderEdit extends React.Component {
             })
         ]).then(([res1]) => {
             this.setState({
-                data: res1
+                data: res1,
+                buyUserInfo: res1.buyUserInfo,
+                sellUserInfo: res1.sellUserInfo
             });
             this.props.cancelFetching();// loading隐藏
         }).catch(this.props.cancelFetching);
@@ -65,49 +70,38 @@ class HistoricalorderOrderEdit extends React.Component {
             field: 'code',
             title: '针对订单号'
         }, {
+            field: 'starLevel',
             title: '评论星级',
-            field: 'invalidDatetime',
-            type: 'datetime'
+            key: 'comment_star_level',
+            type: 'select'
         }, {
-            title: '内容',
-            field: 'markDatetime',
-            type: 'datetime'
+            field: 'content',
+            title: '内容'
         }, {
-            title: '评论人 ',
-            field: 'releaseDatetime',
-            type: 'datetime'
+            field: 'fromUser',
+            title: '评论人'
         }, {
-            title: '被评论人',
-            field: 'status',
-            type: 'select',
-            key: 'trade_order_status'
+            field: 'toUser',
+            title: '被评论人'
         }, {
             title: '评论时间',
-            field: 'bsComment',
-            type: 'select',
-            key: 'comment_result'
-        }, {
-            title: '交易数量',
-            field: 'countString',
-            hidden: true,
-            render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
-            }
+            field: 'createDatetime',
+            type: 'date'
         }];
-        const { data } = this.state;
-        return (
-            <div>
+        const {data, buyUserInfo, sellUserInfo} = this.state;
+            return (
+        <div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label> 编号：</label>
                     <span style={{marginLeft: '20px'}}>{data.code}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>买家：</label>
-                    <span style={{marginLeft: '20px'}}>{data.buyUser}</span>
+                    <span style={{marginLeft: '20px'}}>{buyUserInfo.nickname}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>卖家：</label>
-                    <span style={{marginLeft: '20px'}}>{data.sellUser}</span>
+                    <span style={{marginLeft: '20px'}}>{sellUserInfo.nickname}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>交易对：</label>
@@ -119,7 +113,9 @@ class HistoricalorderOrderEdit extends React.Component {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>交易数量：</label>
-                    <span style={{marginLeft: '20px'}}>{data.countString}</span>
+                    <span style={{marginLeft: '20px'}}>
+                         {moneyFormat(data.countString, '', data.tradeCoin) + '-' + data.tradeCoin}
+                    </span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>交易金额：</label>
@@ -127,7 +123,9 @@ class HistoricalorderOrderEdit extends React.Component {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>广告费：</label>
-                    <span style={{marginLeft: '20px'}}>{(data.feeString / 100000000) + '-BTC'}</span>
+                    <span style={{marginLeft: '20px'}}>
+                        {moneyFormat(data.feeString, '', data.tradeCoin) + '-' + data.tradeCoin}
+                    </span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>完成时间：</label>

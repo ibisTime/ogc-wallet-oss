@@ -219,6 +219,37 @@ export function moneyFormat(money, format, coin, isRe = false) {
     }
     return money;
 }
+export function moneyBTC(money, format, coin, isRe = false) {
+  let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000000';
+  let flag = false;// 是否是负数
+  if (isNaN(money)) {
+    return '-';
+  } else {
+    Number(money);
+  }
+  if (money < 0) {
+    money = -1 * money;
+    flag = true;
+  }
+  // 如果有币种coin 则默认为8位  如果没有则默认格式为2位小数
+  if (coin && isUndefined(format)) {
+    format = 8;
+  } else if (isUndefined(format) || typeof format === 'object') {
+    format = 2;
+  }
+  // 金额格式化 金额除以unit并保留format位小数
+  money = new BigDecimal(money.toString());
+  money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_DOWN).toString();
+  // 是否去零
+  if (isRe) {
+    var re = /\d{1,3}(?=(\d{3})+$)/g;
+    money = money.replace(/^(\d+)((\.\d+)?)$/, (s, s1, s2) => (s1.replace(re, '$&,') + s2));
+  }
+  if (flag) {
+    money = '-' + money;
+  }
+  return money;
+}
 
 /**
  * 金额放大 根据币种的单位把金额放大

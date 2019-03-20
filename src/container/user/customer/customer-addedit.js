@@ -132,7 +132,8 @@ class CustomerAddedit extends DetailUtil {
         }];
         return (
             <div>
-                <div style={{width: '100%', marginLeft: '45%', marginTop: '30px'}}>
+            /*
+          <div style={{width: '100%', marginLeft: '45%', marginTop: '30px'}}>
                     <div className="content-wrap wp100">
                         <div className="wrap chat-wrap hp100 wp100">
                             <div className="msgflow" id="msgflow"></div>
@@ -148,6 +149,7 @@ class CustomerAddedit extends DetailUtil {
                         </div>
                     </div>
                 </div>
+*/>
                 <div style={{marginTop: '20px'}}>
                     {
                         this.buildDetail({

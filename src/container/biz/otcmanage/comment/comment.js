@@ -30,6 +30,7 @@ class Comment extends React.Component {
         }, {
             field: 'starLevel',
             title: '评论星级',
+            key: 'comment_star_level',
             search: true,
             type: 'select'
         }, {

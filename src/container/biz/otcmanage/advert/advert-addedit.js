@@ -90,7 +90,10 @@ class MarketAdjustmentAddedit extends DetailUtil {
             }
         }, {
             title: '交易金额',
-            field: 'tradeAmount'
+            field: 'tradeAmount',
+            render: (v, data) => {
+                return data.tradeAmount + '-' + data.tradeCurrency;
+            }
         }, {
             title: '广告费',
             field: 'feeString',
@@ -120,11 +123,12 @@ class MarketAdjustmentAddedit extends DetailUtil {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>付款方式：</label>
-                    <span style={{marginLeft: '20px'}}>{data.payType}</span>
+                    <span style={{marginLeft: '20px'}}>{data.paymentName}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>已买出/购买(BTC)：</label>
-                    <span style={{marginLeft: '20px'}}>{(data.totalCountString / 100000000)}-BTC
+                    <span style={{marginLeft: '20px'}}>
+                           {data.totalCountString === '0' ? data.totalCountString + '-' + data.tradeCoin : moneyFormat(data.totalCountString, '', data.tradeCoin) + '-' + data.tradeCoin}
                     </span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
