@@ -161,7 +161,7 @@ class PlatformAccount extends React.Component {
                             </div>
                             {<div style={{width: '100%', textAlign: 'center'}}>
                                 <Button
-                                    onClick={() => this.gomanualsettlement(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '', 'jour_biz_type_lhlc', '')}
+                                    onClick={() => this.gomanualsettlement(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '', 'jour_biz_type_lhlc', this.state.symbol)}
                                     type="primary" style={{marginTop: '50px', margin: 'center'}}>手动结算</Button>
                                 {/* <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button> */}
                             </div>}

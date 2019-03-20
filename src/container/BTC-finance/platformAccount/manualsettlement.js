@@ -28,10 +28,9 @@ class GJAddressQueryAddedit extends DetailUtil {
 
     render() {
         const fields = [{
-            value: 1,
-            required: true,
-            field: 'currency',
-            hidden: true
+            title: '币种',
+            hidden: true,
+            field: 'currency'
         }, {
             value: getUserName(),
             required: true,
@@ -77,6 +76,8 @@ class GJAddressQueryAddedit extends DetailUtil {
                 title: '保存',
                 check: true,
                 handler: (params) => {
+                    console.log(params);
+                    params.currency = this.symbol;
                     this.doFetching();
                     fetch(802820, params).then(() => {
                         showSucMsg('操作成功');
@@ -90,13 +91,7 @@ class GJAddressQueryAddedit extends DetailUtil {
                 handler: () => {
                     this.props.history.go(-1);
                 }
-            }],
-            searchParams: {
-                isPlat: this.isPlat,
-                bizType: this.bizType,
-                currency: this.symbol,
-                accountNumber: this.accountNumber
-            }
+            }]
         });
     }
 }

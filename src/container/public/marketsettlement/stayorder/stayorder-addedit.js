@@ -38,7 +38,8 @@ class StayorderAddedit extends DetailUtil {
         }, {
             title: '状态',
             field: 'status',
-           key: 'transfer_status'
+            type: 'select',
+               key: 'transfer_status'
         }];
         return this.buildDetail({
             fields,

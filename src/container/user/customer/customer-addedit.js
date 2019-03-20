@@ -111,9 +111,6 @@ class CustomerAddedit extends DetailUtil {
                 return data.realName ? '是' : '否';
             }
         }, {
-            //     field: 'tradeRate',
-            //     title: '广告费率'
-            // }, {
             field: 'status',
             title: '状态',
             type: 'select',
@@ -132,24 +129,6 @@ class CustomerAddedit extends DetailUtil {
         }];
         return (
             <div>
-            /*
-          <div style={{width: '100%', marginLeft: '45%', marginTop: '30px'}}>
-                    <div className="content-wrap wp100">
-                        <div className="wrap chat-wrap hp100 wp100">
-                            <div className="msgflow" id="msgflow"></div>
-                            <div className="btnWrap">
-                                <textarea type="text" id="msgedit" className="msgedit" placeholder="按回车发送消息"></textarea>
-                                <button id="msgImg" className="msgImg"></button>
-                                <button id="openPic" className="openPic"></button>
-                                <div className="emotionUL-wrap hidden">
-                                    <ul id="emotionUL" className="wp100">
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-*/>
                 <div style={{marginTop: '20px'}}>
                     {
                         this.buildDetail({
