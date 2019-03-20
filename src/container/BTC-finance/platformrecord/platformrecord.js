@@ -29,29 +29,38 @@ import fetch from 'common/js/fetch';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Otcpayment extends React.Component {
+class PlatFormrecord extends React.Component {
     render() {
-        const fields = [{
-            title: '订单编号',
-            field: 'code'
-        }, {
-            title: '申请人',
-            field: 'applyUser'
-        }, {
-            title: '申请时间',
-            type: 'datetime',
-            field: 'applyDatetime'
-        }, {
-            title: '申请说明',
-            field: 'approveNote'
-        }, {
-            title: '操作人',
-            field: 'approveUser'
-        }, {
-            title: '操作时间',
-            type: 'datetime',
-            field: 'approveDatetime'
-        }];
+        const fields = [
+            {
+                field: 'bizType',
+                title: '结算类型',
+                type: 'select',
+                search: 'true',
+                data: [{
+                    key: '0',
+                    value: '营销结算'
+                }],
+                keyName: 'key',
+                valueName: 'value'
+            }, {
+                field: 'type',
+                title: '具体业务',
+                type: 'select',
+                search: 'true',
+                data: [{
+                    key: '0',
+                    value: '划转结算'
+                }],
+                keyName: 'key',
+                valueName: 'value'
+            }, {
+                title: '打币地址',
+                field: 'payCardNo'
+            }, {
+                field: 'settleAmount',
+                title: '结算数量'
+            }];
         return this.props.buildList({
             fields,
             pageCode: 802830
@@ -59,4 +68,4 @@ class Otcpayment extends React.Component {
     }
 }
 
-export default Otcpayment;
+export default PlatFormrecord;

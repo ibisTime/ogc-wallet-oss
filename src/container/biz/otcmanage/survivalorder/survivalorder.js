@@ -36,9 +36,7 @@ class SurvivalOrder extends React.Component {
             title: '买家',
             field: 'buyUser',
             render: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
-                }
+                return data.buyUserInfo ? data.buyUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
@@ -50,9 +48,7 @@ class SurvivalOrder extends React.Component {
             title: '卖家',
             field: 'sellUser',
             render: (v, data) => {
-                if (data.sellUserInfo) {
-                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
-                }
+                return data.sellUserInfo ? data.sellUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
@@ -65,8 +61,7 @@ class SurvivalOrder extends React.Component {
             type: 'tradeCoin',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
-            },
-            search: true
+            }
         }, {
             title: '交易价格',
             field: 'tradePrice'
@@ -89,6 +84,7 @@ class SurvivalOrder extends React.Component {
             title: '状态',
             field: 'status',
             key: 'trade_order_status',
+            type: 'select',
             search: true
         }, {
             field: 'updateDatetime',

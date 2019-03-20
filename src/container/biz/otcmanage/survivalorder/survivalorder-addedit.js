@@ -23,9 +23,7 @@ class SurvivalorderAddedit extends DetailUtil {
             title: '买家',
             field: 'buyUser',
             formatter: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
-                }
+                return data.buyUserInfo ? data.buyUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
@@ -37,9 +35,7 @@ class SurvivalorderAddedit extends DetailUtil {
             title: '卖家',
             field: 'sellUser',
             formatter: (v, data) => {
-                if (data.sellUserInfo) {
-                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
-                }
+                return data.sellUserInfo ? data.sellUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',

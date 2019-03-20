@@ -44,6 +44,8 @@ class Advert extends React.Component {
             }
         }, {
             field: 'payType',
+            type: 'select',
+            search: 'true',
             title: '付款方式'
         }, {
             field: 'totalCountString',

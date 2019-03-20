@@ -65,17 +65,13 @@ class MarketAdjustmentAddedit extends DetailUtil {
             title: '买家',
             field: 'buyUser',
             render: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
-                }
+                    return data.buyUserInfo ? data.buyUserInfo.nickname : '';
             }
         }, {
             title: '卖家',
             field: 'sellUser',
             render: (v, data) => {
-                if (data.sellUserInfo) {
-                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
-                }
+                    return data.sellUserInfo ? data.sellUserInfo.nickname : '';
             }
         }, {
             title: '交易对',
@@ -104,6 +100,7 @@ class MarketAdjustmentAddedit extends DetailUtil {
         }, {
             title: '状态',
             field: 'status',
+            type: 'select',
             key: 'trade_order_status'
         }, {
             field: 'updateDatetime',

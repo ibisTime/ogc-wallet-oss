@@ -57,8 +57,7 @@ class HistoricalorderOrderEdit extends React.Component {
                 data: res1
             });
             this.props.cancelFetching();// loading隐藏
-        }).catch(() => this.setState(
-            {fetching: false}));
+        }).catch(this.props.cancelFetching);
     }
 
     render() {
@@ -66,18 +65,27 @@ class HistoricalorderOrderEdit extends React.Component {
             field: 'code',
             title: '针对订单号'
         }, {
+            title: '评论星级',
+            field: 'invalidDatetime',
+            type: 'datetime'
+        }, {
             title: '内容',
-            field: 'content'
+            field: 'markDatetime',
+            type: 'datetime'
         }, {
             title: '评论人 ',
-            field: 'fromUser'
+            field: 'releaseDatetime',
+            type: 'datetime'
         }, {
             title: '被评论人',
-            field: 'toUser'
+            field: 'status',
+            type: 'select',
+            key: 'trade_order_status'
         }, {
             title: '评论时间',
-            field: 'createDatetime',
-            type: 'datetime'
+            field: 'bsComment',
+            type: 'select',
+            key: 'comment_result'
         }];
         const { data } = this.state;
         return (
@@ -112,7 +120,7 @@ class HistoricalorderOrderEdit extends React.Component {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>广告费：</label>
-                    <span style={{marginLeft: '20px'}}>{data.feeString}</span>
+                    <span style={{marginLeft: '20px'}}>{moneyFormat(data.feeString)}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>完成时间：</label>
