@@ -38,7 +38,7 @@ class BannerAddEdit extends DetailUtil {
             title: 'banner图片',
             field: 'pic',
             type: 'img',
-            help: '690*300',
+            help: '1200*300',
             required: true,
             single: true
         }, {

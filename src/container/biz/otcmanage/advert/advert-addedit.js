@@ -86,7 +86,7 @@ class MarketAdjustmentAddedit extends DetailUtil {
             title: '交易数量',
             field: 'countString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '交易金额',
@@ -95,7 +95,7 @@ class MarketAdjustmentAddedit extends DetailUtil {
             title: '广告费',
             field: 'feeString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '状态',
@@ -123,8 +123,9 @@ class MarketAdjustmentAddedit extends DetailUtil {
                     <span style={{marginLeft: '20px'}}>{data.payType}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
-                    <label>已有总量：</label>
-                    <span style={{marginLeft: '20px'}}>{moneyFormat(data.totalCountString)}</span>
+                    <label>已买出/购买(BTC)：</label>
+                    <span style={{marginLeft: '20px'}}>{(data.totalCountString / 100000000)}-BTC
+                    </span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>溢价率：</label>

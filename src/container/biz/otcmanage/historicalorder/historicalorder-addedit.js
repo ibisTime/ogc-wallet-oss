@@ -86,6 +86,13 @@ class HistoricalorderOrderEdit extends React.Component {
             field: 'bsComment',
             type: 'select',
             key: 'comment_result'
+        }, {
+            title: '交易数量',
+            field: 'countString',
+            hidden: true,
+            render: (v, data) => {
+                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+            }
         }];
         const { data } = this.state;
         return (
@@ -104,7 +111,7 @@ class HistoricalorderOrderEdit extends React.Component {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>交易对：</label>
-                    <span style={{marginLeft: '20px'}}>{data.tradeCoin}</span>
+                    <span style={{marginLeft: '20px'}}>{ data ? data.tradeCoin + '-' + data.tradeCurrency : ''}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>交易价格：</label>
@@ -116,11 +123,11 @@ class HistoricalorderOrderEdit extends React.Component {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>交易金额：</label>
-                    <span style={{marginLeft: '20px'}}>{data.tradeAmount}</span>
+                    <span style={{marginLeft: '20px'}}>{ data.tradeAmount + '-' + data.tradeCurrency}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>广告费：</label>
-                    <span style={{marginLeft: '20px'}}>{moneyFormat(data.feeString)}</span>
+                    <span style={{marginLeft: '20px'}}>{(data.feeString / 100000000) + '-BTC'}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>完成时间：</label>

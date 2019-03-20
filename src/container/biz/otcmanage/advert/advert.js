@@ -43,15 +43,23 @@ class Advert extends React.Component {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
         }, {
-            field: 'payType',
+            field: 'paymentName',
             type: 'select',
             search: 'true',
+            listCode: '625350',
+            keyName: 'code',
+            valueName: 'name',
+            required: true,
             title: '付款方式'
         }, {
             field: 'totalCountString',
-            title: '已有总量(BTC)',
+            title: '已买出/购买(BTC)',
             render: (v, data) => {
-                return moneyFormat(v, '', data.totalCountString);
+                if (data.totalCountString === '0') {
+                    return data.totalCountString + '-BTC';
+                } else {
+                    return moneyFormat(v, '', data.totalCountString) + 'BTC';
+                }
             }
         }, {
             field: 'premiumRate',
@@ -60,11 +68,11 @@ class Advert extends React.Component {
                 return v * 100 + '%';
             }
         }, {
-            field: 'maxTrade',
-            title: '单笔最大量'
-        }, {
             field: 'minTrade',
             title: '单笔最小量'
+        }, {
+            field: 'maxTrade',
+            title: '单笔最大量'
         }, {
             field: 'payLimit',
             title: '付款期限',

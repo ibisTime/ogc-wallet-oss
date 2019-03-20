@@ -24,11 +24,11 @@ import {listWrapper} from 'common/js/build-list';
 class Comment extends React.Component {
     render() {
         const fields = [{
-            field: 'content',
+            field: 'code',
             title: '针对订单号',
             search: true
         }, {
-            field: 'content',
+            field: 'starLevel',
             title: '评论星级',
             search: true,
             type: 'select'

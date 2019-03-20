@@ -69,16 +69,19 @@ class SurvivalOrder extends React.Component {
             title: '交易数量',
             field: 'countString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '交易金额',
-            field: 'tradeAmount'
+            field: 'tradeAmount',
+            render: (v, data) => {
+                return data.tradeAmount + '-' + data.tradeCurrency;
+            }
         }, {
             title: '广告费',
             field: 'feeString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '状态',

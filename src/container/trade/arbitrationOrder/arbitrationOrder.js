@@ -66,7 +66,7 @@ class ArbitrationOrder extends React.Component {
             fields,
             pageCode: '625265',
             searchParams: {
-                strut: '5'
+                status: '5'
             },
             // setstrutlist: ['5'],
             btnEvent: {

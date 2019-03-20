@@ -57,33 +57,25 @@ class SurvivalorderAddedit extends DetailUtil {
             title: '交易数量',
             field: 'countString',
             formatter: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '交易金额',
-            field: 'tradeAmount'
+            field: 'tradeAmount',
+            formatter: (v, data) => {
+                return data.tradeAmount + '-' + data.tradeCurrency;
+            }
         }, {
             title: '广告费',
             field: 'feeString',
             formatter: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '状态',
             field: 'status',
+            key: 'trade_order_status',
             type: 'select',
-            data: [{
-                'key': '0',
-                'value': '待支付'
-            }, {
-                'key': '1',
-                'value': '已支付'
-            }, {
-                'key': '3',
-                'value': '仲裁中'
-            }],
-            keyName: 'key',
-            valueName: 'value',
             search: true
         }, {
             field: 'updateDatetime',

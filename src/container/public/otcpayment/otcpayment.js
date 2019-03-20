@@ -35,6 +35,7 @@ class Otcpayment extends React.Component {
             title: '类型',
             field: 'type',
             type: 'select',
+            search: true,
             key: 'payment_method'
         }, {
             title: '中文名称',
