@@ -47,10 +47,6 @@ class Otcpayment extends React.Component {
             title: '订单编号',
             field: 'code'
         }, {
-            title: '活动类型',
-            field: 'pic',
-            type: 'img'
-        }, {
             title: '活动币种',
             field: 'currency',
             select: 'type',

@@ -31,8 +31,16 @@ import {Modal} from 'antd';
 class Advert extends React.Component {
     render() {
         const fields = [{
-            field: 'realName',
+            field: 'userId',
             title: '发布人',
+            type: 'select',
+            pageCode: '805120',
+            // params: {
+            //     kind: 'Q'
+            // },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}',
+            searchName: 'keyword',
             search: true,
             render: (v, data) => {
                 return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
@@ -42,13 +50,9 @@ class Advert extends React.Component {
             field: 'tradeCoin',
             // field: 'symbol',
             type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
+            listCode: '625370',
+            keyName: 'tradeCurrency',
+            valueName: '{{simpleName.DATA}}',
             search: true,
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
@@ -57,7 +61,8 @@ class Advert extends React.Component {
             field: 'paymentName',
             type: 'select',
             search: 'true',
-            listCode: '625350',
+            pageCode: '625351',
+            searchName: 'keyword',
             keyName: 'code',
             valueName: 'name',
             title: '付款方式',

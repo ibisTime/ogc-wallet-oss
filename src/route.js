@@ -840,9 +840,10 @@ const ROUTES = [
         path: '/BTC-finance/diviAddress/flow',
         component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-flow'))
     },
+    // 财务管理 -- 会员账户 -- 会员账户 -- 本地流水-- 详情
     {
         path: '/BTC-finance/diviAddress/addedit',
-        component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-ledger'))
+        component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-addedit'))
     },
 
     // 充币管理

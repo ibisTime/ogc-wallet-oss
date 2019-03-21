@@ -1,44 +1,26 @@
 import React from 'react';
 import { Form } from 'antd';
-import { getQueryString } from 'common/js/util';
+import { getQueryString, moneyFormat } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
-
+import fetch from 'common/js/fetch';
 @Form.create()
-class DiviAddEdit extends DetailUtil {
+class diviAddresAddedit extends DetailUtil {
   constructor(props) {
     super(props);
     this.code = getQueryString('code', this.props.location.search);
+    this.accountNumber = getQueryString('accountNumber', this.props.location.search);
     this.view = !!getQueryString('v', this.props.location.search);
   }
   render() {
     const fields = [{
       title: '用户',
-      field: 'userId',
-      type: 'select',
-      pageCode: '805120',
-      keyName: 'userId',
-      valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-      searchName: 'keyword',
-      search: true,
-      render: (v, data) => {
-        return data.nickname;
-      }
+      field: 'userId'
     }, {
       field: 'loginName',
       title: '手机号/邮箱'
     }, {
       field: 'currency',
-      title: '持有币种',
-      type: 'select',
-      pageCode: '802005',
-      params: {
-        status: '0'
-      },
-      keyName: 'symbol',
-      valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-      searchName: 'symbol',
-      render: (v) => v,
-      search: true
+      title: '持有币种'
     }, {
       field: 'amount',
       title: '持有币的数量'
@@ -54,14 +36,22 @@ class DiviAddEdit extends DetailUtil {
     }, {
       field: 'usdAssets',
       title: '折合USD'
-    }]
+    }];
     return this.buildDetail({
       fields,
       code: this.code,
       view: this.view,
       detailCode: 802522
+      // beforeSearch: (data) => {
+      //   if(data.status) {
+      //     var statusList = [];
+      //     statusList.push(data.status);
+      //     data.statusList = statusList;
+      //   }
+      //   return data;
+      // }
     });
   }
 }
 
-export default DiviAddEdit;
+export default diviAddresAddedit;

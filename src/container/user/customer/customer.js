@@ -40,9 +40,6 @@ class Customer extends React.Component {
             data: [{
                 key: 'C',
                 value: 'c端'
-            }, {
-                key: 'Q',
-                value: '渠道商'
             }],
             keyName: 'key',
             valueName: 'value',
