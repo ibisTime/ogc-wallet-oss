@@ -27,7 +27,10 @@ class StayorderAddedit extends DetailUtil {
             }
         }, {
             title: '申请人',
-            field: 'applyUser'
+            field: 'applyUser',
+            formatter: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '申请时间',
             type: 'datetime',

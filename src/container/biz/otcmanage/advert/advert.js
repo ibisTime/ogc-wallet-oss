@@ -14,7 +14,8 @@ import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getUserName
+    getUserName,
+    getCoinList
 } from 'common/js/util';
 import {Modal} from 'antd';
 @listWrapper(
@@ -37,8 +38,18 @@ class Advert extends React.Component {
                 return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             }
         }, {
-            field: 'tradeCoin',
             title: '交易对',
+            field: 'tradeCoin',
+            // field: 'symbol',
+            type: 'select',
+            pageCode: '802005',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            search: true,
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }

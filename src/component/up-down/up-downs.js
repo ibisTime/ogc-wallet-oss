@@ -49,7 +49,7 @@ class UpDowns extends React.Component {
             beforeSubmit: (params) => {
                 console.log(params.status);
                 console.log(params.result);
-                params.status = this.result;
+                params.status = this.approveUser;
                 return params;
             },
             addCode: biz

@@ -156,7 +156,7 @@ class PlatformAccount extends React.Component {
                                 <label>已结算数量:</label>
                                 <span style={{marginLeft: '20px'}}>{data.totalSettleAmount}</span>
                                 <Button
-                                    onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
+                                    onClick={() => this.goSettlement(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
                                     type="primary" style={{marginTop: '15px', marginLeft: '55px'}}>查看记录</Button>
                             </div>
                             {<div style={{width: '100%', textAlign: 'center'}}>

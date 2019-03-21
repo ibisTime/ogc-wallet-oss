@@ -73,7 +73,10 @@ class Otcpayment extends React.Component {
             field: 'approveNote'
         }, {
             title: '操作人',
-            field: 'approveUser'
+            field: 'approveUser',
+            render: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '操作时间',
             type: 'datetime',
@@ -89,6 +92,11 @@ class Otcpayment extends React.Component {
                 accountNumber: this.accountNumber
             },
             buttons: [
+                {
+                    code: 'detail',
+                    name: '详情',
+                    check: false
+                },
                 {
                     code: 'export',
                     name: '导出',
