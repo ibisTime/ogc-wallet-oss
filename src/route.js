@@ -805,6 +805,11 @@ const ROUTES = [
         path: '/BTC-finance/platformAccount/goStady',
         component: asyncComponent(() => import('container/BTC-finance/platformAccount/goStay'))
     },
+    // 营销管理--营销结算--待结算订单-- 详情
+    {
+        path: '/BTC-finance/platformAccount/goStady/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/stadysettlement/stadysettlement-addedit'))
+    },
     // 平台账户 -- 营销账户余额 -- 已结算数量-- 查看订单
     {
         path: '/BTC-finance/platformAccount/goSettlement',

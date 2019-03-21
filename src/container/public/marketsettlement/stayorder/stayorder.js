@@ -33,7 +33,6 @@ import fetch from 'common/js/fetch';
 class Stayorder extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             // 上下架窗口是否显示
             updownVisible: false,

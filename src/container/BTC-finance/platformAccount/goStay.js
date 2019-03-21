@@ -42,6 +42,10 @@ class StadySettlement extends React.Component {
         }
         this.buttons = [];
         this.buttons = [{
+            code: 'detail',
+            name: '详情',
+            check: false
+        }, {
             code: 'export',
             name: '导出',
             check: false

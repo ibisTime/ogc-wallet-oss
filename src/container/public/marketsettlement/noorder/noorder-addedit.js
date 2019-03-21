@@ -38,18 +38,8 @@ class StayorderAddedit extends DetailUtil {
         }, {
             title: '状态',
             field: 'status',
-            data: [{
-                key: '0',
-                value: '审核中'
-            }, {
-                key: '1',
-                value: '审核通过'
-            }, {
-                key: '2',
-                value: '审核不通过'
-            }],
-            keyName: 'key',
-            valueName: 'value'
+           key: 'transfer_status',
+            type: 'select'
         }, {
             title: '操作人',
             field: 'approveUser'

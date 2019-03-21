@@ -79,10 +79,16 @@ class HistoricalorderOrderEdit extends React.Component {
             title: '内容'
         }, {
             field: 'fromUser',
-            title: '评论人'
+            title: '评论人',
+            render: (v, d) => {
+                return d.fromUserInfo ? d.fromUserInfo.nickname : '';
+            }
         }, {
             field: 'toUser',
-            title: '被评论人'
+            title: '被评论人',
+            render: (v, d) => {
+                return d.toUserInfo ? d.toUserInfo.nickname : '';
+            }
         }, {
             title: '评论时间',
             field: 'createDatetime',
