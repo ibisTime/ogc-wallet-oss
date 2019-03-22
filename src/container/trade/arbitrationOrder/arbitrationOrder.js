@@ -36,13 +36,13 @@ class ArbitrationOrder extends React.Component {
             title: '被告',
             field: 'sellUser',
             render: (v, data) => {
-                return data ? data.sellUser + '-卖家' : '';
+                return data.sellUserInfo ? data.sellUserInfo.nickname + '-卖家' : '';
             }
         }, {
             title: '原告',
             field: 'buyUser',
             render: (v, data) => {
-                return data ? data.buyUser + '-买家' : '';
+                return data.buyUserInfo ? data.buyUserInfo.nickname + '-买家' : '';
             }
         }, {
             title: '交易对',

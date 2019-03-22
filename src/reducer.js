@@ -218,6 +218,7 @@ import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
 // 补给地址
 import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
+import {BTCFinanceDiviAddressAddedit} from './redux/BTC-finance/diviAddress/diviAddressAddedit';
 // 业务管理-- 营销管理
 import {StadySettLement} from './redux/marketsettlement/stadysettlement';
 import {NoOrder} from './redux/marketsettlement/noorder';
@@ -276,6 +277,7 @@ export default combineReducers({
     // 渠道商管理
     // 渠道商管理
     userChannelDealer,
+    BTCFinanceDiviAddressAddedit,
     userChannelDealerLowerLevelQuery,
     // 广告位管理
     // public

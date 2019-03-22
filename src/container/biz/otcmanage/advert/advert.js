@@ -14,7 +14,8 @@ import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getUserName
+    getUserName,
+    getCoinList
 } from 'common/js/util';
 import {Modal} from 'antd';
 @listWrapper(
@@ -30,15 +31,30 @@ import {Modal} from 'antd';
 class Advert extends React.Component {
     render() {
         const fields = [{
-            field: 'realName',
+            field: 'userId',
             title: '发布人',
+            type: 'select',
+            pageCode: '805120',
+            // params: {
+            //     kind: 'Q'
+            // },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}',
+            searchName: 'keyword',
             search: true,
             render: (v, data) => {
                 return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             }
         }, {
-            field: 'tradeCoin',
             title: '交易对',
+            field: 'tradeCoin',
+            // field: 'symbol',
+            type: 'select',
+            listCode: '625370',
+            searchName: 'tradeCurrency',
+            keyName: 'key',
+            valueName: '{{simpleName.DATA}}',
+            search: true,
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
@@ -46,7 +62,8 @@ class Advert extends React.Component {
             field: 'paymentName',
             type: 'select',
             search: 'true',
-            listCode: '625350',
+            pageCode: '625351',
+            searchName: 'keyword',
             keyName: 'code',
             valueName: 'name',
             title: '付款方式',

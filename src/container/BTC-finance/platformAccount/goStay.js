@@ -42,6 +42,10 @@ class StadySettlement extends React.Component {
         }
         this.buttons = [];
         this.buttons = [{
+            code: 'detail',
+            name: '详情',
+            check: false
+        }, {
             code: 'export',
             name: '导出',
             check: false
@@ -72,7 +76,10 @@ class StadySettlement extends React.Component {
             }
         }, {
             title: '申请人',
-            field: 'applyUser'
+            field: 'applyUser',
+            render: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '申请时间',
             type: 'datetime',

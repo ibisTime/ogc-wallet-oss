@@ -800,29 +800,50 @@ const ROUTES = [
         path: '/BTC-finance/platformAccount/goOrder',
         component: asyncComponent(() => import('container/BTC-finance/platformAccount/goOrder'))
     },
+    // 营销管理--营销结算--待审批数量-- 查看订单--详情
+    {
+        path: '/BTC-finance/platformAccount/goOrder/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/stayorder/stayorder-addedit'))
+    },
     // 平台账户 -- 营销账户余额 -- 待结算数量-- 查看订单
     {
         path: '/BTC-finance/platformAccount/goStady',
         component: asyncComponent(() => import('container/BTC-finance/platformAccount/goStay'))
+    },
+    // 营销管理--营销结算--待结算订单-- 详情
+    {
+        path: '/BTC-finance/platformAccount/goStady/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/stadysettlement/stadysettlement-addedit'))
     },
     // 平台账户 -- 营销账户余额 -- 已结算数量-- 查看订单
     {
         path: '/BTC-finance/platformAccount/goSettlement',
         component: asyncComponent(() => import('container/BTC-finance/platformAccount/goSettlement'))
     },
+    // 营销管理--营销结算--已结算订单--查看订单--详情
+    {
+        path: '/BTC-finance/platformAccount/goSettlement/addedit',
+        component: asyncComponent(() => import('container/public/marketsettlement/alreadysettlement/alreadysettlement-addedit'))
+    },
     // 平台账户 -- 营销账户余额 -- 已结算数量-- 手动结算
     {
         path: '/BTC-finance/platformAccount/manualsettlement',
         component: asyncComponent(() => import('container/BTC-finance/platformAccount/manualsettlement'))
     },
-    // 分发地址
+    // 财务管理 -- 会员账户 -- 会员账户
     {
         path: '/BTC-finance/diviAddress',
         component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress'))
     },
+// 财务管理 -- 会员账户 -- 会员账户 -- 本地流水
+    {
+        path: '/BTC-finance/diviAddress/flow',
+        component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-flow'))
+    },
+    // 财务管理 -- 会员账户 -- 会员账户 -- 本地流水-- 详情
     {
         path: '/BTC-finance/diviAddress/addedit',
-        component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-ledger'))
+        component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-addedit'))
     },
 
     // 充币管理

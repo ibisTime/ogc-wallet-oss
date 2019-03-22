@@ -20,42 +20,13 @@ class ArbitrationOrderAddedit extends DetailUtil {
             title: '被告',
             field: 'beigao',
             formatter: (v, data) => {
-                var html = '';
-                if (data.beigaoInfo) {
-                    html = data.beigaoInfo.nickname;
-                    if(data.beigaoInfo.mobile) {
-                        html += '(' + data.beigaoInfo.mobile + ')';
-                    } else {
-                        html += '(' + data.beigaoInfo.email + ')';
-                    }
-                }
-                if(v === data.tradeOrder.buyUser) {
-                    html += '-买家';
-                }else{
-                    html += '-卖家';
-                }
-                return html;
-            },
-            readonly: true
+                return data.sellUserInfo ? data.sellUserInfo.nickname + '-卖家' : '';
+            }
         }, {
             title: '原告',
             field: 'yuangao',
             formatter: (v, data) => {
-                var html = '';
-                if (data.yuangaoInfo) {
-                    html = data.yuangaoInfo.nickname;
-                    if(data.yuangaoInfo.mobile) {
-                        html += '(' + data.yuangaoInfo.mobile + ')';
-                    } else {
-                        html += '(' + data.yuangaoInfo.email + ')';
-                    }
-                }
-                if(v === data.tradeOrder.buyUser) {
-                    html += '-买家';
-                }else{
-                    html += '-卖家';
-                }
-                return html;
+                return data.buyUserInfo ? data.buyUserInfo.nickname + '-买家' : '';
             },
             readonly: true
         }, {

@@ -47,7 +47,10 @@ class StadySettlement extends React.Component {
             }
         }, {
             title: '申请人',
-            field: 'applyUser'
+            field: 'applyUser',
+            render: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '申请时间',
             type: 'datetime',
@@ -61,7 +64,7 @@ class StadySettlement extends React.Component {
         }, {
             title: '操作时间',
             type: 'datetime',
-            field: 'approveDatetime'
+            field: 'applyDatetime'
         }];
         return this.props.buildList({
             fields,

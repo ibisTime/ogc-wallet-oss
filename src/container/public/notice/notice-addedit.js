@@ -16,6 +16,10 @@ class NoticesAddedit extends DetailUtil {
             value: '1',
             hidden: true
         }, {
+            field: 'type',
+            value: '0',
+            hidden: true
+        }, {
             title: '标题',
             field: 'title',
             maxlength: 50,

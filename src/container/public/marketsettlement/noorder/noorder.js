@@ -47,7 +47,10 @@ class Otcpayment extends React.Component {
             }
         }, {
             title: '申请人',
-            field: 'applyUser'
+            field: 'applyUser',
+            render: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '申请时间',
             type: 'datetime',
