@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {user} from './redux/user';
 import {menu} from './redux/menu';
+import {message} from './redux/message';
 import {modalDetail} from './redux/modal/build-modal-detail';
 import {systemRole} from './redux/system/role';
 import {systemMenu} from './redux/system/menu';
@@ -231,6 +232,7 @@ import {PlatFormRecord} from './redux/marketsettlement/platformrecord';
 export default combineReducers({
     user,
     menu,
+    message,
     modalDetail,
     systemRole,
     systemMenu,

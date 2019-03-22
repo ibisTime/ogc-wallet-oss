@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form } from 'antd';
-import DetailUtil from 'common/js/build-detail';
+import DetailUtilO2M from 'common/js/build-detail-o2m';
 import {getQueryString, moneyFormat} from 'common/js/util';
 
 @Form.create()
-class SaleTradeAddedit extends DetailUtil {
+class SaleTradeAddedit extends DetailUtilO2M {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
