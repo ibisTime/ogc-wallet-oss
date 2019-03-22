@@ -51,7 +51,8 @@ class Advert extends React.Component {
             // field: 'symbol',
             type: 'select',
             listCode: '625370',
-            keyName: 'tradeCurrency',
+            searchName: 'tradeCurrency',
+            keyName: 'key',
             valueName: '{{simpleName.DATA}}',
             search: true,
             render: (v, data) => {
