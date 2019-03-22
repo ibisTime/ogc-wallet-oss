@@ -11,8 +11,8 @@ import {
   restoreSubOpenCode
 } from '@redux/menu';
 import { loadTxUserSign, setSelToId } from '@redux/user';
-import { setMsgList } from '@redux/message';
-import { clearUser, getUserId } from 'common/js/util';
+import { setMsgList, addUserMap } from '@redux/message';
+import { clearUser, getUserId, getUserName } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import fetch from 'common/js/fetch';
 import asyncComponent from '../async-component/async-component';
@@ -28,7 +28,7 @@ const Home = asyncComponent(() => import('../../container/home/home'));
 @connect(
   state => ({ ...state.user, ...state.menu, ...state.message, loginName: state.user.loginName }),
   { getMenuList, setTopCode, setSubMenuCode, setSubOpenCode, clearSubOpenCode,
-    restoreSubOpenCode, setSelToId, loadTxUserSign, setMsgList }
+    restoreSubOpenCode, setSelToId, loadTxUserSign, setMsgList, addUserMap }
 )
 class Dashboard extends React.Component {
   constructor(props) {
@@ -40,6 +40,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.getUserSign();
     this.props.getMenuList(this.props.location.pathname);
+    this.props.addUserMap(getUserId(), {nickname: getUserName()});
   }
   handleTopMenuClick = (e) => {
     if (e.key && e.key !== 'user') {
@@ -218,7 +219,7 @@ class Dashboard extends React.Component {
       onMsgNotify: this.onMsgNotify, // 监听新消息(私聊，普通群(非直播聊天室)消息，全员推送消息)事件，必填
       onGroupSystemNotifys: onGroupSystemNotifys // 监听（多终端同步）群系统消息事件，如果不需要监听，可不填
     };
-    let isLogOn = true; // 是否开启sdk在控制台打印日志
+    let isLogOn = false; // 是否开启sdk在控制台打印日志
     let isAccessFormalEnv = true; // 是否访问正式环境
 
     // 初始化时，其他对象，选填
@@ -248,7 +249,7 @@ class Dashboard extends React.Component {
       if (this.props.curSelToID === newMsg.getSession().id()) {
         selSess = newMsg.getSession();
         let _list = this.props.msgList.slice();
-        _list.push(addMsg(newMsg));
+        _list.push(addMsg(newMsg, this.props.userMap));
         this.props.setMsgList(_list);
       }
     }
@@ -273,7 +274,6 @@ class Dashboard extends React.Component {
       MsgContent: webim.Tool.formatText2Html(msgContent),
       MsgTime: webim.Tool.formatTimeStamp(msgTime)
     });
-    // $('#get_my_group_system_msgs_table').bootstrapTable('append', data);
   }
 
   getUserSign() {

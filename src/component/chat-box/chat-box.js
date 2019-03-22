@@ -84,7 +84,7 @@ class ChatBox extends React.Component {
   getGroupMsgs() {
     getLastGroupHistoryMsgs(this.props.chatId).then(([msgList, nextMsgSeq]) => {
       this.nextMsgSeq = nextMsgSeq;
-      let newList = msgList.map(msg => addMsg(msg)).filter(m => m);
+      let newList = msgList.map(msg => addMsg(msg, this.props.userMap)).filter(m => m);
       this.props.setMsgList(newList);
       let msgBox = this.msgBox;
       // 300ms后,等待图片加载完，滚动条自动滚动到底部
@@ -98,7 +98,7 @@ class ChatBox extends React.Component {
       this.setState({ preLoading: true });
       getPreGroupHistoryMsgs(this.props.chatId, this.nextMsgSeq).then(([msgList, nextMsgSeq]) => {
         this.nextMsgSeq = nextMsgSeq;
-        let newList = msgList.map(msg => addMsg(msg)).filter(m => m);
+        let newList = msgList.map(msg => addMsg(msg, this.props.userMap)).filter(m => m);
         let oldList = this.props.msgList.slice();
         let list = newList.concat(oldList);
         this.props.setMsgList(list);
@@ -109,7 +109,7 @@ class ChatBox extends React.Component {
             msgBox.scrollTop = 0;
           }, 300);
         }
-      }).catch(function() {
+      }).catch(() => {
         this.setState({ preLoading: false });
       });
     }
@@ -118,7 +118,7 @@ class ChatBox extends React.Component {
   handleImgClick = (url) => {
     this.showPreviewImg(url);
   }
-  getMyMsg(msg, key) {
+  getMsg(msg, key) {
     return (
       <div key={key} className={msg.isSelfSend ? 'onemsg my' : 'onemsg user'}>
         <div className="msghead">
@@ -127,7 +127,7 @@ class ChatBox extends React.Component {
               <div className="photo" style={{backgroundImage: `url(${msg.fromAccountImage})`}}></div>
             ) : (
               <div className="photo">
-                <div className="noPhoto">C</div>
+                <div className="noPhoto">{msg.isSelfSend ? 'S' : 'C'}</div>
               </div>
             )
           }</div>
@@ -177,7 +177,7 @@ class ChatBox extends React.Component {
   }
   onScroll = () => {
     if (!this.state.preLoading) {
-      let msgBox = this.msgBox.container;
+      let msgBox = this.msgBox;
       let scrollTop = msgBox.scrollTop; // 滚动条滚动高度
       if (scrollTop === 0 && this.nextMsgSeq) {
         msgBox.scrollTop = 10;
@@ -193,12 +193,12 @@ class ChatBox extends React.Component {
       <div className="chatbox-wrapper">
         <div className="content-wrap">
           <div className="wrap chat-wrap">
-            <div className="msgflow" ref={msgBox => this.msgBox = msgBox}>
+            <div className="msgflow" ref={msgBox => this.msgBox = msgBox} onScroll={this.onScroll}>
               {
                 msgList.map((msg, i) => (
                   msg.fromAccount === 'admin' && !msg.isSelfSend
                     ? this.getAdminMsg(msg, i)
-                    : this.getMyMsg(msg, i)
+                    : this.getMsg(msg, i)
                 ))
               }
             </div>

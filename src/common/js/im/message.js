@@ -26,7 +26,6 @@ export const getPreGroupHistoryMsgs = function(selToID, nextMsgSeq) {
           resolve([[], -1]);
           return;
         }
-        console.log(msgList);
         resolve([msgList, msgList[0].seq - 1]);
       },
       function (err) {
@@ -59,7 +58,7 @@ export const getLastGroupHistoryMsgs = function(selToID) {
   });
 };
 
-export const addMsg = function(msg) {
+export const addMsg = function(msg, userMap) {
   let fromAccountNick;
   let fromAccountImage = '';
   let _subType = msg.getSubType();
@@ -70,19 +69,25 @@ export const addMsg = function(msg) {
   let sessType = msg.getSession().type();
   let isSelfSend = msg.getIsSend(); // 消息是否为自己发的
   let fromAccount = msg.getFromAccount();
-
   if (!fromAccount) {
     return;
   }
   if (isSelfSend) { // 如果是自己发的消息
     fromAccountNick = getUserName();
   } else { // 如果别人发的消息
-    var key = webim.SESSION_TYPE.C2C + '_' + fromAccount;
-    // var info = infoMap[key];
-    if (msg.getFromAccountNick()) {
+    var info = userMap[fromAccount];
+    if (info.nickname) {
+      fromAccountNick = info.nickname;
+    } else if (msg.getFromAccountNick()) {
       fromAccountNick = msg.getFromAccountNick();
     } else {
       fromAccountNick = fromAccount;
+    }
+    // 获取头像
+    if (info.photo) {
+      fromAccountImage = info.photo;
+    } else if (msg.fromAccountHeadurl) {
+      fromAccountImage = msg.fromAccountHeadurl;
     }
   }
   // 解析消息

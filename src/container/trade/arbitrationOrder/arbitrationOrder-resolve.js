@@ -1,13 +1,16 @@
 import React from 'react';
-import { Form, Card, Row, Col, Avatar } from 'antd';
-import { getQueryString, moneyFormat, showSucMsg, getUserId } from 'common/js/util';
+import { connect } from 'react-redux';
+import { Form, Row, Col } from 'antd';
+import { addUserMap } from '@redux/message';
+import { getQueryString, moneyFormat, showSucMsg, getUserId, formatImg } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 import ChatBox from 'component/chat-box/chat-box';
 
-const { Meta } = Card;
-
-@Form.create()
+@connect(
+  state => ({ ...state.message }),
+  { addUserMap }
+)
 class ArbitrationOrderResolve extends DetailUtil {
   constructor(props) {
     super(props);
@@ -16,6 +19,7 @@ class ArbitrationOrderResolve extends DetailUtil {
   }
 
   render() {
+    const { pageData } = this.state;
     const fields = [{
       field: 'code',
       title: '编号',
@@ -107,16 +111,40 @@ class ArbitrationOrderResolve extends DetailUtil {
                       handler: (param) => {
                           this.props.history.go(-1);
                       }
-                  }]
+                  }],
+                  afterDetail: () => {
+                    const { pageData } = this.state;
+                    let sellNickname = pageData.sellUser;
+                    let sellPhoto = '';
+                    if (pageData.sellUserInfo) {
+                      sellNickname = pageData.sellUserInfo.nickname;
+                      sellPhoto = pageData.sellUserInfo.photo;
+                    }
+                    this.props.addUserMap(pageData.sellUser, {
+                      nickname: sellNickname,
+                      photo: formatImg(sellPhoto)
+                    });
+
+                    let buyNickname = pageData.buyUser;
+                    let buyPhoto = '';
+                    if (pageData.buyUserInfo) {
+                      buyNickname = pageData.buyUserInfo.nickname;
+                      buyPhoto = pageData.buyUserInfo.photo;
+                    }
+                    this.props.addUserMap(pageData.buyUser, {
+                      nickname: buyNickname,
+                      photo: formatImg(buyPhoto)
+                    });
+                  }
               })
           }
         </Col>
         <Col span={10}>
-          <ChatBox chatId={this.code}/>
+          { pageData ? <ChatBox chatId={this.code} /> : null }
         </Col>
       </Row>
     );
   }
 }
 
-export default ArbitrationOrderResolve;
+export default Form.create()(ArbitrationOrderResolve);
