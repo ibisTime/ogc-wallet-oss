@@ -14,7 +14,7 @@ class diviAddresAddedit extends DetailUtil {
   render() {
     const fields = [{
       title: '用户',
-      field: 'userId'
+      field: 'nickname'
     }, {
       field: 'loginName',
       title: '手机号/邮箱'

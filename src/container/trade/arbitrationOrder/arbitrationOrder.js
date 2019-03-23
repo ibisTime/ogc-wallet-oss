@@ -65,7 +65,10 @@ class ArbitrationOrder extends React.Component {
             search: true
         }, {
             field: 'tradeAmount',
-            title: '涉案金额'
+            title: '涉案金额',
+            render: (v, d) => {
+                return d.tradeAmount + '-' + d.tradeCurrency;
+            }
         }, {
             title: '申请原因',
             field: 'arbitrateReason'

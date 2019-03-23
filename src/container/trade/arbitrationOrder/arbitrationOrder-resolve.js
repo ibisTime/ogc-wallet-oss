@@ -49,7 +49,10 @@ class ArbitrationOrderResolve extends DetailUtil {
     }, {
       field: 'tradePrice',
       title: '涉案金额',
-      readonly: true
+      readonly: true,
+      formatter: (v, d) => {
+        return d.tradeAmount + '-' + d.tradeCurrency;
+      }
     }, {
       title: '申请原因',
       field: 'arbitrateReason',

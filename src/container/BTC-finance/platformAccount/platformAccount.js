@@ -133,14 +133,14 @@ class PlatformAccount extends React.Component {
                         <Card title="营销账户 ">
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>已分发累计总数量:</label>
-                                <span style={{marginLeft: '20px'}}>{data.totalApproveAmount}</span>
+                                <span style={{marginLeft: '20px'}}>{data.totalSendAmount}</span>
                                 <Button
                                     onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
                                     type="primary" style={{marginTop: '15px', marginLeft: '50px'}}>本地流水</Button>
                             </div>
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>待审批数量:</label>
-                                <span style={{marginLeft: '20px'}}>{data.totalApproveAmountString}</span>
+                                <span style={{marginLeft: '20px'}}>{data.totalApproveAmount}</span>
                                 <Button
                                     onClick={() => this.goOrder(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
                                     type="primary" style={{marginTop: '15px', marginLeft: '50px'}}>查看订单</Button>

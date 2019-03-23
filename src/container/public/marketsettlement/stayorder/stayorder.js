@@ -58,7 +58,7 @@ class Stayorder extends React.Component {
             title: '申请划转数量',
             field: 'amount',
             render: (v, data) => {
-                return moneyFormat(v.toString(), ' ', data.amount);
+                return moneyFormat(v.toString(), '', data.amount);
             }
         }, {
             title: '申请人',

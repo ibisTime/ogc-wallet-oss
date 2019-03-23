@@ -58,7 +58,7 @@ class Advert extends React.Component {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
         }, {
-            field: 'paymentName',
+            field: 'payType',
             type: 'select',
             search: 'true',
             pageCode: '625351',

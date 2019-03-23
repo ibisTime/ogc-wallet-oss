@@ -97,7 +97,7 @@ class CustomerLedgerQuery extends React.Component {
             type: 'datetime'
         }, {
             field: 'bizNote',
-            title: '生成说明'
+            title: '备注'
         }];
         return this.props.buildList({
             fields,
