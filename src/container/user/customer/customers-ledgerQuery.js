@@ -50,7 +50,7 @@ class CustomerLedgerQuery extends React.Component {
                 if (data.accountType === 'P') {
                     return '平台账户';
                 } else {
-                    return !v ? data.mobile : v;
+                    return !v ? data.realName : v;
                 }
             }
         }, {

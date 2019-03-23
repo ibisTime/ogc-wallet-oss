@@ -92,8 +92,19 @@ class SurvivalOrder extends React.Component {
         }, {
             title: '状态',
             field: 'status',
-            key: 'trade_order_status',
             type: 'select',
+            data: [{
+                key: '-1',
+                value: '待下单'
+            }, {
+                key: '1',
+                value: '待支付'
+            }, {
+                key: '2',
+                value: '已支付待解冻'
+            }],
+            keyName: 'key',
+            valueName: 'value',
             search: true
         }, {
             field: 'updateDatetime',
