@@ -856,7 +856,6 @@ var webim = { // namespace object webim
      */
     syncMsgs: function (cbOk, cbErr) {},
 
-
     /* function getC2CHistoryMsgs
      * 拉取C2C漫游消息
      * params:

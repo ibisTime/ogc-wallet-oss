@@ -66,17 +66,6 @@ class SurvivalOrderAddeditOrderedit extends React.Component {
 
     render() {
         const fields = [{
-            field: 'code',
-            title: '针对订单号'
-        }, {
-            title: '评论星级',
-            field: 'invalidDatetime',
-            type: 'datetime'
-        }, {
-            title: '内容',
-            field: 'markDatetime',
-            type: 'datetime'
-        }, {
             title: '评论人 ',
             field: 'releaseDatetime',
             type: 'datetime'
@@ -85,6 +74,14 @@ class SurvivalOrderAddeditOrderedit extends React.Component {
             field: 'status',
             type: 'select',
             key: 'trade_order_status'
+        }, {
+            title: '评论星级',
+            field: 'invalidDatetime',
+            type: 'datetime'
+        }, {
+            title: '内容',
+            field: 'markDatetime',
+            type: 'datetime'
         }, {
             title: '评论时间',
             field: 'bsComment',

@@ -76,18 +76,20 @@ export const addMsg = function(msg, userMap) {
     fromAccountNick = getUserName();
   } else { // 如果别人发的消息
     var info = userMap[fromAccount];
-    if (info.nickname) {
-      fromAccountNick = info.nickname;
-    } else if (msg.getFromAccountNick()) {
-      fromAccountNick = msg.getFromAccountNick();
-    } else {
-      fromAccountNick = fromAccount;
-    }
-    // 获取头像
-    if (info.photo) {
-      fromAccountImage = info.photo;
-    } else if (msg.fromAccountHeadurl) {
-      fromAccountImage = msg.fromAccountHeadurl;
+    if (info) {
+      if (info.nickname) {
+        fromAccountNick = info.nickname;
+      } else if (msg.getFromAccountNick()) {
+        fromAccountNick = msg.getFromAccountNick();
+      } else {
+        fromAccountNick = fromAccount;
+      }
+      // 获取头像
+      if (info.photo) {
+        fromAccountImage = info.photo;
+      } else if (msg.fromAccountHeadurl) {
+        fromAccountImage = msg.fromAccountHeadurl;
+      }
     }
   }
   // 解析消息

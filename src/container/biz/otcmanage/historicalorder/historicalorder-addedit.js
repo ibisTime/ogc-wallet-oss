@@ -67,17 +67,6 @@ class HistoricalorderOrderEdit extends React.Component {
 
     render() {
         const fields = [{
-            field: 'code',
-            title: '针对订单号'
-        }, {
-            field: 'starLevel',
-            title: '评论星级',
-            key: 'comment_star_level',
-            type: 'select'
-        }, {
-            field: 'content',
-            title: '内容'
-        }, {
             field: 'fromUser',
             title: '评论人',
             render: (v, d) => {
@@ -89,6 +78,14 @@ class HistoricalorderOrderEdit extends React.Component {
             render: (v, d) => {
                 return d.toUserInfo ? d.toUserInfo.nickname : '';
             }
+        }, {
+            field: 'starLevel',
+            title: '评论星级',
+            key: 'comment_star_level',
+            type: 'select'
+        }, {
+            field: 'content',
+            title: '内容'
         }, {
             title: '评论时间',
             field: 'createDatetime',

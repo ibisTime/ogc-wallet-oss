@@ -40,16 +40,18 @@ class UpDowns extends React.Component {
                 title: '审核说明',
                 required: true,
                 maxlength: 30
-            }, {
-                field: 'approveUser',
-                title: '审核人',
-                required: true,
-                maxlength: 30
             }],
+        // {
+        //     field: 'approveUser',
+        //         title: '审核人',
+        //     required: true,
+        //     maxlength: 30
+        // }
             beforeSubmit: (params) => {
                 console.log(params.status);
                 console.log(params.result);
-                params.status = this.approveUser;
+                params.approveUser = params.updater;
+                // params.updater = this.approveUser;
                 return params;
             },
             addCode: biz

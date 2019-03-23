@@ -21,7 +21,8 @@ class ArbitrationNotifierAddedit extends DetailUtil {
             title: '开始时间',
             shijian: true,
             required: true,
-            integer: true
+            integer: true,
+            placeholder: '请输入0-23的整数'
             // formatter: (v, data) => {
             //     if (v < 10) {
             //         return '0' + v + ':00';
@@ -35,6 +36,7 @@ class ArbitrationNotifierAddedit extends DetailUtil {
             field: 'endDate',
             title: '结束时间',
             required: true,
+            placeholder: '请输入0-23的整数',
             shijian: true,
             integer: true
         }, {

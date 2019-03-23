@@ -25,7 +25,7 @@ import {dateTimeFormat, getCoinList} from 'common/js/util';
 class Lawrate extends React.Component {
     render() {
         const fields = [{
-            title: '币种',
+            title: '法币',
             field: 'currency',
             type: 'select',
             keyName: 'key',
@@ -42,7 +42,7 @@ class Lawrate extends React.Component {
             },
             search: true
         }, {
-            title: '参照币种',
+            title: '参照法币',
             field: 'referCurrency'
         }, {
             title: '汇率来源',

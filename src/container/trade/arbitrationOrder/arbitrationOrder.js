@@ -35,12 +35,24 @@ class ArbitrationOrder extends React.Component {
         }, {
             title: '被告',
             field: 'sellUser',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-卖家',
+            searchName: 'keyword',
+            search: true,
             render: (v, data) => {
                 return data.sellUserInfo ? data.sellUserInfo.nickname + '-卖家' : '';
             }
         }, {
             title: '原告',
             field: 'buyUser',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-买家',
+            searchName: 'keyword',
+            search: true,
             render: (v, data) => {
                 return data.buyUserInfo ? data.buyUserInfo.nickname + '-买家' : '';
             }
@@ -52,7 +64,7 @@ class ArbitrationOrder extends React.Component {
             },
             search: true
         }, {
-            field: 'tradePrice',
+            field: 'tradeAmount',
             title: '涉案金额'
         }, {
             title: '申请原因',
@@ -61,6 +73,11 @@ class ArbitrationOrder extends React.Component {
             field: 'arbitrateCreateDatetime',
             title: '申请时间',
             type: 'datetime'
+        }, {
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            key: 'trade_order_status'
         }];
         return this.props.buildList({
             fields,

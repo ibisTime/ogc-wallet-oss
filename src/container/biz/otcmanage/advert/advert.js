@@ -47,14 +47,13 @@ class Advert extends React.Component {
             }
         }, {
             title: '交易对',
-            field: 'tradeCoin',
-            // field: 'symbol',
+            field: 'tradeCurrency',
             type: 'select',
-            listCode: '625370',
-            searchName: 'tradeCurrency',
-            keyName: 'key',
-            valueName: '{{simpleName.DATA}}',
+            listCode: 625370,
             search: true,
+            searchName: 'tradeCurrency',
+            keyName: 'simpleName',
+            valueName: 'BTC-{{simpleName.DATA}}',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }

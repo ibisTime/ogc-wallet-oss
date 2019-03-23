@@ -41,7 +41,7 @@ class SurvivalOrder extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}',
             searchName: 'keyword',
             search: true
         }, {
@@ -53,12 +53,18 @@ class SurvivalOrder extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}',
             searchName: 'keyword',
             search: true
         }, {
             title: '交易对',
-            type: 'tradeCoin',
+            field: 'tradeCurrency',
+            type: 'select',
+            listCode: 625370,
+            search: true,
+            searchName: 'tradeCurrency',
+            keyName: 'simpleName',
+            valueName: 'BTC-{{simpleName.DATA}}',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
