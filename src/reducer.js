@@ -21,6 +21,9 @@ import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
 import {biztodayprofit} from './redux/biz/financial/todayprofit';
+import {AppManagent} from './redux/managent/appmanagent';
+import {DappManagent} from './redux/managent/dappmanagent';
+import {DappTrateGy} from './redux/managent/dapptrategy';
 
 /* 业务管理 */
 // 客户管理
@@ -383,5 +386,8 @@ export default combineReducers({
     StayOrder,
     AlreadySettlement,
     quanTitativeCategory,
-    NotifierofWithdrawal
+    NotifierofWithdrawal,
+    AppManagent,
+    DappTrateGy,
+    DappManagent
 });

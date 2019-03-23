@@ -1,0 +1,143 @@
+import React from 'react';
+import {Modal} from 'antd';
+import {
+    setTableData,
+    setPagination,
+    setBtnList,
+    setSearchParam,
+    clearSearchParam,
+    doFetching,
+    cancelFetching,
+    setSearchData
+} from '@redux/managent/dappmanagent';
+import {listWrapper} from 'common/js/build-list';
+import {
+    showSucMsg,
+    showWarnMsg,
+    getUserName
+} from 'common/js/util';
+import fetch from 'common/js/fetch';
+
+@listWrapper(
+    state => ({
+        ...state.DappManagent,
+        parentCode: state.menu.subMenuCode
+    }),
+    {
+        setTableData, clearSearchParam, doFetching, setBtnList,
+        cancelFetching, setPagination, setSearchParam, setSearchData
+    }
+)
+class DappManagent extends React.Component {
+    render() {
+        const fields = [{
+            field: 'id',
+            title: '应用ID'
+        }, {
+            field: 'category',
+            type: 'select',
+            search: true,
+            key: 'dapp_category',
+            title: '应用分类'
+        }, {
+            field: 'name',
+            title: '应用名称',
+            search: true
+        }, {
+            field: 'company',
+            title: '应用所属厂商',
+            search: true
+        }, {
+            field: 'label',
+            title: '应用标签'
+        }, {
+            field: 'desc',
+            title: '应用详情描述'
+        }, {
+            field: 'location',
+            title: '位置',
+            type: 'select',
+            required: true,
+            key: 'banner_location',
+            search: true
+        }, {
+            field: 'isTop',
+            title: '是否置顶'
+        }, {
+            field: 'language',
+            title: '语言',
+            search: true
+        }, {
+            field: 'status',
+            title: '状态',
+            type: 'select'
+        }, {
+            field: 'createDatetime',
+            title: '创建时间',
+            type: 'datetime'
+        } ];
+        return this.props.buildList({
+            fields,
+            rowKey: 'id',
+            pageCode: '625455',
+            btnEvent: {
+                up: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status === '1') {
+                        showWarnMsg('不是可以选择的状态');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定显示该应用？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return fetch(625453, {
+                                    id: selectedRows[0].id,
+                                    updater: getUserName()
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
+                },
+                down: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '1') {
+                        showWarnMsg('不是可以选择的状态');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定不显示该应用？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return fetch(625453, {
+                                    id: selectedRows[0].id,
+                                    updater: getUserName()
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+}
+
+export default DappManagent;

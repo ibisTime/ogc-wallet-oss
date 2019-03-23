@@ -947,6 +947,39 @@ const ROUTES = [
     {
         path: '/user/rewarddeatil',
         component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
+    },
+    // 营销管理--奖励明细
+    {
+        path: '/user/rewarddeatil',
+        component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
+    },
+    // 业务管理--APP配置
+    {
+        path: '/managent/appmanagent',
+        component: asyncComponent(() => import('container/managent/appmanagent/appmanagent'))
+    },
+    {
+        path: '/managent/appmanagent/addedit',
+        component: asyncComponent(() => import('container/managent/appmanagent/appmanagent-addedit'))
+    },
+// 业务管理--DAPP应用
+    {
+        path: '/managent/dappmanagent',
+        component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent'))
+    },
+    // 业务管理--DAPP应用
+    {
+        path: '/managent/dappmanagent/addedit',
+        component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent-addedit'))
+    },
+    // 业务管理--DAPP应用攻略
+    {
+        path: '/managent/dapptrategy',
+        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy'))
+    },
+    {
+        path: '/managent/dapptrategy/addedit',
+        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-addedit'))
     }
 ];
 
