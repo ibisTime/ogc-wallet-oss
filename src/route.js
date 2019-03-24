@@ -171,6 +171,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/community/community-addedit'))
     },
     {
+        path: '/public/community/edit',
+        component: asyncComponent(() => import('container/public/community/communitys-addedit'))
+    },
+    {
         path: '/public/warmReminding',
         component: asyncComponent(() => import('container/public/warmReminding/warmReminding'))
     },

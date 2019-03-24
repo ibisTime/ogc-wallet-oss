@@ -18,6 +18,7 @@ import {publicBuyADS} from './redux/public/buyADS';
 import {publicSellETH} from './redux/public/sellETH';
 import {publicTransactionRemind} from './redux/public/TransactionRemind';
 import {publicCommunity} from './redux/public/community';
+import {publicCommunityAddEdit} from './redux/public/community-addedit';
 import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
@@ -241,6 +242,7 @@ export default combineReducers({
     systemPwdReset,
     systemSysParam,
     systemDataDict,
+    publicCommunityAddEdit,
     // public
     publicAboutus,
     publicQuantitative,

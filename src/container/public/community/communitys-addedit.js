@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form } from 'antd';
-import { getQueryString } from 'common/js/util';
+import { getQueryString, showSucMsg } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
-
+import fetch from 'common/js/fetch';
 @Form.create()
 class CommunityAddedit extends DetailUtil {
     constructor(props) {
@@ -54,16 +54,28 @@ class CommunityAddedit extends DetailUtil {
             code: this.code,
             view: this.view,
             addCode: '630500',
-            editCode: '630502',
             detailCode: '630507',
-            beforeSubmit: (data) => {
-                data.location = 'community';
-                data.enPic = data.pic;
-                if (this.code) {
-                    data.type = this.props.pageData.type;
+            buttons: [{
+                title: '保存',
+                check: true,
+                handler: (params) => {
+                    params.location = 'community';
+                    params.enPic = params.pic;
+                    this.doFetching();
+                    fetch(630502, params).then(() => {
+                        showSucMsg('操作成功');
+                        this.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.cancelFetching);
                 }
-                return data;
-            }
+            }, {
+                title: '返回',
+                handler: () => {
+                    this.props.history.go(-1);
+                }
+            }]
         });
     }
 }

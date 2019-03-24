@@ -31,24 +31,41 @@ class Community extends React.Component {
     render() {
         const fields = [{
             title: '名称',
-            field: 'ckey',
+            field: 'name',
             search: true
         }, {
             title: '社群号',
-            field: 'cvalue'
+            field: 'url'
+        }, {
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'commit_type',
+            search: true
+        }, {
+            title: '顺序',
+            field: 'orderNo'
         }, {
             title: '备注',
             field: 'remark'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '630045',
+            pageCode: '630505',
             searchParams: {
-                type: 'followUs'
+                location: 'community'
             },
-            singleSelect: false,
+            // singleSelect: false,
             btnEvent: {
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/public/community/edit?&code=${selectedRows[0].code}`);
+                    }
+                },
                 delete: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
