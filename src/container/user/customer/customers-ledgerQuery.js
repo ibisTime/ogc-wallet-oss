@@ -103,7 +103,7 @@ class CustomerLedgerQuery extends React.Component {
             fields,
             pageCode: '802320',
             searchParams: {
-                accountNumber: this.accountNumber
+                accountType: 'c'
             },
             buttons: this.buttons
         });

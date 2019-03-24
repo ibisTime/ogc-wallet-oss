@@ -34,7 +34,7 @@ class ArbitrationOrder extends React.Component {
             search: true
         }, {
             title: '被告',
-            field: 'sellUser',
+            field: 'beigao',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -46,7 +46,7 @@ class ArbitrationOrder extends React.Component {
             }
         }, {
             title: '原告',
-            field: 'buyUser',
+            field: 'yuangao',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -58,11 +58,16 @@ class ArbitrationOrder extends React.Component {
             }
         }, {
             title: '交易对',
+            field: 'tradeCurrency',
             type: 'select',
+            listCode: 625370,
+            search: true,
+            searchName: 'tradeCurrency',
+            keyName: 'simpleName',
+            valueName: 'BTC-{{simpleName.DATA}}',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
-            },
-            search: true
+            }
         }, {
             field: 'tradeAmount',
             title: '涉案金额',
