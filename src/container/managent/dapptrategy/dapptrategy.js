@@ -14,7 +14,8 @@ import {listWrapper} from 'common/js/build-list';
 import {
     showSucMsg,
     showWarnMsg,
-    getUserName
+    getUserName,
+    getQueryString
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -29,6 +30,12 @@ import fetch from 'common/js/fetch';
     }
 )
 class Aboutus extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = getQueryString('code', this.props.location.search);
+        this.id = getQueryString('id', this.props.location.search);
+        this.view = !!getQueryString('v', this.props.location.search);
+    }
     render() {
         const fields = [{
             field: 'id',
@@ -42,9 +49,6 @@ class Aboutus extends React.Component {
         }, {
             field: 'author',
             title: '作者'
-        }, {
-            field: 'content',
-            title: '内容'
         }, {
             field: 'label',
             title: '标签'
@@ -72,36 +76,33 @@ class Aboutus extends React.Component {
         } ];
         return this.props.buildList({
             fields,
+            rowKey: 'id',
             pageCode: '625465',
-            btnEvent: {
-              gl: (selectedRowKeys, selectedRows) => {
+            singleSelect: false,
+            buttons: [{
+                code: 'addedit',
+                name: '新增',
+                handler: (keys, items) => {
+                    this.props.history.push(`/managent/dapptrategy/addedit?&dappId=${this.id}`);
+                },
+                check: true
+            }, {
+                code: 'edit',
+                name: '修改',
+                handler: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/managent/dapptrategy?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
+                        this.props.history.push(`/managent/dapptrategy/edit?code=${selectedRowKeys[0]}&id=${this.id}`);
                     }
                 },
-                detail: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/managent/dapptrategy/addedit?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
-                    }
-                },
-                edit: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/managent/dapptrategy/addedit?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
-                    }
-                },
-                up: (selectedRowKeys, selectedRows) => {
+                check: true
+            }, {
+                code: 'up',
+                name: '显示',
+                handler: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
@@ -112,34 +113,7 @@ class Aboutus extends React.Component {
                         Modal.confirm({
                             okText: '确认',
                             cancelText: '取消',
-                            content: `确定显示该应用攻略？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return fetch(625463, {
-                                    id: selectedRows[0].id,
-                                    updater: getUserName()
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
-                            }
-                        });
-                    }
-                },
-                down: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是可以选择的状态');
-                    } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定不显示该应用攻略？`,
+                            content: `确定显示该应用？`,
                             onOk: () => {
                                 this.props.doFetching();
                                 return fetch(625463, {
@@ -155,7 +129,76 @@ class Aboutus extends React.Component {
                         });
                     }
                 }
-            }
+            }, {
+                code: 'down',
+                name: '不显示',
+                handler: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '1') {
+                        showWarnMsg('不是可以选择的状态');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定不显示该应用？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return fetch(625463, {
+                                    id: selectedRows[0].id,
+                                    updater: getUserName()
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
+                }
+            }, {
+                code: 'delete',
+                name: '删除',
+                handler: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定删除？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625461, {
+                                        id: selectedRows[0].id,
+                                        updater: getUserName()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
+                    }
+            }, {
+                code: 'detail',
+                name: '详情',
+                handler: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/managent/dapptrategy/detail?code=${selectedRowKeys[0]}&v=1&id=${this.id}`);
+                    }
+                },
+                check: false
+            }]
         });
     }
 }

@@ -95,6 +95,7 @@ class DappManagent extends React.Component {
             fields,
             rowKey: 'id',
             pageCode: '625455',
+            deleteCode: '625451',
             btnEvent: {
                 gl: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
@@ -102,7 +103,7 @@ class DappManagent extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/managent/dapptrategy/addedit?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
+                        this.props.history.push(`/managent/dapptrategy?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
                     }
                 },
                 up: (selectedRowKeys, selectedRows) => {

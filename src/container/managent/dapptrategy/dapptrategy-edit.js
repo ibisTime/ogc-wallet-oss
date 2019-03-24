@@ -8,12 +8,16 @@ class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
-        this.dappId = getQueryString('dappId', this.props.location.search);
         this.id = getQueryString('id', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
     render() {
         const fields = [{
+            field: 'dappId',
+            title: 'dappId',
+            hidden: true,
+            required: true
+        }, {
             field: 'title',
             title: '标题',
             required: true
@@ -39,9 +43,10 @@ class AppmanagentAddedit extends DetailUtil {
             required: true,
             title: '应用标签'
         }, {
-            field: 'desc',
-            title: '描述',
-            required: true
+            field: 'orderNo',
+            title: '次序',
+            required: true,
+            integer: true
         }, {
             field: 'scanCountFake',
             title: '起始浏览数量',
@@ -51,10 +56,20 @@ class AppmanagentAddedit extends DetailUtil {
             title: '起始点赞数量',
             required: true
         }, {
-            field: 'orderNo',
-            title: '次序',
-            required: true,
-            integer: true
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            data: [{
+                'key': '0',
+                'value': '隐藏'
+            }, {
+                'key': '1',
+                'value': '显示'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true,
+            hidden: !this.view
         }, {
             field: 'createDatetime',
             title: '创建时间',
@@ -64,17 +79,10 @@ class AppmanagentAddedit extends DetailUtil {
         return this.buildDetail({
             fields,
             key: 'id',
-            id: this.id,
             code: this.code,
             view: this.view,
-            detailCode: 625463,
-            editCode: 625462,
-            addCode: 625460,
-            deleteCode: 625461,
-            beforeSubmit: (params) => {
-                params.dappId = this.dappId;
-                return params;
-            }
+            detailCode: 625467,
+            editCode: 625462
         });
     }
 }

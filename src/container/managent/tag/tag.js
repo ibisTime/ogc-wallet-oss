@@ -45,7 +45,32 @@ class Aboutus extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: '625475'
+            rowKey: 'id',
+            pageCode: '625475',
+            btnEvent: {
+                delete: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定删除？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625471, {
+                                        id: selectedRows[0].id
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                }
         });
     }
 }

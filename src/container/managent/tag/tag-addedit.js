@@ -8,7 +8,7 @@ class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
-        this.id = getQueryString('id', this.props.location.search);
+        this.id = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
     render() {
@@ -45,6 +45,7 @@ class AppmanagentAddedit extends DetailUtil {
         }];
         return this.buildDetail({
             fields,
+            key: 'id',
             code: this.code,
             view: this.view,
             detailCode: 625477,
