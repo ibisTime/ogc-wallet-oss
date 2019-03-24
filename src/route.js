@@ -980,6 +980,15 @@ const ROUTES = [
     {
         path: '/managent/dapptrategy/addedit',
         component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-addedit'))
+    },
+    // 业务管理--tag标签
+    {
+        path: '/managent/tag',
+        component: asyncComponent(() => import('container/managent/tag/tag'))
+    },
+    {
+        path: '/managent/tag/addedit',
+        component: asyncComponent(() => import('container/managent/tag/tag-addedit'))
     }
 ];
 

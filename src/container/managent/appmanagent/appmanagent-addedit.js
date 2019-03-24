@@ -16,6 +16,12 @@ class AppmanagentAddedit extends DetailUtil {
             title: '首创玩法',
             required: true
         }, {
+            field: 'icon',
+            title: '图标',
+            type: 'img',
+            single: true,
+            required: true
+        }, {
             field: 'description',
             title: '首创玩法概要介绍',
             required: true
@@ -24,29 +30,39 @@ class AppmanagentAddedit extends DetailUtil {
             title: '提示',
             required: true
         }, {
-            field: 'icon',
-            title: '图标',
-            type: 'img',
-            single: true,
-            required: true
+            field: 'action',
+            title: '动作',
+            key: 'dapp_action',
+            required: true,
+            type: 'select'
         }, {
             field: 'location',
             title: '位置',
             type: 'select',
-            required: true,
-            key: 'banner_location',
-            search: true
+            value: '0',
+            hidden: true
         }, {
             field: 'position',
             title: '链接',
             required: true
         }, {
-            title: '顺序',
+            title: '次序',
+            integer: true,
             field: 'orderNo',
             required: true
         }, {
-            field: 'status',
             title: '状态',
+            field: 'status',
+            type: 'select',
+            data: [{
+                'key': '0',
+                'value': '隐藏'
+            }, {
+                'key': '1',
+                'value': '显示'
+            }],
+            keyName: 'key',
+            valueName: 'value',
             hidden: !this.view
         }, {
             field: 'remark',

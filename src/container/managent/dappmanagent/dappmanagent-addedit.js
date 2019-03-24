@@ -15,6 +15,7 @@ class AppmanagentAddedit extends DetailUtil {
         const fields = [{
             field: 'id',
             title: '应用ID',
+            integer: true,
             required: true
         }, {
             field: 'category',
@@ -46,13 +47,48 @@ class AppmanagentAddedit extends DetailUtil {
             required: true
         }, {
             field: 'location',
-            title: '位置',
-            required: true
+            value: '0',
+            hidden: true,
+            title: '位置'
         }, {
             field: 'picIcon',
             title: '图标',
             type: 'img',
             single: true,
+            required: true
+        }, {
+            field: 'grade',
+            title: '评分（星级）',
+            type: 'select',
+            data: [{
+                'key': '1',
+                'value': '1'
+            }, {
+                'key': '2',
+                'value': '2'
+            }, {
+                'key': '3',
+                'value': '3'
+            }, {
+                'key': '4',
+                'value': '4'
+            }, {
+                'key': '5',
+                'value': '5'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            required: true
+        }, {
+            field: 'action',
+            title: '动作',
+            key: 'dapp_action',
+            required: true,
+            type: 'select'
+        }, {
+            field: 'orderNo',
+            title: '次序',
+            integer: true,
             required: true
         }, {
             field: 'isTop',
@@ -69,29 +105,37 @@ class AppmanagentAddedit extends DetailUtil {
             valueName: 'value',
             required: true
         }, {
-            field: 'orderNo',
-            title: '次序'
+            field: 'picList',
+            type: 'img',
+            single: true,
+            title: '图片',
+            required: true
         }, {
             field: 'picScreenshot',
             type: 'img',
-            title: '图片',
+            title: '图片详情',
             render: (v, d) => {
-                return d.picScreenshotList[0];
-        }
-        }, {
-            field: 'action',
-            title: '图片'
+                return d.picScreenshotList;
+            },
+            required: true
         }, {
             field: 'language',
-            title: '语言'
+            title: '语言',
+            value: 'ZH_CN',
+            hidden: true
         }, {
-            field: 'picList',
-            type: 'img',
-            title: '图片'
-        }, {
-            field: 'status',
             title: '状态',
+            field: 'status',
             type: 'select',
+            data: [{
+                'key': '0',
+                'value': '隐藏'
+            }, {
+                'key': '1',
+                'value': '显示'
+            }],
+            keyName: 'key',
+            valueName: 'value',
             hidden: !this.view
         }, {
             field: 'createDatetime',

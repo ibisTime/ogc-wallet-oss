@@ -224,6 +224,7 @@ import {StadySettLement} from './redux/marketsettlement/stadysettlement';
 import {NoOrder} from './redux/marketsettlement/noorder';
 import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
+import {TAG} from './redux/managent/tag';
 
 export default combineReducers({
     user,
@@ -389,5 +390,6 @@ export default combineReducers({
     NotifierofWithdrawal,
     AppManagent,
     DappTrateGy,
-    DappManagent
+    DappManagent,
+    TAG
 });

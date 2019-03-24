@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/managent/dappmanagent';
+} from '@redux/managent/dapptrategy';
 import {listWrapper} from 'common/js/build-list';
 import {
     showSucMsg,
@@ -20,7 +20,7 @@ import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.DappManagent,
+        ...state.DappTrateGy,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -52,8 +52,19 @@ class Aboutus extends React.Component {
             field: 'orderNo',
             title: '排序'
         }, {
+            title: '状态',
             field: 'status',
-            title: '状态'
+            type: 'select',
+            data: [{
+                'key': '0',
+                'value': '隐藏'
+            }, {
+                'key': '1',
+                'value': '显示'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
             field: 'createDatetime',
             title: '创建时间',
@@ -63,6 +74,33 @@ class Aboutus extends React.Component {
             fields,
             pageCode: '625465',
             btnEvent: {
+              gl: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/managent/dapptrategy?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
+                    }
+                },
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/managent/dapptrategy/addedit?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
+                    }
+                },
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/managent/dapptrategy/addedit?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
+                    }
+                },
                 up: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');

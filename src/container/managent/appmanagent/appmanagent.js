@@ -47,14 +47,25 @@ class AppManagent extends React.Component {
             title: '次序',
             field: 'orderNo'
         }, {
-            field: 'location',
-            title: '位置',
-            type: 'select',
-            key: 'banner_location',
-            search: true
+            field: 'action',
+            title: '动作',
+            key: 'dapp_action',
+            required: true,
+            type: 'select'
         }, {
+            title: '状态',
             field: 'status',
-            title: '状态'
+            type: 'select',
+            data: [{
+                'key': '0',
+                'value': '隐藏'
+            }, {
+                'key': '1',
+                'value': '显示'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
             field: 'remark',
             title: '备注'

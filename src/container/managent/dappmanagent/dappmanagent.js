@@ -54,13 +54,6 @@ class DappManagent extends React.Component {
             field: 'desc',
             title: '应用详情描述'
         }, {
-            field: 'location',
-            title: '位置',
-            type: 'select',
-            required: true,
-            key: 'banner_location',
-            search: true
-        }, {
             field: 'isTop',
             title: '是否置顶',
             type: 'select',
@@ -74,9 +67,25 @@ class DappManagent extends React.Component {
             keyName: 'key',
             valueName: 'value'
         }, {
-            field: 'status',
-            title: '状态',
+            field: 'action',
+            title: '动作',
+            key: 'dapp_action',
+            required: true,
             type: 'select'
+        }, {
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            data: [{
+                'key': '0',
+                'value': '隐藏'
+            }, {
+                'key': '1',
+                'value': '显示'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
             field: 'createDatetime',
             title: '创建时间',
@@ -87,6 +96,15 @@ class DappManagent extends React.Component {
             rowKey: 'id',
             pageCode: '625455',
             btnEvent: {
+                gl: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/managent/dapptrategy/addedit?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
+                    }
+                },
                 up: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
