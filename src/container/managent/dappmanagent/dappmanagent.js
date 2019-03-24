@@ -62,11 +62,17 @@ class DappManagent extends React.Component {
             search: true
         }, {
             field: 'isTop',
-            title: '是否置顶'
-        }, {
-            field: 'language',
-            title: '语言',
-            search: true
+            title: '是否置顶',
+            type: 'select',
+            data: [{
+                'key': '0',
+                'value': '是'
+            }, {
+                'key': '1',
+                'value': '否'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
             field: 'status',
             title: '状态',
