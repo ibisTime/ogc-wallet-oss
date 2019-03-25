@@ -25,6 +25,7 @@ class AppmanagentAddedit extends DetailUtil {
         }, {
             field: 'id',
             title: '应用ID',
+            hidden: true,
             integer: true,
             required: true
         }, {

@@ -15,6 +15,7 @@ class AppmanagentAddedit extends DetailUtil {
         const fields = [{
             field: 'id',
             title: '应用ID',
+            hidden: true,
             integer: true,
             required: true
         }, {
@@ -34,13 +35,13 @@ class AppmanagentAddedit extends DetailUtil {
             title: '应用所属厂商',
             required: true
         }, {
-            title: '应用标签',
             field: 'label',
-            type: 'select',
+            type: 'checkbox',
             listCode: '625476',
             keyName: 'id',
             valueName: 'name',
-            required: true
+            required: true,
+            title: '应用标签'
         }, {
             field: 'desc',
             required: true,
@@ -155,15 +156,7 @@ class AppmanagentAddedit extends DetailUtil {
             detailCode: 625457,
             addCode: 625450,
             deleteCode: 625451,
-            editCode: 625452,
-            beforeSubmit: (params, selectedRowKeys, selectedRows) => {
-                let idList = [];
-                for(let i = 0, len = selectedRows.length; i < len; i++) {
-                    idList.push(selectedRows[i].label);
-                }
-                console.log(idList);
-                return params;
-            }
+            editCode: 625452
         });
     }
 }

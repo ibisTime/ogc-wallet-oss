@@ -2,14 +2,26 @@ import React from 'react';
 import { Form } from 'antd';
 import { getQueryString } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
-
+import fetch from 'common/js/fetch';
 @Form.create()
 class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.id = getQueryString('id', this.props.location.search);
+        this.label = getQueryString('label', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+    }
+    componentDidMount() {
+        Promise.all([
+            fetch(625476, {
+                // type: 'B'
+            })
+        ]).then(([accountData]) => {
+            this.setState({
+                label: accountData[0]
+            });
+        }).catch(this.props.cancelFetching);
     }
     render() {
         const fields = [{
@@ -35,18 +47,18 @@ class AppmanagentAddedit extends DetailUtil {
             title: '语言',
             hidden: true
         }, {
+            field: 'orderNo',
+            title: '次序',
+            required: true,
+            integer: true
+        }, {
             field: 'label',
-            type: 'select',
+            type: 'checkbox',
             listCode: '625476',
             keyName: 'id',
             valueName: 'name',
             required: true,
             title: '应用标签'
-        }, {
-            field: 'orderNo',
-            title: '次序',
-            required: true,
-            integer: true
         }, {
             field: 'scanCountFake',
             title: '起始浏览数量',
@@ -80,6 +92,7 @@ class AppmanagentAddedit extends DetailUtil {
             fields,
             key: 'id',
             code: this.code,
+            label: this.label,
             view: this.view,
             detailCode: 625467,
             editCode: 625462

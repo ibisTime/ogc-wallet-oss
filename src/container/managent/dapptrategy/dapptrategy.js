@@ -38,20 +38,11 @@ class Aboutus extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'id',
-            title: '攻略ID'
-        }, {
-            field: 'dappId',
-            title: '应用ID'
-        }, {
             field: 'title',
             title: '标题'
         }, {
             field: 'author',
             title: '作者'
-        }, {
-            field: 'label',
-            title: '标签'
         }, {
             field: 'orderNo',
             title: '排序'
@@ -80,14 +71,14 @@ class Aboutus extends React.Component {
             pageCode: '625465',
             singleSelect: false,
             buttons: [{
-                code: 'addedit',
+                code: 'edit',
                 name: '新增',
                 handler: (keys, items) => {
                     this.props.history.push(`/managent/dapptrategy/addedit?&dappId=${this.id}`);
                 },
                 check: true
             }, {
-                code: 'edit',
+                code: 'addedit',
                 name: '修改',
                 handler: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
@@ -95,7 +86,7 @@ class Aboutus extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/managent/dapptrategy/edit?code=${selectedRowKeys[0]}&id=${this.id}`);
+                        this.props.history.push(`/managent/dapptrategy/edit?&code=${selectedRowKeys[0]}&label=${selectedRows[0].label}&id=${this.id}`);
                     }
                 },
                 check: true

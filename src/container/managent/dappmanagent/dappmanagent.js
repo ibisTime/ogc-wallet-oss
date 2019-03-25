@@ -31,9 +31,6 @@ import fetch from 'common/js/fetch';
 class DappManagent extends React.Component {
     render() {
         const fields = [{
-            field: 'id',
-            title: '应用ID'
-        }, {
             field: 'category',
             type: 'select',
             search: true,
@@ -47,9 +44,6 @@ class DappManagent extends React.Component {
             field: 'company',
             title: '应用所属厂商',
             search: true
-        }, {
-            field: 'label',
-            title: '应用标签'
         }, {
             field: 'desc',
             title: '应用详情描述'

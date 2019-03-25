@@ -65,7 +65,12 @@ module.exports = {
   //   'common': paths.comDetailJs,
   //   'index': paths.appIndexJs
   // },
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: {
+    'polyfills':require.resolve('./polyfills'),
+    'common_detail': paths.comDetailJs,
+    'common_list': paths.comListJs,
+    'index': paths.appIndexJs
+  },
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -255,8 +260,8 @@ module.exports = {
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
     new webpack.optimize.CommonsChunkPlugin({
-      name : 'common',
-      filename : 'static/js/common.js'
+      name : ['common_list','common_detail'],
+      filename : '[name].js'
     }),
     new InterpolateHtmlPlugin(env.raw),
     // Generates an `index.html` file with the <script> injected.

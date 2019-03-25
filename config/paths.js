@@ -51,6 +51,7 @@ module.exports = {
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),
   comDetailJs: resolveApp('src/common/js/lib/DetailComp.js'),
+  comListJs: resolveApp('src/common/js/lib/ListComp.js'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };

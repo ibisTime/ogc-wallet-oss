@@ -8,6 +8,7 @@ class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.label = getQueryString('label', this.props.location.search);
         this.dappId = getQueryString('dappId', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
@@ -28,6 +29,7 @@ class AppmanagentAddedit extends DetailUtil {
             required: true
         }, {
             field: 'author',
+            readonly: true,
             title: '作者',
             required: true
         }, {
@@ -41,7 +43,7 @@ class AppmanagentAddedit extends DetailUtil {
             hidden: true
         }, {
             field: 'label',
-            type: 'select',
+            type: 'checkbox',
             listCode: '625476',
             keyName: 'id',
             valueName: 'name',

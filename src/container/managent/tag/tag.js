@@ -31,9 +31,6 @@ import fetch from 'common/js/fetch';
 class Aboutus extends React.Component {
     render() {
         const fields = [{
-            field: 'id',
-            title: '应用ID'
-        }, {
             field: 'name',
             title: '名称(中文)',
             search: true

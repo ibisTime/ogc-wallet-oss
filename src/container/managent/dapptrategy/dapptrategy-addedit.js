@@ -32,7 +32,7 @@ class AppmanagentAddedit extends DetailUtil {
             hidden: true
         }, {
             field: 'label',
-            type: 'select',
+            type: 'checkbox',
             listCode: '625476',
             keyName: 'id',
             valueName: 'name',
