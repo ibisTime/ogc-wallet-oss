@@ -42,13 +42,10 @@ class AppmanagentAddedit extends DetailUtil {
             title: '语言',
             hidden: true
         }, {
-            field: 'label',
-            type: 'checkbox',
-            listCode: '625476',
-            keyName: 'id',
-            valueName: 'name',
-            required: true,
-            title: '应用标签'
+          field: 'labelList',
+          type: 'checkbox',
+          required: true,
+          title: '应用标签'
         }, {
             field: 'scanCountFake',
             title: '起始浏览数量',
@@ -88,9 +85,11 @@ class AppmanagentAddedit extends DetailUtil {
         } ];
         return this.buildDetail({
             fields,
+              key: 'id',
+              id: this.dappId,
             code: this.code,
             view: this.view,
-            detailCode: 625463
+            detailCode: 625467
         });
     }
 }

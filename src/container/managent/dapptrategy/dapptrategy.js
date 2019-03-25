@@ -74,7 +74,7 @@ class Aboutus extends React.Component {
                 code: 'edit',
                 name: '新增',
                 handler: (keys, items) => {
-                    this.props.history.push(`/managent/dapptrategy/addedit?&dappId=${this.id}`);
+                    this.props.history.push(`/managent/dapptrategy/addedit?dappId=${this.id}`);
                 },
                 check: true
             }, {
@@ -86,7 +86,7 @@ class Aboutus extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/managent/dapptrategy/edit?&code=${selectedRowKeys[0]}&label=${selectedRows[0].label}&id=${this.id}`);
+                        this.props.history.push(`/managent/dapptrategy/edit?&code=${selectedRowKeys[0]}&dappId=${this.id}`);
                     }
                 },
                 check: true
