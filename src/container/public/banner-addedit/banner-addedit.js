@@ -48,13 +48,13 @@ class BannerAddEdit extends DetailUtil {
             required: true,
             single: true
         }, {
-            field: 'action',
+            field: 'type',
             title: '动作',
             type: 'select',
             key: 'banner_action',
             required: true,
             onChange: (v) => {
-            this.setState({dkey: v});
+                this.setState({dkey: v});
             }
         }, {
             title: 'url地址',
@@ -63,15 +63,14 @@ class BannerAddEdit extends DetailUtil {
             required: this.state.dkey === '1'
         }, {
             title: '应用',
+            field: 'id',
             type: 'select',
             pageCode: 625455,
             params: {
-                type: '1'
+                status: '1'
             },
             keyName: 'id',
             valueName: 'name',
-            field: 'url',
-            formatter: (v, d) => d.name,
             hidden: this.state.dkey !== '2',
             required: this.state.dkey === '2'
         }, {
@@ -87,7 +86,6 @@ class BannerAddEdit extends DetailUtil {
             editCode: 630502,
             detailCode: 630507,
             beforeSumit: (params) => {
-                params.action = this.url;
                 params.type = this.type;
                 return params;
             }

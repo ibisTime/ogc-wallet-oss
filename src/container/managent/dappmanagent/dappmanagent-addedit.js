@@ -99,7 +99,15 @@ class AppmanagentAddedit extends DetailUtil {
             title: '动作',
             key: 'dapp_action',
             required: true,
-            type: 'select'
+            type: 'select',
+            onChange: (v) => {
+                this.setState({dkey: v});
+            }
+        }, {
+            title: 'url地址',
+            field: 'url',
+            hidden: this.state.dkey !== '0',
+            required: this.state.dkey === '0'
         }, {
             field: 'orderNo',
             title: '次序',

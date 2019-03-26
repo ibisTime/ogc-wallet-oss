@@ -42,10 +42,17 @@ class AppmanagentAddedit extends DetailUtil {
             title: '语言',
             hidden: true
         }, {
-          field: 'labelList',
-          type: 'checkbox',
-          required: true,
-          title: '应用标签'
+            field: 'label',
+            type: 'checkbox',
+            listCode: '625476',
+            keyName: 'id',
+            valueName: 'name',
+            required: true,
+            title: '应用标签',
+            params: {type: 0},
+            formatter(v, d) {
+                return v;
+            }
         }, {
             field: 'scanCountFake',
             title: '起始浏览数量',
