@@ -8,20 +8,8 @@ class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
-        this.id = getQueryString('id', this.props.location.search);
-        this.label = getQueryString('label', this.props.location.search);
+        this.dappId = getQueryString('dappId', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-    }
-    componentDidMount() {
-        Promise.all([
-            fetch(625476, {
-                // type: 'B'
-            })
-        ]).then(([accountData]) => {
-            this.setState({
-                label: accountData[0]
-            });
-        }).catch(this.props.cancelFetching);
     }
     render() {
         const fields = [{
@@ -55,11 +43,13 @@ class AppmanagentAddedit extends DetailUtil {
             field: 'label',
             type: 'checkbox',
             listCode: '625476',
+            params: {type: 1},
             keyName: 'id',
             valueName: 'name',
             required: true,
             title: '应用标签',
           formatter(v, d) {
+                console.log(v);
             return v;
           }
         }, {
@@ -95,10 +85,15 @@ class AppmanagentAddedit extends DetailUtil {
             fields,
             key: 'id',
             code: this.code,
-            label: this.label,
             view: this.view,
             detailCode: 625467,
-            editCode: 625462
+            editCode: 625462,
+          beforeSubmit: (params) => {
+            params.dappId = this.dappId;
+            let label = params.label.split(',');
+            params.label = label.join('||');
+            return params;
+          }
         });
     }
 }

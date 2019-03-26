@@ -48,6 +48,7 @@ class AppmanagentAddedit extends DetailUtil {
             valueName: 'name',
             required: true,
             title: '应用标签',
+          params: {type: 0},
           formatter(v, d) {
             return v;
           }
@@ -168,8 +169,8 @@ class AppmanagentAddedit extends DetailUtil {
             editCode: 625452,
           beforeSubmit: (params) => {
             params.dappId = this.dappId;
-            params.label = params.label.join('||');
-            console.log(params);
+            let label = params.label.split(',');
+            params.label = label.join('||');
             return params;
           }
         });

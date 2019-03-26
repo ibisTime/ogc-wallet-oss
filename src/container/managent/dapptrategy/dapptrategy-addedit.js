@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, message } from 'antd';
+import { Form } from 'antd';
 import { getQueryString } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
@@ -35,6 +35,7 @@ class AppmanagentAddedit extends DetailUtil {
             type: 'checkbox',
             listCode: '625476',
             keyName: 'id',
+          params: {type: 1},
             valueName: 'name',
             required: true,
             title: '应用标签'
@@ -68,35 +69,14 @@ class AppmanagentAddedit extends DetailUtil {
             code: this.code,
             view: this.view,
             detailCode: 625463,
-          buttons: [{
-            title: '确定',
-            handler: (param) => {
-              param.dappId = this.dappId;
-              param.label = param.label.join('||');
-              if(this.code) {
-                fetch(625462, param).then(() => {
-                  message('操作成功', 1.5);
-                  setTimeout(() => {
-                    this.props.history.go(-1);
-                  }, 1000);
-                }).catch(this.cancelFetching);
-              }else {
-                fetch(625460, param).then(() => {
-                  message('操作成功', 1.5);
-                  setTimeout(() => {
-                    this.props.history.go(-1);
-                  }, 1000);
-                }).catch(this.cancelFetching);
-              }
-            },
-            check: true,
-            type: 'primary'
-          }, {
-            title: '返回',
-            handler: () => {
-              this.props.history.go(-1);
+            addCode: 625460,
+            deleteCode: 625461,
+            beforeSubmit: (params) => {
+                params.dappId = this.dappId;
+              let label = params.label.split(',');
+              params.label = label.join('||');
+                return params;
             }
-          }]
         });
     }
 }
