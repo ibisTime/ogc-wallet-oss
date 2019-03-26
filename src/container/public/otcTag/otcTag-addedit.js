@@ -46,7 +46,7 @@ class OtccountryAddedit extends DetailUtil {
             key: 'id',
             detailCode: 625332,
             addCode: 625320,
-            editCode: 625321
+            editCode: 625331
         });
     }
 }
