@@ -50,7 +50,7 @@ class Banner extends React.Component {
             fields,
             pageCode: '630505',
             searchParams: {
-                type: 2
+                typeList: ['0', '1', '2']
             },
             singleSelect: false,
             btnEvent: {
