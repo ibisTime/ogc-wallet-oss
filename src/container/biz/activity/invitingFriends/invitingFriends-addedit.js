@@ -14,7 +14,7 @@ class InvitingFriendsAddedit extends DetailUtil {
             ckey: {
               cDate: /_date/,
               cSymbol: /_symbol/,
-                cTextarea: /_textarea/
+                cTextarea: /_info/
             }
         };
     }
@@ -38,14 +38,14 @@ class InvitingFriendsAddedit extends DetailUtil {
             title: '数值',
             field: 'cvalue',
             required: true,
-            type: 'datetime'
+            type: 'textarate'
           });
-        } else if(this.cData.ctype.match(this.cData.ckey.cDate)) {
+        } else if(this.cData.ctype.match(this.cData.ckey.cTextarea)) {
             fields.push({
                 title: '数值',
                 field: 'cvalue',
                 required: true,
-                type: 'datetime'
+                type: 'textarea'
             });
         }else if(this.cData.ctype.match(this.cData.ckey.cSymbol)) {
           fields.push({
