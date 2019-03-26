@@ -59,8 +59,9 @@ export const getLastGroupHistoryMsgs = function(selToID) {
 };
 
 export const addMsg = function(msg, userMap) {
+  console.log(userMap);
   let fromAccountNick;
-  let fromAccountImage = '';
+  let fromAccountImage;
   let _subType = msg.getSubType();
 
   // 获取会话类型，目前只支持群聊
