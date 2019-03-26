@@ -19,6 +19,7 @@ import {
   showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
+let currency = 'BTC';
 
 @listWrapper(
   state => ({
@@ -31,6 +32,22 @@ import fetch from 'common/js/fetch';
   }
 )
 class SupplyAddress extends React.Component {
+  componentDidMount() {
+    let clearParams = document.getElementById('clearParams');
+    let symInputList = document.querySelectorAll('.ant-select-search__field');
+    let symPloList = document.querySelectorAll('.ant-select-selection__placeholder');
+      setTimeout(() => {
+        symInputList.forEach((item, index) => {
+          if (item.id === 'symbol') {
+            item.value = currency + '-比特币';
+            symPloList[index].style.display = 'none';
+          }
+        });
+      }, 4000);
+      clearParams.addEventListener('click', () => {
+        currency = 'BTC';
+      });
+  }
   render() {
     const fields = [{
       field: 'symbol',
@@ -43,7 +60,17 @@ class SupplyAddress extends React.Component {
       keyName: 'symbol',
       valueName: '{{symbol.DATA}}-{{cname.DATA}}',
       searchName: 'symbol',
-      render: (v) => v
+      render: (v, data) => v,
+      search: true,
+      onChange: (v) => {
+        setTimeout(() => {
+          let clearSpan = document.querySelector('.ant-select-selection__clear');
+          clearSpan.addEventListener('click', () => {
+            currency = 'BTC';
+          });
+        }, 0);
+        currency = v;
+      }
     }, {
       field: 'address',
       title: '地址'
@@ -71,7 +98,7 @@ class SupplyAddress extends React.Component {
       rowKey: 'id',
       pageCode: '802605',
       searchParams: {
-        symbol: 'BTC'
+        symbol: currency
       },
       btnEvent: {
         add: (selectedRowKeys, selectedRows) => {
@@ -116,7 +143,7 @@ class SupplyAddress extends React.Component {
           } else {
             // 测试：https://testnet.blockexplorer.com/address/
             // 正式：https://blockexplorer.com/address/
-            window.open('https://testnet.blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+            window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
           }
         }
       }

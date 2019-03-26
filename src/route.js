@@ -527,6 +527,11 @@ const ROUTES = [
         path: '/quotation/quotationBTC',
         component: asyncComponent(() => import('container/biz/quotation/quotationBTC'))
     },
+    // USDT行情
+    {
+        path: '/quotation/quotationUSDT',
+        component: asyncComponent(() => import('container/biz/quotation/quotationUSDT'))
+    },
     // ETH行情
     {
         path: '/quotation/quotationETH',
