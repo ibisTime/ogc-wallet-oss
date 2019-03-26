@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'antd';
-import { getQueryString } from 'common/js/util';
+import { getQueryString, getRealCheckboxVal } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 @Form.create()
@@ -58,7 +58,10 @@ class AppmanagentAddedit extends DetailUtil {
             keyName: 'id',
             valueName: 'name',
             required: true,
-            title: '应用标签'
+            title: '应用标签',
+          formatter(v, d) {
+            return v;
+          }
         }, {
             field: 'scanCountFake',
             title: '起始浏览数量',
