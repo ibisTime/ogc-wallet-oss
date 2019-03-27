@@ -13,7 +13,8 @@ class InvitingFriendsAddedit extends DetailUtil {
             ctype: getQueryString('ctype'),
             ckey: {
               cDate: /_date/,
-              cSymbol: /_symbol/
+              cSymbol: /_symbol/,
+                cActivity: /_notice/
             }
         };
     }
@@ -39,7 +40,14 @@ class InvitingFriendsAddedit extends DetailUtil {
             required: true,
             type: 'datetime'
           });
-        } else if(this.cData.ctype.match(this.cData.ckey.cSymbol)) {
+        } else if(this.cData.ctype.match(this.cData.ckey.cActivity)) {
+            fields.push({
+                title: '内容',
+                field: 'cvalue',
+                required: true,
+               type: 'textarea'
+            });
+        }else if(this.cData.ctype.match(this.cData.ckey.cSymbol)) {
           fields.push({
             title: '数值',
             field: 'cvalue',

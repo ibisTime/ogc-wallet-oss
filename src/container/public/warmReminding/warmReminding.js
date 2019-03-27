@@ -37,7 +37,7 @@ class WarmReminding extends React.Component {
             rowKey: 'id',
             pageCode: '630045',
             searchParams: {
-                type: 'tips'
+                type: 'mnemonic'
             }
         });
     }
