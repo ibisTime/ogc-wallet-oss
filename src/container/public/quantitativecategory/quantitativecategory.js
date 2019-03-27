@@ -35,7 +35,8 @@ class Quantitative extends React.Component {
       title: '标题'
     }, {
       field: 'typeName',
-      title: '分类'
+      title: '分类名称',
+      search: true
     }, {
       field: 'orderNo',
       title: '次序'

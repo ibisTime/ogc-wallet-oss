@@ -140,7 +140,9 @@ class ChatBox extends React.Component {
           <div className="msgcon">{
             msg.content.map((cont, i) => (
               cont.type === 'text'
-                ? cont.textContent
+                ? <div dangerouslySetInnerHTML={{
+                      __html: cont.textContent
+                  }}/>
                 : cont.type === 'face'
                   ? <img className="face-img" key={i} src={cont.textContent} />
                   : <img key={cont.textContent.bigImgUrl} name={cont.textContent.name} src={cont.textContent.imgUrl} onClick={() => this.handleImgClick(cont.textContent.bigImgUrl)} />
