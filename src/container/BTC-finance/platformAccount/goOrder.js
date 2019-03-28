@@ -102,7 +102,6 @@ class Stayorder extends React.Component {
                             name: '审核',
                             check: false,
                             handler: (keys, items) => {
-                                console.log(keys);
                                 if (!keys || !keys.length) {
                                     showWarnMsg('请选择记录');
                                 } else {
@@ -111,7 +110,6 @@ class Stayorder extends React.Component {
                                         codeList: keys,
                                         biz: 802801
                                     });
-                                    console.log(keys);
                                 }
                             }
                         },

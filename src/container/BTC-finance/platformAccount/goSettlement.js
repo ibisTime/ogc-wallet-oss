@@ -9,20 +9,19 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketsettlement/alreadysettlement';
+} from '@redux/marketsettlement/gosettlement';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getUserName,
-    getQueryString
+    getUserName
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.AlreadySettlement,
+        ...state.GoSettlement,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -31,17 +30,6 @@ import fetch from 'common/js/fetch';
     }
 )
 class Otcpayment extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-        this.accountNumber = getQueryString('code', this.props.location.search) || '';
-        this.isPlat = !!getQueryString('isPlat', this.props.location.search);
-        this.bizType = getQueryString('bizType', this.props.location.search);
-        this.symbol = getQueryString('symbol', this.props.location.search) || '';
-        if(this.symbol) {
-            this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
-        }
-    }
     render() {
         const fields = [{
             title: '订单编号',
@@ -69,10 +57,7 @@ class Otcpayment extends React.Component {
             field: 'approveNote'
         }, {
             title: '操作人',
-            field: 'approveUser',
-            render: (v, d) => {
-                return d.userInfo ? d.userInfo.nickname : '';
-            }
+            field: 'approveUser'
         }, {
             title: '操作时间',
             type: 'datetime',
@@ -82,10 +67,7 @@ class Otcpayment extends React.Component {
             fields,
             pageCode: 802812,
             searchParams: {
-                isPlat: this.isPlat,
-                bizType: this.bizType,
-                currency: this.symbol,
-                accountNumber: this.accountNumber
+                status: 3
             },
             buttons: [
                 {
@@ -102,7 +84,7 @@ class Otcpayment extends React.Component {
                     name: '返回',
                     check: false,
                     handler: () => {
-                        this.props.history.push(-1);
+                        this.props.history.go(-1);
                     }
                 }]
         });

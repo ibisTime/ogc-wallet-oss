@@ -197,6 +197,7 @@ import {publicOtctag} from './redux/public/otcTag';
 
 import {publicOtcCountry} from './redux/public/otccountry';
 import {quanTitativeCategory} from './redux/public/quantitativecategory';
+import {GoSettlement} from './redux/marketsettlement/gosettlement';
 
 // OTC 支付方式设置
 import {publicOtcPayment} from './redux/public/otcpayment';
@@ -398,6 +399,7 @@ export default combineReducers({
     quanTitativeCategory,
     NotifierofWithdrawal,
     GoOrder,
+    GoSettlement,
     ManualSettlement,
     PlatFormRecord,
     OtcManageAdvertAddedit

@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/user/channelDealerCommissions/channelDealerSettleHistory';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, getQueryString, showWarnMsg, dateFormat, showSucMsg} from 'common/js/util';
+import {dateTimeFormat, moneyFormat, getQueryString, showWarnMsg, dateFormat, showSucMsg} from 'common/js/util';
 import {activateUser} from 'api/user';
 import {CION_FMVP} from 'common/js/config';
 import CommissionsSettlement from 'component/commissions-settlement/commissions-settlement';
@@ -63,6 +63,8 @@ class Rewarddeatil extends React.Component {
             title: '手机号/邮箱',
             render: (v, data) => {
                 if (data.user) {
+                    return data.user.mobile ? data.user.mobile + '-' + data.user.email : '-' + '' + data.user.email;
+                } else if(data.user) {
                     return data.user.email ? data.user.mobile + '-' + data.user.email : data.user.mobile + '-' + '';
                 }
             }
@@ -71,7 +73,10 @@ class Rewarddeatil extends React.Component {
             title: '币种'
         }, {
             field: 'count',
-            title: '奖励总数量'
+            title: '奖励总数量',
+            render: (v, d) => {
+                return moneyFormat(v, '', d.currency);
+            }
         }];
         return (<div>
             {this.props.buildList({

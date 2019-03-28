@@ -16,6 +16,7 @@ class PlatformAccount extends React.Component {
         super(props);
         this.state = {
             data: [],
+            data1: [],
             symbol: getQueryString('symbol'),
             accountTypeSQ: `SYS_USER_WITHDRAW`,
             accountTypeCold: `SYS_USER_COLD`,
@@ -38,8 +39,10 @@ class PlatformAccount extends React.Component {
             })
         ]).then(([res1]) => {
             this.setState({
-                data: res1
+                data: res1,
+                data1: res1.totalUnSettleAmount
             });
+            this.unSettleAmount = res1.totalUnSettleAmount;
         }).catch(() => this.setState(
             {fetching: false}));
     }
@@ -51,6 +54,7 @@ class PlatformAccount extends React.Component {
             message.warning('暂无资金流水');
         }
     }
+
     goOrder(accountNumber, bizType, symbol) {
         if (accountNumber) {
             this.props.history.push(`/BTC-finance/platformAccount/goOrder?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
@@ -58,13 +62,16 @@ class PlatformAccount extends React.Component {
             message.warning('暂无资金流水');
         }
     }
+
+    // 待结算数量
     goStay(accountNumber, bizType, symbol) {
         if (accountNumber) {
-            this.props.history.push(`/BTC-finance/platformAccount/goStady?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+            this.props.history.push(`/BTC-finance/platformAccount/goStady?&isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
         } else {
-            message.warning('暂无审批');
+            message.warning('暂无待结算数量');
         }
     }
+
     goSettlement(accountNumber, bizType, symbol) {
         if (accountNumber) {
             this.props.history.push(`/BTC-finance/platformAccount/goSettlement?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
@@ -72,9 +79,14 @@ class PlatformAccount extends React.Component {
             message.warning('暂无资金订单');
         }
     }
+
     gomanualsettlement(accountNumber, bizType, symbol) {
-            this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
-    }
+        if (accountNumber) {
+            this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&data=${this.unSettleAmount}&v=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+        } else {
+            message.warning('暂无结算数量');
+        }
+  }
     render() {
         const unsettledLoan = this.props.unsettledLoan;
         const {data} = this.state;
@@ -120,28 +132,28 @@ class PlatformAccount extends React.Component {
                         <Card title="营销账户 ">
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>已分发累计总数量:</label>
-                                <span style={{marginLeft: '20px'}}>{data.totalSendAmount}</span>
+                                <span style={{marginLeft: '20px'}}>{moneyFormat(data.totalSendAmount, '', this.state.symbol)}</span>
                                 <Button
-                                    onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
+                                    onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_marketing', this.state.symbol)}
                                     type="primary" style={{marginTop: '15px', marginLeft: '50px'}}>本地流水</Button>
                             </div>
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>待审批数量:</label>
                                 <span style={{marginLeft: '20px'}}>{data.totalApproveAmount}</span>
                                 <Button
-                                    onClick={() => this.goOrder(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
+                                    onClick={() => this.goOrder(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_marketing', this.state.symbol)}
                                     type="primary" style={{marginTop: '15px', marginLeft: '50px'}}>查看订单</Button>
                             </div>
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>待结算数量:</label>
                                 <span style={{marginLeft: '20px'}}>{data.totalUnSettleAmount}</span>
                                 <Button
-                                    onClick={() => this.goStay(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
+                                    onClick={() => this.goStay(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_marketing', this.state.symbol)}
                                     type="primary" style={{marginTop: '15px', marginLeft: '50px'}}>查看订单</Button>
                             </div>
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>已结算数量:</label>
-                                <span style={{marginLeft: '20px'}}>{data.totalSettleAmount}</span>
+                                <span style={{marginLeft: '20px'}}>{data.totalSettle}</span>
                                 <Button
                                     onClick={() => this.goSettlement(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
                                     type="primary" style={{marginTop: '15px', marginLeft: '55px'}}>查看记录</Button>

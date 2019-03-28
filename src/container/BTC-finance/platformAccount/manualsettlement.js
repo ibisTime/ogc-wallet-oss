@@ -19,6 +19,7 @@ class GJAddressQueryAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.accountNumber = getQueryString('code', this.props.location.search) || '';
+        this.data = getQueryString('data', this.props.location.search) || '';
         this.bizType = getQueryString('bizType', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search) || '';
         if (this.symbol) {
@@ -29,6 +30,7 @@ class GJAddressQueryAddedit extends DetailUtil {
     render() {
         const fields = [{
             title: '币种',
+            readonly: false,
             hidden: true,
             field: 'currency'
         }, {
@@ -37,6 +39,7 @@ class GJAddressQueryAddedit extends DetailUtil {
             field: 'creator',
             hidden: true
         }, {
+            readonly: false,
             required: true,
             field: 'bizType',
             title: '结算类型',
@@ -48,6 +51,7 @@ class GJAddressQueryAddedit extends DetailUtil {
             keyName: 'key',
             valueName: 'value'
         }, {
+            readonly: false,
             required: true,
             field: 'type',
             title: '具体业务',
@@ -61,10 +65,14 @@ class GJAddressQueryAddedit extends DetailUtil {
         }, {
             required: true,
             title: '打币地址',
-            field: 'payCardNo'
+            field: 'payCardNo',
+            readonly: false
         }, {
             required: true,
             field: 'settleAmount',
+            formatter: (v, d) => {
+                return this.data;
+        },
             title: '结算数量'
         }];
 
