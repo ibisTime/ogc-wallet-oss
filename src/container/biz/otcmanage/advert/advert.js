@@ -74,7 +74,7 @@ class Advert extends React.Component {
             title: '已买出/购买(BTC)',
             render: (v, data) => {
                 if (data.totalCountString === '0') {
-                    return data.totalCountString + '-BTC';
+                    return moneyFormat(v, '', data.totalCountString) + '-BTC';
                 } else {
                     return moneyFormat(v, '', data.totalCountString) + 'BTC';
                 }
