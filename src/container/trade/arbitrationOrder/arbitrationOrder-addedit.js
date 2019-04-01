@@ -56,7 +56,9 @@ class ArbitrationOrderAddedit extends DetailUtil {
             readonly: true
         }, {
             title: '处理说明',
-            field: 'remark',
+            field: 'arbitrateResult',
+            type: 'textarea',
+            normalArea: true,
             readonly: true
         }, {
             title: '状态',

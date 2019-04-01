@@ -74,14 +74,14 @@ class Advert extends React.Component {
             title: '已买出/购买(BTC)',
             render: (v, data) => {
                 if (data.totalCountString === '0') {
-                    return moneyFormat(v, '', data.totalCountString) + '-BTC';
+                    return data.totalCountString + '-BTC';
                 } else {
-                    return moneyFormat(v, '', data.totalCountString) + 'BTC';
+                    return moneyFormat(v, '', data.tradeCoin) + '-BTC';
                 }
             }
         }, {
             field: 'premiumRate',
-            title: '溢价率',
+            title: '溢价率(%)',
             render: (v, data) => {
                 return v * 100 + '%';
             }
@@ -93,7 +93,7 @@ class Advert extends React.Component {
             title: '单笔最大量'
         }, {
             field: 'payLimit',
-            title: '付款期限',
+            title: '付款期限(分钟)',
             render: (v, data) => {
                 return data.payLimit + '分钟';
             }

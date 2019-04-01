@@ -8,7 +8,7 @@ import {
     setPageData,
     restore
 } from '@redux/marketsettlement/manualsettlement';
-import {getQueryString, getUserName, showSucMsg, moneyFormat} from 'common/js/util';
+import {getQueryString, getUserName, showSucMsg, moneyParse, moneyFormat} from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
@@ -19,12 +19,13 @@ class GJAddressQueryAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.accountNumber = getQueryString('code', this.props.location.search) || '';
-        this.data = getQueryString('data', this.props.location.search) || '';
+        this.settleAmount = getQueryString('settleAmount', this.props.location.search) || '';
         this.bizType = getQueryString('bizType', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search) || '';
         if (this.symbol) {
             this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
         }
+        this.settleAmount = moneyParse(this.settleAmount, '', this.bizType);
     }
 
     render() {
@@ -34,8 +35,6 @@ class GJAddressQueryAddedit extends DetailUtil {
             hidden: true,
             field: 'currency'
         }, {
-            value: getUserName(),
-            required: true,
             field: 'creator',
             hidden: true
         }, {
@@ -68,12 +67,11 @@ class GJAddressQueryAddedit extends DetailUtil {
             field: 'payCardNo',
             readonly: false
         }, {
-            required: true,
             field: 'settleAmount',
+            title: '结算数量',
             formatter: (v, d) => {
-                return this.data;
-        },
-            title: '结算数量'
+                return moneyFormat(this.settleAmount, '', this.bizType) + '-BTC';
+            }
         }];
 
         return this.buildDetail({
@@ -85,11 +83,16 @@ class GJAddressQueryAddedit extends DetailUtil {
                 check: true,
                 handler: (params) => {
                     console.log(params);
-                    params.currency = this.symbol;
+                    // this.settleAmount = moneyFormat(this.settleAmount, '', this.bizType);
+                    params.settleAmount = this.settleAmount;
+                    params.creator = params.updater;
+                     params.currency = this.bizType;
                     this.doFetching();
                     fetch(802820, params).then(() => {
                         showSucMsg('操作成功');
-                        this.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
                     }).catch(this.cancelFetching);
                 }
             }, {

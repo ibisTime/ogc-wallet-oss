@@ -21,7 +21,7 @@ class StayorderAddedit extends DetailUtil {
             title: '申请划转数量',
             field: 'amount',
             formatter: (v, data) => {
-                return moneyFormat(v.toString(), '', data.amount);
+                return moneyFormat(v.toString(), '', data.currency);
             }
         }, {
             title: '申请人',

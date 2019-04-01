@@ -329,12 +329,12 @@ export function formatFile(urls, suffix = '') {
       suffix = url.substr(index);
       url = url.substr(0, index);
     }
-    url = PIC_PREFIX + encodeURIComponent(url) + suffix;
+    url = PIC_PREFIX + url + suffix;
   }
   return url;
 }
 
-/**
+/*
  * 格式化图片地址
  * @param imgs
  * @param suffix

@@ -43,7 +43,7 @@ class ChatBox extends React.Component {
       // 300ms后,等待图片加载完，滚动条自动滚动到底部
       setTimeout(function() {
         msgBox.scrollTop = msgBox.scrollHeight;
-      }, 300);
+      }, 1000);
     }
   }
   // 显示上传图片框
@@ -90,7 +90,7 @@ class ChatBox extends React.Component {
       // 300ms后,等待图片加载完，滚动条自动滚动到底部
       setTimeout(function() {
         msgBox.scrollTop = msgBox.scrollHeight;
-      }, 300);
+      }, 3000);
     });
   }
   getPreGroupHistoryMsgs() {
@@ -107,7 +107,7 @@ class ChatBox extends React.Component {
         if (msgBox.scrollTop === 0) {
           setTimeout(function() {
             msgBox.scrollTop = 0;
-          }, 300);
+          }, 1000);
         }
       }).catch(() => {
         this.setState({ preLoading: false });

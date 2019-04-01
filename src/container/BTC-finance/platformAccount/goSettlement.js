@@ -43,11 +43,14 @@ class Otcpayment extends React.Component {
             title: '申请划转数量',
             field: 'amount',
             render: (v, data) => {
-                return moneyFormat(v.toString(), '', data.amount);
+                return moneyFormat(v.toString(), '', data.currency);
             }
         }, {
             title: '申请人',
-            field: 'applyUser'
+            field: 'applyUser',
+            render: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '申请时间',
             type: 'datetime',

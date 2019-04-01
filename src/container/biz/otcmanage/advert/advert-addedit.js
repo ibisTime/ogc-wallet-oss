@@ -132,7 +132,7 @@ class MarketAdjustmentAddedit extends DetailUtil {
                     </span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
-                    <label>溢价率：</label>
+                    <label>溢价率(%)：</label>
                     <span style={{marginLeft: '20px'}}>{((data.premiumRate) * 100 + '%')}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
@@ -144,7 +144,7 @@ class MarketAdjustmentAddedit extends DetailUtil {
                     <span style={{marginLeft: '20px'}}>{data.minTrade }</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
-                    <label>付款期限：</label>
+                    <label>付款期限(分钟)：</label>
                     <span style={{marginLeft: '20px'}}>{data.payLimit}分钟</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
