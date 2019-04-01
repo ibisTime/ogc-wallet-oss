@@ -17,10 +17,15 @@ class ArbitrationOrderResolve extends DetailUtil {
     this.code = getQueryString('code', this.props.location.search);
     this.view = !!getQueryString('v', this.props.location.search);
   }
-
   render() {
     const { pageData } = this.state;
-    const fields = [{
+    const fields = [
+      {
+        field: 'remark',
+        title: '备注',
+        hidden: true,
+        value: '0'
+      }, {
       field: 'code',
       title: '编号',
       readonly: true

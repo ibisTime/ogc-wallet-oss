@@ -242,6 +242,9 @@ class Dashboard extends React.Component {
   }
   // newMsgList 为新消息数组，结构为[Msg]
   onMsgNotify = (newMsgList) => {
+    console.log('111');
+          console.log(newMsgList);
+          debugger;
     var selSess, newMsg;
     // 遍历新消息
     for (var j in newMsgList) {
