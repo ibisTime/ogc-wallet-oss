@@ -59,7 +59,6 @@ export const getLastGroupHistoryMsgs = function(selToID) {
 };
 
 export const addMsg = function(msg, userMap) {
-  debugger;
   let fromAccountNick;
   let fromAccountImage = '';
   let _subType = msg.getSubType();
@@ -70,7 +69,6 @@ export const addMsg = function(msg, userMap) {
   let sessType = msg.getSession().type();
   let isSelfSend = msg.getIsSend(); // 消息是否为自己发的
   let fromAccount = msg.getFromAccount();
-        debugger;
   if (fromAccount !== 'admin') {
     return;
   }
