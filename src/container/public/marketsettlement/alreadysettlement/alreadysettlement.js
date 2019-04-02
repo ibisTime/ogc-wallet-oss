@@ -60,11 +60,11 @@ class Otcpayment extends React.Component {
             field: 'approveNote'
         }, {
             title: '操作人',
-            field: 'approveUser'
+            field: 'settleUser'
         }, {
             title: '操作时间',
             type: 'datetime',
-            field: 'approveDatetime'
+            field: 'settleDatetime'
         }];
         return this.props.buildList({
             fields,

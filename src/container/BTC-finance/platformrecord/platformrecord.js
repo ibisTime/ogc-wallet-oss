@@ -15,10 +15,10 @@ import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getUserName
+    getUserName,
+    moneyBTC
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
-
 @listWrapper(
     state => ({
         ...state.PlatFormRecord,
@@ -59,7 +59,10 @@ class PlatFormrecord extends React.Component {
                 field: 'payCardNo'
             }, {
                 field: 'settleAmount',
-                title: '结算数量'
+                title: '结算数量',
+                render: (v, d) => {
+                    return moneyBTC(v, '', d.currency) + '-BTC';
+                }
             }];
         return this.props.buildList({
             fields,

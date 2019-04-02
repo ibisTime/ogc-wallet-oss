@@ -242,12 +242,23 @@ class Dashboard extends React.Component {
   }
   // newMsgList 为新消息数组，结构为[Msg]
   onMsgNotify = (newMsgList) => {
-    console.log('111');
-          console.log(newMsgList);
     var selSess, newMsg;
     // 遍历新消息
     for (var j in newMsgList) {
       newMsg = newMsgList[j];
+      // console.log(newMsg);
+      // console.log(newMsg.elems);
+      // let pp = newMsg.elems[0];
+      // let dd = pp.content;
+      // let aa = dd.text;
+      // let cc = aa.substring(5);
+      // newMsg.elems[0].content.text = cc;
+      // // newMsg = newMsg.push(cc);
+      // console.log(cc);
+      // 过滤掉加人的消息格式
+      if (newMsg.fromAccount === '@TIM#SYSTEM') {
+        continue;
+      }
       if (this.props.curSelToID === newMsg.getSession().id()) {
         selSess = newMsg.getSession();
         let _list = this.props.msgList.slice();

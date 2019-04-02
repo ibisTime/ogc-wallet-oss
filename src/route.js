@@ -899,7 +899,7 @@ const ROUTES = [
     // 散取广播
     {
         path: '/BTC-finance/TBunderlines',
-        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderlines'))
     },
     {
         path: '/BTC-finance/TBunderlines/addedit',

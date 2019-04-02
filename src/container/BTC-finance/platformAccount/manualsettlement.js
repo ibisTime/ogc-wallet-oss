@@ -82,7 +82,7 @@ class GJAddressQueryAddedit extends DetailUtil {
                 title: '保存',
                 check: true,
                 handler: (params) => {
-                    console.log(params);
+                    // console.log(params);
                     // this.settleAmount = moneyFormat(this.settleAmount, '', this.bizType);
                     params.settleAmount = this.settleAmount;
                     params.creator = params.updater;
