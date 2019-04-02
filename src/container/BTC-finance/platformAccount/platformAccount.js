@@ -80,9 +80,13 @@ class PlatformAccount extends React.Component {
             message.warning('暂无资金订单');
         }
     }
+    // 奖励明细
+    goReward() {
+        this.props.history.push(`/user/userrewarddeatil`);
+    }
 
     gomanualsettlement(accountNumber, data, bizType, symbol) {
-        if (data.unSettleAmount !== '0') {
+        if (data.unSettleAmount > 0) {
             this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&settleAmount=${this.unSettleAmount}&v=1&code=${accountNumber}&bizType=${bizType}`);
         } else {
             message.warning('暂无结算数量');
@@ -133,16 +137,16 @@ class PlatformAccount extends React.Component {
                     <Col style={{marginBottom: '30px', width: '390px', float: 'left', marginRight: '30px'}}>
                         <Card title="营销账户 " extra={
                             <Button
-                                onClick={() => this.gomanualsettlement(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '', 'jour_biz_type_lhlc', this.state.symbol, this.data)}
-                                type="primary" style={{marginTop: '15px', margin: 'center'}}>手动结算</Button>
-                        }>
+                                onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_marketing', this.state.symbol)}
+                                type="primary" style={{marginTop: '20px', marginLeft: '50px'}}>本地流水</Button>
+                       }>
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>已分发累计总数量:</label>
                                 <span
                                     style={{marginLeft: '20px'}}>{moneyFormat(data.totalSendAmount, '', this.state.symbol) + '-' + this.state.symbol}</span>
-                                <Button
-                                    onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_marketing', this.state.symbol)}
-                                    type="primary" style={{marginTop: '20px', marginLeft: '50px'}}>本地流水</Button>
+                                  <Button
+                                    onClick={() => this.goReward()}
+                                    type="primary" style={{marginTop: '20px', marginLeft: '50px'}}>奖励明细</Button>
                             </div>
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>待审批数量:</label>
@@ -167,6 +171,9 @@ class PlatformAccount extends React.Component {
                                 <Button
                                     onClick={() => this.goSettlement(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
                                     type="primary" style={{marginTop: '20px', marginLeft: '50px'}}>查看记录</Button>
+                                <Button
+                                    onClick={() => this.gomanualsettlement(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '', 'jour_biz_type_lhlc', this.state.symbol, this.data)}
+                                    type="primary" style={{marginTop: '15px', marginLeft: '85px'}}>手动结算</Button>
                             </div>
                         </Card>
                     </Col>

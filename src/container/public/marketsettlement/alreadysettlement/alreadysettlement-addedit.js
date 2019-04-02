@@ -20,6 +20,9 @@ class StayorderAddedit extends DetailUtil {
             select: 'type',
             search: true
         }, {
+            title: '打币地址',
+            field: 'settleAddress'
+        }, {
             title: '申请划转数量',
             field: 'amount',
             formatter: (v, data) => {

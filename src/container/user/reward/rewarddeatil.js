@@ -78,9 +78,9 @@ class Rewarddeatil extends React.Component {
                 fields,
                 rowKey: 'id',
                 pageCode: '802395',
-                searchParams: {
-                    userId: this.userId
-                },
+                // searchParams: {
+                //     userId: this.userId
+                // },
                 buttons: []
             })}
         </div>);
