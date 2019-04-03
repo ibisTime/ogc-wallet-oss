@@ -38,11 +38,12 @@ class PlatformAccount extends React.Component {
                 // type: 'B'
             })
         ]).then(([res1]) => {
+            console.log(res1);
             this.setState({
                 data: res1,
                 data1: res1.totalUnSettleAmount
             });
-            // this.unSettleAmount = res1.totalUnSettleAmount;
+            this.totalUnSettleAmount = res1.totalUnSettleAmount;
             this.unSettleAmount = moneyFormat(res1.totalUnSettleAmount, '', this.state.symbol);
         }).catch(() => this.setState(
             {fetching: false}));
@@ -85,9 +86,10 @@ class PlatformAccount extends React.Component {
         this.props.history.push(`/user/userrewarddeatil`);
     }
 
-    gomanualsettlement(accountNumber, data, bizType, symbol) {
-        if (data.unSettleAmount > 0) {
-            this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&settleAmount=${this.unSettleAmount}&v=1&code=${accountNumber}&bizType=${bizType}`);
+    gomanualsettlement(accountNumber, totalUnSettleAmount, bizType, symbol) {
+        console.log(this.totalUnSettleAmount);
+        if (this.totalUnSettleAmount > 0) {
+            this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&settleAmount=${this.unSettleAmount}&v=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
         } else {
             message.warning('暂无结算数量');
         }
@@ -163,6 +165,9 @@ class PlatformAccount extends React.Component {
                                 <Button
                                     onClick={() => this.goStay(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_marketing', this.state.symbol)}
                                     type="primary" style={{marginTop: '20px', marginLeft: '50px'}}>查看订单</Button>
+                                <Button
+                                    onClick={() => this.gomanualsettlement(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', this.totalUnSettleAmount1, 'jour_biz_type_marketing', this.state.symbol)}
+                                    type="primary" style={{marginTop: '15px', marginLeft: '85px'}}>手动结算</Button>
                             </div>
                             <div style={{width: '100%', marginLeft: '30px', marginTop: '20px'}}>
                                 <label>已结算数量:</label>
@@ -171,9 +176,6 @@ class PlatformAccount extends React.Component {
                                 <Button
                                     onClick={() => this.goSettlement(unsettledLoan[this.state.accountTypeYY] ? unsettledLoan[this.state.accountTypeYY].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
                                     type="primary" style={{marginTop: '20px', marginLeft: '50px'}}>查看记录</Button>
-                                <Button
-                                    onClick={() => this.gomanualsettlement(unsettledLoan[this.state.accountTypeLhlc] ? unsettledLoan[this.state.accountTypeLhlc].accountNumber : '', 'jour_biz_type_lhlc', this.state.symbol, this.data)}
-                                    type="primary" style={{marginTop: '15px', marginLeft: '85px'}}>手动结算</Button>
                             </div>
                         </Card>
                     </Col>

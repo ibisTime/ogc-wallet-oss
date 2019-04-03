@@ -41,7 +41,7 @@ class Otcpayment extends React.Component {
             search: true
         }, {
             title: '打币地址',
-            field: 'payCardNo'
+            field: 'settleAddress'
         }, {
             title: '申请划转数量',
             field: 'amount',

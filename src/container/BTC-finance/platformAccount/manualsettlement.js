@@ -20,12 +20,13 @@ class GJAddressQueryAddedit extends DetailUtil {
         this.view = !!getQueryString('v', this.props.location.search);
         this.accountNumber = getQueryString('code', this.props.location.search) || '';
         this.settleAmount = getQueryString('settleAmount', this.props.location.search) || '';
+        this.viewSettleAmount = this.settleAmount;
         this.bizType = getQueryString('bizType', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search) || '';
         if (this.symbol) {
             this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
         }
-        this.settleAmount = moneyParse(this.settleAmount, '', this.bizType);
+        // this.settleAmount = moneyParse(this.settleAmount, '', this.bizType);
     }
 
     render() {
@@ -70,7 +71,7 @@ class GJAddressQueryAddedit extends DetailUtil {
             field: 'settleAmount',
             title: '结算数量',
             formatter: (v, d) => {
-                return moneyFormat(this.settleAmount, '', this.bizType) + '-BTC';
+                return this.viewSettleAmount;
             }
         }];
 
@@ -83,10 +84,10 @@ class GJAddressQueryAddedit extends DetailUtil {
                 check: true,
                 handler: (params) => {
                     // console.log(params);
-                    // this.settleAmount = moneyFormat(this.settleAmount, '', this.bizType);
+                    this.settleAmount = moneyParse(this.settleAmount, '', this.symbol);
                     params.settleAmount = this.settleAmount;
                     params.creator = params.updater;
-                     params.currency = this.bizType;
+                     params.currency = this.symbol;
                     this.doFetching();
                     fetch(802820, params).then(() => {
                         showSucMsg('操作成功');
