@@ -14,7 +14,8 @@ import {
     moneyFormat,
     showWarnMsg,
     showSucMsg,
-    getUserName
+    getUserName,
+    getCoinList
 } from 'common/js/util';
 import {Modal} from 'antd';
 @listWrapper(
@@ -30,45 +31,69 @@ import {Modal} from 'antd';
 class Advert extends React.Component {
     render() {
         const fields = [{
-            field: 'realName',
+            field: 'userId',
             title: '发布人',
+            type: 'select',
+            pageCode: '805120',
+            // params: {
+            //     kind: 'Q'
+            // },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}',
+            searchName: 'keyword',
             search: true,
             render: (v, data) => {
                 return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             }
         }, {
-            field: 'tradeCoin',
             title: '交易对',
+            field: 'tradeCurrency',
+            type: 'select',
+            listCode: 625370,
+            search: true,
+            searchName: 'tradeCurrency',
+            keyName: 'simpleName',
+            valueName: 'BTC-{{simpleName.DATA}}',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
         }, {
             field: 'payType',
-            title: '付款方式'
+            type: 'select',
+            search: 'true',
+            pageCode: '625351',
+            searchName: 'keyword',
+            keyName: 'code',
+            valueName: 'name',
+            title: '付款方式',
+            render: (v, data) => {
+                return data.paymentName;
+            }
         }, {
             field: 'totalCountString',
-            title: '已有总量',
+            title: '已买出/购买(BTC)',
             render: (v, data) => {
-                return moneyFormat(v, '', data.totalCountString);
+                if (data.totalCountString === '0') {
+                    return data.totalCountString + '-BTC';
+                } else {
+                    return moneyFormat(v, '', data.tradeCoin) + '-BTC';
+                }
             }
         }, {
             field: 'premiumRate',
-            title: '溢价率',
+            title: '溢价率(%)',
             render: (v, data) => {
                 return v * 100 + '%';
             }
         }, {
-            title: '保护价',
-            field: 'protectPrice'
+            field: 'minTrade',
+            title: '单笔最小量'
         }, {
             field: 'maxTrade',
             title: '单笔最大量'
         }, {
-            field: 'minTrade',
-            title: '单笔最小量'
-        }, {
             field: 'payLimit',
-            title: '付款期限',
+            title: '付款期限(分钟)',
             render: (v, data) => {
                 return data.payLimit + '分钟';
             }
@@ -142,6 +167,15 @@ class Advert extends React.Component {
                         this.props.history.push(`/otcmanage/advert/addedit?&code=${selectedRowKeys[0]}&adsCode=${selectedRows[0].adsCode}`);
                     }
                 },
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/otcmanage/advert/addedit?&code=${selectedRows[0].code}`);
+                    }
+            },
                 down: (keys, items) => {
                     if (!keys || !keys.length) {
                         showWarnMsg('请选择记录');

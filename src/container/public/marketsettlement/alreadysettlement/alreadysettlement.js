@@ -35,23 +35,25 @@ class Otcpayment extends React.Component {
             title: '订单编号',
             field: 'code'
         }, {
-            title: '活动类型',
-            field: 'pic',
-            type: 'img'
-        }, {
             title: '活动币种',
             field: 'currency',
             select: 'type',
             search: true
         }, {
+            title: '打币地址',
+            field: 'settleAddress'
+        }, {
             title: '申请划转数量',
             field: 'amount',
             render: (v, data) => {
-                return moneyFormat(v.toString(), '', data.amount);
+                return moneyFormat(v.toString(), '', data.currency);
             }
         }, {
             title: '申请人',
-            field: 'applyUser'
+            field: 'applyUser',
+            render: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '申请时间',
             type: 'datetime',
@@ -61,15 +63,18 @@ class Otcpayment extends React.Component {
             field: 'approveNote'
         }, {
             title: '操作人',
-            field: 'approveUser'
+            field: 'settleUser'
         }, {
             title: '操作时间',
             type: 'datetime',
-            field: 'approveDatetime'
+            field: 'settleDatetime'
         }];
         return this.props.buildList({
             fields,
-            pageCode: 802812
+            pageCode: 802812,
+            searchParams: {
+                status: 3
+            }
         });
     }
 }

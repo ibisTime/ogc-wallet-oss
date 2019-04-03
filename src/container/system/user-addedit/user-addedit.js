@@ -15,6 +15,7 @@ class UserAddedit extends DetailUtil {
         const fields = [{
             title: '登录名(手机号)',
             field: 'mobile',
+            mobile: true,
             required: true,
             readonly: this.code
         }, {

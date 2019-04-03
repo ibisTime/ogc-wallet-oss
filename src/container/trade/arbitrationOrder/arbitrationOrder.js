@@ -34,26 +34,46 @@ class ArbitrationOrder extends React.Component {
             search: true
         }, {
             title: '被告',
-            field: 'sellUser',
+            field: 'beigao',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-卖家',
+            searchName: 'keyword',
+            search: true,
             render: (v, data) => {
-                return data ? data.sellUser + '-卖家' : '';
+                return data.sellUserInfo ? data.sellUserInfo.nickname + '-卖家' : '';
             }
         }, {
             title: '原告',
-            field: 'buyUser',
+            field: 'yuangao',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-买家',
+            searchName: 'keyword',
+            search: true,
             render: (v, data) => {
-                return data ? data.buyUser + '-买家' : '';
+                return data.buyUserInfo ? data.buyUserInfo.nickname + '-买家' : '';
             }
         }, {
             title: '交易对',
+            field: 'tradeCurrency',
             type: 'select',
+            listCode: 625370,
+            search: true,
+            searchName: 'tradeCurrency',
+            keyName: 'simpleName',
+            valueName: 'BTC-{{simpleName.DATA}}',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
-            },
-            search: true
+            }
         }, {
-            field: 'tradePrice',
-            title: '涉案金额'
+            field: 'tradeAmount',
+            title: '涉案金额',
+            render: (v, d) => {
+                return d.tradeAmount + '-' + d.tradeCurrency;
+            }
         }, {
             title: '申请原因',
             field: 'arbitrateReason'
@@ -61,12 +81,17 @@ class ArbitrationOrder extends React.Component {
             field: 'arbitrateCreateDatetime',
             title: '申请时间',
             type: 'datetime'
+        }, {
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            key: 'trade_order_status'
         }];
         return this.props.buildList({
             fields,
             pageCode: '625265',
             searchParams: {
-                strut: '5'
+                status: '5'
             },
             // setstrutlist: ['5'],
             btnEvent: {
@@ -75,8 +100,8 @@ class ArbitrationOrder extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    //     if (selectedRows[0].status !== '0') {
-                    //         showWarnMsg('只有待处理的订单才可以进行处理');
+                        //     if (selectedRows[0].status !== '0') {
+                        //         showWarnMsg('只有待处理的订单才可以进行处理');
                     } else {
                         this.props.history.push(`/trade/arbitrationOrder/resolve?code=${selectedRowKeys[0]}`);
                     }

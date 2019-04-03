@@ -60,12 +60,12 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
-  // entry: {
-  //   'polyfills': require.resolve('./polyfills'),
-  //   'common': paths.comDetailJs,
-  //   'index': paths.appIndexJs
-  // },
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: {
+    'polyfills': require.resolve('./polyfills'),
+    'common': paths.comListJs,
+    'index': paths.appIndexJs
+  },
+  // entry: [require.resolve('./polyfills'), paths.appIndexJs],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -232,12 +232,16 @@ module.exports = {
           // This loader doesn't use a "test" so it will catch all modules
           // that fall through the other loaders.
           {
+            test: /\.scss$/,
+            loaders: ['style-loader', 'css-loader', 'sass-loader'],
+          },
+          {
             loader: require.resolve('file-loader'),
             // Exclude `js` files to keep "css" loader working as it injects
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            exclude: [/\.js$/, /\.html$/, /\.json$/,/\.scss$/],
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },

@@ -112,7 +112,7 @@ class TBunderline extends React.Component {
             search: true,
             render: (v, data) => {
                 if (data.applyUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
+                    let tmpl = data.applyUserInfo.email ? data.applyUserInfo.email : data.applyUserInfo.mobile;
                     if (data.applyUserInfo.kind === 'Q') {
                         return data.applyUserInfo.realName + '(' + tmpl + ')';
                     }
@@ -130,13 +130,15 @@ class TBunderline extends React.Component {
         }, {
             title: '申请说明',
             field: 'applyNote'
-        }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'withdraw_status',
-            search: true
-        }, {
+        },
+        // }, {
+        //     field: 'status',
+        //     title: '状态',
+        //     type: 'select',
+        //     key: 'withdraw_status',
+        //     search: true
+        // },
+            {
             field: 'approveNote',
             title: '审核意见'
         }, {
@@ -157,7 +159,8 @@ class TBunderline extends React.Component {
             fields,
             pageCode: '802355',
             searchParams: {
-                currency
+                currency,
+                status: '1'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {

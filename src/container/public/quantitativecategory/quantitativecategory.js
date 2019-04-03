@@ -35,7 +35,12 @@ class Quantitative extends React.Component {
       title: '标题'
     }, {
       field: 'type',
-      title: '分类'
+      title: '分类名称',
+      type: 'select',
+      listCode: '802860',
+      keyName: 'code',
+      valueName: 'name',
+      search: true
     }, {
       field: 'orderNo',
       title: '次序'

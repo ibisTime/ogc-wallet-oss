@@ -57,9 +57,9 @@ class CustomerLedgerQuery extends React.Component {
                 if (data.accountType === 'P') {
                     return '平台账户';
                 } else {
-                    return !v ? data.mobile : v;
+                    return !v ? data.realName : v;
                 }
-            }
+        }
         }, {
             field: 'channelType',
             title: '渠道',
@@ -104,7 +104,7 @@ class CustomerLedgerQuery extends React.Component {
             type: 'datetime'
         }, {
             field: 'bizNote',
-            title: '生成说明'
+            title: '备注'
         }];
         return this.props.buildList({
             fields,

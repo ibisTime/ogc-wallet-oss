@@ -33,7 +33,8 @@ class Otcpayment extends React.Component {
     render() {
         const fields = [{
             title: '国际代码',
-            field: 'interCode'
+            field: 'interCode',
+            search: true
         }, {
             title: '国旗图片',
             field: 'pic',

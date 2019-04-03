@@ -36,37 +36,38 @@ class SurvivalOrder extends React.Component {
             title: '买家',
             field: 'buyUser',
             render: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
-                }
+                return data.buyUserInfo ? data.buyUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}',
             searchName: 'keyword',
             search: true
         }, {
             title: '卖家',
             field: 'sellUser',
             render: (v, data) => {
-                if (data.sellUserInfo) {
-                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
-                }
+                return data.sellUserInfo ? data.sellUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}',
             searchName: 'keyword',
             search: true
         }, {
             title: '交易对',
-            type: 'tradeCoin',
+            field: 'tradeCurrency',
+            type: 'select',
+            listCode: 625370,
+            search: true,
+            searchName: 'tradeCurrency',
+            keyName: 'simpleName',
+            valueName: 'BTC-{{simpleName.DATA}}',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
-            },
-            search: true
+            }
         }, {
             title: '交易价格',
             field: 'tradePrice'
@@ -74,30 +75,33 @@ class SurvivalOrder extends React.Component {
             title: '交易数量',
             field: 'countString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '交易金额',
-            field: 'tradeAmount'
+            field: 'tradeAmount',
+            render: (v, data) => {
+                return data.tradeAmount + '-' + data.tradeCurrency;
+            }
         }, {
             title: '广告费',
             field: 'feeString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '状态',
             field: 'status',
             type: 'select',
             data: [{
-                'key': '0',
-                'value': '待支付'
+                key: '-1',
+                value: '待下单'
             }, {
-                'key': '1',
-                'value': '已支付'
+                key: '1',
+                value: '待支付'
             }, {
-                'key': '3',
-                'value': '仲裁中'
+                key: '2',
+                value: '已支付待解冻'
             }],
             keyName: 'key',
             valueName: 'value',
@@ -120,8 +124,6 @@ class SurvivalOrder extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是待审核的记录');
                     } else {
                         this.props.history.push(`/otcmanage/survivalorder/addedit?v=1&code=${selectedRows[0].code}`);
                     }

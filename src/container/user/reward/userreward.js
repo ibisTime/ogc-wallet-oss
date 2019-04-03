@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/user/channelDealerCommissions/channelDealerSettleHistory';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, getQueryString, showWarnMsg, dateFormat, showSucMsg} from 'common/js/util';
+import {dateTimeFormat, moneyFormat, getQueryString, showWarnMsg, dateFormat, showSucMsg} from 'common/js/util';
 import {activateUser} from 'api/user';
 import {CION_FMVP} from 'common/js/config';
 import CommissionsSettlement from 'component/commissions-settlement/commissions-settlement';
@@ -38,9 +38,20 @@ class Userreward extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'realName',
+            field: 'userId',
             title: '用户',
-            search: true
+            type: 'select',
+            search: true,
+            pageCode: '805120',
+            params: {
+                kind: 'C'
+            },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            render: (v, data) => {
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
+            }
         }, {
             field: 'loginName',
             title: '手机号/邮箱',
@@ -54,7 +65,10 @@ class Userreward extends React.Component {
             title: '币种'
         }, {
             field: 'totalAward',
-            title: '奖励总数量'
+            title: '奖励总数量',
+            render: (v, d) => {
+                return moneyFormat(v, '', d.currency);
+            }
         }];
         return (<div>
             {this.props.buildList({

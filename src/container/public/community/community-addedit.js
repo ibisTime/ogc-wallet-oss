@@ -13,22 +13,57 @@ class CommunityAddedit extends DetailUtil {
 
     render() {
         const fields = [{
-          title: '名称',
-          field: 'ckey',
-          search: true
+            field: 'status',
+            value: 1,
+            hidden: true
         }, {
-          title: '社群号',
-          field: 'cvalue'
+            field: 'parentCode',
+            value: 0,
+            hidden: true
         }, {
-          title: '备注',
-          field: 'remark'
+            title: '名称',
+            field: 'name',
+            required: true
+        }, {
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'commit_type',
+            required: true
+        }, {
+            title: '图标',
+            field: 'pic',
+            type: 'img',
+            required: true,
+            single: true
+        }, {
+            title: '社群号',
+            field: 'url',
+            required: true
+        }, {
+            title: '顺序',
+            field: 'orderNo',
+            help: '数字越小，排序越靠前',
+            required: true
+        }, {
+            title: '备注',
+            field: 'remark'
         }];
         return this.buildDetail({
-          fields,
-          key: 'id',
-          code: this.code,
-          detailCode: 630046,
-          editCode: 630042
+            fields,
+            code: this.code,
+            view: this.view,
+            addCode: '630500',
+            editCode: '630502',
+            detailCode: '630507',
+            beforeSubmit: (data) => {
+                data.location = 'community';
+                data.enPic = data.pic;
+                if (this.code) {
+                    data.type = this.props.pageData.type;
+                }
+                return data;
+            }
         });
     }
 }

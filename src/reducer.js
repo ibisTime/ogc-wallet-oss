@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {user} from './redux/user';
 import {menu} from './redux/menu';
+import {message} from './redux/message';
 import {modalDetail} from './redux/modal/build-modal-detail';
 import {systemRole} from './redux/system/role';
 import {systemMenu} from './redux/system/menu';
@@ -17,6 +18,7 @@ import {publicBuyADS} from './redux/public/buyADS';
 import {publicSellETH} from './redux/public/sellETH';
 import {publicTransactionRemind} from './redux/public/TransactionRemind';
 import {publicCommunity} from './redux/public/community';
+import {publicCommunityAddEdit} from './redux/public/community-addedit';
 import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
@@ -195,6 +197,7 @@ import {publicOtctag} from './redux/public/otcTag';
 
 import {publicOtcCountry} from './redux/public/otccountry';
 import {quanTitativeCategory} from './redux/public/quantitativecategory';
+import {GoSettlement} from './redux/marketsettlement/gosettlement';
 
 // OTC 支付方式设置
 import {publicOtcPayment} from './redux/public/otcpayment';
@@ -202,6 +205,7 @@ import {publicLawRate} from './redux/public/lawrate';
 import {publicChannelBank} from './redux/public/channelbank';
 // 业务管理-- OTC管理
 import {OtcManageAdvert} from './redux/otcmanage/advert';
+import {OtcManageAdvertAddedit} from './redux/otcmanage/advert-addedit';
 import {OtcSurvivaLorDerOrderedit} from './redux/otcmanage/survivalorder-orderedit';
 import {OtcSurvivaLorDer} from './redux/otcmanage/survivalorder';
 import {OtcManageHistoricalorder} from './redux/otcmanage/historicalorder';
@@ -216,15 +220,22 @@ import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
 // 补给地址
 import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
+import {BTCFinanceDiviAddressAddedit} from './redux/BTC-finance/diviAddress/diviAddressAddedit';
 // 业务管理-- 营销管理
 import {StadySettLement} from './redux/marketsettlement/stadysettlement';
 import {NoOrder} from './redux/marketsettlement/noorder';
 import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
+import {AlreadySettlementResolve} from './redux/marketsettlement/alreadysettlement-resolve';
+
+import {GoOrder} from './redux/marketsettlement/goorder';
+import {ManualSettlement} from './redux/marketsettlement/manualsettlement';
+import {PlatFormRecord} from './redux/marketsettlement/platformrecord';
 
 export default combineReducers({
     user,
     menu,
+    message,
     modalDetail,
     systemRole,
     systemMenu,
@@ -232,6 +243,7 @@ export default combineReducers({
     systemPwdReset,
     systemSysParam,
     systemDataDict,
+    publicCommunityAddEdit,
     // public
     publicAboutus,
     publicQuantitative,
@@ -268,6 +280,7 @@ export default combineReducers({
     // 渠道商管理
     // 渠道商管理
     userChannelDealer,
+    BTCFinanceDiviAddressAddedit,
     userChannelDealerLowerLevelQuery,
     // 广告位管理
     // public
@@ -382,6 +395,12 @@ export default combineReducers({
     NoOrder,
     StayOrder,
     AlreadySettlement,
+    AlreadySettlementResolve,
     quanTitativeCategory,
-    NotifierofWithdrawal
+    NotifierofWithdrawal,
+    GoOrder,
+    GoSettlement,
+    ManualSettlement,
+    PlatFormRecord,
+    OtcManageAdvertAddedit
 });

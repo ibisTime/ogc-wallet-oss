@@ -36,7 +36,7 @@ class AdvertisingFee extends React.Component {
             rowKey: 'id',
             pageCode: '630045',
             searchParams: {
-                type: 'ads_rule'
+                type: 'trade_rule'
             }
         });
     }

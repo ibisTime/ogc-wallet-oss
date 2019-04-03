@@ -1,5 +1,7 @@
 public/*.js
 config/*.js
 scripts/*.js
+scripts/tx/*.js
+src/tx/*.js
 server/*.js
 src/common/js/lib/BigDecimal.js

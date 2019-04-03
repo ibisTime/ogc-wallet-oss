@@ -14,10 +14,12 @@ class OtccountryAddedit extends DetailUtil {
         const fields = [{
             title: '国际代码',
             field: 'interCode',
+            search: true,
             required: true
         }, {
             title: '国旗图片',
             field: 'pic',
+            single: true,
             type: 'img',
             required: true
         }, {

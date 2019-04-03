@@ -6,6 +6,8 @@ const LOGOUT = 'LOGOUT';
 const LOAD_DATA = 'LOAD_DATA';
 const LOADING = 'LOADING';
 const CANCEL_LOADING = 'CANCEL_LOADING';
+const LOAD_TX_USER_SIGN = 'LOAD_TX_USER_SIGN';
+const SET_SELTOID = 'SET_SELTOID';
 
 const initState = {
     fetching: false,
@@ -14,7 +16,11 @@ const initState = {
     userId: getUserId() || '',
     loginName: getUserName() || '',
     roleCode: getRoleCode() || '',
-    kind: ''
+    kind: '',
+    accountType: '',
+    sign: '',
+    txAppCode: '',
+    curSelToID: ''
 };
 
 export function user(state = initState, action) {
@@ -29,6 +35,10 @@ export function user(state = initState, action) {
             return {...state, fetching: true};
         case CANCEL_LOADING:
             return {...state, fetching: false};
+        case LOAD_TX_USER_SIGN:
+            return {...state, ...action.payload};
+        case SET_SELTOID:
+            return {...state, curSelToID: action.payload};
         default:
             return state;
     }
@@ -51,6 +61,14 @@ export function cancelFetching() {
 export function loadData(data) {
     setRoleInfo(data);
     return {type: LOAD_DATA, payload: data};
+}
+
+export function loadTxUserSign(data) {
+    return {type: LOAD_TX_USER_SIGN, payload: data};
+}
+
+export function setSelToId(id) {
+    return {type: SET_SELTOID, payload: id};
 }
 
 // 获取用户信息

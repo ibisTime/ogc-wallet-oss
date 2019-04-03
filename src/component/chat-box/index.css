@@ -1,0 +1,169 @@
+.chatbox-wrapper .content-wrap {
+    border: 1px solid #eee;
+}
+.chatbox-wrapper .content-wrap .msgflow {
+    overflow-y: auto;
+    padding: 20px 0;
+    height: 400px;
+}
+.chatbox-wrapper .msgflow .onemsg {
+    width: 100%;
+    padding: 0 30px;
+}
+.chatbox-wrapper .msgflow .onemsg.my {
+    margin: 10px 0;
+}
+.chatbox-wrapper .msgflow .onemsg.admin {
+    text-align: center;
+    font-size: 12px;
+    color: #484848;
+    padding: 10px 0;
+}
+.chatbox-wrapper .msgflow .onemsg .msghead {
+    width: 100%;
+    height: 26px;
+    position: relative;
+    padding-left: 40px;
+}
+.chatbox-wrapper .msgflow .onemsg .msgbody {
+    padding: 3px 3px 3px 57px;
+    overflow: hidden;
+}
+.chatbox-wrapper .msgflow .onemsg.my .msgbody {
+    padding-left: 3px;
+    padding-right: 57px;
+}
+.chatbox-wrapper .msgflow .onemsg.my .msghead {
+    padding-right: 60px;
+}
+
+.chatbox-wrapper .msgflow .onemsg .photoWrap {
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+.chatbox-wrapper .msgflow .onemsg.my .photoWrap {
+    float: right;
+    right: 0;
+}
+.photoWrap .photo {
+    width: 80px;
+    height: 80px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.chatbox-wrapper .msgflow .onemsg .photoWrap .photo {
+    width: 40px;
+    height: 40px;
+}
+.chatbox-wrapper .msgflow .onemsg .nameWrap {
+    overflow: hidden;
+}
+.chatbox-wrapper .msgflow .onemsg.my .nameWrap {
+    float: right;
+}
+.chatbox-wrapper .msgflow .onemsg .nameWrap samp {
+    display: inline-block;
+    color: #999;
+    font-size: 13px;
+}
+.chatbox-wrapper .msgflow .onemsg .nameWrap samp.name {
+    font-size: 16px;
+    margin: 0 10px 0 15px;
+    color: #484848;
+}
+.chatbox-wrapper .msgflow .onemsg.my .nameWrap samp {
+    float: right;
+}
+.chat-container .msgflow .onemsg .nameWrap samp {
+    display: inline-block;
+    color: #999;
+    font-size: 13px;
+}
+.chatbox-wrapper .msgflow .onemsg .msgbody .msgcon {
+    max-width: 400px;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0 0 3px rgba(119, 119, 119, 0.4);
+    box-shadow: 0 0 3px rgba(119, 119, 119, 0.4);
+    float: left;
+    padding: 10px 15px;
+    font-size: 13px;
+    line-height: 1.8;
+    word-break: break-word;
+}
+.chatbox-wrapper .msgflow .onemsg .msgbody .msgcon img {
+  cursor: pointer;
+}
+.chatbox-wrapper .msgflow .onemsg .msgbody .msgcon img.face-img {
+  cursor: default;
+}
+.chatbox-wrapper .msgflow .onemsg.my .msgbody .msgcon {
+    float: right;
+}
+.chatbox-wrapper .msgflow .onemsg.user {
+    margin: 10px 0;
+}
+.chatbox-wrapper .msgflow .onemsg.user .photoWrap {
+    float: left;
+    left: 0;
+}
+.chatbox-wrapper .msgflow .onemsg .photoWrap .noPhoto {
+    font-size: 24px;
+    line-height: 40px;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    background-color: #333;
+}
+.chatbox-wrapper .msgflow .onemsg.user .nameWrap {
+    float: left;
+}
+.chatbox-wrapper .msgflow .onemsg .msgbody .msgcon img {
+    max-width: 100%;
+    vertical-align: bottom;
+}
+.chatbox-wrapper .editbar-wrapper {
+  position: relative;
+  padding: 6px 8px;
+  background: #eee;
+  font-size: 0;
+}
+.chatbox-wrapper .editbar-wrapper .emotion-span {
+  padding-left: 8px;
+}
+.chatbox-wrapper .editbar-wrapper > span {
+  cursor: pointer;
+  display: inline-block;
+}
+.chatbox-wrapper .emotionUL-wrap {
+    width: 226px;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0 0 3px rgba(119, 119, 119, 0.8);
+    box-shadow: 0 0 3px rgba(119, 119, 119, 0.8);
+    background-color: #fff;
+    position: absolute;
+    top: 34px;
+    left: 38px;
+    padding: 10px 5px;
+    z-index: 999;
+}
+.chatbox-wrapper .emotionUL-wrap ul li {
+    float: left;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 2px;
+    cursor: pointer;
+}
+.chatbox-wrapper .emotionUL-wrap ul li:hover {
+  border: 1px solid #eee;
+}

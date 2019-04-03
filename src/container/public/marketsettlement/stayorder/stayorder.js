@@ -33,7 +33,6 @@ import fetch from 'common/js/fetch';
 class Stayorder extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             // 上下架窗口是否显示
             updownVisible: false,
@@ -51,10 +50,6 @@ class Stayorder extends React.Component {
             title: '订单编号',
             field: 'code'
         }, {
-            title: '活动类型',
-            field: 'pic',
-            type: 'img'
-        }, {
             title: '活动币种',
             field: 'currency',
             select: 'type',
@@ -63,18 +58,18 @@ class Stayorder extends React.Component {
             title: '申请划转数量',
             field: 'amount',
             render: (v, data) => {
-                return moneyFormat(v.toString(), '', data.amount);
+                return moneyFormat(v.toString(), '', data.currency);
             }
         }, {
             title: '申请人',
-            field: 'applyUser'
+            field: 'applyUser',
+            render: (v, d) => {
+                return d.userInfo ? d.userInfo.nickname : '';
+            }
         }, {
             title: '申请时间',
             type: 'datetime',
             field: 'applyDatetime'
-        }, {
-            title: '申请说明',
-            field: 'approveNote'
         }];
         let that = this;
         return (

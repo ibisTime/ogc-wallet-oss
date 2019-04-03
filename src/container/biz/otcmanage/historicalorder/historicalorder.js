@@ -36,9 +36,7 @@ class Historicalorder extends React.Component {
             title: '买家',
             field: 'buyUser',
             render: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
-                }
+                return data.buyUserInfo ? data.buyUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
@@ -50,9 +48,7 @@ class Historicalorder extends React.Component {
             title: '卖家',
             field: 'sellUser',
             render: (v, data) => {
-                if (data.sellUserInfo) {
-                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
-                }
+                return data.sellUserInfo ? data.sellUserInfo.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
@@ -62,11 +58,16 @@ class Historicalorder extends React.Component {
             search: true
         }, {
             title: '交易对',
-            type: 'tradeCoin',
+            field: 'tradeCurrency',
+            type: 'select',
+            listCode: 625370,
+            search: true,
+            searchName: 'tradeCurrency',
+            keyName: 'simpleName',
+            valueName: 'BTC-{{simpleName.DATA}}',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
-            },
-            search: true
+            }
         }, {
             title: '交易价格',
             field: 'tradePrice'
@@ -74,30 +75,42 @@ class Historicalorder extends React.Component {
             title: '交易数量',
             field: 'countString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '交易金额',
-            field: 'tradeAmount'
+            field: 'tradeAmount',
+            render: (v, data) => {
+                return data.tradeAmount + '-' + data.tradeCurrency;
+            }
         }, {
             title: '广告费',
             field: 'feeString',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
             }
         }, {
             title: '状态',
             field: 'status',
             type: 'select',
             data: [{
-                'key': '0',
-                'value': '待支付'
+                key: '2',
+                value: '已解冻待评价'
             }, {
-                'key': '1',
-                'value': '已支付'
+                key: '3',
+                value: '已完成'
             }, {
-                'key': '3',
-                'value': '仲裁中'
+                key: '4',
+                value: '已取消'
+            }, {
+                key: '5',
+                value: '仲裁中'
+            }, {
+                key: '6',
+                value: '仲裁买家胜'
+            }, {
+                key: '7',
+                value: '仲裁卖家胜'
             }],
             keyName: 'key',
             valueName: 'value',

@@ -24,26 +24,35 @@ import {listWrapper} from 'common/js/build-list';
 class Comment extends React.Component {
     render() {
         const fields = [{
+            field: 'code',
+            title: '针对订单号',
+            search: true
+        }, {
+            field: 'starLevel',
+            title: '评论星级',
+            key: 'comment_star_level',
+            search: true,
+            type: 'select'
+        }, {
             field: 'content',
             title: '内容'
         }, {
             field: 'fromUser',
-            title: '评论人'
+            title: '评论人',
+            render: (v, d) => {
+                return d.fromUserInfo ? d.fromUserInfo.nickname : '';
+            }
         }, {
             field: 'toUser',
-            title: '被评论人'
+            title: '被评论人',
+            render: (v, d) => {
+                return d.toUserInfo ? d.toUserInfo.nickname : '';
+            }
         }, {
                 title: '评论时间',
                 field: 'createDatetime',
-                type: 'date',
-                rangedate: ['commentDateStart', 'commentDateEnd'],
-                search: true
-            }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'comment_status'
-        }];
+                type: 'date'
+            }];
         return this.props.buildList({
             fields,
             pageCode: 628275
