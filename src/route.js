@@ -537,6 +537,11 @@ const ROUTES = [
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
     },
+    // TRX行情
+    {
+        path: '/quotation/quotationTRX',
+        component: asyncComponent(() => import('container/biz/quotation/quotationTRX'))
+    },
     // 承兑商行情
     {
         path: '/quotation/quotationCDS',

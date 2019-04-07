@@ -113,6 +113,8 @@ import {quotationQuotationCDS} from './redux/biz/quotation/quotationCDS';
 
 // ETH行情
 import {quotationQuotationETH} from './redux/biz/quotation/quotationETH';
+// trx行情
+import {quotationQuotationTRX} from './redux/biz/quotation/quotationTRX';
 
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
@@ -305,6 +307,7 @@ export default combineReducers({
     quotationQuotationBTC,
     quotationQuotationCDS,
     quotationQuotationETH,
+    quotationQuotationTRX,
     quotationExchangeRate,
     quotationMarketAdjustment,
     // 活动管理

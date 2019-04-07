@@ -111,16 +111,24 @@ class GJAddress extends React.Component {
               symbol: setSymbol
             },
             btnEvent: {
-               flowQuery: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
+                flowQuery: (selectedRowKeys, selectedRows) => {
+                    if(!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
+                    }else if(selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].symbol === 'BTC') {
+                    }else if(selectedRows[0].symbol === 'BTC') {
                         // 测试：https://testnet.blockexplorer.com/address/
                         // 正式：https://blockexplorer.com/address/
                         window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
-                    } else if (selectedRows[0].symbol === 'USDT') {
+                    }else if(selectedRows[0].symbol === 'TRX') {
+                        // 测试：https://shasta.tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
+                        // 正式：https://tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
+                        window.open('https://tronscan.org/#/address/' + selectedRows[0].address + '/token-balances', '_bank');
+                    }else if(selectedRows[0].symbol === 'ETH' || selectedRows[0].symbol === 'KCC') {
+                        // 正式: https://rinkeby.etherscan.io/address/0x8a37b79e54d69e833d79cac3647c877ef72830e1
+                        // 测试: https://etherscan.io/address/0x8a37b79e54d69e833d79cac3647c877ef72830e1
+                        window.open('https://rinkeby.etherscan.io/address/' + selectedRows[0].address, '_bank');
+                    }else if(selectedRows[0].symbol === 'USDT') {
                         window.open('https://omniexplorer.info/address/' + selectedRows[0].address, '_bank');
                     }
                 }
