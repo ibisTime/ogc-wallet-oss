@@ -70,6 +70,12 @@ class Advert extends React.Component {
                 return data.paymentName;
             }
         }, {
+            title: '广告类型',
+            field: 'tradeType',
+            type: 'select',
+            search: true,
+            key: 'ads_trade_type'
+        }, {
             field: 'totalCountString',
             title: '已买出/购买(BTC)',
             render: (v, data) => {
