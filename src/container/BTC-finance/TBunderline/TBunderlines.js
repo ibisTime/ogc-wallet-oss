@@ -159,7 +159,7 @@ class TBunderline extends React.Component {
             pageCode: '802355',
             searchParams: {
                 currency,
-                status: '3'
+                statusList: ['3', '4']
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {
