@@ -111,6 +111,10 @@ class MarketAdjustmentAddedit extends DetailUtil {
             type: 'datetime'
         }];
         const { data } = this.state;
+        // if (data.tradeType === 1) {
+        //     let aa = document.getElementById('BB');
+        //     aa.innerHTML = '卖出';
+        // }
         return (
             <div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
@@ -124,6 +128,10 @@ class MarketAdjustmentAddedit extends DetailUtil {
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>付款方式：</label>
                     <span style={{marginLeft: '20px'}}>{data.paymentName}</span>
+                </div>
+                <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
+                    <label>广告类型：</label>
+                    <span id= 'BB' style={{marginLeft: '20px'}}>{data.tradeType === '0' ? '买入' : '卖出' }</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>已买出/购买(BTC)：</label>

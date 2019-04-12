@@ -8,7 +8,7 @@ import {
     setPageData,
     restore
 } from '@redux/BTC-finance/offlineRecharge/offlineRecharge-detail';
-import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/util';
+import {getQueryString, moneyFormat, getUserName, showSucMsg, dateTimeFormat} from 'common/js/util';
 import fetch from 'common/js/fetch';
 import DetailUtil from 'common/js/build-detail';
 @Form.create()
@@ -34,27 +34,34 @@ class OfflineRechargeDetail extends DetailUtil {
                 return data.payer ? data.payer.loginName : '-';
             }
         }, {
+            field: 'channelOrder',
+            title: '充值编号'
+        }, {
+            field: 'currency',
+            title: '币种类型'
+        }, {
             field: 'accountNumber',
             title: '充值账户',
             hidden: true
         }, {
-            title: '充值数量',
             field: 'amount',
-            required: true,
-            coinAmount: true,
-            coin: 'BTC',
+            title: '充值金额',
             formatter: (v, data) => {
-                return v ? moneyFormat(v, '', data.currency) : '';
+                return moneyFormat(Number(v), '', data.currency);
             }
         }, {
-            field: 'payCardInfo',
-            title: '打币渠道'
-        }, {
-            field: 'payCardNo',
-            title: '打币地址'
-        }, {
-            field: 'applyNote',
+            field: 'bizNote',
             title: '充值说明'
+        }, {
+            field: 'payDatetime',
+            title: '到账时间',
+            type: 'date'
+        }, {
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            key: 'charge_status',
+            search: true
         }];
 
         let buttons = [{
@@ -68,7 +75,8 @@ class OfflineRechargeDetail extends DetailUtil {
                 field: 'payNote',
                 title: '审核意见',
                 readonly: !this.isCheck,
-                required: true
+                required: true,
+                hidden: this.view
             }]);
         }
         if (this.isCheck) {

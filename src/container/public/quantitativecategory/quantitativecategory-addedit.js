@@ -32,6 +32,7 @@ class QuantitativeAddEdit extends DetailUtil {
         }, {
             field: 'orderNo',
             title: '序号',
+            number: true,
             required: true
         }, {
             title: '内容',

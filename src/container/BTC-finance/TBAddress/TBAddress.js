@@ -44,7 +44,7 @@ class TBAddress extends React.Component {
                     symPloList[index].style.display = 'none';
                 }
             });
-        }, 500);
+        }, 1000);
         clearParams.addEventListener('click', () => {
             currency = 'BTC';
         });
