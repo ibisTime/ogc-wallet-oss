@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/quotation/quotationETH';
+} from '@redux/biz/quotation/quotationTRX';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.quotationQuotationETH,
+        ...state.quotationQuotationTRX,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {dateTimeFormat} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class QuotationETH extends React.Component {
+class QuotationTRX extends React.Component {
     componentDidMount() {
         let pHtml = document.createElement('p');
         pHtml.innerHTML = '行情更新间隔时间为30s';
@@ -53,10 +53,10 @@ class QuotationETH extends React.Component {
             rowKey: 'id',
             pageCode: '650101',
             searchParams: {
-                symbol: 'ETH'
+                symbol: 'TRX'
             }
         });
     }
 }
 
-export default QuotationETH;
+export default QuotationTRX;

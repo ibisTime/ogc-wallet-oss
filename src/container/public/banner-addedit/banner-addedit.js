@@ -9,9 +9,18 @@ class BannerAddEdit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.state = {
+            ...this.state,
+            dkey: '',
+            url: false,
+            id: false
+        };
     }
     render() {
         const fields = [{
+          field: 'url',
+          hidden: true
+        }, {
             field: 'status',
             hidden: true,
             value: 1
@@ -42,8 +51,36 @@ class BannerAddEdit extends DetailUtil {
             required: true,
             single: true
         }, {
+            field: 'type',
+            title: '动作',
+            type: 'select',
+            key: 'banner_action',
+            required: true,
+            onChange: (v) => {
+                this.setState({dkey: v});
+                if (v === '1' && !this.state.url) {
+                 this.setState({url: true, id: false});
+                } else if (v === '2' && !this.state.id) {
+                    this.setState({id: true, url: false});
+                }
+            }
+        }, {
             title: 'url地址',
-            field: 'url'
+            field: 'aa',
+            hidden: this.state.dkey !== '1',
+            required: this.state.dkey === '1'
+        }, {
+            title: '应用',
+            type: 'select',
+            pageCode: 625455,
+            params: {
+                status: '1'
+            },
+            field: 'aa',
+            keyName: 'id',
+            valueName: 'name',
+            hidden: this.state.dkey !== '2',
+            required: this.state.dkey === '2'
         }, {
             title: '备注',
             field: 'remark',
@@ -56,8 +93,8 @@ class BannerAddEdit extends DetailUtil {
             addCode: 630500,
             editCode: 630502,
             detailCode: 630507,
-            beforeSumit: (params) => {
-                params.type = this.type;
+            beforeSubmit: (params) => {
+                params.url = params.aa;
                 return params;
             }
         });

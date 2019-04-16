@@ -14,7 +14,11 @@ class InvitingFriendsAddedit extends DetailUtil {
             ckey: {
               cDate: /_date/,
               cSymbol: /_symbol/,
+<<<<<<< HEAD
                 cTextarea: /_info/
+=======
+                cActivity: /_notice/
+>>>>>>> jmqb_branch_v110
             }
         };
     }
@@ -40,12 +44,21 @@ class InvitingFriendsAddedit extends DetailUtil {
             required: true,
             type: 'textarate'
           });
+<<<<<<< HEAD
         } else if(this.cData.ctype.match(this.cData.ckey.cTextarea)) {
             fields.push({
                 title: '数值',
                 field: 'cvalue',
                 required: true,
                 type: 'textarea'
+=======
+        } else if(this.cData.ctype.match(this.cData.ckey.cActivity)) {
+            fields.push({
+                title: '内容',
+                field: 'cvalue',
+                required: true,
+               type: 'textarea'
+>>>>>>> jmqb_branch_v110
             });
         }else if(this.cData.ctype.match(this.cData.ckey.cSymbol)) {
           fields.push({

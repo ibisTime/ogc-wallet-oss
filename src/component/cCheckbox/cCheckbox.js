@@ -66,7 +66,8 @@ export default class CCheckbox extends React.Component {
   getReadonlyValue(initVal, readonly, list, keyName, valueName) {
     let value = '';
     if (readonly && list && initVal) {
-      value = initVal.map(v => list.find(d => d[keyName] === v)[valueName]).join('、');
+      value = initVal.map(v => list.find(d => d[keyName] === v)[valueName]).join(',');
+      return value;
     }
   }
   render() {

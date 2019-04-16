@@ -9,17 +9,18 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/public/banner';
+} from '@redux/managent/tag';
 import {listWrapper} from 'common/js/build-list';
 import {
     showSucMsg,
-    showWarnMsg
+    showWarnMsg,
+    getUserName
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
-        ...state.publicBanner,
+        ...state.TAG,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -27,50 +28,35 @@ import fetch from 'common/js/fetch';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Banner extends React.Component {
+class Aboutus extends React.Component {
     render() {
         const fields = [{
-            title: '名称',
             field: 'name',
+            title: '名称(中文)',
             search: true
         }, {
-            title: '位置',
-            field: 'location',
-            type: 'select',
-            key: 'banner_location',
-            search: true
-        }, {
-            title: '顺序',
-            field: 'orderNo'
-        }, {
-            title: '备注',
-            field: 'remark'
+            field: 'type',
+            key: 'open_dapp_tag_type',
+            select: 'select',
+            title: '标签分类'
         }];
         return this.props.buildList({
             fields,
-            pageCode: '630505',
-            searchParams: {
-                typeList: ['0', '1', '2']
-            },
-            singleSelect: false,
+            rowKey: 'id',
+            pageCode: '625475',
             btnEvent: {
                 delete: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else {
-                        let codeList = [];
-                        for(let i = 0, len = selectedRows.length; i < len; i++) {
-                            codeList.push(selectedRows[i].code);
-                        }
-                        if (codeList.length > 0) {
                             Modal.confirm({
                                 okText: '确认',
                                 cancelText: '取消',
                                 content: `确定删除？`,
                                 onOk: () => {
                                     this.props.doFetching();
-                                    return fetch(630501, {
-                                        codeList: codeList
+                                    return fetch(625471, {
+                                        id: selectedRows[0].id
                                     }).then(() => {
                                         this.props.getPageData();
                                         showSucMsg('操作成功');
@@ -82,9 +68,8 @@ class Banner extends React.Component {
                         }
                     }
                 }
-            }
         });
     }
 }
 
-export default Banner;
+export default Aboutus;

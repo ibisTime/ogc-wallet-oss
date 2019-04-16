@@ -536,10 +536,20 @@ const ROUTES = [
         path: '/quotation/quotationBTC',
         component: asyncComponent(() => import('container/biz/quotation/quotationBTC'))
     },
+    // USDT行情
+    {
+        path: '/quotation/quotationUSDT',
+        component: asyncComponent(() => import('container/biz/quotation/quotationUSDT'))
+    },
     // ETH行情
     {
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
+    },
+    // TRX行情
+    {
+        path: '/quotation/quotationTRX',
+        component: asyncComponent(() => import('container/biz/quotation/quotationTRX'))
     },
     // 承兑商行情
     {
@@ -1001,6 +1011,56 @@ const ROUTES = [
     {
         path: '/user/rewarddeatil',
         component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
+    },
+    // 营销管理--奖励明细
+    {
+        path: '/user/rewarddeatil',
+        component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
+    },
+    // 业务管理--APP配置
+    {
+        path: '/managent/appmanagent',
+        component: asyncComponent(() => import('container/managent/appmanagent/appmanagent'))
+    },
+    {
+        path: '/managent/appmanagent/addedit',
+        component: asyncComponent(() => import('container/managent/appmanagent/appmanagent-addedit'))
+    },
+// 业务管理--DAPP应用
+    {
+        path: '/managent/dappmanagent',
+        component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent'))
+    },
+    // 业务管理--DAPP应用
+    {
+        path: '/managent/dappmanagent/addedit',
+        component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent-addedit'))
+    },
+    // 业务管理--DAPP应用攻略
+    {
+        path: '/managent/dapptrategy',
+        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy'))
+    },
+    {
+        path: '/managent/dapptrategy/addedit',
+        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-addedit'))
+    },
+    {
+        path: '/managent/dapptrategy/edit',
+        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-edit'))
+    },
+    {
+        path: '/managent/dapptrategy/detail',
+        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-edit'))
+    },
+    // 业务管理--tag标签
+    {
+        path: '/managent/tag',
+        component: asyncComponent(() => import('container/managent/tag/tag'))
+    },
+    {
+        path: '/managent/tag/addedit',
+        component: asyncComponent(() => import('container/managent/tag/tag-addedit'))
     }
 ];
 

@@ -777,7 +777,14 @@ function getRangeDateVal(rangedate, keys, result, format, fn, pageData, readonly
 
 // 获取checkbox的真实值
 function getRealCheckboxVal(result) {
-    return result ? result.split(',') : [];
+  let arr = [];
+  if(result) {
+    arr = result.split('||');
+    arr = arr.map(item => +item);
+    return arr;
+  }else {
+    return [];
+  }
 }
 
 /**
