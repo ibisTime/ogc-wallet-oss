@@ -13,8 +13,17 @@ class QuantitativeAddEdit extends DetailUtil {
 
     render() {
         const fields = [{
+            field: 'code',
+            title: '文章编号',
+            hidden: !this.view,
+            required: true
+        }, {
             field: 'title',
-            title: '标题',
+            title: '标题(中文)',
+            required: true
+        }, {
+            field: 'enTitle',
+            title: '标题(英文)',
             required: true
         }, {
             field: 'type',
@@ -25,17 +34,17 @@ class QuantitativeAddEdit extends DetailUtil {
             valueName: 'name',
             required: true
         }, {
-            field: 'code',
-            title: '文章编号',
-            hidden: !this.view,
-            required: true
-        }, {
             field: 'orderNo',
             title: '序号',
             required: true
         }, {
-            title: '内容',
+            title: '内容(中文)',
             field: 'content',
+            type: 'textarea',
+            required: true
+        }, {
+            title: '内容(英文)',
+            field: 'enContent',
             type: 'textarea',
             required: true
         }, {

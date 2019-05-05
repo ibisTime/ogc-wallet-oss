@@ -69,13 +69,20 @@ class TBunderline extends React.Component {
           }
         }, {
             field: 'accountName',
-            title: '账号',
+            title: '申请账号',
             render: (v, data) => {
                 if (data.applyUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
+                    let tmpl = data.applyUserInfo.email ? data.applyUserInfo.email : data.applyUserInfo.mobile;
                     return data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.nickname + '(' + tmpl + ')';
                 }
                 return '';
+            }
+        }, {
+            field: 'loginName',
+            title: '到账账号',
+            required: true,
+            render: (v, data) => {
+                return data.transferUserInfo ? data.loginName : '';
             }
         }, {
             field: 'amount',
@@ -135,7 +142,8 @@ class TBunderline extends React.Component {
             title: '状态',
             type: 'select',
             key: 'withdraw_status'
-        }, {
+        },
+            {
             field: 'approveNote',
             title: '审核意见'
         }, {
@@ -156,7 +164,9 @@ class TBunderline extends React.Component {
             fields,
             pageCode: '802355',
             searchParams: {
-                status: '6'
+                currency,
+                bizType: 'transfer',
+                status: '3'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {
@@ -167,7 +177,7 @@ class TBunderline extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是待审核的记录');
                     } else {
-                        this.props.history.push(`/BTC-finance/completedquery/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/BTC-finance/TBunderline/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
                     }
                 },
                 sp: (selectedRowKeys, selectedRows) => {
@@ -176,12 +186,12 @@ class TBunderline extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else if (selectedRows[0].status !== '3') {
-                        showWarnMsg('不是可广播的记录');
+                        showWarnMsg('不是可划转的记录');
                     } else {
                         Modal.confirm({
                             okText: '确认',
                             cancelText: '取消',
-                            content: `确定广播？`,
+                            content: `确定划转？`,
                             onOk: () => {
                                 this.props.doFetching();
                                 let params = {};

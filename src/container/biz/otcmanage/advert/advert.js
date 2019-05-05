@@ -71,12 +71,12 @@ class Advert extends React.Component {
             }
         }, {
             field: 'totalCountString',
-            title: '已买出/购买(BTC)',
+            title: '已买出/购买',
             render: (v, data) => {
                 if (data.totalCountString === '0') {
-                    return data.totalCountString + '-BTC';
+                    return data.totalCountString + '-' + data.tradeCoin;
                 } else {
-                    return moneyFormat(v, '', data.tradeCoin) + '-BTC';
+                    return moneyFormat(v, '', data.tradeCoin) + '-' + data.tradeCoin;
                 }
             }
         }, {

@@ -594,6 +594,12 @@ export const getRules = (item) => {
       message: '请输入正确格式的电子邮件'
     });
   }
+  if (item.number3) {
+    rules.push({
+      pattern: /(^0\.\d*[1-9]\d*$)/,
+      message: '请输入大于0小于1的两位小数'
+    });
+  }
   if (item.mobile) {
     rules.push({
       pattern: /^1[3|4|5|6|7|8|9]\d{9}$/,

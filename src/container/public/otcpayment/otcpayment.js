@@ -44,6 +44,9 @@ class Otcpayment extends React.Component {
             title: '英文名称',
             field: 'nameEn'
         }, {
+            title: '费率',
+            field: 'feeRate'
+        }, {
             title: '状态',
             field: 'status',
             type: 'select',
@@ -64,12 +67,11 @@ class Otcpayment extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '625351',
+            singleSelect: false,
             btnEvent: {
                 up: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
                     } else if (selectedRows[0].status !== '0') {
                         showWarnMsg('不是可以禁用的状态');
                     } else {
@@ -80,7 +82,7 @@ class Otcpayment extends React.Component {
                             onOk: () => {
                                 this.props.doFetching();
                                 return fetch(625342, {
-                                    code: selectedRows[0].code,
+                                    codeList: selectedRows[0].code,
                                     updater: getUserName()
                                 }).then(() => {
                                     this.props.getPageData();
@@ -95,8 +97,6 @@ class Otcpayment extends React.Component {
                 down: (keys, items) => {
                     if (!keys || !keys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (keys.length > 1) {
-                        showWarnMsg('请选择一条记录');
                     } else if (items[0].status !== '1') {
                         showWarnMsg('该付款方式不可禁用');
                     } else {
@@ -107,7 +107,7 @@ class Otcpayment extends React.Component {
                             onOk: () => {
                                 this.props.doFetching();
                                 return fetch(625343, {
-                                    code: items[0].code,
+                                    codeList: items[0].code,
                                     updater: getUserName()
                                 }).then(() => {
                                     this.props.getPageData();
@@ -117,6 +117,15 @@ class Otcpayment extends React.Component {
                                 });
                             }
                         });
+                    }
+                },
+                fee: (keys, items) => {
+                    if (!keys || !keys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (keys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/system/otcadvicefee?&paymentCode=${items[0].code}`);
                     }
                 }
             }

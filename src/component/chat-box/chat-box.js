@@ -91,15 +91,26 @@ class ChatBox extends React.Component {
       setTimeout(function() {
         msgBox.scrollTop = msgBox.scrollHeight;
       }, 3000);
+      console.log(this.nextMsgSeq);
     });
   }
   getPreGroupHistoryMsgs() {
+    console.log(this.nextMsgSeq);
+    // let number = 10;
     if (this.nextMsgSeq && this.nextMsgSeq >= 0) {
+      // this.nextMsgSeq -= 10;
+      // if (this.nextMsgSeq < 10) {
+      //   this.nextMsgSeq = 0;
+      //   number = this.nextMsgSeq;
+      // }
       this.setState({ preLoading: true });
       getPreGroupHistoryMsgs(this.props.chatId, this.nextMsgSeq).then(([msgList, nextMsgSeq]) => {
+        console.log(666, msgList);
         this.nextMsgSeq = nextMsgSeq;
         let newList = msgList.map(msg => addMsg(msg, this.props.userMap)).filter(m => m);
+        console.log(557, newList);
         let oldList = this.props.msgList.slice();
+        console.log(558, this.props.msgList);
         let list = newList.concat(oldList);
         this.props.setMsgList(list);
         this.setState({ preLoading: false });
@@ -155,7 +166,11 @@ class ChatBox extends React.Component {
   getAdminMsg(msg, key) {
     return (
       <div key={key} className="onemsg admin">
-        <div className="msghead">{msg.content[0].textContent}<samp>({msg.msgTime})</samp></div>
+        <div className="msghead">    <div dangerouslySetInnerHTML={{
+          __html: msg.content[0].textContent
+        }}
+        />
+          <samp>({msg.msgTime})</samp></div>
         <div className="msgbody"></div>
       </div>
     );

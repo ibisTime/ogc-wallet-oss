@@ -134,8 +134,7 @@ class TBunderline extends React.Component {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'withdraw_status',
-            search: true
+            key: 'withdraw_status'
         }, {
             field: 'approveNote',
             title: '审核意见'

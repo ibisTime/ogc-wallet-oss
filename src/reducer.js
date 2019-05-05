@@ -84,8 +84,10 @@ import {tradeArbitrationOrder} from './redux/trade/arbitrationOrder/arbitrationO
 
 // 仲裁通知人
 import {tradeArbitrationNotifier} from './redux/trade/arbitrationNotifier/arbitrationNotifier';
+import {ComplainTorder} from './redux/trade/complaintorder/complaintorder';
 // 提币通知人
 import {NotifierofWithdrawal} from './redux/trade/notifierofwithdrawal/notifierofwithdrawal';
+import {otclanguage} from './redux/trade/otclanguage/otclanguage';
 // 承兑商管理
 // 收款方式
 import {acceptPayment} from './redux/accept/payment/payment';
@@ -201,6 +203,7 @@ import {GoSettlement} from './redux/marketsettlement/gosettlement';
 
 // OTC 支付方式设置
 import {publicOtcPayment} from './redux/public/otcpayment';
+import {publicOtcadviceFee} from './redux/public/advicefee';
 import {publicLawRate} from './redux/public/lawrate';
 import {publicChannelBank} from './redux/public/channelbank';
 // 业务管理-- OTC管理
@@ -300,6 +303,7 @@ export default combineReducers({
     tradeFinishOrder,
     tradeArbitrationOrder,
     tradeArbitrationNotifier,
+    ComplainTorder,
     // 承兑商管理
     // 收款方式
     acceptPayment,
@@ -380,6 +384,7 @@ export default combineReducers({
     // OTC系统设置
     publicOtctag,
     publicOtcPayment,
+    publicOtcadviceFee,
     publicOtcCountry,
     publicLawRate,
     publicChannelBank,
@@ -398,6 +403,7 @@ export default combineReducers({
     AlreadySettlementResolve,
     quanTitativeCategory,
     NotifierofWithdrawal,
+    otclanguage,
     GoOrder,
     GoSettlement,
     ManualSettlement,

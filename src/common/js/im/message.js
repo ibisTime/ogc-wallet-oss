@@ -6,6 +6,7 @@ const businessType = webim.UPLOAD_PIC_BUSSINESS_TYPE.GROUP_MSG;
 
 // 向上翻页，获取更早的群历史消息
 export const getPreGroupHistoryMsgs = function (selToID, nextMsgSeq) {
+    console.log(999, nextMsgSeq);
     return new Promise((resolve, reject) => {
         if (!nextMsgSeq || nextMsgSeq <= 0) {
             webim.Log.warn('该群没有历史消息可拉取了');
@@ -21,22 +22,13 @@ export const getPreGroupHistoryMsgs = function (selToID, nextMsgSeq) {
         webim.syncGroupMsgs(
             options,
             function (msgList) {
-                console.log('11111');
-                console.log(msgList);
-                // for (let i = 0; i < msgList.length; i++) {
-                //     let pp = msgList[i].elems;
-                //     msgList.push(pp);
-                // }
-                // let pp = msgList.sess;
-                // let dd = pp[0].impl;
-                // let aa = dd.msgs;
-                // msgList.elems.content.text = cc;
                 if (!msgList.length) {
                     webim.Log.error('该群没有历史消息了:options=' + JSON.stringify(options));
                     resolve([[], -1]);
                     return;
                 }
-                resolve([msgList, msgList[0].seq - 1]);
+                resolve([msgList,
+                    msgList[0].seq - 1]);
             },
             function (err) {
                 reject(err.ErrorInfo);
@@ -46,7 +38,7 @@ export const getPreGroupHistoryMsgs = function (selToID, nextMsgSeq) {
 };
 
 // 获取最新的群历史消息,用于切换群组聊天时，重新拉取群组的聊天消息
-export const getLastGroupHistoryMsgs = function (selToID) {
+export const getLastGroupHistoryMsgs = function (selToID, nextMsgSeq) {
     return new Promise((resolve, reject) => {
         getGroupInfo(selToID, function (resp) {
             let nextMsgSeq = resp.GroupInfo[0].NextMsgSeq - 1;
@@ -55,9 +47,10 @@ export const getLastGroupHistoryMsgs = function (selToID) {
                 resolve([[], -1]);
                 return;
             }
-            // 清空会话
+            // // 清空会话
             webim.MsgStore.delSessByTypeId(selType, selToID);
             getPreGroupHistoryMsgs(selToID, nextMsgSeq).then(function ([list, msgSeq]) {
+                console.log(222, msgSeq);
                 resolve([list, msgSeq]);
             }).catch(function (errorInfo) {
                 reject(errorInfo);
@@ -75,7 +68,6 @@ export const addMsg = function (msg, userMap) {
     // 获取会话类型，目前只支持群聊
     // webim.SESSION_TYPE.GROUP-群聊，
     // webim.SESSION_TYPE.C2C-私聊，
-    let sessType = msg.getSession().type();
     let isSelfSend = msg.getIsSend(); // 消息是否为自己发的
     let fromAccount = msg.getFromAccount();
     if (!fromAccount) {
@@ -90,6 +82,56 @@ export const addMsg = function (msg, userMap) {
                 fromAccountNick = info.nickname;
             } else if (msg.getFromAccountNick()) {
                 fromAccountNick = msg.getFromAccountNick();
+            } else {
+                fromAccountNick = fromAccount;
+            }
+            // 获取头像
+            if (info.photo) {
+                fromAccountImage = info.photo;
+            } else if (msg.fromAccountHeadurl) {
+                fromAccountImage = msg.fromAccountHeadurl;
+            }
+        }
+    }
+    // 解析消息
+    // 获取消息子类型
+    // 会话类型为群聊时，子类型为：webim.GROUP_MSG_SUB_TYPE
+    let content = '';
+    switch (_subType) {
+        case webim.GROUP_MSG_SUB_TYPE.COMMON: // 群普通消息
+            content = convertMsgtoHtml(msg);
+            break;
+        case webim.GROUP_MSG_SUB_TYPE.TIP: // 群提示消息
+            return null;
+    }
+    return {
+        isSelfSend,
+        content,
+        fromAccountImage,
+        fromAccountNick,
+        fromAccount,
+        msgTime: webim.Tool.formatTimeStamp(msg.getTime())
+    };
+};
+export const addMsg1 = function (msg, userMap) {
+    let fromAccountNick;
+    let fromAccountImage = '';
+    let _subType = 0;
+    // 获取会话类型，目前只支持群聊
+    // webim.SESSION_TYPE.GROUP-群聊，
+    // webim.SESSION_TYPE.C2C-私聊，
+    let isSelfSend = msg.isSendMsg; // 消息是否为自己发的
+    let fromAccount = msg.From_Account;
+    if (!fromAccount) {
+        return;
+    }
+    if (isSelfSend) { // 如果是自己发的消息
+        fromAccountNick = getUserName();
+    } else { // 如果别人发的消息
+        var info = userMap[fromAccount];
+        if (info) {
+            if (info.nickname) {
+                fromAccountNick = info.nickname;
             } else {
                 fromAccountNick = fromAccount;
             }
