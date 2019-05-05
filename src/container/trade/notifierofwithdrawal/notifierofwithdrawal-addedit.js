@@ -21,13 +21,11 @@ class NotifierofwithdrawalAddedit extends DetailUtil {
             title: '开始时间',
             shijian: true,
             required: true,
-            integer: true,
-            placeholder: '请输入0-23的整数'
+            integer: true
         }, {
             field: 'endDate',
             title: '结束时间',
             required: true,
-            placeholder: '请输入0-23的整数',
             shijian: true,
             integer: true
         }, {

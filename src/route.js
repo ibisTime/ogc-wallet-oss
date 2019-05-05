@@ -353,6 +353,20 @@ const ROUTES = [
         path: '/system/otcpayment/addedit',
         component: asyncComponent(() => import('container/public/otcpayment/otcpayment-addedit'))
     },
+    // 系统管理--系统设置--OTC支付方式设置 -- 费率
+    {
+        path: '/system/otcadvicefee',
+        component: asyncComponent(() => import('container/public/otcadvicefee/otcadvicefee'))
+    },
+    // 系统管理--系统设置--OTC支付方式设置 -- 费率新增
+    {
+        path: '/system/otcadvicefee/add',
+        component: asyncComponent(() => import('container/public/otcadvicefee/otcadvice-add'))
+    },
+    {
+        path: '/system/otcadvicefee/edit',
+        component: asyncComponent(() => import('container/public/otcadvicefee/otcadvice-edit'))
+    },
     // 系统管理--系统设置--OTC国家设置
     {
         path: '/system/otccountry',
@@ -449,7 +463,16 @@ const ROUTES = [
         path: '/trade/finishOrder/addedit',
         component: asyncComponent(() => import('container/trade/finishOrder/finishOrder-addedit'))
     },
+// 投诉订单查询
 
+    {
+        path: '/trade/complaintorder',
+        component: asyncComponent(() => import('container/trade/complaintorder/complaintorder'))
+    },
+    {
+        path: '/trade/complaintorder/clack',
+        component: asyncComponent(() => import('container/trade/complaintorder/complaintorder-addedit'))
+    },
     // 仲裁订单管理
     // 仲裁订单
     {
@@ -482,7 +505,14 @@ const ROUTES = [
         path: '/trade/notifierofwithdrawal/addedit',
         component: asyncComponent(() => import('container/trade/notifierofwithdrawal/notifierofwithdrawal-addedit'))
     },
-
+    {
+        path: '/pubilc/otclanguage',
+        component: asyncComponent(() => import('container/public/otclanguage/otclanguage'))
+    },
+    {
+        path: '/pubilc/otclanguage/addedit',
+        component: asyncComponent(() => import('container/public/otclanguage/otclanguage-addedit'))
+    },
     // 承兑商管理
     // 收款方式
     {
@@ -536,20 +566,10 @@ const ROUTES = [
         path: '/quotation/quotationBTC',
         component: asyncComponent(() => import('container/biz/quotation/quotationBTC'))
     },
-    // USDT行情
-    {
-        path: '/quotation/quotationUSDT',
-        component: asyncComponent(() => import('container/biz/quotation/quotationUSDT'))
-    },
     // ETH行情
     {
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
-    },
-    // TRX行情
-    {
-        path: '/quotation/quotationTRX',
-        component: asyncComponent(() => import('container/biz/quotation/quotationTRX'))
     },
     // 承兑商行情
     {
@@ -919,6 +939,20 @@ const ROUTES = [
         path: '/BTC-finance/TBunderlines/multiCheck',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
     },
+
+    // 内部划转
+    {
+        path: '/TBinnerund/TBunderlines',
+        component: asyncComponent(() => import('container/BTC-finance/TBinnerund/TBunderlines'))
+    },
+    {
+        path: '/TBinnerund/TBunderlines/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/TBinnerund/TBunderline-addedit'))
+    },
+    {
+        path: '/TBinnerund/TBunderlines/multiCheck',
+        component: asyncComponent(() => import('container/BTC-finance/TBinnerund/TBunderline-multiCheck'))
+    },
     // 已完成散取查询
     {
         path: '/BTC-finance/completedquery',
@@ -1011,56 +1045,6 @@ const ROUTES = [
     {
         path: '/user/rewarddeatil',
         component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
-    },
-    // 营销管理--奖励明细
-    {
-        path: '/user/rewarddeatil',
-        component: asyncComponent(() => import('container/user/reward/rewarddeatil'))
-    },
-    // 业务管理--APP配置
-    {
-        path: '/managent/appmanagent',
-        component: asyncComponent(() => import('container/managent/appmanagent/appmanagent'))
-    },
-    {
-        path: '/managent/appmanagent/addedit',
-        component: asyncComponent(() => import('container/managent/appmanagent/appmanagent-addedit'))
-    },
-// 业务管理--DAPP应用
-    {
-        path: '/managent/dappmanagent',
-        component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent'))
-    },
-    // 业务管理--DAPP应用
-    {
-        path: '/managent/dappmanagent/addedit',
-        component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent-addedit'))
-    },
-    // 业务管理--DAPP应用攻略
-    {
-        path: '/managent/dapptrategy',
-        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy'))
-    },
-    {
-        path: '/managent/dapptrategy/addedit',
-        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-addedit'))
-    },
-    {
-        path: '/managent/dapptrategy/edit',
-        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-edit'))
-    },
-    {
-        path: '/managent/dapptrategy/detail',
-        component: asyncComponent(() => import('container/managent/dapptrategy/dapptrategy-edit'))
-    },
-    // 业务管理--tag标签
-    {
-        path: '/managent/tag',
-        component: asyncComponent(() => import('container/managent/tag/tag'))
-    },
-    {
-        path: '/managent/tag/addedit',
-        component: asyncComponent(() => import('container/managent/tag/tag-addedit'))
     }
 ];
 

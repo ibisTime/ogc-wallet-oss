@@ -103,12 +103,12 @@ class Dashboard extends React.Component {
     );
     return (
       <Header className="header">
-          <div className="logo" onClick={() => {
-              this.props.setTopCode('');
-              this.props.history.push('/');
-          }}>
-              <img style ={{width: '72%', height: '40px'}} src={logo}/>
-          </div>
+        <div className="logo" onClick={() => {
+            this.props.setTopCode('');
+            this.props.history.push('/');
+        }}>
+            <img style={{width: '72%', height: '42px'}} src={logo}/>
+        </div>
         <Menu
           theme="dark"
           mode="horizontal"
@@ -246,15 +246,6 @@ class Dashboard extends React.Component {
     // 遍历新消息
     for (var j in newMsgList) {
       newMsg = newMsgList[j];
-      // console.log(newMsg);
-      // console.log(newMsg.elems);
-      // let pp = newMsg.elems[0];
-      // let dd = pp.content;
-      // let aa = dd.text;
-      // let cc = aa.substring(5);
-      // newMsg.elems[0].content.text = cc;
-      // // newMsg = newMsg.push(cc);
-      // console.log(cc);
       // 过滤掉加人的消息格式
       if (newMsg.fromAccount === '@TIM#SYSTEM') {
         continue;

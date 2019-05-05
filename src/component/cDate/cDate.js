@@ -88,7 +88,6 @@ export default class CDate extends React.Component {
 CDate.propTypes = {
   label: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number,
     PropTypes.element
   ]).isRequired,
   initVal: PropTypes.oneOfType([

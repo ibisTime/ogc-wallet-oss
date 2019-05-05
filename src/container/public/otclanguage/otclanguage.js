@@ -1,5 +1,4 @@
 import React from 'react';
-import {Modal} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -9,16 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/public/warmReminding';
+} from '@redux/trade/otclanguage/otclanguage';
 import {listWrapper} from 'common/js/build-list';
-import {
-    showSucMsg,
-    showWarnMsg
-} from 'common/js/util';
+import {dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.publicWarmReminding,
+        ...state.otclanguage,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -26,21 +22,26 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class WarmReminding extends React.Component {
+class otclanguage extends React.Component {
     render() {
         const fields = [{
-            field: 'remark',
-            title: '说明'
+            field: 'dvalue',
+            title: '中文'
+        }, {
+            field: 'enDvalue',
+            title: '英文'
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '630045',
+            deleteCode: '630031',
+            pageCode: '630035',
             searchParams: {
-                type: 'tips'
+                parentKey: 'often_sentence'
+                // type: 0
             }
         });
     }
 }
 
-export default WarmReminding;
+export default otclanguage;

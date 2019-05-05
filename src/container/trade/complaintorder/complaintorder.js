@@ -8,7 +8,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/otcmanage/historicalorder';
+} from '@redux/trade/complaintorder/complaintorder';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -19,7 +19,7 @@ import {
 import fetch from 'common/js/fetch';
 @listWrapper(
     state => ({
-        ...state.OtcManageHistoricalorder,
+        ...state.ComplainTorder,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -27,7 +27,7 @@ import fetch from 'common/js/fetch';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Historicalorder extends React.Component {
+class ComplainTorder extends React.Component {
     state = {
         jyd: []
     };
@@ -35,7 +35,7 @@ class Historicalorder extends React.Component {
         fetch(625229).then(data => {
             data.forEach((item, index) => {
                 this.state.jyd.push({
-                    kname: item,
+                    kname: index,
                     kvalue: item
                 });
             });
@@ -72,7 +72,7 @@ class Historicalorder extends React.Component {
             search: true
         }, {
             title: '交易对',
-            field: 'tradeCurrency',
+                field: 'tradeCurrency',
             type: 'select',
             data: this.state.jyd,
             keyName: 'kname',
@@ -128,8 +128,8 @@ class Historicalorder extends React.Component {
                 key: '7',
                 value: '仲裁卖家胜'
             }, {
-                key: '8',
-                value: '超时取消'
+              key: '8',
+              value: '超时取消'
             }, {
                 key: '9',
                 value: '投诉待处理'
@@ -150,7 +150,7 @@ class Historicalorder extends React.Component {
             rowKey: 'id',
             pageCode: '625250',
             searchParams: {
-                statusList: ['3', '4', '6', '7', '10']
+                status: '9'
             },
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {
@@ -160,6 +160,15 @@ class Historicalorder extends React.Component {
                         showWarnMsg('请选择一条记录');
                     } else {
                         this.props.history.push(`/otcmanage/historicalorder/addedit?&code=${selectedRows[0].code}`);
+                    }
+                },
+                cleck: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/trade/complaintorder/clack?&code=${selectedRows[0].code}`);
                     }
                 }
             },
@@ -176,4 +185,4 @@ class Historicalorder extends React.Component {
     }
 }
 
-export default Historicalorder;
+export default ComplainTorder;

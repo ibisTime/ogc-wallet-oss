@@ -23,9 +23,6 @@ import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
 import {biztodayprofit} from './redux/biz/financial/todayprofit';
-import {AppManagent} from './redux/managent/appmanagent';
-import {DappManagent} from './redux/managent/dappmanagent';
-import {DappTrateGy} from './redux/managent/dapptrategy';
 
 /* 业务管理 */
 // 客户管理
@@ -87,8 +84,10 @@ import {tradeArbitrationOrder} from './redux/trade/arbitrationOrder/arbitrationO
 
 // 仲裁通知人
 import {tradeArbitrationNotifier} from './redux/trade/arbitrationNotifier/arbitrationNotifier';
+import {ComplainTorder} from './redux/trade/complaintorder/complaintorder';
 // 提币通知人
 import {NotifierofWithdrawal} from './redux/trade/notifierofwithdrawal/notifierofwithdrawal';
+import {otclanguage} from './redux/trade/otclanguage/otclanguage';
 // 承兑商管理
 // 收款方式
 import {acceptPayment} from './redux/accept/payment/payment';
@@ -115,8 +114,6 @@ import {quotationQuotationCDS} from './redux/biz/quotation/quotationCDS';
 
 // ETH行情
 import {quotationQuotationETH} from './redux/biz/quotation/quotationETH';
-// trx行情
-import {quotationQuotationTRX} from './redux/biz/quotation/quotationTRX';
 
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
@@ -206,6 +203,7 @@ import {GoSettlement} from './redux/marketsettlement/gosettlement';
 
 // OTC 支付方式设置
 import {publicOtcPayment} from './redux/public/otcpayment';
+import {publicOtcadviceFee} from './redux/public/advicefee';
 import {publicLawRate} from './redux/public/lawrate';
 import {publicChannelBank} from './redux/public/channelbank';
 // 业务管理-- OTC管理
@@ -231,15 +229,11 @@ import {StadySettLement} from './redux/marketsettlement/stadysettlement';
 import {NoOrder} from './redux/marketsettlement/noorder';
 import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
-<<<<<<< HEAD
 import {AlreadySettlementResolve} from './redux/marketsettlement/alreadysettlement-resolve';
 
 import {GoOrder} from './redux/marketsettlement/goorder';
 import {ManualSettlement} from './redux/marketsettlement/manualsettlement';
 import {PlatFormRecord} from './redux/marketsettlement/platformrecord';
-=======
-import {TAG} from './redux/managent/tag';
->>>>>>> jmqb_branch_v110
 
 export default combineReducers({
     user,
@@ -309,6 +303,7 @@ export default combineReducers({
     tradeFinishOrder,
     tradeArbitrationOrder,
     tradeArbitrationNotifier,
+    ComplainTorder,
     // 承兑商管理
     // 收款方式
     acceptPayment,
@@ -323,7 +318,6 @@ export default combineReducers({
     quotationQuotationBTC,
     quotationQuotationCDS,
     quotationQuotationETH,
-    quotationQuotationTRX,
     quotationExchangeRate,
     quotationMarketAdjustment,
     // 活动管理
@@ -390,6 +384,7 @@ export default combineReducers({
     // OTC系统设置
     publicOtctag,
     publicOtcPayment,
+    publicOtcadviceFee,
     publicOtcCountry,
     publicLawRate,
     publicChannelBank,
@@ -408,16 +403,10 @@ export default combineReducers({
     AlreadySettlementResolve,
     quanTitativeCategory,
     NotifierofWithdrawal,
-<<<<<<< HEAD
+    otclanguage,
     GoOrder,
     GoSettlement,
     ManualSettlement,
     PlatFormRecord,
     OtcManageAdvertAddedit
-=======
-    AppManagent,
-    DappTrateGy,
-    DappManagent,
-    TAG
->>>>>>> jmqb_branch_v110
 });

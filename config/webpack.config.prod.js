@@ -60,18 +60,12 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
-  // entry: [require.resolve('./polyfills'), paths.appIndexJs],
-  // entry: {
-  //   'polyfills': require.resolve('./polyfills'),
-  //   'common': paths.comDetailJs,
-  //   'index': paths.appIndexJs
-  // },
   entry: {
-    'polyfills':require.resolve('./polyfills'),
-    'common_detail': paths.comDetailJs,
-    'common_list': paths.comListJs,
+    'polyfills': require.resolve('./polyfills'),
+    'common': paths.comListJs,
     'index': paths.appIndexJs
   },
+  // entry: [require.resolve('./polyfills'), paths.appIndexJs],
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -265,8 +259,8 @@ module.exports = {
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
     new webpack.optimize.CommonsChunkPlugin({
-      name : ['common_list','common_detail'],
-      filename : '[name].js'
+      name : 'common',
+      filename : 'static/js/common.js'
     }),
     new InterpolateHtmlPlugin(env.raw),
     // Generates an `index.html` file with the <script> injected.
@@ -290,6 +284,7 @@ module.exports = {
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
     // Otherwise React will be compiled in the very slow development mode.
+    new webpack.DefinePlugin(env.stringified),
     // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
       compress: {

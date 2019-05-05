@@ -17,6 +17,7 @@ class OtccountryAddedit extends DetailUtil {
             type: 'select',
             key: 'payment_method',
             required: true,
+            readonly: false,
             search: true
         }, {
             title: '中文名称',

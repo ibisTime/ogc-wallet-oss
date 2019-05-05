@@ -1,6 +1,6 @@
-import {commListState} from '../common';
+import {commListState} from '../../common';
 
-const PREFIX = 'DAPPTRATEGY';
+const PREFIX = 'COMPLAINTORDER_';
 const SET_BUTTON_LIST = PREFIX + 'SET_BUTTON_LIST';
 const LOADING = PREFIX + 'LOADING';
 const CANCEL_LOADING = PREFIX + 'CANCEL_LOADING';
@@ -11,7 +11,7 @@ const SET_SEARCH_PARAM = PREFIX + 'SET_SEARCH_PARAM';
 
 const initState = {...commListState};
 
-export function DappTrateGy(state = initState, action) {
+export function ComplainTorder(state = initState, action) {
     switch (action.type) {
         case SET_BUTTON_LIST:
             return {...state, btnList: action.payload};

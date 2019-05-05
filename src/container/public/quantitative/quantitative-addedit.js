@@ -18,8 +18,12 @@ class QuantitativeAddEdit extends DetailUtil {
       required: true
     }, {
       field: 'name',
-      title: '分类名称',
+      title: '分类名称(中文)',
       required: true
+    }, {
+      field: 'enName',
+      required: true,
+      title: '分类名称(英文)'
     }, {
       field: 'orderNo',
       title: '次序',

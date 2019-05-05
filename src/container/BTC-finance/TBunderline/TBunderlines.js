@@ -131,11 +131,19 @@ class TBunderline extends React.Component {
             title: '申请说明',
             field: 'applyNote'
         }, {
-            field: 'status',
             title: '状态',
+            field: 'status',
+            search: true,
             type: 'select',
-            key: 'withdraw_status',
-            search: true
+            data: [{
+                'key': '3',
+                'value': '审批通过待广播'
+            }, {
+                'key': '4',
+                'value': '广播中'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         },
             {
             field: 'approveNote',
@@ -159,7 +167,8 @@ class TBunderline extends React.Component {
             pageCode: '802355',
             searchParams: {
                 currency,
-                statusList: ['3', '4']
+                status: '3',
+                bizType: 'withdraw'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {

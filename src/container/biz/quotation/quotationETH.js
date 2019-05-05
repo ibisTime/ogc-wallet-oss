@@ -53,7 +53,7 @@ class QuotationETH extends React.Component {
             rowKey: 'id',
             pageCode: '650101',
             searchParams: {
-                symbol: 'ETH'
+                symbol: 'USDT'
             }
         });
     }

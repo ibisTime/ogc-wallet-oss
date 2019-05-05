@@ -32,8 +32,11 @@ class Quantitative extends React.Component {
     render() {
         const fields = [{
             field: 'name',
-            title: '分类名称',
+            title: '分类名称(中文)',
             search: true
+        }, {
+            field: 'enName',
+            title: '分类名称(英文)'
         }, {
             field: 'orderNo',
             title: '次序'

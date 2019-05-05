@@ -176,7 +176,7 @@ export default class CSearchSelect extends React.Component {
               })(
               <Select {...this.getSelectProps(onChange)}>
                 {list && list.length ? list.map(d => (
-                  <Option key={d[keyName] + ''} value={d[keyName] + ''}>
+                  <Option key={d[keyName]} value={d[keyName]}>
                     {this.getValueName(d, valueName)}
                   </Option>
                 )) : null}

@@ -594,6 +594,12 @@ export const getRules = (item) => {
       message: '请输入正确格式的电子邮件'
     });
   }
+  if (item.number3) {
+    rules.push({
+      pattern: /(^0\.\d*[1-9]\d*$)/,
+      message: '请输入大于0小于1的两位小数'
+    });
+  }
   if (item.mobile) {
     rules.push({
       pattern: /^1[3|4|5|6|7|8|9]\d{9}$/,
@@ -777,14 +783,7 @@ function getRangeDateVal(rangedate, keys, result, format, fn, pageData, readonly
 
 // 获取checkbox的真实值
 function getRealCheckboxVal(result) {
-  let arr = [];
-  if(result) {
-    arr = result.split('||');
-    arr = arr.map(item => +item);
-    return arr;
-  }else {
-    return [];
-  }
+    return result ? result.split(',') : [];
 }
 
 /**
