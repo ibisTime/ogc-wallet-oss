@@ -31,39 +31,37 @@ import fetch from 'common/js/fetch';
 )
 class Otcpayment extends React.Component {
     render() {
-        const fields = [ {
-            title: '类型',
-            field: 'type',
-            type: 'select',
-            search: true,
-            key: 'payment_method'
-        }, {
-            title: '中文名称',
-            field: 'name'
-        }, {
-            title: '英文名称',
-            field: 'nameEn'
-        }, {
-            title: '费率',
-            field: 'feeRate'
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            data: [{
-                key: '0',
-                value: '禁用'
+        const fields = [
+            {
+                title: '中文名称',
+                field: 'name'
             }, {
-                key: '1',
-                value: '启用'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            search: true
-        }, {
-            title: '次序',
-            field: 'orderNo'
-        }];
+                title: '英文名称',
+                field: 'nameEn'
+            }, {
+                title: '类型',
+                field: 'type',
+                type: 'select',
+                search: true,
+                key: 'payment_method'
+            }, {
+                title: '状态',
+                field: 'status',
+                type: 'select',
+                data: [{
+                    key: '0',
+                    value: '禁用'
+                }, {
+                    key: '1',
+                    value: '启用'
+                }],
+                keyName: 'key',
+                valueName: 'value',
+                search: true
+            }, {
+                title: '次序',
+                field: 'orderNo'
+            }];
         return this.props.buildList({
             fields,
             pageCode: '625351',
@@ -72,51 +70,69 @@ class Otcpayment extends React.Component {
                 up: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRows[0].status !== '0') {
-                        showWarnMsg('不是可以禁用的状态');
                     } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定启用该付款方式？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return fetch(625342, {
-                                    codeList: selectedRows[0].code,
-                                    updater: getUserName()
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
+                        let codeList = [];
+                        for (let i = 0, len = selectedRows.length; i < len; i++) {
+                            if (selectedRows[i].status !== '0') {
+                                showWarnMsg(selectedRows[i].name + '不是可以启用的状态');
+                                codeList = [];
+                                return;
                             }
-                        });
+                            codeList.push(selectedRows[i].code);
+                        }
+                        if (codeList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定启用该付款方式？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625342, {
+                                        codeList: codeList,
+                                        updater: getUserName()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
                     }
                 },
                 down: (keys, items) => {
                     if (!keys || !keys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (items[0].status !== '1') {
-                        showWarnMsg('该付款方式不可禁用');
                     } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定禁用该付款方式？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return fetch(625343, {
-                                    codeList: items[0].code,
-                                    updater: getUserName()
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
+                        let codeList = [];
+                        for (let i = 0, len = items.length; i < len; i++) {
+                            if (items[i].status !== '1') {
+                                showWarnMsg(items[i].name + '不是可以禁用的状态');
+                                codeList = [];
+                                return;
                             }
-                        });
+                            codeList.push(items[i].code);
+                        }
+                        if (codeList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定禁用该付款方式？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625343, {
+                                        codeList: codeList,
+                                        updater: getUserName()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
                     }
                 },
                 fee: (keys, items) => {

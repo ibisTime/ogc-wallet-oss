@@ -15,7 +15,7 @@ import {
     getCoinList,
     showWarnMsg
 } from 'common/js/util';
-
+import fetch from 'common/js/fetch';
 @listWrapper(
     state => ({
         ...state.tradeArbitrationOrder,
@@ -27,6 +27,19 @@ import {
     }
 )
 class ArbitrationOrder extends React.Component {
+    state = {
+        jyd: []
+    };
+    componentWillMount() {
+        fetch(625229).then(data => {
+            data.forEach((item, index) => {
+                this.state.jyd.push({
+                    kname: index,
+                    kvalue: item
+                });
+            });
+        });
+    }
     render() {
         const fields = [{
             field: 'code',
@@ -60,11 +73,9 @@ class ArbitrationOrder extends React.Component {
             title: '交易对',
             field: 'tradeCurrency',
             type: 'select',
-            listCode: 625370,
-            search: true,
-            searchName: 'tradeCurrency',
-            keyName: 'simpleName',
-            valueName: 'BTC-{{simpleName.DATA}}',
+            data: this.state.jyd,
+            keyName: 'kname',
+            valueName: 'kvalue',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
@@ -106,6 +117,15 @@ class ArbitrationOrder extends React.Component {
                         this.props.history.push(`/trade/arbitrationOrder/resolve?code=${selectedRowKeys[0]}`);
                     }
                 }
+            },
+            beforeSearch: (params) => {
+                if(params.tradeCurrency) {
+                    let tradeCoin = params.tradeCurrency.split('-')[0];
+                    let tradeCurrency = params.tradeCurrency.split('-')[1];
+                    params.tradeCoin = tradeCoin;
+                    params.tradeCurrency = tradeCurrency;
+                }
+                return params;
             }
         });
     }

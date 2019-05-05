@@ -16,6 +16,7 @@ import {
     showSucMsg,
     getUserName
 } from 'common/js/util';
+import fetch from 'common/js/fetch';
 @listWrapper(
     state => ({
         ...state.OtcSurvivaLorDer,
@@ -27,6 +28,19 @@ import {
     }
 )
 class SurvivalOrder extends React.Component {
+    state = {
+        jyd: []
+    };
+    componentWillMount() {
+        fetch(625229).then(data => {
+            data.forEach((item, index) => {
+                this.state.jyd.push({
+                    kname: item,
+                    kvalue: item
+                });
+            });
+        });
+    }
     render() {
         const fields = [{
             field: 'code',
@@ -60,11 +74,10 @@ class SurvivalOrder extends React.Component {
             title: '交易对',
             field: 'tradeCurrency',
             type: 'select',
-            listCode: 625370,
+            data: this.state.jyd,
+            keyName: 'kname',
             search: true,
-            searchName: 'tradeCurrency',
-            keyName: 'simpleName',
-            valueName: 'BTC-{{simpleName.DATA}}',
+            valueName: 'kvalue',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
@@ -117,6 +130,15 @@ class SurvivalOrder extends React.Component {
             pageCode: '625250',
             searchParams: {
                 statusList: ['0', '1', '2']
+            },
+            beforeSearch: (params) => {
+                if(params.tradeCurrency) {
+                    let tradeCoin = params.tradeCurrency.split('-')[0];
+                    let tradeCurrency = params.tradeCurrency.split('-')[1];
+                    params.tradeCoin = tradeCoin;
+                    params.tradeCurrency = tradeCurrency;
+                }
+                return params;
             },
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {

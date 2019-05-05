@@ -18,6 +18,7 @@ import {
     getCoinList
 } from 'common/js/util';
 import {Modal} from 'antd';
+import fetch from 'common/js/fetch';
 @listWrapper(
     state => ({
         ...state.OtcManageAdvert,
@@ -29,6 +30,19 @@ import {Modal} from 'antd';
     }
 )
 class Advert extends React.Component {
+    state = {
+        jyd: []
+    };
+    componentWillMount() {
+        fetch(625229).then(data => {
+            data.forEach((item, index) => {
+                this.state.jyd.push({
+                    kname: item,
+                    kvalue: item
+                });
+            });
+        });
+    }
     render() {
         const fields = [{
             field: 'userId',
@@ -49,11 +63,10 @@ class Advert extends React.Component {
             title: '交易对',
             field: 'tradeCurrency',
             type: 'select',
-            listCode: 625370,
+            data: this.state.jyd,
+            keyName: 'kname',
             search: true,
-            searchName: 'tradeCurrency',
-            keyName: 'simpleName',
-            valueName: 'BTC-{{simpleName.DATA}}',
+            valueName: 'kvalue',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
             }
@@ -128,6 +141,15 @@ class Advert extends React.Component {
             pageCode: '625225',
             searchParams: {
                 statusList: ['0', '1', '2', '3']
+            },
+            beforeSearch: (params) => {
+                if(params.tradeCurrency) {
+                    let tradeCoin = params.tradeCurrency.split('-')[0];
+                    let tradeCurrency = params.tradeCurrency.split('-')[1];
+                    params.coin = tradeCoin;
+                    params.tradeCurrency = tradeCurrency;
+                }
+                return params;
             },
             btnEvent: {
                 up: (selectedRowKeys, selectedRows) => {

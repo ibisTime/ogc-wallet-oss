@@ -53,7 +53,7 @@ class ProductsApprove extends React.Component {
             keyName: 'key',
             valueName: 'value',
             search: true
-    }, {
+        }, {
             title: '展示次序',
             field: 'orderNo',
             required: true
@@ -84,55 +84,69 @@ class ProductsApprove extends React.Component {
                 up: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '0') {
-                        showWarnMsg('不是可以上架的状态');
                     } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定上架该标签？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return fetch(625322, {
-                                    id: selectedRows[0].id,
-                                    updater: getUserName()
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
+                        let idList = [];
+                        for (let i = 0, len = selectedRows.length; i < len; i++) {
+                            if (selectedRows[i].status !== '0') {
+                                showWarnMsg(selectedRows[i].name + '不是可以上架的状态');
+                                idList = [];
+                                return;
                             }
-                        });
+                            idList.push(selectedRows[i].id);
+                        }
+                        if (idList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定上架该标签？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625322, {
+                                        idList: idList,
+                                        updater: getUserName()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
                     }
                 },
                 down: (keys, items) => {
                     if (!keys || !keys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (keys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (items[0].status !== '1') {
-                        showWarnMsg('该标签已下架');
                     } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定下架该标签？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return fetch(625323, {
-                                    id: items[0].id,
-                                    updater: getUserName()
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
+                        let idList = [];
+                        for (let i = 0, len = items.length; i < len; i++) {
+                            if (items[i].status !== '1') {
+                                showWarnMsg(items[i].name + '不是可以下架的状态');
+                                idList = [];
+                                return;
                             }
-                        });
+                            idList.push(items[i].id);
+                        }
+                        if (idList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定下架该标签？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625323, {
+                                        idList: idList,
+                                        updater: getUserName()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
                     }
                 }
             }

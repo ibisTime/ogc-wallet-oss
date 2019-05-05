@@ -72,11 +72,10 @@ class ComplainTorder extends React.Component {
             search: true
         }, {
             title: '交易对',
-                field: 'tradeCurrency',
+            field: 'tradeCurrency',
             type: 'select',
             data: this.state.jyd,
             keyName: 'kname',
-            search: true,
             valueName: 'kvalue',
             render: (v, data) => {
                 return data ? data.tradeCoin + '-' + data.tradeCurrency : '';
@@ -138,8 +137,7 @@ class ComplainTorder extends React.Component {
                 value: '投诉已处理'
             }],
             keyName: 'key',
-            valueName: 'value',
-            search: true
+            valueName: 'value'
         }, {
             field: 'updateDatetime',
             title: '完成时间',

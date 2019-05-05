@@ -23,17 +23,17 @@ class FinishOrderAddedit extends DetailUtil {
                 title: '编号',
                 readonly: true
             }, {
-                title: '原告',
+                title: '被告',
                 field: 'sellUser',
                 formatter: (v, data) => {
-                    return data.sellUserInfo ? data.sellUserInfo.nickname + '-卖家' : '';
+                    return data.complaintAccused ? data.complaintAccused.nickname : '';
                 },
                 readonly: true
             }, {
-                title: '被告',
+                title: '原告',
                 field: 'buyUser',
                 formatter: (v, data) => {
-                    return data.buyUserInfo ? data.buyUserInfo.nickname + '-买家' : '';
+                    return data.complaintPlaintiff ? data.complaintPlaintiff.nickname : '';
                 },
                 readonly: true
             }, {

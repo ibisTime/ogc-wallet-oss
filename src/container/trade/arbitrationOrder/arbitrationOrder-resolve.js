@@ -33,14 +33,14 @@ class ArbitrationOrderResolve extends DetailUtil {
       title: '被告',
       field: 'sellUser',
       formatter: (v, data) => {
-        return data.sellUserInfo ? data.sellUserInfo.nickname + '-卖家' : '';
+        return data.accused ? data.accused.nickname : '';
       },
       readonly: true
     }, {
       title: '原告',
       field: 'buyUser',
       formatter: (v, data) => {
-        return data.buyUserInfo ? data.buyUserInfo.nickname + '-买家' : '';
+        return data.plaintiff ? data.plaintiff.nickname : '';
       },
       readonly: true
     }, {
