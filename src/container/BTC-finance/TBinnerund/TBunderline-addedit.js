@@ -33,7 +33,9 @@ class TBunderlineAddedit extends DetailUtil {
             title: '到账账号',
             required: true,
             formatter: (v, data) => {
-                return data.transferUserInfo ? data.loginName : '';
+                if (data.withdraw.transferUserInfo) {
+                    return data.withdraw.transferUserInfo.loginName ? data.withdraw.transferUserInfo.loginName : data.withdraw.transferUserInfo.nickname;
+                }
             }
         }, {
             field: 'amount',

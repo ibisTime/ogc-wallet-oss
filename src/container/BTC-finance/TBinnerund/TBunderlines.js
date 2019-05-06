@@ -82,7 +82,9 @@ class TBunderline extends React.Component {
             title: '到账账号',
             required: true,
             render: (v, data) => {
-                return data.transferUserInfo ? data.loginName : '';
+                if (data.transferUserInfo) {
+                    return data.transferUserInfo.loginName ? data.transferUserInfo.nickname + '(' + data.transferUserInfo.loginName + ')' : data.transferUserInfo.nickname;
+                }
             }
         }, {
             field: 'amount',
@@ -118,7 +120,7 @@ class TBunderline extends React.Component {
             searchName: 'keyword',
             search: true,
             render: (v, data) => {
-                if (data.applyUserInfo) {
+                if (data.applyUserInfo instanceof Object) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
                     if (data.applyUserInfo.kind === 'Q') {
                         return data.applyUserInfo.realName + '(' + tmpl + ')';

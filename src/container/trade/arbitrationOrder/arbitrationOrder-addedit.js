@@ -20,13 +20,23 @@ class ArbitrationOrderAddedit extends DetailUtil {
             title: '被告',
             field: 'sellUser',
             formatter: (v, data) => {
-                return data.accused ? data.accused.nickname : '';
+                if (data.accused.userId !== data.buyUserInfo.userId) {
+                    // 卖家
+                    return data.accused.nickname + '-卖家';
+                }else {
+                    return data.accused.nickname + '-买家';
+                }
             }
         }, {
             title: '原告',
             field: 'buyUser',
             formatter: (v, data) => {
-                return data.plaintiff ? data.plaintiff.nickname : '';
+                if (data.plaintiff.userId !== data.buyUserInfo.userId) {
+                    // 卖家
+                    return data.plaintiff.nickname + '-卖家';
+                }else {
+                    return data.plaintiff.nickname + '-买家';
+                }
             }
         }, {
             title: '交易对',

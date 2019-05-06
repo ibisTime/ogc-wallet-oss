@@ -48,26 +48,24 @@ class ArbitrationOrder extends React.Component {
         }, {
             title: '被告',
             field: 'beigao',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-卖家',
-            searchName: 'keyword',
-            search: true,
             render: (v, data) => {
-                return data.sellUserInfo ? data.sellUserInfo.nickname + '-卖家' : '';
+                if (data.accused.userId !== data.buyUserInfo.userId) {
+                    // 卖家
+                    return data.accused.nickname + '-卖家';
+                }else {
+                    return data.accused.nickname + '-买家';
+                }
             }
         }, {
             title: '原告',
             field: 'yuangao',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-买家',
-            searchName: 'keyword',
-            search: true,
             render: (v, data) => {
-                return data.buyUserInfo ? data.buyUserInfo.nickname + '-买家' : '';
+                if (data.plaintiff.userId !== data.buyUserInfo.userId) {
+                    // 卖家
+                    return data.plaintiff.nickname + '-卖家';
+                }else {
+                    return data.plaintiff.nickname + '-买家';
+                }
             }
         }, {
             title: '交易对',

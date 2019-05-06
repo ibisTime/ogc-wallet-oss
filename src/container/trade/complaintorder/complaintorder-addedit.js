@@ -26,14 +26,24 @@ class FinishOrderAddedit extends DetailUtil {
                 title: '被告',
                 field: 'sellUser',
                 formatter: (v, data) => {
-                    return data.complaintAccused ? data.complaintAccused.nickname : '';
+                    if (data.complaintAccused.userId !== data.buyUserInfo.userId) {
+                        // 卖家
+                        return data.complaintAccused.nickname + '-卖家';
+                    }else {
+                        return data.complaintAccused.nickname + '-买家';
+                    }
                 },
                 readonly: true
             }, {
                 title: '原告',
                 field: 'buyUser',
                 formatter: (v, data) => {
-                    return data.complaintPlaintiff ? data.complaintPlaintiff.nickname : '';
+                    if (data.complaintPlaintiff.userId !== data.buyUserInfo.userId) {
+                        // 卖家
+                        return data.complaintPlaintiff.nickname + '-卖家';
+                    }else {
+                        return data.complaintPlaintiff.nickname + '-买家';
+                    }
                 },
                 readonly: true
             }, {

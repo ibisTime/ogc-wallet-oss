@@ -47,29 +47,29 @@ class ComplainTorder extends React.Component {
             title: '编号',
             search: true
         }, {
-            title: '买家',
-            field: 'buyUser',
-            render: (v, data) => {
-                return data.buyUserInfo ? data.buyUserInfo.nickname : '';
-            },
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true
-        }, {
-            title: '卖家',
+            title: '被告',
             field: 'sellUser',
             render: (v, data) => {
-                return data.sellUserInfo ? data.sellUserInfo.nickname : '';
+                if (data.complaintAccused.userId !== data.buyUserInfo.userId) {
+                    // 卖家
+                    return data.complaintAccused.nickname + '-卖家';
+                }else {
+                    return data.complaintAccused.nickname + '-买家';
+                }
             },
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true
+            readonly: true
+        }, {
+            title: '原告',
+            field: 'buyUser',
+            render: (v, data) => {
+                if (data.complaintPlaintiff.userId !== data.buyUserInfo.userId) {
+                    // 卖家
+                    return data.complaintPlaintiff.nickname + '-卖家';
+                }else {
+                    return data.complaintPlaintiff.nickname + '-买家';
+                }
+            },
+            readonly: true
         }, {
             title: '交易对',
             field: 'tradeCurrency',

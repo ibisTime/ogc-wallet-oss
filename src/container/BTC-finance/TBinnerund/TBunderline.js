@@ -69,7 +69,7 @@ class TBunderline extends React.Component {
           }
         }, {
             field: 'accountName',
-            title: '账号',
+            title: '申请账号',
             render: (v, data) => {
                 if (data.applyUserInfo) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
