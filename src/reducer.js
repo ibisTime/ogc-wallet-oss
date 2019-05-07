@@ -223,6 +223,8 @@ import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddressQuery/GJAdd
 import {BTCFinanceGJAddressQueryAddEdit} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery-addedit';
 import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
+// 点位管理
+import {publicPointPostion} from './redux/public/pointpostion';
 // 补给地址
 import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
 import {BTCFinanceDiviAddressAddedit} from './redux/BTC-finance/diviAddress/diviAddressAddedit';
@@ -287,6 +289,7 @@ export default combineReducers({
     // public
     publicBanner,
     publicBannerAddEdit,
+    publicPointPostion,
     // 待结算佣金名单
     userChannelDealerCommissions,
     userChannelDealerCommissionsChecklist,

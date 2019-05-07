@@ -130,6 +130,7 @@ const ROUTES = [
         path: '/public/noticesystem/addedit',
         component: asyncComponent(() => import('container/public/noticesystem/noticesystem-addedit'))
     },
+    // 广告位管理
     {
         path: '/public/banner',
         component: asyncComponent(() => import('container/public/banner/banner'))
@@ -137,6 +138,15 @@ const ROUTES = [
     {
         path: '/public/banner/addedit',
         component: asyncComponent(() => import('container/public/banner-addedit/banner-addedit'))
+    },
+    // BUG反馈管理
+    {
+        path: '/public/pointpostion',
+        component: asyncComponent(() => import('container/public/pointposition/pointpostion'))
+    },
+    {
+        path: '/public/pointpostion/addedit',
+        component: asyncComponent(() => import('container/public/pointposition/pointpostion-addedit'))
     },
     {
         path: '/public/buyADS',

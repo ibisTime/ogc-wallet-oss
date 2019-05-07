@@ -153,6 +153,61 @@ class DappManagent extends React.Component {
                             }
                         });
                     }
+                },
+                // 置顶
+                zd: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status === '1') {
+                        showWarnMsg('不是可以选择的状态');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定显示该应用？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return fetch(625453, {
+                                    id: selectedRows[0].id,
+                                    updater: getUserName()
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
+                },
+                nozd: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '1') {
+                        showWarnMsg('不是可以选择的状态');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定不显示该应用？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return fetch(625453, {
+                                    id: selectedRows[0].id,
+                                    updater: getUserName()
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
                 }
             }
         });

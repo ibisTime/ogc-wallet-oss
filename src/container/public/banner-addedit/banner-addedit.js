@@ -13,13 +13,16 @@ class BannerAddEdit extends DetailUtil {
             ...this.state,
             dkey: '',
             url: false,
-            id: false
+            id: false,
+            ishidden: !!getQueryString('ishidden', this.props.location.search)
         };
+        this.index = 0;
     }
     render() {
+        let {ishidden} = this.state;
         const fields = [{
-          field: 'url',
-          hidden: true
+            field: 'url',
+            hidden: true
         }, {
             field: 'status',
             hidden: true,
@@ -37,7 +40,18 @@ class BannerAddEdit extends DetailUtil {
             field: 'location',
             type: 'select',
             key: 'banner_location',
-            required: true
+            required: true,
+            onChange: (c) => {
+                this.setState({dkey: c});
+                if(this.index > 0) {
+                    if (c === 'app_guide') {
+                        this.setState({ishidden: true});
+                    } else if (c === 'app_home') {
+                        this.setState({ishidden: false});
+                    }
+                };
+                this.index++;
+            }
         }, {
             title: '顺序',
             field: 'orderNo',
@@ -55,11 +69,12 @@ class BannerAddEdit extends DetailUtil {
             title: '动作',
             type: 'select',
             key: 'banner_action',
-            required: true,
+            hidden: ishidden || this.view,
+            required: this.state.dkey !== 'app_guide',
             onChange: (v) => {
                 this.setState({dkey: v});
                 if (v === '1' && !this.state.url) {
-                 this.setState({url: true, id: false});
+                    this.setState({url: true, id: false});
                 } else if (v === '2' && !this.state.id) {
                     this.setState({id: true, url: false});
                 }
@@ -79,7 +94,8 @@ class BannerAddEdit extends DetailUtil {
             field: 'aa',
             keyName: 'id',
             valueName: 'name',
-            hidden: this.state.dkey !== '2',
+            hidden: ishidden || this.view,
+            // hidden: this.state.dkey !== '2',
             required: this.state.dkey === '2'
         }, {
             title: '备注',
@@ -94,6 +110,10 @@ class BannerAddEdit extends DetailUtil {
             editCode: 630502,
             detailCode: 630507,
             beforeSubmit: (params) => {
+                if (params.location === 'app_guide') {
+                    params.type = '0';
+                    return params;
+                };
                 params.url = params.aa;
                 return params;
             }
