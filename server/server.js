@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 app.use('/api', function (req, res) {
    //  //研发
    // // var url = 'http://3.1.207.21:2801/forward-service/api';
-    var url = 'http://120.26.6.213:5801/forward-service/api';
+    // var url = 'http://120.26.6.213:5801/forward-service/api';
     //测试
   // var url = 'http://120.26.6.213:6801/forward-service/api';
     //研发
