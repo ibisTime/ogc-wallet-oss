@@ -49,12 +49,6 @@ class OfflineRechargeDetail extends DetailUtil {
         }, {
             field: 'payCardInfo',
             title: '打币渠道'
-        }, {
-            field: 'payCardNo',
-            title: '打币地址'
-        }, {
-            field: 'applyNote',
-            title: '充值说明'
         }];
 
         let buttons = [{
@@ -63,14 +57,6 @@ class OfflineRechargeDetail extends DetailUtil {
             this.props.history.go(-1);
           }
         }];
-        if (this.isCheck || (this.code && !this.isCheck)) {
-            fields = fields.concat([{
-                field: 'payNote',
-                title: '审核意见',
-                readonly: !this.isCheck,
-                required: true
-            }]);
-        }
         if (this.isCheck) {
             buttons = [{
                 title: '通过',
