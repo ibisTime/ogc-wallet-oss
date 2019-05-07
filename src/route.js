@@ -396,26 +396,26 @@ const ROUTES = [
         path: '/trade/saleTrade/addedit',
         component: asyncComponent(() => import('container/trade/saleTrade/saleTrade-addedit'))
     },
-    // OTC管理-- 广告
-    {
-        path: '/otcmanage/advert',
-        component: asyncComponent(() => import('container/biz/otcmanage/advert/advert'))
-    },
-    // OTC管理-- 新增广告
-    {
-        path: '/otcmanage/advert/addedit',
-        component: asyncComponent(() => import('container/biz/otcmanage/advert/advert-addedit'))
-    },
-    // 存活订单查询
-    {
-        path: '/otcmanage/survivalorder',
-        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder'))
-    },
-    // 存活订单查询--订单详情
-    {
-        path: '/otcmanage/survivalorder/addedit',
-        component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder-addedit'))
-    },
+    // // OTC管理-- 广告
+    // {
+    //     path: '/otcmanage/advert',
+    //     component: asyncComponent(() => import('container/biz/otcmanage/advert/advert'))
+    // },
+    // // OTC管理-- 新增广告
+    // {
+    //     path: '/otcmanage/advert/addedit',
+    //     component: asyncComponent(() => import('container/biz/otcmanage/advert/advert-addedit'))
+    // },
+    // // 存活订单查询
+    // {
+    //     path: '/otcmanage/survivalorder',
+    //     component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder'))
+    // },
+    // // 存活订单查询--订单详情
+    // {
+    //     path: '/otcmanage/survivalorder/addedit',
+    //     component: asyncComponent(() => import('container/biz/otcmanage/survivalorder/survivalorder-addedit'))
+    // },
     // 历史订单查询
     {
         path: '/otcmanage/historicalorder',

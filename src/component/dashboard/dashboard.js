@@ -230,15 +230,15 @@ class Dashboard extends React.Component {
     this._txLogin(loginInfo, listeners, options);
   }
   _txLogin(loginInfo, listeners, options) {
-    webim.login(loginInfo, listeners, options, function(resp) {
-      webim.syncGroupMsgs({}, (data) => {
-        console.debug(data);
-      }, (data) => {
-        console.debug(data);
-      });
-    }, (err) => {
-      alert(err.ErrorInfo);
-    });
+    // webim.login(loginInfo, listeners, options, function(resp) {
+    //   webim.syncGroupMsgs({}, (data) => {
+    //     console.debug(data);
+    //   }, (data) => {
+    //     console.debug(data);
+    //   });
+    // }, (err) => {
+    //   alert(err.ErrorInfo);
+    // });
   }
   // newMsgList 为新消息数组，结构为[Msg]
   onMsgNotify = (newMsgList) => {
