@@ -231,15 +231,7 @@ import {StadySettLement} from './redux/marketsettlement/stadysettlement';
 import {NoOrder} from './redux/marketsettlement/noorder';
 import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
-<<<<<<< HEAD
-import {AlreadySettlementResolve} from './redux/marketsettlement/alreadysettlement-resolve';
-
-import {GoOrder} from './redux/marketsettlement/goorder';
-import {ManualSettlement} from './redux/marketsettlement/manualsettlement';
-import {PlatFormRecord} from './redux/marketsettlement/platformrecord';
-=======
 import {TAG} from './redux/managent/tag';
->>>>>>> jmqb_branch_v110
 
 export default combineReducers({
     user,
@@ -405,19 +397,9 @@ export default combineReducers({
     NoOrder,
     StayOrder,
     AlreadySettlement,
-    AlreadySettlementResolve,
     quanTitativeCategory,
-    NotifierofWithdrawal,
-<<<<<<< HEAD
-    GoOrder,
-    GoSettlement,
-    ManualSettlement,
-    PlatFormRecord,
-    OtcManageAdvertAddedit
-=======
     AppManagent,
     DappTrateGy,
     DappManagent,
     TAG
->>>>>>> jmqb_branch_v110
 });

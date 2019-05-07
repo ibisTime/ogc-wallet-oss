@@ -97,9 +97,6 @@ class GJAddressQuery extends React.Component {
                         // 测试：https://testnet.blockexplorer.com/address/
                         // 正式：https://blockexplorer.com/address/
                         window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
-<<<<<<< HEAD
-                    } else if (selectedRows[0].symbol === 'USDT') {
-=======
                     }else if(selectedRows[0].symbol === 'TRX') {
                         // 测试：https://shasta.tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
                         // 正式：https://tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
@@ -109,7 +106,6 @@ class GJAddressQuery extends React.Component {
                         // 测试: https://etherscan.io/address/0x8a37b79e54d69e833d79cac3647c877ef72830e1
                         window.open('https://rinkeby.etherscan.io/address/' + selectedRows[0].address, '_bank');
                     }else if(selectedRows[0].symbol === 'USDT') {
->>>>>>> jmqb_branch_v110
                         window.open('https://omniexplorer.info/address/' + selectedRows[0].address, '_bank');
                     }
                 }
