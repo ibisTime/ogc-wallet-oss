@@ -1,9 +1,10 @@
 import React from 'react';
+import { getQueryString, showSucMsg, getUserName } from 'common/js/util';
 import ModalDetail from 'common/js/build-modal-detail';
 
 class UpDown extends React.Component {
     render() {
-        let { code, key = 'code', biz, onOk, hideLoc, locKey } = this.props;
+        let { code, key = 'code', biz, onOk } = this.props;
         let locationField = {
             title: '严重等级',
             required: true,
@@ -34,7 +35,13 @@ class UpDown extends React.Component {
                 integer: true,
                 maxlength: 30
             }],
-            addCode: biz
+            addCode: 805101,
+            beforeSubmit: (data) => {
+                    data.code = data.code;
+                    data.approveResult = 1;
+                    data.approveUser = getUserName();
+                return data;
+            }
         };
         if (onOk) {
             options.onOk = () => onOk();

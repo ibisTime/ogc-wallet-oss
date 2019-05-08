@@ -30,6 +30,19 @@ import fetch from 'common/js/fetch';
     }
 )
 class publicPointPostion extends React.Component {
+    state = {
+        levelData: []
+    };
+    componentDidMount() {
+        fetch(805105, {
+            start: 1,
+            limit: 10
+        }).then(data => {
+            this.setState({
+                levelData: data.commitUserInfo
+            });
+        });
+    }
     render() {
         const fields = [{
             title: '提交人昵称',
@@ -55,9 +68,11 @@ class publicPointPostion extends React.Component {
             type: 'select',
             key: 'bug_level',
             field: 'level',
-            render: (v, d) => {
-                return d.commitUserInfo ? d.commitUserInfo.level : '';
-            }
+           render: (v, d) => {
+               let levelData = this.state.levelData;
+               console.log(levelData);
+               return levelData;
+           }
         }, {
             title: '状态',
             type: 'select',
@@ -92,9 +107,29 @@ class publicPointPostion extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '805105',
+            beforeSubmit: (data) => {
+                return data;
+            },
             btnEvent: {
                 check: (selectedRowKeys, selectedRows) => {
-                    this.props.history.push(`/public/pointpostion/addedit?&v=1`);
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '0') {
+                        showWarnMsg('不是可以支付的状态');
+                    } else {
+                        this.props.history.push(`/public/pointpostion/addedit?code=${selectedRows[0].code}&v=1`);
+                    }
+                },
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/public/pointpostion/addedit?code=${selectedRows[0].code}&v=1&isAdd=1`);
+                    }
                 },
                 zf: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
@@ -112,6 +147,10 @@ class publicPointPostion extends React.Component {
                                 this.props.doFetching();
                                 return fetch(805100, {
                                     code: selectedRows[0].code,
+                                    reappear: selectedRows[0].reappear,
+                               deviceSystem: selectedRows[0].deviceSystem,
+                                description: selectedRows[0].description,
+                                commitUser: selectedRows[0].commitUser,
                                     updater: getUserName()
                                 }).then(() => {
                                     this.props.getPageData();
