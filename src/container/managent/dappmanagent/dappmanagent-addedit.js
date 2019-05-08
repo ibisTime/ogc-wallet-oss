@@ -19,6 +19,34 @@ class AppmanagentAddedit extends DetailUtil {
 
     render() {
         const fields = [{
+            title: '类型',
+            search: true,
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '敬请期待型'
+            }, {
+                key: '2',
+                value: '直接跳转型'
+            }, {
+                key: '3',
+                value: '简介跳转型'
+            }, {
+                key: '4',
+                value: '自营型'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            field: 'level',
+            onChange: (v) => {
+                this.setState({dkey: v});
+                if (v === '1') {
+                    this.setState({ category: true, name: true, picIcon: true });
+                } else if (v === '2') {
+                    this.setState({ category: true, name: true, picIcon: true, url: true });
+                }
+            }
+        }, {
             field: 'id',
             title: '应用ID',
             hidden: true,
@@ -27,7 +55,7 @@ class AppmanagentAddedit extends DetailUtil {
         }, {
             field: 'category',
             type: 'select',
-            search: true,
+             search: true,
             key: 'dapp_category',
             title: '应用分类',
             required: true
@@ -39,13 +67,15 @@ class AppmanagentAddedit extends DetailUtil {
         }, {
             field: 'company',
             title: '应用所属厂商',
-            required: true
+            required: true,
+            hidden: this.state.dkey === '1' || this.state.dkey === '2'
         }, {
             field: 'label',
             type: 'checkbox',
             listCode: '625476',
             keyName: 'id',
             valueName: 'name',
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             required: true,
             title: '应用标签',
           params: {type: 0},
@@ -55,9 +85,11 @@ class AppmanagentAddedit extends DetailUtil {
         }, {
             field: 'desc',
             required: true,
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             title: '应用详情描述'
         }, {
             field: 'download',
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             title: '下载数量',
             required: true
         }, {
@@ -73,6 +105,7 @@ class AppmanagentAddedit extends DetailUtil {
             required: true
         }, {
             field: 'grade',
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             title: '评分（星级）',
             type: 'select',
             data: [{
@@ -99,6 +132,7 @@ class AppmanagentAddedit extends DetailUtil {
             title: '动作',
             key: 'dapp_action',
             required: true,
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             type: 'select',
             onChange: (v) => {
                 this.setState({dkey: v});
@@ -106,16 +140,18 @@ class AppmanagentAddedit extends DetailUtil {
         }, {
             title: 'url地址',
             field: 'url',
-            hidden: this.state.dkey !== '0',
-            required: this.state.dkey === '0'
+            hidden: this.state.dkey === '0' || this.state.dkey === '1',
+            required: true
         }, {
             field: 'orderNo',
             title: '次序',
             integer: true,
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             required: true
         }, {
             field: 'isTop',
             title: '是否置顶',
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             type: 'select',
             data: [{
                 'key': '0',
@@ -131,12 +167,14 @@ class AppmanagentAddedit extends DetailUtil {
             field: 'picList',
             type: 'img',
             single: true,
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             title: '图片',
             required: true
         }, {
             field: 'picScreenshot',
             type: 'img',
             title: '图片详情',
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
             render: (v, d) => {
                 return d.picScreenshotList;
             },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'antd';
-import { getQueryString, showSucMsg } from 'common/js/util';
+import { getQueryString, showSucMsg, getUserName } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 import UpDown from 'component/up-down/repetition';
@@ -27,8 +27,7 @@ class BannerAddEdit extends DetailUtil {
     render() {
         const fields = [{
             title: '提交人昵称',
-            field: 'name',
-            search: true
+            field: 'name'
         }, {
             title: '提交人手机号',
             field: 'mobile',
@@ -44,23 +43,38 @@ class BannerAddEdit extends DetailUtil {
             field: 'orderNo'
         }, {
             title: '截图',
-            search: true,
             type: 'img',
-            field: 'orderNo'
+            field: 'pic'
         }, {
             title: '状态',
             field: 'status',
-            search: true
+            data: [{
+                key: '0',
+                value: '待确认'
+            }, {
+                key: '1',
+                value: '已确认待奖励'
+            }, {
+                key: '2',
+                value: '复现不成功'
+            }, {
+                key: '3',
+                value: '已奖励'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
             title: '提交时间',
-            field: 'updateDatetime',
+            field: 'commitDatetime',
             type: 'datetime'
         }, {
             title: '备注',
             field: 'remark'
         }, {
             title: '审批说明',
-            field: 'remark'
+            field: 'approveNote',
+            readonly: false,
+            required: true
         }];
         return(
             <div>
@@ -68,22 +82,21 @@ class BannerAddEdit extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            addCode: 630500,
-            editCode: 630502,
-            detailCode: 630507,
+            detailCode: 805106,
             buttons: [{
-                title: '复现',
+                title: '复现成功',
                 handler: (param) => {
                     this.setState({
                         updownVisible: true
                     });
                     var data = {
-                        id: this.code,
-                        handleResult: '1',
+                        code: this.code,
+                        approveResult: '1',
+                        approveUser: this.getUserName(),
                         handleNote: param.handleNote
                     };
                     this.doFetching();
-                    fetch(802390, data).then(() => {
+                    fetch(805101, data).then(() => {
                         showSucMsg('操作成功');
                         this.cancelFetching();
                         setTimeout(() => {
@@ -94,15 +107,15 @@ class BannerAddEdit extends DetailUtil {
                 check: true,
                 type: 'primary'
             }, {
-                title: '不复现',
+                title: '复现不成功',
                 handler: (param) => {
                     var data = {
-                        id: this.code,
-                        handleResult: '0',
-                        handleNote: param.handleNote
+                        code: this.code,
+                        approveResult: '0',
+                        approveUser: this.getUserName()
                     };
                     this.doFetching();
-                    fetch(802390, data).then(() => {
+                    fetch(805101, data).then(() => {
                         showSucMsg('操作成功');
                         this.cancelFetching();
                         setTimeout(() => {

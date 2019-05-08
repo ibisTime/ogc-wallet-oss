@@ -5,35 +5,32 @@ class UpDown extends React.Component {
     render() {
         let { code, key = 'code', biz, onOk, hideLoc, locKey } = this.props;
         let locationField = {
-            field: 'location',
-            title: 'UI位置',
+            title: '严重等级',
+            required: true,
             type: 'select',
-            hidden: hideLoc,
-            required: true
+            data: [{
+            key: '1',
+            value: '严重'
+        }, {
+            key: '2',
+            value: '一般'
+        }, {
+            key: '3',
+            value: '优化'
+        }],
+            keyName: 'key',
+            valueName: 'value',
+            field: 'level'
         };
-        if (locKey) {
-            locationField.key = locKey;
-        } else {
-            locationField.data = [{
-                key: '0',
-                value: '普通'
-            }, {
-                key: '1',
-                value: '热门'
-            }];
-            locationField.keyName = 'key';
-            locationField.valueName = 'value';
-        }
         const options = {
             fields: [{
                 field: key,
                 value: code,
                 hidden: true
             }, locationField, {
-                field: 'orderNo',
-                title: 'UI次序',
+                field: 'repairVersionCode',
+                title: '修复版本号',
                 required: true,
-                help: '数字越小，排序越靠前',
                 integer: true,
                 maxlength: 30
             }],
