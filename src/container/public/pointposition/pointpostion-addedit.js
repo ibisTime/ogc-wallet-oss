@@ -120,10 +120,10 @@ class BannerAddEdit extends DetailUtil {
                     code={this.state.code}
                     onOk={() => {
                         this.setModalVisible(false);
-                        this.props.getPageData();
                         setTimeout(() => {
                             this.props.history.go(-1);
                         }, 1000);
+                        this.props.getPageData();
                     }}/>
             </div>
         );

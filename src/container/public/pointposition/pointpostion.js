@@ -30,21 +30,33 @@ import fetch from 'common/js/fetch';
     }
 )
 class publicPointPostion extends React.Component {
-    state = {
-        levelData: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            level: []
+        };
+    }
     componentDidMount() {
-        fetch(805105, {
-            start: 1,
-            limit: 10
-        }).then(data => {
+        // 直接请求
+        this.props.doFetching();// loading显示
+        Promise.all([
+            fetch(805105, {
+                start: 1,
+                limit: 10
+                // type: 'B'
+            })
+        ]).then(([data]) => {
             this.setState({
-                levelData: data.commitUserInfo
+                data: data.commitUserInfo
             });
-        });
+            this.props.cancelFetching();// loading隐藏
+        }).catch(this.props.cancelFetching);
     }
     render() {
-        const fields = [{
+        const {data} = this.state;
+        const fields = [
+            {
             title: '提交人昵称',
             field: 'commitUser',
             render: (v, d) => {
@@ -69,9 +81,8 @@ class publicPointPostion extends React.Component {
             key: 'bug_level',
             field: 'level',
            render: (v, d) => {
-               let levelData = this.state.levelData;
-               console.log(levelData);
-               return levelData;
+            let a = d.commitUserInfo.level;
+               return a;
            }
         }, {
             title: '状态',

@@ -5,6 +5,7 @@ import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
 @Form.create()
+    // 保留之前的代码
 class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
@@ -183,6 +184,19 @@ class AppmanagentAddedit extends DetailUtil {
             required: true,
             hidden: this.state.dkey === '1' || this.state.dkey === '2'
         }, {
+            field: 'label',
+            type: 'checkbox',
+            listCode: '625476',
+            keyName: 'id',
+            valueName: 'name',
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
+            required: true,
+            title: '应用标签',
+          params: {type: 0},
+          formatter(v, d) {
+            return v;
+          }
+        }, {
             field: 'desc',
             required: true,
             hidden: this.state.dkey === '1' || this.state.dkey === '2',
@@ -203,6 +217,40 @@ class AppmanagentAddedit extends DetailUtil {
             type: 'img',
             single: true,
             required: true
+        }, {
+            field: 'grade',
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
+            title: '评分（星级）',
+            type: 'select',
+            data: [{
+                'key': '1',
+                'value': '1'
+            }, {
+                'key': '2',
+                'value': '2'
+            }, {
+                'key': '3',
+                'value': '3'
+            }, {
+                'key': '4',
+                'value': '4'
+            }, {
+                'key': '5',
+                'value': '5'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            required: true
+        }, {
+            field: 'action',
+            title: '动作',
+            key: 'dapp_action',
+            required: true,
+            hidden: this.state.dkey === '1' || this.state.dkey === '2',
+            type: 'select',
+            onChange: (v) => {
+                this.setState({dkey: v});
+            }
         }, {
             title: 'url地址',
             field: 'url',
