@@ -34,7 +34,7 @@ class DappManagent extends React.Component {
             field: 'category',
             type: 'select',
             search: true,
-            key: 'dapp_category',
+            key: 'dopen_app_category',
             title: '应用分类'
         }, {
             field: 'name',
@@ -63,6 +63,7 @@ class DappManagent extends React.Component {
         }, {
             field: 'action',
             title: '类型',
+            search: true,
             key: 'dopen_app_action',
             type: 'select'
         }, {

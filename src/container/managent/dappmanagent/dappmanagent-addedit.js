@@ -231,7 +231,7 @@ class AppmanagentAddedit extends DetailUtil {
             field: 'category',
             type: 'select',
             search: true,
-            key: 'dapp_category',
+            key: 'dopen_app_category',
             title: '应用分类',
             required: true
         }, {
