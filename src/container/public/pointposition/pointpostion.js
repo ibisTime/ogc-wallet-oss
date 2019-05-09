@@ -18,7 +18,7 @@ import {
     dateTimeFormat
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
-
+import UpDowns from 'component/up-down/pay';
 @listWrapper(
     state => ({
         ...state.publicPointPostion,
@@ -33,6 +33,9 @@ class publicPointPostion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            updownVisible: false,
+            code: '',
+            biz: '',
             data: [],
             level: []
         };
@@ -52,6 +55,9 @@ class publicPointPostion extends React.Component {
             });
             this.props.cancelFetching();// loading隐藏
         }).catch(this.props.cancelFetching);
+    }
+    setModalVisible = (updownVisible) => {
+        this.setState({ updownVisible });
     }
     render() {
         const {data} = this.state;
@@ -79,11 +85,7 @@ class publicPointPostion extends React.Component {
             search: true,
             type: 'select',
             key: 'bug_level',
-            field: 'level',
-           render: (v, d) => {
-            let a = d.commitUserInfo.level;
-               return a;
-           }
+            field: 'level'
         }, {
             title: '状态',
             type: 'select',
@@ -115,7 +117,9 @@ class publicPointPostion extends React.Component {
             title: '备注',
             field: 'remark'
         }];
-        return this.props.buildList({
+        return (
+            <div>
+                {this.props.buildList({
             fields,
             pageCode: '805105',
             beforeSubmit: (data) => {
@@ -128,7 +132,7 @@ class publicPointPostion extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else if (selectedRows[0].status !== '0') {
-                        showWarnMsg('不是可以支付的状态');
+                        showWarnMsg('不是可以审核的状态');
                     } else {
                         this.props.history.push(`/public/pointpostion/addedit?code=${selectedRows[0].code}&v=1`);
                     }
@@ -150,31 +154,27 @@ class publicPointPostion extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是可以支付的状态');
                     } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定支付？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return fetch(805100, {
-                                    code: selectedRows[0].code,
-                                    reappear: selectedRows[0].reappear,
-                               deviceSystem: selectedRows[0].deviceSystem,
-                                description: selectedRows[0].description,
-                                commitUser: selectedRows[0].commitUser,
-                                    updater: getUserName()
-                                }).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
-                            }
+                        this.setState({
+                            updownVisible: true,
+                            code: selectedRows[0].code,
+                            payUser: getUserName(),
+                            biz: 805102
                         });
                     }
                 }
             }
-        });
+        })}
+                <UpDowns
+                    updownVisible={this.state.updownVisible}
+                    setModalVisible={this.setModalVisible}
+                    biz={this.state.biz}
+                    code ={this.state.code}
+                    onOk={() => {
+                        this.setModalVisible(false);
+                        this.props.getPageData();
+                    }} />
+            </div>
+        );
     }
 }
 

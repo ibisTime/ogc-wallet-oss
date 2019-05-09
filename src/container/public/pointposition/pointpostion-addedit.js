@@ -42,7 +42,8 @@ class BannerAddEdit extends DetailUtil {
                 handler: (param) => {
                     var data = {
                         code: param.code,
-                        approveResult: '0'
+                        approveResult: '0',
+                        approveUser: getUserName()
                     };
                     this.doFetching();
                     fetch(805101, data).then(() => {

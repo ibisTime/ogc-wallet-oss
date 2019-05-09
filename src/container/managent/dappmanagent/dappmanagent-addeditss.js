@@ -8,7 +8,6 @@ import fetch from 'common/js/fetch';
 class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
-        this.action = getQueryString('action', this.props.location.search);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.buttons = [];
@@ -16,11 +15,10 @@ class AppmanagentAddedit extends DetailUtil {
             this.buttons = [{
                 title: '保存',
                 handler: (param) => {
-                    if (param.action === '1') {
+                    if (param.level === '1') {
                         let data = {
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
+                            picIcon: param.picIcon,
                             category: param.category,
                             language: param.language,
                             location: param.location,
@@ -34,11 +32,10 @@ class AppmanagentAddedit extends DetailUtil {
                                 this.props.history.go(-1);
                             }, 1000);
                         }).catch(this.props.cancelFetching);
-                    } else if (param.action === '2') {
+                    } else if (param.level === '2') {
                         let data = {
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
+                            picIcon: param.picIcon,
                             category: param.category,
                             language: param.language,
                             location: param.location,
@@ -52,17 +49,10 @@ class AppmanagentAddedit extends DetailUtil {
                                 this.props.history.go(-1);
                             }, 1000);
                         }).catch(this.props.cancelFetching);
-                    } else if (param.action === '3') {
-                        param.dappId = this.dappId;
-                        let label = param.label.split(',');
-                        param.label = label.join('||');
+                    } else if (param.level === '3') {
                         let data = {
-                            label: param.label,
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
                             picIcon: param.picIcon,
-                            picScreenshot: param.picScreenshot,
                             category: param.category,
                             language: param.language,
                             location: param.location,
@@ -78,21 +68,18 @@ class AppmanagentAddedit extends DetailUtil {
                                 this.props.history.go(-1);
                             }, 1000);
                         }).catch(this.props.cancelFetching);
-                    } else if (param.action === '4') {
+                    } else if (param.level === '4') {
                         let data = {
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
                             picIcon: param.picIcon,
                             category: param.category,
                             language: param.language,
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
-                            url: param.url,
-                            company: param.company
+                            url: param.url
                         };
-                        fetch(625653, data).then(() => {
+                        fetch(625652, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
                                 this.props.history.go(-1);
@@ -110,13 +97,12 @@ class AppmanagentAddedit extends DetailUtil {
             }];
         }else if (this.code) {
             this.buttons = [{
-                title: '保存',
+                title: '保存1',
                 handler: (param) => {
-                    if (this.action === '1') {
+                    if (param.level === '1') {
                         let data = {
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
+                            picIcon: param.picIcon,
                             category: param.category,
                             language: param.language,
                             location: param.location,
@@ -130,11 +116,10 @@ class AppmanagentAddedit extends DetailUtil {
                                 this.props.history.go(-1);
                             }, 1000);
                         }).catch(this.props.cancelFetching);
-                    } else if (this.action === '2') {
+                    } else if (param.level === '2') {
                         let data = {
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
+                            picIcon: param.picIcon,
                             category: param.category,
                             language: param.language,
                             location: param.location,
@@ -148,17 +133,10 @@ class AppmanagentAddedit extends DetailUtil {
                                 this.props.history.go(-1);
                             }, 1000);
                         }).catch(this.props.cancelFetching);
-                    } else if (this.action === '3') {
-                        param.dappId = this.dappId;
-                        let label = param.label.split(',');
-                        param.label = label.join('||');
+                    } else if (param.level === '3') {
                         let data = {
-                            label: param.label,
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
                             picIcon: param.picIcon,
-                            picScreenshot: param.picScreenshot,
                             category: param.category,
                             language: param.language,
                             location: param.location,
@@ -174,11 +152,10 @@ class AppmanagentAddedit extends DetailUtil {
                                 this.props.history.go(-1);
                             }, 1000);
                         }).catch(this.props.cancelFetching);
-                    } else if (this.action === '4') {
+                    } else if (param.level === '4') {
                         let data = {
                             name: param.name,
-                            id: param.id,
-                            picList: param.picList,
+                            picIcon: param.picIcon,
                             category: param.category,
                             language: param.language,
                             location: param.location,
@@ -208,17 +185,17 @@ class AppmanagentAddedit extends DetailUtil {
     render() {
         const fields = [{
             title: '类型',
+            search: true,
             type: 'select',
             key: 'dopen_app_action',
             required: true,
-            readonly: this.code,
             field: 'action',
             onChange: (v) => {
                 this.setState({dkey: v});
                 if (v === '1') {
-                    this.setState({ category: true, name: true, picList: true });
+                    this.setState({ category: true, name: true, picIcon: true });
                 } else if (v === '2') {
-                    this.setState({ category: true, name: true, picList: true, url: true });
+                    this.setState({ category: true, name: true, picIcon: true, url: true });
                 }
             }
         }, {
@@ -230,7 +207,7 @@ class AppmanagentAddedit extends DetailUtil {
         }, {
             field: 'category',
             type: 'select',
-            search: true,
+             search: true,
             key: 'dapp_category',
             title: '应用分类',
             required: true
@@ -245,42 +222,20 @@ class AppmanagentAddedit extends DetailUtil {
             required: true,
             hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4'
         }, {
-            field: 'label',
-            type: 'checkbox',
-            listCode: '625476',
-            keyName: 'id',
-            valueName: 'name',
-            hidden: this.state.dkey !== '3',
+            field: 'desc',
             required: true,
-            title: '应用标签',
-            params: {type: 0},
-            formatter(v, d) {
-                return v;
-            }
+            hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4',
+            title: '应用详情描述'
         }, {
             field: 'location',
-            type: 'select',
-            required: true,
-            key: 'dopen_app_location',
+            value: '0',
+            hidden: true,
             title: '位置'
         }, {
             field: 'picIcon',
             title: '图标',
             type: 'img',
             single: true,
-            hidden: this.state.dkey !== '3',
-            required: true
-        }, {
-            field: 'picList',
-            title: '列表展示图',
-            type: 'img',
-            required: true
-        }, {
-            field: 'picScreenshot',
-            title: '详情截图',
-            type: 'img',
-            single: true,
-            hidden: this.state.dkey !== '3',
             required: true
         }, {
             title: 'url地址',
@@ -316,15 +271,8 @@ class AppmanagentAddedit extends DetailUtil {
         }, {
             field: 'language',
             title: '语言',
-            hidden: true,
+           hidden: true,
             value: 'ZH_CN'
-        }, {
-            field: 'desc',
-            required: true,
-            type: 'textarea',
-            normalArea: true,
-            hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4',
-            title: '应用详情描述'
         }, {
             title: '状态',
             field: 'status',

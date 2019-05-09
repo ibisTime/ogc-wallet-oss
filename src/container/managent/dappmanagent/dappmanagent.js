@@ -62,9 +62,8 @@ class DappManagent extends React.Component {
             valueName: 'value'
         }, {
             field: 'action',
-            title: '动作',
-            key: 'dapp_action',
-            required: true,
+            title: '类型',
+            key: 'dopen_app_action',
             type: 'select'
         }, {
             title: '状态',
@@ -98,6 +97,15 @@ class DappManagent extends React.Component {
                         showWarnMsg('请选择一条记录');
                     } else {
                         this.props.history.push(`/managent/dapptrategy?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
+                    }
+                },
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/managent/dappmanagent/addedit?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}&action=${selectedRows[0].action}`);
                     }
                 },
                 up: (selectedRowKeys, selectedRows) => {
