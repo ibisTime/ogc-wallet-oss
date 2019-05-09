@@ -274,12 +274,12 @@ class AppmanagentAddedit extends DetailUtil {
             field: 'picList',
             title: '列表展示图',
             type: 'img',
+            single: true,
             required: true
         }, {
             field: 'picScreenshot',
             title: '详情截图',
             type: 'img',
-            single: true,
             hidden: this.state.dkey !== '3',
             required: true
         }, {
