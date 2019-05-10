@@ -816,8 +816,7 @@ export function getCoinList() {
 // 获取币种unit
 export function getCoinUnit(coin) {
     if (!coin) {
-        console.log('coin不能为空');
-        return;
+      return;
     }
     var unit = getCoinData()[coin].unit;
     return unit;

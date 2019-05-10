@@ -6,7 +6,6 @@ const businessType = webim.UPLOAD_PIC_BUSSINESS_TYPE.GROUP_MSG;
 
 // 向上翻页，获取更早的群历史消息
 export const getPreGroupHistoryMsgs = function (selToID, nextMsgSeq) {
-    console.log(999, nextMsgSeq);
     return new Promise((resolve, reject) => {
         if (!nextMsgSeq || nextMsgSeq <= 0) {
             webim.Log.warn('该群没有历史消息可拉取了');
@@ -50,7 +49,6 @@ export const getLastGroupHistoryMsgs = function (selToID, nextMsgSeq) {
             // // 清空会话
             webim.MsgStore.delSessByTypeId(selType, selToID);
             getPreGroupHistoryMsgs(selToID, nextMsgSeq).then(function ([list, msgSeq]) {
-                console.log(222, msgSeq);
                 resolve([list, msgSeq]);
             }).catch(function (errorInfo) {
                 reject(errorInfo);
@@ -169,7 +167,7 @@ export const checkSendMsg = function (selToID, msgContent) {
         return false;
     }
     let msgLen = webim.Tool.getStrBytes(msgContent);
-    if (msgContent.length < 1) {
+    if (msgContent.length < 1 || msgContent.trim() === '') {
         alert('发送的消息不能为空!');
         return false;
     }
@@ -224,8 +222,10 @@ export const createMsg = function (selToID, msgContent) {
         }
     }
     msg.sending = 1;
-    msg.originContent = msgContent;
-
+    msg.originContent = msgContent.trim();
+    if (msg.originContent === '') {
+        msg.isSend = false;
+    }
     return msg;
 };
 // 发送消息(文本或者表情)
@@ -346,6 +346,9 @@ function checkPic(obj, fileSize) {
 // 发消息处理
 function handleMsgSend(selToID, msg, resolve, reject) {
     webim.sendMsg(msg, function (resp) {
+        if (msg.originContent === '') {
+            return;
+        };
         resolve();
         webim.Tool.setCookie('tmpmsg_' + selToID, '', 0);
     }, function (err) {
@@ -358,7 +361,6 @@ function convertMsgtoHtml(msg) {
     let elems = msg.getElems(); // 获取消息包含的元素数组
     let count = elems.length;
     let isSelfSend = msg.getIsSend();
-    console.log(isSelfSend);
     let msgArr = [];
     for (let i = 0; i < count; i++) {
         let elem = elems[i];

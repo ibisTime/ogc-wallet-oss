@@ -95,7 +95,6 @@ class ChatBox extends React.Component {
     });
   }
   getPreGroupHistoryMsgs() {
-    console.log(this.nextMsgSeq);
     // let number = 10;
     if (this.nextMsgSeq && this.nextMsgSeq >= 0) {
       // this.nextMsgSeq -= 10;
@@ -105,12 +104,9 @@ class ChatBox extends React.Component {
       // }
       this.setState({ preLoading: true });
       getPreGroupHistoryMsgs(this.props.chatId, this.nextMsgSeq).then(([msgList, nextMsgSeq]) => {
-        console.log(666, msgList);
         this.nextMsgSeq = nextMsgSeq;
         let newList = msgList.map(msg => addMsg(msg, this.props.userMap)).filter(m => m);
-        console.log(557, newList);
         let oldList = this.props.msgList.slice();
-        console.log(558, this.props.msgList);
         let list = newList.concat(oldList);
         this.props.setMsgList(list);
         this.setState({ preLoading: false });
