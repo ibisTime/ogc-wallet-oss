@@ -12,6 +12,12 @@ import ChatBox from 'component/chat-box/chat-box';
   { addUserMap }
 )
 class ArbitrationOrderResolve extends DetailUtil {
+  componentDidMount() {
+    var eleList = document.querySelectorAll('.ant-col-sm-8');
+    eleList.forEach(item => {
+      item.style.width = '100px';
+    });
+  }
   constructor(props) {
     super(props);
     this.code = getQueryString('code', this.props.location.search);
@@ -94,7 +100,7 @@ class ArbitrationOrderResolve extends DetailUtil {
                   view: this.view,
                   detailCode: '625266',
                   buttons: [{
-                      title: '通过',
+                      title: '放币',
                       handler: (param) => {
                           param.result = '1';
                           param.updater = getUserId();
@@ -110,7 +116,7 @@ class ArbitrationOrderResolve extends DetailUtil {
                       check: true,
                       type: 'primary'
                   }, {
-                      title: '不通过',
+                      title: '不放币',
                       handler: (param) => {
                           param.result = '0';
                           param.updater = getUserId();

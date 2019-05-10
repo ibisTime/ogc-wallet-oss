@@ -116,7 +116,7 @@ class SupplyAddress extends React.Component {
           } else {
             // 测试：https://testnet.blockexplorer.com/address/
             // 正式：https://blockexplorer.com/address/
-            window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+            window.open('https://testnet.blockexplorer.com/address/' + selectedRows[0].address, '_bank');
           }
         }
       }
