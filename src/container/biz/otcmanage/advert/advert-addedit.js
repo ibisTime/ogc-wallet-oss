@@ -133,7 +133,7 @@ class MarketAdjustmentAddedit extends DetailUtil {
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>溢价率(%)：</label>
-                    <span style={{marginLeft: '20px'}}>{((data.premiumRate) * 100 + '%')}</span>
+                    <span style={{marginLeft: '20px'}}>{(((data.premiumRate) * 100).toFixed(2) + '%')}</span>
                 </div>
                 <div style={{width: '100%', marginLeft: '30px', marginTop: '30px'}}>
                     <label>单笔最大量：</label>

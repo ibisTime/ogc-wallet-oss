@@ -96,7 +96,8 @@ class Advert extends React.Component {
             field: 'premiumRate',
             title: '溢价率(%)',
             render: (v, data) => {
-                return v * 100 + '%';
+                let a = data.premiumRate * 100;
+                return a.toFixed(2);
             }
         }, {
             field: 'minTrade',
