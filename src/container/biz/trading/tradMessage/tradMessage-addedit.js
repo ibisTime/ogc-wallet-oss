@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, message } from 'antd';
 import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat} from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @Form.create()
 class TradMessageAddedit extends DetailUtil {
@@ -11,6 +12,11 @@ class TradMessageAddedit extends DetailUtil {
     this.view = !!getQueryString('v', this.props.location.search);
     this.symbolIn = '';
     this.symbolOut = '';
+  }
+  componentDidMount() {
+    fetch('802006').then(data => {
+      console.log(data);
+    });
   }
   render() {
     const fields = [{
@@ -25,7 +31,6 @@ class TradMessageAddedit extends DetailUtil {
       keyName: 'symbol',
       valueName: '{{symbol.DATA}}-{{cname.DATA}}',
       searchName: 'symbol',
-      render: (v) => v,
       onChange: (v) => {
         this.symbolIn = v;
         if(v === this.symbolOut) {
@@ -44,11 +49,10 @@ class TradMessageAddedit extends DetailUtil {
       keyName: 'symbol',
       valueName: '{{symbol.DATA}}-{{cname.DATA}}',
       searchName: 'symbol',
-      render: (v) => v,
       onChange: (v) => {
         this.symbolOut = v;
         if(v === this.symbolIn) {
-          message.warning('已选择重复币种');
+          message.warning('已选择重复币种, 请重新选择');
         }
       }
     }, {
@@ -66,7 +70,7 @@ class TradMessageAddedit extends DetailUtil {
     }, {
       field: 'status',
       title: '状态',
-      key: 'trade_default_fee_rate',
+      key: 'exchange_symbol_pair_statis',
       type: 'select',
       hidden: !this.view
     }, {
@@ -85,7 +89,15 @@ class TradMessageAddedit extends DetailUtil {
       view: this.view,
       addCode: '802900',
       editCode: '802901',
-      detailCode: '802913'
+      detailCode: '802913',
+      beforeSubmit: (params) => {
+        if(params.symbolOut === params.symbolIn) {
+          message.warning('兑出币种不可与兑入币种一样');
+          return false;
+        }else {
+          return true;
+        }
+      }
     });
   }
 }

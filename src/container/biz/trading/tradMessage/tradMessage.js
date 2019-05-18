@@ -11,7 +11,6 @@ import {
 } from '@redux/trading/tradMessage/tradMessage';
 import {listWrapper} from 'common/js/build-list';
 import { showWarnMsg } from 'common/js/util';
-import fetch from 'common/js/fetch';
 import {Modal, message} from 'antd';
 
 const confirm = Modal.confirm;
@@ -48,7 +47,7 @@ class Payment extends React.Component {
     }, {
       field: 'status',
       title: '状态',
-      key: 'trade_default_fee_rate',
+      key: 'exchange_symbol_pair_statis',
       type: 'select',
       search: true
     }, {
@@ -79,7 +78,7 @@ class Payment extends React.Component {
                 }).then(() => {
                   hasMsg();
                   message.success('操作成功', 1, () => {
-                    this.getPageData();
+                    this.props.getPageData();
                   });
                 }, hasMsg);
               },
