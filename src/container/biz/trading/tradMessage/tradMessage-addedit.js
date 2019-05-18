@@ -1,8 +1,7 @@
 import React from 'react';
 import { Form, message } from 'antd';
 import DetailUtil from 'common/js/build-detail';
-import {getQueryString, moneyFormat} from 'common/js/util';
-import fetch from 'common/js/fetch';
+import {getQueryString, moneyFormat, moneyParse} from 'common/js/util';
 
 @Form.create()
 class TradMessageAddedit extends DetailUtil {
@@ -10,31 +9,23 @@ class TradMessageAddedit extends DetailUtil {
     super(props);
     this.code = getQueryString('code', this.props.location.search);
     this.view = !!getQueryString('v', this.props.location.search);
+    this.index = 0;
     this.symbolIn = '';
     this.symbolOut = '';
-  }
-  componentDidMount() {
-    fetch('802006').then(data => {
-      console.log(data);
-    });
   }
   render() {
     const fields = [{
       field: 'symbolIn',
       title: '兑入币种',
-      required: true,
       type: 'select',
-      pageCode: '802005',
-      params: {
-        status: '0'
-      },
+      listCode: '802013',
       keyName: 'symbol',
-      valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-      searchName: 'symbol',
+      valueName: 'symbol',
+      required: true,
       onChange: (v) => {
         this.symbolIn = v;
         if(v === this.symbolOut) {
-          message.warning('已选择重复币种, 请重新选择');
+          message.warning('不可选相同币进行兑换，请重新选择');
         }
       }
     }, {
@@ -42,17 +33,13 @@ class TradMessageAddedit extends DetailUtil {
       title: '兑出币种',
       required: true,
       type: 'select',
-      pageCode: '802005',
-      params: {
-        status: '0'
-      },
+      listCode: '802013',
       keyName: 'symbol',
-      valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-      searchName: 'symbol',
+      valueName: 'symbol',
       onChange: (v) => {
         this.symbolOut = v;
         if(v === this.symbolIn) {
-          message.warning('已选择重复币种, 请重新选择');
+          message.warning('不可选相同币进行兑换，请重新选择');
         }
       }
     }, {
@@ -61,8 +48,11 @@ class TradMessageAddedit extends DetailUtil {
       required: true
     }, {
       field: 'min',
-      title: '最小兑入数量',
-      required: true
+      title: '最小兑出数量',
+      required: true,
+      formatter: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolOut);
+      }
     }, {
       field: 'orderNo',
       title: '展示序号',
@@ -95,6 +85,7 @@ class TradMessageAddedit extends DetailUtil {
           message.warning('兑出币种不可与兑入币种一样');
           return false;
         }else {
+          params.min = moneyParse(params.min, '', params.symbolOut);
           return true;
         }
       }

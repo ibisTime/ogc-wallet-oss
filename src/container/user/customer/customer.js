@@ -52,7 +52,6 @@ class Customer extends React.Component {
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
-            // pageCode: '805120',
             search: true,
             render: (v, data) => {
                 if (data.refereeUser) {

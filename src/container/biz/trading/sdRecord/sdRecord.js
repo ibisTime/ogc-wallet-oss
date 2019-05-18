@@ -10,7 +10,7 @@ import {
   setSearchData
 } from '@redux/trading/sdRecord/sdRecord';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg } from 'common/js/util';
+import { showWarnMsg, moneyFormat } from 'common/js/util';
 
 @listWrapper(
   state => ({
@@ -22,25 +22,34 @@ import { showWarnMsg } from 'common/js/util';
     cancelFetching, setPagination, setSearchParam, setSearchData
   }
 )
-class Payment extends React.Component {
+class SdRecord extends React.Component {
   render() {
     const fields = [{
-      field: 'symbolOut',
+      field: 'symbolIn',
       title: '兑入币种',
       search: true
     }, {
-      field: 'symbolIn',
+      field: 'symbolOut',
       title: '兑出币种',
       search: true
     }, {
       field: 'countOutTotal',
-      title: '总兑出数量'
+      title: '总兑出数量',
+      render: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolOut);
+      }
     }, {
       field: 'countOut',
-      title: '实际兑出数量'
+      title: '实际兑出数量',
+      render: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolOut);
+      }
     }, {
       field: 'countIn',
-      title: '兑入数量'
+      title: '兑入数量',
+      render: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolIn);
+      }
     }, {
       field: 'valueCnyOut',
       title: '兑出币种行情价格'
@@ -72,4 +81,4 @@ class Payment extends React.Component {
   }
 }
 
-export default Payment;
+export default SdRecord;

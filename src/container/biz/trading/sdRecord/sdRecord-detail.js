@@ -27,13 +27,22 @@ class SdRecordDetail extends DetailUtil {
       title: '兑出币种'
     }, {
       field: 'countOutTotal',
-      title: '总兑出数量'
+      title: '总兑出数量',
+      formatter: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolOut);
+      }
     }, {
       field: 'countOut',
-      title: '实际兑出数量'
+      title: '实际兑出数量',
+      formatter: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolOut);
+      }
     }, {
       field: 'countIn',
-      title: '兑入数量'
+      title: '兑入数量',
+      formatter: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolIn);
+      }
     }, {
       field: 'valueCnyOut',
       title: '兑出币种行情价格'

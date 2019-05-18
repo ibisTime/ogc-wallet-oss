@@ -1085,10 +1085,30 @@ const ROUTES = [
         path: '/trading/tradMessage',
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage'))
    },
-  {
-    path: '/trading/tradMessage/addedit',
-    component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-addedit'))
-  }
+    {
+        path: '/trading/tradMessage/addedit',
+        component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-addedit'))
+    },
+    {
+        path: '/cloud/millMessage',
+        component: asyncComponent(() => import('container/biz/cloud/millMessage/millMessage'))
+    },
+    {
+        path: '/cloud/millMessage/addedit',
+        component: asyncComponent(() => import('container/biz/cloud/millMessage/millMessage-addedit'))
+    },
+    {
+        path: '/cloud/millOrder',
+        component: asyncComponent(() => import('container/biz/cloud/millOrder/millOrder'))
+    },
+    {
+        path: '/cloud/millOrder/addedit',
+        component: asyncComponent(() => import('container/biz/cloud/millOrder/millOrder-addedit'))
+    },
+    {
+        path: '/cloud/millOrderIncome',
+        component: asyncComponent(() => import('container/biz/cloud/millOrder/millOrderIncome'))
+    }
 ];
 
 export default ROUTES;

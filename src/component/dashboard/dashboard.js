@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
     };
   }
   componentDidMount() {
-    this.getUserSign();
+    // this.getUserSign();
     this.props.getMenuList(this.props.location.pathname);
     this.props.addUserMap(getUserId(), {nickname: getUserName()});
   }

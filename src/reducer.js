@@ -27,6 +27,9 @@ import {AppManagent} from './redux/managent/appmanagent';
 import {DappManagent} from './redux/managent/dappmanagent';
 import {DappTrateGy} from './redux/managent/dapptrategy';
 import {tradingSdRecord} from './redux/trading/sdRecord/sdRecord';
+import {cloudMillMessage} from './redux/cloud/millMessage/millMessage';
+import {cloudMillOrder} from './redux/cloud/millOrder/millOrder';
+import {cloudMillOrderIncome} from './redux/cloud/millOrder/millOrderIncome';
 
 /* 业务管理 */
 // 客户管理
@@ -408,7 +411,10 @@ export default combineReducers({
     DappTrateGy,
     DappManagent,
     TAG,
-  // 闪兑
-  tradingSdRecord,
-  tradingTradMessage
+    // 闪兑
+    tradingSdRecord,
+    tradingTradMessage,
+    cloudMillMessage,
+    cloudMillOrder,
+    cloudMillOrderIncome
 });

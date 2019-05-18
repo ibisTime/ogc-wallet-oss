@@ -10,8 +10,9 @@ import {
   setSearchData
 } from '@redux/trading/tradMessage/tradMessage';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg } from 'common/js/util';
+import { showWarnMsg, moneyFormat } from 'common/js/util';
 import {Modal, message} from 'antd';
+import fetch from 'common/js/fetch';
 
 const confirm = Modal.confirm;
 
@@ -25,14 +26,14 @@ const confirm = Modal.confirm;
     cancelFetching, setPagination, setSearchParam, setSearchData
   }
 )
-class Payment extends React.Component {
+class TradMessage extends React.Component {
   render() {
     const fields = [{
-      field: 'symbolOut',
+      field: 'symbolIn',
       title: '兑入币种',
       search: true
     }, {
-      field: 'symbolIn',
+      field: 'symbolOut',
       title: '兑出币种',
       search: true
     }, {
@@ -40,7 +41,10 @@ class Payment extends React.Component {
       title: '手续费率'
     }, {
       field: 'min',
-      title: '最小兑入数量'
+      title: '最小兑出数量',
+      render: function (v, data) {
+        return moneyFormat(v.toString(), '', data.symbolOut);
+      }
     }, {
       field: 'orderNo',
       title: '展示序号'
@@ -71,7 +75,7 @@ class Payment extends React.Component {
               confirm({
               title: `${sName}交易对`,
               content: `是否${sName}该交易对`,
-              onOk() {
+              onOk: () => {
                 let hasMsg = message.loading('');
                 fetch(code, {
                   id: selectedRowKeys[0]
@@ -92,4 +96,4 @@ class Payment extends React.Component {
   }
 }
 
-export default Payment;
+export default TradMessage;
