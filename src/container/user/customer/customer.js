@@ -190,6 +190,30 @@ class Customer extends React.Component {
                     } else {
                         this.props.history.push(`/user/customer/accountQuery?userId=${selectedRowKeys[0]}`);
                     }
+                },
+                // 新增节点用户
+                addNode: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if(selectedRows[0].nodeLevel) {
+                        showWarnMsg('该用户已是节点用户');
+                    } else {
+                        this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}`);
+                    }
+                },
+                // 修改节点用户
+                editNode: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if(!selectedRows[0].nodeLevel) {
+                        showWarnMsg('该用户还不是节点用户');
+                    } else {
+                        this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}&nodeLevel=1`);
+                    }
                 }
             }
         });

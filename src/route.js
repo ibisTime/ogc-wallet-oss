@@ -229,6 +229,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/user/customer/customer-account'))
     },
     {
+        path: '/user/customer/userNode',
+        component: asyncComponent(() => import('container/user/customer/userNode'))
+    },
+    {
         path: '/user/customer/entrustQuery',
         component: asyncComponent(() => import('container/user/customer/customer-entrustQuery'))
     },
