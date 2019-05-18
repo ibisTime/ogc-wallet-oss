@@ -1071,6 +1071,15 @@ const ROUTES = [
     {
         path: '/managent/tag/addedit',
         component: asyncComponent(() => import('container/managent/tag/tag-addedit'))
+    },
+  // 闪兑管理
+    {
+      path: '/trading/sdRecord',
+      component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord'))
+    },
+    {
+        path: '/trading/sdRecord/detail',
+        component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord-detail'))
     }
 ];
 

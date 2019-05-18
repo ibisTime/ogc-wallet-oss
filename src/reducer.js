@@ -26,6 +26,7 @@ import {biztodayprofit} from './redux/biz/financial/todayprofit';
 import {AppManagent} from './redux/managent/appmanagent';
 import {DappManagent} from './redux/managent/dappmanagent';
 import {DappTrateGy} from './redux/managent/dapptrategy';
+import {tradingSdRecord} from './redux/trading/sdRecord/sdRecord';
 
 /* 业务管理 */
 // 客户管理
@@ -404,5 +405,7 @@ export default combineReducers({
     AppManagent,
     DappTrateGy,
     DappManagent,
-    TAG
+    TAG,
+  // 闪兑
+  tradingSdRecord
 });
