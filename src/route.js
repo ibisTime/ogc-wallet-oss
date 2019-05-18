@@ -1080,7 +1080,15 @@ const ROUTES = [
     {
         path: '/trading/sdRecord/detail',
         component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord-detail'))
-    }
+    },
+   {
+        path: '/trading/tradMessage',
+        component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage'))
+   },
+  {
+    path: '/trading/tradMessage/addedit',
+    component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-addedit'))
+  }
 ];
 
 export default ROUTES;

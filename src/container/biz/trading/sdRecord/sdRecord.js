@@ -26,10 +26,12 @@ class Payment extends React.Component {
   render() {
     const fields = [{
       field: 'symbolOut',
-      title: '兑入币种'
+      title: '兑入币种',
+      search: true
     }, {
       field: 'symbolIn',
-      title: '兑出币种'
+      title: '兑出币种',
+      search: true
     }, {
       field: 'countOutTotal',
       title: '总兑出数量'
@@ -51,29 +53,18 @@ class Payment extends React.Component {
     }, {
       field: 'feeRate',
       title: '手续费率'
-    }, {
-      field: 'createTime',
-      title: '闪兑时间',
-      type: 'datetime'
     }];
     return this.props.buildList({
       fields,
       pageCode: 802930,
       btnEvent: {
-        edit: (selectedRowKeys, selectedRows) => {
-          if (!selectedRowKeys.length) {
-            showWarnMsg('请选择记录');
-          } else if (selectedRowKeys.length > 1) {
-            showWarnMsg('请选择一条记录');
-          } else {
-          }
-        },
         detail: (selectedRowKeys, selectedRows) => {
           if (!selectedRowKeys.length) {
             showWarnMsg('请选择记录');
           } else if (selectedRowKeys.length > 1) {
             showWarnMsg('请选择一条记录');
           } else {
+            this.props.history.push(`/trading/sdRecord/detail?code=${selectedRowKeys[0]}`);
           }
         }
       }

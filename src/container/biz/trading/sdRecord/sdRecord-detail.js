@@ -4,33 +4,52 @@ import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat} from 'common/js/util';
 
 @Form.create()
-class PaymentAddedit extends DetailUtil {
+class SdRecordDetail extends DetailUtil {
   constructor(props) {
     super(props);
     this.code = getQueryString('code', this.props.location.search);
   }
   render() {
     const fields = [{
-      field: 'realName',
-      title: '户名',
-      required: true
+      field: 'code',
+      title: '编号'
     }, {
-      field: 'bindMobile',
-      title: '绑定手机号'
+      field: 'nickname',
+      title: '昵称',
+      formatter(v, d) {
+        return d.userInfo.nickname + '-' + d.userInfo.loginName;
+      }
     }, {
-      field: 'pic',
-      title: '收款码',
-      type: 'img',
-      single: true
+      field: 'symbolOut',
+      title: '兑入币种'
     }, {
-      field: 'status',
-      title: '状态',
-      type: 'select',
-      hidden: true,
-      key: 'bank_card_status'
+      field: 'symbolIn',
+      title: '兑出币种'
     }, {
-      field: 'remark',
-      title: '备注'
+      field: 'countOutTotal',
+      title: '总兑出数量'
+    }, {
+      field: 'countOut',
+      title: '实际兑出数量'
+    }, {
+      field: 'countIn',
+      title: '兑入数量'
+    }, {
+      field: 'valueCnyOut',
+      title: '兑出币种行情价格'
+    }, {
+      field: 'valueCnyIn',
+      title: '兑入币种行情价格'
+    }, {
+      field: 'fee',
+      title: '手续费'
+    }, {
+      field: 'feeRate',
+      title: '手续费率'
+    }, {
+      field: 'createTime',
+      title: '闪兑时间',
+      type: 'datetime'
     }];
     return this.buildDetail({
       fields,
@@ -41,4 +60,4 @@ class PaymentAddedit extends DetailUtil {
   }
 }
 
-export default PaymentAddedit;
+export default SdRecordDetail;

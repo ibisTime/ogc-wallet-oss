@@ -226,6 +226,8 @@ import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
 // 点位管理
 import {publicPointPostion} from './redux/public/pointpostion';
+// 交易对管理
+import {tradingTradMessage} from './redux/trading/tradMessage/tradMessage';
 // 补给地址
 import {BTCFinanceSupplyAddress} from './redux/BTC-finance/supplyAddress/supplyAddress';
 import {BTCFinanceDiviAddressAddedit} from './redux/BTC-finance/diviAddress/diviAddressAddedit';
@@ -407,5 +409,6 @@ export default combineReducers({
     DappManagent,
     TAG,
   // 闪兑
-  tradingSdRecord
+  tradingSdRecord,
+  tradingTradMessage
 });
