@@ -37,7 +37,10 @@ class UserNode extends DetailUtil {
             field: 'nodePwd',
             title: '节点用户登录密码',
             type: 'password',
-            required: true
+            required: true,
+            formatter() {
+                return null;
+            }
         }];
         return this.buildDetail({
             fields,
@@ -52,11 +55,15 @@ class UserNode extends DetailUtil {
                 handler: (params) => {
                     params.userId = this.userId;
                     let code = this.nodeLevel ? '805096' : '805095';
+                    if(!params.nodePwd) {
+                        message.warning('请输入登录密码', 1);
+                        return;
+                    }
                     let hasMsg = message.loading('');
                     params.nodeAmount = (params.nodeAmount * 10000).toString();
                     fetch(code, params).then(() => {
                         hasMsg();
-                        message.success('操作用户');
+                        message.success('操作成功', 1);
                         window.history.go(-1);
                     }, hasMsg);
                 }
