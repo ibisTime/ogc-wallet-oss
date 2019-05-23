@@ -1,6 +1,6 @@
 export const SYSTEM_CODE = 'CD-OGC000020';
 // 七牛上传地址
-export const UPLOAD_URL = 'http://up.qiniup.com';
+export const UPLOAD_URL = 'https://up.qiniup.com';
 // 七牛图片前缀
 export const PIC_PREFIX = 'http://qn.tha.hichengdai.com/';
 export const PIC_BASEURL_L = '?imageMogr2/auto-orient/thumbnail/!1000x1000r';
