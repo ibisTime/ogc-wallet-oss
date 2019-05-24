@@ -30,6 +30,7 @@ import {tradingSdRecord} from './redux/trading/sdRecord/sdRecord';
 import {cloudMillMessage} from './redux/cloud/millMessage/millMessage';
 import {cloudMillOrder} from './redux/cloud/millOrder/millOrder';
 import {cloudMillOrderIncome} from './redux/cloud/millOrder/millOrderIncome';
+import {cloudRules} from './redux/cloud/rules/rules';
 
 /* 业务管理 */
 // 客户管理
@@ -416,5 +417,6 @@ export default combineReducers({
     tradingTradMessage,
     cloudMillMessage,
     cloudMillOrder,
-    cloudMillOrderIncome
+    cloudMillOrderIncome,
+    cloudRules
 });

@@ -1112,6 +1112,14 @@ const ROUTES = [
     {
         path: '/cloud/millOrderIncome',
         component: asyncComponent(() => import('container/biz/cloud/millOrder/millOrderIncome'))
+    },
+    {
+        path: '/cloud/rules',
+        component: asyncComponent(() => import('container/biz/cloud/rules/rules'))
+    },
+    {
+        path: '/cloud/rules/addedit',
+        component: asyncComponent(() => import('container/biz/cloud/rules/rules-addedit'))
     }
 ];
 
