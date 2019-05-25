@@ -570,6 +570,16 @@ const ROUTES = [
         path: '/quotation/quotationCDS',
         component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
     },
+    // 自配行情
+    {
+        path: '/quotation/quotationZP',
+        component: asyncComponent(() => import('container/biz/quotation/quotationZP/quotationZP'))
+    },
+    // 自配行情 - 详情
+    {
+        path: '/quotation/quotationZP/addedit',
+        component: asyncComponent(() => import('container/biz/quotation/quotationZP/quotationZP-addedit'))
+    },
     // 活动管理
     // 邀请好友
     {

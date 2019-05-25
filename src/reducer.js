@@ -115,6 +115,9 @@ import {acceptCancelOrder} from './redux/accept/cancelOrder/cancelOrder';
 // BTC行情
 import {quotationQuotationBTC} from './redux/biz/quotation/quotationBTC';
 
+// 自配行情
+import {quotationQuotationZP} from './redux/biz/quotation/quotationZP';
+
 // 承兑商行情
 import {quotationQuotationCDS} from './redux/biz/quotation/quotationCDS';
 
@@ -418,5 +421,6 @@ export default combineReducers({
     cloudMillMessage,
     cloudMillOrder,
     cloudMillOrderIncome,
-    cloudRules
+    cloudRules,
+    quotationQuotationZP
 });
