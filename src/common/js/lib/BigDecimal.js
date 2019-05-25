@@ -908,9 +908,9 @@ BigDecimal.prototype.createArrayWithZeros = createArrayWithZeros;
  * the appropriate context settings.
  * <p>
  * When a <code>BigDecimal</code> operator method is used, a set of
- * rules define what the result will be (and, by implication, how the
+ * quantitativeAiRule define what the result will be (and, by implication, how the
  * result would be represented as a character string).
- * These rules are defined in the BigDecimal arithmetic documentation
+ * These quantitativeAiRule are defined in the BigDecimal arithmetic documentation
  * (see the URL above), but in summary:
  * <ul>
  * <li>Results are normally calculated with up to some maximum number of
@@ -3066,7 +3066,7 @@ BigDecimal.ONE = BigDecimal.prototype.ONE = new BigDecimal("1");
   var i=0;
   if (set.lostDigits)
    this.checkdigits(rhs,set.digits);
-  n=rhs.intcheck(this.MinArg,this.MaxArg); // check RHS by the rules
+  n=rhs.intcheck(this.MinArg,this.MaxArg); // check RHS by the quantitativeAiRule
   lhs=this; // clarified name
 
   reqdig=set.digits; // local copy (heavily used)
@@ -3427,7 +3427,7 @@ BigDecimal.ONE = BigDecimal.prototype.ONE = new BigDecimal("1");
   * can apply locale-sensitive editing of the result.  The level of
   * formatting that it provides is a necessary part of the BigDecimal
   * class as it is sensitive to and must follow the calculation and
-  * rounding rules for BigDecimal arithmetic.
+  * rounding quantitativeAiRule for BigDecimal arithmetic.
   * However, if the function is provided elsewhere, it may be removed
   * from this class. </i>
   * <p>
@@ -3494,7 +3494,7 @@ BigDecimal.ONE = BigDecimal.prototype.ONE = new BigDecimal("1");
   * can apply locale-sensitive editing of the result.  The level of
   * formatting that it provides is a necessary part of the BigDecimal
   * class as it is sensitive to and must follow the calculation and
-  * rounding rules for BigDecimal arithmetic.
+  * rounding quantitativeAiRule for BigDecimal arithmetic.
   * However, if the function is provided elsewhere, it may be removed
   * from this class. </i>
   * <p>
@@ -3716,7 +3716,7 @@ BigDecimal.ONE = BigDecimal.prototype.ONE = new BigDecimal("1");
 
   /* If 'after' was specified then we may need to adjust the
      mantissa.  This is a little tricky, as we must conform to the
-     rules of exponential layout if necessary (e.g., we cannot end up
+     quantitativeAiRule of exponential layout if necessary (e.g., we cannot end up
      with 10.0 if scientific). */
   if (after>=0)
    {setafter:for(;;){
@@ -4856,7 +4856,7 @@ BigDecimal.ONE = BigDecimal.prototype.ONE = new BigDecimal("1");
     return lhs.setScale(scale);
    }
 
-  /* Prepare numbers according to BigDecimal rules */
+  /* Prepare numbers according to BigDecimal quantitativeAiRule */
   reqdig=set.digits; // local copy (heavily used)
   if (reqdig>0)
    {

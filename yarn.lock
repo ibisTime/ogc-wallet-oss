@@ -2530,7 +2530,7 @@ cssesc@^0.1.0:
     postcss-filter-plugins "^2.0.0"
     postcss-merge-idents "^2.1.5"
     postcss-merge-longhand "^2.0.1"
-    postcss-merge-rules "^2.0.3"
+    postcss-merge-quantitativeAiRule "^2.0.3"
     postcss-minify-font-values "^1.0.2"
     postcss-minify-gradients "^1.0.1"
     postcss-minify-params "^1.0.4"
@@ -6946,7 +6946,7 @@ postcss-merge-longhand@^2.0.1:
 
 postcss-merge-rules@^2.0.3:
   version "2.1.2"
-  resolved "https://registry.npm.taobao.org/postcss-merge-rules/download/postcss-merge-rules-2.1.2.tgz#d1df5dfaa7b1acc3be553f0e9e10e87c61b5f721"
+  resolved "https://registry.npm.taobao.org/postcss-merge-quantitativeAiRule/download/postcss-merge-quantitativeAiRule-2.1.2.tgz#d1df5dfaa7b1acc3be553f0e9e10e87c61b5f721"
   integrity sha1-0d9d+qexrMO+VT8OnhDofGG19yE=
   dependencies:
     browserslist "^1.5.2"
