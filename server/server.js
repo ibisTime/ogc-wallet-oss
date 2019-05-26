@@ -15,13 +15,16 @@ app.use('/api', function (req, res) {
     //测试
   // var url = 'http://120.26.6.213:6801/forward-service/api';
     //研发
-   var url = 'http://api.wwdev.hichengdai.com/';
+   // var url = 'http://api.wwdev.hichengdai.com/';
     //测试
     //  var url = 'http://120.26.6.213:6801/forward-service/api';
     // 客户
     // var url = 'http://47.97.202.123:2801/forward-service/api';
 // 正式
     // var url = 'http://3.1.207.21:2701/forward-service/api';
+    
+    // ticp
+    let url = 'http://api.ticptoken.com/';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);

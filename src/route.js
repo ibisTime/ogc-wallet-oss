@@ -598,29 +598,29 @@ const ROUTES = [
     // 业务规则
     // 广告费规则
     {
-        path: '/rules/advertisingFee',
+        path: '/quantitativeAiRule/advertisingFee',
         component: asyncComponent(() => import('container/rules/advertisingFee/advertisingFee'))
     },
     {
-        path: '/rules/advertisingFee/addedit',
+        path: '/quantitativeAiRule/advertisingFee/addedit',
         component: asyncComponent(() => import('container/rules/advertisingFee/advertisingFee-addedit'))
     },
     // 提币手续费规则
     {
-        path: '/rules/withdrawUserFee',
+        path: '/quantitativeAiRule/withdrawUserFee',
         component: asyncComponent(() => import('container/rules/withdrawUserFee/withdrawUserFee'))
     },
     {
-        path: '/rules/withdrawUserFee/addedit',
+        path: '/quantitativeAiRule/withdrawUserFee/addedit',
         component: asyncComponent(() => import('container/rules/withdrawUserFee/withdrawUserFee-addedit'))
     },
     // 承兑商手续费规则
     {
-        path: '/rules/acceptRule',
+        path: '/quantitativeAiRule/acceptRule',
         component: asyncComponent(() => import('container/rules/acceptRule/acceptRule'))
     },
     {
-        path: '/rules/acceptRule/addedit',
+        path: '/quantitativeAiRule/acceptRule/addedit',
         component: asyncComponent(() => import('container/rules/acceptRule/acceptRule-addedit'))
     },
     // 业务管理 -- 评论管理 -- 关键字管理
@@ -1130,6 +1130,34 @@ const ROUTES = [
     {
         path: '/cloud/rules/addedit',
         component: asyncComponent(() => import('container/biz/cloud/rules/rules-addedit'))
+    },
+    {
+        path: '/quantitativeAi/quantitativeAi',
+        component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAi/quantitativeAi'))
+    },
+    {
+        path: '/quantitativeAi/quantitativeAi/addedit',
+        component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAi/quantitativeAi-addedit'))
+    },
+    {
+        path: '/quantitativeAi/quantitativeAiOrder',
+        component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAiOrder/quantitativeAiOrder'))
+    },
+    {
+        path: '/quantitativeAi/quantitativeAiOrder/addedit',
+        component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAiOrder/quantitativeAiOrder-addedit'))
+    },
+    {
+        path: '/quantitativeAi/quantitativeAiOrderIncome',
+        component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAiOrder/quantitativeAiOrderIncome'))
+    },
+    {
+        path: '/quantitativeAi/quantitativeAiRule',
+        component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAiRule/quantitativeAiRule'))
+    },
+    {
+        path: '/quantitativeAi/quantitativeAiRule/addedit',
+        component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAiRule/quantitativeAiRule-addedit'))
     }
 ];
 

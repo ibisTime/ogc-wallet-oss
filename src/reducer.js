@@ -31,6 +31,10 @@ import {cloudMillMessage} from './redux/cloud/millMessage/millMessage';
 import {cloudMillOrder} from './redux/cloud/millOrder/millOrder';
 import {cloudMillOrderIncome} from './redux/cloud/millOrder/millOrderIncome';
 import {cloudRules} from './redux/cloud/rules/rules';
+import {quantitativeAi} from './redux/quantitativeAi/quantitativeAi/quantitativeAi';
+import {quantitativeAiOrder} from './redux/quantitativeAi/quantitativeAiOrder/quantitativeAiOrder';
+import {quantitativeAiOrderIncome} from './redux/quantitativeAi/quantitativeAiOrder/quantitativeAiOrderIncome';
+import {quantitativeAiRule} from './redux/quantitativeAi/quantitativeAiRule/quantitativeAiRule';
 
 /* 业务管理 */
 // 客户管理
@@ -331,6 +335,7 @@ export default combineReducers({
     quotationQuotationTRX,
     quotationExchangeRate,
     quotationMarketAdjustment,
+    quotationQuotationZP,
     // 活动管理
     // 邀请好友
     activityInvitingFriends,
@@ -422,5 +427,10 @@ export default combineReducers({
     cloudMillOrder,
     cloudMillOrderIncome,
     cloudRules,
-    quotationQuotationZP
+
+    // 高频量化
+    quantitativeAi,
+    quantitativeAiOrder,
+    quantitativeAiOrderIncome,
+    quantitativeAiRule
 });
