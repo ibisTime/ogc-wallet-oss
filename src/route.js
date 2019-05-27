@@ -100,6 +100,14 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/privacy/privacy'))
     },
     {
+        path: '/public/machineProtocol',
+        component: asyncComponent(() => import('container/public/machineProtocol/machineProtocol'))
+    },
+    {
+        path: '/public/machineProtocol/addedit',
+        component: asyncComponent(() => import('container/public/machineProtocol/machineProtocol-addedit'))
+    },
+    {
         path: '/public/privacy/addedit',
         component: asyncComponent(() => import('container/public/privacy-addeidt/privacy-addeidt'))
     },
@@ -598,29 +606,29 @@ const ROUTES = [
     // 业务规则
     // 广告费规则
     {
-        path: '/quantitativeAiRule/advertisingFee',
+        path: '/rules/advertisingFee',
         component: asyncComponent(() => import('container/rules/advertisingFee/advertisingFee'))
     },
     {
-        path: '/quantitativeAiRule/advertisingFee/addedit',
+        path: '/rules/advertisingFee/addedit',
         component: asyncComponent(() => import('container/rules/advertisingFee/advertisingFee-addedit'))
     },
     // 提币手续费规则
     {
-        path: '/quantitativeAiRule/withdrawUserFee',
+        path: '/rules/withdrawUserFee',
         component: asyncComponent(() => import('container/rules/withdrawUserFee/withdrawUserFee'))
     },
     {
-        path: '/quantitativeAiRule/withdrawUserFee/addedit',
+        path: '/rules/withdrawUserFee/addedit',
         component: asyncComponent(() => import('container/rules/withdrawUserFee/withdrawUserFee-addedit'))
     },
     // 承兑商手续费规则
     {
-        path: '/quantitativeAiRule/acceptRule',
+        path: '/rules/acceptRule',
         component: asyncComponent(() => import('container/rules/acceptRule/acceptRule'))
     },
     {
-        path: '/quantitativeAiRule/acceptRule/addedit',
+        path: '/rules/acceptRule/addedit',
         component: asyncComponent(() => import('container/rules/acceptRule/acceptRule-addedit'))
     },
     // 业务管理 -- 评论管理 -- 关键字管理

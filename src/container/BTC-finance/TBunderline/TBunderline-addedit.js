@@ -23,7 +23,7 @@ class TBunderlineAddedit extends DetailUtil {
     render() {
         let fields = [{
             field: 'accountNumber',
-            title: '充值账户',
+            title: '申请用户',
             required: true,
             formatter: (v, data) => {
                 return data.withdraw.applyUserInfo ? data.withdraw.applyUserInfo.realName ? data.withdraw.applyUserInfo.realName : data.withdraw.applyUserInfo.mobile ? data.withdraw.applyUserInfo.mobile : data.withdraw.applyUserInfo.email : '';

@@ -13,6 +13,7 @@ import {publicAboutus} from './redux/public/aboutus';
 import {publicQuantitative} from './redux/public/quantitative';
 import {publicContact} from './redux/public/contact';
 import {publicPrivacy} from './redux/public/privacy';
+import {publicMachineProtocol} from './redux/public/machineProtocol';
 import {publicRegister} from './redux/public/register';
 import {publicBuyADS} from './redux/public/buyADS';
 import {publicSellETH} from './redux/public/sellETH';
@@ -266,6 +267,7 @@ export default combineReducers({
     publicQuantitative,
     publicContact,
     publicPrivacy,
+    publicMachineProtocol,
     publicRegister,
     publicBuyADS,
     publicSellETH,

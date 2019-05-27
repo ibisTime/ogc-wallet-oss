@@ -45,9 +45,6 @@ class DappManagent extends React.Component {
             title: '应用所属厂商',
             search: true
         }, {
-            field: 'desc',
-            title: '应用详情描述'
-        }, {
             field: 'isTop',
             title: '是否置顶',
             type: 'select',
@@ -80,6 +77,9 @@ class DappManagent extends React.Component {
             keyName: 'key',
             valueName: 'value',
             search: true
+        }, {
+            field: 'desc',
+            title: '应用详情描述'
         }, {
             field: 'createDatetime',
             title: '创建时间',

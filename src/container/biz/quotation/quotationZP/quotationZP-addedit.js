@@ -20,7 +20,7 @@ class QuotationZPAddedit extends DetailUtil {
             readonly: true
         }, {
             title: '行情价格',
-            field: 'currency'
+            field: 'price'
         }, {
             title: '来源',
             field: 'origin',

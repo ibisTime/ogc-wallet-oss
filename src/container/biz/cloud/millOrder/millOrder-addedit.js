@@ -15,7 +15,10 @@ class CloudMillOrderDetail extends DetailUtil {
             title: '矿机购买订单编号'
         }, {
             field: 'userId',
-            title: '购买用户编号'
+            title: '购买用户编号',
+            formatter(v, d) {
+                return d.user && d.user.nickname + '-' + d.user.loginName;
+            }
         }, {
             field: 'machineName',
             title: '矿机名称',
