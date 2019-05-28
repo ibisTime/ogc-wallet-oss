@@ -13,14 +13,32 @@ class QuotationZPAddedit extends DetailUtil {
         const fields = [{
             title: '币种',
             field: 'symbol',
-            readonly: true
+            hidden: true
         }, {
             title: '计价币种',
-            field: 'referCurrency',
-            readonly: true
+            field: 'currency',
+            hidden: true,
+            formatter(v, d) {
+                return d.referCurrency;
+    }
+        }, {
+            title: '币种',
+            field: 'symbol1',
+            readonly: true,
+            formatter(v, d) {
+                return d.symbol;
+            }
+        }, {
+            title: '计价币种',
+            field: 'referCurrency1',
+            readonly: true,
+            formatter(v, d) {
+                return d.referCurrency;
+            }
         }, {
             title: '行情价格',
-            field: 'price'
+            field: 'price',
+            formatter: (v, d) => d.lastPrice
         }, {
             title: '来源',
             field: 'origin',

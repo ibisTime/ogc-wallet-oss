@@ -51,10 +51,13 @@ class SdRecordDetail extends DetailUtil {
       title: '兑入币种行情价格'
     }, {
       field: 'fee',
-      title: '手续费'
+      title: '手续费',
+      formatter: (v, data) => {
+          return moneyFormat(v.toString(), '', data.symbolOut);
+      }
     }, {
       field: 'feeRate',
-      title: '手续费率'
+      title: '手续费率(%)'
     }, {
       field: 'createTime',
       title: '闪兑时间',

@@ -25,6 +25,12 @@ import { showWarnMsg, moneyFormat } from 'common/js/util';
 class SdRecord extends React.Component {
   render() {
     const fields = [{
+        field: 'nickname',
+        title: '昵称',
+        render(v, d) {
+          return d.userInfo ? `${d.userInfo.nickname}${'-' + d.userInfo.loginName}` : '-';
+        }
+    }, {
       field: 'symbolIn',
       title: '兑入币种',
       search: true

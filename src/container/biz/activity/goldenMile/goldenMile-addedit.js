@@ -4,7 +4,7 @@ import { getQueryString } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
 @Form.create()
-class InvitingFriendsAddedit extends DetailUtil {
+class GoldenMileAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -12,13 +12,12 @@ class InvitingFriendsAddedit extends DetailUtil {
         this.cData = {
             ctype: getQueryString('ctype'),
             ckey: {
-              cDate: /_date/,
-              cSymbol: /_symbol/,
+                cDate: /_date/,
+                cSymbol: /_symbol/,
                 cActivity: /_notice/
             }
         };
     }
-
     render() {
         const fields = [{
             title: '说明',
@@ -33,37 +32,37 @@ class InvitingFriendsAddedit extends DetailUtil {
             hidden: true
         }];
         if(this.cData.ctype.match(this.cData.ckey.cDate)) {
-          fields.push({
-            title: '数值',
-            field: 'cvalue',
-            required: true,
-            type: 'textarate'
-          });
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                type: 'textarate'
+            });
         } else if(this.cData.ctype.match(this.cData.ckey.cActivity)) {
             fields.push({
                 title: '内容',
                 field: 'cvalue',
                 required: true,
-               type: 'textarea'
+                type: 'textarea'
             });
         }else if(this.cData.ctype.match(this.cData.ckey.cSymbol)) {
-          fields.push({
-            title: '数值',
-            field: 'cvalue',
-            required: true,
-            type: 'select',
-            listCode: '802007',
-            params: {
-              status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}'
-          });
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                type: 'select',
+                pageCode: '802005',
+                params: {
+                    status: '0'
+                },
+                keyName: 'symbol',
+                valueName: '{{symbol.DATA}}-{{cname.DATA}}'
+            });
         } else {
             fields.push({
-              title: '数值',
-              field: 'cvalue',
-              required: true
+                title: '数值',
+                field: 'cvalue',
+                required: true
             });
         }
         return this.buildDetail({
@@ -74,11 +73,11 @@ class InvitingFriendsAddedit extends DetailUtil {
             editCode: '630042',
             detailCode: '630046',
             beforeSubmit: function(data) {
-                data.type = 'award';
+                data.ckey = 'activety_notice';
                 return data;
             }
         });
     }
 }
 
-export default InvitingFriendsAddedit;
+export default GoldenMileAddedit;

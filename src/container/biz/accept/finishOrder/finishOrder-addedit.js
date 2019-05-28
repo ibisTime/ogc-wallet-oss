@@ -9,6 +9,11 @@ class FinishOrderAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.type = getQueryString('type', this.props.location.search);
+        this.skObj = {
+            '0': '收款',
+            '1': '付款'
+        };
     }
 
     render() {
@@ -77,10 +82,10 @@ class FinishOrderAddedit extends DetailUtil {
             type: 'datetime'
         }, {
             field: 'receiveBank',
-            title: '付款方式'
+            title: `${this.skObj[this.type]}方式`
         }, {
             field: 'receiveCardNo',
-            title: '付款账号'
+            title: `${this.skObj[this.type]}账号`
         }, {
             title: '备注',
             field: 'remark'

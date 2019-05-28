@@ -72,11 +72,11 @@ class BuyOrderAddedit extends DetailUtil {
                 return data.user ? data.user.nickname : '';
             }
         }, {
-          field: 'receiveBank',
-          title: '收款方式'
+            field: 'receiveBank',
+            title: '收款方式'
         }, {
-          field: 'receiveCardNo',
-          title: '卡号'
+            field: 'receiveCardNo',
+            title: '收款账号'
         }, {
           title: '手机号/邮箱',
           field: 'loginName',
@@ -117,12 +117,6 @@ class BuyOrderAddedit extends DetailUtil {
             field: 'createDatetime',
             title: '下单时间',
             type: 'datetime'
-        }, {
-            field: 'receiveBank',
-            title: '付款方式'
-        }, {
-            field: 'receiveCardNo',
-            title: '付款账号'
         }, {
           title: '附言',
           field: 'postscript'

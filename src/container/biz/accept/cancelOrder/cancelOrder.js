@@ -116,6 +116,17 @@ class CancelOrder extends React.Component {
       pageCode: 625285,
       searchParams: {
         statusList: ['3', '4', '5']
+      },
+      btnEvent: {
+          detail: (selectedRowKeys, selectedRows) => {
+              if (!selectedRowKeys.length) {
+                  showWarnMsg('请选择记录');
+              } else if (selectedRowKeys.length > 1) {
+                  showWarnMsg('请选择一条记录');
+              } else {
+                  this.props.history.push(`/accept/cancelOrder/addedit?v=1&code=${selectedRowKeys[0]}&type=${selectedRows[0].type}`);
+              }
+          }
       }
     });
   }

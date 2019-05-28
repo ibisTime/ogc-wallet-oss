@@ -54,7 +54,7 @@ class MillOrder extends React.Component {
             noVisible: true
         }, {
             field: 'code',
-            title: '矿机名称',
+            title: '水滴名称',
             type: 'select',
             pageCode: '610004',
             keyName: 'code',
@@ -64,22 +64,19 @@ class MillOrder extends React.Component {
             noVisible: true
         }, {
             field: 'machineName',
-            title: '矿机名称',
+            title: '水滴名称',
             render(v, d) {
                 return d.machine.name;
             }
         }, {
             field: 'symbol',
-            title: '矿机购买币种'
+            title: '水滴购买币种'
         }, {
             field: 'amount',
-            title: '单个人民币价格'
+            title: '每滴币个数'
         }, {
             field: 'quantity',
             title: '购买数量'
-        }, {
-            field: 'investAmount',
-            title: '花费人民币总金额'
         }, {
             field: 'investCount',
             title: '花费币总额',
@@ -110,6 +107,10 @@ class MillOrder extends React.Component {
             key: 'machine_order_continue_status',
             type: 'select',
             search: true
+        }, {
+            field: 'createTime',
+            title: '创建时间',
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,

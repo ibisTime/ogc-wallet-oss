@@ -2,7 +2,6 @@ import React from 'react';
 import { Form } from 'antd';
 import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
-import fetch from 'common/js/fetch';
 
 @Form.create()
 class CancelOrderAddedit extends DetailUtil {
@@ -10,6 +9,11 @@ class CancelOrderAddedit extends DetailUtil {
     super(props);
     this.code = getQueryString('code', this.props.location.search);
     this.view = !!getQueryString('v', this.props.location.search);
+      this.type = getQueryString('type', this.props.location.search);
+      this.skObj = {
+          '0': '收款',
+          '1': '付款'
+      };
     this.buttons = [{
       title: '返回',
       handler: (param) => {
@@ -85,10 +89,10 @@ class CancelOrderAddedit extends DetailUtil {
       type: 'datetime'
     }, {
       field: 'receiveBank',
-      title: '付款方式'
+      title: `${this.skObj[this.type]}方式`
     }, {
       field: 'receiveCardNo',
-      title: '付款账号'
+      title: `${this.skObj[this.type]}账号`
     }, {
       title: '备注',
       field: 'remark'

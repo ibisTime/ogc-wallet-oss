@@ -37,7 +37,7 @@ class Aboutus extends React.Component {
         }, {
             field: 'type',
             key: 'open_dapp_tag_type',
-            select: 'select',
+            type: 'select',
             title: '标签分类'
         }];
         return this.props.buildList({

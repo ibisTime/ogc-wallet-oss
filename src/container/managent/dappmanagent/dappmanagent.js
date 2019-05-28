@@ -96,6 +96,8 @@ class DappManagent extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].action !== '3') {
+                        showWarnMsg('该应用无须应用攻略');
                     } else {
                         this.props.history.push(`/managent/dapptrategy?code=${selectedRowKeys[0]}&id=${selectedRows[0].id}`);
                     }

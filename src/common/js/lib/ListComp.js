@@ -227,8 +227,9 @@ export default class ListComponent extends React.Component {
                 });
                 let result = [titles].concat(bodys);
                 const wb = getWorkbook();
+                const menuName = sessionStorage.getItem('menuName') || '表格下载';
                 wb.getSheet(result, 'SheetJS');
-                wb.downloadXls('表格导出');
+                wb.downloadXls(menuName);
                 this.props.cancelFetching();
             }
         }).catch(this.props.cancelFetching);

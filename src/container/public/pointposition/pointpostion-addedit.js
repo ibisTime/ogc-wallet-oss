@@ -17,7 +17,8 @@ class BannerAddEdit extends DetailUtil {
             code: '',
             biz: '',
             // 窗口是否显示
-            updownVisible: false
+            updownVisible: false,
+            approveNote: ''
         };
         this.buttons = [];
         if (this.isAdd) {
@@ -31,10 +32,10 @@ class BannerAddEdit extends DetailUtil {
             this.buttons = [{
                 title: '复现成功',
                 handler: (param) => {
-                    console.log(param);
                     this.setState({
                         updownVisible: true,
-                        code: param.code
+                        code: param.code,
+                        approveNote: param.approveNote
                     });
                 }
             }, {
@@ -43,7 +44,8 @@ class BannerAddEdit extends DetailUtil {
                     var data = {
                         code: param.code,
                         approveResult: '0',
-                        approveUser: getUserName()
+                        approveUser: getUserName(),
+                        approveNote: param.approveNote
                     };
                     this.doFetching();
                     fetch(805101, data).then(() => {
@@ -98,8 +100,14 @@ class BannerAddEdit extends DetailUtil {
             field: 'commitDatetime',
             type: 'datetime'
         }, {
+            title: '奖励数量',
+            field: 'payAmount'
+        }, {
+            title: '奖励说明',
+            field: 'payNote'
+        }, {
             title: '备注',
-            field: 'remark'
+            field: 'commitNote'
         }, {
             title: '审批说明',
             field: 'approveNote',
@@ -119,6 +127,7 @@ class BannerAddEdit extends DetailUtil {
                     updownVisible={this.state.updownVisible}
                     setModalVisible={this.setModalVisible}
                     code={this.state.code}
+                    approveNote={this.state.approveNote}
                     onOk={() => {
                         this.setModalVisible(false);
                         setTimeout(() => {

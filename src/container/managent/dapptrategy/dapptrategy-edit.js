@@ -2,13 +2,13 @@ import React from 'react';
 import { Form } from 'antd';
 import { getQueryString, getRealCheckboxVal } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
-import fetch from 'common/js/fetch';
+
 @Form.create()
 class AppmanagentAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
-        this.dappId = getQueryString('dappId', this.props.location.search);
+        this.dappId = getQueryString('id', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
     render() {
@@ -47,7 +47,7 @@ class AppmanagentAddedit extends DetailUtil {
             valueName: 'name',
             required: true,
             title: '应用标签',
-            params: {type: 0},
+            params: {type: 1},
             formatter(v, d) {
                 return v;
             }

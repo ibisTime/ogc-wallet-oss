@@ -56,9 +56,6 @@ class QuantitativeAi extends React.Component {
             field: 'buyMax',
             title: '最大投注币数量'
         }, {
-            field: 'repayType',
-            title: '回款方式'
-        }, {
             field: 'status',
             title: '状态',
             key: 'gplh_project_status',

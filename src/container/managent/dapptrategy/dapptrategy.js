@@ -70,7 +70,17 @@ class Aboutus extends React.Component {
             rowKey: 'id',
             pageCode: '625465',
             singleSelect: false,
+            searchParams: {
+                dappId: this.id
+            },
             buttons: [{
+                code: 'back',
+                name: '返回',
+                handler: () => {
+                    window.history.go(-1);
+                },
+                check: true
+            }, {
                 code: 'edit',
                 name: '新增',
                 handler: (keys, items) => {

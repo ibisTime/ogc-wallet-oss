@@ -48,8 +48,6 @@ class UpDowns extends React.Component {
         //     maxlength: 30
         // }
             beforeSubmit: (params) => {
-                console.log(params.status);
-                console.log(params.result);
                 params.approveUser = params.updater;
                 // params.updater = this.approveUser;
                 return params;

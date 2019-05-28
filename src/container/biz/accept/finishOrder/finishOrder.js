@@ -12,7 +12,8 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
-    getCoinList
+    getCoinList,
+    showWarnMsg
 } from 'common/js/util';
 
 @listWrapper(
@@ -82,20 +83,7 @@ class FinishOrder extends React.Component {
             render: (v, data) => {
                 return moneyFormat(v, '', data.tradeCoin);
             }
-        },
-        // }, {
-        //     title: '状态',
-        //     field: 'status',
-        //     type: 'select',
-        //   data: [{
-        //     key: '2',
-        //     value: '已完成'
-        //   }],
-        //   keyName: 'key',
-        //   valueName: 'value',
-        //     search: true
-        // },
-            {
+        }, {
             field: 'createDatetime',
             title: '下单时间',
             type: 'datetime'
@@ -111,6 +99,17 @@ class FinishOrder extends React.Component {
             pageCode: 625285,
             searchParams: {
                 status: '2'
+            },
+            btnEvent: {
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/accept/finishOrder/addedit?v=1&code=${selectedRowKeys[0]}&type=${selectedRows[0].type}`);
+                    }
+                }
             }
         });
     }

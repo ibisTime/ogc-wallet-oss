@@ -23,6 +23,7 @@ import {publicCommunityAddEdit} from './redux/public/community-addedit';
 import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
+import {publicLhlcxy} from './redux/public/lhlcxy';
 import {biztodayprofit} from './redux/biz/financial/todayprofit';
 import {AppManagent} from './redux/managent/appmanagent';
 import {DappManagent} from './redux/managent/dappmanagent';
@@ -140,6 +141,8 @@ import {quotationMarketAdjustment} from './redux/biz/quotation/marketAdjustment'
 // 活动管理
 // 邀请好友
 import {activityInvitingFriends} from './redux/activity/invitingFriends/invitingFriends';
+
+import {activityGoldenMile} from './redux/activity/goldenMile/goldenMile';
 
 // 业务规则
 // 广告费规则
@@ -278,6 +281,7 @@ export default combineReducers({
     publicWarmReminding,
     publicLegalDeclaration,
     publicRateExplain,
+    publicLhlcxy,
     // 会员查询
     userCustomer,
     userCustomerAccount,
@@ -341,6 +345,7 @@ export default combineReducers({
     // 活动管理
     // 邀请好友
     activityInvitingFriends,
+    activityGoldenMile,
     // 业务规则
     // 广告费规则
     rulesAdvertisingFee,

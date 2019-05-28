@@ -66,6 +66,14 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/aboutus/aboutus'))
     },
     {
+        path: '/public/lhlcxy',
+        component: asyncComponent(() => import('container/public/lhlcxy/lhlcxy'))
+    },
+    {
+        path: '/public/lhlcxy/addedit',
+        component: asyncComponent(() => import('container/public/lhlcxy/lhlcxy-addedit'))
+    },
+    {
         path: '/public/aboutus/addedit',
         component: asyncComponent(() => import('container/public/aboutus-addedit/aboutus-addedit'))
     },
@@ -597,6 +605,15 @@ const ROUTES = [
     {
         path: '/activity/invitingFriends/addedit',
         component: asyncComponent(() => import('container/biz/activity/invitingFriends/invitingFriends-addedit'))
+    },
+    // 邀请好友
+    {
+        path: '/activity/goldenMile',
+        component: asyncComponent(() => import('container/biz/activity/goldenMile/goldenMile'))
+    },
+    {
+        path: '/activity/goldenMile/addedit',
+        component: asyncComponent(() => import('container/biz/activity/goldenMile/goldenMile-addedit'))
     },
     // 邀请好友链接文本
     {

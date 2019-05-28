@@ -38,7 +38,7 @@ class TradMessage extends React.Component {
       search: true
     }, {
       field: 'feeRate',
-      title: '手续费率'
+      title: '手续费率(%)'
     }, {
       field: 'min',
       title: '最小兑出数量',

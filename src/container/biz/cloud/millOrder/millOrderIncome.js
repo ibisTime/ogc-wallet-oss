@@ -27,10 +27,10 @@ class MillOrderIncome extends React.Component {
         super(props);
         this.machineOrderCode = getQueryString('machineOrderCode', props.location.search);
     }
+    componentDidMount() {
+        this.props.getPageData();
+    }
     render() {
-        if(!this.machineOrderCode) {
-            return null;
-        }
         const fields = [{
             field: 'loginName',
             title: '购买用户',
@@ -39,7 +39,7 @@ class MillOrderIncome extends React.Component {
             }
         }, {
             field: 'machineName',
-            title: '矿机名称',
+            title: '水滴名称',
             render(v, d) {
                 return d.machine && d.machine.name;
             }
@@ -82,7 +82,6 @@ class MillOrderIncome extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'machineOrderCode',
             pageCode: 610144,
             searchParams: {
                 machineOrderCode: this.machineOrderCode

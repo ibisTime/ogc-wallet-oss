@@ -4,7 +4,8 @@ import ModalDetail from 'common/js/build-modal-detail';
 
 class UpDown extends React.Component {
     render() {
-        let { code, key = 'code', biz, onOk } = this.props;
+        let { code, key = 'code', biz, onOk, approveNote } = this.props;
+        console.log(approveNote);
         let locationField = {
             title: '严重等级',
             required: true,
@@ -40,6 +41,7 @@ class UpDown extends React.Component {
                     data.code = data.code;
                     data.approveResult = 1;
                     data.approveUser = getUserName();
+                    data.approveNote = approveNote;
                 return data;
             }
         };

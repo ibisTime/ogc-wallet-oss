@@ -35,7 +35,7 @@ class AppmanagentAddedit extends DetailUtil {
             type: 'checkbox',
             listCode: '625476',
             keyName: 'id',
-          params: {type: 1},
+            params: {type: 1},
             valueName: 'name',
             required: true,
             title: '应用标签'

@@ -108,7 +108,7 @@ class AppmanagentAddedit extends DetailUtil {
                     this.props.history.go(-1);
                 }
             }];
-        }else if (this.code) {
+        }else if (this.code && !this.view) {
             this.buttons = [{
                 title: '保存',
                 handler: (param) => {
@@ -123,7 +123,6 @@ class AppmanagentAddedit extends DetailUtil {
                             orderNo: param.orderNo,
                             isTop: param.isTop
                         };
-                        console.log(param);
                         fetch(625660, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -184,7 +183,7 @@ class AppmanagentAddedit extends DetailUtil {
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
-                            url: param.url
+                            url: param.url1
                         };
                         fetch(625663, data).then(() => {
                             showSucMsg('操作成功');
@@ -202,9 +201,15 @@ class AppmanagentAddedit extends DetailUtil {
                     this.props.history.go(-1);
                 }
             }];
+        }else if(this.view) {
+            this.buttons = [{
+                title: '返回',
+                handler: () => {
+                    this.props.history.go(-1);
+                }
+            }];
         }
     }
-
     render() {
         const fields = [{
             title: '类型',
@@ -289,11 +294,16 @@ class AppmanagentAddedit extends DetailUtil {
             required: true
         }, {
             title: 'url地址',
-            field: 'url',
+            field: 'url1',
             type: 'select',
             key: 'dopen_app_inner_module',
             hidden: this.state.dkey !== '4',
-            required: true
+            required: true,
+            formatter(v, d) {
+                if(d.url) {
+                    return d.url;
+                }
+            }
         }, {
             field: 'orderNo',
             title: '次序',

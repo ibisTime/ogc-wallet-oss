@@ -4,7 +4,6 @@ import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat} from 'common/js/util';
 import {SYS_USER, CION_FMVP} from 'common/js/config';
 
-let bankName = '';
 @Form.create()
 class PaymentAddedit extends DetailUtil {
     constructor(props) {
@@ -12,6 +11,8 @@ class PaymentAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.isAlipay = getQueryString('isAlipay', this.props.location.search) || '1';
+        this.bankName = '';
+        this.index = 0;
     }
 
     render() {
@@ -32,14 +33,22 @@ class PaymentAddedit extends DetailUtil {
             params: {
               type: '0'
             },
-            onChange(v, data) {
+            onChange: (v, data) => {
+                console.log(data, v);
                 if(Array.isArray(data)) {
                   data.forEach(item => {
                     if(item.bankCode === v) {
-                      bankName = item.bankName;
+                      this.bankName = item.bankName;
                     }
                   });
                 }
+            },
+            formatter: (v, d) => {
+                if(d.bankName && this.index === 0) {
+                    this.index++;
+                    this.bankName = d.bankName;
+                }
+                return v;
             }
         }, {
             field: 'subbranch',
@@ -78,8 +87,8 @@ class PaymentAddedit extends DetailUtil {
               if(this.isAlipay === '1') {
                 params.bankName = '支付宝';
               }
-              if(bankName) {
-                params.bankName = bankName;
+              if(this.bankName) {
+                params.bankName = this.bankName;
               }
                 return params;
             }

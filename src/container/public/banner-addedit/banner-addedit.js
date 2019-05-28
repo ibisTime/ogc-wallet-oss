@@ -69,7 +69,7 @@ class BannerAddEdit extends DetailUtil {
             title: '动作',
             type: 'select',
             key: 'banner_action',
-            hidden: ishidden || this.view,
+            readonly: ishidden || this.view,
             required: this.state.dkey !== 'app_guide',
             onChange: (v) => {
                 this.setState({dkey: v});
@@ -83,7 +83,9 @@ class BannerAddEdit extends DetailUtil {
             title: 'url地址',
             field: 'aa',
             hidden: this.state.dkey !== '1',
-            required: this.state.dkey === '1'
+            readonly: this.state.dkey === '1' && this.code,
+            required: this.state.dkey === '1',
+            formatter: (v, d) => d.url
         }, {
             title: '应用',
             type: 'select',
@@ -91,12 +93,21 @@ class BannerAddEdit extends DetailUtil {
             params: {
                 status: '1'
             },
-            field: 'aa',
+            field: 'aa1',
             keyName: 'id',
             valueName: 'name',
-            hidden: ishidden || this.view,
-            // hidden: this.state.dkey !== '2',
-            required: this.state.dkey === '2'
+            // hidden: ishidden || this.view,
+            hidden: this.state.dkey !== '2',
+            readonly: this.state.dkey === '2' && this.code,
+            required: this.state.dkey === '2',
+            formatter: (v, d) => {
+                if(d.type === '2' && d.url) {
+                    console.log(+d.url);
+                    return +d.url;
+                }else {
+                    return d.url;
+                }
+            }
         }, {
             title: '备注',
             field: 'remark',
@@ -114,7 +125,11 @@ class BannerAddEdit extends DetailUtil {
                     params.type = '0';
                     return params;
                 };
-                params.url = params.aa;
+                if(params.aa1) {
+                    params.url = params.aa1;
+                }else {
+                    params.url = params.aa;
+                }
                 return params;
             }
         });

@@ -13,11 +13,11 @@ class CloudMessageAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'code',
-            title: '矿机编号',
+            title: '水滴编号',
             hidden: !this.view
         }, {
             field: 'name',
-            title: '矿机名称',
+            title: '水滴名称',
             required: true
         }, {
             field: 'symbol',
@@ -29,7 +29,7 @@ class CloudMessageAddedit extends DetailUtil {
             required: true
         }, {
             field: 'amount',
-            title: '人民币单价',
+            title: '每滴币个数',
             required: true
         }, {
             field: 'daysLimit',
@@ -38,7 +38,8 @@ class CloudMessageAddedit extends DetailUtil {
         }, {
             field: 'dailyOutput',
             title: '日产能（%）',
-            required: true
+            required: true,
+            formatter: (v) => v * 100
         }, {
             field: 'stockTotal',
             title: '库存总量',
@@ -74,7 +75,11 @@ class CloudMessageAddedit extends DetailUtil {
             view: this.view,
             addCode: '610000',
             editCode: '610002',
-            detailCode: '610003'
+            detailCode: '610003',
+            beforeSubmit(params) {
+                params.dailyOutput = (+params.dailyOutput / 100).toFixed(4);
+                return params;
+            }
         });
     }
 }

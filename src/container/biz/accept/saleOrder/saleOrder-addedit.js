@@ -114,12 +114,6 @@ class SaleOrderAddedit extends DetailUtil {
             title: '下单时间',
             type: 'datetime'
         }, {
-            field: 'receiveBank',
-            title: '付款方式'
-        }, {
-            field: 'receiveCardNo',
-            title: '付款账号'
-        }, {
             title: '备注',
             field: 'remark'
         }];

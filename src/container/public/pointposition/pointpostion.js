@@ -74,8 +74,7 @@ class publicPointPostion extends React.Component {
             field: 'commitUserMobile',
             render: (v, d) => {
               return d.commitUserInfo ? d.commitUserInfo.mobile : '';
-            },
-            search: true
+            }
         }, {
             title: '所在端',
             field: 'deviceSystem',
@@ -115,7 +114,7 @@ class publicPointPostion extends React.Component {
             search: true
         }, {
             title: '备注',
-            field: 'remark'
+            field: 'commitNote'
         }];
         return (
             <div>
