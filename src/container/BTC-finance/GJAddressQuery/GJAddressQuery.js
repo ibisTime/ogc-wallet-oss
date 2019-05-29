@@ -96,11 +96,11 @@ class GJAddressQuery extends React.Component {
                     }else if(selectedRows[0].symbol === 'BTC') {
                         // 测试：https://testnet.blockexplorer.com/address/
                         // 正式：https://blockexplorer.com/address/
-                        window.open('https://testnet.blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+                        window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
                     }else if(selectedRows[0].symbol === 'TRX') {
                         // 测试：https://shasta.tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
                         // 正式：https://tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
-                        window.open('https://shasta.tronscan.org/#/address/' + selectedRows[0].address + '/token-balances', '_bank');
+                        window.open('https://tronscan.org/#/address/' + selectedRows[0].address + '/token-balances', '_bank');
                     }else if(selectedRows[0].symbol === 'ETH' || selectedRows[0].symbol === 'KCC') {
                         // 正式: https://rinkeby.etherscan.io/address/0x8a37b79e54d69e833d79cac3647c877ef72830e1
                         // 测试: https://etherscan.io/address/0x8a37b79e54d69e833d79cac3647c877ef72830e1
