@@ -27,9 +27,6 @@ class GoldenMile extends React.Component {
         const fields = [{
             field: 'remark',
             title: '说明'
-        }, {
-            field: 'cvalue',
-            title: '数值'
         }];
         return this.props.buildList({
             fields,

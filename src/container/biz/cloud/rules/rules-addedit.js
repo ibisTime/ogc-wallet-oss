@@ -25,8 +25,7 @@ class CloudRulesEdit extends DetailUtil {
         }, {
             title: '数值',
             field: 'cvalue',
-            required: true,
-            number: true
+            required: true
         }];
         return this.buildDetail({
             fields,

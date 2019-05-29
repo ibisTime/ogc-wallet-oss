@@ -39,7 +39,12 @@ class CloudMessageAddedit extends DetailUtil {
             field: 'dailyOutput',
             title: '日产能（%）',
             required: true,
-            formatter: (v) => v * 100
+            formatter: (v) => {
+                if(v) {
+                    return v * 100;
+                }
+            },
+            type: 'number'
         }, {
             field: 'stockTotal',
             title: '库存总量',
