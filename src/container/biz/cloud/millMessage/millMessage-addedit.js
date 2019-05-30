@@ -43,8 +43,7 @@ class CloudMessageAddedit extends DetailUtil {
                 if(v) {
                     return v * 100;
                 }
-            },
-            type: 'number'
+            }
         }, {
             field: 'stockTotal',
             title: '库存总量',
