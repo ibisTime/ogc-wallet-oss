@@ -12,7 +12,10 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import { showWarnMsg, moneyFormat } from 'common/js/util';
 import { Link } from 'react-router-dom';
-import {message} from 'antd';
+import {message, Modal} from 'antd';
+import fetch from 'common/js/fetch';
+
+const { confirm } = Modal;
 
 @listWrapper(
     state => ({
@@ -61,15 +64,19 @@ class QuantitativeAiOrder extends React.Component {
             field: 'investCount',
             title: '买入数量',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                return moneyFormat(v.toString(), '', data.symbolBuy);
             }
         }, {
             field: 'status',
             title: '状态',
+            type: 'select',
             key: 'pglh_order_status'
         }, {
-            field: 'incomeCount',
-            title: '产生收益条数'
+            field: 'totalIncome',
+            title: '产生收益总数',
+            render: function (v, data) {
+                return moneyFormat(v.toString(), '', data.symbolIncome);
+            }
         }, {
             field: 'startTime',
             title: '开始产生收益时间',
@@ -97,7 +104,7 @@ class QuantitativeAiOrder extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if(selectedRows[0].status !== '2') {
+                    } else if(selectedRows[0].status !== '3') {
                         showWarnMsg('该状态下无法操作');
                     } else {
                         confirm({
@@ -105,7 +112,7 @@ class QuantitativeAiOrder extends React.Component {
                             content: `该产品是否通过赎回？`,
                             onOk: () => {
                                 let hasMsg = message.loading('');
-                                fetch('610303', {
+                                fetch('610312', {
                                     code: selectedRowKeys[0],
                                     approveResult: '1'
                                 }).then(() => {
@@ -117,7 +124,7 @@ class QuantitativeAiOrder extends React.Component {
                             },
                             onCancel: () => {
                                 let hasMsg = message.loading('');
-                                fetch('610303', {
+                                fetch('610312', {
                                     code: selectedRowKeys[0],
                                     approveResult: '0'
                                 }).then(() => {

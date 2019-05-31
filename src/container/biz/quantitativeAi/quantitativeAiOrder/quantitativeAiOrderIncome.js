@@ -44,7 +44,7 @@ class QuantitativeAiOrderIncome extends React.Component {
             field: 'income',
             title: '收益',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                return moneyFormat(v.toString(), '', data.symbolBuy);
             }
         }, {
             field: 'type',

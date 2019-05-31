@@ -66,11 +66,19 @@ class Customer extends React.Component {
             },
             required: true
         }, {
+            field: 'inviteCode',
+            title: '邀请码'
+        }, {
             field: 'status',
             title: '状态',
             type: 'select',
             key: 'user_status',
             search: true
+        }, {
+            field: 'gplhNodeLevel',
+            title: '节点等级',
+            type: 'select',
+            key: 'gplh_node_level'
         }, {
             field: 'isRealname',
             title: '是否实名',

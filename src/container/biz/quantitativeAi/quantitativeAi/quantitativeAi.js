@@ -63,7 +63,7 @@ class QuantitativeAi extends React.Component {
             search: true
         }, {
             field: 'feeRate',
-            title: '手续费率(%)'
+            title: '手续费'
         }, {
             field: 'createTime',
             title: '创建时间',
@@ -73,6 +73,10 @@ class QuantitativeAi extends React.Component {
             fields,
             pageCode: 610305,
             deleteCode: '610301',
+            searchParams: {
+                orderDir: 'desc',
+                orderColumn: 'createTime'
+            },
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

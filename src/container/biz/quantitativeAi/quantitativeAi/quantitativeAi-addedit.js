@@ -19,22 +19,21 @@ class CloudMessageAddedit extends DetailUtil {
             field: 'symbolBuy',
             title: '购买币种',
             type: 'select',
-            listCode: '802007',
-            keyName: 'symbol',
-            valueName: 'symbol',
+            key: 'gplh_buy_coin',
             required: true
-        }, {
-            field: 'symbolIncome',
-            title: '收益币种',
-            type: 'select',
-            listCode: '802007',
-            keyName: 'symbol',
-            valueName: 'symbol',
-            required: true
+        // }, {
+        //     field: 'symbolIncome',
+        //     title: '收益币种',
+        //     type: 'select',
+        //     listCode: '802007',
+        //     keyName: 'symbol',
+        //     valueName: 'symbol',
+        //     required: true
         }, {
             field: 'rate',
             title: '日息',
-            required: true
+            required: true,
+            help: '如果您想输入10%，请输入0.1'
         }, {
             field: 'lockDays',
             title: '锁仓天数',
@@ -48,19 +47,9 @@ class CloudMessageAddedit extends DetailUtil {
             title: '最大投注币数量',
             required: true
         }, {
-            field: 'picture',
-            title: '产品图片',
-            type: 'img',
-            single: true,
-            required: true
-        }, {
             field: 'feeRate',
-            title: '提前取款手续费比例',
+            title: '提前取款手续费',
             required: true
-        }, {
-            field: 'repayType',
-            title: '回款方式',
-            hidden: !this.view
         }, {
             field: 'status',
             title: '状态',
@@ -70,10 +59,8 @@ class CloudMessageAddedit extends DetailUtil {
         }, {
             field: 'description',
             title: '描述',
-            required: true
-        }, {
-            field: 'remark',
-            title: '备注'
+            required: true,
+            type: 'textarea'
         }];
         return this.buildDetail({
             fields,

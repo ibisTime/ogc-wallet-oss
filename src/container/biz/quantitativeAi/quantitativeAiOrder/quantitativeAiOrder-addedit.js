@@ -12,7 +12,8 @@ class CloudMillOrderDetail extends DetailUtil {
     render() {
         const fields = [{
             field: 'code',
-            title: '编号'
+            title: '编号',
+            hidden: true
         }, {
             field: 'productCode',
             title: '产品编号'
@@ -26,15 +27,19 @@ class CloudMillOrderDetail extends DetailUtil {
             field: 'investCount',
             title: '买入数量',
             formatter: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                return moneyFormat(v.toString(), '', data.symbolBuy);
             }
         }, {
             field: 'status',
             title: '状态',
+            type: 'select',
             key: 'pglh_order_status'
         }, {
-            field: 'incomeCount',
-            title: '产生收益条数'
+            field: 'totalIncome',
+            title: '产生收益总数',
+            formatter: function (v, data) {
+                return moneyFormat(v.toString(), '', data.symbolIncome);
+            }
         }, {
             field: 'startTime',
             title: '开始产生收益时间',
