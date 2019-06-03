@@ -58,7 +58,7 @@ class MillMessage extends React.Component {
             field: 'dailyOutput',
             title: '日产能（%）',
             render(v) {
-                return v * 100;
+                return (v * 100).toFixed(2);
             }
         }, {
             field: 'stockTotal',
