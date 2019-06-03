@@ -87,7 +87,7 @@ class MillOrder extends React.Component {
             field: 'incomeActual',
             title: '已获取收益',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                return moneyFormat(v.toString(), '', 'HEY');
             }
         }, {
             field: 'status',

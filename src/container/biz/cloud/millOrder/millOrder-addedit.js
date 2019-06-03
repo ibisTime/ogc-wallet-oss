@@ -45,7 +45,7 @@ class CloudMillOrderDetail extends DetailUtil {
             field: 'incomeActual',
             title: '已获取收益',
             formatter: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                return moneyFormat(v.toString(), '', 'HEY');
             }
         }, {
             field: 'status',
