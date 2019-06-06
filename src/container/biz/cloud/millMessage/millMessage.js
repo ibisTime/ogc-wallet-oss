@@ -30,9 +30,17 @@ class MillMessage extends React.Component {
     state = {
         visible: false,
         code: '',
-        xyCount: null
+        xyCount: null,
+        amountVisible: false,
+        amountVal: ''
     };
+    amountChagne = e => {
+        if (/^[\d.]*$/.test(e.target.value)) {
+            this.setState({ amountVal: e.target.value });
+        }
+    }
     render() {
+        const { visible, amountVisible, amountVal } = this.state;
         const fields = [{
             field: 'name',
             title: '水滴名称'
@@ -50,7 +58,7 @@ class MillMessage extends React.Component {
             field: 'dailyOutput',
             title: '日产能（%）',
             render(v) {
-                return v * 100;
+                return (v * 100).toFixed(2);
             }
         }, {
             field: 'stockTotal',
@@ -117,13 +125,26 @@ class MillMessage extends React.Component {
                                       code: selectedRowKeys[0]
                                   });
                               }
+                          },
+                          editDj: (selectedRowKeys, selectedRows) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.setState({
+                                      amountVisible: true,
+                                      code: selectedRowKeys[0],
+                                      amountVal: selectedRows[0].amount
+                                  });
+                              }
                           }
                       }
                   })
               }
               <Modal
                 title="虚拟已售数量"
-                visible={this.state.visible}
+                visible={visible}
                 okText={'确定'}
                 cancelText={'取消'}
                 onOk={() => {
@@ -148,6 +169,38 @@ class MillMessage extends React.Component {
                 }}
               >
                   <p><label>虚拟已售数量：</label><Input placeholder="请输入虚拟已售数量" ref={(target) => { this.state.xyCount = target; }} style={{ width: '60%' }}/></p>
+              </Modal>
+              <Modal
+                title="每滴币个数"
+                visible={amountVisible}
+                okText={'确定'}
+                cancelText={'取消'}
+                onOk={() => {
+                    if (!/^\d+(\.\d{1,8})?$/.test(amountVal)) {
+                        showWarnMsg('个数最多为8位小数');
+                        return;
+                    }
+                    let hasMsg = message.loading('');
+                    fetch('610012', {
+                        code: this.state.code,
+                        amount: amountVal
+                    }).then(() => {
+                        hasMsg();
+                        message.success('操作成功', 1, () => {
+                            this.setState({
+                                amountVisible: false
+                            });
+                            this.props.getPageData();
+                        });
+                    }, hasMsg);
+                }}
+                onCancel={() => {
+                    this.setState({
+                        amountVisible: false
+                    });
+                }}
+              >
+                  <p><label>每滴币个数：</label><Input placeholder="请输入每滴币个数" value={amountVal} onChange={this.amountChagne} style={{ width: '60%' }}/></p>
               </Modal>
           </div>
         );

@@ -41,7 +41,7 @@ class CloudMessageAddedit extends DetailUtil {
             required: true,
             formatter: (v) => {
                 if(v) {
-                    return v * 100;
+                    return (v * 100).toFixed(2);
                 }
             }
         }, {

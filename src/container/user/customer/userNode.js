@@ -28,7 +28,7 @@ class UserNode extends DetailUtil {
             required: true
         }, {
             field: 'nodeAmount',
-            title: '成为节点用户所需金额(万元)',
+            title: '成为节点用户所需HEY',
             required: true,
             formatter(v) {
                 return (+v / 10000).toFixed(2);

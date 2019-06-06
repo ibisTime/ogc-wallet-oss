@@ -82,7 +82,7 @@ class CustomerAddedit extends DetailUtil {
             key: 'node_level'
         }, {
             field: 'nodeAmount',
-            title: '成为节点用户所需金额(万元)',
+            title: '成为节点用户HEY',
             formatter(v) {
                 return (+v / 10000).toFixed(2);
             }
