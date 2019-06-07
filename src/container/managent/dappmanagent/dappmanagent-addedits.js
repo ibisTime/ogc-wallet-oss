@@ -24,6 +24,7 @@ class AppmanagentAddedit extends DetailUtil {
                             language: param.language,
                             location: param.location,
                             orderNo: param.orderNo,
+                            desc: param.desc,
                             isTop: param.isTop
                         };
                         console.log(param);
@@ -69,6 +70,7 @@ class AppmanagentAddedit extends DetailUtil {
                             language: param.language,
                             location: param.location,
                             orderNo: param.orderNo,
+                            desc: param.desc,
                             isTop: param.isTop
                         };
                         console.log(param);
@@ -87,6 +89,7 @@ class AppmanagentAddedit extends DetailUtil {
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
+                            desc: param.desc,
                             url: param.url
                         };
                         fetch(625651, data).then(() => {
@@ -123,6 +126,7 @@ class AppmanagentAddedit extends DetailUtil {
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
+                            desc: param.desc,
                             url: param.url
                         };
                         fetch(625653, data).then(() => {
@@ -198,8 +202,8 @@ class AppmanagentAddedit extends DetailUtil {
           }
         }, {
             field: 'desc',
-            required: true,
-            hidden: this.state.dkey === '1' || this.state.dkey === '2',
+            required: this.state.dkey === '3',
+            // hidden: this.state.dkey === '1' || this.state.dkey === '2',
             title: '应用详情描述'
         }, {
             field: 'download',

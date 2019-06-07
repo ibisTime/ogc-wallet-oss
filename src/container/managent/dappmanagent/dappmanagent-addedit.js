@@ -25,6 +25,7 @@ class AppmanagentAddedit extends DetailUtil {
                             language: param.language,
                             location: param.location,
                             orderNo: param.orderNo,
+                            desc: param.desc,
                             isTop: param.isTop
                         };
                         console.log(param);
@@ -44,6 +45,7 @@ class AppmanagentAddedit extends DetailUtil {
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
+                            desc: param.desc,
                             url: param.url
                         };
                         fetch(625651, data).then(() => {
@@ -89,6 +91,7 @@ class AppmanagentAddedit extends DetailUtil {
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
+                            desc: param.desc,
                             url: param.url,
                             company: param.company
                         };
@@ -121,6 +124,7 @@ class AppmanagentAddedit extends DetailUtil {
                             language: param.language,
                             location: param.location,
                             orderNo: param.orderNo,
+                            desc: param.desc,
                             isTop: param.isTop
                         };
                         fetch(625660, data).then(() => {
@@ -139,6 +143,7 @@ class AppmanagentAddedit extends DetailUtil {
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
+                            desc: param.desc,
                             url: param.url
                         };
                         fetch(625661, data).then(() => {
@@ -183,6 +188,7 @@ class AppmanagentAddedit extends DetailUtil {
                             location: param.location,
                             orderNo: param.orderNo,
                             isTop: param.isTop,
+                            desc: param.desc,
                             url: param.url1
                         };
                         fetch(625663, data).then(() => {
@@ -330,10 +336,10 @@ class AppmanagentAddedit extends DetailUtil {
             value: 'ZH_CN'
         }, {
             field: 'desc',
-            required: true,
+            required: this.state.dkey === '3',
             type: 'textarea',
             normalArea: true,
-            hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4',
+            // hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4',
             title: '应用详情描述'
         }, {
             title: '状态',
