@@ -1183,6 +1183,26 @@ const ROUTES = [
     {
         path: '/quantitativeAi/quantitativeAiRule/addedit',
         component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAiRule/quantitativeAiRule-addedit'))
+    },
+    {
+        path: '/candymanagement/candymanagement',
+        component: asyncComponent(() => import('container/biz/candy/candymanagement/candymanagement'))
+    },
+    {
+        path: '/candymanagement/candymanagement/addedit',
+        component: asyncComponent(() => import('container/biz/candy/candymanagement/candymanagement-addedit'))
+    },
+    {
+        path: '/candyorder/candyorder',
+        component: asyncComponent(() => import('container/biz/candy/candyorder/candyorder'))
+    },
+    {
+        path: '/candyorder/candyorder/addedit',
+        component: asyncComponent(() => import('container/biz/candy/candyorder/candyorder-addedit'))
+    },
+    {
+        path: '/priceClassification/priceClassification',
+        component: asyncComponent(() => import('container/managent/priceClassification/priceClassification'))
     }
 ];
 

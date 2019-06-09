@@ -252,6 +252,9 @@ import {NoOrder} from './redux/marketsettlement/noorder';
 import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
 import {TAG} from './redux/managent/tag';
+import {candyCandymanagement} from './redux/candy/candymanagement/candymanagement';
+import {candyCandyOrder} from './redux/candy/candyorder/candyorder';
+import {managentPriceClassification} from './redux/managent/priceClassification';
 
 export default combineReducers({
     user,
@@ -439,5 +442,8 @@ export default combineReducers({
     quantitativeAi,
     quantitativeAiOrder,
     quantitativeAiOrderIncome,
-    quantitativeAiRule
+    quantitativeAiRule,
+    candyCandymanagement,
+    candyCandyOrder,
+    managentPriceClassification
 });
