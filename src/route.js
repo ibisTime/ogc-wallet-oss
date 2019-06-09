@@ -1203,6 +1203,14 @@ const ROUTES = [
     {
         path: '/priceClassification/priceClassification',
         component: asyncComponent(() => import('container/managent/priceClassification/priceClassification'))
+    },
+    {
+        path: '/candy/candyConfiguration',
+        component: asyncComponent(() => import('container/biz/candy/candyConfiguration/candyConfiguration'))
+    },
+    {
+        path: '/candy/candyConfiguration/addedit',
+        component: asyncComponent(() => import('container/biz/candy/candyConfiguration/candyConfiguration-addedit'))
     }
 ];
 

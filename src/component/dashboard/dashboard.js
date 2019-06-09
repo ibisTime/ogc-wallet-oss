@@ -19,7 +19,7 @@ import asyncComponent from '../async-component/async-component';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import ROUTES from 'src/route';
 import './dashboard.css';
-import logo from './ticp.png';
+import logo from './tosp.png';
 
 const { SubMenu, Item } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -109,7 +109,7 @@ class Dashboard extends React.Component {
               this.props.setTopCode('');
               this.props.history.push('/');
           }}>
-              <img style ={{width: '72%', height: '40px'}} src={logo}/>
+              <img style ={{width: '20%', height: '40px'}} src={logo}/>
           </div>
         <Menu
           theme="dark"

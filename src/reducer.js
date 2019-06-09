@@ -255,6 +255,7 @@ import {TAG} from './redux/managent/tag';
 import {candyCandymanagement} from './redux/candy/candymanagement/candymanagement';
 import {candyCandyOrder} from './redux/candy/candyorder/candyorder';
 import {managentPriceClassification} from './redux/managent/priceClassification';
+import {candyConfiguration} from './redux/candy/candyConfiguration/candyConfiguration';
 
 export default combineReducers({
     user,
@@ -445,5 +446,6 @@ export default combineReducers({
     quantitativeAiRule,
     candyCandymanagement,
     candyCandyOrder,
-    managentPriceClassification
+    managentPriceClassification,
+    candyConfiguration
 });

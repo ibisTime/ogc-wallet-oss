@@ -10,18 +10,21 @@ class candyManagementAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
+    componentDidMount() {
+        if(!this.view) {
+            setTimeout(() => {
+                let pricePar = document.getElementById('price').parentNode;
+                let spHtml = document.createElement('span');
+                spHtml.innerText = ' TOSP';
+                spHtml.style.color = 'red';
+                pricePar.appendChild(spHtml);
+            }, 100);
+        }
+    }
     render() {
         const fields = [{
             field: 'name',
             title: '糖果名称',
-            required: true
-        }, {
-            field: 'symbol',
-            title: '糖果购买可用币种',
-            type: 'select',
-            listCode: '802007',
-            keyName: 'symbol',
-            valueName: 'symbol',
             required: true
         }, {
             field: 'price',
@@ -29,7 +32,7 @@ class candyManagementAddedit extends DetailUtil {
             required: true,
             formatter: function (v, data) {
                 if(v) {
-                    return moneyFormat(v.toString(), '', data.symbol);
+                    return moneyFormat(v.toString(), '', data.symbol) + (this.view ? data.symbol : null);
                 }
             }
         }, {
@@ -41,19 +44,20 @@ class candyManagementAddedit extends DetailUtil {
             title: '糖果图片',
             required: true,
             type: 'img',
-            single: true
+            single: true,
+            help: '图片大小为210*158'
         }, {
             field: 'inventory',
             title: '糖果库存数量',
             required: true
-        }, {
-            field: 'description',
-            title: '糖果描述',
-            type: 'textarea',
-            required: true
-        }, {
-            field: 'saleAmountFake',
-            title: '虚拟数量'
+        // }, {
+        //     field: 'description',
+        //     title: '糖果描述',
+        //     type: 'textarea',
+        //     required: true
+        // }, {
+        //     field: 'saleAmountFake',
+        //     title: '虚拟数量'
         }, {
             field: 'status',
             title: '状态',
@@ -79,6 +83,7 @@ class candyManagementAddedit extends DetailUtil {
             editCode: '610402',
             detailCode: '610417',
             beforeSubmit: (params) => {
+                params.symbol = 'TOSP';
                 params.price = moneyParse(params.price, '', params.symbol);
                 return true;
             }

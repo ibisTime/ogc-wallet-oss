@@ -64,17 +64,14 @@ class Candyorder extends React.Component {
             field: 'price',
             title: '价格',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                return moneyFormat(v.toString(), '', data.symbol) + data.symbol;
             }
         }, {
             field: 'rate',
             title: '甜度'
         }, {
-            field: 'quantity',
-            title: '总可售数量'
-        }, {
-            field: 'symbol',
-            title: '币种'
+            field: 'orderNo',
+            title: '购买次序'
         }, {
             field: 'status',
             title: '状态',

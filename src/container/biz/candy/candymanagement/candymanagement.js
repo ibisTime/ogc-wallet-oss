@@ -38,15 +38,19 @@ class Candymanagement extends React.Component {
             title: '糖果名称',
             search: true
         }, {
-            field: 'symbol',
-            title: '购买糖果的币种',
-            search: true
-        }, {
             field: 'price',
             title: '购买糖果价格',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                return moneyFormat(v.toString(), '', data.symbol) + data.symbol;
             }
+        }, {
+            field: 'symbol',
+            title: '糖果购买可用币种',
+            type: 'select',
+            listCode: '802007',
+            keyName: 'symbol',
+            valueName: 'symbol',
+            search: true
         }, {
             field: 'rate',
             title: '糖果甜度'
@@ -61,9 +65,6 @@ class Candymanagement extends React.Component {
         }, {
             field: 'saleAmount',
             title: '已售数量'
-        }, {
-            field: 'saleAmountFake',
-            title: '虚拟已售数量'
         }, {
             field: 'createTime',
             title: '创建时间',

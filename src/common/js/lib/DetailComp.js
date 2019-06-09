@@ -541,6 +541,7 @@ export default class DetailComp extends React.Component {
       isTime,
       getFieldDecorator,
       hidden: item.hidden,
+      daytime: item.daytime,
       inline: item.inline,
       field: item.field,
       label: this.getLabel(item),
