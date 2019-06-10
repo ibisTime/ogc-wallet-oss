@@ -615,6 +615,14 @@ const ROUTES = [
         path: '/activity/goldenMile/addedit',
         component: asyncComponent(() => import('container/biz/activity/goldenMile/goldenMile-addedit'))
     },
+    {
+        path: '/activity/activityConfiguration',
+        component: asyncComponent(() => import('container/biz/activity/activityConfiguration/activityConfiguration'))
+    },
+    {
+        path: '/activity/activityConfiguration/addedit',
+        component: asyncComponent(() => import('container/biz/activity/activityConfiguration/activityConfig-addedit'))
+    },
     // 邀请好友链接文本
     {
         path: '/activity/invitingTxt',
