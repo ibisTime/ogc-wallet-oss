@@ -43,14 +43,14 @@ class Candymanagement extends React.Component {
             render: function (v, data) {
                 return moneyFormat(v.toString(), '', data.symbol) + data.symbol;
             }
-        }, {
-            field: 'symbol',
-            title: '糖果购买可用币种',
-            type: 'select',
-            listCode: '802007',
-            keyName: 'symbol',
-            valueName: 'symbol',
-            search: true
+        // }, {
+        //     field: 'symbol',
+        //     title: '糖果购买可用币种',
+        //     type: 'select',
+        //     listCode: '802007',
+        //     keyName: 'symbol',
+        //     valueName: 'symbol',
+        //     search: true
         }, {
             field: 'rate',
             title: '糖果甜度'

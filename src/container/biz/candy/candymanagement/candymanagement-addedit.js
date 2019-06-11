@@ -30,7 +30,7 @@ class candyManagementAddedit extends DetailUtil {
             field: 'price',
             title: '糖果单价',
             required: true,
-            formatter: function (v, data) {
+            formatter: (v, data) => {
                 if(v) {
                     return moneyFormat(v.toString(), '', data.symbol) + (this.view ? data.symbol : null);
                 }
@@ -84,7 +84,7 @@ class candyManagementAddedit extends DetailUtil {
             detailCode: '610417',
             beforeSubmit: (params) => {
                 params.symbol = 'TOSP';
-                params.price = moneyParse(params.price, '', params.symbol);
+                params.price = moneyParse(`${parseFloat(params.price)}`, '', params.symbol);
                 return true;
             }
         });

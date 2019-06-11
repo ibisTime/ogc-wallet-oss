@@ -1,17 +1,23 @@
 import React from 'react';
 import { Form } from 'antd';
+import { getQueryString } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
-import {getQueryString, moneyFormat} from 'common/js/util';
 
 @Form.create()
-class CandyConfigurationEdit extends DetailUtil {
+class GoldenMileAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-        let ckey = getQueryString('ckey', this.props.location.search);
-        let reg = /date$/;
-        this.isDate = reg.test(ckey);
+        this.cData = {
+            ctype: getQueryString('ckey'),
+            ckey: {
+                cDate: /_date/,
+                cSymbol: /_symbol/,
+                cActivity: /_notice/,
+                cRule: /_rule/
+            }
+        };
     }
     render() {
         const fields = [{
@@ -25,11 +31,41 @@ class CandyConfigurationEdit extends DetailUtil {
             title: '说明',
             field: 'remark',
             hidden: true
-        }, {
-            title: '数值',
-            field: 'cvalue',
-            required: true
         }];
+        if(this.cData.ctype.match(this.cData.ckey.cDate)) {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                type: 'time'
+            });
+        } else if(this.cData.ctype.match(this.cData.ckey.cActivity) || this.cData.ctype.match(this.cData.ckey.cRule)) {
+            fields.push({
+                title: '内容',
+                field: 'cvalue',
+                required: true,
+                type: 'textarea'
+            });
+        }else if(this.cData.ctype.match(this.cData.ckey.cSymbol)) {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                type: 'select',
+                pageCode: '802005',
+                params: {
+                    status: '0'
+                },
+                keyName: 'symbol',
+                valueName: '{{symbol.DATA}}-{{cname.DATA}}'
+            });
+        } else {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true
+            });
+        }
         return this.buildDetail({
             fields,
             key: 'id',
@@ -37,12 +73,12 @@ class CandyConfigurationEdit extends DetailUtil {
             view: this.view,
             editCode: '630042',
             detailCode: '630046',
-            beforeSubmit: (data) => {
-                data.type = 'candy';
+            beforeSubmit: function(data) {
+                data.ckey = 'candy';
                 return data;
             }
         });
     }
 }
 
-export default CandyConfigurationEdit;
+export default GoldenMileAddedit;

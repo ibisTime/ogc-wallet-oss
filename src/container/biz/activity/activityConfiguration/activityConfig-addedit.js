@@ -14,7 +14,8 @@ class GoldenMileAddedit extends DetailUtil {
             ckey: {
                 cDate: /_date/,
                 cSymbol: /_symbol/,
-                cActivity: /_notice/
+                cActivity: /_notice/,
+                cRule: /_rule/
             }
         };
     }
@@ -36,7 +37,7 @@ class GoldenMileAddedit extends DetailUtil {
                 title: '数值',
                 field: 'cvalue',
                 required: true,
-                type: 'textarate'
+                type: 'datetime'
             });
         } else if(this.cData.ctype.match(this.cData.ckey.cActivity)) {
             fields.push({
