@@ -32,7 +32,7 @@ class candyManagementAddedit extends DetailUtil {
             required: true,
             formatter: (v, data) => {
                 if(v) {
-                    return moneyFormat(v.toString(), '', data.symbol) + (this.view ? data.symbol : null);
+                    return moneyFormat(v.toString(), '', data.symbol) + (this.view ? data.symbol : '');
                 }
             }
         }, {

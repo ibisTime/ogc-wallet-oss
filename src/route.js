@@ -1219,6 +1219,14 @@ const ROUTES = [
     {
         path: '/candy/candyConfiguration/addedit',
         component: asyncComponent(() => import('container/biz/candy/candyConfiguration/candyConfiguration-addedit'))
+    },
+    {
+        path: '/earnings/earningsQuery',
+        component: asyncComponent(() => import('container/biz/candy/earnings/earningsQuery'))
+    },
+    {
+        path: '/earnings/earningsQuery/addedit',
+        component: asyncComponent(() => import('container/biz/candy/earnings/earningsQuery-addedit'))
     }
 ];
 

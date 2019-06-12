@@ -257,6 +257,7 @@ import {candyCandymanagement} from './redux/candy/candymanagement/candymanagemen
 import {candyCandyOrder} from './redux/candy/candyorder/candyorder';
 import {managentPriceClassification} from './redux/managent/priceClassification';
 import {candyConfiguration} from './redux/candy/candyConfiguration/candyConfiguration';
+import {earningsQuery} from './redux/candy/earnings/earningsQuery';
 
 export default combineReducers({
     user,
@@ -449,5 +450,6 @@ export default combineReducers({
     candyCandyOrder,
     managentPriceClassification,
     candyConfiguration,
-    activityConfiguration
+    activityConfiguration,
+    earningsQuery
 });
