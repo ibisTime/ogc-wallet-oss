@@ -161,7 +161,6 @@ class TBAddress extends React.Component {
                     console.log(type);
                     //    0 ETH  1 BTC  2 WAN  3 USDT  4 TRX
                     //    OT  ETHTOKEN   2T WANTOKEN
-                    debugger;
                     if(!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     }else if(selectedRowKeys.length > 1) {
