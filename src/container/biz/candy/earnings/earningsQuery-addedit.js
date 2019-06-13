@@ -39,15 +39,21 @@ class earningsQueryAddedit extends DetailUtil {
             }
         }, {
             field: 'candyName',
-            title: '糖果名称'
+            title: '糖果名称',
+            formatter(v, d) {
+                return d.candyOrder.candyName;
+            }
         }, {
             field: 'rate',
-            title: '甜度'
+            title: '甜度',
+            formatter(v, d) {
+                return d.candyOrder.rate;
+            }
         }, {
             field: 'price',
             title: '价格',
-            formatter: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+            formatter: function (v, d) {
+                return moneyFormat(d.candyOrder.price.toString(), '', d.symbol);
             }
         }, {
             field: 'income',
