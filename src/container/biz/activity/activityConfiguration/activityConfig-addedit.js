@@ -10,7 +10,7 @@ class GoldenMileAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.cData = {
-            ctype: getQueryString('ckey'),
+            ctype: getQueryString('ctype'),
             ckey: {
                 cDate: /_date/,
                 cSymbol: /_symbol/,
@@ -31,19 +31,15 @@ class GoldenMileAddedit extends DetailUtil {
             title: '说明',
             field: 'remark',
             hidden: true
-        }, {
-            title: '数值',
-            field: 'cvalue',
-            required: true
         }];
         if(this.cData.ctype.match(this.cData.ckey.cDate)) {
             fields.push({
                 title: '数值',
                 field: 'cvalue',
                 required: true,
-                type: 'time'
+                type: 'datetime'
             });
-        } else if(this.cData.ctype.match(this.cData.ckey.cActivity) || this.cData.ctype.match(this.cData.ckey.cRule)) {
+        } else if(this.cData.ctype.match(this.cData.ckey.cActivity)) {
             fields.push({
                 title: '内容',
                 field: 'cvalue',
@@ -78,7 +74,7 @@ class GoldenMileAddedit extends DetailUtil {
             editCode: '630042',
             detailCode: '630046',
             beforeSubmit: function(data) {
-                data.ckey = 'candy';
+                data.ckey = 'register';
                 return data;
             }
         });

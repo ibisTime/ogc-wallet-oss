@@ -143,6 +143,7 @@ import {quotationMarketAdjustment} from './redux/biz/quotation/marketAdjustment'
 import {activityInvitingFriends} from './redux/activity/invitingFriends/invitingFriends';
 
 import {activityGoldenMile} from './redux/activity/goldenMile/goldenMile';
+import {activityConfiguration} from './redux/activity/activityConfiguration/activityConfiguration';
 
 // 业务规则
 // 广告费规则
@@ -256,6 +257,7 @@ import {candyCandymanagement} from './redux/candy/candymanagement/candymanagemen
 import {candyCandyOrder} from './redux/candy/candyorder/candyorder';
 import {managentPriceClassification} from './redux/managent/priceClassification';
 import {candyConfiguration} from './redux/candy/candyConfiguration/candyConfiguration';
+import {earningsQuery} from './redux/candy/earnings/earningsQuery';
 
 export default combineReducers({
     user,
@@ -447,5 +449,7 @@ export default combineReducers({
     candyCandymanagement,
     candyCandyOrder,
     managentPriceClassification,
-    candyConfiguration
+    candyConfiguration,
+    activityConfiguration,
+    earningsQuery
 });

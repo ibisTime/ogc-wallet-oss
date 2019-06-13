@@ -615,6 +615,14 @@ const ROUTES = [
         path: '/activity/goldenMile/addedit',
         component: asyncComponent(() => import('container/biz/activity/goldenMile/goldenMile-addedit'))
     },
+    {
+        path: '/activity/activityConfiguration',
+        component: asyncComponent(() => import('container/biz/activity/activityConfiguration/activityConfiguration'))
+    },
+    {
+        path: '/activity/activityConfiguration/addedit',
+        component: asyncComponent(() => import('container/biz/activity/activityConfiguration/activityConfig-addedit'))
+    },
     // 邀请好友链接文本
     {
         path: '/activity/invitingTxt',
@@ -1211,6 +1219,14 @@ const ROUTES = [
     {
         path: '/candy/candyConfiguration/addedit',
         component: asyncComponent(() => import('container/biz/candy/candyConfiguration/candyConfiguration-addedit'))
+    },
+    {
+        path: '/earnings/earningsQuery',
+        component: asyncComponent(() => import('container/biz/candy/earnings/earningsQuery'))
+    },
+    {
+        path: '/earnings/earningsQuery/addedit',
+        component: asyncComponent(() => import('container/biz/candy/earnings/earningsQuery-addedit'))
     }
 ];
 

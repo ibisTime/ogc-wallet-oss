@@ -37,7 +37,7 @@ class InvitingFriendsAddedit extends DetailUtil {
             title: '数值',
             field: 'cvalue',
             required: true,
-            type: 'textarate'
+            type: 'datetime'
           });
         } else if(this.cData.ctype.match(this.cData.ckey.cActivity)) {
             fields.push({
