@@ -988,6 +988,16 @@ const ROUTES = [
         path: '/BTC-finance/nopassquery/addedit',
         component: asyncComponent(() => import('container/BTC-finance/nopassquery/TBunderline-addedit'))
     },
+    // 广播失败散取查询
+    {
+        path: '/BTC-finance/broadcastfailurequery',
+        component: asyncComponent(() => import('container/BTC-finance/broadcastfailurequery/TBunderline'))
+    },
+    // 广播失败散取查询 --详情
+    {
+        path: '/BTC-finance/broadcastfailurequery/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/broadcastfailurequery/TBunderline-addedit'))
+    },
 
     // 归集地址
     {

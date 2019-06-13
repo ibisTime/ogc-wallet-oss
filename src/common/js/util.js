@@ -823,3 +823,12 @@ export function getCoinUnit(coin) {
     var unit = getCoinData()[coin].unit;
     return unit;
 }
+
+export function getCoinType(coin) {
+  if (!coin) {
+      console.log('coin不能为空');
+      return;
+  }
+  var type = getCoinData()[coin].type;
+  return type;
+}

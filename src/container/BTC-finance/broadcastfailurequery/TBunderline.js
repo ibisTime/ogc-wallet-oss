@@ -151,7 +151,7 @@ class TBunderline extends React.Component {
             fields,
             pageCode: '802355',
             searchParams: {
-                status: '2'
+                status: '5'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {
@@ -162,7 +162,7 @@ class TBunderline extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是待审核的记录');
                     } else {
-                        this.props.history.push(`/BTC-finance/nopassquery/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/BTC-finance/completedquery/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
                     }
                 },
                 sp: (selectedRowKeys, selectedRows) => {
