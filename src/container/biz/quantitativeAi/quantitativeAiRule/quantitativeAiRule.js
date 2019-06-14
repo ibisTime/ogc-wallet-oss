@@ -38,7 +38,21 @@ class QuantitativeAiRule extends React.Component {
             pageCode: '630045',
             searchParams: {
                 type: 'gplh'
-            }
+            },
+            buttons: [{
+                code: 'userInvestFlow',
+                name: '修改',
+                handler: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push('/quantitativeAi/quantitativeAiRule/addedit?code=' + selectedRowKeys[0] + '&ctype=' + selectedRows[0].ckey);
+                    }
+                },
+                check: true
+            }]
         });
     }
 }

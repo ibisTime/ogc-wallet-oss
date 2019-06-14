@@ -9,6 +9,16 @@ class CloudRulesEdit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.cData = {
+            ctype: getQueryString('ctype'),
+            ckey: {
+                cDate: /_date/,
+                cSymbol: /_symbol/,
+                cActivity: /_notice/,
+                cRule: /_rule/,
+                cRedeem: /redeem_/
+            }
+        };
     }
     render() {
         const fields = [{
@@ -22,12 +32,22 @@ class CloudRulesEdit extends DetailUtil {
             title: '说明',
             field: 'remark',
             hidden: true
-        }, {
-            title: '数值',
-            field: 'cvalue',
-            required: true,
-            number: true
         }];
+        if(this.cData.ctype.match(this.cData.ckey.cRedeem)) {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                type: 'text'
+            });
+        } else {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                number: true
+            });
+        }
         return this.buildDetail({
             fields,
             key: 'id',
