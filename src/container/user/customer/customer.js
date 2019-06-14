@@ -35,16 +35,8 @@ class Customer extends React.Component {
             title: '手机号/邮箱',
             search: true
         }, {
-            field: 'kind',
-            title: '类型',
-            type: 'select',
-            data: [{
-                key: 'C',
-                value: 'c端'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            search: true
+            field: 'inviteCode',
+            title: '邀请码'
         }, {
             field: 'userReferee',
             title: '推荐人',
