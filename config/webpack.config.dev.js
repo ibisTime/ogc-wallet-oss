@@ -57,15 +57,22 @@ module.exports = {
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
   ],
+  entry: {
+    'polyfills':require.resolve('./polyfills'),
+    'webpackHotDevClient': require.resolve('react-dev-utils/webpackHotDevClient'),
+    'common_detail': paths.comDetailJs,
+    'common_list': paths.comListJs,
+    'index': paths.appIndexJs
+  },
   output: {
     // Add /* filename */ comments to generated require()s in the output.
     pathinfo: true,
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
+    filename: 'static/js/[name].[chunkhash:8].js',
     // There are also additional JS chunk files if you use code splitting.
-    chunkFilename: 'static/js/[name].chunk.js',
+    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
@@ -244,6 +251,10 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name : ['common_list','common_detail'],
+      filename : '[name].js'
+    }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

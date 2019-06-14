@@ -58,7 +58,8 @@ class BTCDiviAddress extends React.Component {
       title: '持有币的数量'
     }, {
       field: 'address',
-      title: '地址'
+      title: '地址',
+      search: true
     }, {
       field: 'cnyPrice',
       title: '单价(CNY)'
