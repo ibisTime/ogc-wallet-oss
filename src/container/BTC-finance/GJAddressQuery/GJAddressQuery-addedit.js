@@ -25,16 +25,14 @@ class GJAddressQueryAddedit extends DetailUtil {
         }, {
             field: 'amount',
             title: '交易数量',
-            render: (v, data) => {
-                console.log(data);
-                return moneyFormat(Number(v), '', data.currency);
+            formatter: (v, data) => {
+                return moneyFormat(data.amount, '', data.currency);
             }
         }, {
             title: '矿工费',
             field: 'txFee',
-            render: (v, data) => {
-                // console.log(data.currency);
-                return moneyFormat(Number(v), '', data.currency);
+            formatter: (v, data) => {
+                return moneyFormat(data.txFee, '', data.currency);
             }
         }, {
             field: 'fromAddress',
