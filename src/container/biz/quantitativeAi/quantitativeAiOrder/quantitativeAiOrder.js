@@ -70,7 +70,8 @@ class QuantitativeAiOrder extends React.Component {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'pglh_order_status'
+            key: 'pglh_order_status',
+            search: true
         }, {
             field: 'totalIncome',
             title: '产生收益总数',
