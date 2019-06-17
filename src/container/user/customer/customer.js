@@ -322,7 +322,7 @@ class Customer extends React.Component {
               okText={'确定'}
               cancelText={'取消'}
               onOk={() => {
-                  if (isUndefined(loginPwd)) {
+                  if (isUndefined(this.state.loginPwd)) {
                       showWarnMsg('请输入登录密码');
                       return;
                   }
@@ -334,7 +334,8 @@ class Customer extends React.Component {
                       hasMsg();
                       message.success('操作成功', 1, () => {
                           this.setState({
-                            loginPwdVisible: false
+                            loginPwdVisible: false,
+                            loginPwd: ''
                           });
                           this.props.getPageData();
                       });
@@ -348,7 +349,7 @@ class Customer extends React.Component {
             >
                 <div>
                     <label>登录密码：</label>
-                    <Input type="password" placeholder="请输入密码" ref={(target) => { this.loginPwd = target; }} style={{ width: '60%' }}/>
+                    <Input type="password" placeholder="请输入密码" ref={(target) => { this.state.loginPwd = target; }} style={{ width: '60%' }}/>
                 </div>
             </Modal>
 
