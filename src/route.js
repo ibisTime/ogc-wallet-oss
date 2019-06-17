@@ -873,7 +873,7 @@ const ROUTES = [
     },
     // 平台账户
     {
-        path: '/BTC-finance/platformAccount',
+        path: '/BTC-finance/addressQuery/platformAccount',
         component: asyncComponent(() => import('container/BTC-finance/platformAccount/platformAccount'))
     },
     {

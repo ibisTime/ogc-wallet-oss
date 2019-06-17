@@ -10,3 +10,42 @@
     margin-bottom: 13px;
     line-height: 1;
 }
+.platform-account-wrapper .ant-col {
+    width: 360px;
+    float: left;
+}
+.platform-account-wrapper .ant-col + .ant-col {
+    margin-left: 30px;
+}
+.platform-account-wrapper .ant-card-body {
+    padding: 49px 42px;
+}
+.platform-account-wrapper .account-topcard {
+    display: flex;
+    align-items: center;
+    padding: 40px 30px 44px;
+    width: 1140px;
+    margin-bottom: 30px;
+    background: #fff;
+}
+.platform-account-wrapper .account-topcard .topcard-item {
+    flex: 1;
+    border-right: 1px solid #F0F0F0;
+    line-height: 1;
+    padding-left: 41px;
+}
+.platform-account-wrapper .account-topcard .topcard-item:first-child {
+    padding-left: 0;
+}
+.platform-account-wrapper .account-topcard .topcard-item:last-child {
+    border-right: none;
+}
+.platform-account-wrapper .topcard-item .topcard-title {
+    color: #999999;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+.platform-account-wrapper .topcard-item .topcard-price {
+    color: #333333;
+    font-size: 26px;
+}

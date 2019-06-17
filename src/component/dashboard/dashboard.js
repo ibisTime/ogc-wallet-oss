@@ -164,7 +164,8 @@ class Dashboard extends React.Component {
     let props = {
       className: 'right-content'
     };
-    if (this.props.location.pathname === '/') {
+    if (this.props.location.pathname === '/' ||
+      this.props.location.pathname === '/BTC-finance/addressQuery/platformAccount') {
       props.style = {
         background: '#f0f2f5',
         padding: 2

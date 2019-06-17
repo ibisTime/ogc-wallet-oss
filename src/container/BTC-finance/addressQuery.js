@@ -51,7 +51,7 @@ class AddressQuery extends React.Component {
           } else if (rowKeys.length > 1) {
             showWarnMsg('请选择一条记录');
           } else {
-            this.props.history.push(`/BTC-finance/platformAccount?symbol=${rowKeys[0]}`);
+            this.props.history.push(`/BTC-finance/addressQuery/platformAccount?symbol=${rowKeys[0]}`);
           }
         },
         check: false

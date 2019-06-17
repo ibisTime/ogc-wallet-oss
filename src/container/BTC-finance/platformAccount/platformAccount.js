@@ -16,7 +16,8 @@ class PlatformAccount extends React.Component {
             accountTypeCold: 'SYS_USER_COLD',
             accountTypeLhlc: 'SYS_USER_LHLC',
             accountTypeYK: 'SYS_USER_INCOME',
-            accountTypeYY: 'SYS_USER_MARKETING'
+            accountTypeYY: 'SYS_USER_MARKETING',
+            statistics: {}
         };
     }
 
@@ -51,7 +52,11 @@ class PlatformAccount extends React.Component {
     }
 
     render() {
-        const { unsettledLoan, fetching } = this.state;
+        const {
+            accountTypeSQ, accountTypeCold, accountTypeLhlc,
+            accountTypeYK, accountTypeYY, unsettledLoan,
+            symbol, statistics, fetching
+        } = this.state;
         return (
             <Spin spinning={fetching}>
                 <div style={{'marginBottom': '30px'}}>
@@ -59,37 +64,55 @@ class PlatformAccount extends React.Component {
                         this.props.history.go(-1);
                     }}>返回</Button>
                 </div>
-                <Row className="platform-account-wrapper">
-                    <Col style={{width: '380px', float: 'left', marginRight: '30px'}}>
-                        <Card>
-                            <div>
+                <div className="platform-account-wrapper">
+                    <div className="account-topcard">
+                        <div className="topcard-item">
+                            <div className="topcard-title">{symbol}当日充币总量</div>
+                            <div className="topcard-price">{moneyFormat(statistics.totalCharge ? statistics.totalCharge : '0', '', symbol)}</div>
+                        </div>
+                        <div className="topcard-item">
+                            <div className="topcard-title">{symbol}当日提币总量</div>
+                            <div className="topcard-price">{moneyFormat(statistics.totalWithdraw ? statistics.totalWithdraw : '0', '', symbol)}</div>
+                        </div>
+                        <div className="topcard-item">
+                            <div className="topcard-title">{symbol}剩余总量</div>
+                            <div className="topcard-price">{moneyFormat(statistics.residue ? statistics.residue : '0', '', symbol)}</div>
+                        </div>
+                        <div className="topcard-item">
+                            <div className="topcard-title">JEJU总量</div>
+                            <div className="topcard-price">{moneyFormat(statistics.totalJEJU ? statistics.totalJEJU : '0', '', symbol)}</div>
+                        </div>
+                    </div>
+                    <Row>
+                        <Col>
+                            <Card>
                                 <div className="account-card-title">冷钱包账户余额</div>
-                                <div className="account-card-price">{moneyFormat(unsettledLoan[this.state.accountTypeCold] ? unsettledLoan[this.state.accountTypeCold].amount : '0', '', this.state.symbol)}</div>
+                                <div className="account-card-price">{moneyFormat(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].amount : '0', '', symbol)}</div>
                                 <Button
-                                    onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeCold] ? unsettledLoan[this.state.accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '')}
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '')}
                                     type="primary">资金流水</Button>
-                            </div>
-                        </Card>
-                    </Col>
-                    <Col style={{width: '380px', float: 'left', marginRight: '30px'}}>
-                        <Card title="散取账户余额" extra={
-                            moneyFormat(unsettledLoan[this.state.accountTypeSQ] ? unsettledLoan[this.state.accountTypeSQ].amount : '0', '', this.state.symbol)
-                        }>{<div style={{width: '100%', textAlign: 'center'}}>
-                            <Button
-                                onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeSQ] ? unsettledLoan[this.state.accountTypeSQ].accountNumber : '', 'jour_biz_type_withdraw', '')}
-                                type="primary">资金流水</Button>
-                        </div>}</Card>
-                    </Col>
-                    <Col style={{width: '380px', float: 'left', marginRight: '30px'}}>
-                        <Card title="盈亏账户余额 " extra={
-                            moneyFormat(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].amount : '0', '', this.state.symbol)
-                        }>{<div style={{width: '100%', textAlign: 'center'}}>
-                            <Button
-                                onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
-                                type="primary">资金流水</Button>
-                        </div>}</Card>
-                    </Col>
-                </Row>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <div className="account-card-title">散取账户余额</div>
+                                <div className="account-card-price">{moneyFormat(unsettledLoan[accountTypeSQ] ? unsettledLoan[accountTypeSQ].amount : '0', '', symbol)}</div>
+                                <Button
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeSQ] ? unsettledLoan[accountTypeSQ].accountNumber : '', 'jour_biz_type_withdraw', '')}
+                                    type="primary">资金流水</Button>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <div className="account-card-title">盈亏账户余额</div>
+                                <div className="account-card-price">{moneyFormat(unsettledLoan[accountTypeYK] ? unsettledLoan[accountTypeYK].amount : '0', '', symbol)}</div>
+                                <Button
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeYK] ? unsettledLoan[accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
+                                    type="primary">资金流水</Button>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
             </Spin>
         );
     }
