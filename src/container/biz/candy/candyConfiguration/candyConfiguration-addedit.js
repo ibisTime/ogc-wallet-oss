@@ -31,10 +31,6 @@ class GoldenMileAddedit extends DetailUtil {
             title: '说明',
             field: 'remark',
             hidden: true
-        }, {
-            title: '数值',
-            field: 'cvalue',
-            required: true
         }];
         if(this.cData.ctype.match(this.cData.ckey.cDate)) {
             fields.push({

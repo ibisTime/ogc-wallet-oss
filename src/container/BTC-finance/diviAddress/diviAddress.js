@@ -102,8 +102,8 @@ class BTCDiviAddress extends React.Component {
             showWarnMsg('请选择一条记录');
           } else if (selectedRows[0].currency === 'BTC') {
             // 测试：https://testnet.blockexplorer.com/address/
-            // 正式：https://blockexplorer.com/address/
-            window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+            // 正式：https://btc.com/
+            window.open('https://btc.com/' + selectedRows[0].address, '_bank');
           } else if (selectedRows[0].currency === 'USDT') {
             window.open('https://omniexplorer.info/address/' + selectedRows[0].address, '_bank');
           }

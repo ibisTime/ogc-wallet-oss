@@ -20,7 +20,7 @@ import {
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
-let currency = 'BTC';
+let currency = 'ETH';
 
 @listWrapper(
     state => ({
@@ -40,13 +40,13 @@ class TBAddress extends React.Component {
         setTimeout(() => {
             symInputList.forEach((item, index) => {
                 if (item.id === 'symbol') {
-                    item.value = currency + '-比特币';
+                    item.value = currency + '-以太坊';
                     symPloList[index].style.display = 'none';
                 }
             });
         }, 4000);
         clearParams.addEventListener('click', () => {
-            currency = 'BTC';
+            currency = 'ETH';
         });
     }
 
@@ -68,7 +68,7 @@ class TBAddress extends React.Component {
                 setTimeout(() => {
                     let clearSpan = document.querySelector('.ant-select-selection__clear');
                     clearSpan.addEventListener('click', () => {
-                        currency = 'BTC';
+                        currency = 'ETH';
                     });
                 }, 0);
                 currency = v;
@@ -162,8 +162,8 @@ class TBAddress extends React.Component {
                         showWarnMsg('请选择一条记录');
                     }else if(selectedRows[0].symbol === 'BTC') {
                         // 测试：https://testnet.blockexplorer.com/address/
-                        // 正式：https://blockexplorer.com/address/
-                        window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+                        // 正式：https://btc.com/
+                        window.open('https://btc.com/' + selectedRows[0].address, '_bank');
                     }else if(selectedRows[0].symbol === 'TRX') {
                         // 测试：https://shasta.tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
                         // 正式：https://tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
