@@ -77,15 +77,9 @@ class CustomerAddedit extends DetailUtil {
             }
         }, {
             title: '节点用户等级',
-            field: 'nodeLevel',
+            field: 'candyNodeLevel',
             type: 'select',
-            key: 'node_level'
-        }, {
-            field: 'nodeAmount',
-            title: '成为节点用户所需金额(万元)',
-            formatter(v) {
-                return (+v / 10000).toFixed(2);
-            }
+            key: 'candy_node_level'
         }, {
             field: 'status',
             title: '状态',

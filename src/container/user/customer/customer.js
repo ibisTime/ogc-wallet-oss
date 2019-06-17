@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Select, message } from 'antd';
+import { Modal, Select, message, Input } from 'antd';
 import {
     setTableData,
     setPagination,
@@ -30,20 +30,23 @@ const { Option } = Select;
 class Customer extends React.Component {
     state = {
         levelVal: '',
-        levelVisible: false
+        loginPwd: '',
+        levelVisible: false,
+        loginPwdVisible: false
     };
     levelChagne = levelVal => {
        this.setState({ levelVal });
     }
     render() {
-        const { levelVisible, levelVal, userId } = this.state;
+        const { levelVisible, levelVal, userId, loginPwdVisible, loginPwd } = this.state;
         const fields = [{
             field: 'nickname',
             title: '昵称',
             search: true
         }, {
             field: 'loginName',
-            title: '手机号/邮箱'
+            title: '手机号/邮箱',
+            search: true
         }, {
             field: 'kind',
             title: '类型',
@@ -86,10 +89,10 @@ class Customer extends React.Component {
             key: 'user_status',
             search: true
         }, {
-            field: 'gplhNodeLevel',
+            field: 'candyNodeLevel',
             title: '节点等级',
             type: 'select',
-            key: 'gplh_node_level'
+            key: 'candy_node_level'
         }, {
             field: 'isRealname',
             title: '是否实名',
@@ -131,6 +134,11 @@ class Customer extends React.Component {
                     searchParams: {
                     },
                     btnEvent: {
+                        // 代注册
+                        register: () => {
+                            this.props.history.push(`/user/customer/register`);
+                        },
+                        // 激活用户
                         active: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
@@ -246,7 +254,19 @@ class Customer extends React.Component {
                                 this.setState({
                                     levelVisible: true,
                                     userId: selectedRows[0].userId,
-                                    levelVal: selectedRows[0].gplhNodeLevel
+                                    levelVal: selectedRows[0].candyNodeLevel
+                                });
+                            }
+                        },
+                        editLoginPwd: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.setState({
+                                    loginPwdVisible: true,
+                                    userId: selectedRows[0].userId
                                 });
                             }
                         }
@@ -287,14 +307,51 @@ class Customer extends React.Component {
                     <label>节点等级：</label>
                     <Select placeholder="请选择节点等级" value={levelVal} onChange={this.levelChagne} style={{ width: '60%' }}>
                     {
-                        this.props.searchData.gplhNodeLevel
-                            ? this.props.searchData.gplhNodeLevel.map(v => (
+                        this.props.searchData.candyNodeLevel
+                            ? this.props.searchData.candyNodeLevel.map(v => (
                                 <Option value={v.dkey} key={v.dkey}>{v.dvalue}</Option>
                             )) : null
                     }
                     </Select>
                 </div>
             </Modal>
+
+            <Modal
+              title="修改登录密码"
+              visible={loginPwdVisible}
+              okText={'确定'}
+              cancelText={'取消'}
+              onOk={() => {
+                  if (isUndefined(loginPwd)) {
+                      showWarnMsg('请输入登录密码');
+                      return;
+                  }
+                  let hasMsg = message.loading('');
+                  fetch('805072', {
+                      userId: userId,
+                      loginPwd: this.state.loginPwd.state.value
+                  }).then(() => {
+                      hasMsg();
+                      message.success('操作成功', 1, () => {
+                          this.setState({
+                            loginPwdVisible: false
+                          });
+                          this.props.getPageData();
+                      });
+                  }, hasMsg);
+              }}
+              onCancel={() => {
+                  this.setState({
+                    loginPwdVisible: false
+                  });
+              }}
+            >
+                <div>
+                    <label>登录密码：</label>
+                    <Input type="password" placeholder="请输入密码" ref={(target) => { this.loginPwd = target; }} style={{ width: '60%' }}/>
+                </div>
+            </Modal>
+
             </div>
         );
     }
