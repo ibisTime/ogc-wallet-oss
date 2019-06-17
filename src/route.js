@@ -269,6 +269,16 @@ const ROUTES = [
         path: '/user/customer/accountSummary',
         component: asyncComponent(() => import('container/user/customer/customer-accountSummary'))
     },
+    // 修改推荐人
+    {
+        path: '/user/customer/referee',
+        component: asyncComponent(() => import('container/user/customer/customer-editReferee'))
+    },
+    // 修改实名制
+    {
+        path: '/user/customer/identify',
+        component: asyncComponent(() => import('container/user/customer/customer-identify'))
+    },
     // kyc审核
     {
         path: '/user/kycCheck',
@@ -999,6 +1009,16 @@ const ROUTES = [
     {
         path: '/BTC-finance/nopassquery/addedit',
         component: asyncComponent(() => import('container/BTC-finance/nopassquery/TBunderline-addedit'))
+    },
+    // 散取管理 --取现查询
+    {
+        path: '/BTC-finance/withdrawRule',
+        component: asyncComponent(() => import('container/BTC-finance/withdrawRule/withdrawRule'))
+    },
+    // 散取管理 --取现查询 --详情
+    {
+        path: '/BTC-finance/withdrawRule/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/withdrawRule/withdrawRule-addedit'))
     },
 
     // 归集地址

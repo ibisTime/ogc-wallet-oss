@@ -31,14 +31,28 @@ class Customer extends React.Component {
     state = {
         levelVal: '',
         loginPwd: '',
+        tradePwd: '',
         levelVisible: false,
-        loginPwdVisible: false
+        loginPwdVisible: false,
+        tradePwdVisible: false
     };
+    // 节点等级修改
     levelChagne = levelVal => {
        this.setState({ levelVal });
     }
+    // 登录密码修改
+    loginPwdChagne = e => {
+        this.setState({ loginPwd: e.target.value });
+    }
+    // 交易密码修改
+    tradePwdChagne = e => {
+        this.setState({ tradePwd: e.target.value });
+    }
     render() {
-        const { levelVisible, levelVal, userId, loginPwdVisible, loginPwd } = this.state;
+        const {
+            levelVisible, levelVal, userId, loginPwdVisible, loginPwd,
+            tradePwd, tradePwdVisible
+        } = this.state;
         const fields = [{
             field: 'nickname',
             title: '昵称',
@@ -245,6 +259,7 @@ class Customer extends React.Component {
                                 this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}&nodeLevel=1`);
                             }
                         },
+                        // 修改节点等级
                         editLevel: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
@@ -258,6 +273,7 @@ class Customer extends React.Component {
                                 });
                             }
                         },
+                        // 修改登录密码
                         editLoginPwd: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
@@ -268,6 +284,39 @@ class Customer extends React.Component {
                                     loginPwdVisible: true,
                                     userId: selectedRows[0].userId
                                 });
+                            }
+                        },
+                        // 修改交易密码
+                        editTradePwd: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.setState({
+                                    tradePwdVisible: true,
+                                    userId: selectedRows[0].userId
+                                });
+                            }
+                        },
+                        // 修改推荐人
+                        editUserReferee: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/user/customer/referee?userId=${selectedRowKeys[0]}`);
+                            }
+                        },
+                        // 修改实名制
+                        editIdentify: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/user/customer/identify?userId=${selectedRowKeys[0]}`);
                             }
                         }
                     }
@@ -285,7 +334,7 @@ class Customer extends React.Component {
                   }
                   let hasMsg = message.loading('');
                   fetch('805074', {
-                      userId: userId,
+                      userId,
                       candyNodeLevel: levelVal
                   }).then(() => {
                       hasMsg();
@@ -328,8 +377,8 @@ class Customer extends React.Component {
                   }
                   let hasMsg = message.loading('');
                   fetch('805072', {
-                      userId: userId,
-                      loginPwd: this.state.loginPwd.state.value
+                      userId,
+                      loginPwd
                   }).then(() => {
                       hasMsg();
                       message.success('操作成功', 1, () => {
@@ -343,16 +392,51 @@ class Customer extends React.Component {
               }}
               onCancel={() => {
                   this.setState({
-                    loginPwdVisible: false
+                      loginPwdVisible: false
                   });
               }}
             >
                 <div>
                     <label>登录密码：</label>
-                    <Input type="password" placeholder="请输入密码" ref={(target) => { this.state.loginPwd = target; }} style={{ width: '60%' }}/>
+                    <Input type="password" placeholder="请输入密码" value={loginPwd} onChange={this.loginPwdChagne} style={{ width: '60%' }}/>
                 </div>
             </Modal>
-
+            <Modal
+              title="修改交易密码"
+              visible={tradePwdVisible}
+              okText={'确定'}
+              cancelText={'取消'}
+              onOk={() => {
+                  if (isUndefined(this.state.tradePwd)) {
+                      showWarnMsg('请输入交易密码');
+                      return;
+                  }
+                  let hasMsg = message.loading('');
+                  fetch('805073', {
+                      userId,
+                      tradePwd
+                  }).then(() => {
+                      hasMsg();
+                      message.success('操作成功', 1, () => {
+                          this.setState({
+                            tradePwdVisible: false,
+                            tradePwd: ''
+                          });
+                          this.props.getPageData();
+                      });
+                  }, hasMsg);
+              }}
+              onCancel={() => {
+                  this.setState({
+                    tradePwdVisible: false
+                  });
+              }}
+            >
+                <div>
+                    <label>交易密码：</label>
+                    <Input type="password" placeholder="请输入密码" value={tradePwd} onChange={this.tradePwdChagne} style={{ width: '60%' }}/>
+                </div>
+            </Modal>
             </div>
         );
     }

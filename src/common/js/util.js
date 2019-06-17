@@ -648,7 +648,12 @@ export const getRules = (item) => {
       message: '金额必须>=0，且小数点后最多2位'
     });
   }
-
+  if (item.nonnegative) {
+      rules.push({
+          pattern: /^\d+(?:\.\d+)?$/,
+          message: '必须>=0'
+      });
+  }
   if (item.min) {
     rules.push({
       validator: (rule, value, callback) => {
@@ -682,6 +687,13 @@ export const getRules = (item) => {
       min: 1,
       max: item.maxlength,
       message: `请输入一个长度最多是${item.maxlength}的字符串`
+    });
+  }
+  if (item.minlength) {
+    rules.push({
+      min: 1,
+      max: item.maxlength,
+      message: `请输入一个长度最少是${item.minlength}的字符串`
     });
   }
   return rules;

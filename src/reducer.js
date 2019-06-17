@@ -186,8 +186,6 @@ import {bizRedPacketQuery} from './redux/biz/redPacket/redPacketQuery';
 
 /* BTC财务管理 */
 // 查询地址
-import {BTCFinancePlatformAccount} from './redux/BTC-finance/platformAccount/platformAccount';
-// 平台账户
 import {addressQuery} from './redux/BTC-finance/addressQuery';
 
 // 分发地址
@@ -238,6 +236,8 @@ import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
 import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
 import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery';
 import {BTCFinanceGJAddressQueryAddEdit} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery-addedit';
+// 散取管理-- 取现规则
+import { BTCFinanceWithdrawRule } from './redux/BTC-finance/withdrawRule/withdrawRule';
 import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
 // 点位管理
@@ -389,8 +389,6 @@ export default combineReducers({
     /* BTC 财务管理 */
     // 查询币种
     addressQuery,
-    // 平台账户
-    BTCFinancePlatformAccount,
     // 分发地址
     BTCFinanceDiviAddress,
     BTCFinanceDiviAddressLedger,
@@ -410,6 +408,7 @@ export default combineReducers({
     BTCFinanceGJAddressQuery,
     BTCFinanceGJAddressQueryAddEdit,
     BTCFinanceSupplyAddress,
+    BTCFinanceWithdrawRule,
     // OTC系统设置
     publicOtctag,
     publicOtcPayment,
