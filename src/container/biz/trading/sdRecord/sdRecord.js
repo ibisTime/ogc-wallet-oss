@@ -31,6 +31,27 @@ class SdRecord extends React.Component {
           return d.userInfo ? `${d.userInfo.nickname}${'-' + d.userInfo.loginName}` : '-';
         }
     }, {
+      field: 'userId',
+      title: '兑换用户',
+      type: 'select',
+      pageCode: '805120',
+      keyName: 'userId',
+      valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+      searchName: 'keyword',
+      search: true,
+      render: (v, data) => {
+          if (data.refereeUser) {
+              let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
+              if (data.refereeUser.kind === 'Q') {
+                  let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
+                  return name + '(' + tmpl + ')';
+              }
+              return data.refereeUser.nickname + '(' + tmpl + ')';
+          }
+          return '';
+      },
+      noVisible: true
+  }, {
       field: 'symbolIn',
       title: '兑入币种',
       search: true
