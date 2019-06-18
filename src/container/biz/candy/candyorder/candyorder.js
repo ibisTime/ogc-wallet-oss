@@ -59,7 +59,7 @@ class Candyorder extends React.Component {
             noVisible: true
         }, {
             field: 'candyName',
-            title: '糖果名称'
+            title: '计划名称'
         }, {
             field: 'price',
             title: '价格',
@@ -68,7 +68,7 @@ class Candyorder extends React.Component {
             }
         }, {
             field: 'rate',
-            title: '甜度'
+            title: '收益计划'
         }, {
             field: 'orderNo',
             title: '购买次序'

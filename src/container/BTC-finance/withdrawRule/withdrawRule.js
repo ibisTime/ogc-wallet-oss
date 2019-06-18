@@ -40,8 +40,7 @@ class WithdrawRule extends React.Component {
             key: 'withdraw_fee_type'
         }, {
             field: 'withdrawFee',
-            title: '取现手续费数量',
-            help: '手续费类型如果是绝对值，则直接填写手续费；如果是百分比，请填写小数点x，手续费=实际提现金额*x'
+            title: '取现手续费数量'
         }];
         return this.props.buildList({
             fields,

@@ -18,7 +18,7 @@ class candyOrderAddedit extends DetailUtil {
             }
         }, {
             field: 'candyName',
-            title: '糖果名称'
+            title: '计划名称'
         }, {
             field: 'price',
             title: '价格',
@@ -27,7 +27,7 @@ class candyOrderAddedit extends DetailUtil {
             }
         }, {
             field: 'rate',
-            title: '甜度'
+            title: '计划收益'
         }, {
             field: 'quantity',
             title: '总可售数量'

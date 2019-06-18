@@ -15,7 +15,7 @@ class candyManagementAddedit extends DetailUtil {
             setTimeout(() => {
                 let pricePar = document.getElementById('price').parentNode;
                 let spHtml = document.createElement('span');
-                spHtml.innerText = ' TOSP';
+                spHtml.innerText = ' JEJU';
                 spHtml.style.color = 'red';
                 pricePar.appendChild(spHtml);
             }, 100);
@@ -24,11 +24,11 @@ class candyManagementAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'name',
-            title: '糖果名称',
+            title: '计划名称',
             required: true
         }, {
             field: 'price',
-            title: '糖果单价',
+            title: '参与单价',
             required: true,
             formatter: (v, data) => {
                 if(v) {
@@ -37,18 +37,18 @@ class candyManagementAddedit extends DetailUtil {
             }
         }, {
             field: 'rate',
-            title: '糖果甜度（0-1）',
+            title: '计划收益（0-1）',
             required: true
         }, {
             field: 'picture',
-            title: '糖果图片',
+            title: '图片',
             required: true,
             type: 'img',
             single: true,
             help: '图片大小为210*158'
         }, {
             field: 'inventory',
-            title: '糖果库存数量',
+            title: '库存数量',
             required: true
         // }, {
         //     field: 'description',
@@ -83,7 +83,7 @@ class candyManagementAddedit extends DetailUtil {
             editCode: '610402',
             detailCode: '610417',
             beforeSubmit: (params) => {
-                params.symbol = 'TOSP';
+                params.symbol = 'JEJU';
                 params.price = moneyParse(`${parseFloat(params.price)}`, '', params.symbol);
                 return true;
             }

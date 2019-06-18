@@ -12,7 +12,7 @@ class earningsQueryAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'refCode',
-            title: '糖果订单编号'
+            title: '订单编号'
         }, {
             field: 'buyName',
             title: '购买人',
@@ -39,13 +39,13 @@ class earningsQueryAddedit extends DetailUtil {
             }
         }, {
             field: 'candyName',
-            title: '糖果名称',
+            title: '计划名称',
             formatter(v, d) {
                 return d.candyOrder.candyName;
             }
         }, {
             field: 'rate',
-            title: '甜度',
+            title: '计划收益',
             formatter(v, d) {
                 return d.candyOrder.rate;
             }

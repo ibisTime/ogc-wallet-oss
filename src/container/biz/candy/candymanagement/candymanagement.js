@@ -35,11 +35,11 @@ class Candymanagement extends React.Component {
     render() {
         const fields = [{
             field: 'name',
-            title: '糖果名称',
+            title: '计划名称',
             search: true
         }, {
             field: 'price',
-            title: '购买糖果价格',
+            title: '参与计划价格',
             render: function (v, data) {
                 return moneyFormat(v.toString(), '', data.symbol) + data.symbol;
             }
@@ -53,10 +53,10 @@ class Candymanagement extends React.Component {
         //     search: true
         }, {
             field: 'rate',
-            title: '糖果甜度'
+            title: '计划收益'
         }, {
             field: 'status',
-            title: '糖果状态',
+            title: '计划状态',
             type: 'select',
             key: 'candy_product_status'
         }, {
@@ -86,8 +86,8 @@ class Candymanagement extends React.Component {
                               } else {
                                   let sName = selectedRows[0].status === '0' ? '上架' : '下架';
                                   confirm({
-                                      title: `${sName}糖果`,
-                                      content: `是否${sName}该糖果`,
+                                      title: `${sName}计划`,
+                                      content: `是否${sName}该计划`,
                                       onOk: () => {
                                           let hasMsg = message.loading('');
                                           fetch('610403', {
