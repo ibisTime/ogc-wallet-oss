@@ -78,8 +78,19 @@ class CustomerAddedit extends DetailUtil {
         }, {
             title: '节点用户等级',
             field: 'nodeLevel',
-            type: 'select',
-            key: 'node_level'
+            formatter: (v, data) => {
+                let level;
+                if (v === '0') {
+                    level = '共营节点（高级）';
+                } else if (v === '1') {
+                    level = '社区节点（中级）';
+                } else if (v === '2') {
+                    level = '区域节点（初级）';
+                } else {
+                    level = '普通用户';
+                }
+                return level;
+            }
         }, {
             field: 'nodeAmount',
             title: '成为节点用户HEY',
