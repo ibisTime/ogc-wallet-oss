@@ -207,6 +207,31 @@ class Customer extends React.Component {
                     } else {
                         this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}&nodeLevel=1`);
                     }
+                },
+                //取消节点用户
+                cancleNode: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if(!selectedRows[0].nodeLevel) {
+                        showWarnMsg('该用户不是节点用户，无需取消');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定取消此用户的节点身份？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return canselNode(selectedRows[0].userId).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
                 }
             }
         });

@@ -24,6 +24,13 @@ export function setNodeMenus(nodeList, roleCode) {
     });
 }
 
+// 取消用户节点身份
+export function canselNode(userId) {
+    return fetch(805099, {
+        userId
+    });
+}
+
 // 注销激活平台用户
 export function activateSysUser(userIdList) {
     return fetch(630056, {userIdList, updater: getUserName()});
