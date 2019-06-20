@@ -25,7 +25,7 @@ export function setNodeMenus(nodeList, roleCode) {
 }
 
 // 取消用户节点身份
-export function canselNode(userId) {
+export function cancelNode(userId) {
     return fetch(805099, {
         userId
     });

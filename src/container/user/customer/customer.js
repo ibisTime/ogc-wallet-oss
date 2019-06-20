@@ -12,7 +12,7 @@ import {
 } from '@redux/user/customer/customer';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, showWarnMsg, showSucMsg} from 'common/js/util';
-import {activateUser, setQ} from 'api/user';
+import {activateUser, setQ, cancelNode} from 'api/user';
 
 @listWrapper(
     state => ({
@@ -208,8 +208,8 @@ class Customer extends React.Component {
                         this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}&nodeLevel=1`);
                     }
                 },
-                //取消节点用户
-                cancleNode: (selectedRowKeys, selectedRows) => {
+                // 取消节点用户
+                cancelNode: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
@@ -223,7 +223,7 @@ class Customer extends React.Component {
                             content: `确定取消此用户的节点身份？`,
                             onOk: () => {
                                 this.props.doFetching();
-                                return canselNode(selectedRows[0].userId).then(() => {
+                                return cancelNode(selectedRows[0].userId).then(() => {
                                     this.props.getPageData();
                                     showSucMsg('操作成功');
                                 }).catch(() => {

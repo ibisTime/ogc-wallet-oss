@@ -256,9 +256,6 @@ const ROUTES = [
         path: '/user/customer/ledgerQuery',
         component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
     },
-    {
-        path: '/user/customer/cancelNode',
-    },
     // 会员流水
     {
         path: '/user/customer/ledgerQuerys',
