@@ -14,6 +14,7 @@ class BannerAddEdit extends DetailUtil {
         this.isAdd = getQueryString('isAdd', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.state = {
+            ...this.state,
             code: '',
             biz: '',
             // 窗口是否显示
@@ -100,11 +101,34 @@ class BannerAddEdit extends DetailUtil {
             field: 'commitDatetime',
             type: 'datetime'
         }, {
-            title: '奖励数量',
-            field: 'payAmount'
+            title: '状态',
+            type: 'select',
+            field: 'status',
+            data: [{
+                key: '0',
+                value: '待审核'
+            }, {
+                key: '1',
+                value: '处理中'
+            }, {
+                key: '2',
+                value: '复现不成功'
+            }, {
+                key: '3',
+                value: '已处理'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
-            title: '奖励说明',
-            field: 'payNote'
+            title: '严重等级',
+            type: 'select',
+            key: 'bug_level',
+            field: 'level',
+            search: true
+        }, {
+            title: '修复版本',
+            field: 'repairVersionCode'
         }, {
             title: '备注',
             field: 'commitNote'
