@@ -91,16 +91,16 @@ class publicPointPostion extends React.Component {
             field: 'status',
             data: [{
                 key: '0',
-                value: '待确认'
+                value: '待审核'
             }, {
                 key: '1',
-                value: '已确认待奖励'
+                value: '处理中'
             }, {
                 key: '2',
                 value: '复现不成功'
             }, {
                 key: '3',
-                value: '已奖励'
+                value: '已处理'
             }],
             keyName: 'key',
             valueName: 'value',
@@ -151,7 +151,7 @@ class publicPointPostion extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是可以支付的状态');
+                        showWarnMsg('不是可以修复完成的状态');
                     } else {
                         this.setState({
                             updownVisible: true,

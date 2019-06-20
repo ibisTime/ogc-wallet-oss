@@ -33,7 +33,6 @@ class UpDown extends React.Component {
                 field: 'repairVersionCode',
                 title: '修复版本号',
                 required: true,
-                integer: true,
                 maxlength: 30
             }],
             addCode: 805101,
