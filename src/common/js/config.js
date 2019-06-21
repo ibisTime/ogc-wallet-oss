@@ -5,7 +5,7 @@ export const SYSTEM_CODE = 'CL-TOSP';
 export const UPLOAD_URL = 'http://up.qiniup.com';
 // 七牛图片前缀
 // export const PIC_PREFIX = 'http://img.adorkableisland.com/';
-export const PIC_PREFIX = 'http://ticp-pic.hichengdai.com/';
+export const PIC_PREFIX = 'http://tosp-pic.hichengdai.com/';
 export const PIC_BASEURL_L = '?imageMogr2/auto-orient/thumbnail/!1000x1000r';
 // 系统userid
 export const SYS_USER = 'SYS_USER';
