@@ -52,12 +52,12 @@ class SdRecord extends React.Component {
       },
       noVisible: true
   }, {
+    field: 'symbolOut',
+    title: '兑出币种',
+    search: true
+    }, {
       field: 'symbolIn',
       title: '兑入币种',
-      search: true
-    }, {
-      field: 'symbolOut',
-      title: '兑出币种',
       search: true
     }, {
       field: 'countOutTotal',

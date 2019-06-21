@@ -29,12 +29,12 @@ const confirm = Modal.confirm;
 class TradMessage extends React.Component {
   render() {
     const fields = [{
-      field: 'symbolIn',
-      title: '兑入币种',
-      search: true
-    }, {
       field: 'symbolOut',
       title: '兑出币种',
+      search: true
+    }, {
+      field: 'symbolIn',
+      title: '兑入币种',
       search: true
     }, {
       field: 'feeRate',

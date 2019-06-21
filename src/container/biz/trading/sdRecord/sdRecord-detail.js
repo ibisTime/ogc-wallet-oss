@@ -21,10 +21,10 @@ class SdRecordDetail extends DetailUtil {
       }
     }, {
       field: 'symbolOut',
-      title: '兑入币种'
+      title: '兑出币种'
     }, {
       field: 'symbolIn',
-      title: '兑出币种'
+      title: '兑入币种'
     }, {
       field: 'countOutTotal',
       title: '总兑出数量',
