@@ -65,7 +65,7 @@ class GJAddressQuery extends React.Component {
         }, {
             field: 'amount',
             title: '交易数量',
-            render(v) {
+            render(v, data) {
                 return moneyFormat(data.amount, '', data.currency);
             }
         }, {
@@ -74,7 +74,7 @@ class GJAddressQuery extends React.Component {
         }, {
             title: '矿工费',
             field: 'txFee',
-            render(v) {
+            render(v, data) {
                 return moneyFormat(data.amount, '', data.currency);
             }
         }, {
