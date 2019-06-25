@@ -90,9 +90,6 @@ class BannerAddEdit extends DetailUtil {
             title: 'Bug描述',
             field: 'description'
         }, {
-            title: '复现步骤',
-            field: 'reappear'
-        }, {
             title: '截图',
             type: 'img',
             field: 'pic'
