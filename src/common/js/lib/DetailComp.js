@@ -7,8 +7,8 @@ import {
   isUndefined, showSucMsg, showErrMsg, showWarnMsg, getUserId, getUserName,
   moneyParse, getRules, getRealValue, dateFormat, dateTimeFormat } from 'common/js/util';
 import fetch from 'common/js/fetch';
-import { UPLOAD_URL, PIC_PREFIX, PIC_BASEURL_L, formItemLayout,
-  validateFieldsAndScrollOption, DATE_FORMAT, MONTH_FORMAT, DATETIME_FORMAT } from 'common/js/config';
+import { UPLOAD_URL, PIC_PREFIX, formItemLayout, validateFieldsAndScrollOption,
+  DATE_FORMAT, MONTH_FORMAT, DATETIME_FORMAT } from 'common/js/config';
 import cityData from 'common/js/lib/city';
 import CInput from 'component/cInput/cInput';
 import CNormalTextArea from 'component/cNormalTextArea/cNormalTextArea';
