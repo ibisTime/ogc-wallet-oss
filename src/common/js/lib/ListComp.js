@@ -218,10 +218,12 @@ export default class ListComponent extends React.Component {
                 data.list.forEach((d, i) => {
                     let temp = [];
                     this.options.fields.forEach(f => {
-                        if (i === 0) {
-                            titles.push(f.title);
+                        if (!f.noVisible) {
+                            if (i === 0) {
+                                titles.push(f.title);
+                            }
+                            temp.push(f.render(d[f.field], d));
                         }
-                        temp.push(f.render(d[f.field], d));
                     });
                     bodys.push(temp);
                 });
