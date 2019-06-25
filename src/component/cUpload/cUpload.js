@@ -79,6 +79,12 @@ export default class CUpload extends React.Component {
       previewImage: file.url || file.thumbUrl,
       previewVisible: true,
       previewId
+    }, () => {
+      setTimeout(() => {
+        let urls = this.props.getFieldValue(previewId).split('||');
+        let index = urls.findIndex(url => url === file.key);
+        this.carousel.goTo(index);
+      }, 0);
     });
     this.imgUrl = PIC_PREFIX + file.key + '?attname=' + file.key + '.jpg';
   }
