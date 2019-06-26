@@ -14,9 +14,9 @@ app.use('/api', function (req, res) {
    // var url = 'http://120.26.6.213:5801/forward-service/api';
     //测试
   // var url = 'http://120.26.6.213:6801/forward-service/api';
-    //金米测试
+    //水滴钱包测试
 //    let url = 'http://m.jinmitest.hichengdai.com/api';
-    //金米研发
+    //水滴钱包研发
     // let url = 'http://120.26.6.213:6801/forward-service/api';
     // ticp研发
     // let url = 'http://api.ticptoken.com/';
