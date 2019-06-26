@@ -64,9 +64,13 @@ body {
   line-height: 60px;
   color: #484848;
   font-size: 30px;
+  position: relative;
 }
 .title img{
-  height: 100%;
+  width: 45%;
+  position: absolute;
+  top: -56%;
+  left: 26%;
   vertical-align: bottom;
 }
 
