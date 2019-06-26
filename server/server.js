@@ -15,7 +15,7 @@ app.use('/api', function (req, res) {
     //测试
   // var url = 'http://120.26.6.213:6801/forward-service/api';
     //金米测试
-   let url = 'http://m.jinmitest.hichengdai.com/api';
+//    let url = 'http://m.jinmitest.hichengdai.com/api';
     //金米研发
     // let url = 'http://120.26.6.213:6801/forward-service/api';
     // ticp研发
@@ -29,6 +29,9 @@ app.use('/api', function (req, res) {
     
     // ticp
     // let url = 'http://api.ticptoken.com/';
+
+    //水滴钱包测试
+    let url = 'http://m.sditest.hichengdai.com/api';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
