@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {login} from '@redux/user';
 import './login.css';
 import loginLeft from '../../images/login-left.png';
-import loginphot from '../../images/wallt.png';
+import loginphot from '../../images/water.png';
 
 const FormItem = Form.Item;
 
