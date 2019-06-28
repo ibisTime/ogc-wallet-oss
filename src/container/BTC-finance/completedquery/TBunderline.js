@@ -84,8 +84,8 @@ class TBunderline extends React.Component {
                 return moneyFormat(data.amount, '', data.currency);
             }
         }, {
-            field: 'actualAmount',
-            title: '实际到账金额',
+            field: 'fee',
+            title: '手续费',
             render: (v, data) => {
                 return moneyFormat(v, '', data.currency);
             }

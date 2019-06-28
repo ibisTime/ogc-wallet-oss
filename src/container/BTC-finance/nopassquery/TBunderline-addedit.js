@@ -45,13 +45,6 @@ class TBunderlineAddedit extends DetailUtil {
                 return moneyFormat(data.withdraw.fee, '', data.withdraw.currency);
             }
         }, {
-            field: 'actualAmount',
-            title: '到账金额',
-            required: true,
-            formatter: (v, data) => {
-                return moneyFormat(data.withdraw.actualAmount, '', data.withdraw.currency);
-            }
-        }, {
             field: 'payCardInfo',
             title: '区块链类型',
             value: 'BTC',
