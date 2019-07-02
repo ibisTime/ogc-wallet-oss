@@ -43,11 +43,12 @@ class PlatformAccount extends React.Component {
         }).catch(() => this.setState({ fetching: false }));
     }
 
-    goFlow(accountNumber, bizType, symbol) {
+    goFlow(accountNumber, bizType, symbol, history = 0) {
         if (accountNumber) {
-            this.props.history.push(`/BTC-finance/platformAccount/ledger?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
+            this.props.history.push(`/BTC-finance/platformAccount/ledger?isPlat=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}&history=${history}`);
         } else {
-            message.warning('暂无资金流水');
+            let msg = history === 1 ? '历史' : '近期';
+            message.warning(`暂无${msg}流水`);
         }
     }
 
@@ -92,7 +93,8 @@ class PlatformAccount extends React.Component {
                                     onClick={() => this.goFlow(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '')}
                                     type="primary">近期流水</Button>
                                 <Button
-                                    onClick={() => this.goFlow(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '')}
+                                    style={{marginLeft: 20}}
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '', 1)}
                                     type="primary">历史流水</Button>
                             </Card>
                         </Col>
@@ -102,7 +104,11 @@ class PlatformAccount extends React.Component {
                                 <div className="account-card-price">{moneyFormat(unsettledLoan[accountTypeSQ] ? unsettledLoan[accountTypeSQ].amount : '0', '', symbol)}</div>
                                 <Button
                                     onClick={() => this.goFlow(unsettledLoan[accountTypeSQ] ? unsettledLoan[accountTypeSQ].accountNumber : '', 'jour_biz_type_withdraw', '')}
-                                    type="primary">资金流水</Button>
+                                    type="primary">近期流水</Button>
+                                <Button
+                                    style={{marginLeft: 20}}
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeSQ] ? unsettledLoan[accountTypeSQ].accountNumber : '', 'jour_biz_type_withdraw', '', 1)}
+                                    type="primary">历史流水</Button>
                             </Card>
                         </Col>
                         <Col>
@@ -111,7 +117,11 @@ class PlatformAccount extends React.Component {
                                 <div className="account-card-price">{moneyFormat(unsettledLoan[accountTypeYK] ? unsettledLoan[accountTypeYK].amount : '0', '', symbol)}</div>
                                 <Button
                                     onClick={() => this.goFlow(unsettledLoan[accountTypeYK] ? unsettledLoan[accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
-                                    type="primary">资金流水</Button>
+                                    type="primary">近期流水</Button>
+                                <Button
+                                    style={{marginLeft: 20}}
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeYK] ? unsettledLoan[accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol, 1)}
+                                    type="primary">历史流水</Button>
                             </Card>
                         </Col>
                     </Row>
