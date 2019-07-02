@@ -90,7 +90,10 @@ class PlatformAccount extends React.Component {
                                 <div className="account-card-price">{moneyFormat(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].amount : '0', '', symbol)}</div>
                                 <Button
                                     onClick={() => this.goFlow(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '')}
-                                    type="primary">资金流水</Button>
+                                    type="primary">近期流水</Button>
+                                <Button
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeCold] ? unsettledLoan[accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '')}
+                                    type="primary">历史流水</Button>
                             </Card>
                         </Col>
                         <Col>
