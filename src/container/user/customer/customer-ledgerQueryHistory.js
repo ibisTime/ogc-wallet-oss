@@ -8,7 +8,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/user/customer/customer-ledgerQuery';
+} from '@redux/user/customer/customer-ledgerQueryHistory';
 import {listWrapper} from 'common/js/build-list';
 import {getQueryString, moneyFormat, moneyFormatSubtract, getCoinList, showWarnMsg} from 'common/js/util';
 import {SYS_USER} from 'common/js/config';
@@ -24,7 +24,7 @@ import { getDictList } from 'api/dict';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class CustomerLedgerQuery extends React.Component {
+class CustomerLedgerQueryHistory extends React.Component {
     constructor(props) {
         super(props);
         this.accountNumber = getQueryString('code', this.props.location.search) || '';
@@ -108,7 +108,7 @@ class CustomerLedgerQuery extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: '802320',
+            pageCode: '802324',
             searchParams: {
                 accountNumber: this.accountNumber
             },
@@ -117,4 +117,4 @@ class CustomerLedgerQuery extends React.Component {
     }
 }
 
-export default CustomerLedgerQuery;
+export default CustomerLedgerQueryHistory;

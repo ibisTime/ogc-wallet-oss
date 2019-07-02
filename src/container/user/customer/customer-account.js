@@ -38,9 +38,15 @@ class CustomerAccount extends React.Component {
         this.buttons = [];
         this.buttons = [{
             code: 'ledgerQuery',
-            name: '流水查询',
+            name: '近期流水查询',
             handler: (selectedRowKeys, selectedRows) => {
                 this.ledgerQuery(selectedRowKeys, selectedRows);
+            }
+        }, {
+            code: 'ledgerQueryHistory',
+            name: '历史流水查询',
+            handler: (selectedRowKeys, selectedRows) => {
+                this.ledgerQueryHistory(selectedRowKeys, selectedRows);
             }
         }, {
             code: 'goBack',
@@ -56,7 +62,7 @@ class CustomerAccount extends React.Component {
         }];
     }
 
-    // 流水查询
+    // 近期流水查询
     ledgerQuery = (selectedRowKeys, selectedRows) => {
         if (!selectedRowKeys.length) {
             showWarnMsg('请选择记录');
@@ -64,6 +70,17 @@ class CustomerAccount extends React.Component {
             showWarnMsg('请选择一条记录');
         } else {
             this.props.history.push(`/user/customer/ledgerQuery?code=${selectedRowKeys[0]}`);
+        }
+    }
+
+    // 历史流水查询
+    ledgerQueryHistory = (selectedRowKeys, selectedRows) => {
+        if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+        } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+        } else {
+            this.props.history.push(`/user/customer/ledgerQueryHistory?code=${selectedRowKeys[0]}`);
         }
     }
 
