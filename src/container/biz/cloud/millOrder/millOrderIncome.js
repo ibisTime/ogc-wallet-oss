@@ -47,14 +47,6 @@ class MillOrderIncome extends React.Component {
             field: 'symbol',
             title: '出矿币种'
         }, {
-            field: 'incomeCountExpect',
-            title: '预计收益数量',
-            render: function (v, data) {
-                if(v) {
-                    return moneyFormat(v.toString(), '', data.symbol);
-                }
-            }
-        }, {
             field: 'incomeCountActual',
             title: '实际收益数量',
             render: function (v, data) {
@@ -62,10 +54,6 @@ class MillOrderIncome extends React.Component {
                     return moneyFormat(v.toString(), '', data.symbol);
                 }
             }
-        }, {
-            field: 'incomeTimeExpect',
-            title: '预计收益时间',
-            type: 'datetime'
         }, {
             field: 'incomeTimeActual',
             title: '实际收益时间',
@@ -83,6 +71,11 @@ class MillOrderIncome extends React.Component {
             }],
             keyName: 'key',
             valueName: 'value'
+        }, {
+            field: 'type',
+            title: '收益类型',
+            type: 'select',
+            key: 'machine_income_type'
         }];
         return this.props.buildList({
             fields,

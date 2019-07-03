@@ -31,6 +31,7 @@ class CustomerLedgerQuery extends React.Component {
         this.isPlat = !!getQueryString('isPlat', this.props.location.search);
         this.bizType = getQueryString('bizType', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search) || '';
+        this.type = getQueryString('type', this.props.location.search) || '';
         if(this.symbol) {
           this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
         }
@@ -108,7 +109,7 @@ class CustomerLedgerQuery extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: '802320',
+            pageCode: this.type === 'hos' ? '802324' : '802320',
             searchParams: {
                 accountNumber: this.accountNumber
             },
