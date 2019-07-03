@@ -46,6 +46,12 @@ class TradMessage extends React.Component {
         return moneyFormat(v.toString(), '', data.symbolOut);
       }
     }, {
+        field: 'max',
+        title: '最小兑出数量',
+        render: function (v, data) {
+            return moneyFormat(v.toString(), '', data.symbolOut);
+        }
+    }, {
       field: 'orderNo',
       title: '展示序号'
     }, {

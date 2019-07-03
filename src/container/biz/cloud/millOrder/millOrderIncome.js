@@ -50,13 +50,17 @@ class MillOrderIncome extends React.Component {
             field: 'incomeCountExpect',
             title: '预计收益数量',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                if(v) {
+                    return moneyFormat(v.toString(), '', data.symbol);
+                }
             }
         }, {
             field: 'incomeCountActual',
             title: '实际收益数量',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                if(v) {
+                    return moneyFormat(v.toString(), '', data.symbol);
+                }
             }
         }, {
             field: 'incomeTimeExpect',

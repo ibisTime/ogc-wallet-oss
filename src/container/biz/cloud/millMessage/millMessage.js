@@ -38,7 +38,7 @@ class MillMessage extends React.Component {
         if (/^[\d.]*$/.test(e.target.value)) {
             this.setState({ amountVal: e.target.value });
         }
-    }
+    };
     render() {
         const { visible, amountVisible, amountVal } = this.state;
         const fields = [{

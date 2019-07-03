@@ -54,6 +54,12 @@ class TradMessageAddedit extends DetailUtil {
         return moneyFormat(v.toString(), '', data.symbolOut);
       }
     }, {
+        field: 'max',
+        title: '最大兑出数量',
+        formatter: function (v, data) {
+            return moneyFormat(v.toString(), '', data.symbolOut);
+        }
+    }, {
       field: 'orderNo',
       title: '展示序号',
       required: true
@@ -86,6 +92,7 @@ class TradMessageAddedit extends DetailUtil {
           return false;
         }else {
           params.min = moneyParse(params.min, '', params.symbolOut);
+          params.max = moneyParse(params.max, '', params.symbolOut);
           return true;
         }
       }
