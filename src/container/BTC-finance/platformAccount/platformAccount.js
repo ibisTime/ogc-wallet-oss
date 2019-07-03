@@ -120,7 +120,7 @@ class PlatformAccount extends React.Component {
                             <Button
                               style={{marginLeft: '50px'}}
                               onClick={
-                                  () => this.goFlow(unsettledLoan[this.state.accountTypeCold] ? unsettledLoan[this.state.accountTypeCold].accountNumber : '', 'jour_biz_type_income', this.state.symbol, 'hos')
+                                  () => this.goFlow(unsettledLoan[this.state.accountTypeCold] ? unsettledLoan[this.state.accountTypeCold].accountNumber : '', 'jour_biz_type_cold', this.state.symbol, 'hos')
                               }
                               type="primary">历史流水</Button>
                         </div>}</Card>
@@ -135,7 +135,7 @@ class PlatformAccount extends React.Component {
                             <Button
                               style={{marginLeft: '50px'}}
                               onClick={
-                                  () => this.goFlow(unsettledLoan[this.state.accountTypeSQ] ? unsettledLoan[this.state.accountTypeSQ].accountNumber : '', 'jour_biz_type_income', this.state.symbol, 'hos')
+                                  () => this.goFlow(unsettledLoan[this.state.accountTypeSQ] ? unsettledLoan[this.state.accountTypeSQ].accountNumber : '', 'jour_biz_type_withdraw', this.state.symbol, 'hos')
                               }
                               type="primary">历史流水</Button>
                         </div>}</Card>
