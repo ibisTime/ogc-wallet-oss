@@ -41,15 +41,19 @@ class TradMessage extends React.Component {
       title: '手续费率(%)'
     }, {
       field: 'min',
-      title: '最小兑出数量',
+      title: '最小兑出数量(单次)',
       render: function (v, data) {
         return moneyFormat(v.toString(), '', data.symbolOut);
       }
     }, {
         field: 'max',
-        title: '最小兑出数量',
+        title: '最大兑出数量(单次)',
         render: function (v, data) {
-            return moneyFormat(v.toString(), '', data.symbolOut);
+            if(v && +v > 0) {
+                return moneyFormat(v.toString(), '', data.symbolOut);
+            }else {
+                return '无限制';
+            }
         }
     }, {
       field: 'orderNo',

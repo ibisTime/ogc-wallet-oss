@@ -35,20 +35,9 @@ class BTCDiviAddress extends React.Component {
       refAmount: '',
       userId: '',
       accountNumber: '',
-      symbolList: []
+      loginName: '',
+      title: ''
   };
-    symbolSelect = (val) => {
-      this.setState({
-          symbol: val
-      });
-    };
-    componentDidMount() {
-        fetch(802013).then(data => {
-          this.setState({
-              symbolList: data
-          });
-        });
-    }
   render() {
     const fields = [{
       title: '用户',
@@ -82,6 +71,9 @@ class BTCDiviAddress extends React.Component {
       field: 'amount',
       title: '持有币的数量'
     }, {
+        field: 'frozenAmount',
+        title: '冻结币数量'
+    }, {
       field: 'address',
       title: '地址',
       search: true
@@ -95,7 +87,7 @@ class BTCDiviAddress extends React.Component {
       field: 'usdAssets',
       title: '折合USD'
     }];
-    const {symbolList, symbol, amountType, refAmount, direction, userId, accountNumber} = this.state;
+    const {symbol, amountType, refAmount, direction, userId, accountNumber, loginName, title} = this.state;
     return (
       <div>
           {
@@ -144,9 +136,12 @@ class BTCDiviAddress extends React.Component {
                               showWarnMsg('请选择一条记录');
                           } else {
                               this.setState({
+                                  title: '空投',
                                   visible: true,
                                   amountType: '0',
-                                  direction: '0',
+                                  direction: '1',
+                                  symbol: selectedRows[0].currency,
+                                  loginName: selectedRows[0].loginName,
                                   userId: selectedRows[0].userId,
                                   accountNumber: selectedRows[0].accountNumber
                               });
@@ -159,9 +154,12 @@ class BTCDiviAddress extends React.Component {
                               showWarnMsg('请选择一条记录');
                           } else {
                               this.setState({
+                                  title: '减钱',
                                   visible: true,
                                   amountType: '0',
-                                  direction: '1',
+                                  direction: '0',
+                                  symbol: selectedRows[0].currency,
+                                  loginName: selectedRows[0].loginName,
                                   userId: selectedRows[0].userId,
                                   accountNumber: selectedRows[0].accountNumber
                               });
@@ -174,9 +172,12 @@ class BTCDiviAddress extends React.Component {
                               showWarnMsg('请选择一条记录');
                           } else {
                               this.setState({
+                                  title: '锁仓',
                                   visible: true,
                                   amountType: '1',
-                                  direction: '0',
+                                  direction: '1',
+                                  symbol: selectedRows[0].currency,
+                                  loginName: selectedRows[0].loginName,
                                   userId: selectedRows[0].userId,
                                   accountNumber: selectedRows[0].accountNumber
                               });
@@ -189,9 +190,12 @@ class BTCDiviAddress extends React.Component {
                               showWarnMsg('请选择一条记录');
                           } else {
                               this.setState({
+                                  title: '释放',
                                   visible: true,
                                   amountType: '1',
-                                  direction: '1',
+                                  direction: '0',
+                                  symbol: selectedRows[0].currency,
+                                  loginName: selectedRows[0].loginName,
                                   userId: selectedRows[0].userId,
                                   accountNumber: selectedRows[0].accountNumber
                               });
@@ -201,13 +205,13 @@ class BTCDiviAddress extends React.Component {
               })
           }
           <Modal
-            title="账户操作"
+            title={`账户操作(${title})`}
             visible={this.state.visible}
             okText={'确定'}
             cancelText={'取消'}
             onOk={() => {
-                let amount = refAmount.state && refAmount.state.value;
-                if(!symbol || !amount) {
+                let amount = this.refAmount.state && this.refAmount.state.value;
+                if(!amount) {
                   message.warning('请填写完整', 1.5);
                   return;
                 }
@@ -225,38 +229,36 @@ class BTCDiviAddress extends React.Component {
                         this.setState({
                             visible: false
                         });
+                        this.refAmount.state.value = '';
                         this.props.getPageData();
                     });
                 }, hasMsg);
             }}
             onCancel={() => {
-                refAmount.state.value = '';
+                if(this.refAmount.state) {
+                    this.refAmount.state.value = '';
+                }
                 this.setState({
-                    visible: false,
-                    symbol: ''
+                    visible: false
                 });
             }}
           >
               <div style={{marginBottom: '20px'}}>
+                  <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>手机号/邮箱：</label>
+                  <span>{loginName}</span>
+              </div>
+              <div style={{marginBottom: '20px'}}>
                   <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>币种：</label>
-                  <Select
-                    placeholder="请选择币种"
-                    style={{ width: '60%' }}
-                    onChange={this.symbolSelect}
-                    value={symbol}
-                  >
-                      {
-                        symbolList.length > 0 && symbolList.map(item => (
-                          <Option value={item.symbol} key={item.id}>{item.symbol}</Option>
-                        ))
-                      }
-                  </Select>
+                  <span>{symbol}</span>
               </div>
               <div>
-                  <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>虚拟已售数量：</label>
+                  <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>数量：</label>
                   <Input
-                    placeholder="请输入虚拟已售数量"
-                    ref={(target) => { this.state.refAmount = target; }}
+                    placeholder="请输入数量"
+                    type="number"
+                    ref={(target) => {
+                      this.refAmount = target;
+                    }}
                     style={{ width: '60%' }}
                   />
               </div>

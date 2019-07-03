@@ -48,14 +48,14 @@ class TradMessageAddedit extends DetailUtil {
       required: true
     }, {
       field: 'min',
-      title: '最小兑出数量',
+      title: '最小兑出数量(单次)',
       required: true,
       formatter: function (v, data) {
         return moneyFormat(v.toString(), '', data.symbolOut);
       }
     }, {
         field: 'max',
-        title: '最大兑出数量',
+        title: '最大兑出数量(单次)',
         formatter: function (v, data) {
             return moneyFormat(v.toString(), '', data.symbolOut);
         }
