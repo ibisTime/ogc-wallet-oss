@@ -29,7 +29,7 @@ class CloudMessageAddedit extends DetailUtil {
             required: true
         }, {
             field: 'amount',
-            title: '每滴币个数',
+            title: '每滴价格（CNY）',
             required: true
         }, {
             field: 'daysLimit',

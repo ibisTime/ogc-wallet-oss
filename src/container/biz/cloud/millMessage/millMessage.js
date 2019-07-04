@@ -50,7 +50,7 @@ class MillMessage extends React.Component {
             search: true
         }, {
             field: 'amount',
-            title: '每滴币个数'
+            title: '每滴价格（CNY）'
         }, {
             field: 'daysLimit',
             title: '期限（天）'
@@ -96,8 +96,8 @@ class MillMessage extends React.Component {
                               } else {
                                   let sName = selectedRows[0].status === '0' ? '显示' : '隐藏';
                                   confirm({
-                                      title: `${sName}交易对`,
-                                      content: `是否${sName}该交易对`,
+                                      title: `${sName}水滴`,
+                                      content: `是否${sName}该水滴`,
                                       onOk: () => {
                                           let hasMsg = message.loading('');
                                           fetch('610007', {
@@ -171,7 +171,7 @@ class MillMessage extends React.Component {
                   <p><label>虚拟已售数量：</label><Input placeholder="请输入虚拟已售数量" ref={(target) => { this.state.xyCount = target; }} style={{ width: '60%' }}/></p>
               </Modal>
               <Modal
-                title="每滴币个数"
+                title="每滴价格（CNY）"
                 visible={amountVisible}
                 okText={'确定'}
                 cancelText={'取消'}
@@ -200,7 +200,7 @@ class MillMessage extends React.Component {
                     });
                 }}
               >
-                  <p><label>每滴币个数：</label><Input placeholder="请输入每滴币个数" value={amountVal} onChange={this.amountChagne} style={{ width: '60%' }}/></p>
+                  <p><label>每滴价格（CNY）：</label><Input placeholder="请输入每滴价格（CNY）" value={amountVal} onChange={this.amountChagne} style={{ width: '60%' }}/></p>
               </Modal>
           </div>
         );

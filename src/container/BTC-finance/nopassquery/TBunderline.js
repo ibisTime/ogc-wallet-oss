@@ -93,6 +93,12 @@ class TBunderline extends React.Component {
             title: '区块链类型',
             field: 'payCardInfo'
         }, {
+            field: 'bizType',
+            title: '划转类型',
+            type: 'select',
+            key: 'withdraw_biz_type',
+            search: true
+        }, {
             title: '提现地址',
             field: 'payCardNo'
         }, {
