@@ -282,16 +282,21 @@ export default class ListComponent extends React.Component {
             selectedRowKeys,
             selectedRows
         });
-    }
+    };
     handleReset = () => {
         this.props.form.resetFields();
+        if(this.ownerReset) {
+            this.ownerReset();
+            this.intervalStart.state.value = '';
+            this.intervalEnd.state.value = '';
+        }
         this.props.clearSearchParam();
-    }
+    };
     handleSubmit = (e) => {
         e.preventDefault();
         let values = this.props.form.getFieldsValue();
         this.getPageData(1, values);
-    }
+    };
 
     getRealSearchParams(params) {
         let result = {};
@@ -535,6 +540,9 @@ export default class ListComponent extends React.Component {
     }
 
     getItemByType(type, item) {
+        if(item.intervalParams) {
+            this.ownerReset = item.intervalParams.reset;
+        }
         switch (type) {
             case 'provSelect':
             case 'citySelect':
@@ -547,9 +555,9 @@ export default class ListComponent extends React.Component {
             case 'interval':
                 return item.intervalParams && (
                   <div>
-                    <span><Input type="number" onChange={item.intervalParams.start} style={{width: '100px'}}/></span>
+                    <span><Input type="number" ref={(target) => { this.intervalStart = target; }} onChange={item.intervalParams.start} style={{width: '100px'}}/></span>
                     <span style={{margin: '0 10px'}}>~</span>
-                    <span><Input type="number" onChange={item.intervalParams.end} style={{width: '100px'}}/></span>
+                    <span><Input type="number" ref={(target) => { this.intervalEnd = target; }} onChange={item.intervalParams.end} style={{width: '100px'}}/></span>
                 </div>);
             default:
                 return <Input style={{width: 200}} placeholder={item.placeholder}/>;

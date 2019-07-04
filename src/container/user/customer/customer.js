@@ -15,23 +15,23 @@ import {dateTimeFormat, showWarnMsg, showSucMsg} from 'common/js/util';
 import {activateUser, setQ, cancelNode} from 'api/user';
 import fetch from 'common/js/fetch';
 
-const { Option } = Select;
+const {Option} = Select;
 
 @listWrapper(
-    state => ({
-        ...state.userCustomer,
-        parentCode: state.menu.subMenuCode
-    }),
-    {
-        setTableData, clearSearchParam, doFetching, setBtnList,
-        cancelFetching, setPagination, setSearchParam, setSearchData
-    }
+  state => ({
+      ...state.userCustomer,
+      parentCode: state.menu.subMenuCode
+  }),
+  {
+      setTableData, clearSearchParam, doFetching, setBtnList,
+      cancelFetching, setPagination, setSearchParam, setSearchData
+  }
 )
 class Customer extends React.Component {
     state = {
         ...this.state,
         visible: false,
-        symbol: '',
+        symbol: null,
         amountType: '',
         direction: '',
         refAmount: '',
@@ -57,6 +57,12 @@ class Customer extends React.Component {
     machineEnd = (target) => {
         this.setState({
             machineOrderNumEnd: target.target.value
+        });
+    };
+    machineReset = () => {
+        this.setState({
+            machineOrderNumStart: '',
+            machineOrderNumEnd: ''
         });
     };
     changeSymbol = (value) => {
@@ -128,55 +134,56 @@ class Customer extends React.Component {
                 return level;
             }
         },
-        {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'user_status',
-            search: true
-        }, {
-            field: 'isRealname',
-            title: '是否实名',
-            render: (v, data) => {
-                return data.realName ? '是' : '否';
-            }
-        }, {
+            {
+                field: 'status',
+                title: '状态',
+                type: 'select',
+                key: 'user_status',
+                search: true
+            }, {
+                field: 'isRealname',
+                title: '是否实名',
+                render: (v, data) => {
+                    return data.realName ? '是' : '否';
+                }
+            }, {
                 field: 'machineOrderNum',
                 title: '存活水滴数'
-        }, {
+            }, {
                 field: 'machineOrder',
                 title: '存活水滴数',
                 search: true,
                 type: 'interval',
                 intervalParams: {
                     start: this.machineStart,
-                    end: this.machineEnd
+                    end: this.machineEnd,
+                    reset: this.machineReset
                 },
                 noVisible: true
             }, {
-            field: 'realName',
-            title: '真实姓名',
-            render: (v, data) => {
-                return data.realName ? data.realName : '-';
-            }
-        }, {
-        //     field: 'tradeRate',
-        //     title: '广告费率'
-        // }, {
-            field: 'createDatetime',
-            title: '注册时间',
-            type: 'date',
-            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
-            render: dateTimeFormat,
-            search: true
-        }, {
-            field: 'lastLogin',
-            title: '最后登录时间',
-            type: 'datetime'
-        }, {
-            field: 'remark',
-            title: '备注'
-        }];
+                field: 'realName',
+                title: '真实姓名',
+                render: (v, data) => {
+                    return data.realName ? data.realName : '-';
+                }
+            }, {
+                //     field: 'tradeRate',
+                //     title: '广告费率'
+                // }, {
+                field: 'createDatetime',
+                title: '注册时间',
+                type: 'date',
+                rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
+                render: dateTimeFormat,
+                search: true
+            }, {
+                field: 'lastLogin',
+                title: '最后登录时间',
+                type: 'datetime'
+            }, {
+                field: 'remark',
+                title: '备注'
+            }];
         const {symbol, amountType, direction, userIdList, title, symbolData} = this.state;
         return (
           <div>
@@ -192,8 +199,8 @@ class Customer extends React.Component {
                                   showWarnMsg('请选择记录');
                               } else {
                                   let userIdList = [];
-                                  for(let i = 0, len = selectedRows.length; i < len; i++) {
-                                      if(selectedRows[i].status === '0') {
+                                  for (let i = 0, len = selectedRows.length; i < len; i++) {
+                                      if (selectedRows[i].status === '0') {
                                           showWarnMsg(selectedRows[i].nickname + '用户已是正常状态');
                                           userIdList = [];
                                           return;
@@ -223,8 +230,8 @@ class Customer extends React.Component {
                                   showWarnMsg('请选择记录');
                               } else {
                                   let userIdList = [];
-                                  for(let i = 0, len = selectedRows.length; i < len; i++) {
-                                      if(selectedRows[i].status === '2') {
+                                  for (let i = 0, len = selectedRows.length; i < len; i++) {
+                                      if (selectedRows[i].status === '2') {
                                           showWarnMsg(selectedRows[i].nickname + '用户已禁止登录');
                                           userIdList = [];
                                           return;
@@ -275,7 +282,7 @@ class Customer extends React.Component {
                                   showWarnMsg('请选择记录');
                               } else if (selectedRowKeys.length > 1) {
                                   showWarnMsg('请选择一条记录');
-                              } else if(selectedRows[0].nodeLevel) {
+                              } else if (selectedRows[0].nodeLevel) {
                                   showWarnMsg('该用户已是节点用户');
                               } else {
                                   this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}`);
@@ -287,7 +294,7 @@ class Customer extends React.Component {
                                   showWarnMsg('请选择记录');
                               } else if (selectedRowKeys.length > 1) {
                                   showWarnMsg('请选择一条记录');
-                              } else if(!selectedRows[0].nodeLevel) {
+                              } else if (!selectedRows[0].nodeLevel) {
                                   showWarnMsg('该用户还不是节点用户');
                               } else {
                                   this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}&nodeLevel=1`);
@@ -299,7 +306,7 @@ class Customer extends React.Component {
                                   showWarnMsg('请选择记录');
                               } else if (selectedRowKeys.length > 1) {
                                   showWarnMsg('请选择一条记录');
-                              } else if(!selectedRows[0].nodeLevel) {
+                              } else if (!selectedRows[0].nodeLevel) {
                                   showWarnMsg('该用户不是节点用户，无需取消');
                               } else {
                                   Modal.confirm({
@@ -380,10 +387,10 @@ class Customer extends React.Component {
                           }
                       },
                       beforeSearch: (params) => {
-                          if(this.state.machineOrderNumStart) {
+                          if (this.state.machineOrderNumStart) {
                               params.machineOrderNumStart = this.state.machineOrderNumStart;
                           }
-                          if(this.state.machineOrderNumEnd) {
+                          if (this.state.machineOrderNumEnd) {
                               params.machineOrderNumEnd = this.state.machineOrderNumEnd;
                           }
                           return params;
@@ -397,7 +404,7 @@ class Customer extends React.Component {
                 cancelText={'取消'}
                 onOk={() => {
                     let amount = this.refAmount.state && this.refAmount.state.value;
-                    if(!amount || !symbol) {
+                    if (!amount || !symbol) {
                         message.warning('请填写完整', 1.5);
                         return;
                     }
@@ -412,7 +419,8 @@ class Customer extends React.Component {
                         hasMsg();
                         message.success('操作成功', 1, () => {
                             this.setState({
-                                visible: false
+                                visible: false,
+                                symbol: null
                             });
                             this.refAmount.state.value = '';
                             this.props.getPageData();
@@ -420,17 +428,18 @@ class Customer extends React.Component {
                     }, hasMsg);
                 }}
                 onCancel={() => {
-                    if(this.refAmount.state) {
+                    if (this.refAmount.state) {
                         this.refAmount.state.value = '';
                     }
                     this.setState({
-                        visible: false
+                        visible: false,
+                        symbol: null
                     });
                 }}
               >
                   <div style={{marginBottom: '20px'}}>
                       <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>币种：</label>
-                      <Select style={{ width: '60%' }} placeholder="请选择币种" onChange={this.changeSymbol}>
+                      <Select style={{width: '60%'}} placeholder="请选择币种" value={symbol} onChange={this.changeSymbol}>
                           {
                               symbolData.map(item => (
                                 <Option value={item.symbol} key={item.id}>{item.symbol}</Option>
@@ -446,7 +455,7 @@ class Customer extends React.Component {
                         ref={(target) => {
                             this.refAmount = target;
                         }}
-                        style={{ width: '60%' }}
+                        style={{width: '60%'}}
                       />
                   </div>
               </Modal>
