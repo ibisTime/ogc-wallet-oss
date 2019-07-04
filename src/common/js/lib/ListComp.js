@@ -544,6 +544,13 @@ export default class ListComponent extends React.Component {
                 return item.rangedate ? this.getRangeDateItem(item) : this.getDateItem(item);
             case 'datetime':
                 return item.rangedate ? this.getRangeDateItem(item, true) : this.getDateItem(item, true);
+            case 'interval':
+                return item.intervalParams && (
+                  <div>
+                    <span><Input type="number" onChange={item.intervalParams.start} style={{width: '100px'}}/></span>
+                    <span style={{margin: '0 10px'}}>~</span>
+                    <span><Input type="number" onChange={item.intervalParams.end} style={{width: '100px'}}/></span>
+                </div>);
             default:
                 return <Input style={{width: 200}} placeholder={item.placeholder}/>;
         }
