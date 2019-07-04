@@ -1,4 +1,4 @@
-export const SYSTEM_CODE = 'CL-WATER';
+export const SYSTEM_CODE = 'CL-BEITA';
 // 七牛上传地址
 export const UPLOAD_URL = 'http://up.qiniup.com';
 // 七牛图片前缀

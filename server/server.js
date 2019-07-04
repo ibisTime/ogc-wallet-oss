@@ -32,6 +32,9 @@ app.use('/api', function (req, res) {
 
     //水滴钱包测试
     let url = 'http://m.sditest.hichengdai.com/api';
+    
+    // 贝塔
+    // let url = 'http://m.u2e2.com/api';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
