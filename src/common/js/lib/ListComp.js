@@ -448,9 +448,13 @@ export default class ListComponent extends React.Component {
         }
         this.props.doFetching();
         const {pagination} = this.props;
+        let limit = pagination.pageSize;
+        if(searchParam.limit) {
+            limit = searchParam.limit;
+        }
         fetch(this.options.pageCode, {
             start: current,
-            limit: pagination.pageSize,
+            limit,
             ...searchParam
         }).then(data => {
             this.props.cancelFetching();

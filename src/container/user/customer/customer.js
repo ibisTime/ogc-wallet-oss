@@ -193,6 +193,9 @@ class Customer extends React.Component {
                       rowKey: 'userId',
                       pageCode: '805120',
                       singleSelect: false,
+                      searchParam: {
+                          limit: 20
+                      },
                       btnEvent: {
                           active: (selectedRowKeys, selectedRows) => {
                               if (!selectedRowKeys.length) {
