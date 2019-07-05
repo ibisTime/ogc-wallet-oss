@@ -75,7 +75,8 @@ class MillOrderIncome extends React.Component {
             field: 'type',
             title: '收益类型',
             type: 'select',
-            key: 'machine_income_type'
+            key: 'machine_income_type',
+            search: true
         }];
         return this.props.buildList({
             fields,

@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import React from 'react';
 import { getWorkbook } from 'common/js/xlsx-util';
 import { Form, Select, DatePicker, Input, Button, Table } from 'antd';
@@ -289,6 +290,8 @@ export default class ListComponent extends React.Component {
             this.ownerReset();
             this.intervalStart.state.value = '';
             this.intervalEnd.state.value = '';
+            sessionStorage.removeItem('machineOrderNumStart');
+            sessionStorage.removeItem('machineOrderNumEnd');
         }
         this.props.clearSearchParam();
     };
@@ -546,6 +549,16 @@ export default class ListComponent extends React.Component {
     getItemByType(type, item) {
         if(item.intervalParams) {
             this.ownerReset = item.intervalParams.reset;
+        }
+        if(this.intervalStart && this.intervalEnd) {
+            let machineOrderNumStart = sessionStorage.getItem('machineOrderNumStart') || '';
+            let machineOrderNumEnd = sessionStorage.getItem('machineOrderNumEnd') || '';
+            if(machineOrderNumStart) {
+                this.intervalStart.state.value = machineOrderNumStart;
+            }
+            if(machineOrderNumEnd) {
+                this.intervalEnd.state.value = machineOrderNumEnd;
+            }
         }
         switch (type) {
             case 'provSelect':

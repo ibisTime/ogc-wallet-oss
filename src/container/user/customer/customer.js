@@ -38,8 +38,8 @@ class Customer extends React.Component {
         userIdList: '',
         accountNumber: '',
         title: '',
-        machineOrderNumStart: '',
-        machineOrderNumEnd: '',
+        machineOrderNumStart: sessionStorage.getItem('machineOrderNumStart') || '',
+        machineOrderNumEnd: sessionStorage.getItem('machineOrderNumEnd') || '',
         symbolData: []
     };
     componentDidMount() {
@@ -390,11 +390,14 @@ class Customer extends React.Component {
                           }
                       },
                       beforeSearch: (params) => {
-                          if (this.state.machineOrderNumStart) {
-                              params.machineOrderNumStart = this.state.machineOrderNumStart;
+                          const {machineOrderNumStart, machineOrderNumEnd} = this.state;
+                          if (machineOrderNumStart) {
+                              params.machineOrderNumStart = machineOrderNumStart;
+                              sessionStorage.setItem('machineOrderNumStart', machineOrderNumStart);
                           }
-                          if (this.state.machineOrderNumEnd) {
-                              params.machineOrderNumEnd = this.state.machineOrderNumEnd;
+                          if (machineOrderNumEnd) {
+                              params.machineOrderNumEnd = machineOrderNumEnd;
+                              sessionStorage.setItem('machineOrderNumEnd', machineOrderNumEnd);
                           }
                           return params;
                       }
