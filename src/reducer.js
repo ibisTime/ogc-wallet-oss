@@ -255,9 +255,11 @@ import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
 import {TAG} from './redux/managent/tag';
 import {candyCandymanagement} from './redux/candy/candymanagement/candymanagement';
 import {candyCandyOrder} from './redux/candy/candyorder/candyorder';
+import {historyCandyCandyOrder} from './redux/candy/historyCandyorder/historyCandyorder';
 import {managentPriceClassification} from './redux/managent/priceClassification';
 import {candyConfiguration} from './redux/candy/candyConfiguration/candyConfiguration';
 import {earningsQuery} from './redux/candy/earnings/earningsQuery';
+import {historyEarningsQuery} from './redux/candy/historyEarnings/historyEarningsQuery';
 
 export default combineReducers({
     user,
@@ -447,8 +449,10 @@ export default combineReducers({
     quantitativeAiRule,
     candyCandymanagement,
     candyCandyOrder,
+    historyCandyCandyOrder,
     managentPriceClassification,
     candyConfiguration,
     activityConfiguration,
-    earningsQuery
+    earningsQuery,
+    historyEarningsQuery
 });

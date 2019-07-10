@@ -1147,19 +1147,19 @@ const ROUTES = [
         path: '/managent/tag/addedit',
         component: asyncComponent(() => import('container/managent/tag/tag-addedit'))
     },
-  // 闪兑管理
+    // 闪兑管理
     {
-      path: '/trading/sdRecord',
-      component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord'))
+        path: '/trading/sdRecord',
+        component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord'))
     },
     {
         path: '/trading/sdRecord/detail',
         component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord-detail'))
     },
-   {
+    {
         path: '/trading/tradMessage',
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage'))
-   },
+    },
     {
         path: '/trading/tradMessage/addedit',
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-addedit'))
@@ -1237,6 +1237,14 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/candy/candyorder/candyorder-addedit'))
     },
     {
+        path: '/historyCandyorder/historyCandyorder',
+        component: asyncComponent(() => import('container/biz/candy/historyCandyorder/historyCandyorder'))
+    },
+    {
+        path: '/historyCandyorder/historyCandyorder/addedit',
+        component: asyncComponent(() => import('container/biz/candy/historyCandyorder/historyCandyorder-addedit'))
+    },
+    {
         path: '/priceClassification/priceClassification',
         component: asyncComponent(() => import('container/managent/priceClassification/priceClassification'))
     },
@@ -1255,6 +1263,15 @@ const ROUTES = [
     {
         path: '/earnings/earningsQuery/addedit',
         component: asyncComponent(() => import('container/biz/candy/earnings/earningsQuery-addedit'))
+    },
+    // 历史收益
+    {
+        path: '/historyEarnings/historyEarningsQuery',
+        component: asyncComponent(() => import('container/biz/candy/historyEarnings/historyEarningsQuery'))
+    },
+    {
+        path: '/historyEarnings/historyEarningsQuery/addedit',
+        component: asyncComponent(() => import('container/biz/candy/historyEarnings/historyEarningsQuery-addedit'))
     }
 ];
 
