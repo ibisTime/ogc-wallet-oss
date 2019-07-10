@@ -92,7 +92,7 @@ class historyCandyorder extends React.Component {
               {
                   this.props.buildList({
                       fields,
-                      pageCode: 610435,
+                      pageCode: 610447,
                       deleteCode: '610421'
                   })
               }
