@@ -14,14 +14,14 @@ import { showWarnMsg, moneyFormat } from 'common/js/util';
 import {Modal, message, Input} from 'antd';
 
 @listWrapper(
-  state => ({
-      ...state.historyCandyCandyOrder,
-      parentCode: state.menu.subMenuCode
-  }),
-  {
-      setTableData, clearSearchParam, doFetching, setBtnList,
-      cancelFetching, setPagination, setSearchParam, setSearchData
-  }
+    state => ({
+        ...state.historyCandyCandyOrder,
+        parentCode: state.menu.subMenuCode
+    }),
+    {
+        setTableData, clearSearchParam, doFetching, setBtnList,
+        cancelFetching, setPagination, setSearchParam, setSearchData
+    }
 )
 class historyCandyorder extends React.Component {
     state = {
@@ -88,15 +88,15 @@ class historyCandyorder extends React.Component {
             type: 'datetime'
         }];
         return (
-          <div>
-              {
-                  this.props.buildList({
-                      fields,
-                      pageCode: 610447,
-                      deleteCode: '610421'
-                  })
-              }
-          </div>
+            <div>
+                {
+                    this.props.buildList({
+                        fields,
+                        pageCode: 610447,
+                        deleteCode: '610421'
+                    })
+                }
+            </div>
         );
     }
 }

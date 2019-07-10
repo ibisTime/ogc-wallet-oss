@@ -76,7 +76,7 @@ class historyEarningsQueryAddedit extends DetailUtil {
             key: 'id',
             code: this.code,
             view: true,
-            detailCode: '610444'
+            detailCode: '610446'
         });
     }
 }

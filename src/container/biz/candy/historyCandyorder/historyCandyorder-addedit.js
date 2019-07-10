@@ -52,7 +52,7 @@ class historyCandyorderAddedit extends DetailUtil {
             fields,
             code: this.code,
             view: true,
-            detailCode: '610437'
+            detailCode: '610449'
         });
     }
 }

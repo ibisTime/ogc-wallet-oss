@@ -13,14 +13,14 @@ import {listWrapper} from 'common/js/build-list';
 import { showWarnMsg, moneyFormat } from 'common/js/util';
 
 @listWrapper(
-  state => ({
-      ...state.historyEarningsQuery,
-      parentCode: state.menu.subMenuCode
-  }),
-  {
-      setTableData, clearSearchParam, doFetching, setBtnList,
-      cancelFetching, setPagination, setSearchParam, setSearchData
-  }
+    state => ({
+        ...state.historyEarningsQuery,
+        parentCode: state.menu.subMenuCode
+    }),
+    {
+        setTableData, clearSearchParam, doFetching, setBtnList,
+        cancelFetching, setPagination, setSearchParam, setSearchData
+    }
 )
 class HistoryEarningsQuery extends React.Component {
     render() {
@@ -101,15 +101,15 @@ class HistoryEarningsQuery extends React.Component {
             search: true
         }];
         return (
-          <div>
-              {
-                  this.props.buildList({
-                      fields,
-                      rowKey: 'id',
-                      pageCode: 610445
-                  })
-              }
-          </div>
+            <div>
+                {
+                    this.props.buildList({
+                        fields,
+                        rowKey: 'id',
+                        pageCode: 610445
+                    })
+                }
+            </div>
         );
     }
 }
