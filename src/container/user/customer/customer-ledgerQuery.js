@@ -32,9 +32,6 @@ class CustomerLedgerQuery extends React.Component {
         this.bizType = getQueryString('bizType', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search) || '';
         this.type = getQueryString('type', this.props.location.search) || '';
-        if(this.symbol) {
-          this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
-        }
         this.buttons = [];
         this.buttons = [{
             code: 'export',
