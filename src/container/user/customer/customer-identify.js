@@ -23,12 +23,12 @@ class CustomerIdentify extends DetailUtil {
             field: 'idNo',
             title: '证件号',
             idCard: true,
-            require: true
+            required: true
         }, {
             field: 'realName',
             title: '真实姓名',
             maxlength: 10,
-            require: true
+            required: true
         }];
         return this.buildDetail({
             fields,
