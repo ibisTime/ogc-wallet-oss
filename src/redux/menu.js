@@ -168,7 +168,9 @@ function createMenus(newList, result) {
 
 function sortSubMenus(result) {
     for (let key in result.top2SubObj) {
-        result.top2SubObj[key].sort((a, b) => a['orderNo'].localeCompare(b['orderNo']));
+        result.top2SubObj[key].sort((a, b) => {
+            return (+a['orderNo']) - (+b['orderNo']);
+        });
     }
 }
 
