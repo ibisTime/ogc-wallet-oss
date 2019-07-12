@@ -144,7 +144,7 @@ function getFilterList(result, data) {
 }
 
 function createMenus(newList, result) {
-    newList.forEach(v => {
+    newList.forEach((v, index) => {
         v.url = getRealUrl(v.url);
         let pCode = v.parentCode;
         if (result.top2SubObj[pCode]) {

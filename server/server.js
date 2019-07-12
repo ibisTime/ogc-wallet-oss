@@ -16,6 +16,8 @@ app.use('/api', function (req, res) {
   // var url = 'http://120.26.6.213:6801/forward-service/api';
     //金米测试
    let url = 'http://m.jinmitest.hichengdai.com/api';
+   // 正式
+   // let url = 'https://m.jinmi.club/api';
     //金米研发
     // let url = 'http://120.26.6.213:6801/forward-service/api';
     // ticp研发
