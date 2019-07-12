@@ -233,6 +233,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/user/customer/customer'))
     },
     {
+        path: '/user/customer/identify',
+        component: asyncComponent(() => import('container/user/customer/customer-identify'))
+    },
+    {
         path: '/user/customer/addedit',
         component: asyncComponent(() => import('container/user/customer/customer-addedit'))
     },

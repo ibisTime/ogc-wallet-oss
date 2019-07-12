@@ -387,6 +387,16 @@ class Customer extends React.Component {
                                       userIdList: list
                                   });
                               }
+                          },
+                          // 实名设置
+                          editIdentify: (selectedRowKeys, selectedRows) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.props.history.push(`/user/customer/identify?userId=${selectedRowKeys[0]}`);
+                              }
                           }
                       },
                       beforeSearch: (params) => {
