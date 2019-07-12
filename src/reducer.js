@@ -143,6 +143,7 @@ import {quotationMarketAdjustment} from './redux/biz/quotation/marketAdjustment'
 import {activityInvitingFriends} from './redux/activity/invitingFriends/invitingFriends';
 
 import {activityGoldenMile} from './redux/activity/goldenMile/goldenMile';
+import {activityBednReward} from './redux/activity/bednReward/bednReward';
 
 // 业务规则
 // 广告费规则
@@ -346,6 +347,7 @@ export default combineReducers({
     // 邀请好友
     activityInvitingFriends,
     activityGoldenMile,
+    activityBednReward,
     // 业务规则
     // 广告费规则
     rulesAdvertisingFee,

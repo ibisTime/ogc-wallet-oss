@@ -91,7 +91,6 @@ class PlatformAccount extends React.Component {
     }
 
     gomanualsettlement(accountNumber, totalUnSettleAmount, bizType, symbol) {
-        console.log(this.totalUnSettleAmount);
         if (this.totalUnSettleAmount > 0) {
             this.props.history.push(`/BTC-finance/platformAccount/manualsettlement?isPlat=1&settleAmount=${this.unSettleAmount}&v=1&code=${accountNumber}&bizType=${bizType}&symbol=${symbol}`);
         } else {
@@ -100,61 +99,36 @@ class PlatformAccount extends React.Component {
     }
 
     render() {
-        const unsettledLoan = this.props.unsettledLoan;
+        const unsettledLoan = this.props.unsettledLoan || {};
+        const unsettedList = Object.values(unsettledLoan);
         const {data} = this.state;
         return (
             <div>
-                <div style={{'margin-bottom': '30px'}}>
+                <div style={{marginBottom: '30px'}}>
                     <Button onClick={() => {
                         this.props.history.go(-1);
                     }}>返回</Button>
                 </div>
                 <Row>
-                    <Col style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}}>
-                        <Card title="冷钱包账户余额" extra={
-                            moneyFormat(unsettledLoan[this.state.accountTypeCold] ? unsettledLoan[this.state.accountTypeCold].amount : '0', '', this.state.symbol)
-                        }>{<div style={{width: '100%', textAlign: 'center'}}>
-                            <Button
-                                onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeCold] ? unsettledLoan[this.state.accountTypeCold].accountNumber : '', 'jour_biz_type_cold', '')}
-                                type="primary">资金流水</Button>
-                            <Button
-                              style={{marginLeft: '50px'}}
-                              onClick={
-                                  () => this.goFlow(unsettledLoan[this.state.accountTypeCold] ? unsettledLoan[this.state.accountTypeCold].accountNumber : '', 'jour_biz_type_cold', this.state.symbol, 'hos')
-                              }
-                              type="primary">历史流水</Button>
-                        </div>}</Card>
-                    </Col>
-                    <Col style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}}>
-                        <Card title="散取账户余额" extra={
-                            moneyFormat(unsettledLoan[this.state.accountTypeSQ] ? unsettledLoan[this.state.accountTypeSQ].amount : '0', '', this.state.symbol)
-                        }>{<div style={{width: '100%', textAlign: 'center'}}>
-                            <Button
-                                onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeSQ] ? unsettledLoan[this.state.accountTypeSQ].accountNumber : '', 'jour_biz_type_withdraw', '')}
-                                type="primary">资金流水</Button>
-                            <Button
-                              style={{marginLeft: '50px'}}
-                              onClick={
-                                  () => this.goFlow(unsettledLoan[this.state.accountTypeSQ] ? unsettledLoan[this.state.accountTypeSQ].accountNumber : '', 'jour_biz_type_withdraw', this.state.symbol, 'hos')
-                              }
-                              type="primary">历史流水</Button>
-                        </div>}</Card>
-                    </Col>
-                    <Col style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}}>
-                        <Card title="盈亏账户余额 " extra={
-                            moneyFormat(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].amount : '0', '', this.state.symbol)
-                        }>{<div style={{width: '100%', textAlign: 'center'}}>
-                            <Button
-                                onClick={() => this.goFlow(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
-                                type="primary">资金流水</Button>
-                            <Button
-                              style={{marginLeft: '50px'}}
-                              onClick={
-                                  () => this.goFlow(unsettledLoan[this.state.accountTypeYK] ? unsettledLoan[this.state.accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol, 'hos')
-                              }
-                              type="primary">历史流水</Button>
-                        </div>}</Card>
-                    </Col>
+                    {
+                        unsettedList.length > 0 && unsettedList.map((item) => (
+                          <Col style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}} key={item.userId}>
+                              <Card title={item.accountName} extra={
+                                  moneyFormat(item.amount.toString(), '', item.currency)
+                              }>{<div style={{width: '100%', textAlign: 'center'}}>
+                                  <Button
+                                    onClick={() => this.goFlow(item.accountNumber, item.accountBizTypeKey, '')}
+                                    type="primary">资金流水</Button>
+                                  <Button
+                                    style={{marginLeft: '50px'}}
+                                    onClick={
+                                        () => this.goFlow(item.accountNumber, item.accountBizTypeKey, item.currency, 'hos')
+                                    }
+                                    type="primary">历史流水</Button>
+                              </div>}</Card>
+                          </Col>
+                        ))
+                    }
                 </Row>
             </div>
         );
