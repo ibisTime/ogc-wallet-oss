@@ -38,7 +38,7 @@ class CustomerAccount extends React.Component {
         this.buttons = [];
         this.buttons = [{
             code: 'ledgerQuery',
-            name: '近期流水查询',
+            name: '今日流水查询',
             handler: (selectedRowKeys, selectedRows) => {
                 this.ledgerQuery(selectedRowKeys, selectedRows);
             }

@@ -14,14 +14,14 @@ import {listWrapper} from 'common/js/build-list';
 import {moneyFormat, getCoinList, dateTimeFormat, showWarnMsg} from 'common/js/util';
 
 @listWrapper(
-  state => ({
-    ...state.BTCFinanceDiviAddress,
-    parentCode: state.menu.subMenuCode
-  }),
-  {
-    setTableData, clearSearchParam, doFetching, setBtnList,
-    cancelFetching, setPagination, setSearchParam, setSearchData
-  }
+    state => ({
+      ...state.BTCFinanceDiviAddress,
+      parentCode: state.menu.subMenuCode
+    }),
+    {
+      setTableData, clearSearchParam, doFetching, setBtnList,
+      cancelFetching, setPagination, setSearchParam, setSearchData
+    }
 )
 class BTCDiviAddress extends React.Component {
   render() {
@@ -58,7 +58,8 @@ class BTCDiviAddress extends React.Component {
       title: '持有币的数量'
     }, {
       field: 'address',
-      title: '地址'
+      title: '地址',
+      search: true
     }, {
       field: 'cnyPrice',
       title: '单价(CNY)'

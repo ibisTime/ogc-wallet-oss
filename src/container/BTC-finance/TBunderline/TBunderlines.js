@@ -68,6 +68,11 @@ class TBunderline extends React.Component {
             currency = v;
           }
         }, {
+            field: 'bizType',
+            title: '订单类型',
+            type: 'select',
+            key: 'withdraw_biz_type'
+        }, {
             field: 'accountName',
             title: '账号',
             render: (v, data) => {
