@@ -264,6 +264,15 @@ const ROUTES = [
         path: '/user/customer/ledgerQueryHistory',
         component: asyncComponent(() => import('container/user/customer/customer-ledgerQueryHistory'))
     },
+    // 实名认证
+    {
+        path: '/user/identify',
+        component: asyncComponent(() => import('container/user/customer/identify'))
+    },
+    {
+        path: '/user/identify/addedit',
+        component: asyncComponent(() => import('container/user/customer/identify-addedit'))
+    },
     // 会员流水
     {
         path: '/user/customer/ledgerQuerys',

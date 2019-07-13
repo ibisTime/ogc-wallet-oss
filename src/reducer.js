@@ -46,6 +46,7 @@ import {userCustomerAccount} from './redux/user/customer/customer-account';
 import {userCustomerEntrustQuery} from './redux/user/customer/customer-entrustQuery';
 import {userCustomerLedgerQuery} from './redux/user/customer/customer-ledgerQuery';
 import {userCustomerAccountSummary} from './redux/user/customer/customer-accountSummary';
+import {userCustomerIdentify} from './redux/user/customer/identify';
 
 // 渠道商管理
 // 渠道商管理
@@ -289,6 +290,7 @@ export default combineReducers({
     userCustomerEntrustQuery,
     userCustomerLedgerQuery,
     userCustomerAccountSummary,
+    userCustomerIdentify,
     // 黑名单管理
     userCustomerBlackList,
     // kyc审核
