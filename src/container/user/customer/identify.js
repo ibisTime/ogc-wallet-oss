@@ -158,6 +158,24 @@ class CustomerIdentify extends React.Component {
                                           }).catch(this.props.cancelFetching);
                                       }
                                   });
+                                  setTimeout(() => {
+                                      let spHtml = document.createElement('span');
+                                      let modalContent = document.querySelector('.ant-modal-content');
+                                      if(modalContent) {
+                                          spHtml.innerText = '×';
+                                          spHtml.style.display = 'block';
+                                          spHtml.style.fontSize = '24px';
+                                          spHtml.style.padding = '14px';
+                                          spHtml.classList.add('ant-modal-close');
+                                          modalContent.appendChild(spHtml);
+                                          spHtml.addEventListener('click', function() {
+                                              let mask = document.querySelector('.ant-modal-mask');
+                                              let warp = document.querySelector('.ant-modal-wrap');
+                                              mask.parentNode.removeChild(mask);
+                                              warp.parentNode.removeChild(warp);
+                                          });
+                                      }
+                                  }, 500);
                               }
                           }
                       }
