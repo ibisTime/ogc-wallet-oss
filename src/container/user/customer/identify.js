@@ -30,7 +30,7 @@ class CustomerIdentify extends React.Component {
         ...this.state,
         visible: false,
         title: '',
-        pic: ''
+        picList: []
     };
     handleOk = e => {
         this.setState({
@@ -61,47 +61,25 @@ class CustomerIdentify extends React.Component {
             title: '身份证号'
         }, {
             field: 'frontImage',
-            title: '身份证正面照',
-            render: (v) => (
-              <div style={{textAlign: 'center', margin: '-20px'}} onClick={(e) => {
+            title: '身份证照片',
+            render: (v, d) => (
+              <div style={{textAlign: 'center', margin: '0px'}} onClick={(e) => {
                   e.stopPropagation();
                   this.setState({
-                      title: '身份证正面照',
+                      title: `${d.realName}(${d.idNo})`,
                       visible: true,
-                      pic: PIC_PREFIX + v
+                      picList: [{
+                          pic: PIC_PREFIX + v
+                      }, {
+                          pic: PIC_PREFIX + d.backImage
+                      }, {
+                          pic: PIC_PREFIX + d.faceImage
+                      }]
                   });
               }}>
-                  <img src={PIC_PREFIX + v} alt="" style={{width: '20%'}}/>
-              </div>
-            )
-        }, {
-            field: 'backImage',
-            title: '身份证反面照',
-            render: (v) => (
-              <div style={{textAlign: 'center', margin: '-20px'}} onClick={(e) => {
-                  e.stopPropagation();
-                  this.setState({
-                      title: '身份证反面照',
-                      visible: true,
-                      pic: PIC_PREFIX + v
-                  });
-              }}>
-                  <img src={PIC_PREFIX + v} alt="" style={{width: '20%'}}/>
-              </div>
-            )
-        }, {
-            field: 'faceImage',
-            title: '手持身份证照',
-            render: (v) => (
-              <div style={{textAlign: 'center', margin: '-20px'}} onClick={(e) => {
-                  e.stopPropagation();
-                  this.setState({
-                      title: '手持身份证照',
-                      visible: true,
-                      pic: PIC_PREFIX + v
-                  });
-              }}>
-                  <img src={PIC_PREFIX + v} alt="" style={{width: '20%'}}/>
+                  <img src={PIC_PREFIX + v} alt="" style={{width: '10%'}}/>
+                  <img src={PIC_PREFIX + d.backImage} alt="" style={{width: '10%', margin: '0 20px'}}/>
+                  <img src={PIC_PREFIX + d.faceImage} alt="" style={{width: '10%'}}/>
               </div>
             )
         }, {
@@ -125,7 +103,7 @@ class CustomerIdentify extends React.Component {
             title: '申请时间',
             type: 'datetime'
         }];
-        const {title, visible, pic} = this.state;
+        const {title, visible, picList} = this.state;
         return (
           <div>
               {
@@ -154,7 +132,6 @@ class CustomerIdentify extends React.Component {
                                   showWarnMsg('请选择记录');
                               } else {
                                   Modal.confirm({
-                                      maskClosable: true,
                                       title: '批量审核',
                                       okText: '通过',
                                       cancelText: '不通过',
@@ -188,7 +165,7 @@ class CustomerIdentify extends React.Component {
               }
               <Modal
                 title={title}
-                width={600}
+                width={1300}
                 visible={visible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
@@ -196,7 +173,11 @@ class CustomerIdentify extends React.Component {
                 cancelText="取消"
               >
                   <div>
-                      <img src={pic} alt="" style={{width: '100%'}}/>
+                      {
+                          picList.map(item => (
+                            <img src={item.pic} alt="" style={{width: '30%', marginRight: '20px'}}/>
+                          ))
+                      }
                   </div>
               </Modal>
           </div>

@@ -45,22 +45,6 @@ class CustomerIdentifyAddEdit extends DetailUtil {
             title: '手机号',
             _keys: ['user', 'mobile']
         }, {
-            field: 'frontImage',
-            title: '身份证正面',
-            type: 'img'
-        }, {
-            field: 'backImage',
-            title: '身份证反面',
-            type: 'img'
-        }, {
-            field: 'faceImage',
-            title: '人脸照片',
-            type: 'img'
-        }, {
-            field: 'createDatetime',
-            title: '申请时间',
-            type: 'datetime'
-        }, {
             field: 'realName',
             title: '真实姓名',
             readonly: true,
@@ -71,6 +55,22 @@ class CustomerIdentifyAddEdit extends DetailUtil {
             idCard: true,
             readonly: true,
             hidden: !this.check
+        }, {
+            field: 'frontImage',
+            title: '身份证正面',
+            type: 'img'
+        }, {
+            field: 'backImage',
+            title: '身份证反面',
+            type: 'img'
+        }, {
+            field: 'faceImage',
+            title: '手持身份证照',
+            type: 'img'
+        }, {
+            field: 'createDatetime',
+            title: '申请时间',
+            type: 'datetime'
         }, {
             field: 'remark',
             title: '审核说明',
