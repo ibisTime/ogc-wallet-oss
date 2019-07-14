@@ -31,25 +31,29 @@ class AcceptRule extends React.Component {
             field: 'cvalue',
             title: '数值'
         }];
-        return this.props.buildList({
-            fields,
-            rowKey: 'id',
-            pageCode: '630045',
-            searchParams: {
-                type: 'accept_rule'
-            },
-            btnEvent: {
-                edit: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/rules/acceptRule/addedit?code=${selectedRowKeys[0]}&ckey=${selectedRows[0].ckey}`);
+        return (<div>
+            {
+                this.props.buildList({
+                    fields,
+                    rowKey: 'id',
+                    pageCode: '630045',
+                    searchParams: {
+                        type: 'accept_rule'
+                    },
+                    btnEvent: {
+                        edit: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/rules/acceptRule/addedit?code=${selectedRowKeys[0]}&ckey=${selectedRows[0].ckey}`);
+                            }
+                        }
                     }
-                }
+                })
             }
-        });
+        </div>);
     }
 }
 

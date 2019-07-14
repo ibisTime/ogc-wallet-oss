@@ -47,26 +47,15 @@ class CustomerIdentifyAddEdit extends DetailUtil {
         }, {
             field: 'frontImage',
             title: '身份证正面',
-            type: 'img',
-            formatter: (v, d) => this.getPic(d, '0')
-        }, {
-            field: 'data1',
-            title: '身份证正面三方认证错误信息',
-            formatter: (v, d) => this.getPicMsg(d, '0')
+            type: 'img'
         }, {
             field: 'backImage',
             title: '身份证反面',
-            type: 'img',
-            formatter: (v, d) => this.getPic(d, '1')
-        }, {
-            field: 'data2',
-            title: '身份证反面三方认证错误信息',
-            formatter: (v, d) => this.getPicMsg(d, '1')
+            type: 'img'
         }, {
             field: 'faceImage',
             title: '人脸照片',
-            type: 'img',
-            formatter: (v, d) => this.getPic(d, '2')
+            type: 'img'
         }, {
             field: 'createDatetime',
             title: '申请时间',
@@ -74,15 +63,13 @@ class CustomerIdentifyAddEdit extends DetailUtil {
         }, {
             field: 'realName',
             title: '真实姓名',
-            help: '审核通过时必须填写',
-            readonly: !this.check,
+            readonly: true,
             hidden: !this.check
         }, {
             field: 'idNo',
             title: '身份证号码',
-            help: '审核通过时必须填写',
             idCard: true,
-            readonly: !this.check,
+            readonly: true,
             hidden: !this.check
         }, {
             field: 'remark',
@@ -101,19 +88,15 @@ class CustomerIdentifyAddEdit extends DetailUtil {
             config.buttons = [{
                 title: '通过',
                 handler: (params) => {
-                    if (!params.realName) {
-                        showWarnMsg('审核通过时必须填写真实姓名');
-                    } else if (!params.idNo) {
-                        showWarnMsg('审核通过时必须填写身份证号码');
-                    } else {
-                        this.checkOrder(params, 1);
-                    }
+                    params.codeList = [params.code];
+                    this.checkOrder(params, 1);
                 },
                 check: true,
                 type: 'primary'
             }, {
                 title: '不通过',
                 handler: (params) => {
+                    params.codeList = [params.code];
                     this.checkOrder(params, 0);
                 },
                 check: true,
