@@ -118,9 +118,6 @@ import {acceptCancelOrder} from './redux/accept/cancelOrder/cancelOrder';
 
 // 行情管理
 
-// BTC行情
-import {quotationQuotationBTC} from './redux/biz/quotation/quotationBTC';
-
 // 自配行情
 import {quotationQuotationZP} from './redux/biz/quotation/quotationZP';
 
@@ -129,8 +126,6 @@ import {quotationQuotationCDS} from './redux/biz/quotation/quotationCDS';
 
 // ETH行情
 import {quotationQuotationETH} from './redux/biz/quotation/quotationETH';
-// trx行情
-import {quotationQuotationTRX} from './redux/biz/quotation/quotationTRX';
 
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
@@ -343,10 +338,8 @@ export default combineReducers({
     acceptFinishOrder,
     acceptCancelOrder,
     // 行情管理
-    quotationQuotationBTC,
     quotationQuotationCDS,
     quotationQuotationETH,
-    quotationQuotationTRX,
     quotationExchangeRate,
     quotationMarketAdjustment,
     quotationQuotationZP,

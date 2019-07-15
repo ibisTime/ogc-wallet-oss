@@ -579,25 +579,10 @@ const ROUTES = [
     },
 
     // 行情管理
-    // BTC行情
-    {
-        path: '/quotation/quotationBTC',
-        component: asyncComponent(() => import('container/biz/quotation/quotationBTC'))
-    },
-    // USDT行情
-    {
-        path: '/quotation/quotationUSDT',
-        component: asyncComponent(() => import('container/biz/quotation/quotationUSDT'))
-    },
     // ETH行情
     {
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
-    },
-    // TRX行情
-    {
-        path: '/quotation/quotationTRX',
-        component: asyncComponent(() => import('container/biz/quotation/quotationTRX'))
     },
     // 承兑商行情
     {
