@@ -255,6 +255,19 @@ import {managentPriceClassification} from './redux/managent/priceClassification'
 import {candyConfiguration} from './redux/candy/candyConfiguration/candyConfiguration';
 import {earningsQuery} from './redux/candy/earnings/earningsQuery';
 import {historyEarningsQuery} from './redux/candy/historyEarnings/historyEarningsQuery';
+// 商户管理-- 线下支付
+// 线下支付-- 商户管理
+import { businessmen } from './redux/businessmenManager/businessmen/businessmen';
+// 线下支付-- 未结算支付记录
+import { unsettledAccounts } from './redux/businessmenManager/unsettledAccounts/unsettledAccounts';
+// 线下支付-- 已结算支付记录
+import { settled } from './redux/businessmenManager/settled/settled';
+// 线下支付-- 结算记录
+import { settlementRecords } from './redux/businessmenManager/settlementRecords/settlementRecords';
+// 线下支付-- 商户分析
+import { businessAnalysis } from './redux/businessmenManager/businessAnalysis/businessAnalysis';
+// 线下支付-- 支付规则
+import { paymentRules } from './redux/businessmenManager/paymentRules/paymentRules';
 
 export default combineReducers({
     user,
@@ -447,5 +460,13 @@ export default combineReducers({
     candyConfiguration,
     activityConfiguration,
     earningsQuery,
-    historyEarningsQuery
+    historyEarningsQuery,
+
+    // 商户管理-- 线下支付
+    businessmen,
+    unsettledAccounts,
+    settled,
+    settlementRecords,
+    businessAnalysis,
+    paymentRules
 });

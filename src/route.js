@@ -1257,6 +1257,48 @@ const ROUTES = [
     {
         path: '/historyEarnings/historyEarningsQuery/addedit',
         component: asyncComponent(() => import('container/biz/candy/historyEarnings/historyEarningsQuery-addedit'))
+    },
+    // 商户管理
+    {
+        path: '/businessmenManager/businessmen',
+        component: asyncComponent(() => import('container/businessmenManager/businessmen/businessmen'))
+    },
+    {
+        path: '/businessmenManager/businessmen/addedit',
+        component: asyncComponent(() => import('container/businessmenManager/businessmen/businessmen-addedit'))
+    },
+    {
+        path: '/businessmenManager/businessmen/accountQuery',
+        component: asyncComponent(() => import('container/businessmenManager/businessmen/customer-account'))
+    },
+    // 未结算
+    {
+        path: '/businessmenManager/unsettledAccounts',
+        component: asyncComponent(() => import('container/businessmenManager/unsettledAccounts/unsettledAccounts'))
+    },
+    // 已结算
+    {
+        path: '/businessmenManager/settled',
+        component: asyncComponent(() => import('container/businessmenManager/settled/settled'))
+    },
+    // 结算记录
+    {
+        path: '/businessmenManager/settlementRecords',
+        component: asyncComponent(() => import('container/businessmenManager/settlementRecords/settlementRecords'))
+    },
+    // 商户分析
+    {
+        path: '/businessmenManager/businessAnalysis',
+        component: asyncComponent(() => import('container/businessmenManager/businessAnalysis/businessAnalysis'))
+    },
+    // 支付规则
+    {
+        path: '/businessmenManager/paymentRules',
+        component: asyncComponent(() => import('container/businessmenManager/paymentRules/paymentRules'))
+    },
+    {
+        path: '/businessmenManager/paymentRules/edit',
+        component: asyncComponent(() => import('container/businessmenManager/paymentRules/paymentRule-addedit'))
     }
 ];
 

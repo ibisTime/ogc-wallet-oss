@@ -188,7 +188,7 @@ export function H0M0S0Date(date, days, format) {
  * @param coin 币种
  * @param isRe 是否去零
  */
-export function moneyFormat(money, format, coin, isRe = false) {
+export function moneyFormat(money, format, coin, isRe = false, isTosp) {
     let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
     let flag = false;// 是否是负数
     if (isNaN(money)) {
@@ -204,7 +204,11 @@ export function moneyFormat(money, format, coin, isRe = false) {
     if (coin && isUndefined(format)) {
         format = 8;
     } else if (isUndefined(format) || typeof format === 'object') {
-        format = 2;
+        if(!isTosp) {
+          format = 2;
+        }else{
+          format = 16;
+        }
     }
     // 金额格式化 金额除以unit并保留format位小数
     money = new BigDecimal(money.toString());
@@ -219,6 +223,7 @@ export function moneyFormat(money, format, coin, isRe = false) {
     }
     return money;
 }
+
 export function moneyBTC(money, format, coin, isRe = false) {
   let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000000';
   let flag = false;// 是否是负数
