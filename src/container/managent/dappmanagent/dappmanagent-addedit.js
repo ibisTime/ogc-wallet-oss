@@ -15,7 +15,7 @@ class AppmanagentAddedit extends DetailUtil {
         if(!this.code) {
             this.buttons = [{
                 title: '保存',
-                handler: (param) => {
+                    handler: (param) => {
                     if (param.action === '1') {
                         let data = {
                             name: param.name,
@@ -27,7 +27,6 @@ class AppmanagentAddedit extends DetailUtil {
                             orderNo: param.orderNo,
                             isTop: param.isTop
                         };
-                        console.log(param);
                         fetch(625650, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -256,7 +255,7 @@ class AppmanagentAddedit extends DetailUtil {
             keyName: 'id',
             valueName: 'name',
             hidden: this.state.dkey !== '3',
-            required: true,
+            required: !(this.state.dkey !== '3'),
             title: '应用标签',
             params: {type: 0},
             formatter(v, d) {
@@ -274,7 +273,7 @@ class AppmanagentAddedit extends DetailUtil {
             type: 'img',
             single: true,
             hidden: this.state.dkey !== '3',
-            required: true
+            required: !(this.state.dkey !== '3')
         }, {
             field: 'picList',
             title: '列表展示图',
@@ -286,19 +285,19 @@ class AppmanagentAddedit extends DetailUtil {
             title: '详情截图',
             type: 'img',
             hidden: this.state.dkey !== '3',
-            required: true
+            required: !(this.state.dkey !== '3')
         }, {
             title: 'url地址',
             field: 'url',
             hidden: this.state.dkey === '1' || this.state.dkey === '4',
-            required: true
+            required: !(this.state.dkey === '1' || this.state.dkey === '4')
         }, {
             title: 'url地址',
             field: 'url1',
             type: 'select',
             key: 'dopen_app_inner_module',
             hidden: this.state.dkey !== '4',
-            required: true,
+            required: !(this.state.dkey !== '4'),
             formatter(v, d) {
                 if(d.url) {
                     return d.url;
@@ -330,7 +329,7 @@ class AppmanagentAddedit extends DetailUtil {
             value: 'ZH_CN'
         }, {
             field: 'desc',
-            required: true,
+            required: !(this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4'),
             type: 'textarea',
             normalArea: true,
             hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4',

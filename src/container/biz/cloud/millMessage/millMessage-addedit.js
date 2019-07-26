@@ -9,6 +9,11 @@ class CloudMessageAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.state = {
+          ...this.state,
+            buyType: true
+        };
+        this.index = 0;
     }
     render() {
         const fields = [{
@@ -20,13 +25,39 @@ class CloudMessageAddedit extends DetailUtil {
             title: '水滴名称',
             required: true
         }, {
-            field: 'symbol',
+            field: 'buyType',
             title: '购买币种',
             type: 'select',
-            listCode: '802007',
-            keyName: 'symbol',
-            valueName: 'symbol',
-            required: true
+            key: 'machine_buy_type',
+            required: true,
+            onChange: (v) => {
+                if(v === '1') {
+                    this.setState({
+                        buyType: false
+                    });
+                }else {
+                    this.setState({
+                        buyType: true
+                    });
+                }
+            },
+            formatter: (v) => {
+                if(v === '1') {
+                    if(this.index === 0) {
+                        this.index++;
+                        this.setState({
+                            buyType: false
+                        });
+                    }
+                }
+                return v;
+            }
+        }, {
+            field: 'buyMixRatio',
+            title: 'BEDN支付比例(0-1)',
+            required: !this.state.buyType,
+            help: 'BEDN的抵扣比例，比如输入0.1表示抵扣10%',
+            hidden: this.state.buyType
         }, {
             field: 'amount',
             title: '每滴价格（CNY）',
@@ -80,8 +111,14 @@ class CloudMessageAddedit extends DetailUtil {
             addCode: '610000',
             editCode: '610002',
             detailCode: '610003',
-            beforeSubmit(params) {
+            beforeSubmit: (params) => {
                 params.dailyOutput = (+params.dailyOutput / 100).toFixed(4);
+                params.buySymbol1 = 'HEY';
+                if(!this.state.buyType) {
+                    params.buySymbol2 = 'BEDN';
+                }else {
+                    delete params.buyMixRatio;
+                }
                 return params;
             }
         });

@@ -26,6 +26,7 @@ import {Modal} from 'antd';
   }
 )
 class CustomerIdentify extends React.Component {
+    status = '2';
     state = {
         ...this.state,
         visible: false,
@@ -42,6 +43,11 @@ class CustomerIdentify extends React.Component {
             visible: false
         });
     };
+    componentDidMount() {
+        this.props.form.setFieldsValue({
+            status: '2'
+        });
+    }
     render() {
         const fields = [{
             field: 'userId',
@@ -83,6 +89,22 @@ class CustomerIdentify extends React.Component {
               </div>
             )
         }, {
+            field: 'realName2',
+            title: '推荐人姓名',
+            render(v, d) {
+                if(d.user && d.user.refereeUser) {
+                    return d.user.refereeUser.realName;
+                }
+            }
+        }, {
+            field: 'idNo1',
+            title: '推荐人电话',
+            render(v, d) {
+                if(d.user && d.user.refereeUser) {
+                    return d.user.refereeUser.mobile;
+                }
+            }
+        }, {
             field: 'status',
             title: '状态',
             type: 'select',
@@ -97,10 +119,19 @@ class CustomerIdentify extends React.Component {
                 dvalue: '失败'
             }],
             keyName: 'dkey',
-            valueName: 'dvalue'
+            valueName: 'dvalue',
+            search: true,
+            onChange: (v) => {
+                this.status = v;
+            },
+            defaultValue: '2'
         }, {
             field: 'createDatetime',
             title: '申请时间',
+            type: 'datetime'
+        }, {
+            field: 'updateDatetime',
+            title: '审核时间',
             type: 'datetime'
         }];
         const {title, visible, picList} = this.state;
@@ -112,7 +143,7 @@ class CustomerIdentify extends React.Component {
                       pageCode: '805203',
                       singleSelect: false,
                       searchParams: {
-                          statusList: ['2']
+                          status: this.status
                       },
                       btnEvent: {
                           // 审核

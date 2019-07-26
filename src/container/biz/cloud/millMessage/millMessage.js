@@ -45,9 +45,11 @@ class MillMessage extends React.Component {
             field: 'name',
             title: '水滴名称'
         }, {
-            field: 'symbol',
+            field: 'buyType',
             title: '购买币种',
-            search: true
+            search: true,
+            type: 'select',
+            key: 'machine_buy_type'
         }, {
             field: 'amount',
             title: '每滴价格（CNY）'

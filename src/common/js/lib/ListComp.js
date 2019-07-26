@@ -588,7 +588,9 @@ export default class ListComponent extends React.Component {
             optionFilterProp="children"
             filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
             style={{width: 200}}
-            placeholder="请选择">
+            placeholder="请选择"
+            onChange={item.onChange}
+        >
             {item.data ? item.data.map(d => (
                 <Option key={d[item.keyName]} value={d[item.keyName]}>
                     {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d)}
