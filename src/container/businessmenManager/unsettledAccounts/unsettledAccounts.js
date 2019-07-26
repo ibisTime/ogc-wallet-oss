@@ -59,7 +59,7 @@ class unsettledAccounts extends React.Component {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
-            title: '手续费',
+            title: '手续费（TOSP）',
             field: 'fee',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
@@ -77,13 +77,13 @@ class unsettledAccounts extends React.Component {
             title: '折合（USD）',
             field: 'payUsdAmount',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
             title: '折合（KRW）',
             field: 'settleAmount',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }];
         return this.props.buildList({

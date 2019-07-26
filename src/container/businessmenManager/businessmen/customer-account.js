@@ -106,21 +106,6 @@ class CustomerAccount extends React.Component {
                 return moneyFormat(v, '', data.currency);
             }
         }, {
-            field: 'frozenAmount',
-            title: '冻结金额',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
-            }
-        }, {
-            field: 'availableAmount',
-            title: '可用余额',
-            render: (v, data) => {
-                var amount = data.amount;
-                var frozenAmount = data.frozenAmount;
-
-                return moneyFormatSubtract(amount, frozenAmount, '', data.currency);
-            }
-        }, {
             field: 'createDatetime',
             title: '创建时间',
             type: 'datetime'

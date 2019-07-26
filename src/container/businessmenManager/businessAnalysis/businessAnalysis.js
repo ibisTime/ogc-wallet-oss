@@ -55,28 +55,58 @@ class businessAnalysis extends React.Component {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
+            title: '今日结算数量（TOSP）',
+            field: 'amountSettleTodaySymbolIn',
+            render: (v) => {
+                return moneyFormat(v, '', 'ETH');
+            }
+        }, {
+            title: '截止今日结算金额（TOSP）',
+            field: 'settleAmountTotalSymbolIn',
+            render: (v) => {
+                return moneyFormat(v, '', 'ETH');
+            }
+        }, {
             title: '贡献收币手续费（TOSP）',
             field: 'feeSymbolIn',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
-            title: '今日结算数量（KRW）',
+            title: '今日收币总量（KRW）',
             field: 'amountInTodaySymbolOut',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
-            title: '截止今日结算总量（KRW）',
+            title: '截止今日收币总量（KRW）',
             field: 'amountTotalSymbolOut',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
-            title: '今日结算余额（KRW）',
+            title: '今日余额（KRW）',
             field: 'balanceTodaySymbolOut',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
+            }
+        }, {
+            title: '今日结算数量（KRW）',
+            field: 'amountSettleTodaySymbolOut',
+            render: (v) => {
+                return moneyFormat(v, 2, 'ETH');
+            }
+        }, {
+            title: '截止今日结算金额（KRW）',
+            field: 'settleAmountTotalSymbolOut',
+            render: (v) => {
+                return moneyFormat(v, 2, 'ETH');
+            }
+        }, {
+            title: '结算手续费（KRW）',
+            field: 'settleFeeSymbolOut',
+            render: (v) => {
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
             title: '日期',

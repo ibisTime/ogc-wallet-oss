@@ -212,7 +212,7 @@ export function moneyFormat(money, format, coin, isRe = false, isTosp) {
     }
     // 金额格式化 金额除以unit并保留format位小数
     money = new BigDecimal(money.toString());
-    money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_DOWN).toString();
+    money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_HALF_DOWN).toString();
     // 是否去零
     if (isRe) {
         var re = /\d{1,3}(?=(\d{3})+$)/g;

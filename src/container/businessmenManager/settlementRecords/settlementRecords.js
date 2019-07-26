@@ -55,25 +55,25 @@ class settlementRecords extends React.Component {
             title: '折合（USD）',
             field: 'settleUsdAmount',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
             title: '折合（KRW）',
             field: 'settlePayAmount',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
-            title: '结算手续费',
+            title: '结算手续费（KRW）',
             field: 'settleFee',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
             title: '实到KRW',
             field: 'realSettleAmount',
             render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+                return moneyFormat(v, 2, 'ETH');
             }
         }, {
             title: '结算时间',

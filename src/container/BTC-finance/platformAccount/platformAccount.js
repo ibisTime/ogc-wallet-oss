@@ -17,6 +17,7 @@ class PlatformAccount extends React.Component {
             accountTypeLhlc: 'SYS_USER_LHLC',
             accountTypeYK: 'SYS_USER_INCOME',
             accountTypeYY: 'SYS_USER_MARKETING',
+            accountTypeJS: 'SYS_USER_XXZF',
             statistics: {}
         };
     }
@@ -55,7 +56,7 @@ class PlatformAccount extends React.Component {
     render() {
         const {
             accountTypeSQ, accountTypeCold, accountTypeLhlc,
-            accountTypeYK, accountTypeYY, unsettledLoan,
+            accountTypeYK, accountTypeYY, unsettledLoan, accountTypeJS,
             symbol, statistics, fetching
         } = this.state;
         return (
@@ -121,6 +122,19 @@ class PlatformAccount extends React.Component {
                                 <Button
                                     style={{marginLeft: 20}}
                                     onClick={() => this.goFlow(unsettledLoan[accountTypeYK] ? unsettledLoan[accountTypeYK].accountNumber : '', 'jour_biz_type_income', this.state.symbol, 1)}
+                                    type="primary">历史流水</Button>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <div className="account-card-title">结算账户余额</div>
+                                <div className="account-card-price">{moneyFormat(unsettledLoan[accountTypeJS] ? unsettledLoan[accountTypeJS].amount : '0', '', symbol)}</div>
+                                <Button
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeJS] ? unsettledLoan[accountTypeJS].accountNumber : '', 'jour_biz_type_income', this.state.symbol)}
+                                    type="primary">近期流水</Button>
+                                <Button
+                                    style={{marginLeft: 20}}
+                                    onClick={() => this.goFlow(unsettledLoan[accountTypeJS] ? unsettledLoan[accountTypeJS].accountNumber : '', 'jour_biz_type_income', this.state.symbol, 1)}
                                     type="primary">历史流水</Button>
                             </Card>
                         </Col>
