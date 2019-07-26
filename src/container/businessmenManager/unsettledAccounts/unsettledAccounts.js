@@ -44,15 +44,13 @@ class unsettledAccounts extends React.Component {
             type: 'datetime'
         }, {
             title: '支付用户',
-            field: 'payUserInfo',
+            field: 'payUserNameAndMobile',
+            keyName: 'payUserInfo',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            searchName: 'payUserInfo',
             render(v, d) {
                 return d.payUserInfo && d.payUserInfo.nickname + '-' + d.payUserInfo.mobile;
-            }
-        }, {
-            title: '方式',
-            type: 'select',
-            field: 'payChannel',
-            key: 'xxzf_pay_channel',
+            },
             search: true
         }, {
             title: 'TOSP数额',

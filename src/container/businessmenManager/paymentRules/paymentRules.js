@@ -29,7 +29,18 @@ class paymentRules extends React.Component {
             title: '说明'
         }, {
             field: 'cvalue',
-            title: '数值'
+            title: '数值',
+            render(v, data) {
+                if(data.ckey === 'fee_location') {
+                    if (v === '0') {
+                        return '取现金额中';
+                    }else {
+                        return '余额中';
+                    }
+                }else{
+                    return v;
+                }
+            }
         }];
         return this.props.buildList({
             fields,

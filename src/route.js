@@ -1271,6 +1271,14 @@ const ROUTES = [
         path: '/businessmenManager/businessmen/accountQuery',
         component: asyncComponent(() => import('container/businessmenManager/businessmen/customer-account'))
     },
+    {
+        path: '/businessmenManager/businessmen/ledgerQuery',
+        component: asyncComponent(() => import('container/businessmenManager/businessmen/customer-ledgerQuery'))
+    },
+    {
+        path: '/businessmenManager/businessmen/ledgerQueryHistory',
+        component: asyncComponent(() => import('container/businessmenManager/businessmen/customer-ledgerQueryHistory'))
+    },
     // 未结算
     {
         path: '/businessmenManager/unsettledAccounts',

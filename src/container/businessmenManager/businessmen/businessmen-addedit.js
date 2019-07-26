@@ -29,19 +29,19 @@ class businessmenAddedit extends DetailUtil {
             required: true
         }, {
             field: 'pic',
-            title: '图片',
+            title: '店铺logo',
             type: 'img',
             single: true,
             required: true
         }, {
             field: 'province',
-            title: '省/市/区',
+            title: '详细地址',
             type: 'citySelect',
             cFields: ['province', 'city', 'area'],
             required: true
         }, {
             field: 'address',
-            title: '地址',
+            title: '店铺地址',
             required: true
         }, {
             field: 'remark',

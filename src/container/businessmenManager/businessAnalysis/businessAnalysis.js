@@ -37,13 +37,13 @@ class businessAnalysis extends React.Component {
             field: 'merchantNameAndMobile',
             search: true
         }, {
-            title: '今日收币总量',
+            title: '今日收币总量（TOSP）',
             field: 'amountInTodaySymbolIn',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
-            title: '截止今日收币总量',
+            title: '截止今日收币总量（TOSP）',
             field: 'amountTotalSymbolIn',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
@@ -61,13 +61,13 @@ class businessAnalysis extends React.Component {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
-            title: '今日结算数量',
+            title: '今日结算数量（KRW）',
             field: 'amountInTodaySymbolOut',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
-            title: '截止今日结算总量',
+            title: '截止今日结算总量（KRW）',
             field: 'amountTotalSymbolOut',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
@@ -81,7 +81,7 @@ class businessAnalysis extends React.Component {
         }, {
             title: '日期',
             field: 'date',
-            type: 'datetime',
+            type: 'date',
             search: true
         }];
         return this.props.buildList({

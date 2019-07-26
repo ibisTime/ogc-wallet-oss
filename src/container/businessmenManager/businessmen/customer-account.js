@@ -69,7 +69,7 @@ class CustomerAccount extends React.Component {
         } else if (selectedRowKeys.length > 1) {
             showWarnMsg('请选择一条记录');
         } else {
-            this.props.history.push(`/user/customer/ledgerQuery?code=${selectedRowKeys[0]}`);
+            this.props.history.push(`/businessmenManager/businessmen/ledgerQuery?code=${selectedRowKeys[0]}`);
         }
     }
 
@@ -80,7 +80,7 @@ class CustomerAccount extends React.Component {
         } else if (selectedRowKeys.length > 1) {
             showWarnMsg('请选择一条记录');
         } else {
-            this.props.history.push(`/user/customer/ledgerQueryHistory?code=${selectedRowKeys[0]}`);
+            this.props.history.push(`/businessmenManager/businessmen/ledgerQueryHistory?code=${selectedRowKeys[0]}`);
         }
     }
 
@@ -95,8 +95,7 @@ class CustomerAccount extends React.Component {
             type: 'select',
             data: getCoinList(),
             keyName: 'key',
-            valueName: 'value',
-            search: true
+            valueName: 'value'
         }, {
             field: 'accountNumber',
             title: '账号'
