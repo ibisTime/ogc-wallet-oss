@@ -60,6 +60,10 @@ class TradMessageAddedit extends DetailUtil {
             return moneyFormat(v.toString(), '', data.symbolOut);
         }
     }, {
+        field: 'dailyLimit',
+        title: '每日次数限制',
+        required: true
+    }, {
       field: 'orderNo',
       title: '展示序号',
       required: true

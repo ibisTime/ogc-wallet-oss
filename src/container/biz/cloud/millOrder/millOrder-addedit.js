@@ -31,16 +31,28 @@ class CloudMillOrderDetail extends DetailUtil {
             title: '水滴购买币种'
         }, {
             field: 'amount',
-            title: '每滴币个数'
+            title: '每滴价格（CNY）'
         }, {
             field: 'quantity',
             title: '购买数量'
         }, {
-            field: 'investCount',
-            title: '花费币总额',
+            field: 'investCount1',
+            title: '花费HEY总额',
             formatter: function (v, data) {
                 return moneyFormat(v.toString(), '', data.symbol);
             }
+        }, {
+            field: 'investCount2',
+            title: '花费BEDN总额',
+            formatter: function (v, data) {
+                return moneyFormat(v.toString(), '', data.symbol);
+            }
+        }, {
+            field: 'marketPriceSymbol1',
+            title: 'HEY购买时行情'
+        }, {
+            field: 'marketPriceSymbol2',
+            title: 'BEDN购买时行情'
         }, {
             field: 'incomeActual',
             title: '已获取收益',
