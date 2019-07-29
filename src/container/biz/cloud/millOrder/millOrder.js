@@ -53,13 +53,13 @@ class MillOrder extends React.Component {
             },
             noVisible: true
         }, {
-            field: 'code',
+            field: 'machineCode',
             title: '水滴名称',
             type: 'select',
             pageCode: '610004',
             keyName: 'code',
             valueName: '{{name.DATA}}-{{code.DATA}}',
-            searchName: 'code',
+            searchName: 'machineCode',
             search: true,
             noVisible: true
         }, {
@@ -81,13 +81,17 @@ class MillOrder extends React.Component {
             field: 'investCount',
             title: '花费币总额',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', data.symbol);
+                if(v) {
+                    return moneyFormat(v.toString(), '', data.symbol);
+                }
             }
         }, {
             field: 'incomeActual',
             title: '已获取收益',
             render: function (v, data) {
-                return moneyFormat(v.toString(), '', 'HEY');
+                if(v) {
+                    return moneyFormat(v.toString(), '', 'HEY');
+                }
             }
         }, {
             field: 'status',

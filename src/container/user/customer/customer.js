@@ -77,8 +77,11 @@ class Customer extends React.Component {
             search: true
         }, {
             field: 'loginName',
-            title: '手机号/邮箱',
+            title: '登录名',
             search: true
+        }, {
+            field: 'mobile',
+            title: '手机号'
         }, {
             field: 'inviteCode',
             title: '邀请码'

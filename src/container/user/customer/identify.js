@@ -47,6 +47,10 @@ class CustomerIdentify extends React.Component {
         this.props.form.setFieldsValue({
             status: '2'
         });
+        const clearParams = document.getElementById('clearParams');
+        clearParams && clearParams.addEventListener('click', () => {
+            this.status = '';
+        });
     }
     render() {
         const fields = [{
@@ -158,8 +162,12 @@ class CustomerIdentify extends React.Component {
                                   this.props.history.push(`/user/identify/addedit?code=${selectedRowKeys[0]}&check=1&v=1`);
                               }
                           },
-                          batchCheck: (selectedRowKeys) => {
+                          batchCheck: (selectedRowKeys, selectedRows) => {
                               if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRows[0].status !== '0' && selectedRows[0].status !== '2') {
+                                  showWarnMsg('该记录不是待人工认证状态');
+                              } else if (!selectedRowKeys.length) {
                                   showWarnMsg('请选择记录');
                               } else {
                                   Modal.confirm({
