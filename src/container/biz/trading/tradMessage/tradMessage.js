@@ -57,7 +57,14 @@ class TradMessage extends React.Component {
         }
     }, {
         field: 'dailyLimit',
-        title: '每日次数限制'
+        title: '每日次数限制',
+        render(v) {
+          if(v === 0 || v < 0) {
+            return '无限制';
+          }else {
+            return v;
+          }
+        }
     }, {
       field: 'orderNo',
       title: '展示序号'
