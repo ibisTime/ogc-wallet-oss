@@ -4,7 +4,7 @@ export const SYSTEM_CODE = 'CD-OGC000021';
 // 七牛https上传地址
 export const UPLOAD_URL = 'https://up.qiniup.com';
 // 七牛图片前缀
-export const PIC_PREFIX = 'http://img.adorkableisland.com/';
+export const PIC_PREFIX = 'http://pic.jinmi.club/';
 // 七牛图片https前缀
 // export const PIC_PREFIX = 'https://img.adorkableisland.com/';
 export const PIC_BASEURL_L = '?imageMogr2/auto-orient';
