@@ -81,14 +81,27 @@ class TBunderline extends React.Component {
             field: 'amount',
             title: '提现金额',
             render: (v, data) => {
-                return moneyFormat(data.amount, '', data.currency);
+                if(data.amount) {
+                    return moneyFormat(data.amount, '', data.currency);
+                }
             }
-        // }, {
-        //     field: 'actualAmount',
-        //     title: '实际到账金额',
-        //     render: (v, data) => {
-        //         return moneyFormat(v, '', data.currency);
-        //     }
+        }, {
+            field: 'actualAmount',
+            title: '实际到账金额',
+            render: (v, data) => {
+                if(v) {
+                    return moneyFormat(v, '', data.currency);
+                }
+            }
+        }, {
+            field: 'fee',
+            title: '手续费',
+            required: true,
+            render: (v, data) => {
+                if(v) {
+                    return moneyFormat(v, '', data.currency);
+                }
+            }
         }, {
             field: 'channelType',
             title: '渠道',

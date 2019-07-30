@@ -151,7 +151,7 @@ import {activityBednReward} from './redux/activity/bednReward/bednReward';
 import {rulesAdvertisingFee} from './redux/rules/advertisingFee/advertisingFee';
 
 // 提币手续费规则
-import {rulesWithdrawUserFee} from './redux/rules/withdrawUserFee/withdrawUserFee';
+import {BTCFinanceWithdrawRule} from './redux/BTC-finance/withdrawRule/withdrawRule';
 
 // 承兑商手续费规则
 import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
@@ -355,7 +355,7 @@ export default combineReducers({
     rulesAdvertisingFee,
     // 币币交易手续费规则
     // 提币手续费规则
-    rulesWithdrawUserFee,
+    BTCFinanceWithdrawRule,
     // 承兑商手续费规则
     rulesAcceptRule,
     // 业务管理 评论管理
