@@ -81,24 +81,30 @@ class MillOrder extends React.Component {
             field: 'investCount1',
             title: '花费HEY总额',
             render: function (v, data) {
-                if(v) {
+                if(v || v === 0) {
                     return moneyFormat(v.toString(), '', data.symbol);
+                }else {
+                    return '-';
                 }
             }
         }, {
             field: 'investCount2',
             title: '花费BEDN总额',
             render: function (v, data) {
-                if(v) {
+                if(v || v === 0) {
                     return moneyFormat(v.toString(), '', data.symbol);
+                }else {
+                    return '-';
                 }
             }
         }, {
-            field: 'incomeActual',
+            field: 'incomeActualStr',
             title: '已获取收益',
             render: function (v, data) {
                 if(v) {
                     return moneyFormat(v.toString(), '', 'HEY');
+                }else {
+                    return '-';
                 }
             }
         }, {
