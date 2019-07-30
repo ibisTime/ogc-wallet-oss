@@ -27,7 +27,8 @@ app.use('/api', function (req, res) {
     // 正式
     // var url = 'http://3.1.207.21:2701/forward-service/api';
     // let url = 'http://192.168.1.160:2401/forward-service/api';
-    let url = 'http://m.tosplus.org/api';
+    // let url = 'http://m.tosplus.org/api';
+    let url = 'http://oss.wwdev.hichengdai.com/tosp/api';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
