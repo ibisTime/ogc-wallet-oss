@@ -30,7 +30,7 @@ class TBunderlineAddedit extends DetailUtil {
             }
         }, {
             field: 'amount',
-            title: '取现金额',
+            title: '提现总费用',
             required: true,
             coinAmount: true,
             coin: 'BTC',
@@ -38,18 +38,18 @@ class TBunderlineAddedit extends DetailUtil {
                 return moneyFormat(data.withdraw.amount, '', data.withdraw.currency);
             }
         }, {
-            field: 'fee',
-            title: '手续费',
-            required: true,
-            formatter: (v, data) => {
-                return moneyFormat(data.withdraw.fee, '', data.withdraw.currency);
-            }
-        }, {
             field: 'actualAmount',
             title: '到账金额',
             required: true,
             formatter: (v, data) => {
                 return moneyFormat(data.withdraw.actualAmount, '', data.withdraw.currency);
+            }
+        }, {
+            field: 'fee',
+            title: '手续费',
+            required: true,
+            formatter: (v, data) => {
+                return moneyFormat(data.withdraw.fee, '', data.withdraw.currency);
             }
         }, {
             field: 'payCardInfo',

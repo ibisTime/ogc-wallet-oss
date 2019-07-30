@@ -84,6 +84,15 @@ class TBunderline extends React.Component {
                 return moneyFormat(data.amount, '', data.currency);
             }
         }, {
+            field: 'fee',
+            title: '手续费',
+            required: true,
+            render: (v, data) => {
+                if(v) {
+                    return moneyFormat(v, '', data.currency);
+                }
+            }
+        }, {
             field: 'channelType',
             title: '渠道',
             type: 'select',

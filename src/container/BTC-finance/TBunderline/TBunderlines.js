@@ -79,7 +79,7 @@ class TBunderline extends React.Component {
             }
         }, {
             field: 'amount',
-            title: '提现金额',
+            title: '提现总费用',
             render: (v, data) => {
                 return moneyFormat(data.amount, '', data.currency);
             }
@@ -88,6 +88,15 @@ class TBunderline extends React.Component {
             title: '实际到账金额',
             render: (v, data) => {
                 return moneyFormat(v, '', data.currency);
+            }
+        }, {
+            field: 'fee',
+            title: '手续费',
+            required: true,
+            render: (v, data) => {
+                if(v) {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'channelType',
