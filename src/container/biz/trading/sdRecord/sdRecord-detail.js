@@ -20,11 +20,11 @@ class SdRecordDetail extends DetailUtil {
         return d.userInfo.nickname + '-' + d.userInfo.loginName;
       }
     }, {
+        field: 'symbolIn',
+        title: '兑出币种'
+    }, {
       field: 'symbolOut',
       title: '兑入币种'
-    }, {
-      field: 'symbolIn',
-      title: '兑出币种'
     }, {
       field: 'countOutTotal',
       title: '总兑出数量',

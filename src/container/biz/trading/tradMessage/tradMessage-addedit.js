@@ -15,6 +15,20 @@ class TradMessageAddedit extends DetailUtil {
   }
   render() {
     const fields = [{
+        field: 'symbolOut',
+        title: '兑出币种',
+        required: true,
+        type: 'select',
+        listCode: '802013',
+        keyName: 'symbol',
+        valueName: 'symbol',
+        onChange: (v) => {
+            this.symbolOut = v;
+            if(v === this.symbolIn) {
+                message.warning('不可选相同币进行兑换，请重新选择');
+            }
+        }
+    }, {
       field: 'symbolIn',
       title: '兑入币种',
       type: 'select',
@@ -25,20 +39,6 @@ class TradMessageAddedit extends DetailUtil {
       onChange: (v) => {
         this.symbolIn = v;
         if(v === this.symbolOut) {
-          message.warning('不可选相同币进行兑换，请重新选择');
-        }
-      }
-    }, {
-      field: 'symbolOut',
-      title: '兑出币种',
-      required: true,
-      type: 'select',
-      listCode: '802013',
-      keyName: 'symbol',
-      valueName: 'symbol',
-      onChange: (v) => {
-        this.symbolOut = v;
-        if(v === this.symbolIn) {
           message.warning('不可选相同币进行兑换，请重新选择');
         }
       }
