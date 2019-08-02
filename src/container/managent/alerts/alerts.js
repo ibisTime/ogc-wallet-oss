@@ -202,7 +202,7 @@ class Alerts extends React.Component {
             >
                 <div style={{marginBottom: '20px'}}>
                     <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>是否置顶：</label>
-                    <Select style={{width: '60%'}} placeholder="请选择" onChange={this.changeSymbol}>
+                    <Select style={{width: '60%'}} placeholder="请选择" value={this.state.isTop} onChange={this.changeSymbol}>
                         <Option value={1}>是</Option>
                         <Option value={0}>否</Option>
                     </Select>
