@@ -41,7 +41,7 @@ class CustomerBlackList extends React.Component {
             }
         }, {
             field: 'userId',
-            title: '手机号',
+            title: '手机号/邮箱',
             type: 'select',
             pageCode: '805120',
             params: {

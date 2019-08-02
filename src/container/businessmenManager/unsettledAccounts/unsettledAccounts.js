@@ -49,7 +49,7 @@ class unsettledAccounts extends React.Component {
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'payUserInfo',
             render(v, d) {
-                return d.payUserInfo && d.payUserInfo.nickname + '-' + d.payUserInfo.mobile;
+                return d.payUserInfo && d.payUserInfo.nickname + '-' + d.payUserInfo.loginName;
             },
             search: true
         }, {

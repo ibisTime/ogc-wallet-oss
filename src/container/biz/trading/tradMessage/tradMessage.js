@@ -58,6 +58,14 @@ class TradMessage extends React.Component {
       field: 'createTime',
       title: '创建时间',
       type: 'datetime'
+    }, {
+      field: 'dailyStartTime',
+      title: '每日开放时间',
+      type: 'time'
+    }, {
+      field: 'dailyEndTime',
+      title: '每日截止时间',
+      type: 'time'
     }];
     return this.props.buildList({
       rowKey: 'id',
@@ -89,6 +97,15 @@ class TradMessage extends React.Component {
               okText: '确定',
               cancelText: '取消'
             });
+          }
+        },
+        startTimeSet: (selectedRowKeys, selectedRows) => {
+          if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+          } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+          } else {
+            this.props.history.push(`/trading/tradMessage/startTimeSet?id=${selectedRowKeys[0]}&dailyStartTime=${selectedRows[0].dailyStartTime}&dailyEndTime=${selectedRows[0].dailyEndTime}&symbolOut=${selectedRows[0].symbolOut}&symbolIn=${selectedRows[0].symbolIn}`);
           }
         }
       }

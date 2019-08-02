@@ -57,6 +57,9 @@ class BTCDiviAddress extends React.Component {
       field: 'amount',
       title: '持有币的数量'
     }, {
+      field: 'frozenAmount',
+      title: '结冻余额'
+    }, {
       field: 'address',
       title: '地址',
       search: true
@@ -69,6 +72,10 @@ class BTCDiviAddress extends React.Component {
     }, {
       field: 'usdAssets',
       title: '折合USD'
+    }, {
+      field: 'createDatetime',
+      title: '创建时间',
+      type: 'datetime'
     }];
     return this.props.buildList({
       fields,

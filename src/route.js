@@ -1150,6 +1150,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-addedit'))
     },
     {
+        path: '/trading/tradMessage/startTimeSet',
+        component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-startTimeSet'))
+    },
+    {
         path: '/cloud/millMessage',
         component: asyncComponent(() => import('container/biz/cloud/millMessage/millMessage'))
     },
@@ -1264,8 +1268,16 @@ const ROUTES = [
         component: asyncComponent(() => import('container/businessmenManager/businessmen/businessmen'))
     },
     {
-        path: '/businessmenManager/businessmen/addedit',
+        path: '/businessmenManager/businessmen/addinfo',
         component: asyncComponent(() => import('container/businessmenManager/businessmen/businessmen-addedit'))
+    },
+    {
+        path: '/businessmenManager/businessmen/edit',
+        component: asyncComponent(() => import('container/businessmenManager/businessmen/businessmen-edit'))
+    },
+    {
+        path: '/businessmenManager/businessmen/info',
+        component: asyncComponent(() => import('container/businessmenManager/businessmen/businessmen-info'))
     },
     {
         path: '/businessmenManager/businessmen/accountQuery',
@@ -1307,6 +1319,15 @@ const ROUTES = [
     {
         path: '/businessmenManager/paymentRules/edit',
         component: asyncComponent(() => import('container/businessmenManager/paymentRules/paymentRule-addedit'))
+    },
+    // 定时器
+    {
+        path: '/timerManager/timerMonitor',
+        component: asyncComponent(() => import('container/timerManager/timerMonitor/timerMonitor'))
+    },
+    {
+        path: '/timerManager/timerPerformance',
+        component: asyncComponent(() => import('container/timerManager/timerPerformance/timerPerformance'))
     }
 ];
 

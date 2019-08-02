@@ -37,76 +37,46 @@ class businessAnalysis extends React.Component {
             field: 'merchantNameAndMobile',
             search: true
         }, {
-            title: '今日收币总量（TOSP）',
-            field: 'amountInTodaySymbolIn',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
-            }
-        }, {
-            title: '截止今日收币总量（TOSP）',
-            field: 'amountTotalSymbolIn',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
-            }
-        }, {
-            title: '今日余额（TOSP）',
+            title: '今日余额',
             field: 'balanceTodaySymbolIn',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, d) => {
+                return moneyFormat(v, '', 'ETH') + ' (合 ' + moneyFormat(d.balanceTodaySymbolOut, 2, 'ETH') + ' KRW)';
             }
         }, {
-            title: '今日结算数量（TOSP）',
-            field: 'amountSettleTodaySymbolIn',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            title: '今日收币总量',
+            field: 'amountInTodaySymbolIn',
+            render: (v, d) => {
+                return moneyFormat(v, '', 'ETH') + ' (合 ' + moneyFormat(d.amountInTodaySymbolOut, 2, 'ETH') + ' KRW)';
             }
         }, {
-            title: '截止今日结算金额（TOSP）',
+            title: '截止今日结算金额',
             field: 'settleAmountTotalSymbolIn',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, d) => {
+                return moneyFormat(v, '', 'ETH') + ' (合 ' + moneyFormat(d.settleAmountTotalSymbolOut, 2, 'ETH') + ' KRW)';
             }
         }, {
-            title: '贡献收币手续费（TOSP）',
+            title: '今日结算数量',
+            field: 'amountSettleTodaySymbolIn',
+            render: (v, d) => {
+                return moneyFormat(v, '', 'ETH') + ' (合 ' + moneyFormat(d.amountSettleTodaySymbolOut, 2, 'ETH') + ' KRW)';
+            }
+        }, {
+            title: '截止今日收币总量',
+            field: 'amountTotalSymbolIn',
+            render: (v, d) => {
+                return moneyFormat(v, '', 'ETH') + ' (合 ' + moneyFormat(d.amountTotalSymbolOut, 2, 'ETH') + ' KRW)';
+            }
+        }, {
+            title: '贡献收币手续费',
             field: 'feeSymbolIn',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, d) => {
+                return moneyFormat(v, '', 'ETH') + ' (合 ' + moneyFormat(d.feeSymbolOut, 2, 'ETH') + ' KRW)';
             }
         }, {
-            title: '今日收币总量（KRW）',
-            field: 'amountInTodaySymbolOut',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
-            }
-        }, {
-            title: '截止今日收币总量（KRW）',
-            field: 'amountTotalSymbolOut',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
-            }
-        }, {
-            title: '今日余额（KRW）',
-            field: 'balanceTodaySymbolOut',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
-            }
-        }, {
-            title: '今日结算数量（KRW）',
-            field: 'amountSettleTodaySymbolOut',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
-            }
-        }, {
-            title: '截止今日结算金额（KRW）',
-            field: 'settleAmountTotalSymbolOut',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
-            }
-        }, {
-            title: '结算手续费（KRW）',
-            field: 'settleFeeSymbolOut',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
+            title: '贡献结算手续费',
+            field: 'settleFeeSymbolIn',
+            render: (v, d) => {
+                return moneyFormat(v, 2, 'ETH') + ' (合 ' + moneyFormat(d.settleFeeSymbolOut, 2, 'ETH') + ' KRW)';
             }
         }, {
             title: '日期',

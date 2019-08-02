@@ -36,8 +36,8 @@ class businessmen extends React.Component {
             field: 'name',
             search: true
         }, {
-            title: '手机号',
-            field: 'mobile'
+            title: '用户账户',
+            field: 'loginName'
         }, {
             title: '店铺名',
             field: 'shopName'
@@ -134,12 +134,35 @@ class businessmen extends React.Component {
                 },
                 // 账户查询
                 accountQuery: (selectedRowKeys, selectedRows) => {
+                    console.log(selectedRowKeys);
+                    console.log(selectedRows);
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
                         this.props.history.push(`/businessmenManager/businessmen/accountQuery?userId=${selectedRowKeys[0]}`);
+                    }
+                },
+                addinfo: (selectedRowKeys, selectedRows) => {
+                    this.props.history.push(`/businessmenManager/businessmen/addinfo`);
+                },
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/businessmenManager/businessmen/edit?code=${selectedRowKeys[0]}&registerType=${selectedRows[0].registerType}`);
+                    }
+                },
+                info: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/businessmenManager/businessmen/info?v=1&code=${selectedRowKeys[0]}&registerType=${selectedRows[0].registerType}`);
                     }
                 }
             }

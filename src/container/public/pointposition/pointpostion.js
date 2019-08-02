@@ -70,10 +70,10 @@ class publicPointPostion extends React.Component {
             },
             search: true
         }, {
-            title: '提交人手机号',
-            field: 'commitUserMobile',
+            title: '提交人账号',
+            field: 'loginName',
             render: (v, d) => {
-              return d.commitUserInfo ? d.commitUserInfo.mobile : '';
+              return d.commitUserInfo ? d.commitUserInfo.loginName : '';
             }
         }, {
             title: '所在端',

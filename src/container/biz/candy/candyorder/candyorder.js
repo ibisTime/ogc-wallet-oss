@@ -11,7 +11,7 @@ import {
 } from '@redux/candy/candyorder/candyorder';
 import {listWrapper} from 'common/js/build-list';
 import { showWarnMsg, moneyFormat } from 'common/js/util';
-import {Modal, message, Input} from 'antd';
+import {Button} from 'antd';
 
 @listWrapper(
   state => ({
@@ -27,8 +27,22 @@ class Candyorder extends React.Component {
     state = {
         visible: false,
         code: '',
-        xyCount: null
+        xyCount: null,
+        pageCodeTdOrHy: 610435,
+        isTdOrHy: true
     };
+    showToday = () => {
+        this.setState({
+            pageCodeTdOrHy: 610435,
+            isTdOrHy: true
+        });
+    }
+    showHistory = () => {
+        this.setState({
+            pageCodeTdOrHy: 610447,
+            isTdOrHy: false
+        });
+    }
     render() {
         const fields = [{
             field: 'loginName',
@@ -42,7 +56,7 @@ class Candyorder extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             searchName: 'keyword',
             search: true,
             render: (v, data) => {
@@ -92,8 +106,7 @@ class Candyorder extends React.Component {
               {
                   this.props.buildList({
                       fields,
-                      pageCode: 610435,
-                      deleteCode: '610421'
+                      pageCode: this.state.pageCodeTdOrHy
                   })
               }
           </div>

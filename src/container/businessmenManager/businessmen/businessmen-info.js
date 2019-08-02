@@ -9,8 +9,14 @@ class businessmenAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-        this.isNotEmail = true;
-        this.isNotTel = true;
+        this.registerType = getQueryString('registerType', this.props.location.search);
+        if (this.registerType === '0') {
+            this.isNotTel = false;
+            this.isNotEmail = true;
+        } else if(this.registerType === '1') {
+            this.isNotTel = true;
+            this.isNotEmail = false;
+        }
     }
     render() {
         const fields = [{
@@ -37,27 +43,17 @@ class businessmenAddedit extends DetailUtil {
                 'value': '邮箱'
             }],
             keyName: 'key',
-            valueName: 'value',
-            required: true,
-            onChange: (v) => {
-                if (v === '0') {
-                    this.isNotEmail = true;
-                    this.isNotTel = false;
-                }else{
-                    this.isNotEmail = false;
-                    this.isNotTel = true;
-                }
-            }
+            valueName: 'value'
         }, {
             field: 'mobile',
             title: '手机号',
             hidden: this.isNotTel,
-            required: this.isNotEmail
+            required: true
         }, {
             field: 'email',
             title: '邮箱',
             hidden: this.isNotEmail,
-            required: this.isNotTel
+            required: true
         }, {
             field: 'pic',
             title: '店铺logo',
@@ -82,11 +78,7 @@ class businessmenAddedit extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            addCode: '610500',
-            beforeSubmit: (data) => {
-                console.log(data);
-                return data;
-            }
+            detailCode: '610516'
         });
     }
 }

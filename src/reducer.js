@@ -268,6 +268,10 @@ import { settlementRecords } from './redux/businessmenManager/settlementRecords/
 import { businessAnalysis } from './redux/businessmenManager/businessAnalysis/businessAnalysis';
 // 线下支付-- 支付规则
 import { paymentRules } from './redux/businessmenManager/paymentRules/paymentRules';
+// 统计分析-- 监控管理 - triggers监控
+import { timerMonitor } from './redux/timerManager/timerMonitor/timerMonitor';
+// 统计分析-- 监控管理 - triggers性能
+import { timerPerformance } from './redux/timerManager/timerPerformance/timerPerformance';
 
 export default combineReducers({
     user,
@@ -468,5 +472,9 @@ export default combineReducers({
     settled,
     settlementRecords,
     businessAnalysis,
-    paymentRules
+    paymentRules,
+
+    // 定时器管理
+    timerMonitor,
+    timerPerformance
 });

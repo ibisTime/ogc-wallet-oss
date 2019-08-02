@@ -63,7 +63,7 @@ class Customer extends React.Component {
             title: '昵称',
             search: true
         }, {
-            field: 'mobile',
+            field: 'loginName',
             title: '手机号/邮箱',
             search: true
         }, {

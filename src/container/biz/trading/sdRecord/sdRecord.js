@@ -36,7 +36,7 @@ class SdRecord extends React.Component {
       type: 'select',
       pageCode: '805120',
       keyName: 'userId',
-      valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+      valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
       searchName: 'keyword',
       search: true,
       render: (v, data) => {
@@ -89,9 +89,6 @@ class SdRecord extends React.Component {
       render: function (v, data) {
           return moneyFormat(v.toString(), '', data.symbolOut);
       }
-    }, {
-      field: 'feeRate',
-      title: '手续费率(%)'
     }];
     return this.props.buildList({
       fields,

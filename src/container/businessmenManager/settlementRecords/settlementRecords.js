@@ -42,14 +42,26 @@ class settlementRecords extends React.Component {
             title: '商户',
             field: 'merchantInfo',
             render(v, d) {
-                return d.merchantInfo && d.merchantInfo.name + '-' + d.merchantInfo.mobile;
+                return d.merchantInfo && d.merchantInfo.name + '-' + d.merchantInfo.loginName;
             },
             search: true
         }, {
-            title: '实到TOSP',
+            title: '结算总额',
             field: 'settleAmount',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, d) => {
+                return moneyFormat(v, '', 'ETH') + ' (合 ' + moneyFormat(d.settlePayAmount, 2, 'ETH') + ' KRW)';
+            }
+        }, {
+            title: '手续费',
+            field: 'settleFeeSymbolIn',
+            render: (v, d) => {
+                return moneyFormat(v, 2, 'ETH') + ' (合 ' + moneyFormat(d.settleFee, 2, 'ETH') + ' KRW)';
+            }
+        }, {
+            title: '结算金额',
+            field: 'realSettleAmountSymbolIn',
+            render: (v, d) => {
+                return moneyFormat(v, 2, 'ETH') + ' (合 ' + moneyFormat(d.realSettleAmount, 2, 'ETH') + ' KRW)';
             }
         }, {
             title: '折合（USD）',
@@ -60,18 +72,6 @@ class settlementRecords extends React.Component {
         }, {
             title: '折合（KRW）',
             field: 'settlePayAmount',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
-            }
-        }, {
-            title: '结算手续费（KRW）',
-            field: 'settleFee',
-            render: (v) => {
-                return moneyFormat(v, 2, 'ETH');
-            }
-        }, {
-            title: '实到KRW',
-            field: 'realSettleAmount',
             render: (v) => {
                 return moneyFormat(v, 2, 'ETH');
             }

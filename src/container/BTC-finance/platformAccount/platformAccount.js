@@ -125,6 +125,8 @@ class PlatformAccount extends React.Component {
                                     type="primary">历史流水</Button>
                             </Card>
                         </Col>
+                    </Row>
+                    <Row>
                         <Col>
                             <Card>
                                 <div className="account-card-title">结算账户余额</div>

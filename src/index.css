@@ -126,3 +126,26 @@ li {
 .ant-menu-horizontal {
   white-space: normal !important;
 }
+
+.candyorder-tab{
+  position: absolute;
+  top:130px;
+  width: 300px;
+  height: 30px;
+}
+.clear{
+  clear: both;
+}
+.candyorder-tab-today, .candyorder-tab-history{
+  text-align: center;
+  color:#fff;
+  float: left;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  background: #1890ff;
+}
+
+.candyorder-tab-history{
+  margin-left: 10px;
+}

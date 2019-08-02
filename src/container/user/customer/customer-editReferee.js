@@ -26,6 +26,7 @@ class CustomerEditReferee extends DetailUtil {
             pageCode: 805120,
             keyName: 'userId',
             valueName: 'loginName',
+            searchName: 'mobile',
             required: true
         }];
         return this.buildDetail({

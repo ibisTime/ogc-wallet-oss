@@ -69,6 +69,16 @@ class TradMessageAddedit extends DetailUtil {
       type: 'datetime',
       hidden: !this.view
     }, {
+      field: 'dailyStartTime',
+      title: '每日开放时间',
+      type: 'time',
+      hidden: !this.view
+    }, {
+      field: 'dailyEndTime',
+      title: '每日截止时间',
+      type: 'time',
+      hidden: !this.view
+    }, {
       field: 'remark',
       title: '备注'
     }];

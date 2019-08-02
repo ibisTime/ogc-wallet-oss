@@ -36,7 +36,7 @@ class settled extends React.Component {
             title: '商户',
             field: 'merchantInfo',
             render(v, d) {
-                return d.merchantInfo && d.merchantInfo.name + '-' + d.merchantInfo.mobile;
+                return d.merchantInfo && d.merchantInfo.name + '-' + d.merchantInfo.loginName;
             },
             search: true
         }, {
@@ -47,10 +47,10 @@ class settled extends React.Component {
             title: '支付用户',
             field: 'payUserNameAndMobile',
             keyName: 'payUserInfo',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             searchName: 'payUserInfo',
             render(v, d) {
-                return d.payUserInfo && d.payUserInfo.nickname + '-' + d.payUserInfo.mobile;
+                return d.payUserInfo && d.payUserInfo.nickname + '-' + d.payUserInfo.loginName;
             },
             search: true
         }, {
