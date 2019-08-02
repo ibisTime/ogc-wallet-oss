@@ -111,6 +111,24 @@ class Alerts extends React.Component {
                         type: '0'
                     },
                     btnEvent: {
+                        changeTop: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else if (selectedRows[0].status !== '1') {
+                                showWarnMsg('该状态下不能进行该操作');
+                            } else {
+                                fetch(628098, {
+                                    id: selectedRows[0].id
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        },
                         up: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
