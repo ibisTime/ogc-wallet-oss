@@ -26,6 +26,7 @@ import {publicRateExplain} from './redux/public/rateExplain';
 import {publicLhlcxy} from './redux/public/lhlcxy';
 import {biztodayprofit} from './redux/biz/financial/todayprofit';
 import {AppManagent} from './redux/managent/appmanagent';
+import {Alerts} from './redux/managent/alerts';
 import {DappManagent} from './redux/managent/dappmanagent';
 import {DappTrateGy} from './redux/managent/dapptrategy';
 import {tradingSdRecord} from './redux/trading/sdRecord/sdRecord';
@@ -428,6 +429,7 @@ export default combineReducers({
     AlreadySettlement,
     quanTitativeCategory,
     AppManagent,
+    Alerts,
     DappTrateGy,
     DappManagent,
     TAG,
