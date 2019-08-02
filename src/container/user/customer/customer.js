@@ -53,11 +53,13 @@ class Customer extends React.Component {
         this.setState({
             machineOrderNumStart: target.target.value
         });
+        sessionStorage.setItem('machineOrderNumStart', target.target.value);
     };
     machineEnd = (target) => {
         this.setState({
             machineOrderNumEnd: target.target.value
         });
+        sessionStorage.setItem('machineOrderNumEnd', target.target.value);
     };
     machineReset = () => {
         this.setState({

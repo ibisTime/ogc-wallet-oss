@@ -572,9 +572,21 @@ export default class ListComponent extends React.Component {
             case 'interval':
                 return item.intervalParams && (
                   <div>
-                    <span><Input type="number" ref={(target) => { this.intervalStart = target; }} onChange={item.intervalParams.start} style={{width: '100px'}}/></span>
+                    <span>
+                        <Input
+                          type="number"
+                          ref={(target) => { this.intervalStart = target; }}
+                          onChange={item.intervalParams.start} style={{width: '100px'}}
+                        />
+                    </span>
                     <span style={{margin: '0 10px'}}>~</span>
-                    <span><Input type="number" ref={(target) => { this.intervalEnd = target; }} onChange={item.intervalParams.end} style={{width: '100px'}}/></span>
+                    <span>
+                        <Input
+                          type="number"
+                          ref={(target) => { this.intervalEnd = target; }}
+                          onChange={item.intervalParams.end} style={{width: '100px'}}
+                        />
+                    </span>
                 </div>);
             default:
                 return <Input style={{width: 200}} placeholder={item.placeholder}/>;
