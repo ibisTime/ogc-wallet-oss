@@ -65,18 +65,19 @@ class Alerts extends React.Component {
             title: '来源',
             field: 'source',
             type: 'select',
-            key: 'flash_source'
+            key: 'flash_source',
+            search: true
         }, {
             field: 'isTop',
             title: '是否置顶',
             type: 'select',
             search: true,
             data: [{
-                key: '0',
-                value: '否'
-            }, {
                 key: '1',
                 value: '是'
+            }, {
+                key: '0',
+                value: '否'
             }],
             keyName: 'key',
             valueName: 'value'
