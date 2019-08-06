@@ -48,7 +48,7 @@ export default class CNormalTextArea extends React.Component {
   }
   render() {
     const { label, field, rules, readonly, hidden, getFieldDecorator,
-      onChange, initVal, inline } = this.props;
+      onChange, initVal, inline, placeholder = '', style = {maxWidth: 400}, autosize = { minRows: 4, maxRows: 8 } } = this.props;
     let layoutProps = inline ? {} : formItemLayout;
     return (
       <FormItem key={field} label={label} {...layoutProps} className={hidden ? 'hidden' : ''}>
@@ -57,7 +57,12 @@ export default class CNormalTextArea extends React.Component {
             : getFieldDecorator(field, {
                 rules,
                 initialValue: initVal
-              })(<TextArea className="textarea-normalArea" style={{maxWidth: 400}} autosize={{ minRows: 4, maxRows: 8 }}/>)
+              })(<TextArea
+              className="textarea-normalArea"
+              style={style}
+              autosize={autosize}
+              placeholder={placeholder}
+            />)
         }
       </FormItem>
     );

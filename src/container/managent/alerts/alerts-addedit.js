@@ -29,7 +29,16 @@ class AlertsAddedit extends DetailUtil {
             title: '内容',
             field: 'content',
             type: 'textarea',
-            required: true
+            normalArea: true,
+            required: true,
+            placeholder: '快讯格式说明：【标题】快讯内容',
+            style: {
+                width: '100%'
+            },
+            autosize: {
+                minRows: 8,
+                maxRows: 28
+            }
         }, {
             field: 'isTop',
             title: '是否置顶',

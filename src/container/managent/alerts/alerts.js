@@ -51,7 +51,7 @@ class Alerts extends React.Component {
                     const f = v.indexOf('】');
                     const l = v.indexOf('【');
                     if(f !== -1 && l !== -1) {
-                        return v.substring(l + 1, f - 1);
+                        return v.substring(l + 1, f);
                     }else {
                         if(v.length > 15) {
                             return v.substring(0, 15) + '...';
