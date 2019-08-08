@@ -19,6 +19,8 @@ class TradMessageStartTimeSet extends DetailUtil {
     if(getQueryString('dailyStartTime', this.props.location.search) === 'undefined' || getQueryString('dailyEndTime', this.props.location.search) === 'undefined') {
       this.dailyStart = '00:00:00';
       this.dailyEnd = '00:00:00';
+      this.dailyStartTime = '00:00:00';
+      this.dailyEndTime = '00:00:00';
     }else {
       this.dailyStart = getQueryString('dailyStartTime', this.props.location.search);
       this.dailyEnd = getQueryString('dailyEndTime', this.props.location.search);

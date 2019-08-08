@@ -584,10 +584,26 @@ const ROUTES = [
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
     },
+    {
+        path: '/quotation/quotationETHHistory',
+        component: asyncComponent(() => import('container/biz/quotation/quotationETHHistory'))
+    },
     // 承兑商行情
     {
         path: '/quotation/quotationCDS',
         component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
+    },
+    {
+        path: '/quotation/quotationCDSHistory',
+        component: asyncComponent(() => import('container/biz/quotation/quotationCDSHistory'))
+    },
+    {
+        path: '/quotation/legalTender',
+        component: asyncComponent(() => import('container/biz/quotation/legalTender/legalTender'))
+    },
+    {
+        path: '/quotation/legalTenderHistory',
+        component: asyncComponent(() => import('container/biz/quotation/legalTender/legalTenderHistory'))
     },
     // 自配行情
     {
@@ -1154,6 +1170,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-startTimeSet'))
     },
     {
+        path: '/trading/tradMessage/frequency',
+        component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-frequency'))
+    },
+    {
         path: '/cloud/millMessage',
         component: asyncComponent(() => import('container/biz/cloud/millMessage/millMessage'))
     },
@@ -1328,6 +1348,21 @@ const ROUTES = [
     {
         path: '/timerManager/timerPerformance',
         component: asyncComponent(() => import('container/timerManager/timerPerformance/timerPerformance'))
+    },
+    // 用户面板
+    {
+        path: '/userStatistics/userPanel',
+        component: asyncComponent(() => import('container/userStatistics/userPanel'))
+    },
+    // 币量分析
+    {
+        path: '/userStatistics/currencyStatistics',
+        component: asyncComponent(() => import('container/userStatistics/currencyStatistics'))
+    },
+    // 提币审核
+    {
+        path: '/testDemo/toExamine',
+        component: asyncComponent(() => import('container/userStatistics/userStatistics'))
     }
 ];
 

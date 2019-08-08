@@ -130,6 +130,15 @@ import {quotationQuotationETH} from './redux/biz/quotation/quotationETH';
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
 
+// 法币汇率配置
+import {legalTender} from './redux/biz/quotation/legalTender';
+
+import {legalTenderHistory} from './redux/biz/quotation/legalTenderHistory';
+
+import {qutationETHHistory} from './redux/biz/quotation/qutationETHHistory';
+
+import {quotationCSDHistory} from './redux/biz/quotation/quotationCDSHistory';
+
 // 市价调节值
 import {quotationMarketAdjustment} from './redux/biz/quotation/marketAdjustment';
 
@@ -476,5 +485,12 @@ export default combineReducers({
 
     // 定时器管理
     timerMonitor,
-    timerPerformance
+    timerPerformance,
+
+    // 法币汇率管理
+    legalTender,
+    legalTenderHistory,
+    // qutationETHHistory
+    qutationETHHistory,
+    quotationCSDHistory
 });

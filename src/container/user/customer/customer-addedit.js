@@ -18,8 +18,23 @@ class CustomerAddedit extends DetailUtil {
             field: 'nickname',
             readonly: this.view
         }, {
-            field: 'loginName',
-            title: '手机号/邮箱'
+            field: 'mobile',
+            title: '手机号',
+            formatter: (v) => {
+                if(v === undefined || v === '' || v === null) {
+                    return '未绑定手机号';
+                }
+                return v;
+            }
+        }, {
+            field: 'email',
+            title: '邮箱',
+            formatter: (v) => {
+                if(v === undefined || v === '' || v === null) {
+                    return '未绑定邮箱';
+                }
+                return v;
+            }
         }, {
             field: 'kind',
             title: '类型',

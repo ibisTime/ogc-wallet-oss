@@ -10,14 +10,44 @@ class CustomerRegister extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.isNotEmail = true;
+        this.isNotTel = true;
     }
 
     render() {
         const fields = [{
+            field: 'registerType',
+            title: '注册类型',
+            type: 'select',
+            data: [{
+                'key': '0',
+                'value': '手机'
+            }, {
+                'key': '1',
+                'value': '邮箱'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            required: true,
+            onChange: (v) => {
+                if (v === '0') {
+                    this.isNotEmail = true;
+                    this.isNotTel = false;
+                }else{
+                    this.isNotEmail = false;
+                    this.isNotTel = true;
+                }
+            }
+        }, {
             field: 'mobile',
             title: '手机号',
-            mobile: true,
-            required: true
+            hidden: this.isNotTel,
+            required: this.isNotEmail
+        }, {
+            field: 'mobile',
+            title: '邮箱',
+            hidden: this.isNotEmail,
+            required: this.isNotTel
         }, {
             field: 'loginPwd',
             title: '登录密码',

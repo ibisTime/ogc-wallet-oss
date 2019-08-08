@@ -8,13 +8,13 @@ import {
   doFetching,
   cancelFetching,
   setSearchData
-} from '@redux/biz/quotation/quotationCDS';
+} from '@redux/biz/quotation/quotationCDSHistory';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, getCoinList, formatDate} from 'common/js/util';
 
 @listWrapper(
   state => ({
-    ...state.quotationQuotationCDS,
+    ...state.quotationCSDHistory,
     parentCode: state.menu.subMenuCode
   }),
   {
@@ -23,6 +23,18 @@ import {dateTimeFormat, getCoinList, formatDate} from 'common/js/util';
   }
 )
 class quotationCDS extends React.Component {
+  constructor(props) {
+    super(props);
+    this.buttons = [];
+    this.buttons = [{
+      code: 'goBack',
+      name: '返回',
+      check: false,
+      handler: () => {
+        this.props.history.push(`/quotation/quotationCDS`);
+      }
+    }];
+  }
   componentDidMount() {
     let pHtml = document.createElement('p');
     pHtml.innerHTML = '行情更新间隔时间为30s';
@@ -76,13 +88,9 @@ class quotationCDS extends React.Component {
       pageCode: '650202',
       searchParams: {
         symbolList: ['ETH', 'JEJU', 'TOS', 'TOSP'],
-        startDatetime: formatDate(new Date()) + ' 00:00'
+        endDatetime: formatDate(new Date()) + ' 00:00'
       },
-      btnEvent: {
-        history: () => {
-          this.props.history.push(`/quotation/quotationCDSHistory`);
-        }
-      }
+      buttons: this.buttons
     });
   }
 }

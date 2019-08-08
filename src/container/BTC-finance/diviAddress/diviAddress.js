@@ -38,8 +38,23 @@ class BTCDiviAddress extends React.Component {
         return data.nickname;
       }
     }, {
-      field: 'loginName',
-      title: '手机号/邮箱'
+      field: 'mobile',
+      title: '手机号',
+      render: (v) => {
+        if(v === undefined) {
+          return '用户未绑定手机号';
+        }
+        return v;
+      }
+    }, {
+      field: 'email',
+      title: '邮箱',
+      render: (v) => {
+        if(v === undefined) {
+          return '用户未绑定邮箱';
+        }
+        return v;
+      }
     }, {
       field: 'currency',
       title: '持有币种',

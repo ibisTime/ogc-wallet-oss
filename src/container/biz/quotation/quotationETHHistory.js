@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/quotation/quotationETH';
+} from '@redux/biz/quotation/qutationETHHistory';
 import {listWrapper} from 'common/js/build-list';
 import {formatDate} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.quotationQuotationETH,
+        ...state.qutationETHHistory,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {formatDate} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class QuotationETH extends React.Component {
+class quotationETHHistory extends React.Component {
     componentDidMount() {
         let pHtml = document.createElement('p');
         pHtml.innerHTML = '行情更新间隔时间为30s';
@@ -53,19 +53,15 @@ class QuotationETH extends React.Component {
             rowKey: 'id',
             pageCode: '650101',
             searchParams: {
-                startDatetime: formatDate(new Date()) + ' 00:00'
+                endDatetime: formatDate(new Date()) + ' 00:00'
             },
             btnEvent: {
                 today: () => {
-                    console.log('123');
                     this.props.history.push(`/quotation/quotationETH`);
-                },
-                history: () => {
-                    this.props.history.push(`/quotation/quotationETHHistory`);
                 }
             }
         });
     }
 }
 
-export default QuotationETH;
+export default quotationETHHistory;

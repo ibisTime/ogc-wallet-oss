@@ -54,6 +54,10 @@ class TradMessageAddedit extends DetailUtil {
         return moneyFormat(v.toString(), '', data.symbolOut);
       }
     }, {
+      field: 'dailyLimit',
+      title: '闪兑次数',
+      hidden: !this.view
+    }, {
       field: 'orderNo',
       title: '展示序号',
       required: true

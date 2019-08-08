@@ -46,6 +46,9 @@ class TradMessage extends React.Component {
         return moneyFormat(v.toString(), '', data.symbolOut);
       }
     }, {
+      field: 'dailyLimit',
+      title: '闪兑次数'
+    }, {
       field: 'orderNo',
       title: '展示序号'
     }, {
@@ -106,6 +109,15 @@ class TradMessage extends React.Component {
             showWarnMsg('请选择一条记录');
           } else {
             this.props.history.push(`/trading/tradMessage/startTimeSet?id=${selectedRowKeys[0]}&dailyStartTime=${selectedRows[0].dailyStartTime}&dailyEndTime=${selectedRows[0].dailyEndTime}&symbolOut=${selectedRows[0].symbolOut}&symbolIn=${selectedRows[0].symbolIn}`);
+          }
+        },
+        frequency: (selectedRowKeys, selectedRows) => {
+          if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+          } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+          } else {
+            this.props.history.push(`/trading/tradMessage/frequency?id=${selectedRowKeys[0]}&dailyLimit=${selectedRows[0].dailyLimit}&symbolOut=${selectedRows[0].symbolOut}&symbolIn=${selectedRows[0].symbolIn}`);
           }
         }
       }

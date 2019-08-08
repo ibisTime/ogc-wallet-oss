@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/quotation/quotationETH';
+} from '@redux/biz/quotation/legalTender';
 import {listWrapper} from 'common/js/build-list';
-import {formatDate} from 'common/js/util';
+import {formatDate, dateTimeFormat2} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.quotationQuotationETH,
+        ...state.legalTender,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,27 +22,22 @@ import {formatDate} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class QuotationETH extends React.Component {
-    componentDidMount() {
-        let pHtml = document.createElement('p');
-        pHtml.innerHTML = '行情更新间隔时间为30s';
-        pHtml.style.margin = '0';
-        let dHtml = document.querySelector('.tools-wrapper');
-        dHtml.insertBefore(pHtml, dHtml.childNodes[0]);
-    }
+class legalTender extends React.Component {
     render() {
         const fields = [{
             title: '币种',
-            field: 'symbol'
+            field: 'currency'
         }, {
-            title: '计价币种',
+            title: '参照币种',
             field: 'referCurrency'
         }, {
-            title: '最新价',
-            field: 'lastPrice'
+            title: '汇率来源',
+            field: 'origin',
+            type: 'select',
+            key: 'rate_origin'
         }, {
-            title: '来源',
-            field: 'origin'
+            title: '汇率',
+            field: 'rate'
         }, {
             title: '更新时间',
             field: 'updateDatetime',
@@ -51,21 +46,20 @@ class QuotationETH extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '650101',
+            pageCode: '802035',
             searchParams: {
                 startDatetime: formatDate(new Date()) + ' 00:00'
             },
             btnEvent: {
-                today: () => {
-                    console.log('123');
-                    this.props.history.push(`/quotation/quotationETH`);
-                },
                 history: () => {
-                    this.props.history.push(`/quotation/quotationETHHistory`);
+                    this.props.history.push(`/quotation/legalTenderHistory`);
+                },
+                today: () => {
+                    this.props.history.push(`/quotation/legalTender`);
                 }
             }
         });
     }
 }
 
-export default QuotationETH;
+export default legalTender;

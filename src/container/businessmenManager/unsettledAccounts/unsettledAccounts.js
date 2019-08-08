@@ -35,7 +35,7 @@ class unsettledAccounts extends React.Component {
             title: '商户',
             field: 'merchantInfo',
             render(v, d) {
-                return d.merchantInfo && d.merchantInfo.name + '-' + d.merchantInfo.mobile;
+                return d.merchantInfo && d.merchantInfo.name + '-' + d.merchantInfo.loginName;
             },
             search: true
         }, {

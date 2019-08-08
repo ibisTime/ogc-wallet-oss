@@ -63,8 +63,24 @@ class Customer extends React.Component {
             title: '昵称',
             search: true
         }, {
-            field: 'loginName',
-            title: '手机号/邮箱',
+            field: 'mobile',
+            title: '手机号',
+            render: (v) => {
+                if(v === undefined) {
+                    return '用户未绑定手机号';
+                }
+                return v;
+            },
+            search: true
+        }, {
+            field: 'email',
+            title: '邮箱',
+            render: (v) => {
+                if(v === undefined) {
+                    return '用户未绑定邮箱';
+                }
+                return v;
+            },
             search: true
         }, {
             field: 'kind',
@@ -130,7 +146,7 @@ class Customer extends React.Component {
             // }, {
             field: 'createDatetime',
             title: '注册时间',
-            type: 'date',
+            type: 'datetime',
             rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
             render: dateTimeFormat,
             search: true

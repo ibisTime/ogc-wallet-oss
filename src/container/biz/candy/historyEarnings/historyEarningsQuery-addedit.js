@@ -17,12 +17,13 @@ class historyEarningsQueryAddedit extends DetailUtil {
             field: 'buyName',
             title: '购买人',
             formatter(v, d) {
-                return `${d.buyUserRealName}-${d.buyUserMobile}`;
+                return `${d.candyOrder.user.realName ? d.candyOrder.user.realName : d.candyOrder.user.nickname}-${d.candyOrder.user.loginName}`;
             }
         }, {
             field: 'beneName',
             title: '收益人',
             formatter(v, d) {
+                console.log(d);
                 return `${d.benefitUserRealName}-${d.benefitUserMobile}`;
             }
         }, {

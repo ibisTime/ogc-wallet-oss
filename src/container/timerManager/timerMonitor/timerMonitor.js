@@ -33,8 +33,7 @@ class timerMonitor extends React.Component {
     render() {
         const fields = [{
             title: '触发器名称',
-            field: 'jobDetailName',
-            search: true
+            field: 'jobDetailName'
         }, {
             title: 'cron表达式',
             field: 'jobCronExpression'
@@ -44,7 +43,9 @@ class timerMonitor extends React.Component {
             type: 'datetime'
         }, {
             title: '状态',
-            field: 'status'
+            field: 'status',
+            type: 'select',
+            key: 'schedule_quartz_status'
         }];
         return this.props.buildList({
             fields,

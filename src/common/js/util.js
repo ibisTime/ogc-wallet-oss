@@ -157,6 +157,10 @@ export function dateTimeFormat(date) {
   return formatDate(date, 'yyyy-MM-dd hh:mm:ss');
 }
 
+export function dateTimeFormat2(date) {
+  return formatDate(date, 'yyyy-MM-dd') + ' 00:00';
+}
+
 // 日期加法
 export function addDate(date, days, format) {
   var d = new Date(date);
@@ -848,4 +852,12 @@ export function getCoinType(coin) {
   }
   var type = getCoinData()[coin].type;
   return type;
+}
+
+/**
+ * 查询字典对应的dValue
+ */
+
+export function findDsct(array, value) {
+  return array.find(item => item.dkey === value).dvalue;
 }

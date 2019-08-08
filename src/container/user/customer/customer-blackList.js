@@ -55,16 +55,23 @@ class CustomerBlackList extends React.Component {
             search: true,
             noVisible: true
         }, {
-          field: 'loginName',
-          title: '手机号/邮箱',
-          render: (v, data) => {
-            if(data.userInfo) {
-              return data.userInfo.loginName;
+            field: 'mobile',
+            title: '手机号',
+            render: (v, data) => {
+                if(data.userInfo.mobile === undefined) {
+                    return '用户未绑定手机号';
+                }
+                return data.userInfo.mobile;
             }
-            if(v) {
-                return v;
+        }, {
+            field: 'email',
+            title: '邮箱',
+            render: (v, data) => {
+                if(data.userInfo.email === undefined) {
+                    return '用户未绑定邮箱';
+                }
+                return data.userInfo.email;
             }
-          }
         }, {
             field: 'createDatetime',
             title: '拉黑时间',

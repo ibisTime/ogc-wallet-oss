@@ -35,12 +35,16 @@ class Candyorder extends React.Component {
         this.setState({
             pageCodeTdOrHy: 610435,
             isTdOrHy: true
+        }, () => {
+            this.props.getPageData();
         });
     }
     showHistory = () => {
         this.setState({
             pageCodeTdOrHy: 610447,
             isTdOrHy: false
+        }, () => {
+            this.props.getPageData();
         });
     }
     render() {
