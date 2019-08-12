@@ -107,6 +107,11 @@ class Candyorder extends React.Component {
         }];
         return (
           <div>
+              <div className="candyorder-tab">
+                  <Button htmlType="submit" className="candyorder-tab-today" onClick={this.showToday}>今日记录</Button>
+                  <Button htmlType="submit" className="candyorder-tab-history" onClick={this.showHistory}>历史记录</Button>
+                  <div className="clear"> </div>
+              </div>
               {
                   this.props.buildList({
                       fields,

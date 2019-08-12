@@ -1,5 +1,4 @@
 import React from 'react';
-import {Modal, message} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -9,19 +8,16 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/timerManager/timerMonitor/timerMonitor';
+} from '@redux/timerManager/timerPerformance/timerPerformance';
 import {listWrapper} from 'common/js/build-list';
 import {
     showSucMsg,
     showWarnMsg
 } from 'common/js/util';
-import fetch from 'common/js/fetch';
-
-const confirm = Modal.confirm;
 
 @listWrapper(
     state => ({
-        ...state.timerMonitor,
+        ...state.timerPerformance,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -32,23 +28,42 @@ const confirm = Modal.confirm;
 class timerMonitor extends React.Component {
     render() {
         const fields = [{
-            title: '触发器名称',
-            field: 'jobDetailName',
-            search: true
+            title: '名称',
+            field: 'name'
         }, {
-            title: 'cron表达式',
-            field: 'jobCronExpression'
+            title: '日期',
+            field: 'createDate',
+            type: 'date'
         }, {
-            title: '下次触发时间',
-            field: 'nextTriggerTime',
+            title: '任务数量',
+            field: 'count'
+        }, {
+            title: '启动时间',
+            field: 'startDatetime',
             type: 'datetime'
         }, {
-            title: '状态',
-            field: 'status'
+            title: '结束时间',
+            field: 'endDatetime',
+            type: 'datetime'
+        }, {
+            title: '耗时（分）',
+            field: 'consuming'
         }];
         return this.props.buildList({
             fields,
-            pageCode: '610590'
+            pageCode: 610591,
+            btnEvent: {
+                timerLogInfo: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        console.log(selectedRows);
+                        this.props.history.push(`/timerManager/timerPerformance/timerLogInfo?v=1&code=${selectedRows[0].id}`);
+                    }
+                }
+            }
         });
     }
 }

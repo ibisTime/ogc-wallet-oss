@@ -3,7 +3,9 @@ import {Row, Col, Table} from 'antd';
 import {
     showSucMsg,
     showWarnMsg,
-    findDsct
+    findDsct,
+    mtDate,
+    dateFormat
 } from 'common/js/util';
 
 import './userPanel.css';
@@ -11,33 +13,6 @@ import ReactEcharts from 'echarts-for-react';
 
 import {userAmount, userDistribution, dataDect} from '../../api/statisticalAnalysis';
 
-const columns = [
-    {
-        title: '账户',
-        dataIndex: 'payDatetime'
-    },
-    {
-        title: '节点等级',
-        dataIndex: 'payUserName'
-    },
-    {
-        title: '日期',
-        dataIndex: 'payAmount'
-
-    },
-    {
-        title: '用户总量',
-        dataIndex: 'fee'
-    },
-    {
-        title: '有效用户',
-        dataIndex: 'realAmount'
-    },
-    {
-        title: '团队投注量',
-        dataIndex: 'valueUsdPay'
-    }
-];
 class userPanel extends React.Component {
     constructor(props) {
         super(props);
@@ -52,13 +27,13 @@ class userPanel extends React.Component {
         };
     }
     componentDidMount() {
-        userAmount('2019-08-1').then(data => {
+        userAmount(mtDate(dateFormat(new Date()), 15)).then(data => {
             let mAs = [];
             let aCs = [];
             let rgtCs = [];
             let tCs = [];
             for(let i = 0; i < data.length; i++) {
-                mAs[i] = data[i].date;
+                mAs[i] = data[i].date.split('-')[1] + '-' + data[i].date.split('-')[2];
                 aCs[i] = data[i].activeCount;
                 rgtCs[i] = data[i].registerCount;
                 tCs[i] = data[i].totalCount;
@@ -142,12 +117,11 @@ class userPanel extends React.Component {
                     type: 'line',
                     data: activeCounts
                 },
-                // },
                 // {
                 //     name: '今日活跃用户数',
                 //     type: 'line',
                 //     data: registerCounts
-                // },
+                // }
                 {
                     name: '截止今日用户数',
                     type: 'line',
@@ -159,8 +133,6 @@ class userPanel extends React.Component {
     }
     getOptionPieChart = () => {
         const {nodeLevels, nodeList} = this.state;
-        console.log('nodeLevels', nodeLevels);
-        console.log('nodeList', nodeList);
         const option = {
             title: {
                 text: '用户身份',
@@ -178,7 +150,7 @@ class userPanel extends React.Component {
                 left: 'left',
                 data: nodeLevels
             },
-            color: ['#7C6AF2', '#FF6383', '#FF9F40'],
+            color: ['#7C6AF2', '#FF6383', '#FF9F40', '#bd3b1b', '#d8a800', '#b9d870', '#ef5c4e'],
             series: [
                 {
                     name: '等级分布',
@@ -226,13 +198,6 @@ class userPanel extends React.Component {
                                 option={this.getOptionPieChart()}
                                 style={{height: '100%', width: '100%'}}
                                 className='react_for_echarts' />
-                        </div>
-                        <div className="userListInfo">
-                            <Table
-                                style={{marginTop: '0px', height: '320px'}}
-                                columns={columns}
-                                pagination={{pageSize: 5}}
-                            />
                         </div>
                         <div className="clear"></div>
                     </Col>

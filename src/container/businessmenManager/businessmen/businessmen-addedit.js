@@ -84,7 +84,6 @@ class businessmenAddedit extends DetailUtil {
             view: this.view,
             addCode: '610500',
             beforeSubmit: (data) => {
-                console.log(data);
                 return data;
             }
         });

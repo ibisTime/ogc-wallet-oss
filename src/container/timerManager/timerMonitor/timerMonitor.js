@@ -1,5 +1,4 @@
 import React from 'react';
-import {Modal, message} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -15,9 +14,6 @@ import {
     showSucMsg,
     showWarnMsg
 } from 'common/js/util';
-import fetch from 'common/js/fetch';
-
-const confirm = Modal.confirm;
 
 @listWrapper(
     state => ({

@@ -1,0 +1,16 @@
+.upContainer{
+    background:rgba(245,246,247,1);
+    padding: 20px;
+}
+
+.pieStyle{
+    height: 280px;
+    background: #fff;
+    padding-top: 20px;
+}
+
+.statisticalList{
+    background: #fff;
+    margin-top: 20px;
+    padding: 20px;
+}

@@ -11,6 +11,7 @@ import {
 } from '@redux/candy/earnings/earningsQuery';
 import {listWrapper} from 'common/js/build-list';
 import { showWarnMsg, moneyFormat } from 'common/js/util';
+import {Button} from 'antd';
 
 @listWrapper(
   state => ({
@@ -23,6 +24,76 @@ import { showWarnMsg, moneyFormat } from 'common/js/util';
   }
 )
 class EarningsQuery extends React.Component {
+    constructor(props) {
+        super(props);
+        this.buttons = [{
+            code: 'toDay',
+            name: '今日记录',
+            check: false,
+            handler: () => {
+                this.props.history.push(`/quotation/legalTender`);
+            }
+        }, {
+            code: 'toHistory',
+            name: '历史记录',
+            check: false,
+            handler: () => {
+                this.props.history.push(`/quotation/legalTender`);
+            }
+        }, {
+            code: 'toInfo',
+            name: '详情',
+            url: '/addedit'
+        }, {
+            code: 'import',
+            name: '导出',
+            url: '/import'
+        }];
+    }
+    // 近期流水查询
+    ledgerQuery = (selectedRowKeys, selectedRows) => {
+        if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+        } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+        } else {
+            this.props.history.push(`/user/customer/ledgerQuery?code=${selectedRowKeys[0]}`);
+        }
+    }
+
+    // 历史流水查询
+    ledgerQueryHistory = (selectedRowKeys, selectedRows) => {
+        if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+        } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+        } else {
+            this.props.history.push(`/user/customer/ledgerQueryHistory?code=${selectedRowKeys[0]}`);
+        }
+    }
+    state = {
+        visible: false,
+        code: '',
+        xyCount: null,
+        pageCodeTdOrHy: 610443,
+        isTdOrHy: true
+    };
+    showToday = () => {
+        this.setState({
+            pageCodeTdOrHy: 610443,
+            isTdOrHy: true
+        }, () => {
+            this.props.getPageData();
+        });
+    }
+    showHistory = () => {
+        this.setState({
+            pageCodeTdOrHy: 610445,
+            isTdOrHy: false
+        }, () => {
+            this.props.getPageData();
+        });
+    }
     render() {
         const fields = [{
             field: 'buyName',
@@ -102,11 +173,17 @@ class EarningsQuery extends React.Component {
         }];
         return (
           <div>
+              <div className="earnings-tab">
+                  <Button htmlType="submit" className="earnings-tab-today" onClick={this.showToday}>今日记录</Button>
+                  <Button htmlType="submit" className="earnings-tab-history" onClick={this.showHistory}>历史记录</Button>
+                  <div className="clear"> </div>
+              </div>
               {
                   this.props.buildList({
                       fields,
                       rowKey: 'id',
-                      pageCode: 610443
+                      pageCode: this.state.pageCodeTdOrHy,
+                      marginTop: 50
                   })
               }
           </div>

@@ -281,6 +281,8 @@ import { paymentRules } from './redux/businessmenManager/paymentRules/paymentRul
 import { timerMonitor } from './redux/timerManager/timerMonitor/timerMonitor';
 // 统计分析-- 监控管理 - triggers性能
 import { timerPerformance } from './redux/timerManager/timerPerformance/timerPerformance';
+// 统计分析-- 应用分析 - 玖佰玖统计
+import { nineNineStatistics } from './redux/applicationAnalysis/nineNineStatistics';
 
 export default combineReducers({
     user,
@@ -492,5 +494,9 @@ export default combineReducers({
     legalTenderHistory,
     // qutationETHHistory
     qutationETHHistory,
-    quotationCSDHistory
+    quotationCSDHistory,
+
+    // 应用分析
+    // 玖佰玖统计
+    nineNineStatistics
 });

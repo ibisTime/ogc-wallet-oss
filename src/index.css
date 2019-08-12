@@ -149,3 +149,25 @@ li {
 .candyorder-tab-history{
   margin-left: 10px;
 }
+
+.earnings-tab{
+  position: absolute;
+  top:240px;
+  width: 300px;
+  height: 30px;
+  margin-bottom: 30px;
+}
+
+.earnings-tab-today, .earnings-tab-history{
+  text-align: center;
+  color:#fff;
+  float: left;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  background:  #1890ff;
+}
+
+.earnings-tab-history{
+  margin-left: 10px;
+}

@@ -80,6 +80,9 @@ export default class ListComponent extends React.Component {
                 this.getOwnerBtns();
             }
         }
+        if(this.options.marginTop) {
+            console.log(this.options.marginTop);
+        }
         const columns = [];
         const searchFields = [];
         this.options.fields.forEach(f => {
@@ -468,7 +471,8 @@ export default class ListComponent extends React.Component {
             type: this.options.singleSelect ? 'radio' : 'checkbox'
         };
         let useData = this.props.tableList;
-
+        let marginTop = this.options.marginTop;
+        console.log(marginTop);
         // noSelect为true时 列表不可选
         if (this.options.noSelect) {
             rowSelection = null;
@@ -496,6 +500,7 @@ export default class ListComponent extends React.Component {
                         bordered
                         rowSelection={rowSelection}
                         columns={this.columns}
+                        style={{marginTop: this.options.marginTop ? this.options.marginTop + 'px' : '0px'}}
                         rowKey={record => record[this.options.rowKey]}
                         dataSource={useData}
                         pagination={this.props.pagination}

@@ -1349,6 +1349,10 @@ const ROUTES = [
         path: '/timerManager/timerPerformance',
         component: asyncComponent(() => import('container/timerManager/timerPerformance/timerPerformance'))
     },
+    {
+        path: '/timerManager/timerPerformance/timerLogInfo',
+        component: asyncComponent(() => import('container/timerManager/timerPerformance/timePerformance-addedit'))
+    },
     // 用户面板
     {
         path: '/userStatistics/userPanel',
@@ -1363,6 +1367,12 @@ const ROUTES = [
     {
         path: '/testDemo/toExamine',
         component: asyncComponent(() => import('container/userStatistics/userStatistics'))
+    },
+    // 应用分析
+    // 玖佰玖统计
+    {
+        path: '/applicationAnalysis/nineNineStatistics',
+        component: asyncComponent(() => import('container/applicationAnalysis/nineNineStatistics'))
     }
 ];
 

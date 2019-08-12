@@ -103,13 +103,12 @@
 }
 
 .sendRmk{
-    position: absolute;
-    top: -32px;
+    position: fixed;
+    top: 23%;
+    right: 6%;
     padding: 40px 23px 0px 23px;
     background: #fff;
-    width: 86%;
-    margin-left: 6%;
-    margin-right: 8%;
+    width:260px;
     height:500px;
 }
 
