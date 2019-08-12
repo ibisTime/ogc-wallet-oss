@@ -43,7 +43,10 @@ class DappManagent extends React.Component {
         }, {
             field: 'company',
             title: '应用所属厂商',
-            search: true
+            search: true,
+            render(v) {
+                return v || '-';
+            }
         }, {
             field: 'isTop',
             title: '是否置顶',
@@ -79,7 +82,10 @@ class DappManagent extends React.Component {
             search: true
         }, {
             field: 'desc',
-            title: '应用详情描述'
+            title: '应用详情描述',
+            render(v) {
+                return v || '-';
+            }
         }, {
             field: 'createDatetime',
             title: '创建时间',

@@ -1193,20 +1193,48 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/cloud/millOrder/millOrderIncome'))
     },
     {
-        path: '/public/community/association',
-        component: asyncComponent(() => import('container/public/community/association'))
-    },
-    {
-        path: '/public/community/association/addedit',
-        component: asyncComponent(() => import('container/public/community/association-addedit'))
-    },
-    {
         path: '/cloud/rules',
         component: asyncComponent(() => import('container/biz/cloud/rules/rules'))
     },
     {
         path: '/cloud/rules/addedit',
         component: asyncComponent(() => import('container/biz/cloud/rules/rules-addedit'))
+    },
+    {
+        path: '/mill/millMessage',
+        component: asyncComponent(() => import('container/biz/mill/millMessage/millMessage'))
+    },
+    {
+        path: '/mill/millMessage/addedit',
+        component: asyncComponent(() => import('container/biz/mill/millMessage/millMessage-addedit'))
+    },
+    {
+        path: '/mill/millOrder',
+        component: asyncComponent(() => import('container/biz/mill/millOrder/millOrder'))
+    },
+    {
+        path: '/mill/millOrder/addedit',
+        component: asyncComponent(() => import('container/biz/mill/millOrder/millOrder-addedit'))
+    },
+    {
+        path: '/mill/millOrderIncome',
+        component: asyncComponent(() => import('container/biz/mill/millOrder/millOrderIncome'))
+    },
+    {
+        path: '/mill/rules',
+        component: asyncComponent(() => import('container/biz/mill/rules/rules'))
+    },
+    {
+        path: '/mill/rules/addedit',
+        component: asyncComponent(() => import('container/biz/mill/rules/rules-addedit'))
+    },
+    {
+        path: '/public/community/association',
+        component: asyncComponent(() => import('container/public/community/association'))
+    },
+    {
+        path: '/public/community/association/addedit',
+        component: asyncComponent(() => import('container/public/community/association-addedit'))
     },
     {
         path: '/quantitativeAi/quantitativeAi',

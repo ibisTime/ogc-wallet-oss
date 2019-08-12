@@ -151,7 +151,7 @@ export default class CSearchSelect extends React.Component {
         });
       }).catch(() => this.setState({ selectFetch: false }));
     }, 300);
-  }
+  };
   getValueName(d, valueName) {
     return isFunc(valueName)
       ? valueName(d)

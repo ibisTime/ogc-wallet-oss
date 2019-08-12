@@ -34,6 +34,10 @@ import {cloudMillMessage} from './redux/cloud/millMessage/millMessage';
 import {cloudMillOrder} from './redux/cloud/millOrder/millOrder';
 import {cloudMillOrderIncome} from './redux/cloud/millOrder/millOrderIncome';
 import {cloudRules} from './redux/cloud/rules/rules';
+import {millMessage} from './redux/mill/millMessage/millMessage';
+import {millOrder} from './redux/mill/millOrder/millOrder';
+import {millOrderIncome} from './redux/mill/millOrder/millOrderIncome';
+import {millRules} from './redux/mill/rules/rules';
 import {quantitativeAi} from './redux/quantitativeAi/quantitativeAi/quantitativeAi';
 import {quantitativeAiOrder} from './redux/quantitativeAi/quantitativeAiOrder/quantitativeAiOrder';
 import {quantitativeAiOrderIncome} from './redux/quantitativeAi/quantitativeAiOrder/quantitativeAiOrderIncome';
@@ -440,7 +444,10 @@ export default combineReducers({
     cloudMillOrder,
     cloudMillOrderIncome,
     cloudRules,
-
+    millMessage,
+    millOrder,
+    millOrderIncome,
+    millRules,
     // 高频量化
     quantitativeAi,
     quantitativeAiOrder,
