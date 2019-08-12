@@ -37,7 +37,7 @@ class Rules extends React.Component {
             rowKey: 'id',
             pageCode: '630045',
             searchParams: {
-                type: 'machine'
+                type: 'miner'
             }
         });
     }

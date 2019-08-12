@@ -13,15 +13,8 @@ class MillRulesEdit extends DetailUtil {
     render() {
         const fields = [{
             title: '说明',
-            field: 'remark1',
-            readonly: true,
-            formatter: (v, data) => {
-                return data.remark;
-            }
-        }, {
-            title: '说明',
             field: 'remark',
-            hidden: true
+            readonly: true
         }, {
             title: '数值',
             field: 'cvalue',
@@ -35,7 +28,7 @@ class MillRulesEdit extends DetailUtil {
             editCode: '630042',
             detailCode: '630046',
             beforeSubmit: function(data) {
-                data.type = 'machine';
+                data.type = 'miner';
                 return data;
             }
         });
