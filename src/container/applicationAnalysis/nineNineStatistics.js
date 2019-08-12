@@ -178,8 +178,7 @@ class nineNineStatistics extends React.Component {
                             this.props.buildList({
                                 fields,
                                 rowKey: 'id',
-                                pageCode: 610443,
-                                marginTop: -40
+                                pageCode: 610443
                             })
                         }
                     </Col>
