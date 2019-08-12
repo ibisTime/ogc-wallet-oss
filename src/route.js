@@ -1263,6 +1263,10 @@ const ROUTES = [
     {
         path: '/quantitativeAi/quantitativeAiRule/addedit',
         component: asyncComponent(() => import('container/biz/quantitativeAi/quantitativeAiRule/quantitativeAiRule-addedit'))
+    },
+    {
+        path: '/applicationAnalysis/dropsWater',
+        component: asyncComponent(() => import('container/statisticalAnalysis/applicationAnalysis/dropsWater'))
     }
 ];
 

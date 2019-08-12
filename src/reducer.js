@@ -260,6 +260,9 @@ import {StayOrder} from './redux/marketsettlement/stayorder';
 import {AlreadySettlement} from './redux/marketsettlement/alreadysettlement';
 import {TAG} from './redux/managent/tag';
 
+// 统计分析
+import {DropsWater} from './redux/statisticalAnalysis/dropsWater';
+
 export default combineReducers({
     user,
     menu,
@@ -452,5 +455,7 @@ export default combineReducers({
     quantitativeAi,
     quantitativeAiOrder,
     quantitativeAiOrderIncome,
-    quantitativeAiRule
+    quantitativeAiRule,
+    // 统计分析
+    DropsWater
 });
