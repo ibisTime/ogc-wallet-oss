@@ -74,9 +74,11 @@ class teamQuery extends React.Component {
                 for(let i = 0; i < data.length; i++) {
                     if(data[i].key === key && (data[i].children && !data[i].children[0].title)) {
                         return true;
-                    }else if(data[i].key !== key && (data[i].children && data[i].children[0].title)) {
-                        return isChildren(data[i].children, key);
-                    }else if(data[i].key === key && !data[i].children) {
+                    }
+                    if(data[i].key !== key && data[i].children) {
+                        isChildren(data[i].children, key);
+                    }
+                    if(data[i].key === key && !data[i].children) {
                         return false;
                     }
                 }
