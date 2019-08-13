@@ -63,7 +63,7 @@ class Customer extends React.Component {
                 if(+d.way === 0) {
                     return levelData[d.nodeLevelAuto.toString()];
                 }else {
-                    return levelData[d.nodeLevelManual.toString()];
+                    return (d.nodeLevelManual || d.nodeLevelManual === 0) && levelData[d.nodeLevelManual.toString()];
                 }
             }
         }, {

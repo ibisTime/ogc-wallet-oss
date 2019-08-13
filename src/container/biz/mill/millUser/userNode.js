@@ -31,7 +31,6 @@ class MillUserNode extends DetailUtil {
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
-            search: true,
             render: (v, data) => {
                 if (data.refereeUser) {
                     let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
@@ -43,7 +42,7 @@ class MillUserNode extends DetailUtil {
                 }
                 return '';
             },
-            required: !!this.userId
+            required: !this.userId
         }, {
             title: '节点用户等级',
             field: 'nodeLevelManual',
@@ -52,10 +51,10 @@ class MillUserNode extends DetailUtil {
             required: true,
             formatter: (v, d) => {
                 if(+d.way === 0) {
-                    this.nodeLevelManual = d.nodeLevelAuto;
+                    this.nodeLevelManual = d.nodeLevelAuto.toString();
                     return levelData[d.nodeLevelAuto.toString()];
                 }else {
-                    this.nodeLevelManual = d.nodeLevelManual;
+                    this.nodeLevelManual = d.nodeLevelManual.toString();
                     return levelData[d.nodeLevelManual.toString()];
                 }
             },
@@ -82,8 +81,11 @@ class MillUserNode extends DetailUtil {
                     if(this.userId) {
                         params.userId = this.userId;
                     }
+                    if(!params.userId || !params.nodeLevelManual) {
+                        return message.warning('请填写完整', 1.5);
+                    }
                     let hasMsg = message.loading('');
-                    if(this.initIndex > 0) {
+                    if(this.initIndex > 0 && !!this.userId) {
                         params.nodeLevelManual = this.nodeLevelManual;
                     }
                     fetch('805350', params).then(() => {
