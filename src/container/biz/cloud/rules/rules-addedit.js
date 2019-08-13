@@ -13,8 +13,15 @@ class CloudRulesEdit extends DetailUtil {
     render() {
         const fields = [{
             title: '说明',
+            field: 'remark1',
+            readonly: true,
+            formatter: (v, data) => {
+                return data.remark;
+            }
+        }, {
+            title: '说明',
             field: 'remark',
-            readonly: true
+            hidden: true
         }, {
             title: '数值',
             field: 'cvalue',
