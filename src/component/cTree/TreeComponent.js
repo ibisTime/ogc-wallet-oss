@@ -8,7 +8,6 @@ export default class TreeComponent extends React.Component {
         treeData: []
     };
     shouldComponentUpdate(nextProps) {
-        console.log(nextProps.treeDataProps);
         if(nextProps.treeDataProps !== this.props.treeDataProps) {
             this.setState({
                 treeData: nextProps.treeDataProps
@@ -80,7 +79,10 @@ export default class TreeComponent extends React.Component {
         });
     };
     onSelect = (keys) => {
-        this.props.treeClickFn(keys);
+        this.props.treeClickFn(keys, 'onSelect');
+    };
+    onExpand = (keys) => {
+        this.props.treeClickFn(keys, 'onExpand');
     };
     renderTreeNodes = data =>
         data.length > 0 ? data.map(item => {
@@ -103,7 +105,7 @@ export default class TreeComponent extends React.Component {
             onDragEnter={this.onDragEnter}
             onDrop={this.onDrop}
             onSelect={this.onSelect}
-            onExpand={this.onSelect}
+            onExpand={this.onExpand}
           >
               {this.renderTreeNodes(treeData)}
           </Tree>

@@ -61,29 +61,47 @@ class teamQuery extends React.Component {
                     return obj;
                 });
                 this.setState({
-                    treeDataProps: treeDataProps.map(item => {
-                        if(item.key === key) {
-                            item.children = treeData;
-                        }
-                        return item;
-                    })
+                    treeDataProps: findKey(key, treeDataProps, treeData)
                 });
                 hasMsg();
             });
         }
-    };
-    treeClickFn = (keys) => {
-        this.setState({
-            treeKey: keys[0]
-        }, () => {
-            if(keys[0] && this.state.treeKey !== keys[0]) {
-                this.findUserInfo();
+        function findKey(key, data, treeData) {
+            if(Array.isArray(data)) {
+                for(let i = 0; i < data.length; i++) {
+                    if(data[i].key === key) {
+                        data[i].children = treeData;
+                    }else if(data[i].children) {
+                        findKey(key, data[i].children, treeData);
+                    }
+                }
+                return data;
             }
-        });
+        }
+    };
+    treeClickFn = (keys, type) => {
+        if(type === 'onSelect') {
+            if(keys[0] && this.state.treeKey !== keys[0]) {
+                this.setState({
+                    treeKey: keys[0]
+                }, () => {
+                    this.findUserInfo();
+                });
+            }
+        }
+        if(type === 'onExpand') {
+            let len = keys.length - 1;
+            if(keys[len] && this.state.treeKey !== keys[len]) {
+                this.setState({
+                    treeKey: keys[len]
+                }, () => {
+                    this.findUserInfo();
+                });
+            }
+        }
     };
     render() {
         const { treeDataProps } = this.state;
-        console.log('treeDataProps', treeDataProps);
         return(
             <div>
                 <Row>
@@ -99,7 +117,7 @@ class teamQuery extends React.Component {
                         }} type="primary">确认</Button>
                     </Col>
                     <Col span={24} style={{marginTop: '30px', marginLeft: '100px', marginBottom: '60px', overflow: 'hidden'}}>
-                        <TreeComponent treeDataProps={treeDataProps} treeClickFn={this.treeClickFn}/>
+                        <TreeComponent treeDataProps={treeDataProps} treeClickFn={this.treeClickFn} />
                     </Col>
                 </Row>
             </div>
