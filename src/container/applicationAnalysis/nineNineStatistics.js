@@ -20,6 +20,7 @@ import {
 } from '@redux/applicationAnalysis/nineNineStatistics';
 import {listWrapper} from 'common/js/build-list';
 import ReactEcharts from 'echarts-for-react';
+import {todayNineStatistics, dataDect} from '../../api/statisticalAnalysis';
 
 import './nineNineStatistics.css';
 
@@ -34,9 +35,57 @@ import './nineNineStatistics.css';
     }
 )
 class nineNineStatistics extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            productNameList: [],
+            countList: [],
+            nodeList: [],
+            typeList: [],
+            incomeAmountList: [],
+            nodeList2: [],
+            candyNodeLevels: {}
+        };
+    }
     componentDidMount() {
+        dataDect('candy_income_type').then(data => {
+            this.setState({
+                candyNodeLevels: data
+            });
+            todayNineStatistics().then(data => {
+                console.log('test', data);
+                let plt = [];
+                let clt = [];
+                let nodeList = [];
+                let tpLt = [];
+                let nodeList2 = [];
+                for(let i = 0; i < data.orderDetail.length; i++) {
+                    plt[i] = data.orderDetail[i].productName;
+                    clt[i] = data.orderDetail[i].count;
+                    nodeList.push({
+                        value: data.orderDetail[i].count,
+                        name: data.orderDetail[i].productName
+                    });
+                }
+                for(let i = 0; i < data.incomeDetail.length; i++) {
+                    tpLt[i] = findDsct(this.state.candyNodeLevels, data.incomeDetail[i].type);
+                    nodeList2.push({
+                        value: data.incomeDetail[i].incomeAmount,
+                        name: findDsct(this.state.candyNodeLevels, data.incomeDetail[i].type)
+                    });
+                }
+                this.setState({
+                    productNameList: [...plt],
+                    typeList: [...tpLt],
+                    countList: [...clt],
+                    nodeList: [...nodeList],
+                    nodeList2: [...nodeList2]
+                });
+            });
+        });
     }
     getOptionPieChart = () => {
+        const {productNameList, nodeList} = this.state;
         const option = {
             title: {
                 text: '今日玖佰玖统计',
@@ -52,12 +101,12 @@ class nineNineStatistics extends React.Component {
                 itemWidth: 6,
                 itemHeight: 6,
                 left: 'center',
-                data: ['A类计划', 'B类计划', 'C类计划']
+                data: productNameList
             },
-            color: ['#7C6AF2', '#FF6383', '#FF9F40'],
+            color: ['#7C6AF2', '#FF6383', '#FF9F40', '#bd3b1b', '#d8a800', '#b9d870', '#ef5c4e'],
             series: [
                 {
-                    name: '等级分布',
+                    name: '计划分布',
                     type: 'pie',
                     radius: '50%',
                     center: ['50%', '54%'],
@@ -69,11 +118,7 @@ class nineNineStatistics extends React.Component {
                             show: true
                         }
                     },
-                    data: [
-                        {value: 800, name: 'A类计划'},
-                        {value: 200, name: 'B类计划'},
-                        {value: 120, name: 'C类计划'}
-                    ],
+                    data: nodeList,
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
@@ -87,6 +132,7 @@ class nineNineStatistics extends React.Component {
         return option;
     }
     getOptionPieChart2 = () => {
+        const {typeList, nodeList2} = this.state;
         const option = {
             title: {
                 text: '今日玖佰玖利息统计',
@@ -102,7 +148,7 @@ class nineNineStatistics extends React.Component {
                 itemWidth: 6,
                 itemHeight: 6,
                 left: 'center',
-                data: ['自身收益', '层级收益', '节点收益']
+                data: typeList
             },
             color: ['#7C6AF2', '#FF6383', '#FF9F40'],
             series: [
@@ -119,11 +165,7 @@ class nineNineStatistics extends React.Component {
                             show: true
                         }
                     },
-                    data: [
-                        {value: 335, name: '自身收益'},
-                        {value: 310, name: '层级收益'},
-                        {value: 234, name: '节点收益'}
-                    ],
+                    data: nodeList2,
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
@@ -137,24 +179,45 @@ class nineNineStatistics extends React.Component {
         return option;
     }
     render() {
+        const {candyNodeLevels} = this.state;
         const fields = [{
-            field: 'buyName',
-            title: '购买人',
-            render(v, d) {
-                return `${d.buyUserRealName}-${d.buyUserMobile}`;
-            }
-        }, {
-            field: 'beneName',
-            title: '收益人',
-            render(v, d) {
-                return `${d.benefitUserRealName}-${d.benefitUserMobile}`;
-            }
-        }, {
-            field: 'type',
-            title: '收益类型',
-            type: 'select',
-            key: 'candy_income_type ',
+            field: 'createDate',
+            title: '日期',
+            type: 'datetime',
             search: true
+        }, {
+            field: 'orderDetail',
+            title: '今日总数',
+            render(v) {
+                console.log(v);
+                let amount = 0;
+                let amountStr = '';
+                for (let i = 0; i < v.length; i++) {
+                    amount += v[i].count;
+                    amountStr += v[i].productName + ':' + v[i].count + '+';
+                }
+                if(amount === 0) {
+                    return '';
+                }else {
+                    return amount + '（' + amountStr.substring(0, amountStr.length - 1) + '）';
+                }
+            }
+        }, {
+            field: 'incomeDetail',
+            title: '今日利息总量',
+            render(v) {
+                let amount = 0;
+                let amountStr = '';
+                for (let i = 0; i < v.length; i++) {
+                    amount += v[i].incomeAmount;
+                    amountStr += findDsct(candyNodeLevels, v[i].type) + ':' + v[i].incomeAmount + '+';
+                }
+                if(amount === 0) {
+                    return '';
+                }else {
+                    return amount + '（' + amountStr.substring(0, amountStr.length - 1) + '）';
+                }
+            }
         }];
         return(
             <div className="upContainer">
@@ -177,8 +240,7 @@ class nineNineStatistics extends React.Component {
                         {
                             this.props.buildList({
                                 fields,
-                                rowKey: 'id',
-                                pageCode: 610443
+                                pageCode: 610604
                             })
                         }
                     </Col>

@@ -871,6 +871,15 @@ const ROUTES = [
         path: '/BTC-finance/addressQuery',
         component: asyncComponent(() => import('container/BTC-finance/addressQuery'))
     },
+    // 散取通知人
+    {
+        path: '/BTC-finance/Notifier',
+        component: asyncComponent(() => import('container/trade/arbitrationNotifier/arbitrationNotifier'))
+    },
+    {
+        path: '/BTC-finance/Notifier/addedit',
+        component: asyncComponent(() => import('container/trade/arbitrationNotifier/arbitrationNotifier-addedit'))
+    },
     // 财务管理 -- 平台账户 -- 平台结算记录
     {
         path: '/BTC-finance/addressQuery/record',
@@ -973,6 +982,14 @@ const ROUTES = [
     {
         path: '/BTC-finance/TBunderline',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
+    },
+    {
+        path: '/BTC-finance/bordcaseError',
+        component: asyncComponent(() => import('container/BTC-finance/bordcaseError/bordcaseError'))
+    },
+    {
+        path: '/BTC-finance/bordcaseError/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-addedit'))
     },
     {
         path: '/BTC-finance/TBunderline/addedit',
@@ -1367,6 +1384,9 @@ const ROUTES = [
     {
         path: '/testDemo/toExamine',
         component: asyncComponent(() => import('container/userStatistics/userStatistics'))
+    }, {
+        path: '/teamQuery/teamQueryInfo',
+        component: asyncComponent(() => import('container/teamQuery/teamQuery'))
     },
     // 应用分析
     // 玖佰玖统计

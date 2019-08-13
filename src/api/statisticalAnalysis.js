@@ -21,3 +21,18 @@ export function dataDect(parentKey) {
 export function coinDistribution(date, symbol) {
     return fetch(610602, {date, symbol});
 }
+
+// 今日玖佰玖统计
+export function todayNineStatistics() {
+    return fetch(610603);
+}
+
+// 历史玖佰玖统计
+export function historyStatistics() {
+    return fetch(610604);
+}
+
+// 团队查询
+export function teamQueryList(loginName) {
+    return fetch(610608, {loginName});
+}

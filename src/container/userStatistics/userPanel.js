@@ -28,15 +28,16 @@ class userPanel extends React.Component {
     }
     componentDidMount() {
         userAmount(mtDate(dateFormat(new Date()), 15)).then(data => {
+            console.log('testgogog', data);
             let mAs = [];
             let aCs = [];
             let rgtCs = [];
             let tCs = [];
             for(let i = 0; i < data.length; i++) {
                 mAs[i] = data[i].date.split('-')[1] + '-' + data[i].date.split('-')[2];
-                aCs[i] = data[i].activeCount;
-                rgtCs[i] = data[i].registerCount;
-                tCs[i] = data[i].totalCount;
+                aCs[i] = data[i].activeCountToday;
+                rgtCs[i] = data[i].registerCountToday;
+                tCs[i] = data[i].totalUserCount;
             }
             this.setState({
                 mths: [...mAs],
@@ -117,11 +118,11 @@ class userPanel extends React.Component {
                     type: 'line',
                     data: activeCounts
                 },
-                // {
-                //     name: '今日活跃用户数',
-                //     type: 'line',
-                //     data: registerCounts
-                // }
+                {
+                    name: '今日活跃用户数',
+                    type: 'line',
+                    data: registerCounts
+                },
                 {
                     name: '截止今日用户数',
                     type: 'line',

@@ -209,8 +209,12 @@ import {BTCFinanceOfflineRechargeQuery} from './redux/BTC-finance/offlineRecharg
 // 提币地址
 import {BTCFinanceTBAddress} from './redux/BTC-finance/TBAddress/TBAddress';
 
+// 散取管理- 散取通知人
+import {notifier} from './redux/BTC-finance/notifier/notifier';
+
 // 线下提币
 import {BTCFinanceTBunderline} from './redux/BTC-finance/TBunderline/TBunderline';
+import {bordcaseError} from './redux/BTC-finance/bordcaseError/bordcaseError';
 import {BTCFinanceTBunderlineAddEdit} from './redux/BTC-finance/TBunderline/TBunderline-addedit';
 import {BTCFinanceTBunderlineMultiCheck} from './redux/BTC-finance/TBunderline/TBunderline-multiCheck';
 import {publicNotice} from './redux/public/notice';
@@ -425,6 +429,8 @@ export default combineReducers({
     BTCFinanceTBunderline,
     BTCFinanceTBunderlineAddEdit,
     BTCFinanceTBunderlineMultiCheck,
+    notifier,
+    bordcaseError,
     // 归集管理
     BTCFinanceGJAddress,
     BTCFinanceGJAddressAddEdit,

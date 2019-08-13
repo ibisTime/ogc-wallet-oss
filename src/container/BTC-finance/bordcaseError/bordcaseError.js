@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/BTC-finance/TBunderline/TBunderline';
+} from '@redux/BTC-finance/bordcaseError/bordcaseError';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -25,7 +25,7 @@ import fetch from 'common/js/fetch';
 let currency = '';
 @listWrapper(
     state => ({
-        ...state.BTCFinanceTBunderline,
+        ...state.bordcaseError,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -33,40 +33,40 @@ let currency = '';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class TBunderline extends React.Component {
-      componentDidMount() {
+class bordcaseError extends React.Component {
+    componentDidMount() {
         let clearParams = document.getElementById('clearParams');
         clearParams.addEventListener('click', () => {
-          currency = '';
+            currency = '';
         });
-      }
+    }
     render() {
         const fields = [{
             field: 'code',
             title: '编号',
             search: true
         }, {
-          field: 'currency',
-          title: '币种类型',
-          type: 'select',
-          pageCode: '802005',
-          params: {
-            status: '0'
-          },
-          keyName: 'symbol',
-          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-          searchName: 'symbol',
-          render: (v, data) => v,
-          search: true,
-          onChange: (v) => {
-            setTimeout(() => {
-              let clearSpan = document.querySelector('.ant-select-selection__clear');
-              clearSpan.addEventListener('click', () => {
-                currency = '';
-              });
-            }, 0);
-            currency = v;
-          }
+            field: 'currency',
+            title: '币种类型',
+            type: 'select',
+            pageCode: '802005',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            render: (v, data) => v,
+            search: true,
+            onChange: (v) => {
+                setTimeout(() => {
+                    let clearSpan = document.querySelector('.ant-select-selection__clear');
+                    clearSpan.addEventListener('click', () => {
+                        currency = '';
+                    });
+                }, 0);
+                currency = v;
+            }
         }, {
             field: 'bizType',
             title: '订单类型',
@@ -146,39 +146,36 @@ class TBunderline extends React.Component {
                     return '低风险';
                 }
             }
-        }
-        // ,
-        // }, {
-        //     field: 'status',
-        //     title: '状态',
-        //     type: 'select',
-        //     key: 'withdraw_status',
-        //     search: true
-        // },
-        //     {
-        //     field: 'approveNote',
-        //     title: '审核意见'
-        // }, {
-        //     field: 'approveUser',
-        //     title: '审核人',
-        //     render: (v, data) => {
-        //         return data.approveUserInfo ? data.approveUserInfo.loginName : '';
-        //     }
-        // }, {
-        //     field: 'approveDatetime',
-        //     title: '审核时间',
-        //     type: 'date',
-        //     rangedate: ['approveDateStart', 'approveDateEnd'],
-        //     render: dateTimeFormat,
-        //     search: true
-        // }
-        ];
+        }, {
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'withdraw_status',
+            search: true
+        },
+            {
+            field: 'approveNote',
+            title: '审核意见'
+        }, {
+            field: 'approveUser',
+            title: '审核人',
+            render: (v, data) => {
+                return data.approveUserInfo ? data.approveUserInfo.loginName : '';
+            }
+        }, {
+            field: 'approveDatetime',
+            title: '审核时间',
+            type: 'date',
+            rangedate: ['approveDateStart', 'approveDateEnd'],
+            render: dateTimeFormat,
+            search: true
+        }];
         return this.props.buildList({
             fields,
             pageCode: '802355',
             searchParams: {
                 currency,
-                status: '1'
+                status: '5'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {
@@ -186,8 +183,6 @@ class TBunderline extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是待审核的记录');
                     } else {
                         this.props.history.push(`/BTC-finance/TBunderline/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
                     }
@@ -227,4 +222,4 @@ class TBunderline extends React.Component {
     }
 }
 
-export default TBunderline;
+export default bordcaseError;
