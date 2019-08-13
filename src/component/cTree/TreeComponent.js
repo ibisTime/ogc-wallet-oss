@@ -5,7 +5,8 @@ const { TreeNode } = Tree;
 
 export default class TreeComponent extends React.Component {
     state = {
-        treeData: []
+        treeData: [],
+        expandedKeys: []
     };
     shouldComponentUpdate(nextProps) {
         if(nextProps.treeDataProps !== this.props.treeDataProps) {
@@ -13,15 +14,13 @@ export default class TreeComponent extends React.Component {
                 treeData: nextProps.treeDataProps
             });
         }
+        if(nextProps.isInitTree !== this.props.isInitTree) {
+            this.setState({
+                expandedKeys: []
+            });
+        }
         return true;
     }
-    onDragEnter = info => {
-        console.log(info);
-        // expandedKeys 需要受控时设置
-        // this.setState({
-        //   expandedKeys: info.expandedKeys,
-        // });
-    };
     onDrop = info => {
         const dropKey = info.node.props.eventKey;
         const dragKey = info.dragNode.props.eventKey;
@@ -82,6 +81,9 @@ export default class TreeComponent extends React.Component {
         this.props.treeClickFn(keys, 'onSelect');
     };
     onExpand = (keys) => {
+        this.setState({
+            expandedKeys: keys
+        });
         this.props.treeClickFn(keys, 'onExpand');
     };
     renderTreeNodes = data =>
@@ -96,12 +98,14 @@ export default class TreeComponent extends React.Component {
           return <TreeNode key={item.key} {...item} dataRef={item} />;
         }) : null;
     render() {
-        const {treeData} = this.state;
+        // 13276015867
+        const {treeData, expandedKeys} = this.state;
         return (
           <Tree
             className="draggable-tree"
             draggable
             blockNode
+            expandedKeys={expandedKeys}
             onDragEnter={this.onDragEnter}
             onDrop={this.onDrop}
             onSelect={this.onSelect}

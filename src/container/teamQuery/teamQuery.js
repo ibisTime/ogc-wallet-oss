@@ -17,7 +17,8 @@ class teamQuery extends React.Component {
         this.state = {
             userAccount: null,
             treeDataProps: '',
-            treeKey: ''
+            treeKey: '',
+            isInitTree: false
         };
     }
     findUserInfo = () => {
@@ -48,39 +49,25 @@ class teamQuery extends React.Component {
         }else {
             const key = treeKey;
             const {treeDataProps} = this.state;
-            console.log(isChildren(treeDataProps, key));
-            if(isChildren(treeDataProps, key)) {
-                const hasMsg = message.loading('');
-                teamQueryList(key).then(data => {
-                    const treeData = data.map((item, index) => {
-                        let obj = {
-                            title: `${item.loginName}---投注${item.jejuAmount}JEJU,下级${item.refereeCount}人`,
-                            key: item.loginName
-                        };
-                        if(+item.refereeCount > 0) {
-                            obj.children = [{title: '', key: item.loginName + index}];
-                        }
-                        return obj;
-                    });
+            const hasMsg = message.loading('');
+            teamQueryList(key).then(data => {
+                const treeData = Array.isArray(data) && data.map((item, index) => {
+                    let obj = {
+                        title: `${item.loginName}---投注${item.jejuAmount}JEJU,下级${item.refereeCount}人`,
+                        key: item.loginName
+                    };
+                    if(+item.refereeCount > 0) {
+                        obj.children = [{title: '', key: item.loginName + index}];
+                    }
+                    return obj;
+                });
+                if(treeData && treeData.length) {
                     this.setState({
                         treeDataProps: findKey(key, treeDataProps, treeData)
                     });
-                    hasMsg();
-                });
-            };
-        }
-        function isChildren(data, key) {
-            if(Array.isArray(data)) {
-                for(let i = 0; i < data.length; i++) {
-                    if(data[i].key === key && (data[i].children && !data[i].children[0].title)) {
-                        return true;
-                    }else if(data[i].key !== key && (data[i].children && data[i].children[0].title)) {
-                        return isChildren(data[i].children, key);
-                    }else if(data[i].key === key && !data[i].children) {
-                        return false;
-                    }
                 }
-            }
+                hasMsg();
+            });
         }
         function findKey(key, data, treeData) {
             if(Array.isArray(data)) {
@@ -117,7 +104,7 @@ class teamQuery extends React.Component {
         }
     };
     render() {
-        const { treeDataProps } = this.state;
+        const { treeDataProps, isInitTree } = this.state;
         return(
             <div>
                 <Row>
@@ -126,14 +113,15 @@ class teamQuery extends React.Component {
                         <Input placeholder="请输入用户账户" ref={(target) => { this.state.userAccount = target; }} style={{ width: '20%' }}/>
                         <Button style={{marginLeft: '20px'}} onClick={() => {
                             this.setState({
-                                treeKey: ''
+                                treeKey: '',
+                                isInitTree: !isInitTree
                             }, () => {
                                 this.findUserInfo();
                             });
                         }} type="primary">确认</Button>
                     </Col>
-                    <Col span={24} style={{marginTop: '30px', marginLeft: '100px', marginBottom: '60px', overflow: 'hidden'}}>
-                        <TreeComponent treeDataProps={treeDataProps} treeClickFn={this.treeClickFn} />
+                    <Col span={20} style={{marginTop: '30px', marginLeft: '100px', marginBottom: '60px', overflow: 'hidden'}}>
+                        <TreeComponent treeDataProps={treeDataProps} treeClickFn={this.treeClickFn} isInitTree={isInitTree}/>
                     </Col>
                 </Row>
             </div>
