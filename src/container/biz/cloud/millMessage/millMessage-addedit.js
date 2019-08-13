@@ -116,6 +116,7 @@ class CloudMessageAddedit extends DetailUtil {
                 if(!this.state.buyType) {
                     params.buySymbol2 = 'BEDN';
                 }else {
+                    delete params.priceCount2;
                     delete params.buyMixRatio;
                 }
                 return params;
