@@ -53,15 +53,14 @@ class CloudMessageAddedit extends DetailUtil {
                 return v;
             }
         }, {
-            field: 'buyMixRatio',
-            title: 'BEDN支付比例(0-1)',
-            required: !this.state.buyType,
-            help: 'BEDN的抵扣比例，比如输入0.1表示抵扣10%',
-            hidden: this.state.buyType
-        }, {
-            field: 'amount',
-            title: '每滴价格（CNY）',
+            field: 'priceCount1',
+            title: 'HEY数量（币本位）',
             required: true
+        }, {
+            field: 'priceCount2',
+            title: 'BEDN数量（币本位）',
+            required: !this.state.buyType,
+            hidden: this.state.buyType
         }, {
             field: 'daysLimit',
             title: '期限（天）',

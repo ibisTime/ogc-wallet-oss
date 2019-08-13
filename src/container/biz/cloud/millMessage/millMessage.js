@@ -51,8 +51,11 @@ class MillMessage extends React.Component {
             type: 'select',
             key: 'machine_buy_type'
         }, {
-            field: 'amount',
-            title: '每滴价格（CNY）'
+            field: 'priceCount1',
+            title: 'HEY数量（币本位）'
+        }, {
+            field: 'priceCount2',
+            title: 'BEDN数量（币本位）'
         }, {
             field: 'daysLimit',
             title: '期限（天）'
