@@ -39,7 +39,7 @@ class DropsWater extends React.Component {
     getOptionPieChart = () => {
         const option = {
             title: {
-                text: '今日玖佰玖统计',
+                text: '水滴统计',
                 x: 'center'
             },
             tooltip: {
@@ -89,7 +89,7 @@ class DropsWater extends React.Component {
     getOptionPieChart2 = () => {
         const option = {
             title: {
-                text: '今日玖佰玖利息统计',
+                text: '水滴利息统计',
                 x: 'center'
             },
             tooltip: {
@@ -138,27 +138,32 @@ class DropsWater extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'buyName',
-            title: '购买人',
-            render(v, d) {
-                return `${d.buyUserRealName}-${d.buyUserMobile}`;
-            }
+            field: 'name',
+            title: '今日新合成水滴数'
         }, {
-            field: 'beneName',
-            title: '收益人',
-            render(v, d) {
-                return `${d.benefitUserRealName}-${d.benefitUserMobile}`;
-            }
+            field: 'buySymbol',
+            title: '今日到期水滴数'
         }, {
-            field: 'type',
-            title: '收益类型',
-            type: 'select',
-            key: 'candy_income_type ',
+            field: 'minerSymbol',
+            title: '截止今日存活的水滴数'
+        }, {
+            field: 'price',
+            title: '今日复投用户数'
+        }, {
+            field: 'daysLimit',
+            title: '今日利息总量'
+        }, {
+            field: 'dailyOutput',
+            title: '截止今日利息总量'
+        }, {
+            field: 'createTime',
+            title: '日期',
+            type: 'datetime',
             search: true
         }];
         return(
           <div className="upContainer">
-              <Row>
+              <Row style={{height: '286px'}}>
                   <Col className="pieStyle" span={12}>
                       <ReactEcharts
                         option={this.getOptionPieChart()}
@@ -178,7 +183,7 @@ class DropsWater extends React.Component {
                           this.props.buildList({
                               fields,
                               rowKey: 'id',
-                              pageCode: 610443
+                              pageCode: 610503
                           })
                       }
                   </Col>
