@@ -1229,6 +1229,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/mill/rules/rules-addedit'))
     },
     {
+        path: '/mill/millUser',
+        component: asyncComponent(() => import('container/biz/mill/millUser/millUser'))
+    },
+    {
         path: '/public/community/association',
         component: asyncComponent(() => import('container/public/community/association'))
     },

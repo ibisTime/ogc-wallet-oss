@@ -12,6 +12,7 @@ class AppmanagentAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.buttons = [];
+        this.isHideTickets = true;
         if(!this.code) {
             this.buttons = [{
                 title: '保存',
@@ -27,6 +28,11 @@ class AppmanagentAddedit extends DetailUtil {
                             orderNo: param.orderNo,
                             isTop: param.isTop
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625650, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -45,6 +51,11 @@ class AppmanagentAddedit extends DetailUtil {
                             isTop: param.isTop,
                             url: param.url
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625651, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -71,6 +82,11 @@ class AppmanagentAddedit extends DetailUtil {
                             desc: param.desc,
                             company: param.company
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625652, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -91,6 +107,11 @@ class AppmanagentAddedit extends DetailUtil {
                             url: param.url,
                             company: param.company
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625653, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -122,6 +143,11 @@ class AppmanagentAddedit extends DetailUtil {
                             orderNo: param.orderNo,
                             isTop: param.isTop
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625660, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -140,6 +166,11 @@ class AppmanagentAddedit extends DetailUtil {
                             isTop: param.isTop,
                             url: param.url
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625661, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -166,6 +197,11 @@ class AppmanagentAddedit extends DetailUtil {
                             desc: param.desc,
                             company: param.company
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625662, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -184,6 +220,11 @@ class AppmanagentAddedit extends DetailUtil {
                             isTop: param.isTop,
                             url: param.url1
                         };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
                         fetch(625663, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -308,6 +349,44 @@ class AppmanagentAddedit extends DetailUtil {
             title: '次序',
             integer: true,
             required: true
+        }, {
+            field: 'ticketsFlag',
+            title: '门票是否开启',
+            type: 'select',
+            data: [{
+                'key': '1',
+                'value': '是'
+            }, {
+                'key': '0',
+                'value': '否'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            required: true,
+            onChange: (v) => {
+                if(v === '1') {
+                    this.isHideTickets = false;
+                }else {
+                    this.isHideTickets = true;
+                }
+            }
+        }, {
+            field: 'ticketsPrice',
+            title: '门票价格',
+            hidden: this.isHideTickets,
+            required: !this.isHideTickets
+        }, {
+            field: 'ticketsSymbol',
+            title: '门票币种',
+            hidden: this.isHideTickets,
+            required: !this.isHideTickets,
+            type: 'select',
+            listCode: '802007',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}'
         }, {
             field: 'isTop',
             title: '是否置顶',

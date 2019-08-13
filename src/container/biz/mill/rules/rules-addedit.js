@@ -9,6 +9,16 @@ class MillRulesEdit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.cData = {
+            ctype: getQueryString('ctype'),
+            ckey: {
+                cDate: /_date/,
+                cSymbol: /_symbol/,
+                cActivity: /_notice/,
+                cSelect: /_select/,
+                cTextarea: /_textarea/
+            }
+        };
     }
     render() {
         const fields = [{
@@ -22,11 +32,41 @@ class MillRulesEdit extends DetailUtil {
             title: '说明',
             field: 'remark',
             hidden: true
-        }, {
-            title: '数值',
-            field: 'cvalue',
-            required: true
         }];
+        if(this.cData.ctype.match(this.cData.ckey.cDate)) {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                type: 'textarate'
+            });
+        } else if(this.cData.ctype.match(this.cData.ckey.cTextarea)) {
+            fields.push({
+                title: '内容',
+                field: 'cvalue',
+                required: true,
+                type: 'textarea'
+            });
+        }else if(this.cData.ctype.match(this.cData.ckey.cSymbol) || this.cData.ctype.match(this.cData.ckey.cSelect)) {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                type: 'select',
+                listCode: '802007',
+                params: {
+                    status: '0'
+                },
+                keyName: 'symbol',
+                valueName: '{{symbol.DATA}}-{{cname.DATA}}'
+            });
+        } else {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true
+            });
+        }
         return this.buildDetail({
             fields,
             key: 'id',

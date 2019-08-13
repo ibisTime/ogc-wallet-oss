@@ -48,6 +48,32 @@ class DappManagent extends React.Component {
                 return v || '-';
             }
         }, {
+            field: 'ticketsFlag',
+            title: '门票是否开启',
+            type: 'select',
+            data: [{
+                'key': '1',
+                'value': '是'
+            }, {
+                'key': '0',
+                'value': '否'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
+        }, {
+            field: 'ticketsPrice',
+            title: '门票价格',
+            render(v) {
+                return v || '-';
+            }
+        }, {
+            field: 'ticketsSymbol',
+            title: '门票币种',
+            render(v) {
+                return v || '-';
+            }
+        }, {
             field: 'isTop',
             title: '是否置顶',
             type: 'select',
