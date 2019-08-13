@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, message, Select, Input} from 'antd';
+import {Modal, Select, Input} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -12,10 +12,14 @@ import {
 } from '@redux/mill/millUser/millUser';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, showWarnMsg, showSucMsg} from 'common/js/util';
-import {activateUser, setQ, cancelNode} from 'api/user';
+import {activateUser, setQ, millCancelNode} from 'api/user';
 import fetch from 'common/js/fetch';
 
-const {Option} = Select;
+const levelData = {
+    '0': '社区节点（低）',
+    '1': '城市节点（中）',
+    '2': '超级节点（高）'
+};
 
 @listWrapper(
   state => ({
@@ -30,7 +34,6 @@ const {Option} = Select;
 class Customer extends React.Component {
     state = {
         ...this.state,
-        visible: false,
         symbol: null,
         amountType: '',
         direction: '',
@@ -49,53 +52,56 @@ class Customer extends React.Component {
             });
         });
     }
-    machineStart = (target) => {
-        this.setState({
-            machineOrderNumStart: target.target.value
-        });
-        sessionStorage.setItem('machineOrderNumStart', target.target.value);
-    };
-    machineEnd = (target) => {
-        this.setState({
-            machineOrderNumEnd: target.target.value
-        });
-        sessionStorage.setItem('machineOrderNumEnd', target.target.value);
-    };
-    machineReset = () => {
-        this.setState({
-            machineOrderNumStart: '',
-            machineOrderNumEnd: ''
-        });
-    };
-    changeSymbol = (value) => {
-        this.setState({
-            symbol: value
-        });
-    };
     render() {
         const fields = [{
+            field: 'nodeLevel',
+            title: '节点等级',
+            type: 'select',
+            key: 'user_node_level_miner',
+            search: true,
+            render(v, d) {
+                if(+d.way === 0) {
+                    return levelData[d.nodeLevelAuto.toString()];
+                }else {
+                    return levelData[d.nodeLevelManual.toString()];
+                }
+            }
+        }, {
+            field: 'way',
+            title: '节点设置方式',
+            key: 'user_node_level_way',
+            type: 'select'
+        }, {
             field: 'nickname',
             title: '昵称',
-            search: true
+            render(v, d) {
+                return d.user && d.user.nickname;
+            }
         }, {
             field: 'mobile',
             title: '手机号',
-            search: true
+            render(v, d) {
+                return d.user && d.user.mobile;
+            }
         }, {
             field: 'email',
             title: '邮箱',
-            search: true
+            render(v, d) {
+                return d.user && d.user.email;
+            }
         }, {
             field: 'inviteCode',
-            title: '邀请码'
+            title: '邀请码',
+            render(v, d) {
+                return d.user && d.user.inviteCode;
+            }
         }, {
-            field: 'userReferee',
-            title: '推荐人',
+            field: 'userId',
+            title: '手机号',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
-            searchName: 'keyword',
             search: true,
             render: (v, data) => {
                 if (data.refereeUser) {
@@ -108,215 +114,72 @@ class Customer extends React.Component {
                 }
                 return '';
             },
-            required: true
+            noVisible: true
         }, {
-            field: 'nodeLevel',
-            title: '节点等级',
-            type: 'select',
-            data: [{
-                key: '0',
-                value: '共营节点（高级）'
-            }, {
-                key: '1',
-                value: '社区节点（中级）'
-            }, {
-                key: '2',
-                value: '区域节点（初级）'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            search: true,
-            render: (v, data) => {
-                let level;
-                if (v === '0') {
-                    level = '共营节点（高级）';
-                } else if (v === '1') {
-                    level = '社区节点（中级）';
-                } else if (v === '2') {
-                    level = '区域节点（初级）';
-                } else {
-                    level = '普通用户';
-                }
-                return level;
-            }
-        },
-            {
                 field: 'status',
                 title: '状态',
                 type: 'select',
                 key: 'user_status',
-                search: true
+                render(v, d) {
+                    return d.user && d.user.status;
+                }
             }, {
                 field: 'isRealname',
                 title: '是否实名',
                 render: (v, data) => {
-                    return data.realName ? '是' : '否';
+                    return data.user && data.user.realName ? '是' : '否';
                 }
-            }, {
-                field: 'machineOrderNum',
-                title: '存活水滴数'
-            }, {
-                field: 'machineOrder',
-                title: '存活水滴数',
-                search: true,
-                type: 'interval',
-                intervalParams: {
-                    start: this.machineStart,
-                    end: this.machineEnd,
-                    reset: this.machineReset
-                },
-                noVisible: true
             }, {
                 field: 'realName',
                 title: '真实姓名',
                 render: (v, data) => {
-                    return data.realName ? data.realName : '-';
+                    return data.user && data.user.realName ? data.user.realName : '-';
                 }
             }, {
-                //     field: 'tradeRate',
-                //     title: '广告费率'
-                // }, {
                 field: 'createDatetime',
                 title: '注册时间',
                 type: 'date',
                 rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
-                render: dateTimeFormat,
-                search: true
+                render: (v, d) => {
+                    return d.user && dateTimeFormat(d.user.createDatetime);
+                }
             }, {
                 field: 'lastLogin',
                 title: '最后登录时间',
-                type: 'datetime'
-            }, {
-                field: 'remark',
-                title: '备注'
+                type: 'datetime',
+                render(v, d) {
+                    return d.user && d.user.lastLogin;
+                }
             }];
-        const {symbol, amountType, direction, userIdList, title, symbolData} = this.state;
         return (
           <div>
               {
                   this.props.buildList({
                       fields,
-                      rowKey: 'userId',
-                      pageCode: '805120',
-                      singleSelect: false,
+                      rowKey: 'id',
+                      pageCode: '805353',
                       searchParam: {
                           limit: 20
                       },
                       btnEvent: {
-                          active: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let userIdList = [];
-                                  for (let i = 0, len = selectedRows.length; i < len; i++) {
-                                      if (selectedRows[i].status === '0') {
-                                          showWarnMsg(selectedRows[i].nickname + '用户已是正常状态');
-                                          userIdList = [];
-                                          return;
-                                      }
-                                      userIdList.push(selectedRows[i].userId);
-                                  }
-                                  if (userIdList.length > 0) {
-                                      Modal.confirm({
-                                          okText: '确认',
-                                          cancelText: '取消',
-                                          content: `确定允许用户登录？`,
-                                          onOk: () => {
-                                              this.props.doFetching();
-                                              return activateUser(userIdList).then(() => {
-                                                  this.props.getPageData();
-                                                  showSucMsg('操作成功');
-                                              }).catch(() => {
-                                                  this.props.cancelFetching();
-                                              });
-                                          }
-                                      });
-                                  }
-                              }
-                          },
-                          rock: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let userIdList = [];
-                                  for (let i = 0, len = selectedRows.length; i < len; i++) {
-                                      if (selectedRows[i].status === '2') {
-                                          showWarnMsg(selectedRows[i].nickname + '用户已禁止登录');
-                                          userIdList = [];
-                                          return;
-                                      }
-                                      userIdList.push(selectedRows[i].userId);
-                                  }
-                                  if (userIdList.length > 0) {
-                                      Modal.confirm({
-                                          okText: '确认',
-                                          cancelText: '取消',
-                                          content: `确定禁止用户登录？`,
-                                          onOk: () => {
-                                              this.props.doFetching();
-                                              return activateUser(userIdList).then(() => {
-                                                  this.props.getPageData();
-                                                  showSucMsg('操作成功');
-                                              }).catch(() => {
-                                                  this.props.cancelFetching();
-                                              });
-                                          }
-                                      });
-                                  }
-                              }
-                          },
-                          // 修改广告费率
-                          editAdvertisementFee: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else if (selectedRowKeys.length > 1) {
-                                  showWarnMsg('请选择一条记录');
-                              } else {
-                                  this.props.history.push(`/user/customer/editAdvertisementFee?code=${selectedRowKeys[0]}`);
-                              }
-                          },
-                          // 账户查询
-                          accountQuery: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else if (selectedRowKeys.length > 1) {
-                                  showWarnMsg('请选择一条记录');
-                              } else {
-                                  this.props.history.push(`/user/customer/accountQuery?userId=${selectedRowKeys[0]}`);
-                              }
-                          },
                           // 新增节点用户
-                          addNode: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else if (selectedRowKeys.length > 1) {
-                                  showWarnMsg('请选择一条记录');
-                              } else if (selectedRows[0].nodeLevel) {
-                                  showWarnMsg('该用户已是节点用户');
-                              } else {
-                                  this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}`);
-                              }
+                          addNode: () => {
+                              this.props.history.push(`/mill/millUser/userNode`);
                           },
                           // 修改节点用户
                           editNode: (selectedRowKeys, selectedRows) => {
                               if (!selectedRowKeys.length) {
                                   showWarnMsg('请选择记录');
-                              } else if (selectedRowKeys.length > 1) {
-                                  showWarnMsg('请选择一条记录');
-                              } else if (!selectedRows[0].nodeLevel) {
-                                  showWarnMsg('该用户还不是节点用户');
                               } else {
-                                  this.props.history.push(`/user/customer/userNode?userId=${selectedRowKeys[0]}&nodeLevel=1`);
+                                  this.props.history.push(`/mill/millUser/userNode?userId=${selectedRows[0].userId}&nodeLevel=1&id=${selectedRowKeys[0]}`);
                               }
                           },
                           // 取消节点用户
                           cancelNode: (selectedRowKeys, selectedRows) => {
                               if (!selectedRowKeys.length) {
                                   showWarnMsg('请选择记录');
-                              } else if (selectedRowKeys.length > 1) {
-                                  showWarnMsg('请选择一条记录');
-                              } else if (!selectedRows[0].nodeLevel) {
-                                  showWarnMsg('该用户不是节点用户，无需取消');
+                              } else if(selectedRows[0].way === '0') {
+                                  showWarnMsg('该状态下不能进行该操作');
                               } else {
                                   Modal.confirm({
                                       okText: '确认',
@@ -324,7 +187,7 @@ class Customer extends React.Component {
                                       content: `确定取消此用户的节点身份？`,
                                       onOk: () => {
                                           this.props.doFetching();
-                                          return cancelNode(selectedRows[0].userId).then(() => {
+                                          return millCancelNode(selectedRows[0].id).then(() => {
                                               this.props.getPageData();
                                               showSucMsg('操作成功');
                                           }).catch(() => {
@@ -332,76 +195,6 @@ class Customer extends React.Component {
                                           });
                                       }
                                   });
-                              }
-                          },
-                          // 空投
-                          ktOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '空投',
-                                      visible: true,
-                                      amountType: '0',
-                                      direction: '1',
-                                      userIdList: list
-                                  });
-                              }
-                          },
-                          // 减钱
-                          jqOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '减钱',
-                                      visible: true,
-                                      amountType: '0',
-                                      direction: '0',
-                                      userIdList: list
-                                  });
-                              }
-                          },
-                          // 锁仓
-                          scOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '锁仓',
-                                      visible: true,
-                                      amountType: '1',
-                                      direction: '1',
-                                      userIdList: list
-                                  });
-                              }
-                          },
-                          // 释放
-                          sfOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '释放',
-                                      visible: true,
-                                      amountType: '1',
-                                      direction: '0',
-                                      userIdList: list
-                                  });
-                              }
-                          },
-                          // 实名设置
-                          editIdentify: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else if (selectedRowKeys.length > 1) {
-                                  showWarnMsg('请选择一条记录');
-                              } else {
-                                  this.props.history.push(`/user/customer/identify?userId=${selectedRowKeys[0]}`);
                               }
                           }
                       },
@@ -419,68 +212,6 @@ class Customer extends React.Component {
                       }
                   })
               }
-              <Modal
-                title={`账户操作(${title})`}
-                visible={this.state.visible}
-                okText={'确定'}
-                cancelText={'取消'}
-                onOk={() => {
-                    let amount = this.refAmount.state && this.refAmount.state.value;
-                    if (!amount || !symbol) {
-                        message.warning('请填写完整', 1.5);
-                        return;
-                    }
-                    let hasMsg = message.loading('');
-                    fetch('802310', {
-                        symbol,
-                        amountType: amountType,
-                        amount,
-                        direction,
-                        userIdList
-                    }).then(() => {
-                        hasMsg();
-                        message.success('操作成功', 1, () => {
-                            this.setState({
-                                visible: false,
-                                symbol: null
-                            });
-                            this.refAmount.state.value = '';
-                            this.props.getPageData();
-                        });
-                    }, hasMsg);
-                }}
-                onCancel={() => {
-                    if (this.refAmount.state) {
-                        this.refAmount.state.value = '';
-                    }
-                    this.setState({
-                        visible: false,
-                        symbol: null
-                    });
-                }}
-              >
-                  <div style={{marginBottom: '20px'}}>
-                      <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>币种：</label>
-                      <Select style={{width: '60%'}} placeholder="请选择币种" value={symbol} onChange={this.changeSymbol}>
-                          {
-                              symbolData.map(item => (
-                                <Option value={item.symbol} key={item.id}>{item.symbol}</Option>
-                              ))
-                          }
-                      </Select>
-                  </div>
-                  <div>
-                      <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>数量：</label>
-                      <Input
-                        placeholder="请输入数量"
-                        type="number"
-                        ref={(target) => {
-                            this.refAmount = target;
-                        }}
-                        style={{width: '60%'}}
-                      />
-                  </div>
-              </Modal>
           </div>
         );
     }

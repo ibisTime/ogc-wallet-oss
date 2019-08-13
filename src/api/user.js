@@ -60,3 +60,10 @@ export function getSysUsers() {
 export function setQ(userId) {
     return fetch(805093, {userId});
 }
+
+// 水滴矿机取消用户节点身份
+export function millCancelNode(id) {
+    return fetch(805351, {
+        id
+    });
+}

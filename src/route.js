@@ -1233,6 +1233,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/mill/millUser/millUser'))
     },
     {
+        path: '/mill/millUser/userNode',
+        component: asyncComponent(() => import('container/biz/mill/millUser/userNode'))
+    },
+    {
         path: '/public/community/association',
         component: asyncComponent(() => import('container/public/community/association'))
     },
