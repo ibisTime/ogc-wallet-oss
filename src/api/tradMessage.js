@@ -9,3 +9,12 @@ export function setStartTimeAndEndTime(id, dailyStartTime, dailyEndTime) {
 export function setFrequency(id, dailyLimit) {
     return fetch(802905, {id, dailyLimit});
 }
+
+// 修改法币行情
+export function setCoinMaket(id, rate) {
+    return fetch(802038, {id, rate});
+}
+// 修改币种行情
+export function setCoinTypeMaket(id, price) {
+    return fetch(650108, {id, price});
+}

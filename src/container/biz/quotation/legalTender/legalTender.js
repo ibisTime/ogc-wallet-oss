@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/biz/quotation/legalTender';
 import {listWrapper} from 'common/js/build-list';
-import {formatDate, dateTimeFormat2} from 'common/js/util';
+import {formatDate, dateTimeFormat2, showWarnMsg} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -54,8 +54,15 @@ class legalTender extends React.Component {
                 history: () => {
                     this.props.history.push(`/quotation/legalTenderHistory`);
                 },
-                today: () => {
-                    this.props.history.push(`/quotation/legalTender`);
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        console.log(selectedRows);
+                        this.props.history.push(`/quotation/legalTender/edit?code=${selectedRows[0].id}&currency=${selectedRows[0].currency}&referCurrency=${selectedRows[0].referCurrency}&rate=${selectedRows[0].rate}`);
+                    }
                 }
             }
         });

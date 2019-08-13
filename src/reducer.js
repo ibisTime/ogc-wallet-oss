@@ -289,7 +289,7 @@ import { timerPerformance } from './redux/timerManager/timerPerformance/timerPer
 import { nineNineStatistics } from './redux/applicationAnalysis/nineNineStatistics';
 // 散取审核
 import { userStatistics } from './redux/userStatistics/userStatistics';
-
+import { InUserStatistics } from './redux/userStatistics/InUserStatistics';
 export default combineReducers({
     user,
     menu,
@@ -509,5 +509,6 @@ export default combineReducers({
     nineNineStatistics,
 
     // 散取审核
-    userStatistics
+    userStatistics,
+    InUserStatistics
 });

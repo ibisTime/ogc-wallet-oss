@@ -1,14 +1,16 @@
 import React from 'react';
-import {Row, Col, Table, Menu, Dropdown, Icon} from 'antd';
+import {Row, Col, Menu, Dropdown, Icon} from 'antd';
 import {
     showSucMsg,
     showWarnMsg,
     findDsct,
     moneyFormat,
     dateTimeFormat,
-    getUserId
+    getUserId,
+    getQueryString
 } from 'common/js/util';
 
+import fetch from 'common/js/fetch';
 import './userStatistics.css';
 import headInfoImg from './head.png';
 import walletImg from './wallet.png';
@@ -27,39 +29,14 @@ import {
 import {listWrapper} from 'common/js/build-list';
 
 import ReactEcharts from 'echarts-for-react';
-import {behaviorDistribution, dataDect, flowStatistics, bulkCollectionUserInfo, toDaysWithdrawMoneyCount, flowSelectListOrDetail} from '../../api/statisticalAnalysis';
-
-const columns = [
-    {
-        title: '发生时间',
-        dataIndex: 'payDatetime'
-    },
-    {
-        title: '变动金额',
-        dataIndex: 'payUserName'
-    },
-    {
-        title: '变动前金额',
-        dataIndex: 'payAmount'
-
-    },
-    {
-        title: '变动后金额',
-        dataIndex: 'fee'
-    },
-    {
-        title: '业务类型',
-        dataIndex: 'realAmount'
-    },
-    {
-        title: '关联订单号',
-        dataIndex: 'valueUsdPay'
-    },
-    {
-        title: '备注',
-        dataIndex: 'payUsdAmount'
-    }
-];
+import {
+            behaviorDistribution,
+            dataDect,
+            flowStatistics,
+            bulkCollectionUserInfo,
+            toDaysWithdrawMoneyCount,
+            flowSelectListOrDetail
+        } from '../../api/statisticalAnalysis';
 
 @listWrapper(
     state => ({
@@ -67,20 +44,22 @@ const columns = [
         parentCode: state.menu.subMenuCode
     }),
     {
-        setTableData, clearSearchParam, doFetching, setBtnList,
+        setTableData, clearSearchParam, doFetching,
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
 class userStatistics extends React.Component {
     constructor(props) {
         super(props);
+        this.applyUser = getQueryString('applyUser', this.props.location.search);
+        this.code = getQueryString('code', this.props.location.search);
         this.state = {
             nodeTitle: [],
             nodeList: [],
             candyNodeLevels: {},
             coinInfo: 'TOSP',
-            userId: 'U20190805162136198150294',
-            code: 'QX20190628220104902314385',
+            userId: this.applyUser,
+            code: this.code,
             userFlow: {
                 balanceAmount: 0,
                 totalJourCount: 0,
@@ -88,7 +67,9 @@ class userStatistics extends React.Component {
                 weekJourCount: 0
             },
             userName: '',
-            userMobileOrEmail: ''
+            userMobileOrEmail: '',
+            candyNodeLevelList: {},
+            userStatusList: {}
         };
         this.menu = (
             <Menu>
@@ -104,7 +85,7 @@ class userStatistics extends React.Component {
                 </Menu.Item>
                 <Menu.Item>
             <span onClick={e => this.coinType(['JEJU'])}>
-                ETH
+                JEJU
             </span>
                 </Menu.Item>
             </Menu>
@@ -112,33 +93,44 @@ class userStatistics extends React.Component {
     }
     componentDidMount() {
         // 默认显示TOSP全部的行为分布数据
-        this.sendDaysSelectList([500, 'TOSP']);
+        this.sendDaysSelectList(['', 'TOSP']);
         // 流水条数统计
         flowStatistics(this.state.coinInfo, this.state.userId).then(data => {
             this.setState({
                 userFlow: data
             });
         });
-        // 散取用户详情
-        bulkCollectionUserInfo(this.state.code).then(data => {
+        dataDect('candy_node_level').then(data => {
             this.setState({
-                userName: data.withdraw.applyUserInfo.nickname + '-' + data.withdraw.applyUserInfo.loginName,
-                userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
-                userCandyNodeLevel: data.withdraw.applyUserInfo.candyNodeLevel,
-                userStatus: data.withdraw.applyUserInfo.status,
-                userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
-                userAmount: moneyFormat(data.withdraw.amount, '', 'ETH'),
-                userFee: moneyFormat(data.withdraw.fee, '', 'ETH'),
-                userActualAmount: moneyFormat(data.withdraw.actualAmount, '', 'ETH'),
-                userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
-                userPayCardNo: data.withdraw.payCardNo.substring(0, (data.withdraw.payCardNo).length / 2 - 6) + '...',
-                userCurrency: data.withdraw.currency,
-                userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', 'ETH'),
-                userAccountNumber: data.withdraw.accountNumber
+                candyNodeLevelList: data
             });
-            flowSelectListOrDetail(this.state.userAccountNumber, '3', 1, 2).then(data => {
+            dataDect('user_status').then(data => {
+                console.log('sts', data);
                 this.setState({
-                    totalCount: data.totalCount
+                    userStatusList: data
+                });
+                // 散取用户详情
+                bulkCollectionUserInfo(this.state.code).then(data => {
+                    this.setState({
+                        userName: data.withdraw.applyUserInfo.nickname + '-' + data.withdraw.applyUserInfo.loginName,
+                        userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
+                        userCandyNodeLevel: findDsct(this.state.candyNodeLevelList, data.withdraw.applyUserInfo.candyNodeLevel),
+                        userStatus: findDsct(this.state.userStatusList, data.withdraw.applyUserInfo.status),
+                        userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
+                        userAmount: moneyFormat(data.withdraw.amount, '', 'ETH'),
+                        userFee: moneyFormat(data.withdraw.fee, '', 'ETH'),
+                        userActualAmount: moneyFormat(data.withdraw.actualAmount, '', 'ETH'),
+                        userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
+                        userPayCardNo: data.withdraw.payCardNo.substring(0, (data.withdraw.payCardNo).length / 2 - 6) + '...',
+                        userCurrency: data.withdraw.currency,
+                        userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', 'ETH'),
+                        userAccountNumber: data.withdraw.accountNumber
+                    });
+                    flowSelectListOrDetail(this.state.userAccountNumber, '1', 1, 2).then(data => {
+                        this.setState({
+                            totalCount: data.totalCount
+                        });
+                    });
                 });
             });
         });
@@ -146,7 +138,9 @@ class userStatistics extends React.Component {
         toDaysWithdrawMoneyCount(this.state.code).then(data => {
             this.setState({
                 toDayAmount: data.amount,
-                toDayIsWarnning: data.isWarnning
+                toDayIsWarnning: data.isWarnning,
+                lastWithdrawAmount: data.lastWithdraw ? moneyFormat(data.lastWithdraw.amount, '', 'ETH') : '0',
+                lastWithdrawApplyDatetime: data.lastWithdraw ? dateTimeFormat(data.lastWithdraw.applyDatetime) : '暂无记录'
             });
         });
     }
@@ -234,7 +228,6 @@ class userStatistics extends React.Component {
     }
     notAdopt = () => {
        const inputRmk = this.inputRmk.value;
-       console.log('NoinputRmk', inputRmk);
        let param = [];
         param.approveResult = '0';
         param.codeList = [this.state.code];
@@ -242,19 +235,33 @@ class userStatistics extends React.Component {
         param.approveNote = inputRmk;
         fetch(802352, param).then(() => {
             showSucMsg('操作成功');
-            setTimeout(() => {
-                this.props.history.go(-1);
-            }, 1000);
+            this.props.history.go(-1);
         });
     }
     adopt = () => {
         const inputRmk = this.inputRmk.value;
-        console.log('inputRmk', inputRmk);
+        let param = [];
+        param.approveResult = '1';
+        param.codeList = [this.state.code];
+        param.approveUser = getUserId();
+        param.approveNote = inputRmk;
+        fetch(802352, param).then(() => {
+            showSucMsg('操作成功');
+            this.props.history.go(-1);
+        });
+    }
+    runBack = () => {
+        this.props.history.go(-1);
+    }
+    selectFlowInList = () => {
+        const {userAccountNumber} = this.state;
+        this.props.history.push(`/BTC-finance/TBunderline/inUserStatistics?userAccountNumber=${userAccountNumber}`);
     }
     render() {
         const {
             userFlow,
             userName,
+            coinInfo,
             userMobileOrEmail,
             userCandyNodeLevel,
             userStatus,
@@ -269,9 +276,10 @@ class userStatistics extends React.Component {
             totalCount,
             toDayAmount,
             toDayIsWarnning,
-            userAccountNumber
+            userAccountNumber,
+            lastWithdrawAmount,
+            lastWithdrawApplyDatetime
         } = this.state;
-        console.log('jasdasd', userAccountNumber);
         const fields = [{
             field: 'createDatetime',
             title: '发生时间',
@@ -377,7 +385,7 @@ class userStatistics extends React.Component {
                         <div className="sendRmk">
                             <textarea ref={input => this.inputRmk = input} placeholder="请输入备注"></textarea>
                             <div className="box">
-                                <div className="btnGray">返回</div>
+                                <div className="btnGray" onClick={this.runBack}>返回</div>
                                 <div className="btnGray" style={{marginLeft: '20px', marginRight: '20px'}} onClick={this.notAdopt}>不通过</div>
                                 <div className="btnGray" style={{background: 'rgba(23,145,255,1)', color: '#FFFFFF', border: '0px'}} onClick={this.adopt}>通过</div>
                             </div>
@@ -387,7 +395,7 @@ class userStatistics extends React.Component {
                 <span className="bulkCollectionTitle">
                     <Dropdown overlay={this.menu}>
                         <span className="ant-dropdown-link">
-                          资产分析 <Icon type="down" />
+                            资产分析 <span>{coinInfo}</span><Icon type="down" />
                         </span>
                     </Dropdown>
                 </span>
@@ -406,14 +414,14 @@ class userStatistics extends React.Component {
                                     <br />
                                     <span>流水总计<b> {userFlow.totalJourCount} </b>条</span>
                                     <br />
-                                    <span>钱包状态：<label style={{color: '#02B715'}}>{userFlow.accountStatus}</label></span>
+                                    <span>钱包状态：<label style={{color: '#02B715'}}>{userFlow.accountStatus === '0' ? '正常' : (userFlow.accountStatus === '1' ? '程序锁定' : '人工锁定')}</label></span>
                                     <br />
                                     <span>1周内发生 <b> {userFlow.weekJourCount} </b>次流水变动</span>
                                 </div>
                             </Col>
                             <Col span={16}>
                                 <div className="applicantStatistics" style={{height: '300px', paddingTop: '28px'}}>
-                                    <div className="headerTab" onClick={ e => this.sendDaysSelectList([500, this.state.coinInfo])}>全部</div>
+                                    <div className="headerTab" onClick={ e => this.sendDaysSelectList(['', this.state.coinInfo])}>全部</div>
                                     <div className="headerTabOut" onClick={ e => this.sendDaysSelectList([1, this.state.coinInfo])}>今日</div>
                                     <div className="headerTabOut" style={{left: '320px'}} onClick={ e => this.sendDaysSelectList([3, this.state.coinInfo])}>近三日</div>
                                     <div className="headerTabOut" style={{left: '390px'}} onClick={ e => this.sendDaysSelectList([7, this.state.coinInfo])}>近七日</div>
@@ -438,7 +446,7 @@ class userStatistics extends React.Component {
                             <Col span={8}>
                                 <span style={{color: '#999999'}}>最近一次提币数量为</span>
                                 <br />
-                                <strong className="euotaLine" style={{fontSize: '20px'}}>100000.006 BTC</strong>
+                                <strong className="euotaLine" style={{fontSize: '20px'}}>{lastWithdrawAmount + ' ' + userCurrency}</strong>
                                 <div className="lineRightIcon" style={{right: '30px'}}></div>
                             </Col>
                             <Col span={8}>
@@ -455,10 +463,10 @@ class userStatistics extends React.Component {
                         </Row>
                         <Row style={{marginTop: '12px'}}>
                             <Col span={8}>
-                                <span style={{color: '#999999'}}>2019-07-30 12:00:00</span>
+                                <span style={{color: '#999999'}}>{lastWithdrawApplyDatetime}</span>
                             </Col>
                             <Col span={8}>
-                                <span style={{color: '#1791FF'}}>查看已对帐流水</span>
+                                <span style={{color: '#1791FF'}} onClick={this.selectFlowInList}>查看已对帐流水</span>
                             </Col>
                             <Col span={8}>
                             </Col>
@@ -475,7 +483,8 @@ class userStatistics extends React.Component {
                                 searchParams: {
                                     accountNumber: userAccountNumber,
                                     status: '1'
-                                }
+                                },
+                                buttons: this.buttons
                             }) : ''
                         }
                     </Col>

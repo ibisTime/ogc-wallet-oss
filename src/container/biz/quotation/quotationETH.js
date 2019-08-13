@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/biz/quotation/quotationETH';
 import {listWrapper} from 'common/js/build-list';
-import {formatDate} from 'common/js/util';
+import {formatDate, showWarnMsg} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -60,8 +60,15 @@ class QuotationETH extends React.Component {
                     console.log('123');
                     this.props.history.push(`/quotation/quotationETH`);
                 },
-                history: () => {
-                    this.props.history.push(`/quotation/quotationETHHistory`);
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        console.log(selectedRows);
+                        this.props.history.push(`/quotation/quotationETH/edit?code=${selectedRows[0].id}&symbol=${selectedRows[0].symbol}&referCurrency=${selectedRows[0].referCurrency}&lastPrice=${selectedRows[0].lastPrice}`);
+                    }
                 }
             }
         });

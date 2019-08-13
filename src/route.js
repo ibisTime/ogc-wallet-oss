@@ -585,6 +585,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
     },
     {
+        path: '/quotation/quotationETH/edit',
+        component: asyncComponent(() => import('container/biz/quotation/quotationETH-edit'))
+    },
+    {
         path: '/quotation/quotationETHHistory',
         component: asyncComponent(() => import('container/biz/quotation/quotationETHHistory'))
     },
@@ -600,6 +604,10 @@ const ROUTES = [
     {
         path: '/quotation/legalTender',
         component: asyncComponent(() => import('container/biz/quotation/legalTender/legalTender'))
+    },
+    {
+        path: '/quotation/legalTender/edit',
+        component: asyncComponent(() => import('container/biz/quotation/legalTender/legalTender-edit'))
     },
     {
         path: '/quotation/legalTenderHistory',
@@ -986,6 +994,10 @@ const ROUTES = [
     {
         path: '/BTC-finance/TBunderline/userStatistics',
         component: asyncComponent(() => import('container/userStatistics/userStatistics'))
+    },
+    {
+        path: '/BTC-finance/TBunderline/inUserStatistics',
+        component: asyncComponent(() => import('container/userStatistics/InUserStatistics'))
     },
     {
         path: '/BTC-finance/bordcaseError',
