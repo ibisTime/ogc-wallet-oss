@@ -21,18 +21,6 @@ class MillMessageAddedit extends DetailUtil {
             title: '矿机编号',
             hidden: !this.view
         }, {
-            field: 'buySymbol',
-            title: '购买币种',
-            required: true,
-            value: 'USDT',
-            readonly: true
-        }, {
-            field: 'minerSymbol',
-            title: '出矿币种',
-            required: true,
-            value: 'WIS',
-            readonly: true
-        }, {
             field: 'type',
             title: '矿机类型',
             key: 'miner_type',
@@ -44,7 +32,7 @@ class MillMessageAddedit extends DetailUtil {
             required: true
         }, {
             field: 'price',
-            title: '单价（币本位）',
+            title: '单价（USDT币本位）',
             required: true
         }, {
             field: 'daysLimit',
@@ -52,7 +40,7 @@ class MillMessageAddedit extends DetailUtil {
             required: true
         }, {
             field: 'dailyOutput',
-            title: '日收益',
+            title: '日收益（WIS）',
             required: true
         }, {
             field: 'orderNo',
@@ -92,7 +80,6 @@ class MillMessageAddedit extends DetailUtil {
             editCode: '610502',
             detailCode: '610505',
             beforeSubmit: (params) => {
-                params.dailyOutput = (+params.dailyOutput / 100).toFixed(4);
                 params.buySymbol1 = 'HEY';
                 if(!this.state.buyType) {
                     params.buySymbol2 = 'BEDN';
