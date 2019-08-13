@@ -67,7 +67,6 @@ export default class ListComponent extends React.Component {
         });
     }
     buildList = (options) => {
-        console.log(options);
         this.options = {
             ...this.options,
             ...options
