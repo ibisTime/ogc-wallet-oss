@@ -48,23 +48,39 @@ class teamQuery extends React.Component {
         }else {
             const key = treeKey;
             const {treeDataProps} = this.state;
-            const hasMsg = message.loading('');
-            teamQueryList(key).then(data => {
-                const treeData = data.map((item, index) => {
-                    let obj = {
-                        title: `${item.loginName}---投注${item.jejuAmount}JEJU,下级${item.refereeCount}人`,
-                        key: item.loginName
-                    };
-                    if(+item.refereeCount > 0) {
-                        obj.children = [{title: '', key: item.loginName + index}];
+            console.log(isChildren(treeDataProps, key));
+            if(isChildren(treeDataProps, key)) {
+                const hasMsg = message.loading('');
+                teamQueryList(key).then(data => {
+                    const treeData = data.map((item, index) => {
+                        let obj = {
+                            title: `${item.loginName}---投注${item.jejuAmount}JEJU,下级${item.refereeCount}人`,
+                            key: item.loginName
+                        };
+                        if(+item.refereeCount > 0) {
+                            obj.children = [{title: '', key: item.loginName + index}];
+                        }
+                        return obj;
+                    });
+                    this.setState({
+                        treeDataProps: findKey(key, treeDataProps, treeData)
+                    });
+                    hasMsg();
+                });
+            };
+        }
+        function isChildren(data, key) {
+            if(Array.isArray(data)) {
+                for(let i = 0; i < data.length; i++) {
+                    if(data[i].key === key && (data[i].children && !data[i].children[0].title)) {
+                        return true;
+                    }else if(data[i].key !== key && (data[i].children && data[i].children[0].title)) {
+                        return isChildren(data[i].children, key);
+                    }else if(data[i].key === key && !data[i].children) {
+                        return false;
                     }
-                    return obj;
-                });
-                this.setState({
-                    treeDataProps: findKey(key, treeDataProps, treeData)
-                });
-                hasMsg();
-            });
+                }
+            }
         }
         function findKey(key, data, treeData) {
             if(Array.isArray(data)) {

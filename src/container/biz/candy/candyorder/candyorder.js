@@ -115,7 +115,8 @@ class Candyorder extends React.Component {
               {
                   this.props.buildList({
                       fields,
-                      pageCode: this.state.pageCodeTdOrHy
+                      pageCode: this.state.pageCodeTdOrHy,
+                      marginTop: 60
                   })
               }
           </div>

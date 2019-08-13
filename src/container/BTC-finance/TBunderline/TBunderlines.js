@@ -163,6 +163,7 @@ class TBunderline extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '802355',
+            singleSelect: false,
             searchParams: {
                 currency,
                 statusList: ['3', '4']
@@ -182,8 +183,6 @@ class TBunderline extends React.Component {
                 sp: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
                     } else if (selectedRows[0].status !== '3') {
                         showWarnMsg('不是可广播的记录');
                     } else {
@@ -194,8 +193,18 @@ class TBunderline extends React.Component {
                             onOk: () => {
                                 this.props.doFetching();
                                 let params = {};
-                                params.code = selectedRowKeys[0];
+                                params.codeList = [];
                                 params.approveUser = getUserId();
+                                let userIdList = [];
+                                for(let i = 0, len = selectedRows.length; i < len; i++) {
+                                    if(selectedRows[i].status === '0') {
+                                        showWarnMsg(selectedRows[i].nickname + '用户已是正常状态');
+                                        userIdList = [];
+                                        return;
+                                    }
+                                    userIdList.push(selectedRows[i].code);
+                                }
+                                params.codeList = [...userIdList];
                                 this.props.doFetching();
                                 fetch(802353, params).then(() => {
                                     showSucMsg('操作成功');
@@ -207,6 +216,43 @@ class TBunderline extends React.Component {
                             }
                         });
                         // this.props.history.push(`/BTC-finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
+                    }
+                },
+                spRetrial: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRows[0].status !== '3') {
+                        showWarnMsg('不是可广播的记录');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定重审？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                let params = {};
+                                params.codeList = [];
+                                params.approveUser = getUserId();
+                                let userIdList = [];
+                                for(let i = 0, len = selectedRows.length; i < len; i++) {
+                                    if(selectedRows[i].status === '0') {
+                                        showWarnMsg(selectedRows[i].nickname + '用户已是正常状态');
+                                        userIdList = [];
+                                        return;
+                                    }
+                                    userIdList.push(selectedRows[i].code);
+                                }
+                                params.codeList = [...userIdList];
+                                this.props.doFetching();
+                                fetch(802357, params).then(() => {
+                                    showSucMsg('操作成功');
+                                    this.props.cancelFetching();
+                                    setTimeout(() => {
+                                        this.props.getPageData();
+                                    }, 1000);
+                                }).catch(this.props.cancelFetching);
+                            }
+                        });
                     }
                 }
             }

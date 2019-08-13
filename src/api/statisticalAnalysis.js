@@ -36,3 +36,28 @@ export function historyStatistics() {
 export function teamQueryList(loginName) {
     return fetch(610608, {loginName});
 }
+
+// 行为分布
+export function behaviorDistribution(days, symbol, userId) {
+    return fetch(610607, {days, symbol, userId});
+}
+
+// 流水条数统计
+export function flowStatistics(currency, userId) {
+    return fetch(610606, {currency, userId});
+}
+
+// 散取用户详情
+export function bulkCollectionUserInfo(code) {
+    return fetch(802356, {code});
+}
+
+// 今日已提币数量
+export function toDaysWithdrawMoneyCount(code) {
+    return fetch(610605, {code});
+}
+
+// 流水查询接口（今日历史组合查询）
+export function flowSelectListOrDetail(accountNumber, status, start, limit) {
+    return fetch(610609, {accountNumber, status, start, limit});
+}

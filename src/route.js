@@ -984,6 +984,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
     },
     {
+        path: '/BTC-finance/TBunderline/userStatistics',
+        component: asyncComponent(() => import('container/userStatistics/userStatistics'))
+    },
+    {
         path: '/BTC-finance/bordcaseError',
         component: asyncComponent(() => import('container/BTC-finance/bordcaseError/bordcaseError'))
     },
@@ -1380,11 +1384,7 @@ const ROUTES = [
         path: '/userStatistics/currencyStatistics',
         component: asyncComponent(() => import('container/userStatistics/currencyStatistics'))
     },
-    // 提币审核
     {
-        path: '/testDemo/toExamine',
-        component: asyncComponent(() => import('container/userStatistics/userStatistics'))
-    }, {
         path: '/teamQuery/teamQueryInfo',
         component: asyncComponent(() => import('container/teamQuery/teamQuery'))
     },

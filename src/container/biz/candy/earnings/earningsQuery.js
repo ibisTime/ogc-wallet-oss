@@ -183,7 +183,7 @@ class EarningsQuery extends React.Component {
                       fields,
                       rowKey: 'id',
                       pageCode: this.state.pageCodeTdOrHy,
-                      marginTop: 50
+                      marginTop: 80
                   })
               }
           </div>

@@ -287,6 +287,8 @@ import { timerMonitor } from './redux/timerManager/timerMonitor/timerMonitor';
 import { timerPerformance } from './redux/timerManager/timerPerformance/timerPerformance';
 // 统计分析-- 应用分析 - 玖佰玖统计
 import { nineNineStatistics } from './redux/applicationAnalysis/nineNineStatistics';
+// 散取审核
+import { userStatistics } from './redux/userStatistics/userStatistics';
 
 export default combineReducers({
     user,
@@ -504,5 +506,8 @@ export default combineReducers({
 
     // 应用分析
     // 玖佰玖统计
-    nineNineStatistics
+    nineNineStatistics,
+
+    // 散取审核
+    userStatistics
 });
