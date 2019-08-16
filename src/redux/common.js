@@ -7,7 +7,7 @@ export const commListState = {
     searchData: {},
     pagination: {
         current: 1,
-        pageSize: 20,
+        pageSize: 10,
         total: 0
     }
 };

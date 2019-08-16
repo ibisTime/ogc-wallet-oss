@@ -54,7 +54,6 @@ class InvestFlow extends React.Component {
             title: '收益',
             field: 'totalAmount',
             render: (v, data) => {
-                console.log(data.symbol);
                 return moneyFormat(v.toString(), '', this.symbol);
             }
         }, {

@@ -103,6 +103,7 @@ class Customer extends React.Component {
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             search: true,
+            searchName: 'keyword',
             render: (v, data) => {
                 if (data.refereeUser) {
                     let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;

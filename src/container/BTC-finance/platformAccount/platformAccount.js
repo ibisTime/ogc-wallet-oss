@@ -38,7 +38,6 @@ class PlatformAccount extends React.Component {
                 // type: 'B'
             })
         ]).then(([res1]) => {
-            console.log(res1);
             this.setState({
                 data: res1,
                 data1: res1.totalUnSettleAmount

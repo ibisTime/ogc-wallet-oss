@@ -26,7 +26,6 @@ class AppmanagentAddedit extends DetailUtil {
                             orderNo: param.orderNo,
                             isTop: param.isTop
                         };
-                        console.log(param);
                         fetch(625650, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {
@@ -71,7 +70,6 @@ class AppmanagentAddedit extends DetailUtil {
                             orderNo: param.orderNo,
                             isTop: param.isTop
                         };
-                        console.log(param);
                         fetch(625452, data).then(() => {
                             showSucMsg('操作成功');
                             setTimeout(() => {

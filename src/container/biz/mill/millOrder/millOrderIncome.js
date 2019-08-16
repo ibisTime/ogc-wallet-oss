@@ -88,7 +88,7 @@ class MillOrderIncome extends React.Component {
                 code: 'bank',
                 name: '返回',
                 handler: () => {
-                    window.history.go(-1);
+                    this.props.history.goBack();
                 }
             }]
         });

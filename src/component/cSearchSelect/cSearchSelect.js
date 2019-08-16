@@ -124,7 +124,7 @@ export default class CSearchSelect extends React.Component {
     let { params, keyName, field, searchName } = this.props;
     let param = params ? {...params} : {};
     param.start = 1;
-    param.limit = 20;
+    param.limit = params && params.limit ? params.limit : 20;
     let key = searchName || keyName || field;
     if (!this.hasInitVal) {
       key = keyName || field;

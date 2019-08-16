@@ -34,7 +34,6 @@ class PaymentAddedit extends DetailUtil {
               type: '0'
             },
             onChange: (v, data) => {
-                console.log(data, v);
                 if(Array.isArray(data)) {
                   data.forEach(item => {
                     if(item.bankCode === v) {

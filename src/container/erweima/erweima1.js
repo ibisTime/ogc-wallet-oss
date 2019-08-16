@@ -33,7 +33,6 @@ export default class SelectSizesDemo extends React.Component {
                 arr.push(<Option
                     key={data.list[i].code}>{`${data.list[i].code}-${data.list[i].customerName || data.list[i].userName}`}</Option>);
             }
-            console.log(arr);
             this.setState({
                 children: arr,
                 data: data.list

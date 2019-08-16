@@ -9,30 +9,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use('/api', function (req, res) {
-   //  //研发
-   // var url = 'http://3.1.207.21:2801/forward-service/api';
-   // var url = 'http://120.26.6.213:5801/forward-service/api';
-    //测试
-  // var url = 'http://120.26.6.213:6801/forward-service/api';
     //金米研发
-   let url = 'http://m.jinmidev.hichengdai.com/api';
-    //金米测试
+    let url = 'http://m.jinmidev.hichengdai.com/api';
+    // 金米测试
     // let url = 'http://m.jinmitest.hichengdai.com/api';
-   // 正式
-   // let url = 'https://m.jinmi.club/api';
-    //金米研发
-    // let url = 'http://120.26.6.213:6801/forward-service/api';
-    // ticp研发
-    // let url = 'http://api.ticptoken.com/';
-    //测试
-    //  var url = 'http://120.26.6.213:6801/forward-service/api';
-    // 客户
-    // var url = 'http://47.97.202.123:2801/forward-service/api';
-// 正式
-    // var url = 'http://3.1.207.21:2701/forward-service/api';
-    
-    // ticp
-    // let url = 'http://api.ticptoken.com/';
+    // 金米预发布
+    // let url = 'http://m.jinmistage.hichengdai.com/api';
+    // 金米线上
+    // let url = 'http://m.jinmi.club/api';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);

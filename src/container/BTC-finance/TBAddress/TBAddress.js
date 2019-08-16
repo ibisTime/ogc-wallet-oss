@@ -158,7 +158,6 @@ class TBAddress extends React.Component {
                 },
                 flowQuery: (selectedRowKeys, selectedRows) => {
                     let type = getCoinType(selectedRows[0].symbol);
-                    console.log(type);
                     //    0 ETH  1 BTC  2 WAN  3 USDT  4 TRX
                     //    OT  ETHTOKEN   2T WANTOKEN
                     if(!selectedRowKeys.length) {

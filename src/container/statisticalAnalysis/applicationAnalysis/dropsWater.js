@@ -1,12 +1,5 @@
 import React from 'react';
 import {Row, Col, Table} from 'antd';
-import {
-    showSucMsg,
-    showWarnMsg,
-    findDsct,
-    mtDate,
-    dateFormat
-} from 'common/js/util';
 
 import {
     setTableData,
@@ -20,6 +13,7 @@ import {
 } from '@redux/statisticalAnalysis/dropsWater';
 import {listWrapper} from 'common/js/build-list';
 import ReactEcharts from 'echarts-for-react';
+import fetch from 'common/js/fetch';
 
 import './nineNineStatistics.css';
 
@@ -34,12 +28,32 @@ import './nineNineStatistics.css';
   }
 )
 class DropsWater extends React.Component {
+    state = {
+        pieChartData: [],
+        pieChartName: [],
+        pieChart2Data: [],
+        pieChart2Name: []
+    };
     componentDidMount() {
+        fetch('610570').then(data => {
+            let pieChartName = data.map(item => item.name);
+            Array.isArray(data) && this.setState({
+                pieChartData: data,
+                pieChartName
+            });
+        });
+        fetch('610571').then(data => {
+            let pieChart2Name = data.map(item => item.name);
+            Array.isArray(data) && this.setState({
+                pieChart2Data: data,
+                pieChart2Name
+            });
+        });
     }
     getOptionPieChart = () => {
         const option = {
             title: {
-                text: '水滴统计',
+                text: '当前存活矿机统计',
                 x: 'center'
             },
             tooltip: {
@@ -52,7 +66,7 @@ class DropsWater extends React.Component {
                 itemWidth: 6,
                 itemHeight: 6,
                 left: 'center',
-                data: ['A类计划', 'B类计划', 'C类计划']
+                data: this.state.pieChartName
             },
             color: ['#7C6AF2', '#FF6383', '#FF9F40'],
             series: [
@@ -69,11 +83,7 @@ class DropsWater extends React.Component {
                             show: true
                         }
                     },
-                    data: [
-                        {value: 800, name: 'A类计划'},
-                        {value: 200, name: 'B类计划'},
-                        {value: 120, name: 'C类计划'}
-                    ],
+                    data: this.state.pieChartData,
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
@@ -85,11 +95,11 @@ class DropsWater extends React.Component {
             ]
         };
         return option;
-    }
+    };
     getOptionPieChart2 = () => {
         const option = {
             title: {
-                text: '水滴利息统计',
+                text: '今日新增矿机统计',
                 x: 'center'
             },
             tooltip: {
@@ -102,7 +112,7 @@ class DropsWater extends React.Component {
                 itemWidth: 6,
                 itemHeight: 6,
                 left: 'center',
-                data: ['自身收益', '层级收益', '节点收益']
+                data: this.state.pieChart2Name
             },
             color: ['#7C6AF2', '#FF6383', '#FF9F40'],
             series: [
@@ -119,11 +129,7 @@ class DropsWater extends React.Component {
                             show: true
                         }
                     },
-                    data: [
-                        {value: 335, name: '自身收益'},
-                        {value: 310, name: '层级收益'},
-                        {value: 234, name: '节点收益'}
-                    ],
+                    data: this.state.pieChart2Data,
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
@@ -138,28 +144,33 @@ class DropsWater extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'name',
-            title: '今日新合成水滴数'
+            field: 'dateTime',
+            title: '日期',
+            type: 'date',
+            rangedate: ['dateTimeStart', 'dateTimeEnd'],
+            search: true
         }, {
-            field: 'buySymbol',
-            title: '今日到期水滴数'
+            field: 'createQuantity',
+            title: '今日新增矿机数'
         }, {
-            field: 'minerSymbol',
-            title: '截止今日存活的水滴数'
+            field: 'endQuantity',
+            title: '今日到期矿机数'
         }, {
-            field: 'price',
-            title: '今日复投用户数'
+            field: 'liveQuantity',
+            title: '今日存活矿机数'
         }, {
-            field: 'daysLimit',
-            title: '今日利息总量'
+            field: 'minerCount',
+            title: '今日矿机收益总量(WIS)'
         }, {
-            field: 'dailyOutput',
-            title: '截止今日利息总量'
+            field: 'inviteCount',
+            title: '今日层级收益总量(USDT)'
+        }, {
+            field: 'nodeCount',
+            title: '今日节点收益总量(USDT)'
         }, {
             field: 'createTime',
-            title: '日期',
-            type: 'datetime',
-            search: true
+            title: '统计时间',
+            type: 'datetime'
         }];
         return(
           <div className="upContainer">
@@ -183,7 +194,7 @@ class DropsWater extends React.Component {
                           this.props.buildList({
                               fields,
                               rowKey: 'id',
-                              pageCode: 610503
+                              pageCode: 610572
                           })
                       }
                   </Col>

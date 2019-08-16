@@ -40,6 +40,9 @@ class MillOrder extends React.Component {
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             search: true,
+            params: {
+                limit: 1000
+            },
             render: (v, data) => {
                 if (data.refereeUser) {
                     let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
