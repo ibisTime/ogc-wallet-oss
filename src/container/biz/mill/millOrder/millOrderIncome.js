@@ -33,7 +33,7 @@ class MillOrderIncome extends React.Component {
     render() {
         const fields = [{
             field: 'loginName',
-            title: '购买用户',
+            title: '收益用户',
             render(v, d) {
                 return d.user && d.user.loginName;
             }

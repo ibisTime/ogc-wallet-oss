@@ -149,7 +149,7 @@ class Customer extends React.Component {
                 title: '最后登录时间',
                 type: 'datetime',
                 render(v, d) {
-                    return d.user && d.user.lastLogin;
+                    return d.user && dateTimeFormat(d.user.lastLogin);
                 }
             }];
         return (

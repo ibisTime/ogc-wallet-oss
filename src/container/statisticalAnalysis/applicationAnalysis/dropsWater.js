@@ -13,6 +13,7 @@ import {
 } from '@redux/statisticalAnalysis/dropsWater';
 import {listWrapper} from 'common/js/build-list';
 import ReactEcharts from 'echarts-for-react';
+import {moneyFormat} from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 import './nineNineStatistics.css';
@@ -160,13 +161,22 @@ class DropsWater extends React.Component {
             title: '今日存活矿机数'
         }, {
             field: 'minerCount',
-            title: '今日矿机收益总量(WIS)'
+            title: '今日矿机收益总量(WIS)',
+            render(v) {
+                return (v || v === 0) && moneyFormat(v, '', 'WIS');
+            }
         }, {
             field: 'inviteCount',
-            title: '今日层级收益总量(USDT)'
+            title: '今日层级收益总量(USDT)',
+            render(v) {
+                return (v || v === 0) && moneyFormat(v, '', 'USDT');
+            }
         }, {
             field: 'nodeCount',
-            title: '今日节点收益总量(USDT)'
+            title: '今日节点收益总量(USDT)',
+            render(v) {
+                return (v || v === 0) && moneyFormat(v, '', 'USDT');
+            }
         }, {
             field: 'createTime',
             title: '统计时间',
