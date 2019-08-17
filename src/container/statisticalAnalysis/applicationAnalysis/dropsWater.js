@@ -177,10 +177,6 @@ class DropsWater extends React.Component {
             render(v) {
                 return (v || v === 0) && moneyFormat(v, '', 'USDT');
             }
-        }, {
-            field: 'createTime',
-            title: '统计时间',
-            type: 'datetime'
         }];
         return(
           <div className="upContainer">
