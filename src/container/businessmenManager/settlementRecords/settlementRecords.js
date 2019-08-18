@@ -46,6 +46,9 @@ class settlementRecords extends React.Component {
             },
             search: true
         }, {
+            title: '币种',
+            field: 'settleSymbol'
+        }, {
             title: '结算总额',
             field: 'settleAmount',
             render: (v, d) => {

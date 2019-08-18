@@ -53,7 +53,6 @@ class nineNineStatistics extends React.Component {
                 candyNodeLevels: data
             });
             todayNineStatistics().then(data => {
-                console.log('test', data);
                 let plt = [];
                 let clt = [];
                 let nodeList = [];
@@ -86,9 +85,16 @@ class nineNineStatistics extends React.Component {
     }
     getOptionPieChart = () => {
         const {productNameList, nodeList} = this.state;
+        let waningStr = '';
+        if(productNameList.length !== 0) {
+            waningStr = '';
+        }else {
+            waningStr = '暂无数据';
+        }
         const option = {
             title: {
                 text: '今日玖佰玖统计',
+                subtext: waningStr,
                 x: 'center'
             },
             tooltip: {
@@ -133,9 +139,16 @@ class nineNineStatistics extends React.Component {
     }
     getOptionPieChart2 = () => {
         const {typeList, nodeList2} = this.state;
+        let waningStr = '';
+        if(typeList.length !== 0) {
+            waningStr = '';
+        }else {
+            waningStr = '暂无数据';
+        }
         const option = {
             title: {
-                text: '今日玖佰玖利息统计',
+                text: '昨日玖佰玖利息统计',
+                subtext: waningStr,
                 x: 'center'
             },
             tooltip: {
@@ -179,17 +192,10 @@ class nineNineStatistics extends React.Component {
         return option;
     }
     render() {
-        const {candyNodeLevels} = this.state;
         const fields = [{
-            field: 'createDate',
-            title: '日期',
-            type: 'datetime',
-            search: true
-        }, {
             field: 'orderDetail',
             title: '今日总数',
             render(v) {
-                console.log(v);
                 let amount = 0;
                 let amountStr = '';
                 for (let i = 0; i < v.length; i++) {
@@ -206,18 +212,24 @@ class nineNineStatistics extends React.Component {
             field: 'incomeDetail',
             title: '今日利息总量',
             render(v) {
+                console.log('0101', v);
                 let amount = 0;
                 let amountStr = '';
                 for (let i = 0; i < v.length; i++) {
-                    amount += v[i].incomeAmount;
-                    amountStr += findDsct(candyNodeLevels, v[i].type) + ':' + v[i].incomeAmount + '+';
+                    amount += parseFloat(v[i].incomeAmount);
+                    amountStr += (v[i].type === '0' ? '自身收益' : (v[i].type === '1' ? '推荐收益' : '团队收益')) + ':' + v[i].incomeAmount + '+';
                 }
                 if(amount === 0) {
                     return '';
                 }else {
-                    return amount + '（' + amountStr.substring(0, amountStr.length - 1) + '）';
+                    return amount.toFixed(2) + '（' + amountStr.substring(0, amountStr.length - 1) + '）';
                 }
             }
+        }, {
+            field: 'createDate',
+            title: '日期',
+            type: 'date',
+            search: true
         }];
         return(
             <div className="upContainer">

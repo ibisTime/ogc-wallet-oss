@@ -55,6 +55,11 @@
 .euotaLine{
     line-height: 40px;
 }
+.euotaLineAd{
+    display:block;
+    width: 120px;
+    word-wrap:break-word;
+}
 
 .lineRightIcon{
     position: absolute;
@@ -64,11 +69,8 @@
     height:30px;
     background:rgba(230,230,230,1);
 }
-
 .headerTab{
-    position: absolute;
-    left: 180px;
-    top:34px;
+    margin-top: 8px;
     width:56px;
     height:26px;
     line-height: 26px;
@@ -80,9 +82,7 @@
 }
 
 .headerTabOut{
-    position: absolute;
-    left: 250px;
-    top:34px;
+    margin-top: 8px;
     width:56px;
     height:26px;
     line-height: 26px;

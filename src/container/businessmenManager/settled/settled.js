@@ -54,19 +54,22 @@ class settled extends React.Component {
             },
             search: true
         }, {
-            title: 'TOSP数额',
+            title: '币种',
+            field: 'paySymbol'
+        }, {
+            title: '支付总额',
             field: 'payAmount',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
-            title: '手续费（TOSP）',
+            title: '手续费',
             field: 'fee',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');
             }
         }, {
-            title: '实到TOSP',
+            title: '实到数额',
             field: 'realAmount',
             render: (v) => {
                 return moneyFormat(v, '', 'ETH');

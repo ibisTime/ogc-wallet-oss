@@ -31,23 +31,25 @@ class EarningsQuery extends React.Component {
             name: '今日记录',
             check: false,
             handler: () => {
-                this.props.history.push(`/quotation/legalTender`);
+                this.props.history.push(`/earnings/earningsQuery`);
             }
         }, {
             code: 'toHistory',
             name: '历史记录',
             check: false,
             handler: () => {
-                this.props.history.push(`/quotation/legalTender`);
+                this.props.history.push(`/historyEarnings/historyEarningsQuery`);
             }
         }, {
             code: 'toInfo',
             name: '详情',
-            url: '/addedit'
+            handler: (e) => {
+                this.props.history.push(`/earnings/earningsQuery/addedit?v=1&code=${e[0]}`);
+            }
         }, {
-            code: 'import',
+            code: 'export',
             name: '导出',
-            url: '/import'
+            check: false
         }];
     }
     // 近期流水查询
@@ -96,12 +98,6 @@ class EarningsQuery extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'buyName',
-            title: '购买人',
-            render(v, d) {
-                return `${d.buyUserRealName}-${d.buyUserMobile}`;
-            }
-        }, {
             field: 'buyUserId',
             title: '购买人',
             type: 'select',
@@ -111,23 +107,9 @@ class EarningsQuery extends React.Component {
             searchName: 'keyword',
             search: true,
             render: (v, data) => {
-                if (data.refereeUser) {
-                    let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
-                    if (data.refereeUser.kind === 'Q') {
-                        let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
-                        return name + '(' + tmpl + ')';
-                    }
-                    return data.refereeUser.nickname + '(' + tmpl + ')';
-                }
-                return '';
+                return `${data.buyUserRealName}-${data.buyUserMobile}`;
             },
-            noVisible: true
-        }, {
-            field: 'beneName',
-            title: '收益人',
-            render(v, d) {
-                return `${d.benefitUserRealName}-${d.benefitUserMobile}`;
-            }
+            required: true
         }, {
             field: 'userId',
             title: '收益人',
@@ -138,17 +120,9 @@ class EarningsQuery extends React.Component {
             searchName: 'keyword',
             search: true,
             render: (v, data) => {
-                if (data.refereeUser) {
-                    let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
-                    if (data.refereeUser.kind === 'Q') {
-                        let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
-                        return name + '(' + tmpl + ')';
-                    }
-                    return data.refereeUser.nickname + '(' + tmpl + ')';
-                }
-                return '';
+                return `${data.benefitUserRealName}-${data.benefitUserMobile}`;
             },
-            noVisible: true
+            required: true
         }, {
             field: 'type',
             title: '收益类型',
@@ -173,17 +147,12 @@ class EarningsQuery extends React.Component {
         }];
         return (
           <div>
-              <div className="earnings-tab">
-                  <Button htmlType="submit" className="earnings-tab-today" onClick={this.showToday}>今日记录</Button>
-                  <Button htmlType="submit" className="earnings-tab-history" onClick={this.showHistory}>历史记录</Button>
-                  <div className="clear"> </div>
-              </div>
               {
                   this.props.buildList({
                       fields,
                       rowKey: 'id',
                       pageCode: this.state.pageCodeTdOrHy,
-                      marginTop: 80
+                      buttons: this.buttons
                   })
               }
           </div>

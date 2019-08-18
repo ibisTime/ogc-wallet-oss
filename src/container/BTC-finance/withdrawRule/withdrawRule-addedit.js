@@ -51,7 +51,7 @@ class WithdrawRuleAddedit extends DetailUtil {
         }, {
             field: 'id',
             title: '编号',
-            noVisible: true
+            hidden: true
         }, {
             field: 'withdrawMin',
             title: '取现最小金额',

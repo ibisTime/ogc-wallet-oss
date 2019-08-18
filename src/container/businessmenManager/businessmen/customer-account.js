@@ -95,7 +95,10 @@ class CustomerAccount extends React.Component {
             type: 'select',
             data: getCoinList(),
             keyName: 'key',
-            valueName: 'value'
+            valueName: 'value',
+            render(v) {
+                return v;
+            }
         }, {
             field: 'accountNumber',
             title: '账号'
@@ -103,7 +106,11 @@ class CustomerAccount extends React.Component {
             field: 'amount',
             title: '余额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                if(data.currency === 'JEJU_CONSUME') {
+                    return moneyFormat(v, '', 'ETH');
+                }else {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'createDatetime',
@@ -116,8 +123,8 @@ class CustomerAccount extends React.Component {
                 rowKey: 'accountNumber',
                 pageCode: '802300',
                 searchParams: {
-                    kind: '0',
-                    userId: this.userId
+                    userId: this.userId,
+                    isSelectPlatform: '1'
                 },
                 buttons: this.buttons
             })}

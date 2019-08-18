@@ -13,7 +13,9 @@ class timePerformanceAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'type',
-            title: '类型'
+            title: '类型',
+            type: 'select',
+            key: 'schedule_log_type'
         }, {
             field: 'name',
             title: '名称'

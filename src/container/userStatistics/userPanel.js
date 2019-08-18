@@ -28,7 +28,6 @@ class userPanel extends React.Component {
     }
     componentDidMount() {
         userAmount(mtDate(dateFormat(new Date()), 15)).then(data => {
-            console.log('testgogog', data);
             let mAs = [];
             let aCs = [];
             let rgtCs = [];
@@ -116,12 +115,12 @@ class userPanel extends React.Component {
                 {
                     name: '今日新增用户数',
                     type: 'line',
-                    data: activeCounts
+                    data: registerCounts
                 },
                 {
                     name: '今日活跃用户数',
                     type: 'line',
-                    data: registerCounts
+                    data: activeCounts
                 },
                 {
                     name: '截止今日用户数',

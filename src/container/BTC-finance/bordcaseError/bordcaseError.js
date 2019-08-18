@@ -137,16 +137,6 @@ class bordcaseError extends React.Component {
             title: '申请说明',
             field: 'applyNote'
         }, {
-            title: '系统风险初判',
-            field: 'isWarnning',
-            render: (v) => {
-                if(v) {
-                    return '高风险';
-                }else {
-                    return '低风险';
-                }
-            }
-        }, {
             field: 'status',
             title: '状态',
             type: 'select',

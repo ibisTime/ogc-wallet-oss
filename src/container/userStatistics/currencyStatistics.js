@@ -60,7 +60,6 @@ class currencyStatistics extends React.Component {
     }
     getOptionColumnarChart = () => {
         const {nodeList} = this.state;
-        console.log(nodeList);
         const option = {
             title: {
                 text: '币量统计',
@@ -88,9 +87,33 @@ class currencyStatistics extends React.Component {
             xAxis: {type: 'category'},
             yAxis: {},
             series: [
-                {type: 'bar'},
-                {type: 'bar'},
-                {type: 'bar'}
+                {
+                    type: 'bar',
+                    barWidth: 32,
+                    itemStyle: {
+                        normal: {
+                            fontColor: '14px'
+                        }
+                    }
+                },
+                {
+                    type: 'bar',
+                    barWidth: 32,
+                    itemStyle: {
+                        normal: {
+                            fontColor: '14px'
+                        }
+                    }
+                },
+                {
+                    type: 'bar',
+                    barWidth: 32,
+                    itemStyle: {
+                        normal: {
+                            fontColor: '14px'
+                        }
+                    }
+                }
             ]
         };
         return option;
@@ -100,7 +123,7 @@ class currencyStatistics extends React.Component {
             <div>
                 <Row>
                     <Col span={24}>
-                        <strong style={{marginLeft: '4px'}}>请选择币种：</strong>
+                        <strong style={{marginLeft: '4px', fontSize: '18px'}}>请选择币种：</strong>
                         <Select defaultValue="TOSP" style={{ width: 120 }} onChange={this.handleChange}>
                             <Option value="TOSP">TOSP</Option>
                             <Option value="TOS">TOS</Option>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Input, Button, message} from 'antd';
+import {Row, Col, Input, Button, message, Select} from 'antd';
 import TreeComponent from 'component/cTree/TreeComponent';
 import {
     showSucMsg,
@@ -9,7 +9,34 @@ import {
     dateFormat
 } from 'common/js/util';
 
-import {teamQueryList} from '../../api/statisticalAnalysis';
+import {teamQueryList, findUserList, groupUserInfo} from '../../api/statisticalAnalysis';
+
+const { Option } = Select;
+
+let timeout;
+let currentValue;
+
+function fetch(value, callback) {
+    if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+    }
+    currentValue = value;
+
+    function fake() {
+        const datas = [];
+        findUserList(1, 15, value).then(data => {
+            data.list.forEach(r => {
+                datas.push({
+                    value: r.loginName,
+                    text: r.loginName
+                });
+            });
+            callback(datas);
+        });
+    }
+    timeout = setTimeout(fake, 300);
+}
 
 class teamQuery extends React.Component {
     constructor(props) {
@@ -18,30 +45,61 @@ class teamQuery extends React.Component {
             userAccount: null,
             treeDataProps: '',
             treeKey: '',
-            isInitTree: false
+            isInitTree: false,
+            data: [],
+            value: undefined,
+            teamUserInfo: {},
+            isShowInfo: false
         };
     }
+    handleSearch = value => {
+        if (value) {
+            fetch(value, data => this.setState({ data }));
+        } else {
+            this.setState({ data: [] });
+        }
+    };
+
+    handleChange = value => {
+        this.setState({ value });
+    };
     findUserInfo = () => {
-        const {userAccount, treeKey} = this.state;
+        const {treeKey, value} = this.state;
+        this.setState({
+            isShowInfo: true
+        });
         if(!treeKey) {
-            if(userAccount.state.value) {
-                const key = userAccount.state.value;
+            if(value) {
+                groupUserInfo(value).then(data => {
+                    this.setState({
+                        teamUserInfo: data
+                    });
+                });
+                this.setState({
+                    treeDataProps: ''
+                });
+                const key = value;
                 const hasMsg = message.loading('');
                 teamQueryList(key).then(data => {
-                    const treeDataProps = data.map((item, index) => {
-                        let obj = {
-                            title: `${item.loginName}---投注${item.jejuAmount}JEJU,下级${item.refereeCount}人`,
-                            key: item.loginName
-                        };
-                        if(+item.refereeCount > 0) {
-                            obj.children = [{title: '', key: index}];
-                        }
-                        return obj;
-                    });
-                    this.setState({
-                        treeDataProps
-                    });
-                    hasMsg();
+                    if(JSON.stringify(data) !== '{}') {
+                        const treeDataProps = data.map((item, index) => {
+                            let obj = {
+                                title: `${item.loginName}---投注${item.jejuAmount}JEJU,下级${item.refereeCount}人`,
+                                key: item.loginName
+                            };
+                            if(+item.refereeCount > 0) {
+                                obj.children = [{title: '', key: index}];
+                            }
+                            return obj;
+                        });
+                        this.setState({
+                            treeDataProps
+                        });
+                        hasMsg();
+                    }
+                    // else {
+                    //     showWarnMsg('该账号暂无关联推荐人');
+                    // }
                 });
             }else{
                 showWarnMsg('用户账户不能为空!');
@@ -104,13 +162,29 @@ class teamQuery extends React.Component {
         }
     };
     render() {
-        const { treeDataProps, isInitTree } = this.state;
+        const { treeDataProps, isInitTree, teamUserInfo, value, isShowInfo } = this.state;
+        console.log('testPrp', treeDataProps);
+        console.log('init', isInitTree);
+        const options = this.state.data.map(d => <Option key={d.value}>{d.text}</Option>);
         return(
             <div>
                 <Row>
                     <Col span={24}>
                         <strong>用户账户：</strong>
-                        <Input placeholder="请输入用户账户" ref={(target) => { this.state.userAccount = target; }} style={{ width: '20%' }}/>
+                        <Select
+                            showSearch
+                            value={this.state.value}
+                            placeholder={this.props.placeholder}
+                            style={{width: '220px'}}
+                            defaultActiveFirstOption={false}
+                            showArrow={false}
+                            filterOption={false}
+                            onSearch={this.handleSearch}
+                            onChange={this.handleChange}
+                            notFoundContent={null}
+                        >
+                            {options}
+                        </Select>
                         <Button style={{marginLeft: '20px'}} onClick={() => {
                             this.setState({
                                 treeKey: '',
@@ -120,7 +194,10 @@ class teamQuery extends React.Component {
                             });
                         }} type="primary">确认</Button>
                     </Col>
-                    <Col span={20} style={{marginTop: '30px', marginLeft: '100px', marginBottom: '60px', overflow: 'hidden'}}>
+                    <Col span={20} style={{marginTop: '40px'}}>
+                        <strong style={{marginLeft: '60px'}}>{ isShowInfo ? value + '--- 投注' + teamUserInfo.jejuAmount + 'JEJU，下级' + teamUserInfo.refereeCount + '人' : ''}</strong>
+                    </Col>
+                    <Col span={20} style={{marginTop: '20px', marginLeft: '100px', marginBottom: '60px', overflow: 'hidden'}}>
                         <TreeComponent treeDataProps={treeDataProps} treeClickFn={this.treeClickFn} isInitTree={isInitTree}/>
                     </Col>
                 </Row>

@@ -52,6 +52,10 @@ class timerMonitor extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: 610591,
+            searchParams: {
+                orderColumn: 'create_date',
+                orderDir: 'desc'
+            },
             btnEvent: {
                 timerLogInfo: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

@@ -69,7 +69,11 @@ class userStatistics extends React.Component {
             userName: '',
             userMobileOrEmail: '',
             candyNodeLevelList: {},
-            userStatusList: {}
+            userStatusList: {},
+            isToAll: true,
+            isToDay: false,
+            isToThree: false,
+            isToSv: false
         };
         this.menu = (
             <Menu>
@@ -121,7 +125,7 @@ class userStatistics extends React.Component {
                         userFee: moneyFormat(data.withdraw.fee, '', 'ETH'),
                         userActualAmount: moneyFormat(data.withdraw.actualAmount, '', 'ETH'),
                         userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
-                        userPayCardNo: data.withdraw.payCardNo.substring(0, (data.withdraw.payCardNo).length / 2 - 6) + '...',
+                        userPayCardNo: data.withdraw.payCardNo,
                         userCurrency: data.withdraw.currency,
                         userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', 'ETH'),
                         userAccountNumber: data.withdraw.accountNumber
@@ -137,7 +141,7 @@ class userStatistics extends React.Component {
         // 今日提币数量
         toDaysWithdrawMoneyCount(this.state.code).then(data => {
             this.setState({
-                toDayAmount: data.amount,
+                toDayAmount: moneyFormat(data.amount, '', 'ETH'),
                 toDayIsWarnning: data.isWarnning,
                 lastWithdrawAmount: data.lastWithdraw ? moneyFormat(data.lastWithdraw.amount, '', 'ETH') : '0',
                 lastWithdrawApplyDatetime: data.lastWithdraw ? dateTimeFormat(data.lastWithdraw.applyDatetime) : '暂无记录'
@@ -184,6 +188,36 @@ class userStatistics extends React.Component {
                 });
             });
         });
+        console.log('hhk', e[2]);
+        if(e[2] === 'all') {
+            this.setState({
+                isToAll: true,
+                isToDay: false,
+                isToThree: false,
+                isToSv: false
+            });
+        }else if(e[2] === 'one') {
+            this.setState({
+                isToAll: false,
+                isToDay: true,
+                isToThree: false,
+                isToSv: false
+            });
+        }else if(e[2] === 'three') {
+            this.setState({
+                isToAll: false,
+                isToDay: false,
+                isToThree: true,
+                isToSv: false
+            });
+        }else if(e[2] === 'sv') {
+            this.setState({
+                isToAll: false,
+                isToDay: false,
+                isToThree: false,
+                isToSv: true
+            });
+        }
     }
     getOption = () => {
         const {nodeTitle, nodeList} = this.state;
@@ -366,7 +400,7 @@ class userStatistics extends React.Component {
                                         <Col span={8}>
                                             <span>接收地址</span>
                                             <br />
-                                            <strong className="euotaLine">{userPayCardNo}</strong>
+                                            <strong className="euotaLineAd">{userPayCardNo}</strong>
                                             <div className="lineRightIcon"></div>
                                         </Col>
                                         <Col span={8}>
@@ -421,10 +455,10 @@ class userStatistics extends React.Component {
                             </Col>
                             <Col span={16}>
                                 <div className="applicantStatistics" style={{height: '300px', paddingTop: '28px'}}>
-                                    <div className="headerTab" onClick={ e => this.sendDaysSelectList(['', this.state.coinInfo])}>全部</div>
-                                    <div className="headerTabOut" onClick={ e => this.sendDaysSelectList([1, this.state.coinInfo])}>今日</div>
-                                    <div className="headerTabOut" style={{left: '320px'}} onClick={ e => this.sendDaysSelectList([3, this.state.coinInfo])}>近三日</div>
-                                    <div className="headerTabOut" style={{left: '390px'}} onClick={ e => this.sendDaysSelectList([7, this.state.coinInfo])}>近七日</div>
+                                    <div style={{float: 'right'}} className={this.state.isToSv ? 'headerTab' : 'headerTabOut'} onClick={ e => this.sendDaysSelectList([7, this.state.coinInfo, 'sv'])}>近七日</div>
+                                    <div style={{float: 'right', marginRight: '16px'}} className={this.state.isToThree ? 'headerTab' : 'headerTabOut'} onClick={ e => this.sendDaysSelectList([3, this.state.coinInfo, 'three'])}>近三日</div>
+                                    <div style={{float: 'right', marginRight: '16px'}} className={this.state.isToDay ? 'headerTab' : 'headerTabOut'} onClick={ e => this.sendDaysSelectList([1, this.state.coinInfo, 'one'])}>今日</div>
+                                    <div style={{float: 'right', marginRight: '16px'}} className={this.state.isToAll ? 'headerTab' : 'headerTabOut'} onClick={ e => this.sendDaysSelectList(['', this.state.coinInfo, 'all'])}>全部</div>
                                     <div className="headerLogo" style={{background: 'rgba(22,206,109,0.1)'}}>
                                         <img style={{width: '20px', height: '20px'}} src={handImg} />
                                     </div>
@@ -466,7 +500,7 @@ class userStatistics extends React.Component {
                                 <span style={{color: '#999999'}}>{lastWithdrawApplyDatetime}</span>
                             </Col>
                             <Col span={8}>
-                                <span style={{color: '#1791FF'}} onClick={this.selectFlowInList}>查看已对帐流水</span>
+                                <span style={{color: '#1791FF'}} onClick={this.selectFlowInList}>查看已对账流水</span>
                             </Col>
                             <Col span={8}>
                             </Col>

@@ -65,7 +65,7 @@ class WithdrawRule extends React.Component {
             title: '取现最大金额'
         }, {
             field: 'withdrawLimit',
-            title: '每人每日提币上线'
+            title: '每人每日提币上限'
         }, {
             field: 'withdrawRule',
             title: '提币规则文本'

@@ -37,6 +37,9 @@ class businessAnalysis extends React.Component {
             field: 'merchantNameAndMobile',
             search: true
         }, {
+            title: '币种',
+            field: 'symbol'
+        }, {
             title: '今日余额',
             field: 'balanceTodaySymbolIn',
             render: (v, d) => {

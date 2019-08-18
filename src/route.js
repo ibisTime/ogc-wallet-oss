@@ -899,6 +899,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/BTC-finance/platformAccount/platformAccount'))
     },
     {
+        path: '/BTC-finance/consumerWallet',
+        component: asyncComponent(() => import('container/BTC-finance/platformAccount/consumerWallet'))
+    },
+    {
         path: '/BTC-finance/platformAccount/ledger',
         component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
     },

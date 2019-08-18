@@ -23,14 +23,36 @@ import { showWarnMsg, moneyFormat } from 'common/js/util';
     }
 )
 class HistoryEarningsQuery extends React.Component {
-    render() {
-        const fields = [{
-            field: 'buyName',
-            title: '购买人',
-            render(v, d) {
-                return `${d.buyUserRealName}-${d.buyUserMobile}`;
+    constructor(props) {
+        super(props);
+        this.buttons = [{
+            code: 'toDay',
+            name: '今日记录',
+            check: false,
+            handler: () => {
+                this.props.history.push(`/earnings/earningsQuery`);
             }
         }, {
+            code: 'toHistory',
+            name: '历史记录',
+            check: false,
+            handler: () => {
+                this.props.history.push(`/historyEarnings/historyEarningsQuery`);
+            }
+        }, {
+            code: 'toInfo',
+            name: '详情',
+            handler: (e) => {
+                this.props.history.push(`/historyEarnings/historyEarningsQuery/addedit?v=1&code=${e[0]}`);
+            }
+        }, {
+            code: 'export',
+            name: '导出',
+            check: false
+        }];
+    }
+    render() {
+        const fields = [{
             field: 'buyUserId',
             title: '购买人',
             type: 'select',
@@ -40,24 +62,11 @@ class HistoryEarningsQuery extends React.Component {
             searchName: 'keyword',
             search: true,
             render: (v, data) => {
-                if (data.refereeUser) {
-                    let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
-                    if (data.refereeUser.kind === 'Q') {
-                        let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
-                        return name + '(' + tmpl + ')';
-                    }
-                    return data.refereeUser.nickname + '(' + tmpl + ')';
-                }
-                return '';
+                return `${data.buyUserRealName}-${data.buyUserMobile}`;
             },
-            noVisible: true
-        }, {
-            field: 'beneName',
-            title: '收益人',
-            render(v, d) {
-                return `${d.benefitUserRealName}-${d.benefitUserMobile}`;
-            }
-        }, {
+            required: true
+        },
+        {
             field: 'userId',
             title: '收益人',
             type: 'select',
@@ -67,18 +76,11 @@ class HistoryEarningsQuery extends React.Component {
             searchName: 'keyword',
             search: true,
             render: (v, data) => {
-                if (data.refereeUser) {
-                    let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
-                    if (data.refereeUser.kind === 'Q') {
-                        let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
-                        return name + '(' + tmpl + ')';
-                    }
-                    return data.refereeUser.nickname + '(' + tmpl + ')';
-                }
-                return '';
+               return `${data.benefitUserRealName}-${data.benefitUserMobile}`;
             },
-            noVisible: true
-        }, {
+            required: true
+        },
+        {
             field: 'type',
             title: '收益类型',
             type: 'select',
@@ -106,7 +108,8 @@ class HistoryEarningsQuery extends React.Component {
                     this.props.buildList({
                         fields,
                         rowKey: 'id',
-                        pageCode: 610445
+                        pageCode: 610445,
+                        buttons: this.buttons
                     })
                 }
             </div>

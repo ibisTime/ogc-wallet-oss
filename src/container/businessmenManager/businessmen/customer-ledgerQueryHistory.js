@@ -69,7 +69,10 @@ class CustomerLedgerQueryHistory extends React.Component {
             data: getCoinList(),
             keyName: 'key',
             valueName: 'value',
-            search: !this.isPlat
+            search: !this.isPlat,
+            render: (v) => {
+                return v;
+            }
         }, {
             field: 'bizType',
             title: '业务类型',
@@ -80,19 +83,31 @@ class CustomerLedgerQueryHistory extends React.Component {
             field: 'transAmountString',
             title: '变动金额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                if(data.currency === 'JEJU_CONSUME') {
+                    return moneyFormat(v, '', 'ETH');
+                }else {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'preAmountString',
             title: '变动前金额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                if(data.currency === 'JEJU_CONSUME') {
+                    return moneyFormat(v, '', 'ETH');
+                }else {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'postAmountString',
             title: '变动后金额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                if(data.currency === 'JEJU_CONSUME') {
+                    return moneyFormat(v, '', 'ETH');
+                }else {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'createDatetime',

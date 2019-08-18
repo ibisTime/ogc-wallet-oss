@@ -33,7 +33,11 @@ class CustomerLedgerQuery extends React.Component {
         this.symbol = getQueryString('symbol', this.props.location.search) || '';
         this.history = getQueryString('history', this.props.location.search);
         if(this.symbol) {
-          this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
+            if(this.symbol === 'JEJU_CONSUME') {
+                this.bizType = this.bizType + '_tosp';
+            }else {
+                this.bizType = this.bizType + '_' + this.symbol.toLowerCase();
+            }
         }
         this.buttons = [];
         this.buttons = [{
@@ -74,7 +78,10 @@ class CustomerLedgerQuery extends React.Component {
             data: getCoinList(),
             keyName: 'key',
             valueName: 'value',
-            search: !this.isPlat
+            search: !this.isPlat,
+            render: (v) => {
+                return v;
+            }
         }, {
             field: 'bizType',
             title: '业务类型',
@@ -85,19 +92,31 @@ class CustomerLedgerQuery extends React.Component {
             field: 'transAmountString',
             title: '变动金额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                if(data.currency === 'JEJU_CONSUME') {
+                    return moneyFormat(v, '', 'ETH');
+                }else {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'preAmountString',
             title: '变动前金额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                if(data.currency === 'JEJU_CONSUME') {
+                    return moneyFormat(v, '', 'ETH');
+                }else {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'postAmountString',
             title: '变动后金额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                if(data.currency === 'JEJU_CONSUME') {
+                    return moneyFormat(v, '', 'ETH');
+                }else {
+                    return moneyFormat(v, '', data.currency);
+                }
             }
         }, {
             field: 'createDatetime',

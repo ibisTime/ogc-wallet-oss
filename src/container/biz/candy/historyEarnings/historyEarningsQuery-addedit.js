@@ -23,7 +23,6 @@ class historyEarningsQueryAddedit extends DetailUtil {
             field: 'beneName',
             title: '收益人',
             formatter(v, d) {
-                console.log(d);
                 return `${d.benefitUserRealName}-${d.benefitUserMobile}`;
             }
         }, {

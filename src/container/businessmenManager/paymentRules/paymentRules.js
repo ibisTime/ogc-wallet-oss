@@ -31,7 +31,8 @@ class paymentRules extends React.Component {
             field: 'cvalue',
             title: '数值',
             render(v, data) {
-                if(data.ckey === 'fee_location') {
+                console.log('fk', data);
+                if(data.ckey === 'tosp_fee_location' || data.ckey === 'jeju_consume_fee_location' || data.ckey === 'krw_fee_location') {
                     if (v === '0') {
                         return '取现金额中';
                     }else {

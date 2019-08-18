@@ -61,3 +61,13 @@ export function toDaysWithdrawMoneyCount(code) {
 export function flowSelectListOrDetail(accountNumber, status, start, limit) {
     return fetch(610609, {accountNumber, status, start, limit});
 }
+
+// 查询用户列表
+export function findUserList(start, limit, loginName) {
+    return fetch(805120, {start, limit, loginName});
+}
+
+// 团队本人查询
+export function groupUserInfo(loginName) {
+    return fetch(610610, {loginName});
+}

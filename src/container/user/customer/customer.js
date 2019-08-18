@@ -99,7 +99,7 @@ class Customer extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             searchName: 'keyword',
             search: true,
             render: (v, data) => {
@@ -127,7 +127,8 @@ class Customer extends React.Component {
             field: 'candyNodeLevel',
             title: '节点等级',
             type: 'select',
-            key: 'candy_node_level'
+            key: 'candy_node_level',
+            search: true
         }, {
             field: 'isRealname',
             title: '是否实名',

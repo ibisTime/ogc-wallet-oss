@@ -12,7 +12,9 @@ class paymentRuleAddedit extends DetailUtil {
         this.cData = {
             ckey: {
                 ctype: getQueryString('ckey'),
-                cLocation: 'fee_location'
+                cLocation: 'tosp_fee_location',
+                cLocation2: 'jeju_consume_fee_location',
+                cLocation3: 'krw_fee_location'
             }
         };
     }
@@ -30,7 +32,7 @@ class paymentRuleAddedit extends DetailUtil {
             field: 'remark',
             hidden: true
         }];
-        if(getQueryString('ckey') === this.cData.ckey.cLocation) {
+        if(getQueryString('ckey') === this.cData.ckey.cLocation || getQueryString('ckey') === this.cData.ckey.cLocation2 || getQueryString('ckey') === this.cData.ckey.cLocation3) {
             fields.push({
                 title: '数值',
                 field: 'cvalue',
