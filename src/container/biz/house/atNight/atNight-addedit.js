@@ -29,7 +29,7 @@ class atNightAddedit extends DetailUtil {
             field: 'symbol',
             title: '币种',
             type: 'select',
-            key: 'fpp_symbol_in',
+            key: 'fpp_jy_symbol_in',
             required: true
         }, {
             field: 'stockTotal',

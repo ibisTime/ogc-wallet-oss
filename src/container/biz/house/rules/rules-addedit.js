@@ -9,6 +9,7 @@ class MillRulesEdit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.type = getQueryString('ctype');
         this.cData = {
             ctype: getQueryString('ctype'),
             ckey: {
@@ -16,9 +17,11 @@ class MillRulesEdit extends DetailUtil {
                 cSymbol: /_symbol/,
                 cActivity: /_notice/,
                 cSelect: /_select/,
-                cTextarea: /_textarea/
+                cTextarea: /_textarea/,
+                cRQText: /_note/
             }
         };
+        console.log('this.type', this.type);
     }
     render() {
         const fields = [{
@@ -59,6 +62,13 @@ class MillRulesEdit extends DetailUtil {
                 },
                 keyName: 'symbol',
                 valueName: '{{symbol.DATA}}-{{cname.DATA}}'
+            });
+        } else if(this.cData.ctype.match(this.cData.ckey.cRQText)) {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                type: 'textarea',
+                required: true
             });
         } else {
             fields.push({

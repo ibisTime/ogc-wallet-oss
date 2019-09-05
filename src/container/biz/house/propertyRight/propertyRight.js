@@ -95,6 +95,9 @@ class propertyRight extends React.Component {
             field: 'stockRemain',
             title: '剩余库存'
         }, {
+            field: 'buyLimit',
+            title: '单人购买次数上限'
+        }, {
             field: 'status',
             title: '状态',
             key: 'exchange_symbol_pair_statis',

@@ -21,7 +21,7 @@ class userPropertyRightsAddedit extends DetailUtil {
         }, {
             field: 'loginName',
             title: '购买用户',
-            render(v, d) {
+            formatter(v, d) {
                 return d.user && d.user.loginName;
             }
         }, {

@@ -1444,6 +1444,10 @@ const ROUTES = [
         path: '/house/rules',
         component: asyncComponent(() => import('container/biz/house/rules/rules'))
     },
+    {
+        path: '/house/rules/addedit',
+        component: asyncComponent(() => import('container/biz/house/rules/rules-addedit'))
+    },
     // 我的产权
     {
         path: '/house/userPropertyRights',
@@ -1483,6 +1487,15 @@ const ROUTES = [
     {
         path: '/house/transferRecord/examine',
         component: asyncComponent(() => import('container/biz/house/transferRecord/transfeRecord-examine'))
+    },
+    // 收益
+    {
+        path: '/house/profit',
+        component: asyncComponent(() => import('container/biz/house/profit/profit'))
+    },
+    {
+        path: '/house/profit/addedit',
+        component: asyncComponent(() => import('container/biz/house/profit/profit-addedit'))
     }
 ];
 

@@ -14,7 +14,7 @@ class atNightOrderAddedit extends DetailUtil {
         const fields = [{
             field: 'loginName',
             title: '购买用户',
-            render(v, d) {
+            formatter(v, d) {
                 return d.user && d.user.loginName;
             }
         }, {
@@ -47,13 +47,19 @@ class atNightOrderAddedit extends DetailUtil {
             title: '转出币种'
         }, {
             field: 'amount',
-            title: '金额'
+            title: '金额',
+            formatter: (v, data) => {
+                return moneyFormat(v, '', 'ETH');
+            }
         }, {
             field: 'fee',
             title: '手续费'
         }, {
             field: 'realAmount',
-            title: '实际金额'
+            title: '实际金额',
+            formatter: (v, data) => {
+                return moneyFormat(v, '', 'ETH');
+            }
         }, {
             field: 'status',
             title: '状态',

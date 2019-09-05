@@ -30,12 +30,14 @@ class MillOrderDetail extends DetailUtil {
         }, {
             field: 'price',
             title: '单价'
-        }, {
-            field: 'symbolIn',
-            title: '购买币种',
-            type: 'select',
-            key: 'fpp_symbol_in'
-        }, {
+        },
+        // {
+        //     field: 'symbolIn',
+        //     title: '购买币种',
+        //     type: 'select',
+        //     key: 'fpp_symbol_in'
+        // },
+        {
             field: 'symbolOutType',
             title: '收益方式',
             formatter: (v, d) => {
@@ -46,12 +48,14 @@ class MillOrderDetail extends DetailUtil {
                     return '金本位';
                 }
             }
-        }, {
-            field: 'symbolOut',
-            title: '收益币种',
-            type: 'select',
-            key: 'fpp_symbol_in'
-        }, {
+        },
+         // {
+         //    field: 'symbolOut',
+         //    title: '收益币种',
+         //    type: 'select',
+         //    key: 'fpp_symbol_in'
+         // },
+         {
             field: 'priceType',
             title: '买入方式',
             formatter: (v, d) => {

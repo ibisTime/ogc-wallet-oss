@@ -305,6 +305,8 @@ import {atNight} from './redux/house/atNight/atNight';
 import {atNightOrder} from './redux/house/atNightOrder/atNightOrder';
 // 房拼拼 - 划转记录
 import {transfeRecord} from './redux/house/transferRecord/transfeRecord';
+// 房拼拼 - 收益
+import {profit} from './redux/house/profit/profit';
 
 export default combineReducers({
     user,
@@ -535,5 +537,6 @@ export default combineReducers({
     userPropertyRights,
     atNight,
     atNightOrder,
-    transfeRecord
+    transfeRecord,
+    profit
 });

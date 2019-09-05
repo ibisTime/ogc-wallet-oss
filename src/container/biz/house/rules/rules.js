@@ -48,7 +48,7 @@ class Rules extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push('/mill/rules/addedit?code=' + selectedRowKeys[0] + '&ctype=' + selectedRows[0].ckey);
+                        this.props.history.push('/house/rules/addedit?code=' + selectedRowKeys[0] + '&ctype=' + selectedRows[0].ckey);
                     }
                 },
                 check: true

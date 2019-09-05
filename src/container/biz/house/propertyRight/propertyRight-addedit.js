@@ -176,6 +176,9 @@ class propertyRightAddedit extends DetailUtil {
             field: 'stockTotal',
             title: '总库存'
         }, {
+            field: 'buyLimit',
+            title: '单人购买次数上限'
+        }, {
             field: 'orderNo',
             title: '显示顺序'
         }, {

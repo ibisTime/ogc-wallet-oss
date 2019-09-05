@@ -29,7 +29,7 @@ class MillUserNode extends DetailUtil {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             searchName: 'keyword',
             render: (v, data) => {
                 if (data.refereeUser) {

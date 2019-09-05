@@ -12,7 +12,8 @@ class transfeRecordExamine extends DetailUtil {
         this.view = !!getQueryString('v', this.props.location.search);
         this.state = {
             ...this.state,
-            remarks: ''
+            remarks: '',
+            quantity: ''
         };
     }
     handleInpt = (event) => {
@@ -20,14 +21,20 @@ class transfeRecordExamine extends DetailUtil {
             remarks: event.target.value
         });
     }
+    handleNumInpt = (event) => {
+        this.setState({
+            quantity: event.target.value
+        });
+    }
     render() {
-        const {remarks} = this.state;
+        const {remarks, quantity} = this.state;
         let buttons = [{
             title: '通过',
             handler: (param) => {
                 param.approveResult = '1';
                 param.code = this.code;
                 param.updater = getUserId();
+                param.quantity = quantity;
                 param.approveNote = remarks;
                 this.doFetching();
                 fetch(610771, param).then(() => {
@@ -46,6 +53,7 @@ class transfeRecordExamine extends DetailUtil {
                 param.approveResult = '0';
                 param.code = this.code;
                 param.updater = getUserId();
+                param.quantity = quantity;
                 param.approveNote = remarks;
                 this.doFetching();
                 fetch(610771, param).then(() => {
@@ -119,6 +127,9 @@ class transfeRecordExamine extends DetailUtil {
         }, {
             field: '',
             title: ''
+        }, {
+            field: '',
+            title: ''
         }];
         return (
             <div>
@@ -131,7 +142,8 @@ class transfeRecordExamine extends DetailUtil {
                         buttons: buttons
                     })
                 }
-                <div style={{position: 'relative', top: '-120px', left: '12%', zIndex: '10001'}}><label>审核备注:</label><Input onChange={event => this.handleInpt(event)} style={{width: '380px', marginLeft: '6px'}} placeholder="请输入备注" /></div>
+                <div style={{position: 'relative', top: '-200px', left: '12%', zIndex: '10001'}}><label>数量:</label><Input onChange={event => this.handleNumInpt(event)} style={{width: '380px', marginLeft: '6px'}} placeholder="请输入备注" /></div>
+                <div style={{position: 'relative', top: '-160px', left: '12%', zIndex: '10001'}}><label>审核备注:</label><Input onChange={event => this.handleInpt(event)} style={{width: '380px', marginLeft: '6px'}} placeholder="请输入备注" /></div>
             </div>
         );
     }

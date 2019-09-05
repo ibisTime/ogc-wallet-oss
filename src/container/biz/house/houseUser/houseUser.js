@@ -125,7 +125,7 @@ class Customer extends React.Component {
                 type: 'select',
                 key: 'user_status',
                 render(v, d) {
-                    return d.user && d.user.status;
+                    return d.user.status === '0' ? '正常' : (d.user.status === '1' ? '程序锁定' : '人工锁定');
                 }
             }, {
                 field: 'isRealname',
