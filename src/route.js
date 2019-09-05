@@ -1409,6 +1409,80 @@ const ROUTES = [
     {
         path: '/applicationAnalysis/nineNineStatistics',
         component: asyncComponent(() => import('container/applicationAnalysis/nineNineStatistics'))
+    },
+    // 房拼拼 - 节点管理
+    {
+        path: '/house/houseUser',
+        component: asyncComponent(() => import('container/biz/house/houseUser/houseUser'))
+    },
+    {
+        path: '/house/houseUser/userNode',
+        component: asyncComponent(() => import('container/biz/house/houseUser/userNode'))
+    },
+    {
+        path: '/house/propertyRight',
+        component: asyncComponent(() => import('container/biz/house/propertyRight/propertyRight'))
+    },
+    {
+        path: '/house/propertyRight/addedit',
+        component: asyncComponent(() => import('container/biz/house/propertyRight/propertyRight-addedit'))
+    },
+    {
+        path: '/house/houseOrder',
+        component: asyncComponent(() => import('container/biz/house/houseOrder/houseOrder'))
+    },
+    {
+        path: '/house/houseOrder/addedit',
+        component: asyncComponent(() => import('container/biz/house/houseOrder/houseOrder-addedit'))
+    },
+    {
+        path: '/house/houseOrderIncome',
+        component: asyncComponent(() => import('container/biz/house/houseOrder/houseOrderIncome'))
+    },
+    // 产权规则
+    {
+        path: '/house/rules',
+        component: asyncComponent(() => import('container/biz/house/rules/rules'))
+    },
+    // 我的产权
+    {
+        path: '/house/userPropertyRights',
+        component: asyncComponent(() => import('container/biz/house/userPropertyRights/userPropertyRights'))
+    },
+    {
+        path: '/house/userPropertyRights/addedit',
+        component: asyncComponent(() => import('container/biz/house/userPropertyRights/userPropertyRights-addedit'))
+    },
+    // 夜间产品
+    {
+        path: '/house/atNight',
+        component: asyncComponent(() => import('container/biz/house/atNight/atNight'))
+    },
+    {
+        path: '/house/atNight/addedit',
+        component: asyncComponent(() => import('container/biz/house/atNight/atNight-addedit'))
+    },
+    // 夜间订单
+    {
+        path: '/house/atNightOrder',
+        component: asyncComponent(() => import('container/biz/house/atNightOrder/atNightOrder'))
+    },
+    {
+        path: '/house/atNightOrder/addedit',
+        component: asyncComponent(() => import('container/biz/house/atNightOrder/atNightOrder-addedit'))
+    },
+    // 划转记录
+    {
+        path: '/house/transferRecord',
+        component: asyncComponent(() => import('container/biz/house/transferRecord/transfeRecord'))
+    },
+    {
+        path: '/house/transferRecord/addedit',
+        component: asyncComponent(() => import('container/biz/house/transferRecord/transfeRecord-addedit'))
+    },
+    {
+        path: '/house/transferRecord/examine',
+        component: asyncComponent(() => import('container/biz/house/transferRecord/transfeRecord-examine'))
     }
 ];
 

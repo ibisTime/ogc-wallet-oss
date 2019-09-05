@@ -290,6 +290,22 @@ import { nineNineStatistics } from './redux/applicationAnalysis/nineNineStatisti
 // 散取审核
 import { userStatistics } from './redux/userStatistics/userStatistics';
 import { InUserStatistics } from './redux/userStatistics/InUserStatistics';
+// 房拼拼 - 节点管理
+import {houseUser} from './redux/house/houseUser/houseUser';
+// 房拼拼 - 产权管理
+import {propertyRight} from './redux/house/propertyRight/propertyRight';
+// 房拼拼 - 产权订单
+import {houseOrder} from './redux/house/houseOrder/houseOrder';
+import {houseOrderIncome} from './redux/house/houseOrder/houseOrderIncome';
+import {millRules} from './redux/house/rules/rules';
+import {userPropertyRights} from './redux/house/userPropertyRights/userPropertyRights';
+// 房拼拼 - 夜间产品
+import {atNight} from './redux/house/atNight/atNight';
+// 房拼拼 - 夜间订单
+import {atNightOrder} from './redux/house/atNightOrder/atNightOrder';
+// 房拼拼 - 划转记录
+import {transfeRecord} from './redux/house/transferRecord/transfeRecord';
+
 export default combineReducers({
     user,
     menu,
@@ -510,5 +526,14 @@ export default combineReducers({
 
     // 散取审核
     userStatistics,
-    InUserStatistics
+    InUserStatistics,
+    houseUser,
+    propertyRight,
+    houseOrder,
+    houseOrderIncome,
+    millRules,
+    userPropertyRights,
+    atNight,
+    atNightOrder,
+    transfeRecord
 });
