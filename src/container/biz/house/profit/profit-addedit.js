@@ -49,7 +49,9 @@ class profitAddedit extends DetailUtil {
             hidden: this.view
         }, {
             field: 'symbol',
-            title: '币种'
+            title: '币种',
+            type: 'select',
+            key: 'fpp_symbol_out'
         }, {
             field: 'type',
             title: '类型',

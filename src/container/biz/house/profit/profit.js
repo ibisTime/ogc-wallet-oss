@@ -65,18 +65,21 @@ class profit extends React.Component {
             noVisible: true
         }, {
             field: 'symbol',
-            title: '币种'
+            title: '币种',
+            render: function (v, data) {
+                return `${v === 'TOSP_JIFEN' ? 'TOSP(积分)' : (v === 'JY' ? '间夜' : v)}`;
+            }
         }, {
             field: 'type',
             title: '类型',
             type: 'select',
-            key: 'fpp_income_type'
+            key: 'fpp_income_type',
+            search: true
         }, {
             field: 'nodeLevel',
             title: '节点等级',
             type: 'select',
             key: 'user_node_level_fpp',
-            search: true,
             render(v, d) {
                 return levelData[v];
             }
@@ -105,7 +108,8 @@ class profit extends React.Component {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'fpp_income_status'
+            key: 'fpp_income_status',
+            search: true
         }, {
             field: 'settleDatetime',
             title: '结算时间',

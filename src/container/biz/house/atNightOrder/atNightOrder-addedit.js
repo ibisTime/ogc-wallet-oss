@@ -46,21 +46,24 @@ class atNightOrderAddedit extends DetailUtil {
             field: 'price',
             title: '购买单价'
         }, {
-            field: 'symbolIn',
-            title: '购买币种'
-        }, {
             field: 'symbol',
-            title: '币种'
+            title: '币种',
+            formatter: function (v, data) {
+                return `${v === 'TOSP_JIFEN' ? 'TOSP(积分)' : (v === 'JY' ? '间夜' : v)}`;
+            }
         }, {
             field: 'quantity',
             title: '数量'
         }, {
             field: 'totalCount',
-            title: '总金额'
+            title: '总金额',
+            formatter: function (v, data) {
+                return `${moneyFormat(v, '', 'ETH')}`;
+            }
         }, {
             field: 'status',
             title: '状态',
-            key: 'exchange_symbol_pair_statis',
+            key: 'fpp_jy_order_status',
             type: 'select',
             search: true
         }, {

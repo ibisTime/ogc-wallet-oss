@@ -57,10 +57,16 @@ class propertyRight extends React.Component {
             noVisible: true
         }, {
             field: 'fromCurrency',
-            title: '转入币种'
+            title: '转入币种',
+            render: function (v, data) {
+                return `${v === 'TOSP_JIFEN' ? 'TOSP(积分)' : (v === 'JY' ? '间夜' : v)}`;
+            }
         }, {
             field: 'toCurrency',
-            title: '转出币种'
+            title: '转出币种',
+            render: function (v, data) {
+                return `${v === 'TOSP_JIFEN' ? 'TOSP(积分)' : (v === 'JY' ? '间夜' : v)}`;
+            }
         }, {
             field: 'amount',
             title: '金额',
@@ -88,7 +94,8 @@ class propertyRight extends React.Component {
             field: 'status',
             title: '状态',
             key: 'transfer_order_status',
-            type: 'select'
+            type: 'select',
+            search: true
         }, {
             field: 'applyDatetime',
             title: '申请时间',

@@ -60,6 +60,17 @@ class userPropertyRights extends React.Component {
             title: '产权名称',
             search: true
         }, {
+            field: 'priceType',
+            title: '购买方式',
+            render: (v, d) => {
+                console.log('symbolOutType', d);
+                if(v === '1') {
+                    return '币本位';
+                }else {
+                    return `金本位(${d.priceCurrency})`;
+                }
+            }
+        }, {
             field: 'price',
             title: '单价'
         }, {
@@ -67,7 +78,7 @@ class userPropertyRights extends React.Component {
             title: '花费币总额',
             render: function (v, data) {
                 if(v || v === 0) {
-                    return `${moneyFormat(v.toString(), '', data.symbolIn)} (${data.symbolIn})`;
+                    return `${moneyFormat(v.toString(), '', 'ETH')} (${data.symbolIn === 'TOSP_JIFEN' ? 'TOSP(积分)' : (data.symbolIn === 'JY' ? '间夜' : data.symbolIn)})`;
                 }else {
                     return '-';
                 }

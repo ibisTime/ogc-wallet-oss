@@ -65,6 +65,8 @@ class propertyRightAddedit extends DetailUtil {
         }, {
             field: 'priceCurrency',
             title: '金本位标价法币币种',
+            type: 'select',
+            key: 'fpp_symbol_out_currency',
             hidden: this.state.isPc,
             required: true
         }, {
@@ -106,6 +108,8 @@ class propertyRightAddedit extends DetailUtil {
         }, {
             field: 'symbolOutCurrency',
             title: '金本位收益法币币种',
+            type: 'select',
+            key: 'fpp_symbol_out_currency',
             hidden: this.state.isJb2,
             required: true
         }, {
@@ -151,10 +155,11 @@ class propertyRightAddedit extends DetailUtil {
         }, {
             field: 'deductRate',
             title: '抵扣汇率',
+            help: '支付币种兑抵扣币种。举例：如果汇率是10，则10个抵扣币种可以抵扣1个支付币种',
             hidden: !isShow
         }, {
             field: 'deductLimit',
-            title: '抵扣上限',
+            title: '抵扣上限（支付币种）',
             hidden: !isShow
         }, {
             field: 'outFeeType',
@@ -168,16 +173,20 @@ class propertyRightAddedit extends DetailUtil {
             }],
             keyName: 'key',
             valueName: 'value',
-            title: '提前退出手续费类型'
+            title: '提前退出手续费类型',
+            required: true
         }, {
             field: 'outFee',
-            title: '提前退出手续费'
+            title: '提前退出手续费',
+            required: true
         }, {
             field: 'stockTotal',
-            title: '总库存'
+            title: '总库存',
+            required: true
         }, {
             field: 'buyLimit',
-            title: '单人购买次数上限'
+            title: '单人购买次数上限',
+            required: true
         }, {
             field: 'orderNo',
             title: '显示顺序'

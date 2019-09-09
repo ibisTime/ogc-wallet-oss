@@ -5,7 +5,7 @@ import DetailUtil from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
 @Form.create()
-class transfeRecordExamine extends DetailUtil {
+class atNightOrderExamine extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -36,7 +36,7 @@ class transfeRecordExamine extends DetailUtil {
                 param.updater = getUserId();
                 param.approveNote = remarks;
                 this.doFetching();
-                fetch(610771, param).then(() => {
+                fetch(610761, param).then(() => {
                     showSucMsg('操作成功');
                     this.cancelFetching();
                     setTimeout(() => {
@@ -54,7 +54,7 @@ class transfeRecordExamine extends DetailUtil {
                 param.updater = getUserId();
                 param.approveNote = remarks;
                 this.doFetching();
-                fetch(610771, param).then(() => {
+                fetch(610761, param).then(() => {
                     showSucMsg('操作成功');
                     this.cancelFetching();
                     setTimeout(() => {
@@ -98,38 +98,39 @@ class transfeRecordExamine extends DetailUtil {
             noVisible: true,
             hidden: this.view
         }, {
-            field: 'fromCurrency',
-            title: '转入币种'
+            field: 'name',
+            title: '产品名称'
         }, {
-            field: 'toCurrency',
-            title: '转出币种',
-            type: 'select',
-            key: 'fpp_symbol_out'
+            field: 'price',
+            title: '购买单价'
         }, {
-            field: 'amount',
-            title: '金额',
-            formatter: (v, data) => {
-                return moneyFormat(v, '', 'ETH');
+            field: 'symbol',
+            title: '币种',
+            formatter: function (v, data) {
+                return `${v === 'TOSP_JIFEN' ? 'TOSP(积分)' : (v === 'JY' ? '间夜' : v)}`;
             }
         }, {
-            field: 'fee',
-            title: '手续费'
+            field: 'quantity',
+            title: '数量'
         }, {
-            field: 'realAmount',
-            title: '实际金额',
-            formatter: (v, data) => {
-                return moneyFormat(v, '', 'ETH');
-            }
+            field: 'totalCount',
+            title: '总金额',
+            formatter: function (v, data) {
+            return `${moneyFormat(v, '', 'ETH')}`;
+        }
         }, {
             field: 'status',
             title: '状态',
-            key: 'transfer_order_status',
+            key: 'fpp_jy_order_status',
             type: 'select',
             search: true
         }, {
-            field: 'applyDatetime',
-            title: '申请时间',
+            field: 'createTime',
+            title: '创建时间',
             type: 'datetime'
+        }, {
+            field: '',
+            title: ''
         }, {
             field: '',
             title: ''
@@ -141,14 +142,14 @@ class transfeRecordExamine extends DetailUtil {
                         fields,
                         code: this.code,
                         view: this.view,
-                        detailCode: 610776,
+                        detailCode: 610766,
                         buttons: buttons
                     })
                 }
-                <div style={{position: 'relative', top: '-150px', left: '12%', zIndex: '10001'}}><label>审核备注:</label><Input onChange={event => this.handleInpt(event)} style={{width: '380px', marginLeft: '6px'}} placeholder="请输入备注" /></div>
+                <div style={{position: 'relative', top: '-170px', left: '12%', zIndex: '10001'}}><label>审核备注:</label><Input onChange={event => this.handleInpt(event)} style={{width: '380px', marginLeft: '6px'}} placeholder="请输入备注" /></div>
             </div>
         );
     }
 }
 
-export default transfeRecordExamine;
+export default atNightOrderExamine;

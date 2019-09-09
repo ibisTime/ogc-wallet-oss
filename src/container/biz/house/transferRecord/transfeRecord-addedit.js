@@ -44,7 +44,9 @@ class atNightOrderAddedit extends DetailUtil {
             title: '转入币种'
         }, {
             field: 'toCurrency',
-            title: '转出币种'
+            title: '转出币种',
+            type: 'select',
+            key: 'fpp_symbol_out'
         }, {
             field: 'amount',
             title: '金额',

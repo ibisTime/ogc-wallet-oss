@@ -30,7 +30,18 @@ class Rules extends React.Component {
             title: '说明'
         }, {
             field: 'cvalue',
-            title: '数值'
+            title: '数值',
+            render: (v, d) => {
+                if(d.ckey === 'transfer_out_approve_flag' || d.ckey === 'transfer_in_approve_flag') {
+                    if(v === '0') {
+                        return '否';
+                    }else {
+                        return '是';
+                    }
+                }else {
+                    return v;
+                }
+            }
         }];
         return this.props.buildList({
             fields,

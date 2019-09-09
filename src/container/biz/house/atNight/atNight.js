@@ -36,7 +36,10 @@ class propertyRight extends React.Component {
             title: '购买单价'
         }, {
             field: 'symbol',
-            title: '购买币种'
+            title: '购买币种',
+            render: function (v, data) {
+                return `${v === 'TOSP_JIFEN' ? 'TOSP(积分)' : (v === 'JY' ? '间夜' : v)}`;
+            }
         }, {
             field: 'stockTotal',
             title: '总库存'

@@ -18,7 +18,9 @@ class MillRulesEdit extends DetailUtil {
                 cActivity: /_notice/,
                 cSelect: /_select/,
                 cTextarea: /_textarea/,
-                cRQText: /_note/
+                cRQText: /_note/,
+                cIsOrNotSelect: /_flag/,
+                cIsRQText: /_node/
             }
         };
         console.log('this.type', this.type);
@@ -63,11 +65,27 @@ class MillRulesEdit extends DetailUtil {
                 keyName: 'symbol',
                 valueName: '{{symbol.DATA}}-{{cname.DATA}}'
             });
-        } else if(this.cData.ctype.match(this.cData.ckey.cRQText)) {
+        } else if(this.cData.ctype.match(this.cData.ckey.cRQText) || this.cData.ctype.match(this.cData.ckey.cIsRQText)) {
             fields.push({
                 title: '数值',
                 field: 'cvalue',
                 type: 'textarea',
+                required: true
+            });
+        } else if(this.cData.ctype.match(this.cData.ckey.cIsOrNotSelect)) {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                type: 'select',
+                data: [{
+                    'key': '0',
+                    'value': '否'
+                }, {
+                    'key': '1',
+                    'value': '是'
+                }],
+                keyName: 'key',
+                valueName: 'value',
                 required: true
             });
         } else {

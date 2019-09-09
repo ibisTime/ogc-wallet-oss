@@ -10,7 +10,8 @@ import {
     setSearchData
 } from '@redux/house/houseOrder/houseOrder';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg, moneyFormat } from 'common/js/util';
+import { getDictList } from 'api/dict';
+import { showWarnMsg, moneyFormat, dsctList1, findDsct } from 'common/js/util';
 import { Link } from 'react-router-dom';
 
 @listWrapper(
@@ -24,7 +25,28 @@ import { Link } from 'react-router-dom';
     }
 )
 class HouseOrder extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            fppSymbolIn: [],
+            fppSymbolOut: []
+        };
+    }
+    componentDidMount() {
+        getDictList({ parentKey: 'fpp_symbol_in' }).then(data => {
+            this.setState({
+                fppSymbolIn: dsctList1(data)
+            });
+        });
+        getDictList({ parentKey: 'fpp_symbol_out' }).then(data => {
+            this.setState({
+                fppSymbolOut: dsctList1(data)
+            });
+        });
+    }
+
     render() {
+        const {fppSymbolIn, fppSymbolOut} = this.state;
         const fields = [{
             field: 'loginName',
             title: '购买用户',
@@ -67,7 +89,11 @@ class HouseOrder extends React.Component {
             title: '花费币总额',
             render: function (v, data) {
                 if(v || v === 0) {
-                    return `${moneyFormat(v, '', 'ETH')} (${data.symbolIn})`;
+                    if(v === 0) {
+                        return `${moneyFormat(v, '', 'ETH')}`;
+                    }else {
+                        return `${moneyFormat(v.toString(), '', 'ETH')} (${data.symbolIn === 'TOSP_JIFEN' ? 'TOSP(积分)' : data.symbolIn})`;
+                    }
                 }else {
                     return '-';
                 }
@@ -87,14 +113,29 @@ class HouseOrder extends React.Component {
             title: '抵扣金额',
             render: function (v, data) {
                 if(v || v === 0) {
-                    return `${moneyFormat(v.toString(), '', 'ETH')} (${data.deductSymbol})`;
+                    if(v === 0) {
+                        return `${moneyFormat(v.toString(), '', 'ETH')}`;
+                    }else {
+                        return `${moneyFormat(v.toString(), '', 'ETH')} (${data.symbolIn === 'TOSP_JIFEN' ? 'TOSP(积分)' : data.symbolIn})`;
+                    }
                 }else {
                     return '-';
                 }
             }
         }, {
             field: 'realCount',
-            title: '实际支付金额'
+            title: '实际支付金额',
+            render: function (v, data) {
+                if(v || v === 0) {
+                    if(v === 0) {
+                        return `${moneyFormat(v, '', 'ETH')}`;
+                    }else {
+                        return `${moneyFormat(v, '', 'ETH')} (${data.symbolIn === 'TOSP_JIFEN' ? 'TOSP(积分)' : data.symbolIn})`;
+                    }
+                }else {
+                    return '-';
+                }
+            }
         }, {
             field: 'createTime',
             title: '创建时间',

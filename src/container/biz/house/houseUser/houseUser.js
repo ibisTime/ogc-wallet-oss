@@ -57,6 +57,11 @@ class Customer extends React.Component {
     }
     render() {
         const fields = [{
+            title: '账号',
+            render(v, d) {
+                return d.user.nickname + '-' + d.user.loginName;
+            }
+        }, {
             field: 'nodeLevel',
             title: '节点等级',
             type: 'select',
@@ -75,24 +80,6 @@ class Customer extends React.Component {
             key: 'user_node_level_way',
             type: 'select'
         }, {
-            field: 'nickname',
-            title: '昵称',
-            render(v, d) {
-                return d.user && d.user.nickname;
-            }
-        }, {
-            field: 'mobile',
-            title: '手机号',
-            render(v, d) {
-                return d.user && d.user.mobile;
-            }
-        }, {
-            field: 'email',
-            title: '邮箱',
-            render(v, d) {
-                return d.user && d.user.email;
-            }
-        }, {
             field: 'inviteCode',
             title: '邀请码',
             render(v, d) {
@@ -100,7 +87,7 @@ class Customer extends React.Component {
             }
         }, {
             field: 'userId',
-            title: '手机号',
+            title: '用户',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -126,18 +113,6 @@ class Customer extends React.Component {
                 key: 'user_status',
                 render(v, d) {
                     return d.user.status === '0' ? '正常' : (d.user.status === '1' ? '程序锁定' : '人工锁定');
-                }
-            }, {
-                field: 'isRealname',
-                title: '是否实名',
-                render: (v, data) => {
-                    return data.user && data.user.realName ? '是' : '否';
-                }
-            }, {
-                field: 'realName',
-                title: '真实姓名',
-                render: (v, data) => {
-                    return data.user && data.user.realName ? data.user.realName : '-';
                 }
             }, {
                 field: 'createDatetime',

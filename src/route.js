@@ -1475,6 +1475,10 @@ const ROUTES = [
         path: '/house/atNightOrder/addedit',
         component: asyncComponent(() => import('container/biz/house/atNightOrder/atNightOrder-addedit'))
     },
+    {
+        path: '/house/atNightOrder/examine',
+        component: asyncComponent(() => import('container/biz/house/atNightOrder/atNightOrder-examine'))
+    },
     // 划转记录
     {
         path: '/house/transferRecord',

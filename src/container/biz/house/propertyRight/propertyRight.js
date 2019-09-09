@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/house/propertyRight/propertyRight';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg } from 'common/js/util';
+import { showWarnMsg, moneyFormat } from 'common/js/util';
 import {Modal, message, Input} from 'antd';
 import fetch from 'common/js/fetch';
 
@@ -57,7 +57,12 @@ class propertyRight extends React.Component {
             }
         }, {
             field: 'symbolIn',
-            title: '购买币种'
+            title: '购买币种',
+            type: 'select',
+            key: 'fpp_symbol_in'
+        }, {
+            field: 'price',
+            title: '单价'
         }, {
             field: 'symbolOutType',
             title: '收益方式',
@@ -71,7 +76,9 @@ class propertyRight extends React.Component {
             }
         }, {
             field: 'symbolOut',
-            title: '收益币种'
+            title: '收益币种',
+            type: 'select',
+            key: 'fpp_symbol_out'
         }, {
             field: 'daysLimit',
             title: '有效期限（天）'

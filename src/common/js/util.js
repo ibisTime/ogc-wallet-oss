@@ -875,3 +875,14 @@ export function getCoinType(coin) {
 export function findDsct(array, value) {
   return array.find(item => item.dkey === value).dvalue;
 }
+
+export function dsctList1(array) {
+  let arr = [];
+  for(let i = 0; i < array.length; i++) {
+    arr.push({
+      dkey: array[i].dkey,
+      dvalue: array[i].dvalue
+    });
+  }
+  return arr;
+}

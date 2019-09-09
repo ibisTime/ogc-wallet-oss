@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/house/atNightOrder/atNightOrder';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg } from 'common/js/util';
+import { showWarnMsg, moneyFormat } from 'common/js/util';
 import {Modal, message, Input} from 'antd';
 import fetch from 'common/js/fetch';
 
@@ -63,17 +63,27 @@ class propertyRight extends React.Component {
             title: '购买单价'
         }, {
             field: 'symbol',
-            title: '币种'
+            title: '币种',
+            render: function (v, data) {
+                return `${v === 'TOSP_JIFEN' ? 'TOSP(积分)' : (v === 'JY' ? '间夜' : v)}`;
+            }
         }, {
             field: 'quantity',
             title: '数量'
         }, {
             field: 'totalCount',
-            title: '总金额'
+            title: '总金额',
+            render: function (v, data) {
+                if(v || v === 0) {
+                    return `${moneyFormat(v.toString(), '', 'ETH')}`;
+                }else {
+                    return '-';
+                }
+            }
         }, {
             field: 'status',
             title: '状态',
-            key: 'exchange_symbol_pair_statis',
+            key: 'fpp_jy_order_status',
             type: 'select',
             search: true
         }, {
@@ -86,7 +96,18 @@ class propertyRight extends React.Component {
                 {
                     this.props.buildList({
                         fields,
-                        pageCode: 610765
+                        pageCode: 610765,
+                        btnEvent: {
+                            examine: (selectedRowKeys, selectedRows) => {
+                                if (!selectedRowKeys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else if (selectedRowKeys.length > 1) {
+                                    showWarnMsg('请选择一条记录');
+                                } else {
+                                    this.props.history.push(`/house/atNightOrder/examine?v=1&code=${selectedRows[0].code}`);
+                                }
+                            }
+                        }
                     })
                 }
             </div>
