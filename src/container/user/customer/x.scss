@@ -1,0 +1,61 @@
+.content{}
+.chat-container {
+  .chat-wrap {
+    .msgflow {
+      height: 455px;
+      .onemsg {
+        padding: 0 15px;
+        .msgbody {
+          padding-left: 49px;
+          .msgcon {
+            max-width: 250px;
+          }
+        }
+        .nameWrap samp {
+          font-size: 12px;
+        }
+        .nameWrap samp.name {
+          font-size: 14px;
+          margin-left: 10px;
+        }
+        &.my {
+          .msghead {
+            padding-right: 40px;
+          }
+          .msgbody {
+            padding-right: 49px;
+          }
+        }
+      }
+    }
+    .btnWrap,
+    .msgImg,
+    .openPic {
+      height: 65px;
+    }
+    .msgImg {
+      width: 28px;
+      right: 123px;
+      background-size: 28px;
+    }
+    .openPic {
+      width: 28px;
+      right: 85px;
+      background-size: 28px;
+    }
+    .send {
+      width: 50px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+      top: 18px;
+      right: 20px;
+    }
+    .msgedit {
+      width: 440px;
+      height: 45px;
+      padding: 8px 170px 5px 20px;
+      margin-top: 10px;
+    }
+  }
+}

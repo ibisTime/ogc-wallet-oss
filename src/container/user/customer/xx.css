@@ -1,0 +1,76 @@
+.com-content {
+    margin-top: -5px;
+}
+
+.textarea {
+    background-color: #2F49A5;
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #333;
+}
+
+.chat-container {
+    overflow: hidden;
+}
+
+.msgflow {
+    background-color: #F7F7F7;
+    height: 470px;
+    overflow-y: auto;
+    width: 600px;
+    padding: 20px 0;
+}
+
+.btnWrap {
+    height: 60px;
+    background-color: #fff;
+    position: relative;
+}
+
+.btnWrap .msgedit {
+    height: 60px;
+    padding: 17px 300px 8px 20px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.btnWrap .msgImg {
+    background-color: #FFFFFF;
+    width: 30px;
+    height: 60px;
+    border: 1px solid #FFFFFF;
+    background-position: center;
+    background-image: url('../images/fsbq.png');
+    background-repeat: no-repeat;
+    right: 160px;
+    -webkit-background-size: 30px 30px;
+    background-size: 30px;
+}
+.btnWrap .openPic {
+    background-color: #FFFFFF;
+    width: 30px;
+    height: 60px;
+    border: 1px solid #FFFFFF;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../images/tj.png');
+    right: 110px;
+    -webkit-background-size: 30px 30px;
+    background-size: 30px;
+}
+
+.btnWrap .send {
+    background-color: #FFFFFF;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #FFFFFF;
+    background-repeat: no-repeat;
+    right: 160px;
+    -webkit-background-size: 30px 30px;
+    background-size: 30px;
+}
