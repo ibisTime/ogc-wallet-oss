@@ -18,6 +18,9 @@ const store = createStore(reducers, compose(
 const Login = asyncComponent(() => import('container/login/login'));
 const Dashboard = asyncComponent(() => import('component/dashboard/dashboard'));
 
+// 集成生态-超级节点
+const SuperNode = asyncComponent(() => import('container/superNode/superNode'));
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -25,6 +28,7 @@ ReactDOM.render(
                 <AuthRoute></AuthRoute>
                 <Switch>
                     <Route path='/login' component={Login}></Route>
+                    <Route path='/superNode' component={SuperNode}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>

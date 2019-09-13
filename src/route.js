@@ -1275,6 +1275,45 @@ const ROUTES = [
     {
         path: '/applicationAnalysis/dropsWater',
         component: asyncComponent(() => import('container/statisticalAnalysis/applicationAnalysis/dropsWater'))
+    },
+    // 生态管理
+    // 三方应用
+    {
+        path: '/threePartyApp/category',
+        component: asyncComponent(() => import('container/ecology/threePartyApp/category'))
+    },
+    {
+        path: '/threePartyApp/category/addedit',
+        component: asyncComponent(() => import('container/ecology/threePartyApp/category-addedit'))
+    },
+    // 集成生态
+    {
+        path: '/integrationEcology/integrationEcology',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/integrationEcology/integrationEcology'))
+    },
+    {
+        path: '/integrationEcology/userQuery',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/userQuery/userQuery'))
+    },
+    {
+        path: '/integrationEcology/transferAccountsQuery',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/transferAccountsQuery/transferAccountsQuery'))
+    },
+    {
+        path: '/integrationEcology/bonusPool',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/bonusPool/bonusPool'))
+    },
+    {
+        path: '/integrationEcology/bonusPoolRecord',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/bonusPoolRecord/bonusPoolRecord'))
+    },
+    {
+        path: '/integrationEcology/configure',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/configure/configure'))
+    },
+    {
+        path: '/integrationEcology/configure/addedit',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/configure/configure-addedit'))
     }
 ];
 

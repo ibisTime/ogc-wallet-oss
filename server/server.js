@@ -10,13 +10,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use('/api', function (req, res) {
     //金米研发
-    let url = 'http://m.jinmidev.hichengdai.com/api';
+    // let url = 'http://m.jinmidev.hichengdai.com/api';
     // 金米测试
     // let url = 'http://m.jinmitest.hichengdai.com/api';
     // 金米预发布
     // let url = 'http://m.jinmistage.hichengdai.com/api';
     // 金米线上
     // let url = 'http://m.jinmi.club/api';
+
+    //
+    let url = 'http://120.26.6.213:1801/wu-wallet-msp/api'
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);

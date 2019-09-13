@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/system/dataDict';
+} from '@redux/ecology/integrationEcology/configure/configure';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.systemDataDict,
+        ...state.IntegrationEcologyConfigure,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,42 +22,40 @@ import {showWarnMsg} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class DataDict extends React.Component {
+class Configure extends React.Component {
     render() {
         const fields = [{
-            field: 'parentKey',
-            title: '种类',
+            field: 'dappname',
+            title: '应用名称',
+            render: (v, data) => {
+                return data.openDapp.name;
+            }
+        }, {
+            field: 'dappId',
+            title: '应用',
             type: 'select',
-            listCode: '630036',
-            params: {
-                type: 0
-            },
-            keyName: 'dkey',
-            valueName: 'dvalue',
+            pageCode: '625455',
+            keyName: 'id',
+            valueName: '{{name.DATA}}',
+            searchName: 'name',
+            noVisible: true,
             search: true
         }, {
-            field: 'dkey',
-            title: '字典键'
+            field: 'name',
+            title: '名称'
         }, {
-            field: 'dvalue',
-            title: '字典值'
-        }, {
-            field: 'updater',
-            title: '更新人'
-        }, {
-            field: 'updateDatetime',
-            title: '更新时间',
-            type: 'datetime'
+            field: 'value',
+            title: '数值'
         }, {
             field: 'remark',
             title: '备注'
         }];
         return this.props.buildList({
             fields,
-            pageCode: 630035,
+            pageCode: 625013,
             rowKey: 'id'
         });
     }
 }
 
-export default DataDict;
+export default Configure;

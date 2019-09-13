@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/system/dataDict';
+} from '@redux/ecology/threePartyApp/category';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.systemDataDict,
+        ...state.ThreePartyAppCategory,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,20 +22,9 @@ import {showWarnMsg} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class DataDict extends React.Component {
+class Category extends React.Component {
     render() {
         const fields = [{
-            field: 'parentKey',
-            title: '种类',
-            type: 'select',
-            listCode: '630036',
-            params: {
-                type: 0
-            },
-            keyName: 'dkey',
-            valueName: 'dvalue',
-            search: true
-        }, {
             field: 'dkey',
             title: '字典键'
         }, {
@@ -55,9 +44,12 @@ class DataDict extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: 630035,
-            rowKey: 'id'
+            rowKey: 'id',
+            searchParams: {
+                parentKey: 'dopen_app_category'
+            }
         });
     }
 }
 
-export default DataDict;
+export default Category;

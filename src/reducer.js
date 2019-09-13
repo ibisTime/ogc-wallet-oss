@@ -264,6 +264,18 @@ import {TAG} from './redux/managent/tag';
 // 统计分析
 import {DropsWater} from './redux/statisticalAnalysis/dropsWater';
 
+// 生态管理
+// 三方应用
+import {ThreePartyAppCategory} from './redux/ecology/threePartyApp/category';
+
+// 集成生态
+import {IntegrationEcology} from './redux/ecology/integrationEcology/integrationEcology/integrationEcology';
+import {IntegrationEcologyUserQuery} from './redux/ecology/integrationEcology/userQuery/userQuery';
+import {IntegrationEcologyTransferAccountsQuery} from './redux/ecology/integrationEcology/transferAccountsQuery/transferAccountsQuery';
+import {IntegrationEcologyBonusPool} from './redux/ecology/integrationEcology/bonusPool/bonusPool';
+import {IntegrationEcologyBonusPoolRecord} from './redux/ecology/integrationEcology/bonusPoolRecord/bonusPoolRecord';
+import {IntegrationEcologyConfigure} from './redux/ecology/integrationEcology/configure/configure';
+
 export default combineReducers({
     user,
     menu,
@@ -459,5 +471,15 @@ export default combineReducers({
     quantitativeAiOrderIncome,
     quantitativeAiRule,
     // 统计分析
-    DropsWater
+    DropsWater,
+    // 生态管理
+    // 三方应用
+    ThreePartyAppCategory,
+    // 集成生态
+    IntegrationEcology,
+    IntegrationEcologyUserQuery,
+    IntegrationEcologyBonusPool,
+    IntegrationEcologyTransferAccountsQuery,
+    IntegrationEcologyBonusPoolRecord,
+    IntegrationEcologyConfigure
 });
