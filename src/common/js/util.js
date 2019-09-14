@@ -186,9 +186,10 @@ export function H0M0S0Date(date, days, format) {
  * @param money 金额
  * @param format 小数点后几位
  * @param coin 币种
- * @param isRe 是否去零
+ * @param noComma 是否千分化
+ * @param noZero 是否去零
  */
-export function moneyFormat(money, format, coin, isRe = false) {
+export function moneyFormat(money, format, coin, noComma = false, noZero = false) {
     let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
     let flag = false;// 是否是负数
     if (isNaN(money)) {
@@ -209,10 +210,17 @@ export function moneyFormat(money, format, coin, isRe = false) {
     // 金额格式化 金额除以unit并保留format位小数
     money = new BigDecimal(money.toString());
     money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_DOWN).toString();
-    // 是否去零
-    if (isRe) {
+    // 是否需要千分化
+    if (!noComma && !noZero) {
         var re = /\d{1,3}(?=(\d{3})+$)/g;
         money = money.replace(/^(\d+)((\.\d+)?)$/, (s, s1, s2) => (s1.replace(re, '$&,') + s2));
+    }
+    // 是否去零
+    if (noZero) {
+      money = money.replace(/(-?\d+)\.0+$/, '$1');
+      if (!/^-?\d+$/.test(money)) {
+        money = money.replace(/(.+[^0]+)0+$/, '$1');
+      }
     }
     if (flag) {
         money = '-' + money;

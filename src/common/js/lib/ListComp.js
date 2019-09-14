@@ -16,6 +16,7 @@ import fetch from 'common/js/fetch';
 import CSearchSelect from 'component/cSearchSelect/cSearchSelect';
 import locale from './date-locale';
 import cityData from './city';
+import { isUndefined } from '../util';
 
 moment.locale('zh-cn');
 const FormItem = Form.Item;
@@ -466,11 +467,13 @@ export default class ListComponent extends React.Component {
             } else {
                 this.props.setTableData(data.list);
             }
-            this.props.setPagination({
-                ...pagination,
-                current,
-                total: data.totalCount
-            });
+            if(isUndefined(this.options.noPagination)) {
+                this.props.setPagination({
+                    ...pagination,
+                    current,
+                    total: data.totalCount
+                });
+            }
         }).catch(this.props.cancelFetching);
     }
 
@@ -511,7 +514,7 @@ export default class ListComponent extends React.Component {
                         columns={this.columns}
                         rowKey={record => record[this.options.rowKey]}
                         dataSource={useData}
-                        pagination={this.props.pagination}
+                        pagination={this.options.noPagination ? false : this.props.pagination}
                         loading={this.props.fetching}
                         onChange={this.handleTableChange}
                         onRowClick={this.handleRowClick}

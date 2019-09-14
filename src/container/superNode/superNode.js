@@ -10,10 +10,17 @@ import { addMsg } from 'common/js/im/message';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
 import asyncComponent from 'component/async-component/async-component';
+import './superNode.less';
 
 const { SubMenu, Item } = Menu;
 const { Header, Content, Sider } = Layout;
+
+// 路由
 const Home = asyncComponent(() => import('./home/home'));
+const BonusPool = asyncComponent(() => import('./bonusPool/bonusPool'));
+const Node = asyncComponent(() => import('./node/node'));
+const Periods = asyncComponent(() => import('./node/node'));
+const Customer = asyncComponent(() => import('./node/node'));
 
 @connect(
     state => ({ ...state.user, ...state.menu, ...state.message, loginName: state.user.loginName }),
@@ -22,20 +29,47 @@ const Home = asyncComponent(() => import('./home/home'));
 class SuperNode extends React.Component {
     constructor(props) {
         super(props);
+        let topMenuCode = '';
+        if (sessionStorage.getItem('superMenuName')) {
+            topMenuCode = sessionStorage.getItem('superMenuName');
+        } else {
+            topMenuCode = 'home';
+        }
         this.state = {
             editPwdVisible: false,
-            topMenuCode: 'home',
+            // 选择的菜单key
+            topMenuCode: topMenuCode,
             topMenuList: [{
                 code: 'home',
                 name: '首页'
             }, {
-                code: 'hlc',
-                name: '红利池',
-                url: '/hlc'
+                code: 'bonusPool',
+                name: '红利池'
+            }, {
+                code: 'periods',
+                name: '期数'
+            }, {
+                code: 'node',
+                name: '节点'
+            }, {
+                code: 'customer',
+                name: '用户'
             }],
+            // 菜单对应跳转url
             top2SubObj: {
                 'home': '/superNode',
-                'hlc': '/hlc'
+                'bonusPool': '/superNode/bonusPool',
+                'periods': '/superNode/periods',
+                'node': '/superNode/node',
+                'customer': '/superNode/customer'
+            },
+            // 菜单对应的route 为了只刷新内容部分
+            topPageRouter: {
+                'home': Home,
+                'bonusPool': BonusPool,
+                'periods': Periods,
+                'node': Node,
+                'customer': Customer
             }
         };
     }
@@ -54,8 +88,7 @@ class SuperNode extends React.Component {
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
-                    this.props.setTopCode('');
-                    this.props.history.push('/');
+                    this.props.history.push('/superNode');
                 }}>
                     <img style ={{width: '72%', height: '40px'}} src={logo}/>
                 </div>
@@ -85,7 +118,6 @@ class SuperNode extends React.Component {
     getContent() {
         let rightCls = 'right-layout full-right-content';
         let props = {
-            className: 'right-content'
         };
         if (this.props.location.pathname === '/') {
             props.style = {
@@ -97,7 +129,11 @@ class SuperNode extends React.Component {
             <Layout className={rightCls}>
                 <Content {...props}>
                     <Switch>
-                        <Route path='/' exact component={SuperNode}></Route>
+                        <Route path='/superNode' exact component={Home}></Route>
+                        <Route path='/superNode/node' exact component={Node}></Route>
+                        <Route path='/superNode/bonusPool' exact component={BonusPool}></Route>
+                        <Route path='/superNode/customer' exact component={Customer}></Route>
+                        <Route path='/superNode/periods' exact component={Periods}></Route>
                     </Switch>
                 </Content>
             </Layout>
@@ -109,6 +145,7 @@ class SuperNode extends React.Component {
             this.setState({
                 'topMenuCode': key
             });
+            sessionStorage.setItem('superMenuName', key);
             let url = this.state.top2SubObj[key];
             this.props.history.push(url);
         }
@@ -219,7 +256,7 @@ class SuperNode extends React.Component {
 
     render() {
         return (
-            <Layout className="dashboard-layout" style={{minHeight: '100%'}}>
+            <Layout className="dashboard-layout superNode-wrapper" style={{minHeight: '100%'}}>
                 {this.getHeader()}
                 <Layout>
                     {this.getContent()}

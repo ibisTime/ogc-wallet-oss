@@ -29,6 +29,10 @@ ReactDOM.render(
                 <Switch>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/superNode' component={SuperNode}></Route>
+                    <Route path='/superNode/node' exact component={SuperNode}></Route>
+                    <Route path='/superNode/bonusPool' exact component={SuperNode}></Route>
+                    <Route path='/superNode/customer' exact component={SuperNode}></Route>
+                    <Route path='/superNode/periods' exact component={SuperNode}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>

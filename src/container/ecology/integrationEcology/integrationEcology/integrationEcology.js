@@ -15,7 +15,10 @@ class IntegrationEcology extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            urlList: {
+                'dapp_super_node': '/superNode'
+            }
         };
     }
 
@@ -36,9 +39,9 @@ class IntegrationEcology extends React.Component {
 
     onCardClick = (item) => {
         let url = '';
-        if(item.action === '8') {
-            url = window.location.protocol + '//' + window.location.host + item.url;
-        } else if(item.action === '9') {
+        if(this.state.urlList[item.url]) {
+            url = window.location.protocol + '//' + window.location.host + this.state.urlList[item.url];
+        } else {
             url = item.url;
         }
         window.open(url);

@@ -276,6 +276,9 @@ import {IntegrationEcologyBonusPool} from './redux/ecology/integrationEcology/bo
 import {IntegrationEcologyBonusPoolRecord} from './redux/ecology/integrationEcology/bonusPoolRecord/bonusPoolRecord';
 import {IntegrationEcologyConfigure} from './redux/ecology/integrationEcology/configure/configure';
 
+// 超级节点
+import {SuperNodeHome} from './redux/superNode/home';
+
 export default combineReducers({
     user,
     menu,
@@ -481,5 +484,7 @@ export default combineReducers({
     IntegrationEcologyBonusPool,
     IntegrationEcologyTransferAccountsQuery,
     IntegrationEcologyBonusPoolRecord,
-    IntegrationEcologyConfigure
+    IntegrationEcologyConfigure,
+    // 超级节点
+    SuperNodeHome
 });
