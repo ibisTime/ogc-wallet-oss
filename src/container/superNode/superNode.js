@@ -9,8 +9,7 @@ import { clearUser, getUserId, getUserName } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
-import asyncComponent from 'component/async-component/async-component';
-import './superNode.less';
+import './superNode.css';
 import ROUTES from './route';
 
 const { SubMenu, Item } = Menu;
