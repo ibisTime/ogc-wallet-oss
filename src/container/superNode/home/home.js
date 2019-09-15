@@ -119,7 +119,9 @@ class Home extends React.Component {
                     <div className="homeTop-right">
                         <div className="superNode-title-wrap">
                             <p>实时入池记录</p>
-                            <samp>查看更多</samp>
+                            <samp onClick={() => {
+                                this.props.history.push(`/superNode/bonusPool`);
+                            }}>查看更多</samp>
                         </div>
                         <div className="homeTop-right-table">
                             {

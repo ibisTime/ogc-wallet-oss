@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/superNode/customer';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat, formatMoney} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, formatMoney, getQueryString} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -23,6 +23,10 @@ import {showWarnMsg, dateTimeFormat, moneyFormat, formatMoney} from 'common/js/u
     }
 )
 class Customer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = getQueryString('code', this.props.location.search);
+    }
     render() {
         const fields = [{
             field: 'nodePlanName',
@@ -86,6 +90,9 @@ class Customer extends React.Component {
                     this.props.buildList({
                         fields,
                         pageCode: 610640,
+                        searchParams: {
+                            nodePlanCode: this.code
+                        },
                         buttons: [{
                             code: 'incomeRecord',
                             name: '收益记录',

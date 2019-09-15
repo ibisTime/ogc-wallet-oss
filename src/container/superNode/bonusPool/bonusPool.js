@@ -102,8 +102,8 @@ class BonusPool extends React.Component {
         Promise.all([
             // 调额
             fetch(610660, {
-                adjustCount,
-                poolId: moneyParse(Number(this.state.selectedData.id), '', this.state.selectedData.symbol)
+                adjustCount: Number(moneyParse(adjustCount, '', this.state.selectedData.symbol)),
+                poolId: this.state.selectedData.id
             })
         ]).then(() => {
             this.setState({

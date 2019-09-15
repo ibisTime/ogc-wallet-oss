@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/superNode/node';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, getQueryString} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -23,6 +23,10 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
     }
 )
 class Node extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = getQueryString('code', this.props.location.search);
+    }
     render() {
         const fields = [{
             field: 'nodePlanName',
@@ -120,6 +124,9 @@ class Node extends React.Component {
                     this.props.buildList({
                         fields,
                         pageCode: 610610,
+                        searchParams: {
+                            nodePlanCode: this.code
+                        },
                         buttons: [{
                             code: 'voteDistribution',
                             name: '节点投票分布',
