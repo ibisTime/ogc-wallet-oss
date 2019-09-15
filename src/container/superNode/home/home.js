@@ -128,6 +128,7 @@ class Home extends React.Component {
                                     pageCode: 610670,
                                     rowKey: 'id',
                                     noPagination: true,
+                                    noSelect: true,
                                     searchParams: {
                                         limit: 4
                                     }

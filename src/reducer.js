@@ -278,6 +278,16 @@ import {IntegrationEcologyConfigure} from './redux/ecology/integrationEcology/co
 
 // 超级节点
 import {SuperNodeHome} from './redux/superNode/home';
+import {SuperNodeBonusPool} from './redux/superNode/bonusPool';
+import {SuperNodeBonusPoolRecordIntoNow} from './redux/superNode/bonusPoolRecordIntoNow';
+import {SuperNodeBonusPoolRecordIntoPrev} from './redux/superNode/bonusPoolRecordIntoPrev';
+import {SuperNodePeriods} from './redux/superNode/periods';
+import {SuperNodeNode} from './redux/superNode/node';
+import {SuperNodeCustomer} from './redux/superNode/customer';
+import {SuperNodeVoteDistribution} from './redux/superNode/voteDistribution';
+import {SuperNodeVoteRecord} from './redux/superNode/voteRecord';
+import {SuperNodeBuyBackRecord} from './redux/superNode/buyBackRecord';
+import {SuperNodeIncomeRecord} from './redux/superNode/incomeRecord';
 
 export default combineReducers({
     user,
@@ -486,5 +496,15 @@ export default combineReducers({
     IntegrationEcologyBonusPoolRecord,
     IntegrationEcologyConfigure,
     // 超级节点
-    SuperNodeHome
+    SuperNodeHome,
+    SuperNodeBonusPool,
+    SuperNodeBonusPoolRecordIntoNow,
+    SuperNodeBonusPoolRecordIntoPrev,
+    SuperNodePeriods,
+    SuperNodeNode,
+    SuperNodeCustomer,
+    SuperNodeVoteDistribution,
+    SuperNodeVoteRecord,
+    SuperNodeBuyBackRecord,
+    SuperNodeIncomeRecord
 });

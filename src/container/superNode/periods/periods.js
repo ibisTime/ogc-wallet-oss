@@ -1,62 +1,116 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Card, Row, Col, Button, Spin, message} from 'antd';
-import {initData} from '@redux/BTC-finance/platformAccount/platformAccount';
-import {moneyFormat, getQueryString} from 'common/js/util';
-import fetch from 'common/js/fetch';
+import {
+    setTableData,
+    setPagination,
+    setBtnList,
+    setSearchParam,
+    clearSearchParam,
+    doFetching,
+    cancelFetching,
+    setSearchData
+} from '@redux/superNode/periods';
+import {listWrapper} from 'common/js/build-list';
+import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
 
-const {Meta} = Card;
-
-@connect(
-    state => state.IntegrationEcology,
-    {initData}
+@listWrapper(
+    state => ({
+        ...state.SuperNodePeriods,
+        parentCode: state.menu.subMenuCode
+    }),
+    {
+        setTableData, clearSearchParam, doFetching, setBtnList,
+        cancelFetching, setPagination, setSearchParam, setSearchData
+    }
 )
 class Periods extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            data1: [],
-            symbol: getQueryString('symbol'),
-            accountTypeSQ: `SYS_USER_WITHDRAW`,
-            accountTypeCold: `SYS_USER_COLD`,
-            accountTypeLhlc: `SYS_USER_LHLC`,
-            accountTypeYK: `SYS_USER_INCOME`,
-            accountTypeYY: `SYS_USER_MARKETING`
-        };
-    }
-
-    // componentDidMount() {
-    //     this.props.initData(this.state.symbol);
-    // }
-    componentDidMount() {
-        // 直接请求
-        // this.props.initData(this.state.symbol);
-        // Promise.all([
-        //     fetch(802832, {
-        //         currency: this.state.symbol
-        //         // type: 'B'
-        //     })
-        // ]).then(([res1]) => {
-        //     this.setState({
-        //         data: res1,
-        //         data1: res1.totalUnSettleAmount
-        //     });
-        //     this.totalUnSettleAmount = res1.totalUnSettleAmount;
-        //     this.unSettleAmount = moneyFormat(res1.totalUnSettleAmount, '', this.state.symbol);
-        // }).catch(() => this.setState(
-        //     {fetching: false}));
-    }
-
-    onCardClick = (urlname) => {
-        let url = window.location.protocol + '//' + window.location.host + urlname;
-        window.open(url);
-    }
-
     render() {
+        const fields = [{
+            field: 'planName',
+            title: '期数名称'
+        }, {
+            field: 'batch1',
+            title: '批次',
+            render: (v, data) => {
+                return data.batch;
+            }
+        }, {
+            field: 'batch',
+            title: '期数',
+            type: 'select',
+            pageCode: '610601',
+            keyName: 'batch',
+            valueName: '{{batch.DATA}}',
+            searchName: 'batch',
+            search: true,
+            noVisible: true
+        }, {
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'snode_plan_status'
+        }, {
+            field: 'divideCycle',
+            title: '分红周期'
+        }, {
+            field: 'startDate',
+            title: '开始时间',
+            type: 'datetime'
+        }, {
+            field: 'endDate',
+            title: '结束时间',
+            type: 'datetime'
+        }, {
+            field: 'fullAmount',
+            title: '满标数额',
+            render: (v, data) => {
+                return moneyFormat(v, '', 'PSC');
+            }
+        }, {
+            field: 'startAmount',
+            title: '起购数额',
+            render: (v, data) => {
+                return moneyFormat(v, '', 'PSC');
+            }
+        }, {
+            field: 'stepAmount',
+            title: '递增数额',
+            render: (v, data) => {
+                return moneyFormat(v, '', 'PSC');
+            }
+        }];
         return (
-            <div>
-                期数
+            <div className="superNode-listPage-wrapper">
+                {
+                    this.props.buildList({
+                        fields,
+                        pageCode: 610601,
+                        buttons: [{
+                            code: 'userDistribution',
+                            name: '用户分布',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                if (!selectedRowKeys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else if (selectedRowKeys.length > 1) {
+                                    showWarnMsg('请选择一条记录');
+                                } else {
+                                    this.props.history.push(`/superNode/customer?code=${selectedRowKeys[0]}`);
+                                }
+                            }
+                        }, {
+                            code: 'nodeDetail',
+                            name: '节点明细',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                if (!selectedRowKeys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else if (selectedRowKeys.length > 1) {
+                                    showWarnMsg('请选择一条记录');
+                                } else {
+                                    this.props.history.push(`/superNode/node?code=${selectedRowKeys[0]}`);
+                                }
+                            }
+                        }]
+                    })
+                }
             </div>
         );
     }

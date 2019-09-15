@@ -191,42 +191,62 @@ export function H0M0S0Date(date, days, format) {
  */
 export function moneyFormat(money, format, coin, noComma = false, noZero = false) {
     let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
-    let flag = false;// 是否是负数
     if (isNaN(money)) {
         return '-';
     } else {
         Number(money);
     }
-    if (money < 0) {
-        money = -1 * money;
-        flag = true;
-    }
-    // 如果有币种coin 则默认为8位  如果没有则默认格式为2位小数
-    if (coin && isUndefined(format)) {
-        format = 8;
-    } else if (isUndefined(format) || typeof format === 'object') {
-        format = 2;
-    }
-    // 金额格式化 金额除以unit并保留format位小数
-    money = new BigDecimal(money.toString());
-    money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_DOWN).toString();
-    // 是否需要千分化
-    if (!noComma && !noZero) {
-        var re = /\d{1,3}(?=(\d{3})+$)/g;
-        money = money.replace(/^(\d+)((\.\d+)?)$/, (s, s1, s2) => (s1.replace(re, '$&,') + s2));
-    }
-    // 是否去零
-    if (noZero) {
-      money = money.replace(/(-?\d+)\.0+$/, '$1');
-      if (!/^-?\d+$/.test(money)) {
-        money = money.replace(/(.+[^0]+)0+$/, '$1');
-      }
-    }
-    if (flag) {
-        money = '-' + money;
-    }
-    return money;
+    return formatMoney(money, format, unit, noComma, noZero);
 }
+
+/**
+ * 金额格式转化 根据币种格式化金额
+ * @param money 金额
+ * @param format 小数点后几位
+ * @param unitNum 格式化位数
+ * @param noComma 是否千分化
+ * @param noZero 是否去零
+ */
+export function formatMoney(money, format, unitNum, noComma = false, noZero = false) {
+  let unit = !unitNum ? '1000' : unitNum;
+  let flag = false;// 是否是负数
+  if (isNaN(money)) {
+    return '-';
+  } else {
+    Number(money);
+  }
+  if (money < 0) {
+    money = -1 * money;
+    flag = true;
+  }
+  // 如果有币种coin 则默认为8位  如果没有则默认格式为2位小数
+  if (isUndefined(format)) {
+    format = 8;
+  } else if (isUndefined(format) || typeof format === 'object') {
+    format = 2;
+  }
+  // 金额格式化 金额除以unit并保留format位小数
+  money = new BigDecimal(money.toString());
+  money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_DOWN).toString();
+
+  // 是否去零
+  if (noZero) {
+    money = money.replace(/(-?\d+)\.0+$/, '$1');
+    if (!/^-?\d+$/.test(money)) {
+      money = money.replace(/(.+[^0]+)0+$/, '$1');
+    }
+  }
+  // 是否需要千分化
+  if (!noComma) {
+    var re = /\d{1,3}(?=(\d{3})+$)/g;
+    money = money.replace(/^(\d+)((\.\d+)?)$/, (s, s1, s2) => (s1.replace(re, '$&,') + s2));
+  }
+  if (flag) {
+    money = '-' + money;
+  }
+  return money;
+}
+
 export function moneyBTC(money, format, coin, isRe = false) {
   let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000000';
   let flag = false;// 是否是负数
@@ -262,7 +282,7 @@ export function moneyBTC(money, format, coin, isRe = false) {
 /**
  * 金额放大 根据币种的单位把金额放大
  * @param money
- * @param format
+ * @param rate
  * @param coin 币种
  */
 export function moneyParse(money, rate, coin) {

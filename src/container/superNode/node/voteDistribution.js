@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/superNode/customer';
+} from '@redux/superNode/voteDistribution';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat, formatMoney} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, getQueryString} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.SuperNodeCustomer,
+        ...state.SuperNodeVoteDistribution,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,11 +22,56 @@ import {showWarnMsg, dateTimeFormat, moneyFormat, formatMoney} from 'common/js/u
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Customer extends React.Component {
+class VoteDistribution extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = getQueryString('code', this.props.location.search);
+    }
     render() {
         const fields = [{
             field: 'nodePlanName',
             title: '期数'
+        }, {
+            field: 'orderNo',
+            title: '节点',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '1号节点'
+            }, {
+                key: '2',
+                value: '2号节点'
+            }, {
+                key: '3',
+                value: '3号节点'
+            }, {
+                key: '4',
+                value: '4号节点'
+            }, {
+                key: '5',
+                value: '5号节点'
+            }, {
+                key: '6',
+                value: '6号节点'
+            }, {
+                key: '7',
+                value: '7号节点'
+            }, {
+                key: '8',
+                value: '8号节点'
+            }, {
+                key: '9',
+                value: '9号节点'
+            }, {
+                key: '10',
+                value: '10号节点'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            render: (v, data) => {
+                return v + '号节点';
+            },
+            search: true
         }, {
             field: 'userId',
             title: '用户',
@@ -41,33 +86,9 @@ class Customer extends React.Component {
             // }
         }, {
             field: 'totalAmount',
-            title: '投票总数',
+            title: '总票数',
             render: (v, data) => {
-                return moneyFormat(v, '', data.symbol) + ' PSC';
-            }
-        }, {
-            field: 'totalIncome',
-            title: '总收益',
-            render: (v, data) => {
-                return formatMoney(v, '', '10000000') + ' USDT';
-            }
-        }, {
-            field: 'nodeIncome',
-            title: '节点分红',
-            render: (v, data) => {
-                return formatMoney(v, '', '10000000') + ' USDT';
-            }
-        }, {
-            field: 'inviteIncome',
-            title: '推荐奖励',
-            render: (v, data) => {
-                return formatMoney(v, '', '10000000') + ' USDT';
-            }
-        }, {
-            field: 'totalTax',
-            title: '总税金',
-            render: (v, data) => {
-                return moneyFormat(v, '', 'PSC') + ' PSC';
+                return moneyFormat(v, '', 'PSC');
             }
         }, {
             field: 'batch',
@@ -79,26 +100,29 @@ class Customer extends React.Component {
             searchName: 'batch',
             search: true,
             noVisible: true
+        }, {
+            field: 'totalRedeemAmount',
+            title: '赎回总数',
+            render: (v, data) => {
+                return moneyFormat(v, '', 'PSC');
+            }
+        }, {
+            field: 'symbol',
+            title: '币种',
+            render: (v, data) => {
+                return 'PSC';
+            }
         }];
         return (
             <div className="superNode-listPage-wrapper">
                 {
                     this.props.buildList({
                         fields,
-                        pageCode: 610640,
+                        pageCode: 610630,
+                        searchParams: {
+                            nodeCode: this.code
+                        },
                         buttons: [{
-                            code: 'incomeRecord',
-                            name: '收益记录',
-                            handler: (selectedRowKeys, selectedRows) => {
-                                if (!selectedRowKeys.length) {
-                                    showWarnMsg('请选择记录');
-                                } else if (selectedRowKeys.length > 1) {
-                                    showWarnMsg('请选择一条记录');
-                                } else {
-                                    this.props.history.push(`/superNode/incomeRecord?userId=${selectedRows[0].userId}`);
-                                }
-                            }
-                        }, {
                             code: 'voteRecord',
                             name: '投票记录',
                             handler: (selectedRowKeys, selectedRows) => {
@@ -107,7 +131,7 @@ class Customer extends React.Component {
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/superNode/voteRecord?userId=${selectedRows[0].userId}`);
+                                    this.props.history.push(`/superNode/voteRecord?code=${selectedRowKeys[0]}`);
                                 }
                             }
                         }, {
@@ -119,8 +143,14 @@ class Customer extends React.Component {
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/superNode/buyBackRecord?userId=${selectedRows[0].userId}`);
+                                    this.props.history.push(`/superNode/buyBackRecord?code=${selectedRowKeys[0]}`);
                                 }
+                            }
+                        }, {
+                            code: 'goBack',
+                            name: '返回',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                this.props.history.push(`/superNode/node`);
                             }
                         }]
                     })
@@ -130,4 +160,4 @@ class Customer extends React.Component {
     }
 }
 
-export default Customer;
+export default VoteDistribution;

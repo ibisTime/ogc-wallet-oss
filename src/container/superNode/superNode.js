@@ -11,16 +11,10 @@ import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
 import asyncComponent from 'component/async-component/async-component';
 import './superNode.less';
+import ROUTES from './route';
 
 const { SubMenu, Item } = Menu;
 const { Header, Content, Sider } = Layout;
-
-// 路由
-const Home = asyncComponent(() => import('./home/home'));
-const BonusPool = asyncComponent(() => import('./bonusPool/bonusPool'));
-const Node = asyncComponent(() => import('./node/node'));
-const Periods = asyncComponent(() => import('./node/node'));
-const Customer = asyncComponent(() => import('./node/node'));
 
 @connect(
     state => ({ ...state.user, ...state.menu, ...state.message, loginName: state.user.loginName }),
@@ -30,7 +24,7 @@ class SuperNode extends React.Component {
     constructor(props) {
         super(props);
         let topMenuCode = '';
-        if (sessionStorage.getItem('superMenuName')) {
+        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/superNode') {
             topMenuCode = sessionStorage.getItem('superMenuName');
         } else {
             topMenuCode = 'home';
@@ -62,14 +56,6 @@ class SuperNode extends React.Component {
                 'periods': '/superNode/periods',
                 'node': '/superNode/node',
                 'customer': '/superNode/customer'
-            },
-            // 菜单对应的route 为了只刷新内容部分
-            topPageRouter: {
-                'home': Home,
-                'bonusPool': BonusPool,
-                'periods': Periods,
-                'node': Node,
-                'customer': Customer
             }
         };
     }
@@ -129,15 +115,17 @@ class SuperNode extends React.Component {
             <Layout className={rightCls}>
                 <Content {...props}>
                     <Switch>
-                        <Route path='/superNode' exact component={Home}></Route>
-                        <Route path='/superNode/node' exact component={Node}></Route>
-                        <Route path='/superNode/bonusPool' exact component={BonusPool}></Route>
-                        <Route path='/superNode/customer' exact component={Customer}></Route>
-                        <Route path='/superNode/periods' exact component={Periods}></Route>
+                        {
+                            this.getRoutes()
+                        }
                     </Switch>
                 </Content>
             </Layout>
         );
+    }
+
+    getRoutes() {
+        return ROUTES.map(v => <Route key={v.path} exact path={v.path} component={v.component}></Route>);
     }
 
     handleTopMenuClick = ({key}) => {
