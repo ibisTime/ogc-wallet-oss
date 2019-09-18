@@ -34,7 +34,6 @@ const ROUTES = [
         path: '/system/user/role',
         component: asyncComponent(() => import('container/system/user/assign'))
     },
-
     //  系统参数
     {
         path: '/system/sysPara',
@@ -224,7 +223,6 @@ const ROUTES = [
         path: '/public/rateExplain/addedit',
         component: asyncComponent(() => import('container/public/rateExplain/rateExplain-addedit'))
     },
-
     // 业务管理
     // 客户管理
     // 会员查询
@@ -374,7 +372,6 @@ const ROUTES = [
         path: '/user/channelDealerSettleHistory',
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory-commissions'))
     },
-
     // 系统管理--系统设置--OTC标签设置
     {
         path: '/system/otcTag',
@@ -496,7 +493,6 @@ const ROUTES = [
         path: '/trade/finishOrder/addedit',
         component: asyncComponent(() => import('container/trade/finishOrder/finishOrder-addedit'))
     },
-
     // 仲裁订单管理
     // 仲裁订单
     {
@@ -529,7 +525,6 @@ const ROUTES = [
         path: '/trade/notifierofwithdrawal/addedit',
         component: asyncComponent(() => import('container/trade/notifierofwithdrawal/notifierofwithdrawal-addedit'))
     },
-
     // 承兑商管理
     // 收款方式
     {
@@ -576,7 +571,6 @@ const ROUTES = [
         path: '/accept/cancelOrder/addedit',
         component: asyncComponent(() => import('container/biz/accept/cancelOrder/cancelOrder-addedit'))
     },
-
     // 行情管理
     // BTC行情
     {
@@ -862,7 +856,6 @@ const ROUTES = [
         path: '/bizReceive/receiveQuery/addedit',
         component: asyncComponent(() => import('container/biz/redPacket/receiveQuery-addedit'))
     },
-
     // BTC财务管理
     // 查询币种
     {
@@ -933,7 +926,6 @@ const ROUTES = [
         path: '/BTC-finance/diviAddress/addedit',
         component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-addedit'))
     },
-
     // 充币管理
     // 线下充值
     {
@@ -948,13 +940,11 @@ const ROUTES = [
         path: '/BTC-finance/offlineRecharge/detail',
         component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRecharge-detail'))
     },
-
     // 充值查询
     {
         path: '/BTC-finance/offlineRechargeQuery',
         component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRechargeQuery'))
     },
-
     // 提币管理
     // 提币地址
     {
@@ -966,7 +956,6 @@ const ROUTES = [
         path: '/BTC-finance/supplyAddress',
         component: asyncComponent(() => import('container/BTC-finance/supplyAddress/supplyAddress'))
     },
-
     // 散取审批
     {
         path: '/BTC-finance/TBunderline',
@@ -1023,7 +1012,6 @@ const ROUTES = [
         path: '/BTC-finance/broadcastfailurequery/addedit',
         component: asyncComponent(() => import('container/BTC-finance/broadcastfailurequery/TBunderline-addedit'))
     },
-
     // 归集地址
     {
         path: '/BTC-finance/GJAddress',
@@ -1155,19 +1143,19 @@ const ROUTES = [
         path: '/managent/tag/addedit',
         component: asyncComponent(() => import('container/managent/tag/tag-addedit'))
     },
-  // 闪兑管理
+    // 闪兑管理
     {
-      path: '/trading/sdRecord',
-      component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord'))
+        path: '/trading/sdRecord',
+        component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord'))
     },
     {
         path: '/trading/sdRecord/detail',
         component: asyncComponent(() => import('container/biz/trading/sdRecord/sdRecord-detail'))
     },
-   {
+    {
         path: '/trading/tradMessage',
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage'))
-   },
+    },
     {
         path: '/trading/tradMessage/addedit',
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-addedit'))
@@ -1304,9 +1292,21 @@ const ROUTES = [
         path: '/rightsInterests/preservationOrder',
         component: asyncComponent(() => import('container/rightsInterests/preservationOrder/preservationOrder'))
     },
+    // {
+    //     path: '/rightsInterests/preservationOrder/addedit',
+    //     component: asyncComponent(() => import('container/rightsInterests/preservationOrder/preservationOrder-addedit'))
+    // },
     {
-        path: '/rightsInterests/preservationOrder/addedit',
-        component: asyncComponent(() => import('container/rightsInterests/preservationOrder/preservationOrder-addedit'))
+        path: '/bonusPools/bonusPools',
+        component: asyncComponent(() => import('container/rightsInterests/bonusPools/bonusPools'))
+    },
+    {
+        path: '/bonusPools/bonusPoolsRules',
+        component: asyncComponent(() => import('container/rightsInterests/bonusPools/bonusPoolsRules'))
+    },
+    {
+        path: '/bonusPools/weighted',
+        component: asyncComponent(() => import('container/rightsInterests/weighted/weighted'))
     }
 ];
 

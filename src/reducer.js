@@ -269,6 +269,9 @@ import {rightsInterestsLevelMessage} from './redux/rightsInterests/levelMessage/
 import {rightsInterestsRightsMessage} from './redux/rightsInterests/rightsMessage/rightsMessage';
 import {rightsInterestsPreservation} from './redux/rightsInterests/preservation/preservation';
 import {rightsInterestsPreservationOrder} from './redux/rightsInterests/preservationOrder/preservationOrder';
+import {rightsInterestsBonusPools} from './redux/rightsInterests/bonusPools/bonusPools';
+import {rightsInterestsBonusPoolsRules} from './redux/rightsInterests/bonusPools/bonusPoolsRules';
+import {rightsInterestsWeighted} from './redux/rightsInterests/weighted/weighted';
 
 export default combineReducers({
     user,
@@ -469,5 +472,8 @@ export default combineReducers({
     rightsInterestsLevelMessage,
     rightsInterestsRightsMessage,
     rightsInterestsPreservation,
-    rightsInterestsPreservationOrder
+    rightsInterestsPreservationOrder,
+    rightsInterestsBonusPools,
+    rightsInterestsBonusPoolsRules,
+    rightsInterestsWeighted
 });

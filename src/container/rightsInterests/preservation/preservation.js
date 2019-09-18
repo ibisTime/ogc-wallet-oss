@@ -30,9 +30,6 @@ import fetch from 'common/js/fetch';
 class RightsInterestsPreservation extends React.Component {
     render() {
         const fields = [{
-            title: '显示顺序',
-            field: 'orderNo'
-        }, {
             title: '产品名称',
             field: 'name',
             search: true
@@ -55,6 +52,9 @@ class RightsInterestsPreservation extends React.Component {
         }, {
             title: '有效期限（天）',
             field: 'daysLimit'
+        }, {
+            title: '显示顺序',
+            field: 'orderNo'
         }, {
             title: '显示位置',
             field: 'location',
