@@ -1275,6 +1275,38 @@ const ROUTES = [
     {
         path: '/applicationAnalysis/dropsWater',
         component: asyncComponent(() => import('container/statisticalAnalysis/applicationAnalysis/dropsWater'))
+    },
+    {
+        path: '/rightsInterests/levelMessage',
+        component: asyncComponent(() => import('container/rightsInterests/levelMessage/levelMessage'))
+    },
+    {
+        path: '/rightsInterests/levelMessage/addedit',
+        component: asyncComponent(() => import('container/rightsInterests/levelMessage/levelMessage-addedit'))
+    },
+    {
+        path: '/rightsInterests/rightsMessage',
+        component: asyncComponent(() => import('container/rightsInterests/rightsMessage/rightsMessage'))
+    },
+    {
+        path: '/rightsInterests/rightsMessage/addedit',
+        component: asyncComponent(() => import('container/rightsInterests/rightsMessage/rightsMessage-addedit'))
+    },
+    {
+        path: '/rightsInterests/preservation',
+        component: asyncComponent(() => import('container/rightsInterests/preservation/preservation'))
+    },
+    {
+        path: '/rightsInterests/preservation/addedit',
+        component: asyncComponent(() => import('container/rightsInterests/preservation/preservation-addedit'))
+    },
+    {
+        path: '/rightsInterests/preservationOrder',
+        component: asyncComponent(() => import('container/rightsInterests/preservationOrder/preservationOrder'))
+    },
+    {
+        path: '/rightsInterests/preservationOrder/addedit',
+        component: asyncComponent(() => import('container/rightsInterests/preservationOrder/preservationOrder-addedit'))
     }
 ];
 

@@ -264,6 +264,12 @@ import {TAG} from './redux/managent/tag';
 // 统计分析
 import {DropsWater} from './redux/statisticalAnalysis/dropsWater';
 
+// 权益权重
+import {rightsInterestsLevelMessage} from './redux/rightsInterests/levelMessage/levelMessage';
+import {rightsInterestsRightsMessage} from './redux/rightsInterests/rightsMessage/rightsMessage';
+import {rightsInterestsPreservation} from './redux/rightsInterests/preservation/preservation';
+import {rightsInterestsPreservationOrder} from './redux/rightsInterests/preservationOrder/preservationOrder';
+
 export default combineReducers({
     user,
     menu,
@@ -459,5 +465,9 @@ export default combineReducers({
     quantitativeAiOrderIncome,
     quantitativeAiRule,
     // 统计分析
-    DropsWater
+    DropsWater,
+    rightsInterestsLevelMessage,
+    rightsInterestsRightsMessage,
+    rightsInterestsPreservation,
+    rightsInterestsPreservationOrder
 });
