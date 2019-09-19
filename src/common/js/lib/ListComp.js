@@ -290,8 +290,8 @@ export default class ListComponent extends React.Component {
             this.ownerReset();
             this.intervalStart.state.value = '';
             this.intervalEnd.state.value = '';
-            sessionStorage.removeItem('machineOrderNumStart');
-            sessionStorage.removeItem('machineOrderNumEnd');
+            sessionStorage.removeItem(this.startEnd[0]);
+            sessionStorage.removeItem(this.startEnd[1]);
         }
         this.props.clearSearchParam();
     };
@@ -549,10 +549,11 @@ export default class ListComponent extends React.Component {
     getItemByType(type, item) {
         if(item.intervalParams) {
             this.ownerReset = item.intervalParams.reset;
+            this.startEnd = item.startEnd;
         }
         if(this.intervalStart && this.intervalEnd) {
-            let machineOrderNumStart = sessionStorage.getItem('machineOrderNumStart') || '';
-            let machineOrderNumEnd = sessionStorage.getItem('machineOrderNumEnd') || '';
+            let machineOrderNumStart = sessionStorage.getItem(this.startEnd[0]) || '';
+            let machineOrderNumEnd = sessionStorage.getItem(this.startEnd[1]) || '';
             if(machineOrderNumStart) {
                 this.intervalStart.state.value = machineOrderNumStart;
             }

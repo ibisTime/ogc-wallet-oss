@@ -81,10 +81,10 @@ class Customer extends React.Component {
             field: 'mobile',
             title: '手机号',
             search: true
-        }, {
-            field: 'email',
-            title: '邮箱',
-            search: true
+        // }, {
+        //     field: 'email',
+        //     title: '邮箱',
+        //     search: true
         }, {
             field: 'inviteCode',
             title: '邀请码'
@@ -97,6 +97,9 @@ class Customer extends React.Component {
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             search: true,
+            params: {
+                kind: 'C'
+            },
             render: (v, data) => {
                 if (data.refereeUser) {
                     let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
@@ -165,6 +168,7 @@ class Customer extends React.Component {
                     end: this.machineEnd,
                     reset: this.machineReset
                 },
+                startEnd: ['machineOrderNumStart', 'machineOrderNumEnd'],
                 noVisible: true
             }, {
                 field: 'realName',
@@ -199,8 +203,8 @@ class Customer extends React.Component {
                       rowKey: 'userId',
                       pageCode: '805120',
                       singleSelect: false,
-                      searchParam: {
-                          limit: 20
+                      searchParams: {
+                          kind: 'C'
                       },
                       btnEvent: {
                           active: (selectedRowKeys, selectedRows) => {

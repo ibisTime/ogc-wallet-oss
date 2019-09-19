@@ -273,6 +273,11 @@ import {rightsInterestsBonusPools} from './redux/rightsInterests/bonusPools/bonu
 import {rightsInterestsBonusPoolsRules} from './redux/rightsInterests/bonusPools/bonusPoolsRules';
 import {rightsInterestsWeighted} from './redux/rightsInterests/weighted/weighted';
 
+// 商城管理
+import {storeShopCategory} from './redux/biz/store/shopCategory';
+import {storeShopMessage} from './redux/biz/store/shopMessage';
+import {storeShopOrder} from './redux/biz/store/shopOrder';
+
 export default combineReducers({
     user,
     menu,
@@ -475,5 +480,9 @@ export default combineReducers({
     rightsInterestsPreservationOrder,
     rightsInterestsBonusPools,
     rightsInterestsBonusPoolsRules,
-    rightsInterestsWeighted
+    rightsInterestsWeighted,
+    // 商城管理
+    storeShopCategory,
+    storeShopMessage,
+    storeShopOrder
 });

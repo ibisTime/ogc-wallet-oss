@@ -1307,6 +1307,26 @@ const ROUTES = [
     {
         path: '/bonusPools/weighted',
         component: asyncComponent(() => import('container/rightsInterests/weighted/weighted'))
+    },
+    {
+        path: '/store/shopCategory',
+        component: asyncComponent(() => import('container/biz/store/shopCategory/shopCategory'))
+    },
+    {
+        path: '/store/shopCategory/addedit',
+        component: asyncComponent(() => import('container/biz/store/shopCategory/shopCategory-addedit'))
+    },
+    {
+        path: '/store/shopMessage',
+        component: asyncComponent(() => import('container/biz/store/shopMessage/shopMessage'))
+    },
+    {
+        path: '/store/shopMessage/addedit',
+        component: asyncComponent(() => import('container/biz/store/shopMessage/shopMessage-addedit'))
+    },
+    {
+        path: '/store/shopOrder',
+        component: asyncComponent(() => import('container/biz/store/shopOrder/shopOrder'))
     }
 ];
 
