@@ -38,13 +38,20 @@ class IntegrationEcology extends React.Component {
     }
 
     onCardClick = (item) => {
-        let url = '';
-        if(this.state.urlList[item.url]) {
-            url = window.location.protocol + '//' + window.location.host + this.state.urlList[item.url];
-        } else {
-            url = item.url;
+        console.log(item);
+        if(item.name === 'IGO') {
+            let username = localStorage.getItem('username');
+            let tokenIgo = localStorage.getItem('token_igo');
+            window.open(`http://oss.igotest.psctoken.com/verificationPSC?username=${username}&token=${tokenIgo}`);
+        }else {
+            let url = '';
+            if(this.state.urlList[item.url]) {
+                url = window.location.protocol + '//' + window.location.host + this.state.urlList[item.url];
+            } else {
+                url = item.url;
+            }
+            window.open(url);
         }
-        window.open(url);
     }
 
     render() {
@@ -54,7 +61,7 @@ class IntegrationEcology extends React.Component {
                 <Row>
                     {
                         data.length > 0 && data.map((item) => (
-                            <Col style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}} key='1'>
+                            <Col key={item.id} style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}} key='1'>
                                 <Card onClick={
                                     () => this.onCardClick(item)
                                 }>

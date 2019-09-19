@@ -19,7 +19,7 @@ app.use('/api', function (req, res) {
     // let url = 'http://m.jinmi.club/api';
 
     //
-    let url = 'http://120.26.6.213:1801/wu-wallet-msp/api'
+    let url = 'http://oss.psctest.psctoken.com/api'
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
@@ -42,6 +42,6 @@ app.use('/api', function (req, res) {
     console.log(time + ': {' + 'code: ' + _body.code + ', json: ' + _body.json + '}');
 });
 
-app.listen(5891, function () {
+app.listen(5899, function () {
     console.log('Node app start at port 5891')
 });

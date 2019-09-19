@@ -117,7 +117,6 @@ class TBAddress extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802515',
             searchParams: {
                 symbol: currency
             },

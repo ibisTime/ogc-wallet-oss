@@ -3,6 +3,10 @@ import { message, Modal } from 'antd';
 import moment from 'moment';
 import { PIC_PREFIX, DATE_FORMAT, MONTH_FORMAT, DATETIME_FORMAT } from './config';
 import './lib/BigDecimal';
+import CryptoJS from 'crypto-js';
+
+const defaultKey = '23d$%Q#kjwgsl@@$#@'; // 默认的key
+const defaultIv = 'ogiGRWos02oH22301#'; // 默认的key 偏移量
 
 /**
  * 保存用户登录信息
@@ -859,4 +863,78 @@ export function getCoinType(coin) {
   }
   var type = getCoinData()[coin].type;
   return type;
+}
+
+/**
+ * 加密方法
+ * @param: str 需要加密的字符
+ * @param: key 密钥
+ * @param: iv 密钥偏移量
+ */
+export function encrypt(str, key, iv) {
+  const keyStr = key ? encParse(key) : encParse(defaultKey);
+  const ivStr = iv ? encParse(iv) : encParse(defaultIv);
+
+  const encryptedStr = CryptoJS.AES.encrypt(str, keyStr, {
+    iv: ivStr,
+    mode: CryptoJS.mode.CFB,
+    padding: CryptoJS.pad.Pkcs7
+  });
+
+  // 直接toString()是base64格式的字符串
+  // ciphertext.toString() 是128位的字符串
+  return encryptedStr.toString();
+}
+
+/**
+ * 解密方法
+ * @param: str 需要解密的字符
+ * @param: key 密钥
+ * @param: iv 密钥偏移量
+ */
+export function decrypt(str, key, iv) {
+  const keyStr = key ? encParse(key) : encParse(defaultKey);
+  const ivStr = iv ? encParse(iv) : encParse(defaultIv);
+
+  // 判断str是否为base64,如果不是就要转base64，是了就不能再转
+  const flag = isBase64(str);
+  if (!flag) {
+    // 转为base64之前要先转16进制
+    str = CryptoJS.enc.Hex.parse(str);
+    // 只有base64格式的字符才能被解密
+    str = CryptoJS.enc.Base64.stringify(str);
+  }
+
+  const encryptedStr = CryptoJS.AES.decrypt(str, keyStr, {
+    iv: ivStr,
+    mode: CryptoJS.mode.CFB,
+    padding: CryptoJS.pad.Pkcs7
+  });
+  return encryptedStr.toString(CryptoJS.enc.Utf8);
+}
+/**
+ * 处理密钥字符格式
+ * @param: key 需要转格式的字符
+ */
+export function encParse(key) {
+  // key = CryptoJs.enc.Utf8.parse(key);
+  return CryptoJS.enc.Latin1.parse(key);
+}
+/**
+ * 使用MD5 hash字符串
+ * @param: str 需要加密的字符串
+ * @param: times 需要hash的次数
+ */
+export function md5(str, times = 1) {
+  for (let i = 0; i < times; i++) {
+    str = CryptoJS.MD5(str).toString();
+  }
+  return str;
+}
+/**
+ * 判断是否是Base64格式的字符串
+ */
+export function isBase64(str) {
+  let reg = /^(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=))|(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==))$/;
+  return reg.test(str);
 }

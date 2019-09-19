@@ -1,5 +1,5 @@
 import fetch from 'common/js/fetch';
-import {setUser, getUserId, setRoleInfo, getRoleCode, getUserName} from 'common/js/util';
+import {setUser, getUserId, setRoleInfo, getRoleCode, getUserName, encrypt, decrypt} from 'common/js/util';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGOUT = 'LOGOUT';
@@ -94,6 +94,8 @@ export function login({loginName, loginPwd, type = 'P'}) {
             type
         }).then(data => {
             setUser(data);
+            localStorage.setItem('username', 'admin');
+            localStorage.setItem('token_igo', encrypt('888888'));
             dispatch(loginSuccess());
         }).then(() => {
             return _getUser().then(data => {

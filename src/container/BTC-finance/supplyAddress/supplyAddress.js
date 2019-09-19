@@ -95,7 +95,6 @@ class SupplyAddress extends React.Component {
     return this.props.buildList({
       fields,
       rowKey: 'id',
-      pageCode: '802605',
       searchParams: {
         symbol: currency
       },
