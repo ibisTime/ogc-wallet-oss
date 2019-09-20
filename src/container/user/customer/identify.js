@@ -94,18 +94,10 @@ class CustomerIdentify extends React.Component {
             )
         }, {
             field: 'realName2',
-            title: '推荐人姓名',
+            title: '推荐人',
             render(v, d) {
                 if(d.user && d.user.refereeUser) {
-                    return d.user.refereeUser.realName;
-                }
-            }
-        }, {
-            field: 'idNo1',
-            title: '推荐人电话',
-            render(v, d) {
-                if(d.user && d.user.refereeUser) {
-                    return d.user.refereeUser.mobile;
+                    return `${d.user.refereeUser.realName}-${d.user.refereeUser.mobile}`;
                 }
             }
         }, {
