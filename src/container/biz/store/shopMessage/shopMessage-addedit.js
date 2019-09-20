@@ -13,11 +13,11 @@ class ShopMessageAddedit extends DetailUtil {
   render() {
     const fields = [{
       field: 'name',
-      title: '名称',
+      title: '产品名称',
       required: true
     }, {
         field: 'type',
-        title: '类型',
+        title: '所属类别',
         required: true,
         type: 'select',
         listCode: '808007',
@@ -39,31 +39,31 @@ class ShopMessageAddedit extends DetailUtil {
         }
     }, {
         field: 'advPic',
-        title: ' 广告图',
+        title: '列表展示图',
         type: 'img',
         single: true,
         required: true
     }, {
         field: 'pic',
-        title: ' 商品图片',
+        title: '商品banner图',
         type: 'img',
         required: true
     }, {
         field: 'specsName1',
-        title: ' 规格1',
+        title: '规格1',
         required: true
     }, {
         field: 'specsName2',
-        title: ' 规格2'
+        title: '规格2'
     }, {
         field: 'tag',
-        title: ' 标签',
+        title: '标签',
         type: 'select',
         key: 'mall_product_tag',
         multiple: true
     }, {
         field: 'video',
-        title: ' 视频',
+        title: '视频',
         type: 'file'
     }, {
         title: '产品规格列表',
@@ -89,7 +89,6 @@ class ShopMessageAddedit extends DetailUtil {
             }, {
                 title: '原价(USDT)',
                 field: 'originalPrice',
-                amount: true,
                 required: true
             }, {
                 title: '折扣(0-1)',

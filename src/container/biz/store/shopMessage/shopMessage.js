@@ -103,7 +103,7 @@ class ShopMessage extends React.Component {
   render() {
     const fields = [{
         field: 'name',
-        title: '商品名称',
+        title: '产品名称',
         search: true
     }, {
         field: 'type',
@@ -161,8 +161,6 @@ class ShopMessage extends React.Component {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
                             showWarnMsg('请选择一条记录');
-                        } else if (selectedRows[0].status === '3') {
-                            showWarnMsg('该状态下不能进行该操作');
                         } else {
                             this.props.history.push(`/store/shopMessage/addedit?code=${selectedRowKeys[0]}`);
                         }
