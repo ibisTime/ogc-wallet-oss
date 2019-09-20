@@ -44,18 +44,23 @@ class ShopMessageAddedit extends DetailUtil {
         single: true,
         required: true
     }, {
+        field: 'pic',
+        title: ' 商品图片',
+        type: 'img',
+        required: true
+    }, {
         field: 'specsName1',
         title: ' 规格1',
         required: true
     }, {
         field: 'specsName2',
-        title: ' 规格2',
-        required: true
+        title: ' 规格2'
     }, {
-        field: 'pic',
-        title: ' 商品图片',
-        type: 'img',
-        required: true
+        field: 'tag',
+        title: ' 标签',
+        type: 'select',
+        key: 'mall_product_tag',
+        multiple: true
     }, {
         field: 'video',
         title: ' 视频',
@@ -107,8 +112,7 @@ class ShopMessageAddedit extends DetailUtil {
                 required: true
             }, {
                 title: '规格2',
-                field: 'specsVal2',
-                required: true
+                field: 'specsVal2'
             }, {
                 title: '重量(kg)',
                 field: 'weight',
