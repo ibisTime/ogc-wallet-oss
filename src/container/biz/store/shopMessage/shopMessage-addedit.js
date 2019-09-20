@@ -82,7 +82,7 @@ class ShopMessageAddedit extends DetailUtil {
                 number: true,
                 required: true
             }, {
-                title: '原价',
+                title: '原价(USDT)',
                 field: 'originalPrice',
                 amount: true,
                 required: true
@@ -92,14 +92,15 @@ class ShopMessageAddedit extends DetailUtil {
                 required: true,
                 help: '比如，0.1就是指打1折'
             }, {
-                title: '运费',
+                title: '运费(USDT)',
                 field: 'postFee',
                 number: true,
                 required: true
             }, {
                 title: '发货地（省）',
                 field: 'province',
-                required: true
+                required: true,
+                type: 'provSelect'
             }, {
                 title: '规格1',
                 field: 'specsVal1',

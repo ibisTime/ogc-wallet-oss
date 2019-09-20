@@ -81,10 +81,10 @@ class Customer extends React.Component {
             field: 'mobile',
             title: '手机号',
             search: true
-        // }, {
-        //     field: 'email',
-        //     title: '邮箱',
-        //     search: true
+        }, {
+            field: 'email',
+            title: '邮箱',
+            search: true
         }, {
             field: 'inviteCode',
             title: '邀请码'
@@ -203,9 +203,6 @@ class Customer extends React.Component {
                       rowKey: 'userId',
                       pageCode: '805120',
                       singleSelect: false,
-                      searchParams: {
-                          kind: 'C'
-                      },
                       btnEvent: {
                           active: (selectedRowKeys, selectedRows) => {
                               if (!selectedRowKeys.length) {
