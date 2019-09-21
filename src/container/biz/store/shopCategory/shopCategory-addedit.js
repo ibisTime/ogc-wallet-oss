@@ -16,11 +16,21 @@ class ShopCategoryAddedit extends DetailUtil {
       title: '名称',
       required: true
     }, {
+        field: 'orderNo',
+        title: '显示顺序',
+        required: true
+    }, {
         field: 'pic',
         title: '图片',
         type: 'img',
-        single: true,
-        required: true
+        single: true
+    }, {
+        field: 'status',
+        title: '状态',
+        type: 'select',
+        key: 'mall_category_status',
+        hidden: !this.code,
+        readonly: this.code
     }];
     return this.buildDetail({
       fields,

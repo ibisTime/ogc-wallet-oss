@@ -78,7 +78,7 @@ class RightsInterestsPreservation extends React.Component {
             title: '创建人',
             field: 'creatorName'
         }, {
-            title: '创建人时间',
+            title: '创建时间',
             field: 'createTime',
             type: 'datetime'
         }];

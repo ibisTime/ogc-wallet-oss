@@ -26,11 +26,11 @@ class LevelMessageAddedit extends DetailUtil {
             field: 'level',
             readonly: true
         }, {
-            title: '持币数量大于多少',
+            title: '持币数量大于多少(包含)',
             field: 'scopeStart',
             required: true
         }, {
-            title: '持币数量小于多少',
+            title: '持币数量小于多少(不包含)',
             field: 'scopeEnd',
             required: true
         }];

@@ -9,6 +9,12 @@ class ShopMessageAddedit extends DetailUtil {
     super(props);
     this.code = getQueryString('code', this.props.location.search);
     this.view = getQueryString('v', this.props.location.search);
+    this.firstUpdate = true;
+    this.shopKind = '';
+    this.state = {
+        ...this.state,
+        shopLocation: ''
+    };
   }
   render() {
     const fields = [{
@@ -27,6 +33,30 @@ class ShopMessageAddedit extends DetailUtil {
             status: '1'
         }
     }, {
+        field: 'kind',
+        title: '产品类型',
+        required: true,
+        type: 'select',
+        key: 'mall_product_kind',
+        onChange: (v) => {
+            this.shopKind = v;
+            this.setState({
+                shopLocation: v
+            });
+        },
+        formatter: (v) => {
+            if(v && this.code) {
+                if(this.firstUpdate) {
+                    this.firstUpdate = false;
+                    this.shopKind = v;
+                    this.setState({
+                        shopLocation: v
+                    });
+                }
+            }
+            return v;
+        }
+    }, {
         field: 'userLevel',
         title: '用户专享等级',
         required: true,
@@ -38,6 +68,21 @@ class ShopMessageAddedit extends DetailUtil {
           limit: 100
         }
     }, {
+        field: 'video',
+        title: '产品视频',
+        type: 'file'
+    }, {
+        field: 'orderNo',
+        title: '展示顺序',
+        required: true
+    }, {
+        field: 'location',
+        title: '展示位置',
+        type: 'select',
+        key: 'product_location',
+        required: true,
+        hidden: this.state.shopLocation === '2'
+    }, {
         field: 'advPic',
         title: '列表展示图',
         type: 'img',
@@ -45,26 +90,22 @@ class ShopMessageAddedit extends DetailUtil {
         required: true
     }, {
         field: 'pic',
-        title: '商品banner图',
+        title: '商品详情介绍图(多)',
         type: 'img',
         required: true
     }, {
         field: 'specsName1',
-        title: '规格1',
+        title: '规格名称1',
         required: true
     }, {
         field: 'specsName2',
-        title: '规格2'
+        title: '规格名称2'
     }, {
         field: 'tag',
         title: '标签',
         type: 'select',
         key: 'mall_product_tag',
         multiple: true
-    }, {
-        field: 'video',
-        title: '视频',
-        type: 'file'
     }, {
         title: '产品规格列表',
         field: 'productSpecsList',
@@ -82,6 +123,12 @@ class ShopMessageAddedit extends DetailUtil {
                 field: 'name',
                 required: true
             }, {
+                title: '图片',
+                field: 'pic',
+                required: true,
+                single: true,
+                type: 'img'
+            }, {
                 title: '库存',
                 field: 'quantity',
                 number: true,
@@ -89,12 +136,26 @@ class ShopMessageAddedit extends DetailUtil {
             }, {
                 title: '原价(USDT)',
                 field: 'originalPrice',
-                required: true
+                required: true,
+                readonly: this.shopKind === '2',
+                render: (v) => {
+                    return this.shopKind === '2' ? '0' : v;
+                },
+                formatter: (v) => {
+                    return this.shopKind === '2' ? '0' : v;
+                }
             }, {
                 title: '折扣(0-1)',
                 field: 'discount',
                 required: true,
-                help: '比如，0.1就是指打1折'
+                help: '比如，0.1就是指打1折',
+                readonly: this.shopKind === '2',
+                render: (v) => {
+                    return this.shopKind === '2' ? '0' : v;
+                },
+                formatter: (v) => {
+                    return this.shopKind === '2' ? '0' : v;
+                }
             }, {
                 title: '运费(USDT)',
                 field: 'postFee',
@@ -103,8 +164,10 @@ class ShopMessageAddedit extends DetailUtil {
             }, {
                 title: '发货地（省）',
                 field: 'province',
-                required: true,
                 type: 'provSelect'
+            }, {
+                title: '重量(kg)',
+                field: 'weight'
             }, {
                 title: '规格1',
                 field: 'specsVal1',
@@ -112,16 +175,6 @@ class ShopMessageAddedit extends DetailUtil {
             }, {
                 title: '规格2',
                 field: 'specsVal2'
-            }, {
-                title: '重量(kg)',
-                field: 'weight',
-                required: true
-            }, {
-                title: '图片',
-                field: 'pic',
-                required: true,
-                single: true,
-                type: 'img'
             }]
         },
         required: true
@@ -132,7 +185,8 @@ class ShopMessageAddedit extends DetailUtil {
         required: true
     }, {
         field: 'slogan',
-        title: ' 标语'
+        title: ' 标语',
+        required: true
     }, {
       field: 'remark',
       title: '备注'
@@ -144,8 +198,15 @@ class ShopMessageAddedit extends DetailUtil {
       detailCode: '808026',
       addCode: '808010',
       editCode: '808012',
-      beforeSubmit(params) {
+      beforeSubmit: (params) => {
         params.storeCode = 'SYS_JINMI_YOUXUAN';
+        if(this.shopKind === '2') {
+            params.productSpecsList.forEach(item => {
+                item.originalPrice = '0';
+                item.discount = '0';
+            });
+            params.location = '0';
+        }
         return params;
       }
     });

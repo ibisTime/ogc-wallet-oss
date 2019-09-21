@@ -1301,6 +1301,18 @@ const ROUTES = [
         component: asyncComponent(() => import('container/rightsInterests/bonusPools/bonusPools'))
     },
     {
+        path: '/bonusPools/bonusWeight',
+        component: asyncComponent(() => import('container/rightsInterests/bonusPools/bonusWeight'))
+    },
+    {
+        path: '/bonusPools/bonusRules',
+        component: asyncComponent(() => import('container/rightsInterests/bonusPools/bonusRules/bonusRules'))
+    },
+    {
+        path: '/bonusPools/bonusRules/addedit',
+        component: asyncComponent(() => import('container/rightsInterests/bonusPools/bonusRules/bonusRules-addedit'))
+    },
+    {
         path: '/bonusPools/bonusPoolsRules',
         component: asyncComponent(() => import('container/rightsInterests/bonusPools/bonusPoolsRules'))
     },

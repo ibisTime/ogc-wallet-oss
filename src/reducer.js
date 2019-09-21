@@ -270,7 +270,9 @@ import {rightsInterestsRightsMessage} from './redux/rightsInterests/rightsMessag
 import {rightsInterestsPreservation} from './redux/rightsInterests/preservation/preservation';
 import {rightsInterestsPreservationOrder} from './redux/rightsInterests/preservationOrder/preservationOrder';
 import {rightsInterestsBonusPools} from './redux/rightsInterests/bonusPools/bonusPools';
+import {rightsInterestsBonusWeight} from './redux/rightsInterests/bonusPools/bonusWeight';
 import {rightsInterestsBonusPoolsRules} from './redux/rightsInterests/bonusPools/bonusPoolsRules';
+import {bonusPoolsBonusRules} from './redux/rightsInterests/bonusPools/bonusRules';
 import {rightsInterestsWeighted} from './redux/rightsInterests/weighted/weighted';
 
 // 商城管理
@@ -479,7 +481,9 @@ export default combineReducers({
     rightsInterestsPreservation,
     rightsInterestsPreservationOrder,
     rightsInterestsBonusPools,
+    rightsInterestsBonusWeight,
     rightsInterestsBonusPoolsRules,
+    bonusPoolsBonusRules,
     rightsInterestsWeighted,
     // 商城管理
     storeShopCategory,

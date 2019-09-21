@@ -43,7 +43,7 @@ export default class CInput extends React.Component {
     });
     return flag;
   }
-  getInputProps(onChange, type, hidden, placeholder) {
+  getInputProps(onChange, type, hidden, placeholder, onKeyUp) {
     let t;
     if (hidden) {
       t = 'hidden';
@@ -63,11 +63,17 @@ export default class CInput extends React.Component {
         onChange(value);
       };
     }
+    if (onKeyUp) {
+        props.onKeyUp = (e) => {
+            const { value } = e.target;
+            onKeyUp(value);
+        };
+    }
     return props;
   }
   render() {
     const { label, field, rules, readonly, hidden, getFieldDecorator,
-      onChange, type, initVal, inline, title, placeholder } = this.props;
+      onChange, type, initVal, inline, title, placeholder, onKeyUp } = this.props;
     let layoutProps = inline ? {} : formItemLayout;
     return (
       <FormItem key={field} {...layoutProps} className={hidden ? 'hidden' : ''} label={title ? label : ''}>
@@ -77,7 +83,7 @@ export default class CInput extends React.Component {
             : getFieldDecorator(field, {
                 rules,
                 initialValue: initVal
-              })(<Input {...this.getInputProps(onChange, type, hidden, placeholder)} />)
+              })(<Input {...this.getInputProps(onChange, type, hidden, placeholder, onKeyUp)} />)
         }
       </FormItem>
     );

@@ -107,7 +107,7 @@ class RightsInterestsWeighted extends React.Component {
             search: true
         }, {
             title: '创建时间',
-            field: 'createDatetime',
+            field: 'createTime',
             type: 'datetime'
         }, {
             title: '实际结算时间',

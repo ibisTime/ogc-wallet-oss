@@ -55,41 +55,46 @@ class ShopOrder extends React.Component {
         },
         noVisible: true
     }, {
-        field: 'paySymbol',
-        title: '支付币种',
-        search: true
-    }, {
-        field: 'payAmount',
-        title: '支付金额',
+        field: 'amount',
+        title: '订单总额',
         render(v, d) {
-            return v && moneyFormat(v, '', d.paySymbol) + `(${d.paySymbol})`;
-        }
-    }, {
-        field: 'dkAmount',
-        title: '抵扣金额',
-        render(v) {
-            return v && moneyFormat(v, '', 'USDT') + '(USDT)';
+            return v && moneyFormat(v, '', d.priceSymbol) + `(${d.priceSymbol})`;
         }
     }, {
         field: 'postFee',
         title: '邮费',
-        render(v) {
-            return v && moneyFormat(v, '', 'USDT') + '(USDT)';
+        render(v, d) {
+            return v && moneyFormat(v, '', d.priceSymbol) + `(${d.priceSymbol})`;
         }
+    }, {
+        field: 'applyDatetime',
+        title: '下单时间',
+        type: 'datetime',
+        search: true,
+        rangedate: ['applyDatetimeStart', 'applyDatetimeEnd']
+    }, {
+        field: 'paySymbol',
+        title: '支付币种',
+        search: true
+    }, {
+        field: 'market',
+        title: '支付时行情'
+    }, {
+        field: 'payAmount',
+        title: '实际支付金额',
+        render(v, d) {
+            return v && moneyFormat(v, '', d.paySymbol) + `(${d.paySymbol})`;
+        }
+    }, {
+        field: 'payDatetime',
+        title: '支付时间',
+        type: 'datetime'
     }, {
         field: 'status',
         title: '状态',
         type: 'select',
         key: 'mall_order_status',
         search: true
-    }, {
-        field: 'payDatetime',
-        title: '支付时间',
-        type: 'datetime'
-    }, {
-        field: 'applyDatetime',
-        title: '下单时间',
-        type: 'datetime'
     }];
     return this.props.buildList({
         fields,

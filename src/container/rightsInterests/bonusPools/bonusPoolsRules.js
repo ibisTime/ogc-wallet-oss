@@ -40,11 +40,12 @@ class RightsInterestsBonusPoolsRules extends React.Component {
             render(v, d) {
                 return v && moneyFormat(v, '', d.symbol);
             }
-        }, {
-            title: '业务类型',
-            field: 'bizType',
-            type: 'select',
-            key: 'biz_handle'
+        // }, {
+        //     title: '业务类型',
+        //     field: 'bizType',
+        //     type: 'select',
+        //     key: 'pool_biz_type',
+        //     search: true
         }, {
             title: '关联业务编号',
             field: 'refNo'

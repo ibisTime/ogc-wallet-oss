@@ -21,33 +21,43 @@ class ShopOrderAddedit extends DetailUtil {
             return d.user && d.user.loginName;
         }
     }, {
-        field: 'paySymbol',
-        title: '支付币种',
-        search: true
-    }, {
-        field: 'payAmount',
-        title: '支付金额',
-        formatter(v, d) {
-            return v && moneyFormat(v, '', d.paySymbol) + ` ${d.paySymbol}`;
-        }
-    }, {
         field: 'amount',
-        title: 'USDT金额',
-        formatter(v) {
-            return v && moneyFormat(v, '', 'USDT') + ' USDT';
-        }
-    }, {
-        field: 'dkAmount',
-        title: '抵扣金额',
+        title: '订单总额',
         formatter(v, d) {
-            return v && moneyFormat(v, '', 'USDT') + ' USDT';
+            return v && moneyFormat(v, '', d.priceSymbol) + `(${d.priceSymbol})`;
         }
     }, {
         field: 'postFee',
         title: '邮费',
         formatter(v, d) {
-            return v && moneyFormat(v, '', 'USDT') + ' USDT';
+            return v && moneyFormat(v, '', d.priceSymbol) + `(${d.priceSymbol})`;
         }
+    }, {
+        field: 'paySymbol',
+        title: '支付币种'
+    }, {
+        field: 'market',
+        title: '支付时行情'
+    }, {
+        field: 'payAmount',
+        title: '实际支付金额',
+        formatter(v, d) {
+            return v && moneyFormat(v, '', d.paySymbol) + `(${d.paySymbol})`;
+        }
+    }, {
+        field: 'payDatetime',
+        title: '支付时间',
+        type: 'datetime'
+    }, {
+        field: 'applyDatetime',
+        title: '下单时间',
+        type: 'datetime'
+    }, {
+        field: 'status',
+        title: '订单状态',
+        type: 'select',
+        key: 'mall_order_status',
+        search: true
     }, {
         title: '订单商品列表',
         field: 'mallProductOrderList',
@@ -119,10 +129,6 @@ class ShopOrderAddedit extends DetailUtil {
         },
         required: true
     }, {
-        field: 'pdf',
-        title: '物流单',
-        type: 'file'
-    }, {
         field: 'receiver',
         title: '收货人'
     }, {
@@ -132,31 +138,21 @@ class ShopOrderAddedit extends DetailUtil {
         field: 'reAddress',
         title: '收货地址'
     }, {
+        field: 'pdf',
+        title: '物流单',
+        type: 'file'
+    }, {
         field: 'logisticsCode',
         title: '物流单号'
     }, {
         field: 'logisticsCompany',
         title: '物流公司'
     }, {
-        field: 'status',
-        title: '状态',
-        type: 'select',
-        key: 'mall_order_status',
-        search: true
-    }, {
         field: 'signer',
         title: '签收人'
     }, {
         field: 'signDatetime',
         title: '签收时间',
-        type: 'datetime'
-    }, {
-        field: 'payDatetime',
-        title: '支付时间',
-        type: 'datetime'
-    }, {
-        field: 'applyDatetime',
-        title: '下单时间',
         type: 'datetime'
     }];
     return this.buildDetail({

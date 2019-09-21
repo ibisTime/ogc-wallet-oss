@@ -384,6 +384,7 @@ export default class DetailComp extends React.Component {
       label: this.getLabel(item),
       readonly: item.readonly,
       onChange: item.onChange,
+      onKeyUp: item.onKeyUp,
       placeholder: item.placeholder,
       getFieldError: this.props.form.getFieldError,
       getFieldValue: this.props.form.getFieldValue

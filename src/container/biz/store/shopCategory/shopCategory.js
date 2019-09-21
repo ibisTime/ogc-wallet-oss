@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Input, message, Form} from 'antd';
+import {Modal} from 'antd';
 import {
   setTableData,
   setPagination,
@@ -14,17 +14,6 @@ import {listWrapper} from 'common/js/build-list';
 import { showWarnMsg, showSucMsg, moneyFormat } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 4 },
-        sm: { span: 4 }
-    },
-    wrapperCol: {
-        xs: { span: 18 },
-        sm: { span: 18 }
-    }
-};
-
 @listWrapper(
   state => ({
     ...state.storeShopCategory,
@@ -36,36 +25,6 @@ const formItemLayout = {
   }
 )
 class ShopCategory extends React.Component {
-    state = {
-        ...this.state,
-        visible: false,
-        code: ''
-    };
-    handleOk = () => {
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                const hasMsg = message.loading('');
-                const { orderNo01 } = values;
-                fetch('808003', {
-                    orderNo: orderNo01,
-                    code: this.state.code
-                }).then(() => {
-                    hasMsg();
-                    this.props.form.resetFields();
-                    message.success('操作成功', 1.5);
-                    this.props.getPageData();
-                    this.setState({
-                        visible: false
-                    });
-                }, hasMsg).catch(hasMsg);
-            }
-        });
-    };
-    handleCancel = () => {
-        this.setState({
-            visible: false
-        });
-    };
   render() {
     const fields = [{
         field: 'name',
@@ -82,9 +41,9 @@ class ShopCategory extends React.Component {
         field: 'status',
         title: '状态',
         type: 'select',
-        key: 'mall_category_status'
+        key: 'mall_category_status',
+        search: true
     }];
-    const {getFieldDecorator} = this.props.form;
     return <div>
         {
             this.props.buildList({
@@ -92,23 +51,38 @@ class ShopCategory extends React.Component {
                 pageCode: 808005,
                 deleteCode: '808001',
                 btnEvent: {
-                    up: (selectedRowKeys) => {
+                    up: (selectedRowKeys, rows) => {
                         if (!selectedRowKeys.length) {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
                             showWarnMsg('请选择一条记录');
+                        } else if (rows[0].status === '1') {
+                            showWarnMsg('该状态下不能进行该操作');
                         } else {
-                            this.setState({
-                                code: selectedRowKeys[0],
-                                visible: true
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定上架？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    fetch('808003', {
+                                        code: selectedRowKeys[0]
+                                    }).then(() => {
+                                        this.props.form.resetFields();
+                                        showSucMsg('操作成功');
+                                        this.props.getPageData();
+                                    }).catch(this.props.cancelFetching);
+                                }
                             });
                         }
                     },
-                    down: (selectedRowKeys) => {
+                    down: (selectedRowKeys, rows) => {
                         if (!selectedRowKeys.length) {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
                             showWarnMsg('请选择一条记录');
+                        } else if (rows[0].status !== '1') {
+                            showWarnMsg('该状态下不能进行该操作');
                         } else {
                             Modal.confirm({
                                 okText: '确认',
@@ -130,28 +104,6 @@ class ShopCategory extends React.Component {
                 }
             })
         }
-        <Modal
-            title='上架'
-            width={600}
-            visible={this.state.visible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            okText="确定"
-            cancelText="取消"
-        >
-            <Form {...formItemLayout} onSubmit={this.handleOk}>
-                <Form.Item label="顺序">
-                    {getFieldDecorator('orderNo01', {
-                        rules: [
-                            {
-                                required: true,
-                                message: ' '
-                            }
-                        ]
-                    })(<Input placeholder="请输入顺序"/>)}
-                </Form.Item>
-            </Form>
-        </Modal>
     </div>;
   }
 }
