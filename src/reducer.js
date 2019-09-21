@@ -279,6 +279,7 @@ import {rightsInterestsWeighted} from './redux/rightsInterests/weighted/weighted
 import {storeShopCategory} from './redux/biz/store/shopCategory';
 import {storeShopMessage} from './redux/biz/store/shopMessage';
 import {storeShopOrder} from './redux/biz/store/shopOrder';
+import {storeShopRules} from './redux/biz/store/shopRules';
 
 export default combineReducers({
     user,
@@ -488,5 +489,6 @@ export default combineReducers({
     // 商城管理
     storeShopCategory,
     storeShopMessage,
-    storeShopOrder
+    storeShopOrder,
+    storeShopRules
 });

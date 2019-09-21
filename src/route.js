@@ -1337,6 +1337,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/store/shopMessage/shopMessage-addedit'))
     },
     {
+        path: '/store/shopRules',
+        component: asyncComponent(() => import('container/biz/store/shopRules/shopRules'))
+    },
+    {
         path: '/store/shopOrder',
         component: asyncComponent(() => import('container/biz/store/shopOrder/shopOrder'))
     },

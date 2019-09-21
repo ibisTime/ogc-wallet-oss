@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/rightsInterests/bonusPools/bonusRules';
+} from '@redux/biz/store/shopRules';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.bonusPoolsBonusRules,
+        ...state.storeShopRules,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {showWarnMsg, dateTimeFormat} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class BonusRules extends React.Component {
+class ShopRules extends React.Component {
     render() {
         const fields = [{
             field: 'remark',
@@ -38,7 +38,7 @@ class BonusRules extends React.Component {
                     rowKey: 'id',
                     pageCode: '630045',
                     searchParams: {
-                        type: 'weight'
+                        type: 'mall'
                     },
                     btnEvent: {
                         edit: (selectedRowKeys, selectedRows) => {
@@ -47,7 +47,7 @@ class BonusRules extends React.Component {
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/bonusPools/bonusRules/addedit?code=${selectedRowKeys[0]}&ctype=${selectedRows[0].ckey}&type=weight`);
+                                this.props.history.push(`/bonusPools/bonusRules/addedit?code=${selectedRowKeys[0]}&ctype=${selectedRows[0].ckey}&type=mall`);
                             }
                         }
                     }
@@ -57,4 +57,4 @@ class BonusRules extends React.Component {
     }
 }
 
-export default BonusRules;
+export default ShopRules;

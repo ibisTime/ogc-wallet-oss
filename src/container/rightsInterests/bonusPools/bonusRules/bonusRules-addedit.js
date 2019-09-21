@@ -9,6 +9,7 @@ class BonusRulesAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.type = getQueryString('type', this.props.location.search);
         this.cData = {
             ctype: getQueryString('ctype'),
             ckey: {
@@ -73,7 +74,7 @@ class BonusRulesAddedit extends DetailUtil {
             editCode: '630042',
             detailCode: '630046',
             beforeSubmit: function(data) {
-                data.ckey = 'weight';
+                data.ckey = this.type;
                 return data;
             }
         });
