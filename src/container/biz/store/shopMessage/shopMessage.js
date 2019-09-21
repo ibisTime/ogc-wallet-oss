@@ -51,6 +51,12 @@ class ShopMessage extends React.Component {
             status: '1'
         }
     }, {
+        field: 'kind',
+        title: '产品类型',
+        type: 'select',
+        key: 'mall_product_kind',
+        search: true
+    }, {
         field: 'specsName1',
         title: '规格1'
     }, {
