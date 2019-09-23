@@ -14,7 +14,8 @@ class BannerAddEdit extends DetailUtil {
             dkey: '',
             url: false,
             id: false,
-            ishidden: !!getQueryString('ishidden', this.props.location.search)
+            ishidden: !!getQueryString('ishidden', this.props.location.search),
+            isShopCode: false
         };
         this.index = 0;
     }
@@ -68,10 +69,14 @@ class BannerAddEdit extends DetailUtil {
             required: this.state.dkey !== 'app_guide',
             onChange: (v) => {
                 this.setState({dkey: v});
-                if ((v === '1' || v === '3') && !this.state.url) {
-                    this.setState({url: true, id: false});
-                } else if (v === '2' && !this.state.id) {
-                    this.setState({id: true, url: false});
+                if (v === '1') {
+                    this.setState({url: true, id: false, isShopCode: false});
+                } else if (v === '2') {
+                    this.setState({id: true, url: false, isShopCode: false});
+                }else if(v === '3') {
+                    this.setState({isShopCode: true, id: false, url: false});
+                }else {
+                    this.setState({isShopCode: false, id: false, url: false});
                 }
             }
         }, {
@@ -79,6 +84,12 @@ class BannerAddEdit extends DetailUtil {
             field: 'aa',
             hidden: !this.state.url,
             required: this.state.url,
+            formatter: (v, d) => d.url
+        }, {
+            title: '产品编号',
+            field: 'shopCode',
+            hidden: !this.state.isShopCode,
+            required: this.state.isShopCode,
             formatter: (v, d) => d.url
         }, {
             title: '应用',
@@ -115,10 +126,12 @@ class BannerAddEdit extends DetailUtil {
                     params.type = '0';
                     return params;
                 };
-                if(params.aa1) {
-                    params.url = params.aa1;
-                }else {
+                if(this.state.url) {
                     params.url = params.aa;
+                }else if(this.state.isShopCode) {
+                    params.url = params.shopCode;
+                }else {
+                    params.url = params.aa1;
                 }
                 return params;
             }
