@@ -156,6 +156,9 @@ class ShopOrderAddedit extends DetailUtil {
         field: 'signDatetime',
         title: '签收时间',
         type: 'datetime'
+    }, {
+        field: 'remark',
+        title: '备注'
     }];
     return this.buildDetail({
       fields,
