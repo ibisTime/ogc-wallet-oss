@@ -377,6 +377,7 @@ export default class DetailComp extends React.Component {
       initVal,
       getFieldDecorator,
       inline: item.inline,
+      tipEle: item.tipEle,
       title: item.title,
       hidden: item.hidden,
       type: item.type,

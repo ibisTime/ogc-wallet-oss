@@ -78,9 +78,9 @@ class RightsInterestsBonusWeight extends React.Component {
         }];
         return <div>
             <div style={{color: '#666', fontSize: '17px', 'display': 'flex'}}>
-                <p style={{'margin-right': '30px'}}>自我权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalSelfWeight}</span></p>
+                <p style={{'margin-right': '30px'}}>自身权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalSelfWeight}</span></p>
                 <p style={{'margin-right': '30px'}}>团队权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalTeamWeight}</span></p>
-                <p>规则权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalGiftWeight}</span></p>
+                <p>商品权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalGiftWeight}</span></p>
             </div>
             {
                 this.props.buildList({

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Modal, message, Form, Input} from 'antd';
+import {Modal, message, Form, Input, DatePicker} from 'antd';
+import locale from 'antd/es/date-picker/locale/zh_CN';
 import {
     setTableData,
     setPagination,
@@ -14,7 +15,8 @@ import {listWrapper} from 'common/js/build-list';
 import {
     showSucMsg,
     showWarnMsg,
-    moneyFormat
+    moneyFormat,
+    formatDate
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -40,34 +42,54 @@ const formItemLayout = {
     }
 )
 class RightsInterestsBonusPools extends React.Component {
+    isAdjust = true;
     state = {
         ...this.state,
         visible: false,
-        poolId: ''
+        poolId: '',
+        isAdjust: false
     };
     handleOk = () => {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 const hasMsg = message.loading('');
-                const { count01 } = values;
-                fetch('500020', {
-                    count: count01,
-                    poolId: this.state.poolId
-                }).then(() => {
-                    hasMsg();
-                    this.props.form.resetFields();
-                    message.success('操作成功', 1.5);
-                    this.props.getPageData();
-                    this.setState({
-                        visible: false
-                    });
-                }, hasMsg).catch(hasMsg);
+                if(this.state.visible) {
+                    const { count01 } = values;
+                    fetch('500020', {
+                        count: count01,
+                        poolId: this.state.poolId
+                    }).then(() => {
+                        hasMsg();
+                        this.props.form.resetFields();
+                        message.success('操作成功', 1.5);
+                        this.props.getPageData();
+                        this.setState({
+                            visible: false
+                        });
+                    }, hasMsg).catch(hasMsg);
+                }
+                if(this.state.isAdjust) {
+                    const { nextDate01 } = values;
+                    fetch('500002', {
+                        nextDate: formatDate(nextDate01, 'yyyy-MM-dd hh') + ':00:00',
+                        id: this.state.poolId
+                    }).then(() => {
+                        hasMsg();
+                        this.props.form.resetFields();
+                        message.success('操作成功', 1.5);
+                        this.props.getPageData();
+                        this.setState({
+                            isAdjust: false
+                        });
+                    }, hasMsg).catch(hasMsg);
+                }
             }
         });
     };
     handleCancel = () => {
         this.setState({
-            visible: false
+            visible: false,
+            isAdjust: false
         });
     };
     render() {
@@ -92,6 +114,9 @@ class RightsInterestsBonusPools extends React.Component {
             render(v, d) {
                 return v && moneyFormat(v, '', d.symbol);
             }
+        }, {
+            title: '下次分红时间',
+            field: 'nextDate'
         }, {
             title: '创建时间',
             field: 'createDatetime',
@@ -125,12 +150,24 @@ class RightsInterestsBonusPools extends React.Component {
                             } else {
                                 this.props.history.push(`/bonusPools/bonusPoolsRules?code=${selectedRowKeys[0]}`);
                             }
+                        },
+                        exitNextDate: (selectedRowKeys) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.setState({
+                                    isAdjust: true,
+                                    poolId: selectedRowKeys[0]
+                                });
+                            }
                         }
                     }
                 })
             }
             <Modal
-                title='手动调整分红池'
+                title={'手动调整分红池'}
                 width={600}
                 visible={this.state.visible}
                 onOk={this.handleOk}
@@ -143,13 +180,42 @@ class RightsInterestsBonusPools extends React.Component {
                         {getFieldDecorator('count01', {
                             rules: [
                                 {
-                                    required: true,
+                                    required: this.state.visible,
                                     message: ' '
                                 }
                             ]
                         })(<Input placeholder="请输入数量"/>)}
                     </Form.Item>
                     <p style={{color: 'red', marginTop: '10px', paddingLeft: '40px'}}>正数表示加，负数表示减，不能是0</p>
+                </Form>
+            </Modal>
+            <Modal
+                title={'调整分红时间'}
+                width={600}
+                visible={this.state.isAdjust}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                okText="确定"
+                cancelText="取消"
+            >
+                <Form {...formItemLayout} onSubmit={this.handleOk}>
+                    <Form.Item label="分红时间">
+                        {getFieldDecorator('nextDate01', {
+                            rules: [
+                                {
+                                    required: this.state.isAdjust,
+                                    message: ' '
+                                }
+                            ]
+                        })(<DatePicker
+                            format="YYYY-MM-DD HH"
+                            placeholder="选择时间"
+                            allowClear={false}
+                            style={{width: '95%'}}
+                            showTime={true}
+                            locale={locale}
+                        />)}
+                    </Form.Item>
                 </Form>
             </Modal>
         </div>;

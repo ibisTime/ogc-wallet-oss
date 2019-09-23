@@ -146,9 +146,11 @@ class ShopOrderAddedit extends DetailUtil {
         title: '物流单号'
     }, {
         field: 'logisticsCompany',
-        title: '物流公司'
+        title: '物流公司',
+        type: 'select',
+        key: 'kd_company'
     }, {
-        field: 'signer',
+        field: 'signerName',
         title: '签收人'
     }, {
         field: 'signDatetime',

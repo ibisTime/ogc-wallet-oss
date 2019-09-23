@@ -18,7 +18,9 @@ class ShopOrderLogistics extends DetailUtil {
     }, {
         field: 'logisticsCompany',
         title: '物流公司',
-        required: true
+        required: true,
+        type: 'select',
+        key: 'kd_company'
     }, {
         field: 'pdf',
         title: '物流单',

@@ -15,6 +15,7 @@ class ShopMessageAddedit extends DetailUtil {
         ...this.state,
         shopLocation: ''
     };
+    this.timer = null;
   }
   render() {
     const fields = [{
@@ -60,13 +61,10 @@ class ShopMessageAddedit extends DetailUtil {
         field: 'userLevel',
         title: '用户专享等级',
         required: true,
-        pageCode: '805403',
+        listCode: '805407',
         type: 'select',
         keyName: 'code',
-        valueName: 'name',
-        params: {
-          limit: 100
-        }
+        valueName: 'name'
     }, {
         field: 'video',
         title: '产品视频',
@@ -143,6 +141,21 @@ class ShopMessageAddedit extends DetailUtil {
                 },
                 formatter: (v) => {
                     return this.shopKind === '2' ? '0' : v;
+                },
+                onKeyUp: (v) => {
+                    if(this.timer) {
+                        clearTimeout(this.timer);
+                    }
+                    this.timer = setTimeout(() => {
+                        const discountTipEle = document.getElementById('discountTipEle');
+                        const discount = document.getElementById('discount').value;
+                        if((!isNaN(+v) && v !== '') && (!isNaN(+discount) && discount !== '')) {
+                            const price = (Math.floor(+discount * +v * 100) / 100).toFixed(2);
+                            discountTipEle.innerText = `售价：${price} = ${v} * ${discount}`;
+                        }else {
+                            discountTipEle.innerText = '';
+                        }
+                    }, 500);
                 }
             }, {
                 title: '折扣(0-1)',
@@ -155,6 +168,27 @@ class ShopMessageAddedit extends DetailUtil {
                 },
                 formatter: (v) => {
                     return this.shopKind === '2' ? '0' : v;
+                },
+                tipEle: {
+                    id: 'discountTipEle',
+                    style: {
+                        color: '#1890ff'
+                    }
+                },
+                onKeyUp: (v) => {
+                    if(this.timer) {
+                        clearTimeout(this.timer);
+                    }
+                    this.timer = setTimeout(() => {
+                        const discountTipEle = document.getElementById('discountTipEle');
+                        const originalPrice = document.getElementById('originalPrice').value;
+                        if((!isNaN(+v) && v !== '') && (!isNaN(+originalPrice) && originalPrice !== '')) {
+                            const price = (Math.floor(+originalPrice * v * 100) / 100).toFixed(2);
+                            discountTipEle.innerText = `售价：${price} = ${originalPrice} * ${v}`;
+                        }else {
+                            discountTipEle.innerText = '';
+                        }
+                    }, 500);
                 }
             }, {
                 title: '运费(USDT)',
