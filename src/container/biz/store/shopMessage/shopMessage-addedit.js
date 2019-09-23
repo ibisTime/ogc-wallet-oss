@@ -19,6 +19,10 @@ class ShopMessageAddedit extends DetailUtil {
   }
   render() {
     const fields = [{
+        field: 'code',
+        title: '产品编号',
+        hidden: !this.view
+    }, {
       field: 'name',
       title: '产品名称',
       required: true

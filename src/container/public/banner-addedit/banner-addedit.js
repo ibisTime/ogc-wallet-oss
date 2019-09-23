@@ -68,7 +68,7 @@ class BannerAddEdit extends DetailUtil {
             required: this.state.dkey !== 'app_guide',
             onChange: (v) => {
                 this.setState({dkey: v});
-                if (v === '1' && !this.state.url) {
+                if ((v === '1' || v === '3') && !this.state.url) {
                     this.setState({url: true, id: false});
                 } else if (v === '2' && !this.state.id) {
                     this.setState({id: true, url: false});
@@ -77,8 +77,8 @@ class BannerAddEdit extends DetailUtil {
         }, {
             title: 'url地址',
             field: 'aa',
-            hidden: this.state.dkey !== '1',
-            required: this.state.dkey === '1',
+            hidden: !this.state.url,
+            required: this.state.url,
             formatter: (v, d) => d.url
         }, {
             title: '应用',
