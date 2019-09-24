@@ -40,6 +40,19 @@ const ROUTES = [
     {
         path: '/superNode/incomeRecord',
         component: asyncComponent(() => import('container/superNode/customer/incomeRecord'))
+    },
+    // 配置
+    {
+        path: '/superNode/setting',
+        component: asyncComponent(() => import('container/superNode/setting/setting'))
+    },
+    {
+        path: '/superNode/setting/nodeRateEdit',
+        component: asyncComponent(() => import('container/superNode/setting/nodeRateEdit'))
+    },
+    {
+        path: '/superNode/setting/edit',
+        component: asyncComponent(() => import('container/superNode/setting/rules-addedit'))
     }
 ];
 

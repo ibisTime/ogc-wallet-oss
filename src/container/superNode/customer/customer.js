@@ -33,21 +33,29 @@ class Customer extends React.Component {
             title: '期数'
         }, {
             field: 'userId',
-            title: '用户',
+            title: '手机号',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            search: true,
             searchName: 'keyword',
-            search: true
-            // render: (v, data) => {
-            //     return data.user.mobile ? data.nickname + '-' + data.user.mobile : data.nickname + '-' + data.user.email;
-            // }
+            render: (v, data) => {
+                if (data.refereeUser) {
+                    let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
+                    if (data.refereeUser.kind === 'Q') {
+                        let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
+                        return name + '(' + tmpl + ')';
+                    }
+                    return data.refereeUser.nickname + '(' + tmpl + ')';
+                }
+                return '';
+            }
         }, {
             field: 'totalAmount',
             title: '投票总数',
             render: (v, data) => {
-                return moneyFormat(v, '', data.symbol) + ' PSC';
+                return formatMoney(v, '', '1000000000000000000') + ' PSC';
             }
         }, {
             field: 'totalIncome',

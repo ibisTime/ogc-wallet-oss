@@ -47,6 +47,9 @@ class SuperNode extends React.Component {
             }, {
                 code: 'customer',
                 name: '用户'
+            }, {
+                code: 'setting',
+                name: '配置'
             }],
             // 菜单对应跳转url
             top2SubObj: {
@@ -54,7 +57,8 @@ class SuperNode extends React.Component {
                 'bonusPool': '/superNode/bonusPool',
                 'periods': '/superNode/periods',
                 'node': '/superNode/node',
-                'customer': '/superNode/customer'
+                'customer': '/superNode/customer',
+                'setting': '/superNode/setting'
             }
         };
     }

@@ -80,10 +80,16 @@ class Customer extends React.Component {
         }, {
             field: 'mobile',
             title: '手机号',
+            render: (v, data) => {
+                return v || '暂未绑定手机号';
+            },
             search: true
         }, {
             field: 'email',
             title: '邮箱',
+            render: (v, data) => {
+                return v || '暂未绑定邮箱';
+            },
             search: true
         }, {
             field: 'inviteCode',
@@ -104,7 +110,7 @@ class Customer extends React.Component {
                         let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
                         return name + '(' + tmpl + ')';
                     }
-                    return data.refereeUser.nickname + '(' + tmpl + ')';
+                    return (data.refereeUser.nickname ? data.refereeUser.nickname : '暂无数据') + '(' + tmpl + ')';
                 }
                 return '';
             },
@@ -152,20 +158,6 @@ class Customer extends React.Component {
                 render: (v, data) => {
                     return data.realName ? '是' : '否';
                 }
-            }, {
-                field: 'machineOrderNum',
-                title: '存活水滴数'
-            }, {
-                field: 'machineOrder',
-                title: '存活水滴数',
-                search: true,
-                type: 'interval',
-                intervalParams: {
-                    start: this.machineStart,
-                    end: this.machineEnd,
-                    reset: this.machineReset
-                },
-                noVisible: true
             }, {
                 field: 'realName',
                 title: '真实姓名',

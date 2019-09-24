@@ -55,12 +55,12 @@ class CustomerIdentify extends React.Component {
     render() {
         const fields = [{
             field: 'userId',
-            title: '手机号',
-            render: (v, d) => d && d.user ? d.user.mobile : '',
+            title: '用户名',
+            render: (v, d) => d && d.user ? d.user.nickname : '',
             type: 'select',
             pageCode: 805120,
             keyName: 'userId',
-            valueName: 'mobile',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'mobile',
             search: true
         }, {

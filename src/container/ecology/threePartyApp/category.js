@@ -25,17 +25,14 @@ import {showWarnMsg, dateTimeFormat} from 'common/js/util';
 class Category extends React.Component {
     render() {
         const fields = [{
-            field: 'dkey',
-            title: '字典键'
-        }, {
             field: 'dvalue',
-            title: '字典值'
+            title: '类别'
         }, {
             field: 'updater',
-            title: '更新人'
+            title: '修改人'
         }, {
             field: 'updateDatetime',
-            title: '更新时间',
+            title: '修改时间',
             type: 'datetime'
         }, {
             field: 'remark',

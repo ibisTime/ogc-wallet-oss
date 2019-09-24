@@ -288,6 +288,7 @@ import {SuperNodeVoteDistribution} from './redux/superNode/voteDistribution';
 import {SuperNodeVoteRecord} from './redux/superNode/voteRecord';
 import {SuperNodeBuyBackRecord} from './redux/superNode/buyBackRecord';
 import {SuperNodeIncomeRecord} from './redux/superNode/incomeRecord';
+import {SuperNodeSetting} from './redux/superNode/setting';
 
 export default combineReducers({
     user,
@@ -506,5 +507,6 @@ export default combineReducers({
     SuperNodeVoteDistribution,
     SuperNodeVoteRecord,
     SuperNodeBuyBackRecord,
-    SuperNodeIncomeRecord
+    SuperNodeIncomeRecord,
+    SuperNodeSetting
 });

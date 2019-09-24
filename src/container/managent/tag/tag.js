@@ -39,6 +39,10 @@ class Aboutus extends React.Component {
             key: 'open_dapp_tag_type',
             type: 'select',
             title: '标签分类'
+        }, {
+            field: 'createDatetime',
+            title: '创建时间',
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,

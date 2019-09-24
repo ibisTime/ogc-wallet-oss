@@ -15,38 +15,39 @@ import {
   moneyFormat,
   getCoinList,
   dateTimeFormat,
+  getCoinType,
   showWarnMsg,
   showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
-let currency = 'BTC';
+let currency = 'ETH';
 
 @listWrapper(
-  state => ({
-    ...state.BTCFinanceSupplyAddress,
-    parentCode: state.menu.subMenuCode
-  }),
-  {
-    setTableData, clearSearchParam, doFetching, setBtnList,
-    cancelFetching, setPagination, setSearchParam, setSearchData
-  }
+    state => ({
+      ...state.BTCFinanceSupplyAddress,
+      parentCode: state.menu.subMenuCode
+    }),
+    {
+      setTableData, clearSearchParam, doFetching, setBtnList,
+      cancelFetching, setPagination, setSearchParam, setSearchData
+    }
 )
 class SupplyAddress extends React.Component {
   componentDidMount() {
     let clearParams = document.getElementById('clearParams');
     let symInputList = document.querySelectorAll('.ant-select-search__field');
     let symPloList = document.querySelectorAll('.ant-select-selection__placeholder');
-      setTimeout(() => {
-        symInputList.forEach((item, index) => {
-          if (item.id === 'symbol') {
-            item.value = currency + '-比特币';
-            symPloList[index].style.display = 'none';
-          }
-        });
-      }, 4000);
-      clearParams.addEventListener('click', () => {
-        currency = 'BTC';
+    setTimeout(() => {
+      symInputList.forEach((item, index) => {
+        if (item.id === 'symbol') {
+          item.value = currency + '-以太坊';
+          symPloList[index].style.display = 'none';
+        }
       });
+    }, 4000);
+    clearParams.addEventListener('click', () => {
+      currency = 'ETH';
+    });
   }
   render() {
     const fields = [{
@@ -66,7 +67,7 @@ class SupplyAddress extends React.Component {
         setTimeout(() => {
           let clearSpan = document.querySelector('.ant-select-selection__clear');
           clearSpan.addEventListener('click', () => {
-            currency = 'BTC';
+            currency = 'ETH';
           });
         }, 0);
         currency = v;
@@ -78,6 +79,7 @@ class SupplyAddress extends React.Component {
       field: 'balance',
       title: '余额',
       render: (v, data) => {
+        console.log(data.symbol);
         // moneyFormat(v, '', 'BTC');
         return moneyFormat(v.toString(), '', data.symbol);
       }
@@ -95,6 +97,7 @@ class SupplyAddress extends React.Component {
     return this.props.buildList({
       fields,
       rowKey: 'id',
+      pageCode: '802605',
       searchParams: {
         symbol: currency
       },
@@ -139,9 +142,22 @@ class SupplyAddress extends React.Component {
           } else if (selectedRowKeys.length > 1) {
             showWarnMsg('请选择一条记录');
           } else {
-            // 测试：https://testnet.blockexplorer.com/address/
-            // 正式：https://blockexplorer.com/address/
-            window.open('https://blockexplorer.com/address/' + selectedRows[0].address, '_bank');
+            let type = getCoinType(selectedRows[0].symbol);
+            if(type === '1') {
+              // 测试：https://testnet.blockexplorer.com/address/
+              // 正式：https://btc.com/
+              window.open('https://btc.com/' + selectedRows[0].address, '_bank');
+            }else if(type === '4') {
+              // 测试：https://shasta.tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
+              // 正式：https://tronscan.org/#/address/TVcaZYGf94J5K6WkPsfSDVUu5cWreZz1h9/token-balances
+              window.open('https://tronscan.org/#/address/' + selectedRows[0].address + '/token-balances', '_bank');
+            }else if(type === '0' || type === '0T') {
+              // 正式: https://rinkeby.etherscan.io/address/0x8a37b79e54d69e833d79cac3647c877ef72830e1
+              // 测试: https://etherscan.io/address/0x8a37b79e54d69e833d79cac3647c877ef72830e1
+              window.open('https://etherscan.io/address/' + selectedRows[0].address, '_bank');
+            }else if(type === '3') {
+              window.open('https://omniexplorer.info/address/' + selectedRows[0].address, '_bank');
+            }
           }
         }
       }

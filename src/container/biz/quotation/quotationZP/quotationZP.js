@@ -41,7 +41,10 @@ class QuotationZP extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '650105'
+            pageCode: '650101',
+            searchParams: {
+                symbol: 'PSC'
+            }
         });
     }
 }
