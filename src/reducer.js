@@ -131,6 +131,9 @@ import {quotationQuotationBTC} from './redux/biz/quotation/quotationBTC';
 // 自配行情
 import {quotationQuotationZP} from './redux/biz/quotation/quotationZP';
 
+// 行情对接配置
+import {quotationQuotationPz} from './redux/biz/quotation/quotationPz';
+
 // 承兑商行情
 import {quotationQuotationCDS} from './redux/biz/quotation/quotationCDS';
 
@@ -371,6 +374,7 @@ export default combineReducers({
     quotationExchangeRate,
     quotationMarketAdjustment,
     quotationQuotationZP,
+    quotationQuotationPz,
     // 活动管理
     // 邀请好友
     activityInvitingFriends,

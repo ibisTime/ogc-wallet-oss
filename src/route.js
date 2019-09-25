@@ -607,6 +607,16 @@ const ROUTES = [
         path: '/quotation/quotationZP/addedit',
         component: asyncComponent(() => import('container/biz/quotation/quotationZP/quotationZP-addedit'))
     },
+    // 行情对接配置
+    {
+        path: '/quotation/quotationPz',
+        component: asyncComponent(() => import('container/biz/quotation/quotationPz/quotationPz'))
+    },
+    // 行情对接配置 - 详情
+    {
+        path: '/quotation/quotationPz/addedit',
+        component: asyncComponent(() => import('container/biz/quotation/quotationPz/quotationPz-addedit'))
+    },
     // 活动管理
     // 邀请好友
     {
