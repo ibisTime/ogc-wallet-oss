@@ -29,10 +29,15 @@ import fetch from 'common/js/fetch';
     }
 )
 class RightsInterestsBonusWeight extends React.Component {
-    weightObj = {};
+    state = {
+        ...this.state,
+        weightObj: {}
+    };
     componentDidMount() {
         fetch(805512).then(data => {
-            this.weightObj = data;
+            this.setState({
+                weightObj: data
+            });
         });
     }
     render() {
@@ -49,6 +54,7 @@ class RightsInterestsBonusWeight extends React.Component {
             pageCode: '805120',
             keyName: 'nickname',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            searchName: 'keyword',
             search: true,
             params: {
                 kind: 'C'
@@ -81,7 +87,7 @@ class RightsInterestsBonusWeight extends React.Component {
             pageCode: '805120',
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
-            searchName: 'userReferee',
+            searchName: 'keyword',
             search: true,
             params: {
                 kind: 'C'
@@ -108,11 +114,12 @@ class RightsInterestsBonusWeight extends React.Component {
             field: 'giftWeight',
             title: '馈赠权重'
         }];
+        const {weightObj} = this.state;
         return <div>
             <div style={{color: '#666', fontSize: '17px', 'display': 'flex'}}>
-                <p style={{'margin-right': '30px'}}>自身权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalSelfWeight}</span></p>
-                <p style={{'margin-right': '30px'}}>团队权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalTeamWeight}</span></p>
-                <p>馈赠权重总数：<span style={{color: '#1890ff'}}>{this.weightObj.totalGiftWeight}</span></p>
+                <p style={{'margin-right': '30px'}}>自身权重总数：<span style={{color: '#1890ff'}}>{weightObj.totalSelfWeight}</span></p>
+                <p style={{'margin-right': '30px'}}>团队权重总数：<span style={{color: '#1890ff'}}>{weightObj.totalTeamWeight}</span></p>
+                <p>馈赠权重总数：<span style={{color: '#1890ff'}}>{weightObj.totalGiftWeight}</span></p>
             </div>
             {
                 this.props.buildList({

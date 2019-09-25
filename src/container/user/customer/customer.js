@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, message, Select, Input} from 'antd';
+import {Modal, message, Select, Input, Form} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -16,6 +16,16 @@ import {activateUser, setQ, cancelNode} from 'api/user';
 import fetch from 'common/js/fetch';
 
 const {Option} = Select;
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 4 },
+        sm: { span: 4 }
+    },
+    wrapperCol: {
+        xs: { span: 18 },
+        sm: { span: 18 }
+    }
+};
 
 @listWrapper(
   state => ({
@@ -28,6 +38,7 @@ const {Option} = Select;
   }
 )
 class Customer extends React.Component {
+    isRefereesFirst = true;
     state = {
         ...this.state,
         visible: false,
@@ -40,7 +51,41 @@ class Customer extends React.Component {
         title: '',
         machineOrderNumStart: sessionStorage.getItem('machineOrderNumStart') || '',
         machineOrderNumEnd: sessionStorage.getItem('machineOrderNumEnd') || '',
-        symbolData: []
+        symbolData: [],
+        registrationVisible: false,
+        changeRefereesVisible: false,
+        changeRefereesCode: '',
+        refereesData: [],
+        changeLoginPwdVisible: false,
+        changeLoginPwdCode: '',
+        changeTradingPwdVisible: false,
+        changeTradingPwdCode: ''
+    };
+    changeRefereesFilterOption = (input) => {
+        if(this.isRefereesFirst) {
+            this.isRefereesFirst = false;
+            fetch(805120, {
+                start: 1,
+                limit: 10,
+                kind: 'C',
+                keyword: input
+            }).then(data => {
+                let refereesData = [];
+                data.list.forEach(item => {
+                    refereesData.push({
+                        userId: item.userId,
+                        nickname: item.nickname,
+                        mobile: item.mobile
+                    });
+                });
+                this.setState({
+                    refereesData
+                }, () => {
+                    this.isRefereesFirst = true;
+                });
+            });
+        }
+        return false;
     };
     componentDidMount() {
         fetch('802013').then(data => {
@@ -48,6 +93,7 @@ class Customer extends React.Component {
                 symbolData: data
             });
         });
+        this.changeRefereesFilterOption();
     }
     machineStart = (target) => {
         this.setState({
@@ -70,6 +116,84 @@ class Customer extends React.Component {
     changeSymbol = (value) => {
         this.setState({
             symbol: value
+        });
+    };
+    formFn = (code, params, visible) => {
+        const hasMsg = message.loading('');
+        fetch(code, params).then(() => {
+            hasMsg();
+            this.props.form.resetFields();
+            message.success('操作成功', 1.5);
+            this.props.getPageData();
+            this.setState({
+                [visible]: false
+            });
+        }, hasMsg).catch(hasMsg);
+    };
+    registrationHandleOk = () => {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const { mobile01, loginPwd01, inviteCode01, nickname01 } = values;
+                this.formFn(805042, {
+                    mobile: mobile01,
+                    loginPwd: loginPwd01,
+                    inviteCode: inviteCode01,
+                    nickname: nickname01
+                }, 'registrationVisible');
+            }
+        });
+    };
+    registrationHandleCancel = () => {
+        this.setState({
+            registrationVisible: false
+        });
+    };
+    changeRefereesHandleOk = () => {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const { userReferee01 } = values;
+                this.formFn(805071, {
+                    userReferee: userReferee01,
+                    userId: this.state.changeRefereesCode
+                }, 'changeRefereesVisible');
+            }
+        });
+    };
+    changeRefereesHandleCancel = () => {
+        this.setState({
+            changeRefereesVisible: false
+        });
+    };
+    changeLoginPwdHandleOk = () => {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const { loginPwd01 } = values;
+                this.formFn(805072, {
+                    loginPwd: loginPwd01,
+                    userId: this.state.changeLoginPwdCode
+                }, 'changeLoginPwdVisible');
+            }
+        });
+    };
+    changeLoginPwdHandleCancel = () => {
+        this.setState({
+            changeLoginPwdVisible: false
+        });
+    };
+    changeTradingPwdHandleOk = () => {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const { tradePwd01 } = values;
+                this.formFn(805073, {
+                    tradePwd: tradePwd01,
+                    userId: this.state.changeTradingPwdCode
+                }, 'changeTradingPwdVisible');
+            }
+        });
+    };
+    changeTradingPwdHandleCancel = () => {
+        this.setState({
+            changeTradingPwdVisible: false
         });
     };
     render() {
@@ -187,6 +311,12 @@ class Customer extends React.Component {
                 render: dateTimeFormat,
                 search: true
             }, {
+                field: 'registerType',
+                title: '注册方式',
+                type: 'select',
+                key: 'user_register_type',
+                search: true
+            }, {
                 field: 'lastLogin',
                 title: '最后登录时间',
                 type: 'datetime'
@@ -194,7 +324,8 @@ class Customer extends React.Component {
                 field: 'remark',
                 title: '备注'
             }];
-        const {symbol, amountType, direction, userIdList, title, symbolData} = this.state;
+        const {symbol, amountType, direction, userIdList, title, symbolData, refereesData} = this.state;
+        const {getFieldDecorator} = this.props.form;
         return (
           <div>
               {
@@ -404,6 +535,51 @@ class Customer extends React.Component {
                               } else {
                                   this.props.history.push(`/user/customer/identify?userId=${selectedRowKeys[0]}`);
                               }
+                          },
+                          // 代注册
+                          registration: () => {
+                              this.setState({
+                                  registrationVisible: true
+                              });
+                          },
+                          // 修改登录密码
+                          changeLoginPwd: (selectedRowKeys) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.setState({
+                                      changeLoginPwdVisible: true,
+                                      changeLoginPwdCode: selectedRowKeys[0]
+                                  });
+                              }
+                          },
+                          // 修改交易密码
+                          changeTradingPwd: (selectedRowKeys) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.setState({
+                                      changeTradingPwdVisible: true,
+                                      changeTradingPwdCode: selectedRowKeys[0]
+                                  });
+                              }
+                          },
+                          // 修改推荐人
+                          changeReferees: (selectedRowKeys) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.setState({
+                                      changeRefereesVisible: true,
+                                      changeRefereesCode: selectedRowKeys[0]
+                                  });
+                              }
                           }
                       },
                       beforeSearch: (params) => {
@@ -481,6 +657,127 @@ class Customer extends React.Component {
                         style={{width: '60%'}}
                       />
                   </div>
+              </Modal>
+              <Modal
+                  title='代注册'
+                  width={600}
+                  visible={this.state.registrationVisible}
+                  onOk={this.registrationHandleOk}
+                  onCancel={this.registrationHandleCancel}
+                  okText="确定"
+                  cancelText="取消"
+              >
+                  <Form {...formItemLayout} onSubmit={this.registrationHandleOk}>
+                      <Form.Item label="手机号">
+                          {getFieldDecorator('mobile01', {
+                              rules: [
+                                  {
+                                      required: this.state.registrationVisible,
+                                      message: ' '
+                                  }
+                              ]
+                          })(<Input placeholder="请输入手机号"/>)}
+                      </Form.Item>
+                      <Form.Item label="登录密码">
+                          {getFieldDecorator('loginPwd01', {
+                              rules: [
+                                  {
+                                      required: this.state.registrationVisible,
+                                      message: ' '
+                                  }
+                              ]
+                          })(<Input placeholder="请输入登录密码"/>)}
+                      </Form.Item>
+                      <Form.Item label="邀请码">
+                          {getFieldDecorator('inviteCode01', {
+                              rules: [
+                                  {
+                                      required: this.state.registrationVisible,
+                                      message: ' '
+                                  }
+                              ]
+                          })(<Input placeholder="请输入邀请码"/>)}
+                      </Form.Item>
+                      <Form.Item label="昵称">
+                          {getFieldDecorator('nickname01')(<Input placeholder="请输入昵称"/>)}
+                      </Form.Item>
+                  </Form>
+              </Modal>
+              <Modal
+                  title='修改推荐人'
+                  width={600}
+                  visible={this.state.changeRefereesVisible}
+                  onOk={this.changeRefereesHandleOk}
+                  onCancel={this.changeRefereesHandleCancel}
+                  okText="确定"
+                  cancelText="取消"
+              >
+                  <Form {...formItemLayout} onSubmit={this.changeRefereesHandleOk}>
+                      <Form.Item label="推荐人">
+                          {getFieldDecorator('userReferee01', {
+                              rules: [
+                                  {
+                                      required: this.state.changeRefereesVisible,
+                                      message: ' '
+                                  }
+                              ]
+                          })(<Select
+                              placeholder="请选择用户"
+                              showSearch
+                              onSearch={this.changeRefereesFilterOption}
+                          >
+                              {
+                                  refereesData.map(item => (
+                                      <Option key={item.userId}>{item.nickname}-{item.mobile}</Option>
+                                  ))
+                              }
+                          </Select>)}
+                      </Form.Item>
+                  </Form>
+              </Modal>
+              <Modal
+                  title='修改登录密码'
+                  width={600}
+                  visible={this.state.changeLoginPwdVisible}
+                  onOk={this.changeLoginPwdHandleOk}
+                  onCancel={this.changeLoginPwdHandleCancel}
+                  okText="确定"
+                  cancelText="取消"
+              >
+                  <Form {...formItemLayout} onSubmit={this.changeLoginPwdHandleOk}>
+                      <Form.Item label="登录密码">
+                          {getFieldDecorator('loginPwd01', {
+                              rules: [
+                                  {
+                                      required: this.state.changeLoginPwdVisible,
+                                      message: ' '
+                                  }
+                              ]
+                          })(<Input placeholder="请输入登录密码"/>)}
+                      </Form.Item>
+                  </Form>
+              </Modal>
+              <Modal
+                  title='修改交易密码'
+                  width={600}
+                  visible={this.state.changeTradingPwdVisible}
+                  onOk={this.changeTradingPwdHandleOk}
+                  onCancel={this.changeTradingPwdHandleCancel}
+                  okText="确定"
+                  cancelText="取消"
+              >
+                  <Form {...formItemLayout} onSubmit={this.changeTradingPwdHandleOk}>
+                      <Form.Item label="交易密码">
+                          {getFieldDecorator('tradePwd01', {
+                              rules: [
+                                  {
+                                      required: this.state.changeTradingPwdVisible,
+                                      message: ' '
+                                  }
+                              ]
+                          })(<Input placeholder="请输入交易密码"/>)}
+                      </Form.Item>
+                  </Form>
               </Modal>
           </div>
         );

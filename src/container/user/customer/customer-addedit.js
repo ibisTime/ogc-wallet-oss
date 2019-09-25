@@ -103,6 +103,11 @@ class CustomerAddedit extends DetailUtil {
             type: 'select',
             key: 'user_status'
         }, {
+            field: 'registerType',
+            title: '注册方式',
+            type: 'select',
+            key: 'user_register_type'
+        }, {
             field: 'createDatetime',
             title: '注册时间',
             type: 'datetime'
