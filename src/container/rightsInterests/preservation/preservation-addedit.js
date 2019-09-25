@@ -29,10 +29,6 @@ class PreservationAddedit extends DetailUtil {
             type: 'select',
             key: 'right_product_symbol_out'
         }, {
-            title: '购买数量',
-            field: 'amountIn',
-            required: true
-        }, {
             title: '释放数量',
             field: 'amountOut',
             required: true
@@ -94,7 +90,11 @@ class PreservationAddedit extends DetailUtil {
             view: this.view,
             detailCode: '805465',
             editCode: '805462',
-            addCode: '805460'
+            addCode: '805460',
+            beforeSubmit(params) {
+                params.amountIn = '0';
+                return params;
+            }
         });
     }
 }
