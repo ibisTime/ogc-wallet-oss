@@ -325,6 +325,7 @@ class Customer extends React.Component {
                 title: '备注'
             }];
         const {symbol, amountType, direction, userIdList, title, symbolData, refereesData} = this.state;
+        const options = refereesData.map(item => <Option key={item.userId}>{item.nickname}-{item.mobile}</Option>);
         const {getFieldDecorator} = this.props.form;
         return (
           <div>
@@ -724,12 +725,11 @@ class Customer extends React.Component {
                           })(<Select
                               placeholder="请选择用户"
                               showSearch
+                              filterOption={false}
                               onSearch={this.changeRefereesFilterOption}
                           >
                               {
-                                  refereesData.map(item => (
-                                      <Option key={item.userId}>{item.nickname}-{item.mobile}</Option>
-                                  ))
+                                  options
                               }
                           </Select>)}
                       </Form.Item>
