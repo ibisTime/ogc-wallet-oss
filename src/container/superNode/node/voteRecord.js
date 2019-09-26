@@ -31,7 +31,7 @@ class VoteRecord extends React.Component {
 
     render() {
         const fields = [{
-            field: 'nodePlanName',
+            field: 'planName',
             title: '期数'
         }, {
             field: 'userId',
@@ -41,10 +41,14 @@ class VoteRecord extends React.Component {
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
-            search: true
+            search: true,
             // render: (v, data) => {
             //     return data.user.mobile ? data.nickname + '-' + data.user.mobile : data.nickname + '-' + data.user.email;
             // }
+            noVisible: true
+        }, {
+            field: 'userName',
+            title: '用户'
         }, {
             field: 'orderNo',
             title: '节点',
@@ -117,7 +121,7 @@ class VoteRecord extends React.Component {
                         fields,
                         pageCode: 610621,
                         searchParams: {
-                            nodeCode: this.code,
+                            distributeNodeCode: this.code,
                             userId: this.userId
                         },
                         buttons: [{

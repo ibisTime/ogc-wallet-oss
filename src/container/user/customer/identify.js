@@ -56,7 +56,7 @@ class CustomerIdentify extends React.Component {
         const fields = [{
             field: 'userId',
             title: '用户名',
-            render: (v, d) => d && d.user ? d.user.nickname : '',
+            render: (v, d) => d && d.user ? d.user.email : '',
             type: 'select',
             pageCode: 805120,
             keyName: 'userId',
@@ -97,7 +97,9 @@ class CustomerIdentify extends React.Component {
             title: '推荐人',
             render(v, d) {
                 if(d.user && d.user.refereeUser) {
-                    return `${d.user.refereeUser.realName}-${d.user.refereeUser.mobile}`;
+                    return `${d.user.refereeUser.realName ? d.user.refereeUser.realName : '用户名不存在'}-${d.user.refereeUser.mobile ? d.user.refereeUser.mobile : '手机号不存在'}`;
+                }else {
+                    return '暂无数据';
                 }
             }
         }, {

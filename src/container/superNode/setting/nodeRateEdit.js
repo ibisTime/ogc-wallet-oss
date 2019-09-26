@@ -24,7 +24,6 @@ class nodeRateEdit extends DetailUtil {
             this.setState({
                 nodeRateArr: arr
             });
-            console.log('nodeRateArr', this.state.nodeRateArr);
         });
     }
 
@@ -33,43 +32,43 @@ class nodeRateEdit extends DetailUtil {
         const fields = [{
             field: 'rate1',
             title: '节点第一名比例',
-            value: nodeRateArr[0]
+            value: parseFloat(nodeRateArr[0])
         }, {
             field: 'rate2',
             title: '节点第二名比例',
-            value: nodeRateArr[1]
+            value: parseFloat(nodeRateArr[1])
         }, {
             field: 'rate3',
             title: '节点第三名比例',
-            value: nodeRateArr[2]
+            value: parseFloat(nodeRateArr[2])
         }, {
             field: 'rate4',
             title: '节点第四名比例',
-            value: nodeRateArr[3]
+            value: parseFloat(nodeRateArr[3])
         }, {
             field: 'rate5',
             title: '节点第五名比例',
-            value: nodeRateArr[4]
+            value: parseFloat(nodeRateArr[4])
         }, {
             field: 'rate6',
             title: '节点第六名比例',
-            value: nodeRateArr[5]
+            value: parseFloat(nodeRateArr[5])
         }, {
             field: 'rate7',
             title: '节点第七名比例',
-            value: nodeRateArr[6]
+            value: parseFloat(nodeRateArr[6])
         }, {
             field: 'rate8',
             title: '节点第八名比例',
-            value: nodeRateArr[7]
+            value: parseFloat(nodeRateArr[7])
         }, {
             field: 'rate9',
             title: '节点第九名比例',
-            value: nodeRateArr[8]
+            value: parseFloat(nodeRateArr[8])
         }, {
             field: 'rate10',
             title: '节点第十名比例',
-            value: nodeRateArr[9]
+            value: parseFloat(nodeRateArr[9])
         }];
         return this.buildDetail({
             fields,

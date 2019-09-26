@@ -20,7 +20,8 @@ class MillRulesEdit extends DetailUtil {
                 cTextarea: /_textarea/,
                 cRQText: /_note/,
                 cIsOrNotSelect: /_flag/,
-                cIsRQText: /_node/
+                cIsRQText: /_node/,
+                cCreate: /_create/
             }
         };
     }
@@ -71,7 +72,7 @@ class MillRulesEdit extends DetailUtil {
                 type: 'textarea',
                 required: true
             });
-        } else if(this.cData.ctype.match(this.cData.ckey.cIsOrNotSelect)) {
+        } else if(this.cData.ctype.match(this.cData.ckey.cIsOrNotSelect) || this.cData.ctype.match(this.cData.ckey.cCreate)) {
             fields.push({
                 title: '数值',
                 field: 'cvalue',

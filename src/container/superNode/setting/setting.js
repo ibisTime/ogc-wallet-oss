@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/superNode/setting';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat, formatMoney, getQueryString} from 'common/js/util';
+import {showWarnMsg, showSucMsg, dateTimeFormat, moneyFormat, formatMoney, getQueryString} from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 @listWrapper(
@@ -31,6 +31,23 @@ class Setting extends React.Component {
             isSelect: false,
             nodeRateArr: []
         };
+        this.areaData = {
+            data: [
+                {
+                    OrganizationName: '上城区',
+                    LatLng: '120.171465,30.250236'
+                },
+                {
+                    OrganizationName: '百搭区',
+                    LatLng: '120.171465,30.250236'
+                }
+            ]
+        };
+        let arr = [];
+        for(let i = 0; i < this.areaData.data.length; i++) {
+            arr[this.areaData.data[i].OrganizationName] = [this.areaData.data[i].LatLng];
+        }
+        console.log(arr);
     }
     // 分红比例配置
     setNodeRate = () => {
@@ -77,37 +94,19 @@ class Setting extends React.Component {
             this.props.getPageData();
         });
     }
-    // 修改
-    sendEdit = (selectedRowKeys, selectedRows) => {
-        const {type} = this.state;
-        if(type === 'node_rate') {
-            this.props.history.push(`/superNode/setting/nodeRateEdit?v=2&code=1`);
-        }else if(type === 'node_plan') {
-            console.log('node_plan', selectedRows);
-            fetch('630045', {type: 'node_plan'}).then(data => {
-                console.log('node_plan', data);
-            });
-        }else if(type === 'node_redeem') {
-            fetch('630045', {type: 'node_redeem'}).then(data => {
-                console.log('node_redeem', data);
-            });
-        }else if(type === 'node_referee_rate') {
-            fetch('630045', {type: 'node_referee_rate'}).then(data => {
-                console.log('node_referee_rate', data);
-            });
-        }else if(type === 'node_tax_rate') {
-            fetch('630045', {type: 'node_referee_rate'}).then(data => {
-                console.log('node_referee_rate', data);
-            });
-        }
-    }
     render() {
         const fields = [{
             field: 'remark',
             title: '说明'
         }, {
             field: 'cvalue',
-            title: '数值'
+            title: '数值',
+            render: (v, data) => {
+                if(data.type === 'node_plan' && data.id === 1) {
+                    return v === '0' ? '否' : '是';
+                }
+                return v;
+            }
         }];
         const {type, isSelect} = this.state;
         return (
@@ -119,6 +118,7 @@ class Setting extends React.Component {
                     <span className="superNode-listPage-wrapper-tab" onClick={this.setNodeRefereeRate}>推荐分红奖励配置</span>
                     <span className="superNode-listPage-wrapper-tab" onClick={this.setNodeTaxRate}>交税比例配置</span>
                 </div>
+                <div style={{height: '30px'}}></div>
                 {
                     this.props.buildList({
                         fields,
@@ -131,31 +131,52 @@ class Setting extends React.Component {
                             code: 'incomeRecord',
                             name: '修改',
                             handler: (selectedRowKeys, selectedRows) => {
-                                if (!selectedRowKeys.length) {
-                                    showWarnMsg('请选择记录');
-                                } else if (selectedRowKeys.length > 1) {
-                                    showWarnMsg('请选择一条记录');
-                                } else {
-                                    console.log('selectedRows', selectedRows);
                                     const {type} = this.state;
                                     if(type === 'node_rate') {
                                         this.props.history.push(`/superNode/setting/nodeRateEdit?v=2&code=1`);
                                     }else if(type === 'node_plan') {
-                                        this.props.history.push('/superNode/setting/edit?code=' + selectedRowKeys[0] + '&ctype=' + selectedRows[0].ckey);
+                                        if (!selectedRowKeys.length) {
+                                            showWarnMsg('请选择记录');
+                                        } else if (selectedRowKeys.length > 1) {
+                                            showWarnMsg('请选择一条记录');
+                                        } else {
+                                            console.log(selectedRows);
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                        }
                                     }else if(type === 'node_redeem') {
-                                        fetch('630045', {type: 'node_redeem'}).then(data => {
-                                            console.log('node_redeem', data);
-                                        });
+                                        if (!selectedRowKeys.length) {
+                                            showWarnMsg('请选择记录');
+                                        } else if (selectedRowKeys.length > 1) {
+                                            showWarnMsg('请选择一条记录');
+                                        } else {
+                                            console.log(selectedRows);
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                        }
                                     }else if(type === 'node_referee_rate') {
-                                        fetch('630045', {type: 'node_referee_rate'}).then(data => {
-                                            console.log('node_referee_rate', data);
-                                        });
+                                        if (!selectedRowKeys.length) {
+                                            showWarnMsg('请选择记录');
+                                        } else if (selectedRowKeys.length > 1) {
+                                            showWarnMsg('请选择一条记录');
+                                        } else {
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                        }
                                     }else if(type === 'node_tax_rate') {
-                                        fetch('630045', {type: 'node_referee_rate'}).then(data => {
-                                            console.log('node_referee_rate', data);
-                                        });
+                                        if (!selectedRowKeys.length) {
+                                            showWarnMsg('请选择记录');
+                                        } else if (selectedRowKeys.length > 1) {
+                                            showWarnMsg('请选择一条记录');
+                                        } else {
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                        }
                                     }
-                                }
+                            }
+                        }, {
+                            code: 'manualStart',
+                            name: '手动启动',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                fetch(610600).then(data => {
+                                    showSucMsg('操作成功!');
+                                });
                             }
                         }]
                     })

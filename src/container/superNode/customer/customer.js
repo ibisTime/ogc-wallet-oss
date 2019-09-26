@@ -29,11 +29,11 @@ class Customer extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'nodePlanName',
+            field: 'planName',
             title: '期数'
         }, {
             field: 'userId',
-            title: '手机号',
+            title: '用户',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -50,7 +50,11 @@ class Customer extends React.Component {
                     return data.refereeUser.nickname + '(' + tmpl + ')';
                 }
                 return '';
-            }
+            },
+            noVisible: true
+        }, {
+            field: 'userName',
+            title: '用户'
         }, {
             field: 'totalAmount',
             title: '投票总数',

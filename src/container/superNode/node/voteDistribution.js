@@ -29,7 +29,7 @@ class VoteDistribution extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'nodePlanName',
+            field: 'planName',
             title: '期数'
         }, {
             field: 'orderNo',
@@ -80,10 +80,14 @@ class VoteDistribution extends React.Component {
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
-            search: true
+            search: true,
             // render: (v, data) => {
             //     return data.user.mobile ? data.nickname + '-' + data.user.mobile : data.nickname + '-' + data.user.email;
             // }
+            noVisible: true
+        }, {
+            field: 'userName',
+            title: '用户'
         }, {
             field: 'totalAmount',
             title: '总票数',
