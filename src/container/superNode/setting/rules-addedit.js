@@ -10,6 +10,8 @@ class MillRulesEdit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.type = getQueryString('ctype');
+        this.tabType = getQueryString('tp');
+        sessionStorage.setItem('tabType', this.tabType);
         this.cData = {
             ctype: getQueryString('ctype'),
             ckey: {

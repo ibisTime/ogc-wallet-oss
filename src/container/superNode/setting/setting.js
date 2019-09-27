@@ -10,6 +10,7 @@ import {
     setSearchData
 } from '@redux/superNode/setting';
 import {listWrapper} from 'common/js/build-list';
+import { Link } from 'react-router-dom';
 import {showWarnMsg, showSucMsg, dateTimeFormat, moneyFormat, formatMoney, getQueryString} from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -26,28 +27,12 @@ import fetch from 'common/js/fetch';
 class Setting extends React.Component {
     constructor(props) {
         super(props);
+        let tabType = sessionStorage.getItem('tabType');
         this.state = {
-            type: 'node_rate',
-            isSelect: false,
+            type: tabType || 'node_rate',
+            isSelect: tabType !== 'node_rate',
             nodeRateArr: []
         };
-        this.areaData = {
-            data: [
-                {
-                    OrganizationName: '上城区',
-                    LatLng: '120.171465,30.250236'
-                },
-                {
-                    OrganizationName: '百搭区',
-                    LatLng: '120.171465,30.250236'
-                }
-            ]
-        };
-        let arr = [];
-        for(let i = 0; i < this.areaData.data.length; i++) {
-            arr[this.areaData.data[i].OrganizationName] = [this.areaData.data[i].LatLng];
-        }
-        console.log(arr);
     }
     // 分红比例配置
     setNodeRate = () => {
@@ -112,11 +97,11 @@ class Setting extends React.Component {
         return (
             <div className="superNode-listPage-wrapper">
                 <div className="superNode-listPage-wrapper-tab-box">
-                    <span className="superNode-listPage-wrapper-tab" onClick={this.setNodeRate}>分红比例配置</span>
-                    <span className="superNode-listPage-wrapper-tab" onClick={this.setNodePlan}>节点周期配置</span>
-                    <span className="superNode-listPage-wrapper-tab" onClick={this.setNodeRedeem}>赎回手续费配置</span>
-                    <span className="superNode-listPage-wrapper-tab" onClick={this.setNodeRefereeRate}>推荐分红奖励配置</span>
-                    <span className="superNode-listPage-wrapper-tab" onClick={this.setNodeTaxRate}>交税比例配置</span>
+                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRate}>分红比例配置</a>
+                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodePlan}>节点周期配置</a>
+                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRedeem}>赎回手续费配置</a>
+                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRefereeRate}>推荐分红奖励配置</a>
+                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeTaxRate}>交税比例配置</a>
                 </div>
                 <div style={{height: '30px'}}></div>
                 {
@@ -140,8 +125,7 @@ class Setting extends React.Component {
                                         } else if (selectedRowKeys.length > 1) {
                                             showWarnMsg('请选择一条记录');
                                         } else {
-                                            console.log(selectedRows);
-                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey + '&tp=' + type);
                                         }
                                     }else if(type === 'node_redeem') {
                                         if (!selectedRowKeys.length) {
@@ -149,8 +133,7 @@ class Setting extends React.Component {
                                         } else if (selectedRowKeys.length > 1) {
                                             showWarnMsg('请选择一条记录');
                                         } else {
-                                            console.log(selectedRows);
-                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey + '&tp=' + type);
                                         }
                                     }else if(type === 'node_referee_rate') {
                                         if (!selectedRowKeys.length) {
@@ -158,7 +141,7 @@ class Setting extends React.Component {
                                         } else if (selectedRowKeys.length > 1) {
                                             showWarnMsg('请选择一条记录');
                                         } else {
-                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey + '&tp=' + type);
                                         }
                                     }else if(type === 'node_tax_rate') {
                                         if (!selectedRowKeys.length) {
@@ -166,7 +149,7 @@ class Setting extends React.Component {
                                         } else if (selectedRowKeys.length > 1) {
                                             showWarnMsg('请选择一条记录');
                                         } else {
-                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey);
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey + '&tp=' + type);
                                         }
                                     }
                             }
