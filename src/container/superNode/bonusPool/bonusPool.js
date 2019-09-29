@@ -160,7 +160,7 @@ class BonusPool extends React.Component {
                 <div className="superNodeBonusPool-section" style={{marginBottom: '30px'}}>
                     <div className="superNodeBonusPool-property">
                         <samp>总资产折合</samp>
-                        <p>{totalAmountData.totalUsdtPrice / Math.pow(10, 8)} USDT<i>={totalAmountData.totalCnyPrice}CNY</i></p>
+                        <p>{(totalAmountData.totalUsdtPrice / Math.pow(10, 8)).toFixed(4)} USDT<i>={(totalAmountData.totalCnyPrice / Math.pow(10, 8)).toFixed(2)}CNY</i></p>
                     </div>
                     <div className="superNodeBonusPool-property-tab">
                         {

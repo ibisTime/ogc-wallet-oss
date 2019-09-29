@@ -4,6 +4,7 @@ import moment from 'moment';
 import { PIC_PREFIX, DATE_FORMAT, MONTH_FORMAT, DATETIME_FORMAT } from './config';
 import './lib/BigDecimal';
 import CryptoJS from 'crypto-js';
+import fetch from 'common/js/fetch';
 
 const defaultKey = '23d$%Q#kjwgsl@@$#@'; // 默认的key
 const defaultIv = 'ogiGRWos02oH22301#'; // 默认的key 偏移量
@@ -16,6 +17,12 @@ const defaultIv = 'ogiGRWos02oH22301#'; // 默认的key 偏移量
 export function setUser({ userId, token }) {
   cookies.set('userId', userId);
   cookies.set('token', token);
+  fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
+    sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
+  });
+  fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
+    sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+  });
 }
 
 // 删除用户登录信息

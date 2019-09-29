@@ -9,17 +9,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use('/api', function (req, res) {
-    //金米研发
-    // let url = 'http://m.jinmidev.hichengdai.com/api';
-    // 金米测试
-    // let url = 'http://m.jinmitest.hichengdai.com/api';
-    // 金米预发布
-    // let url = 'http://m.jinmistage.hichengdai.com/api';
-    // 金米线上
-    // let url = 'http://m.jinmi.club/api';
-
-    //
-    let url = 'http://oss.psctest.psctoken.com/api'
+    // 研发
+    // let url = 'http://oss.walletdev.hichengdai.com/api';
+    // 测试
+    let url = 'http://oss.psctest.psctoken.com/api';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);

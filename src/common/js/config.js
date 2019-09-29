@@ -2,9 +2,9 @@ export const SYSTEM_CODE = 'CL-PRISM';
 // 七牛http上传地址
 // export const UPLOAD_URL = 'http://up.qiniup.com';
 // 七牛https上传地址
-export const UPLOAD_URL = 'http://up-z2.qiniup.com';
+export const UPLOAD_URL = sessionStorage.getItem('qiniuUploadDomain') + '/';
 // 七牛图片前缀
-export const PIC_PREFIX = 'http://py2ljqirg.bkt.clouddn.com/';
+export const PIC_PREFIX = 'http://' + sessionStorage.getItem('qiniuDomain') + '/';
 // 七牛图片https前缀
 // export const PIC_PREFIX = 'https://img.adorkableisland.com/';
 export const PIC_BASEURL_L = '?imageMogr2/auto-orient';
