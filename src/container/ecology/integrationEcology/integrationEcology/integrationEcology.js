@@ -43,6 +43,7 @@ class IntegrationEcology extends React.Component {
             let username = localStorage.getItem('username');
             let tokenIgo = localStorage.getItem('token_igo');
             window.open(`http://oss.igotest.psctoken.com/verificationPSC?username=${username}&token=${tokenIgo}`);
+            // window.open(`http://oss.igodev.hichengdai.com/verificationPSC?username=${username}&token=${tokenIgo}`);
         }else {
             let url = '';
             if(this.state.urlList[item.url]) {
@@ -67,7 +68,7 @@ class IntegrationEcology extends React.Component {
                                 }>
                                     <div style={{width: '100%'}}>
                                         <div style={{fontSize: '16px', marginBottom: '10px'}}>{item.name}</div>
-                                        <div>用户量： {item.userCount}</div>
+                                        <div>{item.name === 'IGO' ? '活跃用户' : '用户量'}： {item.userCount}</div>
                                     </div>
                                 </Card>
                             </Col>

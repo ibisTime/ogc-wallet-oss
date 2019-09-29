@@ -1,4 +1,4 @@
-export const SYSTEM_CODE = 'CD-OGC000021';
+export const SYSTEM_CODE = 'CL-PRISM';
 // 七牛http上传地址
 // export const UPLOAD_URL = 'http://up.qiniup.com';
 // 七牛https上传地址
