@@ -23,6 +23,9 @@ export function setUser({ userId, token }) {
   fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
     sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
   });
+  fetch(625013, {key: 'api_login_url', start: 1, limit: 10}).then(data => {
+    sessionStorage.setItem('apiLoginUrl', data.list[0].value);
+  });
 }
 
 // 删除用户登录信息

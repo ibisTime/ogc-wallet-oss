@@ -87,7 +87,7 @@ class Setting extends React.Component {
             field: 'cvalue',
             title: '数值',
             render: (v, data) => {
-                if(data.type === 'node_plan' && data.id === 1) {
+                if(data.type === 'node_plan' && data.ckey === 'is_auto_create') {
                     return v === '0' ? '否' : '是';
                 }
                 return v;

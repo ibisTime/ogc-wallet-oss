@@ -30,14 +30,13 @@ class IncomeRecord extends React.Component {
 
     render() {
         const fields = [{
-            field: 'planName',
+            field: 'nodePlanName',
             title: '期数'
         }, {
             field: 'type',
             title: '类型',
             type: 'select',
-            key: 'snode_income_type',
-            search: true
+            key: 'snode_income_type'
         }, {
             field: 'income',
             title: '收益数量',
@@ -70,10 +69,11 @@ class IncomeRecord extends React.Component {
                 return formatMoney(v, '', '10000000') + ' USDT';
             }
         }, {
-            field: 'type',
+            field: 'status',
             title: '结算状态',
             type: 'select',
-            key: 'snode_income_type'
+            key: 'snode_income_status',
+            search: true
         }, {
             field: 'createDatetime',
             title: '生成时间',

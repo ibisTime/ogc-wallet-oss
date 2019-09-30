@@ -88,8 +88,7 @@ class VoteRecord extends React.Component {
             valueName: 'value',
             render: (v, data) => {
                 return v + '号节点';
-            },
-            search: true
+            }
         }, {
             field: 'amount',
             title: '票数',
