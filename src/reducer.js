@@ -292,6 +292,7 @@ import {SuperNodeSetting} from './redux/superNode/setting';
 
 // 超级节点
 import {GuessUpsDownsHome} from './redux/guessUpsDowns/home';
+import {GuessUpsDownsTotayScene} from './redux/guessUpsDowns/totayScene';
 import {GuessUpsDownsQuotation} from './redux/guessUpsDowns/quotation';
 import {GuessUpsDownsQuotationShortTerm} from './redux/guessUpsDowns/quotationShortTerm';
 import {GuessUpsDownsQuotationHistory} from './redux/guessUpsDowns/quotationHistory';
@@ -519,6 +520,7 @@ export default combineReducers({
     SuperNodeSetting,
     // 猜涨跌
     GuessUpsDownsHome,
+    GuessUpsDownsTotayScene,
     GuessUpsDownsQuotation,
     GuessUpsDownsQuotationShortTerm,
     GuessUpsDownsQuotationHistory,

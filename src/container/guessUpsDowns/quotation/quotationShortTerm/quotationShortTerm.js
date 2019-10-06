@@ -25,56 +25,27 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
 class QuotationShortTerm extends React.Component {
     render() {
         const fields = [{
+            field: 'jyd',
+            title: '交易对'
+        }, {
+            field: 'jyd',
+            title: 'k线类型'
+        }, {
             field: 'createDatetime',
-            title: '分红时间',
+            title: 'k线时间',
             type: 'datetime'
         }, {
-            field: 'orderNo',
-            title: '节点',
-            type: 'select',
-            data: [{
-                key: '1',
-                value: '1号节点'
-            }, {
-                key: '2',
-                value: '2号节点'
-            }, {
-                key: '3',
-                value: '3号节点'
-            }, {
-                key: '4',
-                value: '4号节点'
-            }, {
-                key: '5',
-                value: '5号节点'
-            }, {
-                key: '6',
-                value: '6号节点'
-            }, {
-                key: '7',
-                value: '7号节点'
-            }, {
-                key: '8',
-                value: '8号节点'
-            }, {
-                key: '9',
-                value: '9号节点'
-            }, {
-                key: '10',
-                value: '10号节点'
-            }],
-            keyName: 'key',
-            valueName: 'value',
+            field: 'cjl',
+            title: '成交量',
             render: (v, data) => {
-                return v + '号节点';
-            },
-            search: true
+                return moneyFormat(v, '', data.symbol);
+            }
         }, {
-            field: 'nickname',
-            title: '用户'
+            field: 'ksgd',
+            title: '开，收，高，低'
         }, {
             field: 'symbol',
-            title: '币种',
+            title: '针对币种',
             type: 'select',
             pageCode: '802005',
             params: {
@@ -84,13 +55,22 @@ class QuotationShortTerm extends React.Component {
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
             render: (v, data) => v,
+            noVisible: true,
             search: true
         }, {
-            field: 'count',
-            title: '数额',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
-            }
+            field: 'ly',
+            title: '来源'
+        }, {
+            field: 'xg',
+            title: '是否修改'
+        }, {
+            field: 'createDatetime1',
+            title: '抓取时间',
+            type: 'datetime'
+        }, {
+            field: 'createDatetime2',
+            title: '修改时间',
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,
@@ -100,7 +80,20 @@ class QuotationShortTerm extends React.Component {
             searchParams: {
                 direction: '0',
                 nodePlan: '0'
-            }
+            },
+            buttons: [{
+                code: 'detail',
+                name: '详情',
+                handler: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/guessUpsDowns/quotation/detail?code=${selectedRows[0].id}`);
+                    }
+                }
+            }]
         });
     }
 }

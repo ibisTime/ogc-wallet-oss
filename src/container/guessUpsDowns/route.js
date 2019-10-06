@@ -10,6 +10,10 @@ const ROUTES = [
         path: '/guessUpsDowns/quotation',
         component: asyncComponent(() => import('container/guessUpsDowns/quotation/quotation'))
     },
+    {
+        path: '/guessUpsDowns/quotation/detail',
+        component: asyncComponent(() => import('container/guessUpsDowns/quotation/quotation-detail'))
+    },
     // 场次
     {
         path: '/guessUpsDowns/scene',

@@ -1,6 +1,7 @@
 import React from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Card, Row, Col, Button, Spin, message, Tag, Progress} from 'antd';
+import {Card, Row, Col, Button, Spin, message, Tag, Progress, Layout} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -13,7 +14,12 @@ import {
 } from '@redux/guessUpsDowns/home';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat, moneyFormat, formatImg} from 'common/js/util';
+import asyncComponent from 'component/async-component/async-component';
 import fetch from 'common/js/fetch';
+
+const { Content } = Layout;
+
+const TotayScene = asyncComponent(() => import('./totayScene/totayScene'));
 
 @listWrapper(
     state => ({
@@ -29,19 +35,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // ("0", "未开启"),("1", "已开启未满标"),("2","已满标");
-            nodeStatusDict: {
-                '0': '未开启',
-                '1': '正在投票',
-                '2': '已满标'
-            },
-            nodeStatusColor: {
-                '0': 'gray',
-                '1': 'blue',
-                '2': 'red'
-            },
-            bonusPoolData: [],
-            nodeData: []
+            bonusPoolData: []
         };
     }
 
@@ -52,78 +46,69 @@ class Home extends React.Component {
             fetch(610661, {
                 start: 1,
                 limit: 2
-            }),
-            // 当前节点列表查
-            fetch(610614)
-        ]).then(([bonusPoolData, nodeData]) => {
+            })
+        ]).then(([bonusPoolData]) => {
             this.setState({
-                bonusPoolData: bonusPoolData.list,
-                nodeData: nodeData
+                bonusPoolData: bonusPoolData.list
             });
             console.log('bonusPoolData', bonusPoolData);
-            console.log('nodeData', nodeData);
         }).catch(() => this.setState(
             {fetching: false}));
     }
 
-    // 格式化节点投标金额
-    nodeNowAmount = (item) => {
-        let amount = item.leftAmount;
-        if (item.status === '2') {
-            amount = item.nowAmount;
-        }
-        let nowAmount = moneyFormat(amount, 4, item.symbol, true, true);
-        if (nowAmount / 10000 > 1) {
-            nowAmount = nowAmount / 10000 + '万';
-        }
-        return nowAmount;
-    }
-
     render() {
-        const {bonusPoolData, nodeData, nodeStatusColor, nodeStatusDict} = this.state;
+        const {bonusPoolData} = this.state;
         const fields = [{
-            field: 'createDatetime',
-            title: '入池时间',
-            type: 'date'
+            field: 'symbol',
+            title: '投注用户'
         }, {
             field: 'remark',
-            title: '业务类型'
-        }, {
-            field: 'symbol',
-            title: '币种'
+            title: '方向'
         }, {
             field: 'count',
-            title: '数额',
+            title: '下注额',
             render: (v, data) => {
                 return moneyFormat(v, '', data.symbol);
             }
+        }, {
+            field: 'createDatetime',
+            title: '下注时间',
+            type: 'date'
         }];
         return (
             <div className="guessUpsDownsHome-wrapper">
                 <div className="homeTop">
                     <div className="homeTop-left">
-                        <div className="homeTop-left-tit">超级节点分红池</div>
+                        <div className="homeTop-left-tit">平台盈亏池（折算成USDT）</div>
                         <div className="homeTop-left-item-wrap">
-                            {
-                                bonusPoolData.length > 0 && bonusPoolData.map((item) => (
-                                    <div className="homeTop-left-item" key={item.id}>
-                                        <div className="item-logo"><img src={formatImg(item.coin.icon)}/></div>
+                            {/* {
+                                bonusPoolData.length > 0 && bonusPoolData.map((item) => ( */}
+                                    <div className="homeTop-left-item" key='1'>
                                         <div className="item-con">
-                                            <p>{item.symbol}</p>
-                                            <samp>{moneyFormat(item.count, '', item.symbol)}</samp>
+                                            <p>收入总额</p>
+                                            <samp>5555.00000000</samp>
                                         </div>
                                     </div>
-                                ))
-                            }
+                            <div className="homeTop-left-item" key='2'>
+                                <div className="item-con">
+                                    <p>支出总额</p>
+                                    <samp>2222.00000000</samp>
+                                </div>
+                            </div>
+                            <div className="homeTop-left-item" key='3'>
+                                <div className="item-con">
+                                    <p>利润总额</p>
+                                    <samp>3333.00000000</samp>
+                                </div>
+                            </div>
+                            {/*        ))
+                               } */}
                         </div>
                         <div className="homeTop-left-bottom"></div>
                     </div>
                     <div className="homeTop-right">
                         <div className="guessUpsDowns-title-wrap">
-                            <p>实时入池记录</p>
-                            <samp onClick={() => {
-                                this.props.history.push(`/guessUpsDowns/bonusPool`);
-                            }}>查看更多</samp>
+                            <p>实时投注记录（无关场次）</p>
                         </div>
                         <div className="homeTop-right-table">
                             {
@@ -143,26 +128,19 @@ class Home extends React.Component {
                 </div>
                 <div className="homeContent">
                     <div className="guessUpsDowns-title-wrap">
-                        <p>当前节点</p>
+                        <p>今日场次</p>
+                        <samp onClick={() => {
+                            this.props.history.push(`/guessUpsDowns/scene`);
+                        }}>查看更多</samp>
                     </div>
-                    <div className="homeContent-item-wrap">
-                        {
-                            nodeData.length > 0 && nodeData.map((item) => (
-                                <div className="homeContent-item" key={item.code}>
-                                    <div className={item.status === '1' ? 'wrap ing' : 'wrap'}>
-                                        <div className="homeContent-top">
-                                            {item.orderNo}号节点<Tag color={nodeStatusColor[item.status]}>{nodeStatusDict[item.status]}</Tag>
-                                        </div>
-                                        <div className="homeContent-con">
-                                            <i className={item.status !== '2' ? '' : 'hidden'}>剩余 </i>{this.nodeNowAmount(item)}，<i>已投{item.sellRate * 100}%</i>
-                                        </div>
-                                        <div className="homeContent-progress">
-                                            <Progress percent={item.sellRate * 100} showInfo={false} strokeWidth={4} strokeColor="#737DFF"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
+                    <div className="guessUpsDownsBonusPool-section">
+                        <Layout>
+                            <Content>
+                                <Switch>
+                                    <Route path='/guessUpsDowns' exact component={TotayScene}></Route>
+                                </Switch>
+                            </Content>
+                        </Layout>
                     </div>
                 </div>
             </div>
