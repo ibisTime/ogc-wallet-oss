@@ -290,6 +290,14 @@ import {SuperNodeBuyBackRecord} from './redux/superNode/buyBackRecord';
 import {SuperNodeIncomeRecord} from './redux/superNode/incomeRecord';
 import {SuperNodeSetting} from './redux/superNode/setting';
 
+// 超级节点
+import {GuessUpsDownsHome} from './redux/guessUpsDowns/home';
+import {GuessUpsDownsQuotation} from './redux/guessUpsDowns/quotation';
+import {GuessUpsDownsQuotationShortTerm} from './redux/guessUpsDowns/quotationShortTerm';
+import {GuessUpsDownsQuotationHistory} from './redux/guessUpsDowns/quotationHistory';
+import {GuessUpsDownsScene} from './redux/guessUpsDowns/scene';
+import {GuessUpsDownsRobot} from './redux/guessUpsDowns/robot';
+
 export default combineReducers({
     user,
     menu,
@@ -508,5 +516,12 @@ export default combineReducers({
     SuperNodeVoteRecord,
     SuperNodeBuyBackRecord,
     SuperNodeIncomeRecord,
-    SuperNodeSetting
+    SuperNodeSetting,
+    // 猜涨跌
+    GuessUpsDownsHome,
+    GuessUpsDownsQuotation,
+    GuessUpsDownsQuotationShortTerm,
+    GuessUpsDownsQuotationHistory,
+    GuessUpsDownsScene,
+    GuessUpsDownsRobot
 });

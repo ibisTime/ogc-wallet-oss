@@ -9,7 +9,7 @@ import { clearUser, getUserId, getUserName } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
-import './superNode.css';
+import './guessUpsDowns.css';
 import ROUTES from './route';
 
 const { SubMenu, Item } = Menu;
@@ -19,11 +19,11 @@ const { Header, Content, Sider } = Layout;
     state => ({ ...state.user, ...state.menu, ...state.message, loginName: state.user.loginName }),
     { setSelToId, loadTxUserSign, setMsgList, addUserMap }
 )
-class SuperNode extends React.Component {
+class GuessUpsDowns extends React.Component {
     constructor(props) {
         super(props);
         let topMenuCode = '';
-        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/superNode') {
+        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/guessUpsDowns') {
             topMenuCode = sessionStorage.getItem('superMenuName');
         } else {
             topMenuCode = 'home';
@@ -36,29 +36,21 @@ class SuperNode extends React.Component {
                 code: 'home',
                 name: '首页'
             }, {
-                code: 'bonusPool',
-                name: '红利池'
+                code: 'quotation',
+                name: '行情'
             }, {
-                code: 'periods',
-                name: '期数'
+                code: 'scene',
+                name: '场次'
             }, {
-                code: 'node',
-                name: '节点'
-            }, {
-                code: 'customer',
-                name: '用户'
-            }, {
-                code: 'setting',
-                name: '配置'
+                code: 'robot',
+                name: '机器人'
             }],
             // 菜单对应跳转url
             top2SubObj: {
-                'home': '/superNode',
-                'bonusPool': '/superNode/bonusPool',
-                'periods': '/superNode/periods',
-                'node': '/superNode/node',
-                'customer': '/superNode/customer',
-                'setting': '/superNode/setting'
+                'home': '/guessUpsDowns',
+                'quotation': '/guessUpsDowns/quotation',
+                'scene': '/guessUpsDowns/scene',
+                'robot': '/guessUpsDowns/robot'
             }
         };
     }
@@ -77,7 +69,7 @@ class SuperNode extends React.Component {
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
-                    this.props.history.push('/superNode');
+                    this.props.history.push('/guessUpsDowns');
                 }}>
                     <img style ={{width: '62%', height: '30px'}} src={logo}/>
                 </div>
@@ -247,7 +239,7 @@ class SuperNode extends React.Component {
 
     render() {
         return (
-            <Layout className="dashboard-layout superNode-wrapper" style={{minHeight: '100%'}}>
+            <Layout className="dashboard-layout guessUpsDowns-wrapper" style={{minHeight: '100%'}}>
                 {this.getHeader()}
                 <Layout>
                     {this.getContent()}
@@ -257,4 +249,4 @@ class SuperNode extends React.Component {
     }
 }
 
-export default SuperNode;
+export default GuessUpsDowns;

@@ -21,6 +21,9 @@ const Dashboard = asyncComponent(() => import('component/dashboard/dashboard'));
 // 集成生态-超级节点
 const SuperNode = asyncComponent(() => import('container/superNode/superNode'));
 
+// 集成生态-猜涨跌
+const GuessUpsDowns = asyncComponent(() => import('container/guessUpsDowns/guessUpsDowns'));
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -29,6 +32,7 @@ ReactDOM.render(
                 <Switch>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/superNode' component={SuperNode}></Route>
+                    <Route path='/guessUpsDowns' component={GuessUpsDowns}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>
