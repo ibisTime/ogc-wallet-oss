@@ -296,7 +296,13 @@ import {GuessUpsDownsQuotation} from './redux/guessUpsDowns/quotation';
 import {GuessUpsDownsQuotationShortTerm} from './redux/guessUpsDowns/quotationShortTerm';
 import {GuessUpsDownsQuotationHistory} from './redux/guessUpsDowns/quotationHistory';
 import {GuessUpsDownsScene} from './redux/guessUpsDowns/scene';
+import {GuessUpsDownsScenePage} from './redux/guessUpsDowns/scenePage';
+import {GuessUpsDownsScenePreview} from './redux/guessUpsDowns/scenePreview';
+import {GuessUpsDownsSceneRecord} from './redux/guessUpsDowns/sceneRecord';
 import {GuessUpsDownsRobot} from './redux/guessUpsDowns/robot';
+import {robotAccountWater} from './redux/guessUpsDowns/robotAccountWater';
+import {robotRecentWater} from './redux/guessUpsDowns/robotRecentWater';
+import {robotHistoryWater} from './redux/guessUpsDowns/robotHistoryWater';
 
 export default combineReducers({
     user,
@@ -523,5 +529,11 @@ export default combineReducers({
     GuessUpsDownsQuotationShortTerm,
     GuessUpsDownsQuotationHistory,
     GuessUpsDownsScene,
-    GuessUpsDownsRobot
+    GuessUpsDownsScenePage,
+    GuessUpsDownsScenePreview,
+    GuessUpsDownsSceneRecord,
+    GuessUpsDownsRobot,
+    robotAccountWater,
+    robotRecentWater,
+    robotHistoryWater
 });
