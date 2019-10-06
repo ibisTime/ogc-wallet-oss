@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -10,7 +11,8 @@ import {
     setSearchData
 } from '@redux/guessUpsDowns/scene';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg} from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -26,16 +28,17 @@ class Scene extends React.Component {
     render() {
         const fields = [{
             field: 'planName',
-            title: '期数名称'
+            title: '期数'
         }, {
             field: 'batch1',
-            title: '批次',
+            title: '币种',
             render: (v, data) => {
                 return data.batch;
-            }
+            },
+            search: true
         }, {
             field: 'batch',
-            title: '期数',
+            title: '状态',
             type: 'select',
             pageCode: '610601',
             keyName: 'batch',
@@ -45,35 +48,23 @@ class Scene extends React.Component {
             noVisible: true
         }, {
             field: 'status',
-            title: '状态',
+            title: '周期（分）',
             type: 'select',
             key: 'snode_plan_status'
         }, {
             field: 'divideCycle',
-            title: '分红周期'
+            title: '投注期（分）'
         }, {
             field: 'startDate',
-            title: '开始时间',
+            title: '封闭期（分）',
             type: 'datetime'
         }, {
             field: 'endDate',
-            title: '结束时间',
+            title: '启用时间',
             type: 'datetime'
         }, {
-            field: 'fullAmount',
-            title: '满标数额',
-            render: (v, data) => {
-                return moneyFormat(v, '', 'PSC');
-            }
-        }, {
-            field: 'startAmount',
-            title: '起购数额',
-            render: (v, data) => {
-                return moneyFormat(v, '', 'PSC');
-            }
-        }, {
             field: 'stepAmount',
-            title: '递增数额',
+            title: '停用时间',
             render: (v, data) => {
                 return moneyFormat(v, '', 'PSC');
             }
@@ -85,27 +76,80 @@ class Scene extends React.Component {
                         fields,
                         pageCode: 610601,
                         buttons: [{
-                            code: 'userDistribution',
-                            name: '用户分布',
+                            code: 'scene',
+                            name: '场次',
                             handler: (selectedRowKeys, selectedRows) => {
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/guessUpsDowns/customer?code=${selectedRowKeys[0]}`);
+                                    this.props.history.push(`/guessUpsDowns/scene-page?code=${selectedRowKeys[0]}`);
                                 }
                             }
                         }, {
-                            code: 'nodeDetail',
-                            name: '节点明细',
+                            code: 'add',
+                            name: '新增',
+                            handler: () => {
+                                this.props.history.push(`/guessUpsDowns/scene/addedit`);
+                            }
+                        }, {
+                            code: 'edit',
+                            name: '修改',
                             handler: (selectedRowKeys, selectedRows) => {
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/guessUpsDowns/node?code=${selectedRowKeys[0]}`);
+                                    this.props.history.push(`/guessUpsDowns/scene/addedit`);
+                                }
+                            }
+                        }, {
+                            code: 'stopOrNo',
+                            name: '启用/停用',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                if (!selectedRowKeys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else if (selectedRowKeys.length > 1) {
+                                    showWarnMsg('请选择一条记录');
+                                } else {
+                                    const txt = '';
+                                    Modal.confirm({
+                                        okText: '确认',
+                                        cancelText: '取消',
+                                        content: txt,
+                                        onOk: () => {
+                                            // this.props.doFetching();
+                                            // showSucMsg('操作成功');
+                                            // this.props.cancelFetching();
+                                            // this.props.getPageData();
+                                        }
+                                    });
+                                }
+                            }
+                        }, {
+                            code: 'previewEvents',
+                            name: '预览场次',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                if (!selectedRowKeys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else if (selectedRowKeys.length > 1) {
+                                    showWarnMsg('请选择一条记录');
+                                } else {
+                                    this.props.history.push(`/guessUpsDowns/scene-preview`);
+                                }
+                            }
+                        }, {
+                            code: 'detail',
+                            name: '详情',
+                            handler: (selectedRowKeys) => {
+                                if (!selectedRowKeys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else if (selectedRowKeys.length > 1) {
+                                    showWarnMsg('请选择一条记录');
+                                } else {
+                                    this.props.history.push(`/guessUpsDowns/scene/addedit?v=1`);
                                 }
                             }
                         }]
