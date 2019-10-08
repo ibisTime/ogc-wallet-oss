@@ -231,6 +231,29 @@ class AppmanagentAddedit extends DetailUtil {
                                 this.props.history.go(-1);
                             }, 1000);
                         }).catch(this.props.cancelFetching);
+                    } else if (this.action === '9') {
+                        let data = {
+                            name: param.name,
+                            id: param.id,
+                            picList: param.picList,
+                            category: param.category,
+                            language: param.language,
+                            location: param.location,
+                            orderNo: param.orderNo,
+                            isTop: param.isTop,
+                            url: param.url
+                        };
+                        if(param.ticketsFlag === '1') {
+                            data.ticketsPrice = param.ticketsPrice;
+                            data.ticketsSymbol = param.ticketsSymbol;
+                        }
+                        data.ticketsFlag = param.ticketsFlag;
+                        fetch(625661, data).then(() => {
+                            showSucMsg('操作成功');
+                            setTimeout(() => {
+                                this.props.history.go(-1);
+                            }, 1000);
+                        }).catch(this.props.cancelFetching);
                     }
                 },
                 check: true,

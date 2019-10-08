@@ -116,32 +116,40 @@ class Customer extends React.Component {
             },
             required: true
         }, {
-            field: 'nodeLevel',
+            field: 'level',
             title: '节点等级',
             type: 'select',
             data: [{
-                key: '0',
-                value: '共营节点（高级）'
+                key: '-1',
+                value: '普通用户'
             }, {
                 key: '1',
-                value: '社区节点（中级）'
+                value: '三级经销商'
             }, {
                 key: '2',
-                value: '区域节点（初级）'
+                value: '二级经销商'
+            }, {
+                key: '3',
+                value: '一级经销商'
+            }, {
+                key: '4',
+                value: '总经销商'
             }],
             keyName: 'key',
             valueName: 'value',
             search: true,
             render: (v, data) => {
                 let level;
-                if (v === '0') {
-                    level = '共营节点（高级）';
-                } else if (v === '1') {
-                    level = '社区节点（中级）';
-                } else if (v === '2') {
-                    level = '区域节点（初级）';
-                } else {
+                if (v === '-1') {
                     level = '普通用户';
+                } else if (v === '1') {
+                    level = '三级经销商';
+                } else if (v === '2') {
+                    level = '二级经销商';
+                } else if (v === '3') {
+                    level = '一级经销商';
+                } else if (v === '4') {
+                    level = '总经销商';
                 }
                 return level;
             }

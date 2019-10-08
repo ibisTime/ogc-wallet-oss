@@ -106,6 +106,7 @@ class GJAddress extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
+            pageCode: '802525',
             searchParams: {
               type: 'W',
               symbol: setSymbol
