@@ -111,6 +111,7 @@ class BonusPool extends React.Component {
                 selectedData: {}
             });
             this.props.form.resetFields();
+            this.props.getPageData();
         }).catch(() => {
             this.setState({fetching: false});
             this.props.form.resetFields();
@@ -206,7 +207,7 @@ class BonusPool extends React.Component {
                             </div>
                             <div className={adjustPopupFlag ? 'adjust-popup-content error' : 'adjust-popup-content'}>
                                 <div className="text">币种: {selectedData.symbol}</div>
-                                <div className="text">累计调额: {selectedData.totalAdjustCount}{selectedData.symbol}</div>
+                                <div className="text">累计调额: {moneyFormat(selectedData.totalAdjustCount, '', 'ETH')}{selectedData.symbol}</div>
                                 <Form.Item label="额度">
                                     {getFieldDecorator('adjustCount', {
                                         rules: [{
