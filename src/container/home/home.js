@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 import {
     getUserName,
     getRoleCode,
-    dateFormat
+    dateFormat,
+    setSystem
 } from 'common/js/util';
 import {getRoleList} from 'api/company';
 // import {getPageMyNotice, getPageMyCompanysystem} from 'api/home';
@@ -29,6 +30,7 @@ class Home extends React.Component {
             this.getUserRole(roleData);
             this.setState({roleData: roleData, noticeData: noticeData.list, companysystemData: companysystemData.list});
         }).catch(() => this.setState({fetching: false}));
+        setSystem();
     }
 
     getUserRole = (roleData) => {
