@@ -12,7 +12,7 @@ import {
 } from '@redux/menu';
 import { loadTxUserSign, setSelToId } from '@redux/user';
 import { setMsgList, addUserMap } from '@redux/message';
-import { clearUser, getUserId, getUserName } from 'common/js/util';
+import { clearUser, getUserId, getUserName, setSystem } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import fetch from 'common/js/fetch';
 import asyncComponent from '../async-component/async-component';
@@ -41,6 +41,7 @@ class Dashboard extends React.Component {
     // this.getUserSign();
     this.props.getMenuList(this.props.location.pathname);
     this.props.addUserMap(getUserId(), {nickname: getUserName()});
+    setSystem();
   }
   handleTopMenuClick = (e) => {
     if (e.key && e.key !== 'user') {

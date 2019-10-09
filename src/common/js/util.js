@@ -17,6 +17,9 @@ const defaultIv = 'ogiGRWos02oH22301#'; // 默认的key 偏移量
 export function setUser({ userId, token }) {
   cookies.set('userId', userId);
   cookies.set('token', token);
+}
+
+export function setSystem() {
   fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
     sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
   });
