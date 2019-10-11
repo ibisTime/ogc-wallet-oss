@@ -1314,6 +1314,11 @@ const ROUTES = [
     {
         path: '/integrationEcology/configure/addedit',
         component: asyncComponent(() => import('container/ecology/integrationEcology/configure/configure-addedit'))
+    },
+    // 团队查询
+    {
+        path: '/teamQuery/teamQueryInfo',
+        component: asyncComponent(() => import('container/teamQuery/teamQuery'))
     }
 ];
 
