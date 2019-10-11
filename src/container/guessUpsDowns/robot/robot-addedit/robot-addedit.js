@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'antd';
-import { getQueryString } from 'common/js/util';
+import { getQueryString, getCoinList } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
 @Form.create()
@@ -13,73 +13,46 @@ class RobotAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'name',
-            title: '首创玩法',
+            title: '机器人名称',
             required: true
         }, {
-            field: 'icon',
-            title: '图标',
-            type: 'img',
-            single: true,
-            required: true
-        }, {
-            field: 'description',
-            title: '首创玩法概要介绍',
-            required: true
-        }, {
-            field: 'slogan',
-            title: '提示',
-            required: true
-        }, {
-            field: 'action',
-            title: '动作',
-            key: 'dapp_action',
-            required: true,
-            type: 'select'
-        }, {
-            field: 'location',
-            title: '位置',
+            field: 'symbol',
+            title: '针对币种',
             type: 'select',
-            value: '0',
-            hidden: true
-        }, {
-            field: 'position',
-            title: '链接',
+            data: getCoinList(),
+            keyName: 'key',
+            valueName: 'key',
             required: true
         }, {
-            title: '次序',
-            integer: true,
-            field: 'orderNo',
+            field: 'conditionsRate',
+            title: '条件赔率',
             required: true
         }, {
-            title: '状态',
-            field: 'status',
+            field: 'betRate',
+            title: '下注赔率',
+            required: true
+        }, {
+            field: 'betResult',
+            title: '下注输赢',
+            required: true,
             type: 'select',
             data: [{
-                'key': '0',
-                'value': '隐藏'
+                key: '1',
+                value: '赢'
             }, {
-                'key': '1',
-                'value': '显示'
+                key: '0',
+                value: '输'
             }],
             keyName: 'key',
-            valueName: 'value',
-            hidden: !this.view
-        }, {
-            field: 'remark',
-            title: '备注',
-            hidden: !this.view
-        }, {
-            field: 'updateDatetime',
-            hidden: !this.view,
-            type: 'datetime',
-            title: '更新时间'
+            valueName: 'value'
         }];
         return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,
-            detailCode: 625411,
-            editCode: 625402
+            detailCode: 620024,
+            addCode: 620020,
+            editCode: 620021
         });
     }
 }

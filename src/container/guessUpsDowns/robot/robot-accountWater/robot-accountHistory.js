@@ -36,16 +36,16 @@ class RobotHistoryWater extends React.Component {
         }
         this.buttons = [];
         this.buttons = [{
-            code: 'export',
-            name: '导出',
-            check: false
-        }, {
             code: 'goBack',
             name: '返回',
             check: false,
             handler: () => {
                 this.props.history.go(-1);
             }
+        }, {
+            code: 'export',
+            name: '导出',
+            check: false
         }];
     }
     render() {

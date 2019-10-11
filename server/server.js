@@ -10,9 +10,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use('/api', function (req, res) {
     // 研发
-    let url = 'http://oss.walletdev.hichengdai.com/api';
+    // let url = 'http://oss.walletdev.hichengdai.com/api';
     // 测试
     // let url = 'http://oss.psctest.psctoken.com/api';
+    
+    // 涨跌幅
+    let url = 'http://120.26.6.213:1901/wu-wallet-msp/api';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);

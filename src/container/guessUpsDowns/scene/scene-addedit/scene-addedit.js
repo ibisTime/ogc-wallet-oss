@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'antd';
-import { getQueryString } from 'common/js/util';
+import { getQueryString, moneyParse, getCoinList } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
 @Form.create()
@@ -13,73 +13,89 @@ class SceneAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'name',
-            title: '首创玩法',
-            required: true
-        }, {
-            field: 'icon',
-            title: '图标',
-            type: 'img',
-            single: true,
-            required: true
-        }, {
-            field: 'description',
-            title: '首创玩法概要介绍',
-            required: true
-        }, {
-            field: 'slogan',
-            title: '提示',
-            required: true
-        }, {
-            field: 'action',
-            title: '动作',
-            key: 'dapp_action',
-            required: true,
-            type: 'select'
-        }, {
-            field: 'location',
-            title: '位置',
-            type: 'select',
-            value: '0',
-            hidden: true
-        }, {
-            field: 'position',
-            title: '链接',
-            required: true
-        }, {
-            title: '次序',
-            integer: true,
-            field: 'orderNo',
-            required: true
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            data: [{
-                'key': '0',
-                'value': '隐藏'
-            }, {
-                'key': '1',
-                'value': '显示'
-            }],
-            keyName: 'key',
-            valueName: 'value',
+            title: '名称',
             hidden: !this.view
         }, {
-            field: 'remark',
-            title: '备注',
+            field: 'symbol',
+            title: '币种',
+            type: 'select',
+            data: getCoinList(),
+            keyName: 'key',
+            valueName: 'key'
+        }, {
+            field: 'bettingMins',
+            title: '投注期分钟数',
+            number: true,
+            required: true
+        }, {
+            field: 'closeMins',
+            title: '封闭期分钟数',
+            number: true,
+            required: true
+        }, {
+            field: 'recycleMins',
+            title: '周期分钟',
+            number: true,
+            required: true,
+            tipEle: {
+                id: 'recycleMins',
+                style: {
+                    color: '#f5222d'
+                },
+                content: '投注期加封闭期分钟数不能超过周期分钟数'
+            }
+        }, {
+            field: 'singleCountMin',
+            title: '单次最小投注数量',
+            number: true,
+            required: true
+        }, {
+            field: 'singleCountMax',
+            title: '单次最大投注数量',
+            number: true,
+            required: true
+        }, {
+            field: 'betsStep',
+            title: '投注步长',
+            number: true,
+            required: true
+        }, {
+            field: 'personMaxCount',
+            title: '单人最大投注量',
+            number: true,
+            required: true
+        }, {
+            field: 'enableDatetime',
+            title: '启用时间',
+            hidden: !this.view,
+            type: 'datetime'
+        }, {
+            field: 'nextStartDatetime',
+            title: '下期开始时间',
+            hidden: !this.view,
+            type: 'datetime'
+        }, {
+            field: 'status',
+            title: '状态',
+            hidden: !this.view,
+            key: 'reward_term_status'
+        }, {
+            field: 'updateName',
+            title: '更新人',
             hidden: !this.view
         }, {
             field: 'updateDatetime',
+            title: '更新时间',
             hidden: !this.view,
-            type: 'datetime',
-            title: '更新时间'
+            type: 'datetime'
         }];
         return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,
-            detailCode: 625411,
-            editCode: 625402
+            detailCode: 620006,
+            addCode: 620001,
+            editCode: 620002
         });
     }
 }

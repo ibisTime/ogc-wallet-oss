@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/guessUpsDowns/scenePreview';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg, getQueryString} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -23,6 +23,7 @@ import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg} from 'common/js/ut
     }
 )
 class ScenePreview extends React.Component {
+    symbol = getQueryString('symbol', this.props.location.search);
     render() {
         const fields = [{
             field: 'planName',

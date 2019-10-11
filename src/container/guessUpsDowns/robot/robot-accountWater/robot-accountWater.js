@@ -40,11 +40,7 @@ class RobotAccountWater extends React.Component {
             name: '返回',
             check: false,
             handler: () => {
-                if (this.isCDealer) {
-                    this.props.history.push(`/user/channelDealer`);
-                } else {
-                    this.props.history.push(`/user/customer`);
-                }
+                this.props.history.go(-1);
             }
         }, {
             code: 'ledgerQuery',

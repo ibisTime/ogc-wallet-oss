@@ -11,7 +11,8 @@ import {
     setSearchData
 } from '@redux/guessUpsDowns/robot';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, getCoinList, showSucMsg} from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -26,47 +27,51 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
 class Robot extends React.Component {
     render() {
         const fields = [{
-            field: 'planName',
-            title: '机器人'
-        }, {
-            field: 'batch1',
-            title: '针对币种',
-            render: (v, data) => {
-                return data.batch;
-            }
-        }, {
-            field: 'batch',
-            title: '账户余额',
-            type: 'select',
-            pageCode: '610601',
-            keyName: 'batch',
-            valueName: '{{batch.DATA}}',
-            searchName: 'batch',
+            field: 'name',
+            title: '机器人',
             search: true
         }, {
-            field: 'status1',
-            title: '条件赔率',
+            field: 'symbol',
+            title: '针对币种',
             type: 'select',
-            key: 'snode_plan_status'
+            data: getCoinList(),
+            keyName: 'key',
+            valueName: 'key',
+            search: true
         }, {
-            field: 'divideCycle',
+            field: 'balanceAmount',
+            title: '账户余额'
+        }, {
+            field: 'conditionsRate',
+            title: '条件赔率'
+        }, {
+            field: 'betRate',
             title: '下注赔率'
         }, {
-            field: 'startDate',
-            title: '输赢设置',
-            type: 'datetime'
+            field: 'betResult',
+            title: '下注输赢',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '赢'
+            }, {
+                key: '0',
+                value: '输'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'snode_plan_status'
+            key: 'betting_robot_status',
+            search: true
         }, {
-            field: 'endDate',
-            title: '启用时间',
-            type: 'datetime'
+            field: 'updateName',
+            title: '更新人'
         }, {
-            field: 'endDate1',
-            title: '作废时间',
+            field: 'updateDatetime',
+            title: '更新时间',
             type: 'datetime'
         }];
         return (
@@ -74,7 +79,7 @@ class Robot extends React.Component {
                 {
                     this.props.buildList({
                         fields,
-                        pageCode: 610601,
+                        pageCode: 620023,
                         buttons: [{
                             code: 'add',
                             name: '新增',
@@ -84,7 +89,7 @@ class Robot extends React.Component {
                         }, {
                             code: 'edit',
                             name: '修改',
-                            handler: (selectedRowKeys, selectedRows) => {
+                            handler: (selectedRowKeys) => {
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {
@@ -102,16 +107,20 @@ class Robot extends React.Component {
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    const txt = '';
+                                    const txt = selectedRows[0].status === '1' ? '作废' : '启用';
                                     Modal.confirm({
                                         okText: '确认',
                                         cancelText: '取消',
                                         content: txt,
                                         onOk: () => {
-                                            // this.props.doFetching();
-                                            // showSucMsg('操作成功');
-                                            // this.props.cancelFetching();
-                                            // this.props.getPageData();
+                                            this.props.doFetching();
+                                            fetch('620022', {
+                                                code: selectedRowKeys[0]
+                                            }).then(() => {
+                                                showSucMsg('操作成功');
+                                                this.props.cancelFetching();
+                                                this.props.getPageData();
+                                            });
                                         }
                                     });
                                 }
@@ -119,19 +128,19 @@ class Robot extends React.Component {
                         }, {
                             code: 'accountWater',
                             name: '账户流水',
-                            handler: (selectedRowKeys, selectedRows) => {
+                            handler: (selectedRowKeys) => {
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/guessUpsDowns/robot-account?userId=U20191001004429012299690`);
+                                    this.props.history.push(`/guessUpsDowns/robot-account?userId=${selectedRowKeys[0]}`);
                                 }
                             }
                         }, {
                             code: 'bettingRecord',
                             name: '投注查询',
-                            handler: (selectedRowKeys, selectedRows) => {
+                            handler: (selectedRowKeys) => {
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {

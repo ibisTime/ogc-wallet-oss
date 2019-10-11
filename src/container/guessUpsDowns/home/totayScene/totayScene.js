@@ -25,40 +25,57 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
 class TotayScene extends React.Component {
     render() {
         const fields = [{
+            field: 'name',
+            title: '名称'
+        }, {
             field: 'symbol',
             title: '币种'
         }, {
-            field: 'status',
-            title: '状态'
+            field: 'period',
+            title: '期数'
         }, {
-            field: 'result',
-            title: '开奖结果'
+            field: 'bettingStartTime',
+            title: '投注开始时间',
+            type: 'datetime'
         }, {
-            field: 'result1',
-            title: '开奖赔率'
+            field: 'bettingEndTime',
+            title: '投注截止时间',
+            type: 'datetime'
         }, {
-            field: 'createDatetime',
+            field: 'closeStartTime',
+            title: '封闭开始时间',
+            type: 'datetime'
+        }, {
+            field: 'closeEndTime',
+            title: '封闭截止时间',
+            type: 'datetime'
+        }, {
+            field: 'openTime',
             title: '开奖时间',
-            type: 'datatime'
+            type: 'datetime'
         }, {
-            field: 'remark',
-            title: '涨方投注额'
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'open_reward_status',
+            search: this.isPageCode
         }, {
-            field: 'count',
+            field: 'roseBetAmount',
+            title: '涨方投注额',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
+        }, {
+            field: 'fallBetAmount',
             title: '跌方投注额',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
             }
         }];
         return this.props.buildList({
             fields,
-            pageCode: 610670,
-            rowKey: 'id',
-            noSelect: true,
-            searchParams: {
-                direction: '1',
-                nodePlan: '1'
-            }
+            pageCode: 620013,
+            noSelect: true
         });
     }
 }

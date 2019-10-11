@@ -98,8 +98,7 @@ class GuessUpsDowns extends React.Component {
 
     getContent() {
         let rightCls = 'right-layout full-right-content';
-        let props = {
-        };
+        let props = {};
         if (this.props.location.pathname === '/') {
             props.style = {
                 background: '#f0f2f5',

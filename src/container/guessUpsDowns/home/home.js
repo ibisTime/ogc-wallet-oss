@@ -37,8 +37,8 @@ class Home extends React.Component {
         this.state = {
             bonusPoolData: []
         };
+        this.realTimer = null;
     }
-
     componentDidMount() {
         // 直接请求
         Promise.all([
@@ -52,28 +52,43 @@ class Home extends React.Component {
                 bonusPoolData: bonusPoolData.list
             });
             console.log('bonusPoolData', bonusPoolData);
-        }).catch(() => this.setState(
-            {fetching: false}));
+        }).catch(() => this.setState({fetching: false}));
+        if(this.realTimer) {
+            clearTimeout(this.realTimer);
+        }
+        this.realTimer = setInterval(() => {
+            this.props.getPageData(1, 5, false);
+        }, 2000);
     }
-
+    componentWillUnmount() {
+        if(this.realTimer) {
+            clearTimeout(this.realTimer);
+        }
+    }
     render() {
-        const {bonusPoolData} = this.state;
         const fields = [{
-            field: 'symbol',
+            field: 'userName',
             title: '投注用户'
         }, {
-            field: 'remark',
-            title: '方向'
+            field: 'direction',
+            title: '投注方向',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '涨'
+            }, {
+                key: '0',
+                value: '跌'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
-            field: 'count',
-            title: '下注额',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
-            }
+            field: 'betAmount',
+            title: '投注金额'
         }, {
-            field: 'createDatetime',
-            title: '下注时间',
-            type: 'date'
+            field: 'betDatetime',
+            title: '投注时间',
+            type: 'datetime'
         }];
         return (
             <div className="guessUpsDownsHome-wrapper">
@@ -114,12 +129,11 @@ class Home extends React.Component {
                             {
                                 this.props.buildList({
                                     fields,
-                                    pageCode: 610670,
-                                    rowKey: 'id',
+                                    pageCode: 620017,
                                     noPagination: true,
                                     noSelect: true,
                                     searchParams: {
-                                        limit: 4
+                                        limit: 5
                                     }
                                 })
                             }
@@ -130,7 +144,7 @@ class Home extends React.Component {
                     <div className="guessUpsDowns-title-wrap">
                         <p>今日场次</p>
                         <samp onClick={() => {
-                            this.props.history.push(`/guessUpsDowns/scene`);
+                            this.props.history.push(`/guessUpsDowns/scene-page?type=1`);
                         }}>查看更多</samp>
                     </div>
                     <div className="guessUpsDownsBonusPool-section">

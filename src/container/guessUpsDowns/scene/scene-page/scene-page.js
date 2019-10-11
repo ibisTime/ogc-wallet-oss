@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/guessUpsDowns/scenePage';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg, getQueryString} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -23,50 +23,56 @@ import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg} from 'common/js/ut
     }
 )
 class ScenePage extends React.Component {
+    code = getQueryString('code', this.props.location.search);
+    type = getQueryString('type', this.props.location.search);
+    isPageCode = getQueryString('type', this.props.location.search) === '1';
     render() {
         const fields = [{
-            field: 'planName',
-            title: '期数',
-            search: true
+            field: 'name',
+            title: '名称'
         }, {
-            field: 'planName1',
-            title: '场次'
+            field: 'symbol',
+            title: '币种'
         }, {
-            field: 'batch1',
-            title: '币种',
-            render: (v, data) => {
-                return data.batch;
-            }
+            field: 'period',
+            title: '期数'
         }, {
-            field: 'batch',
-            title: '状态',
-            type: 'select',
-            pageCode: '610601',
-            keyName: 'batch',
-            valueName: '{{batch.DATA}}',
-            searchName: 'batch',
-            noVisible: true
+            field: 'bettingStartTime',
+            title: '投注开始时间',
+            type: 'datetime'
         }, {
-            field: 'status',
-            title: '开奖结果',
-            type: 'select',
-            key: 'snode_plan_status'
+            field: 'bettingEndTime',
+            title: '投注截止时间',
+            type: 'datetime'
         }, {
-            field: 'divideCycle',
-            title: '开奖赔率'
+            field: 'closeStartTime',
+            title: '封闭开始时间',
+            type: 'datetime'
         }, {
-            field: 'startDate',
+            field: 'closeEndTime',
+            title: '封闭截止时间',
+            type: 'datetime'
+        }, {
+            field: 'openTime',
             title: '开奖时间',
             type: 'datetime'
         }, {
-            field: 'endDate',
-            title: '涨方投注额',
-            type: 'datetime'
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'open_reward_status',
+            search: this.isPageCode
         }, {
-            field: 'stepAmount',
+            field: 'roseBetAmount',
+            title: '涨方投注额',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
+        }, {
+            field: 'fallBetAmount',
             title: '跌方投注额',
-            render: (v, data) => {
-                return moneyFormat(v, '', 'PSC');
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
             }
         }];
         return (
@@ -74,7 +80,10 @@ class ScenePage extends React.Component {
                 {
                     this.props.buildList({
                         fields,
-                        pageCode: 610601,
+                        pageCode: this.isPageCode ? '620013' : '620010',
+                        searchParams: {
+                            [this.isPageCode ? 'rewardTermCode' : 'code']: this.code
+                        },
                         buttons: [{
                             code: 'goBack',
                             name: '返回',

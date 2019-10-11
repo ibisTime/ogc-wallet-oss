@@ -380,6 +380,7 @@ export default class DetailComp extends React.Component {
       title: item.title,
       hidden: item.hidden,
       type: item.type,
+      tipEle: item.tipEle,
       field: item.field,
       label: this.getLabel(item),
       readonly: item.readonly,

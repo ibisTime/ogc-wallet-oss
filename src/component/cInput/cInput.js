@@ -67,7 +67,7 @@ export default class CInput extends React.Component {
   }
   render() {
     const { label, field, rules, readonly, hidden, getFieldDecorator,
-      onChange, type, initVal, inline, title, placeholder } = this.props;
+      onChange, type, initVal, inline, title, placeholder, tipEle } = this.props;
     let layoutProps = inline ? {} : formItemLayout;
     return (
       <FormItem key={field} {...layoutProps} className={hidden ? 'hidden' : ''} label={title ? label : ''}>
@@ -79,6 +79,9 @@ export default class CInput extends React.Component {
                 initialValue: initVal
               })(<Input {...this.getInputProps(onChange, type, hidden, placeholder)} />)
         }
+          {
+              tipEle ? <div id={tipEle.id} style={tipEle.style}>{tipEle.content || ''}</div> : null
+          }
       </FormItem>
     );
   }
