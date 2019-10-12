@@ -21,13 +21,19 @@ export function setUser({ userId, token }) {
 
 export function setSystem() {
   fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
-    sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
+      if(data.list[0]) {
+          sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
+      }
   });
   fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
-    sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+      if(data.list[0]) {
+          sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+      }
   });
   fetch(625013, {key: 'igo_oss_url', start: 1, limit: 10}).then(data => {
-    sessionStorage.setItem('apiLoginUrl', data.list[0].value);
+      if(data.list[0]) {
+          sessionStorage.setItem('apiLoginUrl', data.list[0].value);
+      }
   });
 }
 
