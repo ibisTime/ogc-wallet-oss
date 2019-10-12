@@ -94,7 +94,7 @@ export default class CUpload extends React.Component {
   getUploadProps = ({ initValue, token, field, readonly = false,
     single = false, isImg = true, onChange, accept }) => {
     const commProps = {
-      action: UPLOAD_URL,
+      action: UPLOAD_URL === 'null/' ? sessionStorage.getItem('qiniuUploadDomain') + '/' : UPLOAD_URL,
       multiple: !single,
       defaultFileList: initValue,
       data: { token },
@@ -103,6 +103,7 @@ export default class CUpload extends React.Component {
         showRemoveIcon: !readonly
       }
     };
+    console.log('UPLOAD_URL', UPLOAD_URL);
     const fileProps = {
       ...commProps,
       onChange: ({ fileList }) => this.setUploadFileUrl(fileList, false, onChange),

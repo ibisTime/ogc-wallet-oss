@@ -17,13 +17,16 @@ const defaultIv = 'ogiGRWos02oH22301#'; // 默认的key 偏移量
 export function setUser({ userId, token }) {
   cookies.set('userId', userId);
   cookies.set('token', token);
+}
+
+export function setSystem() {
   fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
     sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
   });
   fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
     sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
   });
-  fetch(625013, {key: 'api_login_url', start: 1, limit: 10}).then(data => {
+  fetch(625013, {key: 'igo_oss_url', start: 1, limit: 10}).then(data => {
     sessionStorage.setItem('apiLoginUrl', data.list[0].value);
   });
 }
@@ -947,4 +950,40 @@ export function md5(str, times = 1) {
 export function isBase64(str) {
   let reg = /^(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=))|(([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==))$/;
   return reg.test(str);
+}
+
+export function moneyFormatTo18(money, format, coin, isRe = false, isTosp) {
+  let unit = '1000000000000000000';
+  let flag = false;// 是否是负数
+  if (isNaN(money)) {
+    return '-';
+  } else {
+    Number(money);
+  }
+  if (money < 0) {
+    money = -1 * money;
+    flag = true;
+  }
+  // 如果有币种coin 则默认为8位  如果没有则默认格式为2位小数
+  if (coin && isUndefined(format)) {
+    format = 8;
+  } else if (isUndefined(format) || typeof format === 'object') {
+    if(!isTosp) {
+      format = 2;
+    }else{
+      format = 16;
+    }
+  }
+  // 金额格式化 金额除以unit并保留format位小数
+  money = new BigDecimal(money.toString());
+  money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_HALF_DOWN).toString();
+  // 是否去零
+  if (isRe) {
+    var re = /\d{1,3}(?=(\d{3})+$)/g;
+    money = money.replace(/^(\d+)((\.\d+)?)$/, (s, s1, s2) => (s1.replace(re, '$&,') + s2));
+  }
+  if (flag) {
+    money = '-' + money;
+  }
+  return money;
 }

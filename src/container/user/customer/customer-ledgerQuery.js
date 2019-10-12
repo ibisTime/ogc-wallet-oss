@@ -59,12 +59,6 @@ class CustomerLedgerQuery extends React.Component {
                 }
         }
         }, {
-            field: 'channelType',
-            title: '渠道',
-            type: 'select',
-            key: 'channel_type',
-            search: true
-        }, {
             field: 'currency',
             title: '币种',
             type: 'select',
@@ -73,10 +67,8 @@ class CustomerLedgerQuery extends React.Component {
             valueName: 'value',
             search: !this.isPlat
         }, {
-            field: 'bizType',
+            field: 'bizNote',
             title: '业务类型',
-            type: 'select',
-            key: this.isPlat ? this.bizType : 'jour_biz_type_user',
             search: true
         }, {
             field: 'transAmountString',

@@ -116,54 +116,11 @@ class Customer extends React.Component {
             },
             required: true
         }, {
-            field: 'nodeLevel',
-            title: '节点等级',
-            type: 'select',
-            data: [{
-                key: '0',
-                value: '共营节点（高级）'
-            }, {
-                key: '1',
-                value: '社区节点（中级）'
-            }, {
-                key: '2',
-                value: '区域节点（初级）'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            search: true,
-            render: (v, data) => {
-                let level;
-                if (v === '0') {
-                    level = '共营节点（高级）';
-                } else if (v === '1') {
-                    level = '社区节点（中级）';
-                } else if (v === '2') {
-                    level = '区域节点（初级）';
-                } else {
-                    level = '普通用户';
-                }
-                return level;
-            }
-        },
-            {
                 field: 'status',
                 title: '状态',
                 type: 'select',
                 key: 'user_status',
                 search: true
-            }, {
-                field: 'isRealname',
-                title: '是否实名',
-                render: (v, data) => {
-                    return data.realName ? '是' : '否';
-                }
-            }, {
-                field: 'realName',
-                title: '真实姓名',
-                render: (v, data) => {
-                    return data.realName ? data.realName : '-';
-                }
             }, {
                 //     field: 'tradeRate',
                 //     title: '广告费率'
