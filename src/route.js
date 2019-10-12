@@ -1319,6 +1319,16 @@ const ROUTES = [
     {
         path: '/teamQuery/teamQueryInfo',
         component: asyncComponent(() => import('container/teamQuery/teamQuery'))
+    },
+    // 星球抽奖
+    // 星球管理
+    {
+        path: '/starLucky/starMessage',
+        component: asyncComponent(() => import('container/biz/starLucky/starMessage/starMessage'))
+    },
+    {
+        path: '/starLucky/starMessage/addedit',
+        component: asyncComponent(() => import('container/biz/starLucky/starMessage/starMessage-addedit'))
     }
 ];
 

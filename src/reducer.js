@@ -240,6 +240,10 @@ import {OtcSurvivaLorDer} from './redux/otcmanage/survivalorder';
 import {OtcManageHistoricalorder} from './redux/otcmanage/historicalorder';
 import {OtcManageHistoricalorderEdit} from './redux/otcmanage/historicalorder-orderedit';
 import {OtcManageComment} from './redux/otcmanage/comment';
+
+// 星球抽奖
+import {starLuckyStarMessage} from './redux/biz/starLucky/starMessage';
+
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
 import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
@@ -508,5 +512,7 @@ export default combineReducers({
     SuperNodeVoteRecord,
     SuperNodeBuyBackRecord,
     SuperNodeIncomeRecord,
-    SuperNodeSetting
+    SuperNodeSetting,
+    // 星球抽奖
+    starLuckyStarMessage
 });
