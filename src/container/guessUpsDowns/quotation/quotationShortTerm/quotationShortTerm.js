@@ -10,7 +10,15 @@ import {
     setSearchData
 } from '@redux/guessUpsDowns/quotationShortTerm';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, getCoinList} from 'common/js/util';
+
+function fixed8(val) {
+    if(val) {
+        return (Math.floor(+val * 1e8) / 1e8).toFixed(8);
+    }else {
+        return '';
+    }
+}
 
 @listWrapper(
     state => ({
@@ -25,62 +33,99 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
 class QuotationShortTerm extends React.Component {
     render() {
         const fields = [{
-            field: 'jyd',
-            title: '交易对'
+            field: 'fromPlat',
+            title: '来源'
         }, {
-            field: 'jyd',
-            title: 'k线类型'
+            field: 'symbol01',
+            title: '交易币种',
+            render(v, d) {
+                return d && d.symbol;
+            }
         }, {
-            field: 'createDatetime',
+            field: 'symbol',
+            title: '交易币种',
+            type: 'select',
+            data: getCoinList(),
+            keyName: 'key',
+            valueName: 'key',
+            search: true,
+            noVisible: true
+        }, {
+            field: 'toSymbol01',
+            title: '计价币种',
+            render(v, d) {
+                return d && d.toSymbol;
+            }
+        }, {
+            field: 'toSymbol',
+            title: '计价币种',
+            type: 'select',
+            data: getCoinList(),
+            keyName: 'key',
+            valueName: 'key',
+            search: true,
+            noVisible: true
+        }, {
+            field: 'period',
             title: 'k线时间',
-            type: 'datetime'
+            type: 'select',
+            data: [{
+                key: '1min',
+                value: '一分钟'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
-            field: 'cjl',
+            field: 'quantity',
+            title: '成交笔数',
+            render(v) {
+                return v && parseInt(v);
+            }
+        }, {
+            field: 'volume',
             title: '成交量',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
+            render(v) {
+                return fixed8(v);
+            }
+        }, {
+            field: 'amount',
+            title: '成交金额',
+            render(v) {
+                return fixed8(v);
             }
         }, {
             field: 'ksgd',
-            title: '开，收，高，低'
+            title: '开，收，高，低',
+            render(v, d) {
+                return d && `开：${fixed8(d.open)}，收：${fixed8(d.close)}，高：${fixed8(d.high)}，低：${fixed8(d.low)}`;
+            }
         }, {
-            field: 'symbol',
-            title: '针对币种',
+            field: 'modifyFlag',
+            title: '是否修改',
             type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            render: (v, data) => v,
-            noVisible: true,
-            search: true
+            data: [{
+                key: '1',
+                value: '修改'
+            }, {
+                key: '0',
+                value: '未修改'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
-            field: 'ly',
-            title: '来源'
-        }, {
-            field: 'xg',
-            title: '是否修改'
-        }, {
-            field: 'createDatetime1',
-            title: '抓取时间',
+            field: 'klineDatetime',
+            title: '产生时间',
             type: 'datetime'
         }, {
-            field: 'createDatetime2',
-            title: '修改时间',
+            field: 'grabDatetime',
+            title: '抓取时间',
             type: 'datetime'
         }];
         return this.props.buildList({
             fields,
-            pageCode: 610670,
+            pageCode: 620030,
             rowKey: 'id',
-            noSelect: true,
-            searchParams: {
-                direction: '0',
-                nodePlan: '0'
-            },
             buttons: [{
                 code: 'detail',
                 name: '详情',
@@ -90,7 +135,7 @@ class QuotationShortTerm extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/guessUpsDowns/quotation/detail?code=${selectedRows[0].id}`);
+                        this.props.history.push(`/guessUpsDowns/quotation/detail?code=${selectedRows[0].id}&v=1`);
                     }
                 }
             }]

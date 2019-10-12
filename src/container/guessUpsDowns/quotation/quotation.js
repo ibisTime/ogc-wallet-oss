@@ -37,18 +37,17 @@ const { Content } = Layout;
 class Quotation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.activeKey = sessionStorage.getItem('activeKey') || '1';
     }
-
-    componentDidMount() {
-    }
+    changeTabs = (key) => {
+        sessionStorage.setItem('activeKey', key);
+    };
 
     render() {
         return (
             <div className="guessUpsDownsBonusPool-wrapper">
                 <div className="guessUpsDownsBonusPool-section">
-                    <Tabs defaultActiveKey="1">
+                    <Tabs defaultActiveKey={this.activeKey} onChange={this.changeTabs}>
                         <TabPane tab="近期行情" key="1">
                             <Layout>
                                 <Content>

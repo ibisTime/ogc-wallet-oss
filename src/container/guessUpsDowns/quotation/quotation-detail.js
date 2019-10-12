@@ -3,53 +3,106 @@ import { Form } from 'antd';
 import { getQueryString, dateTimeFormat, moneyFormat } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
+function fixed8(val) {
+    if(val) {
+        return (Math.floor(+val * 1e8) / 1e8).toFixed(8);
+    }else {
+        return '';
+    }
+}
+
 @Form.create()
 class QuotationDetail extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.view = getQueryString('v', this.props.location.search);
+        this.isHis = getQueryString('type', this.props.location.search) === 'his';
     }
     render() {
         const fields = [{
-            field: 'jyd',
-            title: '交易对'
+            field: 'fromPlat',
+            title: '来源'
         }, {
-            field: 'jyd',
-            title: 'k线类型'
+            field: 'symbol01',
+            title: '交易币种',
+            formatter(v, d) {
+                return d && d.symbol;
+            }
         }, {
-            field: 'createDatetime',
+            field: 'toSymbol01',
+            title: '计价币种',
+            formatter(v, d) {
+                return d && d.toSymbol;
+            }
+        }, {
+            field: 'period',
             title: 'k线时间',
-            type: 'datetime'
+            type: 'select',
+            data: [{
+                key: '1min',
+                value: '一分钟'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
-            field: 'cjl',
+            field: 'quantity',
+            title: '成交笔数',
+            formatter(v) {
+                return v && parseInt(v);
+            }
+        }, {
+            field: 'volume',
             title: '成交量',
-            formatter: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
+            formatter(v) {
+                return fixed8(v);
+            }
+        }, {
+            field: 'amount',
+            title: '成交金额',
+            formatter(v) {
+                return fixed8(v);
             }
         }, {
             field: 'ksgd',
-            title: '开，收，高，低'
+            title: '开，收，高，低',
+            formatter(v, d) {
+                return d && `开：${fixed8(d.open)}，收：${fixed8(d.close)}，高：${fixed8(d.high)}，低：${fixed8(d.low)}`;
+            }
         }, {
-            field: 'ly',
-            title: '来源'
+            field: 'modifyFlag',
+            title: '是否修改',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '修改'
+            }, {
+                key: '0',
+                value: '未修改'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
-            field: 'xg',
-            title: '是否修改'
+            field: 'xg_ksgd',
+            title: '修改后（开，收，高，低）',
+            formatter(v, d) {
+                return d && d.modifyFlag === '1' ? `开：${fixed8(d.modifyOpen)}，收：${fixed8(d.modifyClose)}，高：${fixed8(d.modifyHigh)}，低：${fixed8(d.modifyLow)}` : '-';
+            }
         }, {
-            field: 'createDatetime1',
-            title: '抓取时间',
+            field: 'klineDatetime',
+            title: '产生时间',
             type: 'datetime'
         }, {
-            field: 'createDatetime2',
-            title: '修改时间',
+            field: 'grabDatetime',
+            title: '抓取时间',
             type: 'datetime'
         }];
         return this.buildDetail({
             fields,
             code: this.code,
             key: 'id',
-            editCode: '650104',
-            detailCode: '650106'
+            detailCode: this.isHis ? '620033' : '620031',
+            view: this.view
         });
     }
 }
