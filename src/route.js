@@ -1258,12 +1258,12 @@ const ROUTES = [
     },
     // 散取告警通知
     {
-        path: '',
+        path: '/BTC-finance/withdrawWarn',
         component: asyncComponent(
             () => import('container/BTC-finance/withdrawWarn/withdrawWarn'))
     },
     {
-        path: '/BTC-finance/withdrawWarn/addedit',/BTC-finance/withdrawWarn
+        path: '/BTC-finance/withdrawWarn/addedit',
         component: asyncComponent(
             () => import('container/BTC-finance/withdrawWarn/withdrawWarn-addedit'))
     },
