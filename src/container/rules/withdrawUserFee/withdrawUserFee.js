@@ -1,25 +1,25 @@
 import React from 'react';
 import {
-    setTableData,
-    setPagination,
-    setBtnList,
-    setSearchParam,
+    cancelFetching,
     clearSearchParam,
     doFetching,
-    cancelFetching,
-    setSearchData
+    setBtnList,
+    setPagination,
+    setSearchData,
+    setSearchParam,
+    setTableData
 } from '@redux/BTC-finance/withdrawRule/withdrawRule';
-import { listWrapper } from 'common/js/build-list';
+import {listWrapper} from 'common/js/build-list';
 
 @listWrapper(
-  state => ({
+    state => ({
       ...state.BTCFinanceWithdrawRule,
       parentCode: state.menu.subMenuCode
-  }),
-  {
+    }),
+    {
       setTableData, clearSearchParam, doFetching, setBtnList,
       cancelFetching, setPagination, setSearchParam, setSearchData
-  }
+    }
 )
 class withdrawUserFee extends React.Component {
     render() {
@@ -41,6 +41,9 @@ class withdrawUserFee extends React.Component {
         }, {
             field: 'withdrawFee',
             title: '取现手续费数量'
+        }, {
+            field: 'withdrawWarn',
+            title: '散取地址报警阀值'
         }];
         return this.props.buildList({
             fields,

@@ -1,24 +1,15 @@
 import React from 'react';
-import {Modal} from 'antd';
 import {
-    setTableData,
-    setPagination,
-    setBtnList,
-    setSearchParam,
+    cancelFetching,
     clearSearchParam,
     doFetching,
-    cancelFetching,
-    setSearchData
+    setBtnList,
+    setPagination,
+    setSearchData,
+    setSearchParam,
+    setTableData
 } from '@redux/rightsInterests/rightsMessage/rightsMessage';
 import {listWrapper} from 'common/js/build-list';
-import {
-    showSucMsg,
-    showWarnMsg,
-    moneyFormat,
-    getCoinList,
-    getUserId
-} from 'common/js/util';
-import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -40,8 +31,12 @@ class RightsInterestsRightsMessage extends React.Component {
             field: 'name',
             search: true
         }, {
-            title: '图标',
+            title: '图标（高亮）',
             field: 'icon',
+            type: 'img'
+        }, {
+            title: '图标（暗色）',
+            field: 'iconUnselect',
             type: 'img'
         }, {
             title: '点击执行动作',

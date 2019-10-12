@@ -1,8 +1,7 @@
 import React from 'react';
-import { Form } from 'antd';
+import {Form} from 'antd';
 import DetailUtil from 'common/js/build-detail';
-import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
-import fetch from 'common/js/fetch';
+import {getQueryString} from 'common/js/util';
 
 @Form.create()
 class RightsMessageAddedit extends DetailUtil {
@@ -25,8 +24,14 @@ class RightsMessageAddedit extends DetailUtil {
             field: 'name',
             required: true
         }, {
-            title: '图标',
+            title: '图标（高亮）',
             field: 'icon',
+            type: 'img',
+            single: true,
+            required: true
+        }, {
+            title: '图标（暗色）',
+            field: 'iconUnselect',
             type: 'img',
             single: true,
             required: true
