@@ -20,12 +20,13 @@ class ShopLabelsAddedit extends DetailUtil {
                 type: 0
             },
             keyName: 'dkey',
-            valueName: 'dvalue'
+            valueName: 'dvalue',
+            hidden: true
         }, {
             title: '字典键',
             field: 'dkey',
             required: true,
-            readonly: true,
+            readonly: this.code,
             maxlength: 15
         }, {
             title: '字典值',

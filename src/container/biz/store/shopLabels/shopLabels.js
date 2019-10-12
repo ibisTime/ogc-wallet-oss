@@ -41,6 +41,7 @@ class ShopLabels extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: 630035,
+            deleteCode: 630031,
             rowKey: 'id',
             searchParams: {
                 parentKey: 'mall_product_tag'
