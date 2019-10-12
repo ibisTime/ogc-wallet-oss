@@ -233,6 +233,7 @@ import {storeShopCategory} from './redux/biz/store/shopCategory';
 import {storeShopMessage} from './redux/biz/store/shopMessage';
 import {storeShopOrder} from './redux/biz/store/shopOrder';
 import {storeShopRules} from './redux/biz/store/shopRules';
+import {storeShopLabels} from './redux/biz/store/shopLabels';
 import {BTCFinanceWithdrawWarn} from './redux/BTC-finance/withdrawWarn/withdrawWarn';
 import {rightsInterestsRules} from './redux/rightsInterests/rules/rules';
 
@@ -451,5 +452,6 @@ export default combineReducers({
     storeShopOrder,
     storeShopRules,
     BTCFinanceWithdrawWarn,
-    rightsInterestsRules
+    rightsInterestsRules,
+    storeShopLabels
 });

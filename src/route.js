@@ -1655,6 +1655,16 @@ const ROUTES = [
             () => import('container/biz/store/shopMessage/shopMessage-addedit'))
     },
     {
+        path: '/store/shopLabels',
+        component: asyncComponent(
+            () => import('container/biz/store/shopLabels/shopLabels'))
+    },
+    {
+        path: '/store/shopLabels/addedit',
+        component: asyncComponent(
+            () => import('container/biz/store/shopLabels/shopLabels-addedit'))
+    },
+    {
         path: '/store/shopRules',
         component: asyncComponent(
             () => import('container/biz/store/shopRules/shopRules'))
