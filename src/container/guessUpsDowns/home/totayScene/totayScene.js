@@ -74,7 +74,7 @@ class TotayScene extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 620013,
+            pageCode: 620019,
             noSelect: true
         });
     }

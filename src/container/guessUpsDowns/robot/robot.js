@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal} from 'antd';
+import {Modal, Form, message, Select, Input} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -11,8 +11,21 @@ import {
     setSearchData
 } from '@redux/guessUpsDowns/robot';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat, getCoinList, showSucMsg} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, getCoinList, showSucMsg, moneyParse} from 'common/js/util';
 import fetch from 'common/js/fetch';
+
+const {Option} = Select;
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 4 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 18 }
+    }
+};
 
 @listWrapper(
     state => ({
@@ -25,6 +38,38 @@ import fetch from 'common/js/fetch';
     }
 )
 class Robot extends React.Component {
+    state = {
+        ...this.state,
+        visible: false,
+        upCode: '',
+        symbol: ''
+    };
+    handleOk = () => {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const hasMsg = message.loading('');
+                const { direction, amount } = values;
+                fetch('620025', {
+                    direction,
+                    amount: moneyParse(amount, '', this.state.symbol),
+                    code: this.state.upCode
+                }).then(() => {
+                    hasMsg();
+                    this.props.form.resetFields();
+                    message.success('操作成功', 1.5);
+                    this.props.getPageData();
+                    this.setState({
+                        visible: false
+                    });
+                }, hasMsg).catch(hasMsg);
+            }
+        });
+    };
+    handleCancel = () => {
+        this.setState({
+            visible: false
+        });
+    };
     render() {
         const fields = [{
             field: 'name',
@@ -74,6 +119,7 @@ class Robot extends React.Component {
             title: '更新时间',
             type: 'datetime'
         }];
+        const {getFieldDecorator} = this.props.form;
         return (
             <div className="guessUpsDowns-listPage-wrapper">
                 {
@@ -96,6 +142,22 @@ class Robot extends React.Component {
                                     showWarnMsg('请选择一条记录');
                                 } else {
                                     this.props.history.push(`/guessUpsDowns/robot/addedit?code=${selectedRowKeys[0]}`);
+                                }
+                            }
+                        }, {
+                            code: 'robotTransfer',
+                            name: '机器人转账',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                if (!selectedRowKeys.length) {
+                                    showWarnMsg('请选择记录');
+                                } else if (selectedRowKeys.length > 1) {
+                                    showWarnMsg('请选择一条记录');
+                                } else {
+                                    this.setState({
+                                        visible: true,
+                                        upCode: selectedRowKeys[0],
+                                        symbol: selectedRows[0].symbol
+                                    });
                                 }
                             }
                         }, {
@@ -152,6 +214,45 @@ class Robot extends React.Component {
                         }]
                     })
                 }
+                <Modal
+                    width={600}
+                    title="机器人转账"
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    okText="确定"
+                    cancelText="取消"
+                >
+                    <Form {...formItemLayout} onSubmit={this.handleOk}>
+                        <Form.Item label="方向">
+                            {getFieldDecorator('direction', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: ' '
+                                    }
+                                ]
+                            })(
+                                <Select placeholder="请选择">
+                                    <Option key="1" value="1">加钱</Option>
+                                    <Option key="0" value="0">减钱</Option>
+                                </Select>
+                            )}
+                        </Form.Item>
+                        <Form.Item label="转账金额">
+                            {getFieldDecorator('amount', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: ' '
+                                    }
+                                ]
+                            })(
+                                <Input placeholder="请输入转账金额"/>
+                            )}
+                        </Form.Item>
+                    </Form>
+                </Modal>
             </div>
         );
     }
