@@ -213,6 +213,9 @@ export function H0M0S0Date(date, days, format) {
  * @param noZero 是否去零
  */
 export function moneyFormat(money, format, coin, noComma = false, noZero = false) {
+  if(+money === 0) {
+    return 0;
+  }
     let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
     if (isNaN(money)) {
         return '-';

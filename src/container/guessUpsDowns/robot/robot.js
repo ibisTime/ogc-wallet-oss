@@ -85,7 +85,10 @@ class Robot extends React.Component {
             search: true
         }, {
             field: 'balanceAmount',
-            title: '账户余额'
+            title: '账户余额',
+            render(v, d) {
+                return v && moneyFormat(v, '4', d.symbol);
+            }
         }, {
             field: 'conditionsRate',
             title: '条件赔率'
