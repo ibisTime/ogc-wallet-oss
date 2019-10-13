@@ -21,7 +21,9 @@ class ShopLabelsAddedit extends DetailUtil {
             },
             keyName: 'dkey',
             valueName: 'dvalue',
-            hidden: true
+            type: 'select',
+            readonly: this.code,
+            required: true
         }, {
             title: '字典键',
             field: 'dkey',
@@ -45,7 +47,13 @@ class ShopLabelsAddedit extends DetailUtil {
             view: this.view,
             addCode: 630030,
             editCode: 630032,
-            detailCode: 630037
+            detailCode: 630037,
+            beforeSubmit: (params) => {
+                if(!this.code) {
+                    params.type = '1';
+                }
+                return true;
+            }
         });
     }
 }
