@@ -32,7 +32,7 @@ class WithdrawWarnAddedit extends DetailUtil {
       view: this.view,
       addCode: '802890',
       beforeSubmit: (params) => {
-        params.type = '0';
+        params.type = '1';
         params.startDate = '0';
         params.endDate = '0';
         return true;
