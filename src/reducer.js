@@ -243,6 +243,14 @@ import {OtcManageComment} from './redux/otcmanage/comment';
 
 // 星球抽奖
 import {starLuckyStarMessage} from './redux/biz/starLucky/starMessage';
+import {starLuckyStarLuckyUser} from './redux/biz/starLucky/starLuckyUser';
+import {starLuckyStarJackpot} from './redux/biz/starLucky/starJackpot';
+import {starLuckyStarConfiguration} from './redux/biz/starLucky/starConfiguration';
+import {starLuckyStarRules} from './redux/biz/starLucky/starRules';
+import {starLuckyStarQuery} from './redux/biz/starLucky/starQuery';
+import {starLuckyStarParticipate} from './redux/biz/starLucky/starParticipate';
+import {starLuckyStarBonusIncome} from './redux/biz/starLucky/starBonusIncome';
+import {starLuckyStarJackpotRecord} from './redux/biz/starLucky/starJackpotRecord';
 
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
@@ -514,5 +522,13 @@ export default combineReducers({
     SuperNodeIncomeRecord,
     SuperNodeSetting,
     // 星球抽奖
-    starLuckyStarMessage
+    starLuckyStarMessage,
+    starLuckyStarLuckyUser,
+    starLuckyStarJackpot,
+    starLuckyStarConfiguration,
+    starLuckyStarRules,
+    starLuckyStarQuery,
+    starLuckyStarParticipate,
+    starLuckyStarBonusIncome,
+    starLuckyStarJackpotRecord
 });

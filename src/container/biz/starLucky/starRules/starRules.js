@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/starLucky/starMessage';
+} from '@redux/biz/starLucky/starRules';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -21,7 +21,7 @@ import {
 
 @listWrapper(
     state => ({
-        ...state.starLuckyStarMessage,
+        ...state.starLuckyStarRules,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -29,7 +29,7 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class StarLuckyStarMessage extends React.Component {
+class StarRules extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -37,21 +37,29 @@ class StarLuckyStarMessage extends React.Component {
     render() {
         const fields = [{
             field: 'name',
-            title: '名称'
-        }, {
-            field: 'symbol',
-            title: '币种',
+            title: '星球',
             search: true
         }, {
-            field: 'updateName',
-            title: '加入时间',
+            field: 'userName',
+            title: '规则名称'
+        }, {
+            field: 'userName1',
+            title: '参与开始时间',
             type: 'datetime'
         }, {
-            field: 'updateName',
-            title: '操作人'
+            field: 'userName2',
+            title: '参与结束时间',
+            type: 'datetime'
         }, {
-            field: 'remark',
-            title: '备注'
+            field: 'userName3',
+            title: '开奖时间',
+            type: 'datetime'
+        }, {
+            field: 'userName4',
+            title: '中奖人数百分比'
+        }, {
+            field: 'userName5',
+            title: '中奖金额的随机数'
         }];
         return this.props.buildList({
             fields,
@@ -63,4 +71,4 @@ class StarLuckyStarMessage extends React.Component {
     }
 }
 
-export default StarLuckyStarMessage;
+export default StarRules;

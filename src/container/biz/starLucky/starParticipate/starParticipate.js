@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/starLucky/starMessage';
+} from '@redux/biz/starLucky/starParticipate';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -21,7 +21,7 @@ import {
 
 @listWrapper(
     state => ({
-        ...state.starLuckyStarMessage,
+        ...state.starLuckyStarParticipate,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -29,7 +29,7 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class StarLuckyStarMessage extends React.Component {
+class StarParticipate extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -37,21 +37,24 @@ class StarLuckyStarMessage extends React.Component {
     render() {
         const fields = [{
             field: 'name',
-            title: '名称'
-        }, {
-            field: 'symbol',
-            title: '币种',
+            title: '星球',
             search: true
         }, {
-            field: 'updateName',
-            title: '加入时间',
+            field: 'userName',
+            title: '场次'
+        }, {
+            field: 'userName1',
+            title: '用户'
+        }, {
+            field: 'userName2',
+            title: '数额'
+        }, {
+            field: 'userName3',
+            title: '币种'
+        }, {
+            field: 'userName5',
+            title: '参与时间',
             type: 'datetime'
-        }, {
-            field: 'updateName',
-            title: '操作人'
-        }, {
-            field: 'remark',
-            title: '备注'
         }];
         return this.props.buildList({
             fields,
@@ -63,4 +66,4 @@ class StarLuckyStarMessage extends React.Component {
     }
 }
 
-export default StarLuckyStarMessage;
+export default StarParticipate;
