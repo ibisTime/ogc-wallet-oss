@@ -41,18 +41,15 @@ class Home extends React.Component {
     }
     componentDidMount() {
         // 直接请求
-        Promise.all([
-            // 红利池分页查
-            fetch(610661, {
-                start: 1,
-                limit: 2
-            })
-        ]).then(([bonusPoolData]) => {
+        fetch(620036).then(data => {
             this.setState({
-                bonusPoolData: bonusPoolData.list
+                bonusPoolData: {
+                    inAmountUsdt: moneyFormat(data.inAmountUsdt, '4', 'USDT'),
+                    outAmountUsdt: moneyFormat(data.outAmountUsdt, '4', 'USDT'),
+                    amountUsdt: moneyFormat(data.amountUsdt, '4', 'USDT')
+                }
             });
-            console.log('bonusPoolData', bonusPoolData);
-        }).catch(() => this.setState({fetching: false}));
+        });
         if(this.realTimer) {
             clearTimeout(this.realTimer);
         }
@@ -90,30 +87,29 @@ class Home extends React.Component {
             title: '投注时间',
             type: 'datetime'
         }];
+        const {bonusPoolData} = this.state;
         return (
             <div className="guessUpsDownsHome-wrapper">
                 <div className="homeTop">
                     <div className="homeTop-left">
                         <div className="homeTop-left-tit">平台盈亏池（折算成USDT）</div>
                         <div className="homeTop-left-item-wrap">
-                            {/* {
-                                bonusPoolData.length > 0 && bonusPoolData.map((item) => ( */}
-                                    <div className="homeTop-left-item" key='1'>
-                                        <div className="item-con">
-                                            <p>收入总额</p>
-                                            <samp>5555.00000000</samp>
-                                        </div>
-                                    </div>
+                            <div className="homeTop-left-item" key='1'>
+                                <div className="item-con">
+                                    <p>收入总额</p>
+                                    <samp>{bonusPoolData.inAmountUsdt}</samp>
+                                </div>
+                            </div>
                             <div className="homeTop-left-item" key='2'>
                                 <div className="item-con">
                                     <p>支出总额</p>
-                                    <samp>2222.00000000</samp>
+                                    <samp>{bonusPoolData.outAmountUsdt}</samp>
                                 </div>
                             </div>
                             <div className="homeTop-left-item" key='3'>
                                 <div className="item-con">
                                     <p>利润总额</p>
-                                    <samp>3333.00000000</samp>
+                                    <samp>{bonusPoolData.amountUsdt}</samp>
                                 </div>
                             </div>
                             {/*        ))
