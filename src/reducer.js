@@ -251,6 +251,8 @@ import {starLuckyStarQuery} from './redux/biz/starLucky/starQuery';
 import {starLuckyStarParticipate} from './redux/biz/starLucky/starParticipate';
 import {starLuckyStarBonusIncome} from './redux/biz/starLucky/starBonusIncome';
 import {starLuckyStarJackpotRecord} from './redux/biz/starLucky/starJackpotRecord';
+import {starLuckyStarLegacyRecords} from './redux/biz/starLucky/starLegacyRecords';
+import {starLuckyStarRecordRecord} from './redux/biz/starLucky/starRecordRecord';
 
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
@@ -530,5 +532,7 @@ export default combineReducers({
     starLuckyStarQuery,
     starLuckyStarParticipate,
     starLuckyStarBonusIncome,
-    starLuckyStarJackpotRecord
+    starLuckyStarJackpotRecord,
+    starLuckyStarLegacyRecords,
+    starLuckyStarRecordRecord
 });

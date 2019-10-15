@@ -1352,6 +1352,14 @@ const ROUTES = [
         path: '/starLucky/starJackpotRecord',
         component: asyncComponent(() => import('container/biz/starLucky/starJackpot/starJackpotRecord'))
     },
+    {
+        path: '/starLucky/starLegacyRecords',
+        component: asyncComponent(() => import('container/biz/starLucky/starJackpot/starLegacyRecords'))
+    },
+    {
+        path: '/starLucky/starRecordRecord',
+        component: asyncComponent(() => import('container/biz/starLucky/starJackpot/starRecordRecord'))
+    },
     // 星球配置
     {
         path: '/starLucky/starConfiguration',

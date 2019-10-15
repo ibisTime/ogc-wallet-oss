@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/starLucky/starJackpotRecord';
+} from '@redux/biz/starLucky/starRecordRecord';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat, getQueryString, moneyFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.starLuckyStarJackpotRecord,
+        ...state.starLuckyStarRecordRecord,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {showWarnMsg, dateTimeFormat, getQueryString, moneyFormat} from 'common/j
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class StarJackpotRecord extends React.Component {
+class StarRecordRecord extends React.Component {
     constructor(props) {
         super(props);
         this.buttons = [{
@@ -68,4 +68,4 @@ class StarJackpotRecord extends React.Component {
     }
 }
 
-export default StarJackpotRecord;
+export default StarRecordRecord;

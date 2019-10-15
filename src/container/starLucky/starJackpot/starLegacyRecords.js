@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/starLucky/starJackpotRecord';
+} from '@redux/biz/starLucky/starLegacyRecords';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat, getQueryString, moneyFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.starLuckyStarJackpotRecord,
+        ...state.starLuckyStarLegacyRecords,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {showWarnMsg, dateTimeFormat, getQueryString, moneyFormat} from 'common/j
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class StarJackpotRecord extends React.Component {
+class StarLegacyRecords extends React.Component {
     constructor(props) {
         super(props);
         this.buttons = [{
@@ -44,13 +44,13 @@ class StarJackpotRecord extends React.Component {
             title: '币种'
         }, {
             field: 'count',
-            title: '调额数量',
+            title: '遗留数量',
             render(v, d) {
                 return v && moneyFormat(v, '', d.symbol);
             }
         }, {
             field: 'createDatetime',
-            title: '调额时间',
+            title: '遗留时间',
             type: 'datetime'
         }, {
             field: 'updaterName',
@@ -58,7 +58,7 @@ class StarJackpotRecord extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 806000,
+            pageCode: 806010,
             rowKey: 'id',
             buttons: this.buttons,
             searchParams: {
@@ -68,4 +68,4 @@ class StarJackpotRecord extends React.Component {
     }
 }
 
-export default StarJackpotRecord;
+export default StarLegacyRecords;
