@@ -79,7 +79,16 @@ class StarLuckyUser extends React.Component {
                     rowKey: 'id',
                     pageCode: '640015',
                     deleteCode: '640011',
+                    searchParams: {
+                        starId: this.code
+                    },
                     buttons: [{
+                        code: 'goBack',
+                        name: '返回',
+                        handler() {
+                            window.history.go(-1);
+                        }
+                    }, {
                         code: 'add',
                         name: '添加'
                     }, {

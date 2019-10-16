@@ -47,23 +47,23 @@ class Home extends React.Component {
 
     componentDidMount() {
         // 直接请求
-        Promise.all([
-            // 红利池分页查
-            fetch(610661, {
-                start: 1,
-                limit: 2
-            }),
-            // 当前节点列表查
-            fetch(610614)
-        ]).then(([bonusPoolData, nodeData]) => {
-            this.setState({
-                bonusPoolData: bonusPoolData.list,
-                nodeData: nodeData
-            });
-            console.log('bonusPoolData', bonusPoolData);
-            console.log('nodeData', nodeData);
-        }).catch(() => this.setState(
-            {fetching: false}));
+        // Promise.all([
+        //     // 红利池分页查
+        //     fetch(610661, {
+        //         start: 1,
+        //         limit: 2
+        //     }),
+        //     // 当前节点列表查
+        //     fetch(610614)
+        // ]).then(([bonusPoolData, nodeData]) => {
+        //     this.setState({
+        //         bonusPoolData: bonusPoolData.list,
+        //         nodeData: nodeData
+        //     });
+        //     console.log('bonusPoolData', bonusPoolData);
+        //     console.log('nodeData', nodeData);
+        // }).catch(() => this.setState(
+        //     {fetching: false}));
     }
 
     // 格式化节点投标金额

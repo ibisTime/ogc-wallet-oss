@@ -37,33 +37,54 @@ class StarRecordRecord extends React.Component {
             }
         }];
         this.poolId = getQueryString('poolId', this.props.location.search);
+        this.direction = getQueryString('direction', this.props.location.search);
     }
     render() {
         const fields = [{
             field: 'symbol',
-            title: '币种'
+            title: '币种',
+            type: 'select',
+            pageCode: '802005',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            render: (v, data) => v,
+            search: true
+        }, {
+            field: 'bizType',
+            title: '业务类型'
         }, {
             field: 'count',
-            title: '调额数量',
-            render(v, d) {
-                return v && moneyFormat(v, '', d.symbol);
+            title: '数额',
+            render: (v, data) => {
+                return moneyFormat(v, '', data.symbol);
+            }
+        }, {
+            field: 'createDatetime1',
+            title: '时间',
+            render: (v, data) => {
+                return dateTimeFormat(data.createDatetime);
             }
         }, {
             field: 'createDatetime',
-            title: '调额时间',
-            type: 'datetime'
-        }, {
-            field: 'updaterName',
-            title: '操作人'
+            title: '时间',
+            type: 'date',
+            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
+            noVisible: true,
+            search: true
         }];
         return <div className="superNode-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,
-                    pageCode: 806000,
                     rowKey: 'id',
+                    pageCode: 806020,
                     buttons: this.buttons,
                     searchParams: {
+                        direction: this.direction,
                         poolId: this.poolId
                     }
                 })

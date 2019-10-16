@@ -61,7 +61,6 @@ class StarJackpotRecord extends React.Component {
                 this.props.buildList({
                     fields,
                     pageCode: 806000,
-                    rowKey: 'id',
                     buttons: this.buttons,
                     searchParams: {
                         poolId: this.poolId

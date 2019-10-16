@@ -77,13 +77,13 @@ class StarLuckyStarMessage extends React.Component {
                     }, {
                         code: 'starJackpot',
                         name: '奖池查询',
-                        handler: (selectedRowKeys) => {
+                        handler: (selectedRowKeys, rowKeys) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/starLucky/starJackpot?code=${selectedRowKeys[0]}`);
+                                this.props.history.push(`/starLucky/starJackpot?symbol=${rowKeys[0].symbol}`);
                             }
                         }
                     }, {

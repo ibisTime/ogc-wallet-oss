@@ -61,7 +61,6 @@ class StarLegacyRecords extends React.Component {
                 this.props.buildList({
                     fields,
                     pageCode: 806010,
-                    rowKey: 'id',
                     buttons: this.buttons,
                     searchParams: {
                         poolId: this.poolId

@@ -49,19 +49,22 @@ class StarParticipate extends React.Component {
             searchName: 'starId',
             noVisible: true
         }, {
-            field: 'userName',
+            field: 'sessionName',
             title: '场次'
         }, {
-            field: 'userName1',
+            field: 'userName',
             title: '用户'
         }, {
-            field: 'userName2',
-            title: '数额'
+            field: 'frozenAmount',
+            title: '数额',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
         }, {
-            field: 'userName3',
+            field: 'symbol',
             title: '币种'
         }, {
-            field: 'userName5',
+            field: 'createDatetime',
             title: '参与时间',
             type: 'datetime'
         }];
@@ -69,10 +72,16 @@ class StarParticipate extends React.Component {
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '623010',
+                    pageCode: '640040',
+                    searchParams: {
+                        sessionId: this.code
+                    },
                     buttons: [{
-                        code: 'detail',
-                        name: '详情'
+                        code: 'goBack',
+                        name: '返回',
+                        handler() {
+                            window.history.go(-1);
+                        }
                     }, {
                         code: 'export',
                         name: '导出'

@@ -4,75 +4,71 @@ import {
     getQueryString,
     moneyFormat
 } from 'common/js/util';
-import DetailUtil from 'common/js/build-detail';
+import DetailUtil from 'common/js/build-detail-o2m';
 
 @Form.create()
 class StarRulesAddedit extends DetailUtil {
     constructor(props) {
         super(props);
-        this.code = getQueryString('code', this.props.location.search);
+        this.code = getQueryString('starId', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
     }
 
     render() {
         const fields = [{
-            title: '红包编号',
-            field: 'code1',
-            formatter(v, data) {
-                return data.code;
+            field: 'list',
+            title: '星球规则',
+            type: 'o2m',
+            required: true,
+            options: {
+                add: true,
+                edit: true,
+                delete: true,
+                rowKey: 'id',
+                fields: [{
+                    field: 'startTime',
+                    title: '开始时间(0-23)',
+                    required: true,
+                    shijian: true
+                }, {
+                    field: 'endTime',
+                    title: '结束时间(0-23)',
+                    required: true,
+                    shijian: true
+                }, {
+                    field: 'openDatetime',
+                    title: '开奖时间(0-23)',
+                    required: true,
+                    shijian: true
+                }, {
+                    field: 'fitRate',
+                    required: true,
+                    title: '中奖人数比例(0-1)'
+                }, {
+                    field: 'randomRange',
+                    required: true,
+                    title: '中奖金额随机数'
+                }]
             }
-        }, {
-            title: '用户',
-            field: 'userId',
-            formatter: function(v, data) {
-                return data.sendUserMobile + '(' + data.sendUserNickname + ')';
-            }
-        }, {
-            title: '币种',
-            field: 'symbol',
-            type: 'select',
-            pageCode: '802265',
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol'
-        }, {
-            title: '类型',
-            field: 'type',
-            type: 'select',
-            key: 'red_packet_type'
-        }, {
-            title: '红包总个数',
-            field: 'sendNum'
-        }, {
-            title: '红包总额',
-            field: 'totalCount'
-        }, {
-            title: '已领取个数',
-            field: 'receivedNum'
-        }, {
-            title: '已领取总额',
-            field: 'receivedCount'
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            key: 'red_packet_status'
-        }, {
-            field: 'createDateTime',
-            title: '发送时间',
-            type: 'datetime'
-        }, {
-            field: 'bestHandUserNickname',
-            title: '最佳手气用户'
-        }, {
-            field: 'bestHandCount',
-            title: '手气最佳金额'
         }];
         return this.buildDetail({
             fields,
+            key: 'starId',
             code: this.code,
             view: this.view,
-            detailCode: '623006'
+            addCode: '640020',
+            editCode: '640022',
+            detailCode: '640025',
+            detailParams: {
+                start: 1,
+                limit: 100
+            },
+            beforeSubmit: (params) => {
+                params.starId = this.code;
+                params.ruleList = JSON.parse(JSON.stringify(params.list));
+                delete params.list;
+                return params;
+            }
         });
     }
 }

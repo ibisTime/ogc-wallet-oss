@@ -50,31 +50,49 @@ class StarBonusIncome extends React.Component {
             noVisible: true
         }, {
             field: 'userName',
-            title: '场次'
-        }, {
-            field: 'userName1',
             title: '用户'
         }, {
-            field: 'userName2',
-            title: '奖金类型'
+            field: 'type',
+            title: '奖金类型',
+            type: 'select',
+            key: 'star_income_type'
         }, {
-            field: 'userName3',
-            title: '数额'
+            field: 'amount',
+            title: '中奖金额',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
         }, {
-            field: 'userName4',
+            field: 'symbol',
             title: '币种'
         }, {
-            field: 'userName5',
-            title: '状态'
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'star_income_status'
+        }, {
+            field: 'createDatetime',
+            title: '创建时间',
+            type: 'datetime'
+        }, {
+            field: 'receiveDatetime',
+            title: '领取时间',
+            type: 'datetime'
         }];
         return <div className="superNode-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '623010',
+                    pageCode: '640051',
+                    searchParams: {
+                        sessionId: this.code
+                    },
                     buttons: [{
-                        code: 'detail',
-                        name: '详情'
+                        code: 'goBack',
+                        name: '返回',
+                        handler() {
+                            window.history.go(-1);
+                        }
                     }, {
                         code: 'export',
                         name: '导出'

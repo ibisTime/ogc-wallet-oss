@@ -36,31 +36,28 @@ class StarConfiguration extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'name',
-            title: '星球名称'
-        }, {
-            field: 'starId',
-            title: '星球名称',
-            search: true,
-            type: 'select',
-            pageCode: '640003',
-            keyName: 'id',
-            valueName: '{{name.DATA}}-{{symbol.DATA}}',
-            searchName: 'starId',
-            noVisible: true
-        }, {
-            field: 'userName',
+            field: 'remark',
             title: '配置'
         }, {
-            field: 'userName1',
+            field: 'value',
             title: '数值'
         }];
         return <div className="superNode-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,
+                    rowKey: 'id',
                     pageCode: '640060',
+                    searchParams: {
+                        starId: this.code
+                    },
                     buttons: [{
+                        code: 'goBack',
+                        name: '返回',
+                        handler() {
+                            window.history.go(-1);
+                        }
+                    }, {
                         code: 'edit',
                         name: '修改'
                     }]

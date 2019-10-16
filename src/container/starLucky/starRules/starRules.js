@@ -49,38 +49,43 @@ class StarRules extends React.Component {
             searchName: 'starId',
             noVisible: true
         }, {
-            field: 'userName',
-            title: '规则名称'
+            field: 'rulesName',
+            title: '规则名称',
+            render(v, d) {
+                return d && `${d.symbol}第${d.batch}场`;
+            }
         }, {
-            field: 'userName1',
-            title: '参与开始时间',
-            type: 'datetime'
+            field: 'startTime',
+            title: '开始时间'
         }, {
-            field: 'userName2',
-            title: '参与结束时间',
-            type: 'datetime'
+            field: 'endTime',
+            title: '结束时间'
         }, {
-            field: 'userName3',
-            title: '开奖时间',
-            type: 'datetime'
+            field: 'openDatetime',
+            title: '开奖时间'
         }, {
-            field: 'userName4',
-            title: '中奖人数百分比'
+            field: 'fitRate',
+            title: '中奖人数比例'
         }, {
-            field: 'userName5',
+            field: 'randomRange',
             title: '中奖金额的随机数'
         }];
         return <div className="superNode-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '623010',
+                    rowKey: 'id',
+                    pageCode: '640025',
+                    noSelect: true,
+                    searchParams: {
+                        starId: this.code
+                    },
                     buttons: [{
-                        code: 'add',
-                        name: '新增'
-                    }, {
-                        code: 'edit',
-                        name: '修改'
+                        code: 'editAll',
+                        name: '配置规则',
+                        handler: () => {
+                            this.props.history.push(`/starLucky/starRules/addedit?starId=${this.code}`);
+                        }
                     }]
                 })
             }

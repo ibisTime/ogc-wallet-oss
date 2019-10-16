@@ -45,7 +45,7 @@ const formItemLayout = {
 class StarJackpot extends React.Component {
     constructor(props) {
         super(props);
-        this.code = getQueryString('code', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search);
         this.state = {
             ...this.state,
             visible: false,
@@ -62,6 +62,7 @@ class StarJackpot extends React.Component {
                     poolId: this.state.poolId
                 }).then(() => {
                     showSucMsg('操作成功');
+                    this.props.form.resetFields();
                     this.props.cancelFetching();
                     this.props.getPageData();
                     this.setState({
@@ -125,9 +126,13 @@ class StarJackpot extends React.Component {
                         rowKey: 'id',
                         pageCode: '610661',
                         searchParams: {
-                            type: 'star'
+                            type: 'star',
+                            symbol: this.symbol
                         },
                         buttons: [{
+                            code: 'goBack',
+                            name: '返回'
+                        }, {
                             code: 'amountOf',
                             name: '调额'
                         }, {
@@ -144,13 +149,16 @@ class StarJackpot extends React.Component {
                             name: '调额记录'
                         }],
                         btnEvent: {
+                            goBack() {
+                                window.history.go(-1);
+                            },
                             recordInto: (selectedRowKeys) => { // 进池
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/starLucky/starRecordRecord`);
+                                    this.props.history.push(`/starLucky/starRecordRecord?poolId=${selectedRowKeys[0]}&direction=1`);
                                 }
                             },
                             recordOut: (selectedRowKeys) => { // 出池
@@ -159,7 +167,7 @@ class StarJackpot extends React.Component {
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/starLucky/starRecordRecord`);
+                                    this.props.history.push(`/starLucky/starRecordRecord?poolId=${selectedRowKeys[0]}&direction=0`);
                                 }
                             },
                             legacyRecords: (selectedRowKeys, selectedRows) => { // 遗留记录

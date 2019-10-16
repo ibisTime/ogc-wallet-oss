@@ -16,11 +16,16 @@ class StarConfigurationAddedit extends DetailUtil {
 
     render() {
         const fields = [{
-            field: 'bestHandCount',
-            title: '手气最佳金额'
+            field: 'remark',
+            title: '配置',
+            readonly: true
+        }, {
+            field: 'value',
+            title: '数值'
         }];
         return this.buildDetail({
             fields,
+            key: 'id',
             code: this.code,
             view: this.view,
             editCode: '640062',
