@@ -1319,6 +1319,29 @@ const ROUTES = [
     {
         path: '/teamQuery/teamQueryInfo',
         component: asyncComponent(() => import('container/teamQuery/teamQuery'))
+    },
+    // 定时器
+    {
+        path: '/timerManager/timerMonitor',
+        component: asyncComponent(() => import('container/timerManager/timerMonitor/timerMonitor'))
+    },
+    {
+        path: '/timerManager/timerPerformance',
+        component: asyncComponent(() => import('container/timerManager/timerPerformance/timerPerformance'))
+    },
+    {
+        path: '/timerManager/timerPerformance/timerLogInfo',
+        component: asyncComponent(() => import('container/timerManager/timerPerformance/timePerformance-addedit'))
+    },
+    // 用户面板
+    {
+        path: '/userStatistics/userPanel',
+        component: asyncComponent(() => import('container/userStatistics/userPanel'))
+    },
+    // 币量分析
+    {
+        path: '/userStatistics/currencyStatistics',
+        component: asyncComponent(() => import('container/userStatistics/currencyStatistics'))
     }
 ];
 

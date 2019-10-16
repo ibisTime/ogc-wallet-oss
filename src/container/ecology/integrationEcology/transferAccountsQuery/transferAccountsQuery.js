@@ -45,7 +45,7 @@ class TransferAccountsQuery extends React.Component {
             field: 'nickname',
             title: '姓名',
             render: (v, data) => {
-                return data.user.nickname;
+                return data.user.nickname + '(' + (data.user.mobile ? data.user.mobile : data.user.email) + ')';
             }
         }, {
             field: 'userId',
@@ -56,9 +56,7 @@ class TransferAccountsQuery extends React.Component {
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             search: true,
-            render: (v, data) => {
-                return data.user.mobile ? data.user.mobile : data.user.email;
-            }
+            noVisible: true
         }, {
             field: 'dkey',
             title: '方向',

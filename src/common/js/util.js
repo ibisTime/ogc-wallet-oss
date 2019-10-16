@@ -182,6 +182,20 @@ export function addDate(date, days, format) {
   return dateFormat(d.getFullYear() + '-' + m + '-' + d.getDate());
 }
 
+// 日期减法
+export function mtDate(beginDate, days) {
+  var beginDates = beginDate.split('-');
+  var nDate = new Date(beginDates[1] + '-' + beginDates[2] + '-' + beginDates[0]);
+  var millSeconds = Math.abs(nDate) - (days * 24 * 60 * 60 * 1000);
+  var rDate = new Date(millSeconds);
+  var year = rDate.getFullYear();
+  var month = rDate.getMonth() + 1;
+  if (month < 10) month = '0' + month;
+  var date = rDate.getDate();
+  if (date < 10) date = '0' + date;
+  return (year + '-' + month + '-' + date);
+}
+
 // 日期加23时分秒
 export function HhMmSsDate(date, days, format) {
   var d = new Date(date);
@@ -986,4 +1000,23 @@ export function moneyFormatTo18(money, format, coin, isRe = false, isTosp) {
     money = '-' + money;
   }
   return money;
+}
+
+/**
+ * 查询字典对应的dValue
+ */
+
+export function findDsct(array, value) {
+  return array.find(item => item.dkey === value).dvalue;
+}
+
+export function dsctList1(array) {
+  let arr = [];
+  for(let i = 0; i < array.length; i++) {
+    arr.push({
+      dkey: array[i].dkey,
+      dvalue: array[i].dvalue
+    });
+  }
+  return arr;
 }

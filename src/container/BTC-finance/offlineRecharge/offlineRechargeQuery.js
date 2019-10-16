@@ -64,9 +64,9 @@ class OfflineRechargeQuery extends React.Component {
           }
         }, {
             field: 'accountName',
-            title: '户名',
+            title: '用户',
             render: (v, data) => {
-                return data.payer ? data.payer.nickname : '';
+                return data.payer ? data.payer.nickname + '(' + data.payer.loginName + ')' : '';
             }
         }, {
             title: '充值用户',
@@ -81,12 +81,6 @@ class OfflineRechargeQuery extends React.Component {
             searchName: 'keyword',
             search: true,
             noVisible: true
-        }, {
-            field: 'loginName',
-            title: '手机号/邮箱',
-            render: (v, data) => {
-                return data.payer ? data.payer.loginName : '-';
-            }
         }, {
             field: 'amount',
             title: '充值金额',

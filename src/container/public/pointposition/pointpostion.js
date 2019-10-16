@@ -63,18 +63,12 @@ class publicPointPostion extends React.Component {
         const {data} = this.state;
         const fields = [
             {
-            title: '提交人昵称',
+            title: '账户',
             field: 'commitUser',
             render: (v, d) => {
-                return d.commitUserInfo ? d.commitUserInfo.nickname : '';
+                return d.commitUserInfo ? d.commitUserInfo.nickname + '(' + (d.commitUserInfo.mobile ? d.commitUserInfo.mobile : (d.commitUserInfo.email ? d.commitUserInfo.email : '暂无账户信息')) + ')' : '';
             },
             search: true
-        }, {
-            title: '提交人账号',
-            field: 'commitUserMobile',
-            render: (v, d) => {
-              return d.commitUserInfo.mobile ? d.commitUserInfo.mobile : (d.commitUserInfo.email ? d.commitUserInfo.email : '暂无账户信息');
-            }
         }, {
             title: '所在端',
             field: 'deviceSystem',

@@ -292,6 +292,14 @@ import {SuperNodeSetting} from './redux/superNode/setting';
 import {SuperNodeLeftOver} from './redux/superNode/leftOver';
 import {SuperNodeAdjustment} from './redux/superNode/adjustment';
 
+// 统计分析-- 监控管理 - triggers监控
+import { timerMonitor } from './redux/timerManager/timerMonitor/timerMonitor';
+// 统计分析-- 监控管理 - triggers性能
+import { timerPerformance } from './redux/timerManager/timerPerformance/timerPerformance';
+// 散取审核
+import { userStatistics } from './redux/userStatistics/userStatistics';
+import { InUserStatistics } from './redux/userStatistics/InUserStatistics';
+
 export default combineReducers({
     user,
     menu,
@@ -512,5 +520,10 @@ export default combineReducers({
     SuperNodeIncomeRecord,
     SuperNodeSetting,
     SuperNodeLeftOver,
-    SuperNodeAdjustment
+    SuperNodeAdjustment,
+    // 统计分析
+    timerMonitor,
+    timerPerformance,
+    userStatistics,
+    InUserStatistics
 });

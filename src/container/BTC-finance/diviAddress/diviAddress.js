@@ -35,11 +35,8 @@ class BTCDiviAddress extends React.Component {
       searchName: 'keyword',
       search: true,
       render: (v, data) => {
-        return data.nickname;
+        return data.nickname + '(' + data.loginName + ')';
       }
-    }, {
-      field: 'loginName',
-      title: '手机号/邮箱'
     }, {
       field: 'currency',
       title: '持有币种',
@@ -63,15 +60,6 @@ class BTCDiviAddress extends React.Component {
       field: 'address',
       title: '地址',
       search: true
-    }, {
-      field: 'cnyPrice',
-      title: '单价(CNY)'
-    }, {
-      field: 'cnyAssets',
-      title: '总价值（CNY）'
-    }, {
-      field: 'usdAssets',
-      title: '折合USD'
     }];
     return (
       <div>

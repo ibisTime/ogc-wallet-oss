@@ -42,9 +42,9 @@ class UserQuery extends React.Component {
             search: true
         }, {
             field: 'nickname',
-            title: '姓名',
+            title: '用户',
             render: (v, data) => {
-                return data.user.nickname;
+                return data.user.nickname + '(' + (data.user.mobile ? data.user.mobile : data.user.email) + ')';
             }
         }, {
             field: 'userId',
@@ -55,9 +55,7 @@ class UserQuery extends React.Component {
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             search: true,
-            render: (v, data) => {
-                return data.user.mobile ? data.user.mobile : data.user.email;
-            }
+            noVisible: true
         }, {
             field: 'createDatetime',
             title: '加入时间',

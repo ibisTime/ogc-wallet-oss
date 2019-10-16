@@ -28,7 +28,7 @@ class SdRecord extends React.Component {
         field: 'nickname',
         title: '昵称',
         render(v, d) {
-          return d.userInfo ? `${d.userInfo.nickname}${'-' + d.userInfo.loginName}` : '-';
+          return d.userInfo ? `${d.userInfo.nickname}${'(' + d.userInfo.loginName}` : ')';
         }
     }, {
         field: 'symbolOut',
