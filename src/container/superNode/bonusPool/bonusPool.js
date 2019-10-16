@@ -123,6 +123,15 @@ class BonusPool extends React.Component {
         return true;
     }
 
+    // 遗留记录
+    onLeftOver = (value) => {
+        this.props.history.push(`/superNode/bonusPool/leftOver?poolId=${value}`);
+    }
+    // 调整记录
+    onAjt = (value) => {
+        this.props.history.push(`/superNode/bonusPool/adjustment?poolId=${value}`);
+    }
+
     render() {
         const {totalAmountData, adjustPopupShow, selectedData, adjustPopupFlag} = this.state;
         const { getFieldDecorator } = this.props.form;
@@ -140,13 +149,13 @@ class BonusPool extends React.Component {
             field: 'remainCount',
             title: '上期遗留资产',
             render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
+                return <span>{moneyFormat(v, '', data.symbol)}<samp className="tc_purple" onClick={() => this.onLeftOver(data.id)}>  遗留记录</samp></span>;
             }
         }, {
             field: 'totalAdjustCount',
             title: '累计调额资产',
             render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
+                return <span>{moneyFormat(v, '', data.symbol)}<samp className="tc_purple" onClick={() => this.onAjt(data.id)}>  调整记录</samp></span>;
             }
         }, {
             field: 'operation',
@@ -170,7 +179,10 @@ class BonusPool extends React.Component {
                                 pageCode: 610661,
                                 rowKey: 'id',
                                 noPagination: true,
-                                noSelect: true
+                                noSelect: true,
+                                searchParams: {
+                                    type: 'snode'
+                                }
                             })
                         }
                     </div>

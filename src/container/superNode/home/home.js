@@ -51,7 +51,8 @@ class Home extends React.Component {
             // 红利池分页查
             fetch(610661, {
                 start: 1,
-                limit: 2
+                limit: 2,
+                type: 'snode'
             }),
             // 当前节点列表查
             fetch(610614)

@@ -53,6 +53,16 @@ const ROUTES = [
     {
         path: '/superNode/setting/edit',
         component: asyncComponent(() => import('container/superNode/setting/rules-addedit'))
+    },
+    // 调整
+    {
+        path: '/superNode/bonusPool/adjustment',
+        component: asyncComponent(() => import('container/superNode/bonusPool/adjustment/adjustment'))
+    },
+    // 遗留
+    {
+        path: '/superNode/bonusPool/leftOver',
+        component: asyncComponent(() => import('container/superNode/bonusPool/leftOver/leftOver'))
     }
 ];
 
