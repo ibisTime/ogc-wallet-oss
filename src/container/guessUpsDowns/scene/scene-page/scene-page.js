@@ -24,8 +24,6 @@ import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg, getQueryString} fr
 )
 class ScenePage extends React.Component {
     code = getQueryString('code', this.props.location.search);
-    type = getQueryString('type', this.props.location.search);
-    isPageCode = getQueryString('type', this.props.location.search) === '1';
     render() {
         const fields = [{
             field: 'name',
@@ -61,7 +59,7 @@ class ScenePage extends React.Component {
             title: '状态',
             type: 'select',
             key: 'open_reward_status',
-            search: this.isPageCode
+            search: true
         }, {
             field: 'roseBetAmount',
             title: '涨方投注额',
@@ -80,9 +78,9 @@ class ScenePage extends React.Component {
                 {
                     this.props.buildList({
                         fields,
-                        pageCode: this.isPageCode ? '620013' : '620010',
+                        pageCode: 620013,
                         searchParams: {
-                            [this.isPageCode ? 'rewardTermCode' : 'code']: this.code
+                            'rewardTermCode': this.code
                         },
                         buttons: [{
                             code: 'goBack',

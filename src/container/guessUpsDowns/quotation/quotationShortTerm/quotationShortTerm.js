@@ -37,9 +37,9 @@ class QuotationShortTerm extends React.Component {
             title: '来源'
         }, {
             field: 'symbol01',
-            title: '交易币种',
+            title: '交易对',
             render(v, d) {
-                return d && d.symbol;
+                return d && `${d.symbol}/${d.toSymbol}`;
             }
         }, {
             field: 'symbol',
@@ -51,49 +51,8 @@ class QuotationShortTerm extends React.Component {
             search: true,
             noVisible: true
         }, {
-            field: 'toSymbol01',
-            title: '计价币种',
-            render(v, d) {
-                return d && d.toSymbol;
-            }
-        }, {
-            field: 'toSymbol',
-            title: '计价币种',
-            type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
-            valueName: 'key',
-            search: true,
-            noVisible: true
-        }, {
             field: 'period',
-            title: 'k线时间',
-            type: 'select',
-            data: [{
-                key: '1min',
-                value: '一分钟'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            search: true
-        }, {
-            field: 'quantity',
-            title: '成交笔数',
-            render(v) {
-                return v && parseInt(v);
-            }
-        }, {
-            field: 'volume',
-            title: '成交量',
-            render(v) {
-                return fixed8(v);
-            }
-        }, {
-            field: 'amount',
-            title: '成交金额',
-            render(v) {
-                return fixed8(v);
-            }
+            title: 'k线时间'
         }, {
             field: 'ksgd',
             title: '开，收，高，低',
@@ -112,7 +71,8 @@ class QuotationShortTerm extends React.Component {
                 value: '未修改'
             }],
             keyName: 'key',
-            valueName: 'value'
+            valueName: 'value',
+            search: true
         }, {
             field: 'klineDatetime',
             title: '产生时间',

@@ -70,11 +70,30 @@ class Robot extends React.Component {
             visible: false
         });
     };
+    // 近期流水查询
+    ledgerQuery = (selectedRowKeys) => {
+        if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+        } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+        } else {
+            this.props.history.push(`/guessUpsDowns/robot-recent?code=${selectedRowKeys[0]}`);
+        }
+    };
+    // 历史流水查询
+    ledgerQueryHistory = (selectedRowKeys) => {
+        if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+        } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+        } else {
+            this.props.history.push(`/guessUpsDowns/robot-accountHistory?code=${selectedRowKeys[0]}`);
+        }
+    };
     render() {
         const fields = [{
             field: 'name',
-            title: '机器人',
-            search: true
+            title: '机器人'
         }, {
             field: 'symbol',
             title: '针对币种',
@@ -191,18 +210,6 @@ class Robot extends React.Component {
                                 }
                             }
                         }, {
-                            code: 'accountWater',
-                            name: '账户流水',
-                            handler: (selectedRowKeys) => {
-                                if (!selectedRowKeys.length) {
-                                    showWarnMsg('请选择记录');
-                                } else if (selectedRowKeys.length > 1) {
-                                    showWarnMsg('请选择一条记录');
-                                } else {
-                                    this.props.history.push(`/guessUpsDowns/robot-account?userId=${selectedRowKeys[0]}`);
-                                }
-                            }
-                        }, {
                             code: 'bettingRecord',
                             name: '投注查询',
                             handler: (selectedRowKeys) => {
@@ -213,6 +220,18 @@ class Robot extends React.Component {
                                 } else {
                                     this.props.history.push(`/guessUpsDowns/scene-record?code=${selectedRowKeys[0]}`);
                                 }
+                            }
+                        }, {
+                            code: 'ledgerQuery',
+                            name: '近期流水查询',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                this.ledgerQuery(selectedRowKeys, selectedRows);
+                            }
+                        }, {
+                            code: 'ledgerQueryHistory',
+                            name: '历史流水查询',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                this.ledgerQueryHistory(selectedRowKeys, selectedRows);
                             }
                         }]
                     })

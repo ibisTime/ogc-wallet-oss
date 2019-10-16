@@ -21,7 +21,20 @@ class SceneAddedit extends DetailUtil {
             type: 'select',
             data: getCoinList(),
             keyName: 'key',
-            valueName: 'key'
+            valueName: 'key',
+            required: true
+        }, {
+            field: 'recycleMins',
+            title: '周期分钟数',
+            number: true,
+            required: true,
+            tipEle: {
+                id: 'recycleMins',
+                style: {
+                    color: '#f5222d'
+                },
+                content: '投注期+封闭期分钟数不能超过周期分钟数'
+            }
         }, {
             field: 'bettingMins',
             title: '投注期分钟数',
@@ -32,18 +45,6 @@ class SceneAddedit extends DetailUtil {
             title: '封闭期分钟数',
             number: true,
             required: true
-        }, {
-            field: 'recycleMins',
-            title: '周期分钟',
-            number: true,
-            required: true,
-            tipEle: {
-                id: 'recycleMins',
-                style: {
-                    color: '#f5222d'
-                },
-                content: '投注期加封闭期分钟数不能超过周期分钟数'
-            }
         }, {
             field: 'singleCountMin',
             title: '单次最小投注数量',

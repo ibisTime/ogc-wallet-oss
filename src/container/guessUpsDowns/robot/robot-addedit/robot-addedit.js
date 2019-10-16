@@ -34,7 +34,6 @@ class RobotAddedit extends DetailUtil {
         }, {
             field: 'betResult',
             title: '下注输赢',
-            required: true,
             type: 'select',
             data: [{
                 key: '1',

@@ -44,9 +44,9 @@ class Home extends React.Component {
         fetch(620036).then(data => {
             this.setState({
                 bonusPoolData: {
-                    inAmountUsdt: moneyFormat(data.inAmountUsdt, '4', 'USDT'),
-                    outAmountUsdt: moneyFormat(data.outAmountUsdt, '4', 'USDT'),
-                    amountUsdt: moneyFormat(data.amountUsdt, '4', 'USDT')
+                    inAmount: moneyFormat(data.inAmount, '4', 'BTC'),
+                    outAmount: moneyFormat(data.outAmount, '4', 'BTC'),
+                    amount: moneyFormat(data.amount, '4', 'BTC')
                 }
             });
         });
@@ -92,24 +92,24 @@ class Home extends React.Component {
             <div className="guessUpsDownsHome-wrapper">
                 <div className="homeTop">
                     <div className="homeTop-left">
-                        <div className="homeTop-left-tit">平台盈亏池（折算成USDT）</div>
+                        <div className="homeTop-left-tit">平台BTC盈亏池</div>
                         <div className="homeTop-left-item-wrap">
                             <div className="homeTop-left-item" key='1'>
                                 <div className="item-con">
                                     <p>收入总额</p>
-                                    <samp>{bonusPoolData.inAmountUsdt}</samp>
+                                    <samp>{bonusPoolData.inAmount}</samp>
                                 </div>
                             </div>
                             <div className="homeTop-left-item" key='2'>
                                 <div className="item-con">
                                     <p>支出总额</p>
-                                    <samp>{bonusPoolData.outAmountUsdt}</samp>
+                                    <samp>{bonusPoolData.outAmount}</samp>
                                 </div>
                             </div>
                             <div className="homeTop-left-item" key='3'>
                                 <div className="item-con">
                                     <p>利润总额</p>
-                                    <samp>{bonusPoolData.amountUsdt}</samp>
+                                    <samp>{bonusPoolData.amount}</samp>
                                 </div>
                             </div>
                             {/*        ))

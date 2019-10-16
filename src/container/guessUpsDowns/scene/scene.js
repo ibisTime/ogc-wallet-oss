@@ -186,7 +186,7 @@ class Scene extends React.Component {
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/guessUpsDowns/scene-page?code=${selectedRows[0].code}&type=1`);
+                                    this.props.history.push(`/guessUpsDowns/scene-page?code=${selectedRows[0].code}`);
                                 }
                             }
                         }, {
@@ -200,7 +200,7 @@ class Scene extends React.Component {
                                 } else if(selectedRows[0].status !== '1') {
                                     showWarnMsg('该状态下不能进行该操作');
                                 }else {
-                                    this.props.history.push(`/guessUpsDowns/scene-page?code=${selectedRows[0].code}&type=0`);
+                                    this.props.history.push(`/guessUpsDowns/scene-preview?code=${selectedRows[0].code}`);
                                 }
                             }
                         }, {
