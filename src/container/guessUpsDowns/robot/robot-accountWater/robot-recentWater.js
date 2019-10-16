@@ -48,16 +48,6 @@ class RobotRecentWater extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'realName',
-            title: '户名',
-            render: (v, data) => {
-                if (data.accountType === 'P') {
-                    return '平台账户';
-                } else {
-                    return !v ? data.realName : v;
-                }
-            }
-        }, {
             field: 'channelType',
             title: '渠道',
             type: 'select',
@@ -75,7 +65,7 @@ class RobotRecentWater extends React.Component {
             field: 'bizType',
             title: '业务类型',
             type: 'select',
-            key: this.isPlat ? this.bizType : 'jour_biz_type_user',
+            key: 'jour_biz_type_user',
             search: true
         }, {
             field: 'transAmountString',

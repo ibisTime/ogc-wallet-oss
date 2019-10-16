@@ -39,16 +39,8 @@ class ScenePreview extends React.Component {
             title: '投注开始时间',
             type: 'datetime'
         }, {
-            field: 'bettingEndTime',
-            title: '投注截止时间',
-            type: 'datetime'
-        }, {
             field: 'closeStartTime',
             title: '封闭开始时间',
-            type: 'datetime'
-        }, {
-            field: 'closeEndTime',
-            title: '封闭截止时间',
             type: 'datetime'
         }, {
             field: 'openTime',

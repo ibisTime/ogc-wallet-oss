@@ -67,6 +67,9 @@ class Home extends React.Component {
             field: 'userName',
             title: '投注用户'
         }, {
+            field: 'symbol',
+            title: '投注币种'
+        }, {
             field: 'direction',
             title: '投注方向',
             type: 'select',
@@ -119,7 +122,7 @@ class Home extends React.Component {
                     </div>
                     <div className="homeTop-right">
                         <div className="guessUpsDowns-title-wrap">
-                            <p>实时投注记录（无关场次）</p>
+                            <p>实时投注记录</p>
                         </div>
                         <div className="homeTop-right-table">
                             {

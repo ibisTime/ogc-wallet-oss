@@ -25,15 +25,9 @@ class QuotationDetail extends DetailUtil {
             title: '来源'
         }, {
             field: 'symbol01',
-            title: '交易币种',
+            title: '交易对',
             formatter(v, d) {
-                return d && d.symbol;
-            }
-        }, {
-            field: 'toSymbol01',
-            title: '计价币种',
-            formatter(v, d) {
-                return d && d.toSymbol;
+                return d && `${d.symbol}/${d.toSymbol}`;
             }
         }, {
             field: 'period',
@@ -41,7 +35,7 @@ class QuotationDetail extends DetailUtil {
             type: 'select',
             data: [{
                 key: '1min',
-                value: '一分钟'
+                value: '1min'
             }],
             keyName: 'key',
             valueName: 'value'
