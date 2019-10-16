@@ -37,8 +37,17 @@ class StarBonusIncome extends React.Component {
     render() {
         const fields = [{
             field: 'name',
-            title: '星球',
-            search: true
+            title: '星球名称'
+        }, {
+            field: 'starId',
+            title: '星球名称',
+            search: true,
+            type: 'select',
+            pageCode: '640003',
+            keyName: 'id',
+            valueName: '{{name.DATA}}-{{symbol.DATA}}',
+            searchName: 'starId',
+            noVisible: true
         }, {
             field: 'userName',
             title: '场次'
@@ -58,13 +67,21 @@ class StarBonusIncome extends React.Component {
             field: 'userName5',
             title: '状态'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: '623010',
-            searchParams: {
-                redPacketCode: this.code
+        return <div className="superNode-listPage-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: '623010',
+                    buttons: [{
+                        code: 'detail',
+                        name: '详情'
+                    }, {
+                        code: 'export',
+                        name: '导出'
+                    }]
+                })
             }
-        });
+        </div>;
     }
 }
 

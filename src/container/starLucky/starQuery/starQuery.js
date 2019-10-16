@@ -37,8 +37,17 @@ class StarQuery extends React.Component {
     render() {
         const fields = [{
             field: 'name',
-            title: '星球',
-            search: true
+            title: '星球名称'
+        }, {
+            field: 'starId',
+            title: '星球名称',
+            search: true,
+            type: 'select',
+            pageCode: '640003',
+            keyName: 'id',
+            valueName: '{{name.DATA}}-{{symbol.DATA}}',
+            searchName: 'starId',
+            noVisible: true
         }, {
             field: 'userName',
             title: '场次'
@@ -61,13 +70,39 @@ class StarQuery extends React.Component {
             field: 'userName5',
             title: '中奖金额的随机数'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: '623010',
-            searchParams: {
-                redPacketCode: this.code
+        return <div className="superNode-listPage-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: '623010',
+                    buttons: [{
+                        code: 'starParticipate',
+                        name: '参与记录',
+                        handler: (selectedRowKeys) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/starLucky/starParticipate?code=${selectedRowKeys[0]}`);
+                            }
+                        }
+                    }, {
+                        code: 'starBonusIncome',
+                        name: '奖金收益',
+                        handler: (selectedRowKeys) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/starLucky/starBonusIncome?code=${selectedRowKeys[0]}`);
+                            }
+                        }
+                    }]
+                })
             }
-        });
+        </div>;
     }
 }
 

@@ -118,7 +118,7 @@ class StarJackpot extends React.Component {
         }];
         const { getFieldDecorator } = this.props.form;
         return (
-            <div>
+            <div className="superNode-listPage-wrapper">
                 {
                     this.props.buildList({
                         fields,
@@ -127,8 +127,24 @@ class StarJackpot extends React.Component {
                         searchParams: {
                             type: 'star'
                         },
+                        buttons: [{
+                            code: 'amountOf',
+                            name: '调额'
+                        }, {
+                            code: 'recordInto',
+                            name: '进池记录'
+                        }, {
+                            code: 'recordOut',
+                            name: '出池记录'
+                        }, {
+                            code: 'legacyRecords',
+                            name: '遗留记录'
+                        }, {
+                            code: 'amountRecorded',
+                            name: '调额记录'
+                        }],
                         btnEvent: {
-                            recordInto: (selectedRowKeys, selectedRows) => { // 进池
+                            recordInto: (selectedRowKeys) => { // 进池
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {
@@ -137,7 +153,7 @@ class StarJackpot extends React.Component {
                                     this.props.history.push(`/starLucky/starRecordRecord`);
                                 }
                             },
-                            recordOut: (selectedRowKeys, selectedRows) => { // 出池
+                            recordOut: (selectedRowKeys) => { // 出池
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
                                 } else if (selectedRowKeys.length > 1) {

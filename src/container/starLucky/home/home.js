@@ -99,7 +99,15 @@ class Home extends React.Component {
             }
         }];
         return (
-            <div className="superNodeHome-wrapper">
+            <div></div>
+        );
+    }
+}
+
+export default Home;
+
+/*
+<div className="superNodeHome-wrapper">
                 <div className="homeTop">
                     <div className="homeTop-left">
                         <div className="homeTop-left-tit">超级节点分红池</div>
@@ -166,8 +174,4 @@ class Home extends React.Component {
                     </div>
                 </div>
             </div>
-        );
-    }
-}
-
-export default Home;
+* */

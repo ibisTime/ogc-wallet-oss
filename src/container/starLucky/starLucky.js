@@ -23,7 +23,7 @@ class StarLucky extends React.Component {
     constructor(props) {
         super(props);
         let topMenuCode = '';
-        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/superNode') {
+        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/starLucky') {
             topMenuCode = sessionStorage.getItem('superMenuName');
         } else {
             topMenuCode = 'home';
@@ -46,7 +46,7 @@ class StarLucky extends React.Component {
             top2SubObj: {
                 'home': '/starLucky',
                 'star': '/starLucky/starMessage',
-                'session': '/starLucky/session'
+                'session': '/starLucky/starQuery'
             }
         };
     }
@@ -65,7 +65,7 @@ class StarLucky extends React.Component {
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
-                    this.props.history.push('/superNode');
+                    this.props.history.push('/starLucky');
                 }}>
                     <img style ={{width: '72%', height: '40px'}} src={logo}/>
                 </div>

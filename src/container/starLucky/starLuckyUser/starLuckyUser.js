@@ -40,7 +40,7 @@ class StarLuckyUser extends React.Component {
             title: '星球名称'
         }, {
             field: 'starId',
-            title: '星球',
+            title: '星球名称',
             search: true,
             type: 'select',
             pageCode: '640003',
@@ -72,12 +72,23 @@ class StarLuckyUser extends React.Component {
             field: 'createrName',
             title: '操作人'
         }];
-        return this.props.buildList({
-            fields,
-            rowKey: 'id',
-            pageCode: '640015',
-            deleteCode: '640011'
-        });
+        return <div className="superNode-listPage-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    rowKey: 'id',
+                    pageCode: '640015',
+                    deleteCode: '640011',
+                    buttons: [{
+                        code: 'add',
+                        name: '添加'
+                    }, {
+                        code: 'delete',
+                        name: '移除'
+                    }]
+                })
+            }
+        </div>;
     }
 }
 

@@ -56,15 +56,19 @@ class StarLegacyRecords extends React.Component {
             field: 'updaterName',
             title: '操作人'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: 806010,
-            rowKey: 'id',
-            buttons: this.buttons,
-            searchParams: {
-                poolId: this.poolId
+        return <div className="superNode-listPage-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: 806010,
+                    rowKey: 'id',
+                    buttons: this.buttons,
+                    searchParams: {
+                        poolId: this.poolId
+                    }
+                })
             }
-        });
+        </div>;
     }
 }
 

@@ -21,6 +21,9 @@ const Dashboard = asyncComponent(() => import('component/dashboard/dashboard'));
 // 集成生态-超级节点
 const SuperNode = asyncComponent(() => import('container/superNode/superNode'));
 
+// 集成生态-星球
+const StarLucky = asyncComponent(() => import('container/starLucky/starLucky'));
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -29,6 +32,7 @@ ReactDOM.render(
                 <Switch>
                     <Route path='/login' component={Login}></Route>
                     <Route path='/superNode' component={SuperNode}></Route>
+                    <Route path='/starLucky' component={StarLucky}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>
