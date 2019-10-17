@@ -1688,10 +1688,6 @@ const ROUTES = [
     {
         path: '/integrationEcology/integrationEcology',
         component: asyncComponent(() => import('container/ecology/integrationEcology/integrationEcology/integrationEcology'))
-    },
-    {
-        path: '/card',
-        component: asyncComponent(() => import('container/card/home/home'))
     }
 ];
 

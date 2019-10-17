@@ -24,6 +24,7 @@ import logo from './wallt.png';
 const { SubMenu, Item } = Menu;
 const { Header, Content, Sider } = Layout;
 const Home = asyncComponent(() => import('../../container/home/home'));
+const Card = asyncComponent(() => import('../../container/card/card'));
 
 @connect(
   state => ({ ...state.user, ...state.menu, ...state.message, loginName: state.user.loginName }),
@@ -178,6 +179,7 @@ class Dashboard extends React.Component {
         <Content {...props}>
           <Switch>
             <Route path='/' exact component={Home}></Route>
+            <Route path='/card' exact component={Card}></Route>
             {this.props.topMenuList.length ? this.getRoutes() : null}
           </Switch>
         </Content>

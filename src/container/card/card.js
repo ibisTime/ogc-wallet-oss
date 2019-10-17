@@ -9,7 +9,7 @@ import { clearUser, getUserId, getUserName } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
-import './superNode.css';
+import './card.css';
 import ROUTES from './route';
 
 const { SubMenu, Item } = Menu;
@@ -19,11 +19,11 @@ const { Header, Content, Sider } = Layout;
     state => ({ ...state.user, ...state.menu, ...state.message, loginName: state.user.loginName }),
     { setSelToId, loadTxUserSign, setMsgList, addUserMap }
 )
-class SuperNode extends React.Component {
+class Card extends React.Component {
     constructor(props) {
         super(props);
         let topMenuCode = '';
-        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/superNode') {
+        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/card') {
             topMenuCode = sessionStorage.getItem('superMenuName');
         } else {
             topMenuCode = 'home';
@@ -36,29 +36,17 @@ class SuperNode extends React.Component {
                 code: 'home',
                 name: '首页'
             }, {
-                code: 'bonusPool',
-                name: '红利池'
+                code: 'secretKey',
+                name: '密钥匙'
             }, {
-                code: 'periods',
-                name: '期数'
-            }, {
-                code: 'node',
-                name: '节点'
-            }, {
-                code: 'customer',
-                name: '用户'
-            }, {
-                code: 'setting',
-                name: '配置'
+                code: 'cardVolume',
+                name: '卡卷'
             }],
             // 菜单对应跳转url
             top2SubObj: {
-                'home': '/superNode',
-                'bonusPool': '/superNode/bonusPool',
-                'periods': '/superNode/periods',
-                'node': '/superNode/node',
-                'customer': '/superNode/customer',
-                'setting': '/superNode/setting'
+                'home': '/card',
+                'secretKey': '/card/secretKey',
+                'cardVolume': '/card/cardVolume'
             }
         };
     }
@@ -77,7 +65,7 @@ class SuperNode extends React.Component {
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
-                    this.props.history.push('/superNode');
+                    this.props.history.push('/card');
                 }}>
                     <img style ={{width: '72%', height: '40px'}} src={logo}/>
                 </div>
@@ -257,4 +245,4 @@ class SuperNode extends React.Component {
     }
 }
 
-export default SuperNode;
+export default Card;
