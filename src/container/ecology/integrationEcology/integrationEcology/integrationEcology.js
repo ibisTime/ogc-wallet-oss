@@ -45,12 +45,12 @@ class IntegrationEcology extends React.Component {
             // window.open(`http://oss.igotest.psctoken.com/verificationPSC?username=${username}&token=${tokenIgo}`);
             window.open(`${igoUrl}/verificationPSC?username=${username}&token=${tokenIgo}`);
         }else {
-            let url = '';
-            if(this.state.urlList[item.url]) {
-                url = window.location.protocol + '//' + window.location.host + this.state.urlList[item.url];
-            } else {
-                url = item.url;
-            }
+            let url = 'http://localhost:5808/flashManagement';
+            // if(this.state.urlList[item.url]) {
+            //     url = window.location.protocol + '//' + window.location.host + this.state.urlList[item.url];
+            // } else {
+            //     url = item.url;
+            // }
             window.open(url);
         }
     }
