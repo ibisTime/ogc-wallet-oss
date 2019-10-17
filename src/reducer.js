@@ -241,6 +241,7 @@ import {rightsInterestsRules} from './redux/rightsInterests/rules/rules';
 import {CardHome} from './redux/card/home';
 import {CardSecretKey} from './redux/card/secretKey';
 import {CardCardVolume} from './redux/card/cardVolume';
+import {CardcardLog} from './redux/card/cardLog';
 
 export default combineReducers({
     user,
@@ -459,5 +460,6 @@ export default combineReducers({
     // 卡卷
     CardHome,
     CardSecretKey,
-    CardCardVolume
+    CardCardVolume,
+    CardcardLog
 });

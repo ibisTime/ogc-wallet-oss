@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal} from 'antd';
+import {Modal, Upload, Button, Icon} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -20,6 +20,7 @@ import {
     getUserId,
     showSucMsg
 } from 'common/js/util';
+import { readXls } from 'common/js/xlsx-util';
 import fetch from 'common/js/fetch';
 
 let currency = '';
@@ -34,186 +35,170 @@ let currency = '';
     }
 )
 class SecretKey extends React.Component {
+    state = {
+        ...this.state,
+        visible: false,
+        data: []
+    };
     componentDidMount() {
         let clearParams = document.getElementById('clearParams');
         clearParams.addEventListener('click', () => {
             currency = '';
         });
     }
+    handleChange = (file) => {
+        readXls(file).then(XLSXData => {
+            for (let i = XLSXData.length; i > 0;) {
+                if (XLSXData[--i].length) {
+                    break;
+                } else {
+                    XLSXData.splice(i, 1);
+                }
+            }
+            let data = [];
+            delete XLSXData[0];
+            XLSXData.forEach((item, i) => {
+                data.push(item[2]);
+            });
+            this.setState({
+                data: data
+            });
+        }).catch(msg => showWarnMsg(msg));
+    }
+    // 确认导入
+    handleImprot = () => {
+        this.props.form.validateFieldsAndScroll((err) => {
+            if (err) {
+                return;
+            }
+            let param = {};
+            param.publicKeyList = this.state.data;
+            fetch(610600, param).then(() => {
+                showSucMsg('导入成功');
+                this.setState({
+                    visible: false
+                });
+            }).catch(this.props.cancelFetching);
+        });
+    };
+    handleCancel = () => {
+        this.setState({
+            visible: false
+        });
+    };
     render() {
-        const fields = [{
-            field: 'code',
-            title: '编号',
-            search: true
-        }, {
-            field: 'currency',
-            title: '币种类型',
-            type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
+        const _this = this;
+        const props = {
+            name: 'file',
+            headers: {
+                authorization: 'authorization-text'
             },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            render: (v, data) => v,
-            search: true,
-            onChange: (v) => {
-                setTimeout(() => {
-                    let clearSpan = document.querySelector('.ant-select-selection__clear');
-                    clearSpan.addEventListener('click', () => {
-                        currency = '';
-                    });
-                }, 0);
-                currency = v;
-            }
-        }, {
-            field: 'accountName',
-            title: '账号',
-            render: (v, data) => {
-                if (data.applyUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    return data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.nickname + '(' + tmpl + ')';
+            onChange(info) {
+                if (info.file.status !== 'uploading') {
+                    _this.setState({ fileList: [info.file] });
                 }
-                return '';
-            }
-        }, {
-            field: 'amount',
-            title: '提现总费用',
-            render: (v, data) => {
-                return moneyFormat(data.amount, '', data.currency);
-            }
-        }, {
-            field: 'actualAmount',
-            title: '实际到账金额',
-            render: (v, data) => {
-                if(v) {
-                    return moneyFormat(v, '', data.currency);
+                if (info.file.status === 'done') {
+                } else if (info.file.status === 'error') {
                 }
-            }
-        }, {
-            field: 'fee',
-            title: '手续费',
-            required: true,
-            render: (v, data) => {
-                if(v) {
-                    return moneyFormat(v, '', data.currency);
+            },
+            beforeUpload(file) {
+                if (!file) {
+                    return false;
                 }
-            }
-        }, {
-            field: 'channelType',
-            title: '渠道',
-            type: 'select',
-            key: 'channel_type',
+                _this.handleChange(file);
+                return false;
+            },
+            fileList: _this.state.fileList
+        };
+        const fields = [{
+            field: 'publicKey',
+            title: '公钥',
             search: true
-        }, {
-            title: '区块链类型',
-            field: 'payCardInfo'
-        }, {
-            title: '提现地址',
-            field: 'payCardNo'
-        }, {
-            field: 'applyUser',
-            title: '申请人',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            render: (v, data) => {
-                if (data.applyUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    if (data.applyUserInfo.kind === 'Q') {
-                        return data.applyUserInfo.realName + '(' + tmpl + ')';
-                    }
-                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
-                }
-                return '';
-            }
-        }, {
-            field: 'applyDatetime',
-            title: '申请时间',
-            type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
-            render: dateTimeFormat,
-            search: true
-        }, {
-            title: '申请说明',
-            field: 'applyNote'
         }, {
             field: 'status',
             title: '状态',
+            search: true,
             type: 'select',
-            key: 'withdraw_status',
-            search: true
+            key: 'card_secret_status'
         }, {
-            field: 'approveNote',
-            title: '审核意见'
+            field: 'creatorName',
+            title: '导入人'
         }, {
-            field: 'approveUser',
-            title: '审核人',
-            render: (v, data) => {
-                return data.approveUserInfo ? data.approveUserInfo.loginName : '';
-            }
+            field: 'createDatetime',
+            title: '导入时间',
+            type: 'datetime'
         }, {
-            field: 'approveDatetime',
-            title: '审核时间',
-            type: 'date',
-            rangedate: ['approveDateStart', 'approveDateEnd'],
-            render: dateTimeFormat,
-            search: true
+            field: 'cancelUserName',
+            title: '作废人'
+        }, {
+            field: 'cancelDatetime',
+            title: '作废时间',
+            type: 'datetime'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: '802355',
-            searchParams: {
-                status: '5'
-            },
-            btnEvent: {
-                multiCheck: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是待审核的记录');
-                    } else {
-                        this.props.history.push(`/BTC-finance/completedquery/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
-                    }
-                },
-                sp: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '3') {
-                        showWarnMsg('不是可广播的记录');
-                    } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定广播？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                let params = {};
-                                params.code = selectedRowKeys[0];
-                                params.approveUser = getUserId();
-                                this.props.doFetching();
-                                fetch(802353, params).then(() => {
-                                    showSucMsg('操作成功');
-                                    this.props.cancelFetching();
-                                    setTimeout(() => {
-                                        this.props.getPageData();
-                                    }, 1000);
-                                }).catch(this.props.cancelFetching);
+        return <div className="superNodeHome-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    rowKey: 'id',
+                    pageCode: '610603',
+                    buttons: [{
+                        code: 'import',
+                        name: '导入'
+                    }, {
+                        code: 'invalid',
+                        name: '作废'
+                    }],
+                    btnEvent: {
+                        import: () => {
+                            this.setState({
+                                visible: true
+                            });
+                        },
+                        invalid: (selectedRowKeys) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                Modal.confirm({
+                                    okText: '作废',
+                                    cancelText: '取消',
+                                    content: `确定作废？`,
+                                    onOk: () => {
+                                        this.props.doFetching();
+                                        this.props.doFetching();
+                                        fetch(610602, {
+                                            id: selectedRowKeys[0]
+                                        }).then(() => {
+                                            showSucMsg('操作成功');
+                                            this.props.cancelFetching();
+                                            setTimeout(() => {
+                                                this.props.getPageData();
+                                            }, 1000);
+                                        }).catch(this.props.cancelFetching);
+                                    }
+                                });
                             }
-                        });
-                        // this.props.history.push(`/BTC-finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
+                        }
                     }
-                }
+                })
             }
-        });
+            <Modal
+                title='导入'
+                width={500}
+                visible={this.state.visible}
+                onOk={this.handleImprot}
+                onCancel={this.handleCancel}
+                okText="确定"
+                cancelText="取消"
+            >
+                <Upload {...props}>
+                    <Button>
+                        <Icon type="upload"/>选择文件
+                    </Button>
+                </Upload>
+            </Modal>
+        </div>;
     }
 }
 

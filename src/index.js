@@ -16,6 +16,7 @@ const store = createStore(reducers, compose(
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ));
 const Login = asyncComponent(() => import('container/login/login'));
+const Card = asyncComponent(() => import('container/card/card'));
 const Dashboard = asyncComponent(() => import('component/dashboard/dashboard'));
 
 ReactDOM.render(
@@ -25,6 +26,7 @@ ReactDOM.render(
                 <AuthRoute></AuthRoute>
                 <Switch>
                     <Route path='/login' component={Login}></Route>
+                    <Route path='/card' component={Card}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>

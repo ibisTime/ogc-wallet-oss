@@ -12,6 +12,10 @@ const ROUTES = [
     {
         path: '/card/cardVolume',
         component: asyncComponent(() => import('container/card/cardVolume/cardVolume'))
+    },
+    {
+        path: '/card/cardLog',
+        component: asyncComponent(() => import('container/card/cardLog/cardLog'))
     }
 ];
 

@@ -43,7 +43,6 @@
 }
 .superNode-wrapper .superNodeHome-wrapper .homeTop .homeTop-left {
   width: 450px;
-  height: 380px;
   background-color: #fff;
   margin-right: 30px;
   border-radius: 4px;
@@ -62,7 +61,7 @@
   width: 100%;
   overflow: hidden;
   display: flex;
-  padding: 25px 0;
+  padding: 10px 0;
 }
 .superNode-wrapper .superNodeHome-wrapper .homeTop .homeTop-left .homeTop-left-item .item-logo {
   width: 50px;

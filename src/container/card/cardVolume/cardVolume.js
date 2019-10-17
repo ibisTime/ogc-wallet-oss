@@ -34,182 +34,73 @@ let currency = '';
     }
 )
 class CardVolume extends React.Component {
-    componentDidMount() {
-        let clearParams = document.getElementById('clearParams');
-        clearParams.addEventListener('click', () => {
-            currency = '';
-        });
-    }
     render() {
         const fields = [{
-            field: 'code',
-            title: '编号',
+            field: 'symbol',
+            title: '币种'
+        }, {
+            field: 'price',
+            title: '面值'
+        }, {
+            field: 'publicKey',
+            title: '公钥',
             search: true
-        }, {
-            field: 'currency',
-            title: '币种类型',
-            type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            render: (v, data) => v,
-            search: true,
-            onChange: (v) => {
-                setTimeout(() => {
-                    let clearSpan = document.querySelector('.ant-select-selection__clear');
-                    clearSpan.addEventListener('click', () => {
-                        currency = '';
-                    });
-                }, 0);
-                currency = v;
-            }
-        }, {
-            field: 'accountName',
-            title: '账号',
-            render: (v, data) => {
-                if (data.applyUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    return data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.nickname + '(' + tmpl + ')';
-                }
-                return '';
-            }
-        }, {
-            field: 'amount',
-            title: '提现总费用',
-            render: (v, data) => {
-                return moneyFormat(data.amount, '', data.currency);
-            }
-        }, {
-            field: 'actualAmount',
-            title: '实际到账金额',
-            render: (v, data) => {
-                if(v) {
-                    return moneyFormat(v, '', data.currency);
-                }
-            }
-        }, {
-            field: 'fee',
-            title: '手续费',
-            required: true,
-            render: (v, data) => {
-                if(v) {
-                    return moneyFormat(v, '', data.currency);
-                }
-            }
-        }, {
-            field: 'channelType',
-            title: '渠道',
-            type: 'select',
-            key: 'channel_type',
-            search: true
-        }, {
-            title: '区块链类型',
-            field: 'payCardInfo'
-        }, {
-            title: '提现地址',
-            field: 'payCardNo'
-        }, {
-            field: 'applyUser',
-            title: '申请人',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            render: (v, data) => {
-                if (data.applyUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    if (data.applyUserInfo.kind === 'Q') {
-                        return data.applyUserInfo.realName + '(' + tmpl + ')';
-                    }
-                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
-                }
-                return '';
-            }
-        }, {
-            field: 'applyDatetime',
-            title: '申请时间',
-            type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
-            render: dateTimeFormat,
-            search: true
-        }, {
-            title: '申请说明',
-            field: 'applyNote'
         }, {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'withdraw_status',
+            key: 'card_status',
             search: true
         }, {
-            field: 'approveNote',
-            title: '审核意见'
-        }, {
-            field: 'approveUser',
-            title: '审核人',
-            render: (v, data) => {
-                return data.approveUserInfo ? data.approveUserInfo.loginName : '';
+            field: 'generateUser',
+            title: '生成人',
+            render(v, d) {
+                return v && v.loginName;
             }
         }, {
-            field: 'approveDatetime',
-            title: '审核时间',
-            type: 'date',
-            rangedate: ['approveDateStart', 'approveDateEnd'],
-            render: dateTimeFormat,
-            search: true
+            field: 'useUser',
+            title: '兑换人',
+            render(v) {
+                return v && v.loginName;
+            }
+        }, {
+            field: 'useUserId',
+            title: '兑换人',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: 'loginName',
+            searchName: 'keyword',
+            search: true,
+            noVisible: true
+        }, {
+            field: 'createDatetime',
+            title: '生成卡时间',
+            type: 'date'
+        }, {
+            field: 'openDatetime',
+            title: '查看私钥时间',
+            type: 'date'
+        }, {
+            field: 'useDatetime',
+            title: '兑换时间',
+            type: 'date'
         }];
         return this.props.buildList({
             fields,
-            pageCode: '802355',
-            searchParams: {
-                status: '5'
-            },
+            pageCode: '610643',
+            buttons: [{
+                code: 'cardLog',
+                name: '卡券日志'
+            }],
             btnEvent: {
-                multiCheck: (selectedRowKeys, selectedRows) => {
+                cardLog: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是待审核的记录');
                     } else {
-                        this.props.history.push(`/BTC-finance/completedquery/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
-                    }
-                },
-                sp: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '3') {
-                        showWarnMsg('不是可广播的记录');
-                    } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确定广播？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                let params = {};
-                                params.code = selectedRowKeys[0];
-                                params.approveUser = getUserId();
-                                this.props.doFetching();
-                                fetch(802353, params).then(() => {
-                                    showSucMsg('操作成功');
-                                    this.props.cancelFetching();
-                                    setTimeout(() => {
-                                        this.props.getPageData();
-                                    }, 1000);
-                                }).catch(this.props.cancelFetching);
-                            }
-                        });
-                        // this.props.history.push(`/BTC-finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/card/cardLog?publicKey=${selectedRows[0].publicKey}`);
                     }
                 }
             }
