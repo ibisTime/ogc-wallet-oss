@@ -11,7 +11,7 @@ import {
 import './userPanel.css';
 import ReactEcharts from 'echarts-for-react';
 
-import {userAmount, userDistribution, dataDect} from '../../api/statisticalAnalysis';
+import {userAmount, dataDect} from '../../api/statisticalAnalysis';
 
 class userPanel extends React.Component {
     constructor(props) {
@@ -21,7 +21,6 @@ class userPanel extends React.Component {
             activeCounts: [],
             registerCounts: [],
             totalCounts: [],
-            candyNodeLevels: {},
             nodeLevels: [],
             nodeList: []
         };
@@ -43,26 +42,6 @@ class userPanel extends React.Component {
                 activeCounts: [...aCs],
                 registerCounts: [...rgtCs],
                 totalCounts: [...tCs]
-            });
-        });
-        dataDect('candy_node_level').then(data => {
-            this.setState({
-                candyNodeLevels: data
-            });
-            userDistribution().then(data => {
-                let ndls = [];
-                let nodeList = [];
-                for(let i = 0; i < data.length; i++) {
-                    ndls[i] = findDsct(this.state.candyNodeLevels, data[i].candyNodeLevel);
-                    nodeList.push({
-                        value: data[i].count,
-                        name: findDsct(this.state.candyNodeLevels, data[i].candyNodeLevel)
-                    });
-                }
-                this.setState({
-                    nodeLevels: [...ndls],
-                    nodeList: [...nodeList]
-                });
             });
         });
     }
@@ -189,17 +168,6 @@ class userPanel extends React.Component {
                                 style={{height: '100%', width: '100%'}}
                                 className='react_for_echarts' />
                         </div>
-                    </Col>
-                </Row>
-                <Row style={{marginTop: '20px'}}>
-                    <Col span={24}>
-                        <div className="userIdentity">
-                            <ReactEcharts
-                                option={this.getOptionPieChart()}
-                                style={{height: '100%', width: '100%'}}
-                                className='react_for_echarts' />
-                        </div>
-                        <div className="clear"></div>
                     </Col>
                 </Row>
             </div>

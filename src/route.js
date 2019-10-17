@@ -973,6 +973,14 @@ const ROUTES = [
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline'))
     },
     {
+        path: '/BTC-finance/TBunderline/userStatistics',
+        component: asyncComponent(() => import('container/userStatistics/userStatistics'))
+    },
+    {
+        path: '/BTC-finance/TBunderline/inUserStatistics',
+        component: asyncComponent(() => import('container/userStatistics/InUserStatistics'))
+    },
+    {
         path: '/BTC-finance/TBunderline/addedit',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-addedit'))
     },

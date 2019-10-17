@@ -71,6 +71,8 @@ class RoleMenu extends React.Component {
     }
     onCheck = (checkedKeys, event) => {
         const { treeData } = this.state;
+        console.log('treeData', treeData);
+        console.log('checkedKeys', checkedKeys);
         this.checkNode = '';
         let key = event.node.props.eventKey;
         this.findCheckItem(treeData, key);
@@ -90,19 +92,19 @@ class RoleMenu extends React.Component {
                     checked.splice(idx, 1);
                 }
             });
-            if (this.parentKeyMap[key]) {
-                let flag = true;
-                this.result[this.parentKeyMap[key]].forEach(r => {
-                    let idx = checked.findIndex(v => v === r.key);
-                    if (idx > -1) {
-                        flag = false;
-                    }
-                });
-                if (flag) {
-                    let idx = checked.findIndex(c => c === this.parentKeyMap[key]);
-                    checked.splice(idx, 1);
-                }
-            }
+            // if (this.parentKeyMap[key]) {
+            //     let flag = true;
+            //     this.result[this.parentKeyMap[key]].forEach(r => {
+            //         let idx = checked.findIndex(v => v === r.key);
+            //         if (idx > -1) {
+            //             flag = false;
+            //         }
+            //     });
+            //     if (flag) {
+            //         let idx = checked.findIndex(c => c === this.parentKeyMap[key]);
+            //         checked.splice(idx, 1);
+            //     }
+            // }
         } else {
             childrenKeys.forEach(c => {
                 let idx = checked.findIndex(v => c === v);
