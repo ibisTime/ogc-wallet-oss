@@ -24,6 +24,18 @@ const ROUTES = [
     {
         path: '/flashManagement/quotation',
         component: asyncComponent(() => import('container/flashManagement/quotation/quotation'))
+    },
+    {
+        path: '/flashManagement/settle',
+        component: asyncComponent(() => import('container/flashManagement/quotation/settle'))
+    },
+    {
+        path: '/flashManagement/settle/addedit',
+        component: asyncComponent(() => import('container/flashManagement/quotation/settle-addedit'))
+    },
+    {
+        path: '/flashManagement/dailyActList',
+        component: asyncComponent(() => import('container/flashManagement/home/dailyActList'))
     }
 ];
 

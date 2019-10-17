@@ -11,7 +11,12 @@ import {
 } from '@redux/biz/quotation/quotationCDS';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, getCoinList} from 'common/js/util';
+import {Layout} from 'antd';
+import { Switch, Route } from 'react-router-dom';
+import asyncComponent from 'component/async-component/async-component';
 
+const entryLogTop = asyncComponent(() => import('./settle'));
+const { Content } = Layout;
 @listWrapper(
     state => ({
         ...state.quotationQuotationCDS,
@@ -75,14 +80,25 @@ class quotationCDS extends React.Component {
             type: 'datetime'
         }];
         return (
-            <div className="superNode-listPage-wrapper">
-                {
-                    this.props.buildList({
-                        fields,
-                        rowKey: 'id',
-                        pageCode: '650202'
-                    })
-                }
+            <div>
+                <div>
+                    <Layout>
+                        <Content>
+                            <Switch>
+                                <Route path='/flashManagement/quotation' exact component={entryLogTop}></Route>
+                            </Switch>
+                        </Content>
+                    </Layout>
+                </div>
+                <div className="superNode-listPage-wrapper" style={{marginTop: '30px'}}>
+                    {
+                        this.props.buildList({
+                            fields,
+                            rowKey: 'id',
+                            pageCode: '650202'
+                        })
+                    }
+                </div>
             </div>
         );
     }

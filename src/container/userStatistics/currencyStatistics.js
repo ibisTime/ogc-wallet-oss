@@ -5,7 +5,8 @@ import {
     showWarnMsg,
     mtDate,
     dateFormat,
-    moneyFormat
+    moneyFormat,
+    getCoinList
 } from 'common/js/util';
 
 import ReactEcharts from 'echarts-for-react';
@@ -18,12 +19,16 @@ class currencyStatistics extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            nodeList: []
+            nodeList: [],
+            coinList: []
         };
     }
     componentDidMount() {
+        this.setState({
+            coinList: getCoinList()
+        });
         // TOSP TOS ETH
-        coinDistribution(mtDate(dateFormat(new Date()), 15), 'TOSP').then(data => {
+        coinDistribution(mtDate(dateFormat(new Date()), 15), 'PSC').then(data => {
             let nodeList = [];
             let sourceList = [
                 ['product', '今日存币数量', '今日提币数量', '截止今日币量']
@@ -119,15 +124,18 @@ class currencyStatistics extends React.Component {
         return option;
     }
     render() {
+        const {coinList} = this.state;
         return(
             <div>
                 <Row>
                     <Col span={24}>
                         <strong style={{marginLeft: '4px', fontSize: '18px'}}>请选择币种：</strong>
-                        <Select defaultValue="TOSP" style={{ width: 120 }} onChange={this.handleChange}>
-                            <Option value="TOSP">TOSP</Option>
-                            <Option value="TOS">TOS</Option>
-                            <Option value="ETH">ETH</Option>
+                        <Select defaultValue="PSC" style={{ width: 120 }} onChange={this.handleChange}>
+                            {
+                                coinList.map(item => {
+                                    return (<Option value={item.key}>{item.key}</Option>);
+                                })
+                            }
                         </Select>
                     </Col>
                 </Row>

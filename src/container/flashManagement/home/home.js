@@ -1,6 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Card, Row, Col, Button, Spin, message, Tag, Progress} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -14,6 +12,12 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat, moneyFormat, formatImg} from 'common/js/util';
 import fetch from 'common/js/fetch';
+import {Layout} from 'antd';
+import { Switch, Route } from 'react-router-dom';
+import asyncComponent from 'component/async-component/async-component';
+
+const entryLogTop = asyncComponent(() => import('./dailyReport'));
+const { Content } = Layout;
 
 @listWrapper(
     state => ({
@@ -49,20 +53,12 @@ class Home extends React.Component {
         // 直接请求
         Promise.all([
             // 红利池分页查
-            fetch(610661, {
-                start: 1,
-                limit: 2,
-                type: 'snode'
-            }),
-            // 当前节点列表查
-            fetch(610614)
-        ]).then(([bonusPoolData, nodeData]) => {
+            fetch(620020)
+        ]).then(([bonusPoolData]) => {
             this.setState({
-                bonusPoolData: bonusPoolData.list,
-                nodeData: nodeData
+                bonusPoolData: bonusPoolData
             });
             console.log('bonusPoolData', bonusPoolData);
-            console.log('nodeData', nodeData);
         }).catch(() => this.setState(
             {fetching: false}));
     }
@@ -81,23 +77,22 @@ class Home extends React.Component {
     }
 
     render() {
-        const {bonusPoolData, nodeData, nodeStatusColor, nodeStatusDict} = this.state;
+        const {bonusPoolData} = this.state;
         const fields = [{
-            field: 'createDatetime',
-            title: '入池时间',
-            type: 'date'
+            field: 'symbolPair',
+            title: '交易对'
         }, {
-            field: 'remark',
-            title: '业务类型'
+            field: 'countOutTotal',
+            title: '总兑出数量'
         }, {
-            field: 'symbol',
-            title: '币种'
+            field: 'fee',
+            title: '手续费'
         }, {
-            field: 'count',
-            title: '数额',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
-            }
+            field: 'countOut',
+            title: '实际兑出数量'
+        }, {
+            field: 'countIn',
+            title: '兑入数量'
         }];
         return (
             <div className="superNodeHome-wrapper">
@@ -106,13 +101,11 @@ class Home extends React.Component {
                         <div className="homeTop-left-tit">币种统计</div>
                         <div className="homeTop-left-item-wrap">
                             {
-                                bonusPoolData.length > 0 && bonusPoolData.map((item) => (
-                                    <div className="homeTop-left-item" key={item.id}>
-                                        <div className="item-logo"><img src={formatImg(item.coin.icon)}/></div>
-                                        <div className="item-con">
-                                            <p>{item.symbol}</p>
-                                            <samp>{moneyFormat(item.count, '', item.symbol)}</samp>
-                                        </div>
+                                bonusPoolData.map((item) => (
+                                    <div style={{height: '50px'}}>
+                                        <strong style={{marginRight: '20px', fontSize: '16px'}}>{item.symbol}</strong>
+                                        <span style={{marginRight: '20px'}}>兑入:{item.countIn}</span>
+                                        <span style={{marginRight: '20px'}}>兑出:{item.countOut}</span>
                                     </div>
                                 ))
                             }
@@ -123,14 +116,14 @@ class Home extends React.Component {
                         <div className="superNode-title-wrap">
                             <p>交易对统计</p>
                             <samp onClick={() => {
-                                this.props.history.push(`/superNode/bonusPool`);
+                                this.props.history.push(`/flashManagement/dailyActList`);
                             }}>查看更多</samp>
                         </div>
                         <div className="homeTop-right-table">
                             {
                                 this.props.buildList({
                                     fields,
-                                    pageCode: 610670,
+                                    pageCode: 620021,
                                     rowKey: 'id',
                                     noPagination: true,
                                     noSelect: true,
@@ -146,8 +139,14 @@ class Home extends React.Component {
                     <div className="superNode-title-wrap">
                         <p>交易对兑换报表</p>
                     </div>
-                    <div className="homeContent-item-wrap">
-
+                    <div>
+                        <Layout>
+                            <Content>
+                                <Switch>
+                                    <Route path='/flashManagement' exact component={entryLogTop}></Route>
+                                </Switch>
+                            </Content>
+                        </Layout>
                     </div>
                 </div>
             </div>
