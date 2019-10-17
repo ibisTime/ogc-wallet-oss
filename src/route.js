@@ -1683,6 +1683,15 @@ const ROUTES = [
         path: '/store/shopOrder-logistics',
         component: asyncComponent(
             () => import('container/biz/store/shopOrder/shopOrder-logistics'))
+    },
+    // 集成生态
+    {
+        path: '/integrationEcology/integrationEcology',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/integrationEcology/integrationEcology'))
+    },
+    {
+        path: '/card',
+        component: asyncComponent(() => import('container/card/home/home'))
     }
 ];
 
