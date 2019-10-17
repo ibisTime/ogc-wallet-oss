@@ -72,7 +72,7 @@ class StarLuckyUser extends React.Component {
             field: 'createrName',
             title: '操作人'
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

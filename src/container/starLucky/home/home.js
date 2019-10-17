@@ -33,29 +33,29 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bonusPoolData: {}
+            bonusPoolData: {},
+            starData: {}
         };
     }
 
     componentDidMount() {
         // 直接请求
-        // Promise.all([
-        //     // 红利池分页查
-        //     fetch(610661, {
-        //         start: 1,
-        //         limit: 2
-        //     }),
-        //     // 当前节点列表查
-        //     fetch(610614)
-        // ]).then(([bonusPoolData, nodeData]) => {
-        //     this.setState({
-        //         bonusPoolData: bonusPoolData.list,
-        //         nodeData: nodeData
-        //     });
-        //     console.log('bonusPoolData', bonusPoolData);
-        //     console.log('nodeData', nodeData);
-        // }).catch(() => this.setState(
-        //     {fetching: false}));
+        fetch('640003', {
+            start: 1,
+            limit: 1
+        }).then(data => {
+            const obj = data.list ? data.list[0] : '';
+            if(obj) {
+                this.setState({
+                    starData: {
+                        ...obj,
+                        count: moneyFormat(obj.pool.count, '', obj.symbol),
+                        countIn: moneyFormat(obj.pool.countIn, '', obj.symbol),
+                        countOut: moneyFormat(obj.pool.countOut, '', obj.symbol)
+                    }
+                });
+            }
+        });
     }
 
     // 格式化节点投标金额
@@ -72,18 +72,24 @@ class Home extends React.Component {
     }
 
     render() {
-        const {bonusPoolData} = this.state;
+        const {starData} = this.state;
         const fields = [{
-            field: 'createDatetime',
+            field: 'starName',
+            title: '星球名称',
+            render(v, d) {
+                return v && `${v}(${d.symbol})`;
+            }
+        }, {
+            field: 'userName',
             title: '用户'
         }, {
-            field: 'remark',
-            title: '数额'
+            field: 'frozenAmount',
+            title: '数额',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
         }, {
-            field: 'symbol',
-            title: '币种'
-        }, {
-            field: 'count',
+            field: 'createDatetime',
             title: '参与时间',
             type: 'datetime'
         }];
@@ -91,24 +97,24 @@ class Home extends React.Component {
             <div className="guessUpsDownsHome-wrapper">
                 <div className="homeTop">
                     <div className="homeTop-left">
-                        <div className="homeTop-left-tit">地球（HD）奖池</div>
+                        <div className="homeTop-left-tit">{starData.name}({starData.symbol})奖池</div>
                         <div className="homeTop-left-item-wrap">
                             <div className="homeTop-left-item" key='1'>
                                 <div className="item-con">
                                     <p>进池总额</p>
-                                    <samp>{bonusPoolData.inAmount}</samp>
+                                    <samp>{starData.countIn}</samp>
                                 </div>
                             </div>
                             <div className="homeTop-left-item" key='2'>
                                 <div className="item-con">
                                     <p>出池总额</p>
-                                    <samp>{bonusPoolData.outAmount}</samp>
+                                    <samp>{starData.countOut}</samp>
                                 </div>
                             </div>
                             <div className="homeTop-left-item" key='3'>
                                 <div className="item-con">
                                     <p>余额</p>
-                                    <samp>{bonusPoolData.amount}</samp>
+                                    <samp>{starData.count}</samp>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +128,7 @@ class Home extends React.Component {
                             {
                                 this.props.buildList({
                                     fields,
-                                    pageCode: 620017,
+                                    pageCode: 640040,
                                     noPagination: true,
                                     noSelect: true,
                                     searchParams: {
@@ -137,7 +143,7 @@ class Home extends React.Component {
                     <div className="guessUpsDowns-title-wrap">
                         <p>今日场次</p>
                         <samp onClick={() => {
-                            this.props.history.push(`/guessUpsDowns/scene-page?type=1`);
+                            this.props.history.push(`/starLucky/starQuery?origin=home`);
                         }}>查看更多</samp>
                     </div>
                     <div className="guessUpsDownsBonusPool-section">

@@ -93,7 +93,7 @@ class StarLucky extends React.Component {
     }
 
     getContent() {
-        let rightCls = 'right-layout full-right-content';
+        let rightCls = 'right-layout full-right-content guessUpsDowns-wrapper';
         let props = {
         };
         if (this.props.location.pathname === '/') {
@@ -194,15 +194,6 @@ class StarLucky extends React.Component {
         // 遍历新消息
         for (var j in newMsgList) {
             newMsg = newMsgList[j];
-            // console.log(newMsg);
-            // console.log(newMsg.elems);
-            // let pp = newMsg.elems[0];
-            // let dd = pp.content;
-            // let aa = dd.text;
-            // let cc = aa.substring(5);
-            // newMsg.elems[0].content.text = cc;
-            // // newMsg = newMsg.push(cc);
-            // console.log(cc);
             // 过滤掉加人的消息格式
             if (newMsg.fromAccount === '@TIM#SYSTEM') {
                 continue;

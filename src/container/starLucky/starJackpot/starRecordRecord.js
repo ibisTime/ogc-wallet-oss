@@ -48,22 +48,10 @@ class StarRecordRecord extends React.Component {
                 return this.starName && `${this.starName}(${d.symbol})`;
             }
         }, {
-            field: 'symbol',
-            title: '币种',
-            type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            render: (v) => v,
-            search: true,
-            noVisible: true
-        }, {
             field: 'bizType',
-            title: '业务类型'
+            title: '业务类型',
+            type: 'select',
+            key: 'pool_biz_type'
         }, {
             field: 'count',
             title: '数额',
@@ -84,7 +72,7 @@ class StarRecordRecord extends React.Component {
             noVisible: true,
             search: true
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

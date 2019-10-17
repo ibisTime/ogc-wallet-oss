@@ -60,7 +60,7 @@ class StarJackpotRecord extends React.Component {
             field: 'updaterName',
             title: '操作人'
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

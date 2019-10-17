@@ -56,11 +56,8 @@ class StarLegacyRecords extends React.Component {
             field: 'createDatetime',
             title: '遗留时间',
             type: 'datetime'
-        }, {
-            field: 'updaterName',
-            title: '操作人'
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

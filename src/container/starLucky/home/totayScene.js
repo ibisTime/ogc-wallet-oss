@@ -16,7 +16,8 @@ import {
     showWarnMsg,
     showSucMsg,
     dateTimeFormat,
-    getQueryString
+    getQueryString,
+    formatDate
 } from 'common/js/util';
 
 @listWrapper(
@@ -67,17 +68,19 @@ class TotayScene extends React.Component {
             title: '中奖人数比例'
         }, {
             field: 'randomRange',
-            title: '中奖金额的随机数'
-        }];
-        return <div className="superNode-listPage-wrapper">
-            {
-                this.props.buildList({
-                    fields,
-                    rowKey: 'id',
-                    pageCode: '640030'
-                })
+            title: '中奖金额的随机数',
+            render(v) {
+                return v && `(0, ${v})`;
             }
-        </div>;
+        }];
+        return this.props.buildList({
+            fields,
+            rowKey: 'id',
+            pageCode: '640030',
+            searchParams: {
+                date: formatDate(new Date())
+            }
+        });
     }
 }
 

@@ -86,20 +86,6 @@ class StarJackpot extends React.Component {
                 return this.starName && `${this.starName}(${d.symbol})`;
             }
         }, {
-            field: 'symbol',
-            title: '币种',
-            type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            render: (v) => v,
-            search: true,
-            noVisible: true
-        }, {
             field: 'count',
             title: '余额',
             render(v, d) {
@@ -129,13 +115,10 @@ class StarJackpot extends React.Component {
             render(v, d) {
                 return v && moneyFormat(v, '', d.symbol);
             }
-        }, {
-            field: 'createrName',
-            title: '操作人'
         }];
         const { getFieldDecorator } = this.props.form;
         return (
-            <div className="superNode-listPage-wrapper">
+            <div className="guessUpsDowns-listPage-wrapper">
                 {
                     this.props.buildList({
                         fields,

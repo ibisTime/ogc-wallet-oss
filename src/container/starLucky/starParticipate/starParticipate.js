@@ -16,7 +16,8 @@ import {
     showWarnMsg,
     showSucMsg,
     dateTimeFormat,
-    getQueryString
+    getQueryString,
+    dateFormat
 } from 'common/js/util';
 
 @listWrapper(
@@ -36,24 +37,17 @@ class StarParticipate extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'name',
+            field: 'starName',
             title: '星球名称',
             render(v, d) {
                 return v && `${v}(${d.symbol})`;
             }
         }, {
-            field: 'starId',
-            title: '星球名称',
-            search: true,
-            type: 'select',
-            pageCode: '640003',
-            keyName: 'id',
-            valueName: '{{name.DATA}}-{{symbol.DATA}}',
-            searchName: 'starId',
-            noVisible: true
-        }, {
             field: 'sessionName',
-            title: '场次'
+            title: '场次',
+            render(v, d) {
+                return d && d.session ? `${d.session.symbol} ${dateFormat(d.session.date)} 第${d.session.batch}场` : '';
+            }
         }, {
             field: 'userName',
             title: '用户'
@@ -64,14 +58,11 @@ class StarParticipate extends React.Component {
                 return v && moneyFormat(v, '', d.symbol);
             }
         }, {
-            field: 'symbol',
-            title: '币种'
-        }, {
             field: 'createDatetime',
             title: '参与时间',
             type: 'datetime'
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

@@ -50,7 +50,7 @@ class StarConfiguration extends React.Component {
             field: 'value',
             title: '数值'
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

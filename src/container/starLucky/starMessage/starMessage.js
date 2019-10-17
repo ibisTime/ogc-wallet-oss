@@ -54,11 +54,17 @@ class StarLuckyStarMessage extends React.Component {
             search: true,
             noVisible: true
         }, {
-            field: 'a',
-            title: '奖池总额'
+            field: 'totalAdjustCount',
+            title: '奖池总额',
+            render(v, d) {
+                return d && d.pool && moneyFormat((+(d.pool.totalAdjustCount) + (d.pool.countIn)), '', d.symbol);
+            }
         }, {
-            field: 'createrName1',
-            title: '发放总额'
+            field: 'totalCount',
+            title: '发放总额',
+            render(v, d) {
+                return d && d.pool && moneyFormat(d.pool.countOut, '', d.symbol);
+            }
         }, {
             field: 'createDatetime',
             title: '加入时间',
@@ -67,7 +73,7 @@ class StarLuckyStarMessage extends React.Component {
             field: 'createrName',
             title: '操作人'
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

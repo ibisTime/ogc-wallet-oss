@@ -103,7 +103,6 @@ export default class CUpload extends React.Component {
         showRemoveIcon: !readonly
       }
     };
-    console.log('UPLOAD_URL', UPLOAD_URL);
     const fileProps = {
       ...commProps,
       onChange: ({ fileList }) => this.setUploadFileUrl(fileList, false, onChange),

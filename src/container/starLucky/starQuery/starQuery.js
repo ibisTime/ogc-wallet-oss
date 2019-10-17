@@ -16,7 +16,8 @@ import {
     showWarnMsg,
     showSucMsg,
     dateTimeFormat,
-    getQueryString
+    getQueryString,
+    dateFormat
 } from 'common/js/util';
 
 @listWrapper(
@@ -34,32 +35,39 @@ class StarQuery extends React.Component {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.origin = getQueryString('origin', this.props.location.search);
-        if(this.origin !== 'home') {
-            this.buttons = [{
-                code: 'starParticipate',
-                name: '参与记录',
-                handler: (selectedRowKeys) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/starLucky/starParticipate?code=${selectedRowKeys[0]}`);
-                    }
+        this.buttons = [{
+            code: 'starParticipate',
+            name: '参与记录',
+            handler: (selectedRowKeys) => {
+                if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                } else {
+                    this.props.history.push(`/starLucky/starParticipate?code=${selectedRowKeys[0]}`);
                 }
-            }, {
-                code: 'starBonusIncome',
-                name: '奖金收益',
-                handler: (selectedRowKeys) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/starLucky/starBonusIncome?code=${selectedRowKeys[0]}`);
-                    }
+            }
+        }, {
+            code: 'starBonusIncome',
+            name: '奖金收益',
+            handler: (selectedRowKeys) => {
+                if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                } else {
+                    this.props.history.push(`/starLucky/starBonusIncome?code=${selectedRowKeys[0]}`);
                 }
-            }];
+            }
+        }];
+        if(this.origin === 'home') {
+            this.buttons.unshift({
+                code: 'goBack',
+                name: '返回',
+                handler: () => {
+                    window.history.go(-1);
+                }
+            });
         }
     }
     render() {
@@ -88,26 +96,34 @@ class StarQuery extends React.Component {
             type: 'select',
             key: 'session_status'
         }, {
-            field: 'date',
-            title: '场次日期',
-            type: 'date'
-        }, {
             field: 'startTime',
-            title: '开始时间'
+            title: '开始时间',
+            render(v, d) {
+                return v && `${dateFormat(d.date)} ${v}:00:00`;
+            }
         }, {
             field: 'endTime',
-            title: '参与结束时间'
+            title: '参与结束时间',
+            render(v, d) {
+                return v && `${dateFormat(d.date)} ${v}:00:00`;
+            }
         }, {
             field: 'openDatetime',
-            title: '开奖时间'
+            title: '开奖时间',
+            render(v, d) {
+                return v && `${dateFormat(d.date)} ${v}:00:00`;
+            }
         }, {
             field: 'fitRate',
             title: '中奖人数比例'
         }, {
             field: 'randomRange',
-            title: '中奖金额的随机数'
+            title: '中奖金额的随机数',
+            render(v) {
+                return v && `(0, ${v})`;
+            }
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

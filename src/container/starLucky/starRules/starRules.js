@@ -68,9 +68,12 @@ class StarRules extends React.Component {
             title: '中奖人数比例'
         }, {
             field: 'randomRange',
-            title: '中奖金额的随机数'
+            title: '中奖金额的随机数',
+            render(v) {
+                return v && `(0, ${v})`;
+            }
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

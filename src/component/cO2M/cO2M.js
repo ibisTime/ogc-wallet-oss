@@ -472,7 +472,6 @@ export default class CO2M extends React.Component {
     render() {
         const { label, field, readonly, hidden, title, list, inline,
             options, selectedRowKeys, setO2MSelect } = this.props;
-        console.log(inline);
         let layoutProps = inline ? o2mFormItemLayout : formItemLayout;
         const columns = this.getTableColumns(options);
         const dataSource = list || [];

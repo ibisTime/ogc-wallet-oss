@@ -42,16 +42,6 @@ class StarBonusIncome extends React.Component {
                 return v && `${v}(${d.symbol})`;
             }
         }, {
-            field: 'starId',
-            title: '星球名称',
-            search: true,
-            type: 'select',
-            pageCode: '640003',
-            keyName: 'id',
-            valueName: '{{name.DATA}}-{{symbol.DATA}}',
-            searchName: 'starId',
-            noVisible: true
-        }, {
             field: 'userName',
             title: '用户'
         }, {
@@ -82,7 +72,7 @@ class StarBonusIncome extends React.Component {
             title: '领取时间',
             type: 'datetime'
         }];
-        return <div className="superNode-listPage-wrapper">
+        return <div className="guessUpsDowns-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,
