@@ -79,6 +79,7 @@ class SceneAddedit extends DetailUtil {
             field: 'status',
             title: '状态',
             hidden: !this.view,
+            type: 'select',
             key: 'reward_term_status'
         }, {
             field: 'updateName',
