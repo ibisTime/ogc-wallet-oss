@@ -57,7 +57,7 @@ class StarLuckyStarMessage extends React.Component {
             field: 'totalAdjustCount',
             title: '奖池总额',
             render(v, d) {
-                return d && d.pool && moneyFormat((+(d.pool.totalAdjustCount) + (d.pool.countIn)), '', d.symbol);
+                return d && d.pool && moneyFormat(((+d.pool.totalAdjustCount) + (+d.pool.countIn)), '', d.symbol);
             }
         }, {
             field: 'totalCount',

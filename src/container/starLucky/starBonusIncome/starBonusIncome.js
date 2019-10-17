@@ -77,6 +77,7 @@ class StarBonusIncome extends React.Component {
                 this.props.buildList({
                     fields,
                     pageCode: '640051',
+                    noSelect: true,
                     searchParams: {
                         sessionId: this.code
                     },

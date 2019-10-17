@@ -77,6 +77,7 @@ class TotayScene extends React.Component {
             fields,
             rowKey: 'id',
             pageCode: '640030',
+            noSelect: true,
             searchParams: {
                 date: formatDate(new Date())
             }
