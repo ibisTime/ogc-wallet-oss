@@ -253,6 +253,7 @@ import {starLuckyStarBonusIncome} from './redux/biz/starLucky/starBonusIncome';
 import {starLuckyStarJackpotRecord} from './redux/biz/starLucky/starJackpotRecord';
 import {starLuckyStarLegacyRecords} from './redux/biz/starLucky/starLegacyRecords';
 import {starLuckyStarRecordRecord} from './redux/biz/starLucky/starRecordRecord';
+import {starLuckyTotayScene} from './redux/biz/starLucky/totayScene';
 
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
@@ -534,5 +535,6 @@ export default combineReducers({
     starLuckyStarBonusIncome,
     starLuckyStarJackpotRecord,
     starLuckyStarLegacyRecords,
-    starLuckyStarRecordRecord
+    starLuckyStarRecordRecord,
+    starLuckyTotayScene
 });

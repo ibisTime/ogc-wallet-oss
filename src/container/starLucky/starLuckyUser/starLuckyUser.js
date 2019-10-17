@@ -37,7 +37,10 @@ class StarLuckyUser extends React.Component {
     render() {
         const fields = [{
             field: 'starName',
-            title: '星球名称'
+            title: '星球名称',
+            render(v, d) {
+                return v && `${v}(${d.starSymbol})`;
+            }
         }, {
             field: 'starId',
             title: '星球名称',
@@ -48,9 +51,6 @@ class StarLuckyUser extends React.Component {
             valueName: '{{name.DATA}}-{{symbol.DATA}}',
             searchName: 'starId',
             noVisible: true
-        }, {
-            field: 'starSymbol',
-            title: '币种'
         }, {
             field: 'userId',
             title: '必中用户',

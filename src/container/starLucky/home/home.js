@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card, Row, Col, Button, Spin, message, Tag, Progress} from 'antd';
+import { Switch, Route, Link } from 'react-router-dom';
+import {Card, Row, Col, Button, Spin, message, Tag, Progress, Layout} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -12,8 +13,11 @@ import {
     setSearchData
 } from '@redux/superNode/home';
 import {listWrapper} from 'common/js/build-list';
+import TotayScene from './totayScene';
 import {showWarnMsg, dateTimeFormat, moneyFormat, formatImg} from 'common/js/util';
 import fetch from 'common/js/fetch';
+
+const { Content } = Layout;
 
 @listWrapper(
     state => ({
@@ -29,19 +33,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // ("0", "未开启"),("1", "已开启未满标"),("2","已满标");
-            nodeStatusDict: {
-                '0': '未开启',
-                '1': '正在投票',
-                '2': '已满标'
-            },
-            nodeStatusColor: {
-                '0': 'gray',
-                '1': 'blue',
-                '2': 'red'
-            },
-            bonusPoolData: [],
-            nodeData: []
+            bonusPoolData: {}
         };
     }
 
@@ -80,69 +72,61 @@ class Home extends React.Component {
     }
 
     render() {
-        const {bonusPoolData, nodeData, nodeStatusColor, nodeStatusDict} = this.state;
+        const {bonusPoolData} = this.state;
         const fields = [{
             field: 'createDatetime',
-            title: '入池时间',
-            type: 'date'
+            title: '用户'
         }, {
             field: 'remark',
-            title: '业务类型'
+            title: '数额'
         }, {
             field: 'symbol',
             title: '币种'
         }, {
             field: 'count',
-            title: '数额',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
-            }
+            title: '参与时间',
+            type: 'datetime'
         }];
         return (
-            <div></div>
-        );
-    }
-}
-
-export default Home;
-
-/*
-<div className="superNodeHome-wrapper">
+            <div className="guessUpsDownsHome-wrapper">
                 <div className="homeTop">
                     <div className="homeTop-left">
-                        <div className="homeTop-left-tit">超级节点分红池</div>
+                        <div className="homeTop-left-tit">地球（HD）奖池</div>
                         <div className="homeTop-left-item-wrap">
-                            {
-                                bonusPoolData.length > 0 && bonusPoolData.map((item) => (
-                                    <div className="homeTop-left-item" key={item.id}>
-                                        <div className="item-logo"><img src={formatImg(item.coin.icon)}/></div>
-                                        <div className="item-con">
-                                            <p>{item.symbol}</p>
-                                            <samp>{moneyFormat(item.count, '', item.symbol)}</samp>
-                                        </div>
-                                    </div>
-                                ))
-                            }
+                            <div className="homeTop-left-item" key='1'>
+                                <div className="item-con">
+                                    <p>进池总额</p>
+                                    <samp>{bonusPoolData.inAmount}</samp>
+                                </div>
+                            </div>
+                            <div className="homeTop-left-item" key='2'>
+                                <div className="item-con">
+                                    <p>出池总额</p>
+                                    <samp>{bonusPoolData.outAmount}</samp>
+                                </div>
+                            </div>
+                            <div className="homeTop-left-item" key='3'>
+                                <div className="item-con">
+                                    <p>余额</p>
+                                    <samp>{bonusPoolData.amount}</samp>
+                                </div>
+                            </div>
                         </div>
                         <div className="homeTop-left-bottom"></div>
                     </div>
                     <div className="homeTop-right">
-                        <div className="superNode-title-wrap">
-                            <p>实时入池记录</p>
-                            <samp onClick={() => {
-                                this.props.history.push(`/superNode/bonusPool`);
-                            }}>查看更多</samp>
+                        <div className="guessUpsDowns-title-wrap">
+                            <p>实时参与记录</p>
                         </div>
                         <div className="homeTop-right-table">
                             {
                                 this.props.buildList({
                                     fields,
-                                    pageCode: 610670,
-                                    rowKey: 'id',
+                                    pageCode: 620017,
                                     noPagination: true,
                                     noSelect: true,
                                     searchParams: {
-                                        limit: 4
+                                        limit: 5
                                     }
                                 })
                             }
@@ -150,28 +134,25 @@ export default Home;
                     </div>
                 </div>
                 <div className="homeContent">
-                    <div className="superNode-title-wrap">
-                        <p>当前节点</p>
+                    <div className="guessUpsDowns-title-wrap">
+                        <p>今日场次</p>
+                        <samp onClick={() => {
+                            this.props.history.push(`/guessUpsDowns/scene-page?type=1`);
+                        }}>查看更多</samp>
                     </div>
-                    <div className="homeContent-item-wrap">
-                        {
-                            nodeData.length > 0 && nodeData.map((item) => (
-                                <div className="homeContent-item" key={item.code}>
-                                    <div className={item.status === '1' ? 'wrap ing' : 'wrap'}>
-                                        <div className="homeContent-top">
-                                            {item.orderNo}号节点<Tag color={nodeStatusColor[item.status]}>{nodeStatusDict[item.status]}</Tag>
-                                        </div>
-                                        <div className="homeContent-con">
-                                            <i className={item.status !== '2' ? '' : 'hidden'}>剩余 </i>{this.nodeNowAmount(item)}，<i>已投{item.sellRate * 100}%</i>
-                                        </div>
-                                        <div className="homeContent-progress">
-                                            <Progress percent={item.sellRate * 100} showInfo={false} strokeWidth={4} strokeColor="#737DFF"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
+                    <div className="guessUpsDownsBonusPool-section">
+                        <Layout>
+                            <Content>
+                                <Switch>
+                                    <Route path='/starLucky' exact component={TotayScene}></Route>
+                                </Switch>
+                            </Content>
+                        </Layout>
                     </div>
                 </div>
             </div>
-* */
+        );
+    }
+}
+
+export default Home;

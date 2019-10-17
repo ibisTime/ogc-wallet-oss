@@ -34,11 +34,16 @@ class StarLuckyStarMessage extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        sessionStorage.removeItem('starName');
+        sessionStorage.removeItem('starSymbol');
     }
     render() {
         const fields = [{
             field: 'name',
-            title: '名称'
+            title: '星球名称',
+            render(v, d) {
+                return v && `${v}(${d.symbol})`;
+            }
         }, {
             field: 'symbol',
             title: '币种',
@@ -46,7 +51,14 @@ class StarLuckyStarMessage extends React.Component {
             data: getCoinList(),
             keyName: 'key',
             valueName: 'key',
-            search: true
+            search: true,
+            noVisible: true
+        }, {
+            field: 'a',
+            title: '奖池总额'
+        }, {
+            field: 'createrName1',
+            title: '发放总额'
         }, {
             field: 'createDatetime',
             title: '加入时间',
@@ -83,18 +95,21 @@ class StarLuckyStarMessage extends React.Component {
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
+                                sessionStorage.setItem('starName', rowKeys[0].name);
                                 this.props.history.push(`/starLucky/starJackpot?symbol=${rowKeys[0].symbol}`);
                             }
                         }
                     }, {
                         code: 'starConfiguration',
                         name: '配置管理',
-                        handler: (selectedRowKeys) => {
+                        handler: (selectedRowKeys, rowKeys) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
+                                sessionStorage.setItem('starName', rowKeys[0].name);
+                                sessionStorage.setItem('starSymbol', rowKeys[0].symbol);
                                 this.props.history.push(`/starLucky/starConfiguration?code=${selectedRowKeys[0]}`);
                             }
                         }

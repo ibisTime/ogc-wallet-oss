@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/starLucky/starRules';
+} from '@redux/biz/starLucky/totayScene';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -21,7 +21,7 @@ import {
 
 @listWrapper(
     state => ({
-        ...state.starLuckyStarRules,
+        ...state.starLuckyTotayScene,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -29,37 +29,36 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class StarRules extends React.Component {
+class TotayScene extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
     }
     render() {
         const fields = [{
-            field: 'name',
-            title: '星球名称'
-        }, {
-            field: 'starId',
+            field: 'starName',
             title: '星球名称',
-            search: true,
-            type: 'select',
-            pageCode: '640003',
-            keyName: 'id',
-            valueName: '{{name.DATA}}-{{symbol.DATA}}',
-            searchName: 'starId',
-            noVisible: true
-        }, {
-            field: 'rulesName',
-            title: '规则名称',
             render(v, d) {
-                return d && `${d.symbol}第${d.batch}场`;
+                return v && `${v}(${d.symbol})`;
             }
+        }, {
+            field: 'batch',
+            title: '场次'
+        }, {
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'session_status'
+        }, {
+            field: 'date',
+            title: '场次日期',
+            type: 'date'
         }, {
             field: 'startTime',
             title: '开始时间'
         }, {
             field: 'endTime',
-            title: '结束时间'
+            title: '参与结束时间'
         }, {
             field: 'openDatetime',
             title: '开奖时间'
@@ -75,28 +74,11 @@ class StarRules extends React.Component {
                 this.props.buildList({
                     fields,
                     rowKey: 'id',
-                    pageCode: '640025',
-                    noSelect: true,
-                    searchParams: {
-                        starId: this.code
-                    },
-                    buttons: [{
-                        code: 'goBack',
-                        name: '返回',
-                        handler: () => {
-                            window.history.go(-1);
-                        }
-                    }, {
-                        code: 'editAll',
-                        name: '配置规则',
-                        handler: () => {
-                            this.props.history.push(`/starLucky/starRules/addedit?starId=${this.code}`);
-                        }
-                    }]
+                    pageCode: '640030'
                 })
             }
         </div>;
     }
 }
 
-export default StarRules;
+export default TotayScene;

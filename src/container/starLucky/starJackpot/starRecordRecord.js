@@ -26,21 +26,28 @@ class StarRecordRecord extends React.Component {
     constructor(props) {
         super(props);
         this.buttons = [{
-            code: 'export',
-            name: '导出'
-        }, {
             code: 'goBack',
             name: '返回',
             check: false,
             handler: () => {
                 this.props.history.go(-1);
             }
+        }, {
+            code: 'export',
+            name: '导出'
         }];
         this.poolId = getQueryString('poolId', this.props.location.search);
         this.direction = getQueryString('direction', this.props.location.search);
+        this.starName = sessionStorage.getItem('starName') || '';
     }
     render() {
         const fields = [{
+            field: 'name',
+            title: '星球名称',
+            render: (v, d) => {
+                return this.starName && `${this.starName}(${d.symbol})`;
+            }
+        }, {
             field: 'symbol',
             title: '币种',
             type: 'select',
@@ -51,8 +58,9 @@ class StarRecordRecord extends React.Component {
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
-            render: (v, data) => v,
-            search: true
+            render: (v) => v,
+            search: true,
+            noVisible: true
         }, {
             field: 'bizType',
             title: '业务类型'

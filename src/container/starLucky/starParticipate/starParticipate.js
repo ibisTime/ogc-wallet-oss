@@ -37,7 +37,10 @@ class StarParticipate extends React.Component {
     render() {
         const fields = [{
             field: 'name',
-            title: '星球名称'
+            title: '星球名称',
+            render(v, d) {
+                return v && `${v}(${d.symbol})`;
+            }
         }, {
             field: 'starId',
             title: '星球名称',

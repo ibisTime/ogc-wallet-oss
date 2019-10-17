@@ -46,6 +46,7 @@ class StarJackpot extends React.Component {
     constructor(props) {
         super(props);
         this.symbol = getQueryString('symbol', this.props.location.search);
+        this.starName = sessionStorage.getItem('starName') || '';
         this.state = {
             ...this.state,
             visible: false,
@@ -79,13 +80,25 @@ class StarJackpot extends React.Component {
     };
     render() {
         const fields = [{
+            field: 'name',
+            title: '星球名称',
+            render: (v, d) => {
+                return this.starName && `${this.starName}(${d.symbol})`;
+            }
+        }, {
             field: 'symbol',
             title: '币种',
             type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
-            valueName: 'key',
-            search: true
+            pageCode: '802005',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            render: (v) => v,
+            search: true,
+            noVisible: true
         }, {
             field: 'count',
             title: '余额',
@@ -116,6 +129,9 @@ class StarJackpot extends React.Component {
             render(v, d) {
                 return v && moneyFormat(v, '', d.symbol);
             }
+        }, {
+            field: 'createrName',
+            title: '操作人'
         }];
         const { getFieldDecorator } = this.props.form;
         return (

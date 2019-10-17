@@ -33,9 +33,17 @@ class StarConfiguration extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.starName = sessionStorage.getItem('starName') || '';
+        this.starSymbol = sessionStorage.getItem('starSymbol') || '';
     }
     render() {
         const fields = [{
+            field: 'name',
+            title: '星球名称',
+            render: () => {
+                return this.starName && `${this.starName}(${this.starSymbol})`;
+            }
+        }, {
             field: 'remark',
             title: '配置'
         }, {

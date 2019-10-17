@@ -26,22 +26,26 @@ class StarLegacyRecords extends React.Component {
     constructor(props) {
         super(props);
         this.buttons = [{
-            code: 'export',
-            name: '导出'
-        }, {
             code: 'goBack',
             name: '返回',
             check: false,
             handler: () => {
                 this.props.history.go(-1);
             }
+        }, {
+            code: 'export',
+            name: '导出'
         }];
         this.poolId = getQueryString('poolId', this.props.location.search);
+        this.starName = sessionStorage.getItem('starName') || '';
     }
     render() {
         const fields = [{
-            field: 'symbol',
-            title: '币种'
+            field: 'name',
+            title: '星球名称',
+            render: (v, d) => {
+                return this.starName && `${this.starName}(${d.symbol})`;
+            }
         }, {
             field: 'count',
             title: '遗留数量',

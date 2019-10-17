@@ -29,6 +29,18 @@ export const formItemLayout = {
         sm: {span: 16}
     }
 };
+
+export const o2mFormItemLayout = {
+    labelCol: {
+        xs: {span: 2},
+        sm: {span: 2}
+    },
+    wrapperCol: {
+        xs: {span: 20},
+        sm: {span: 20}
+    }
+};
+
 export const tailFormItemLayout = {
     wrapperCol: {
         xs: {

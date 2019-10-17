@@ -20,6 +20,7 @@ class StarRulesAddedit extends DetailUtil {
             title: '星球规则',
             type: 'o2m',
             required: true,
+            inline: true,
             options: {
                 add: true,
                 edit: true,

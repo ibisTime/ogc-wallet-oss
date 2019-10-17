@@ -33,11 +33,42 @@ class StarQuery extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.origin = getQueryString('origin', this.props.location.search);
+        if(this.origin !== 'home') {
+            this.buttons = [{
+                code: 'starParticipate',
+                name: '参与记录',
+                handler: (selectedRowKeys) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/starLucky/starParticipate?code=${selectedRowKeys[0]}`);
+                    }
+                }
+            }, {
+                code: 'starBonusIncome',
+                name: '奖金收益',
+                handler: (selectedRowKeys) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/starLucky/starBonusIncome?code=${selectedRowKeys[0]}`);
+                    }
+                }
+            }];
+        }
     }
     render() {
         const fields = [{
             field: 'starName',
-            title: '星球名称'
+            title: '星球名称',
+            render(v, d) {
+                return v && `${v}(${d.symbol})`;
+            }
         }, {
             field: 'starId',
             title: '星球名称',
@@ -82,31 +113,7 @@ class StarQuery extends React.Component {
                     fields,
                     rowKey: 'id',
                     pageCode: '640030',
-                    buttons: [{
-                        code: 'starParticipate',
-                        name: '参与记录',
-                        handler: (selectedRowKeys) => {
-                            if (!selectedRowKeys.length) {
-                                showWarnMsg('请选择记录');
-                            } else if (selectedRowKeys.length > 1) {
-                                showWarnMsg('请选择一条记录');
-                            } else {
-                                this.props.history.push(`/starLucky/starParticipate?code=${selectedRowKeys[0]}`);
-                            }
-                        }
-                    }, {
-                        code: 'starBonusIncome',
-                        name: '奖金收益',
-                        handler: (selectedRowKeys) => {
-                            if (!selectedRowKeys.length) {
-                                showWarnMsg('请选择记录');
-                            } else if (selectedRowKeys.length > 1) {
-                                showWarnMsg('请选择一条记录');
-                            } else {
-                                this.props.history.push(`/starLucky/starBonusIncome?code=${selectedRowKeys[0]}`);
-                            }
-                        }
-                    }]
+                    buttons: this.buttons
                 })
             }
         </div>;

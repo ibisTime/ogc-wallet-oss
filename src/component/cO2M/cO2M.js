@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Button, Table } from 'antd';
 import { noop, isUndefined, dateTimeFormat, dateFormat, monthFormat,
     moneyFormat, tempString, showWarnMsg, isFunc } from 'common/js/util';
-import { formItemLayout, MONTH_FORMAT, PIC_PREFIX } from 'common/js/config';
+import { formItemLayout, o2mFormItemLayout, MONTH_FORMAT, PIC_PREFIX } from 'common/js/config';
 import cityData from 'common/js/lib/city';
 import fetch from 'common/js/fetch';
 import { getWorkbook } from 'common/js/xlsx-util';
@@ -472,7 +472,8 @@ export default class CO2M extends React.Component {
     render() {
         const { label, field, readonly, hidden, title, list, inline,
             options, selectedRowKeys, setO2MSelect } = this.props;
-        let layoutProps = inline ? {} : formItemLayout;
+        console.log(inline);
+        let layoutProps = inline ? o2mFormItemLayout : formItemLayout;
         const columns = this.getTableColumns(options);
         const dataSource = list || [];
         let noSelect = options.noSelect;
