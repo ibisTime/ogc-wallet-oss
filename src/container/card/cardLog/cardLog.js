@@ -18,7 +18,8 @@ import {
     dateTimeFormat,
     showWarnMsg,
     getUserId,
-    showSucMsg
+    showSucMsg,
+    getQueryString
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -34,6 +35,7 @@ let currency = '';
     }
 )
 class CardLog extends React.Component {
+    code = getQueryString('code', this.props.location.search);
     render() {
         const fields = [{
             field: 'price',
@@ -67,7 +69,10 @@ class CardLog extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: '610663'
+            pageCode: '610663',
+            searchParams: {
+                cardCode: this.code
+            }
         });
     }
 }

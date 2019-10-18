@@ -76,15 +76,15 @@ class CardVolume extends React.Component {
         }, {
             field: 'createDatetime',
             title: '生成卡时间',
-            type: 'date'
+            type: 'datetime'
         }, {
             field: 'openDatetime',
             title: '查看私钥时间',
-            type: 'date'
+            type: 'datetime'
         }, {
             field: 'useDatetime',
             title: '兑换时间',
-            type: 'date'
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,
@@ -100,7 +100,7 @@ class CardVolume extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/card/cardLog?publicKey=${selectedRows[0].publicKey}`);
+                        this.props.history.push(`/card/cardLog?code=${selectedRowKeys[0]}`);
                     }
                 }
             }

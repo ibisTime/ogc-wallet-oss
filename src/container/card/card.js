@@ -37,10 +37,10 @@ class Card extends React.Component {
                 name: '首页'
             }, {
                 code: 'secretKey',
-                name: '密钥匙'
+                name: '密钥对'
             }, {
                 code: 'cardVolume',
-                name: '卡卷'
+                name: '卡券'
             }],
             // 菜单对应跳转url
             top2SubObj: {
