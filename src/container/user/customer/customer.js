@@ -76,21 +76,10 @@ class Customer extends React.Component {
         const fields = [{
             field: 'nickname',
             title: '昵称',
-            search: true
-        }, {
-            field: 'mobile',
-            title: '手机号',
+            search: true,
             render: (v, data) => {
-                return v || '暂未绑定手机号';
-            },
-            search: true
-        }, {
-            field: 'email',
-            title: '邮箱',
-            render: (v, data) => {
-                return v || '暂未绑定邮箱';
-            },
-            search: true
+                return `${v}(${data.email})`;
+            }
         }, {
             field: 'inviteCode',
             title: '邀请码'

@@ -49,8 +49,8 @@ class ArbitrationNotifier extends React.Component {
             field: 'name',
             title: '通知人'
         }, {
-            field: 'phone',
-            title: '通知手机号'
+            field: 'email',
+            title: '通知人邮箱'
         }];
         return this.props.buildList({
             fields,

@@ -57,10 +57,10 @@ class ArbitrationNotifierAddedit extends DetailUtil {
             title: '通知人',
             required: true
         }, {
-            field: 'phone',
-            title: '通知手机号',
+            field: 'email',
+            title: '通知人邮箱',
             required: true,
-            mobile: true
+            email: true
         }];
         return this.buildDetail({
             fields,

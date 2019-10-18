@@ -78,22 +78,27 @@ class userStatistics extends React.Component {
         this.menu = (
             <Menu>
                 <Menu.Item>
-                    <span onClick={e => this.coinType(['PSC'])}>
+                    <span onClick={e => this.coinType(['PSC'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
                         PSC
                     </span>
                 </Menu.Item>
                 <Menu.Item>
-                    <span onClick={e => this.coinType(['BTC'])}>
+                    <span onClick={e => this.coinType(['BTC'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
                         BTC
                     </span>
                 </Menu.Item>
                 <Menu.Item>
-                    <span onClick={e => this.coinType(['USDT'])}>
+                    <span onClick={e => this.coinType(['ETH'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
+                        ETH
+                    </span>
+                </Menu.Item>
+                <Menu.Item>
+                    <span onClick={e => this.coinType(['USDT'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
                         USDT
                     </span>
                 </Menu.Item>
                 <Menu.Item>
-                    <span onClick={e => this.coinType(['E-USDT'])}>
+                    <span onClick={e => this.coinType(['E-USDT'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
                         E-USDT
                     </span>
                 </Menu.Item>
@@ -116,7 +121,7 @@ class userStatistics extends React.Component {
             // 散取用户详情
             bulkCollectionUserInfo(this.state.code).then(data => {
                 this.setState({
-                    userName: data.withdraw.applyUserInfo.nickname + '-' + data.withdraw.applyUserInfo.loginName,
+                    userName: data.withdraw.applyUserInfo.nickname + '(' + data.withdraw.applyUserInfo.loginName + ')',
                     userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
                     userStatus: findDsct(this.state.userStatusList, data.withdraw.applyUserInfo.status),
                     userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
@@ -356,7 +361,7 @@ class userStatistics extends React.Component {
                                 </div>
                                 <span className="headerLogoTitle">申请人情况</span>
                                 <div className="applicantInfoDetail">
-                                    <span>用户姓名：{userName}（<lable style={{color: '#1791FF'}}></lable>）</span>
+                                    <span>用户姓名：{userName}</span>
                                     <br />
                                     <span>手机号/邮箱：{userMobileOrEmail} </span>
                                     <br />

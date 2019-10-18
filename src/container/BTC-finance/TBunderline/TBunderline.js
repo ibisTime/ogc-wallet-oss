@@ -50,27 +50,33 @@ class TBunderline extends React.Component {
             title: '编号',
             search: true
         }, {
-          field: 'currency',
-          title: '币种类型',
-          type: 'select',
-          pageCode: '802005',
-          params: {
-            status: '0'
-          },
-          keyName: 'symbol',
-          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-          searchName: 'symbol',
-          render: (v, data) => v,
-          search: true,
-          onChange: (v) => {
-            setTimeout(() => {
-              let clearSpan = document.querySelector('.ant-select-selection__clear');
-              clearSpan.addEventListener('click', () => {
-                currency = '';
-              });
-            }, 0);
-            currency = v;
-          }
+            field: 'currency',
+            title: '币种类型',
+            type: 'select',
+            pageCode: '802005',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            render: (v, data) => v,
+            search: true,
+            onChange: (v) => {
+                setTimeout(() => {
+                    let clearSpan = document.querySelector('.ant-select-selection__clear');
+                    clearSpan.addEventListener('click', () => {
+                        currency = '';
+                    });
+                }, 0);
+                currency = v;
+            }
+        }, {
+            field: 'bizType',
+            title: '订单类型',
+            type: 'select',
+            key: 'withdraw_biz_type',
+            search: true
         }, {
             field: 'accountName',
             title: '账号',
@@ -83,28 +89,15 @@ class TBunderline extends React.Component {
             }
         }, {
             field: 'amount',
-            title: '提现总费用',
+            title: '提现金额',
             render: (v, data) => {
-                if(data.amount) {
-                    return moneyFormat(data.amount, '', data.currency);
-                }
-            }
-        }, {
-            field: 'actualAmount',
-            title: '实际到账金额',
-            render: (v, data) => {
-                if(v) {
-                    return moneyFormat(v, '', data.currency);
-                }
+                return moneyFormat(data.amount, '', data.currency);
             }
         }, {
             field: 'fee',
             title: '手续费',
-            required: true,
             render: (v, data) => {
-                if(v) {
-                    return moneyFormat(v, '', data.currency);
-                }
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'channelType',
@@ -115,15 +108,7 @@ class TBunderline extends React.Component {
         }, {
             title: '区块链类型',
             field: 'payCardInfo'
-        },
-        //     {
-        //     field: 'bizType',
-        //     title: '划转类型',
-        //     type: 'select',
-        //     key: 'withdraw_biz_type',
-        //     search: true
-        // },
-        {
+        }, {
             title: '提现地址',
             field: 'payCardNo'
         }, {
@@ -155,30 +140,16 @@ class TBunderline extends React.Component {
         }, {
             title: '申请说明',
             field: 'applyNote'
-        },
-        // }, {
-        //     field: 'status',
-        //     title: '状态',
-        //     type: 'select',
-        //     key: 'withdraw_status',
-        //     search: true
-        // },
-            {
-            field: 'approveNote',
-            title: '审核意见'
         }, {
-            field: 'approveUser',
-            title: '审核人',
-            render: (v, data) => {
-                return data.approveUserInfo ? data.approveUserInfo.loginName : '';
+            title: '系统风险初判',
+            field: 'isWarnning',
+            render: (v) => {
+                if(v) {
+                    return '高风险';
+                }else {
+                    return '低风险';
+                }
             }
-        }, {
-            field: 'approveDatetime',
-            title: '审核时间',
-            type: 'date',
-            rangedate: ['approveDateStart', 'approveDateEnd'],
-            render: dateTimeFormat,
-            search: true
         }];
         return this.props.buildList({
             fields,
