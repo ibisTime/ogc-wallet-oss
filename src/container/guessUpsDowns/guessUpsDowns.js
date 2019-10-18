@@ -44,13 +44,17 @@ class GuessUpsDowns extends React.Component {
             }, {
                 code: 'robot',
                 name: '机器人'
+            }, {
+                code: 'configuration',
+                name: '规则配置'
             }],
             // 菜单对应跳转url
             top2SubObj: {
                 'home': '/guessUpsDowns',
                 'quotation': '/guessUpsDowns/quotation',
                 'scene': '/guessUpsDowns/scene',
-                'robot': '/guessUpsDowns/robot'
+                'robot': '/guessUpsDowns/robot',
+                'configuration': '/guessUpsDowns/configuration'
             }
         };
     }

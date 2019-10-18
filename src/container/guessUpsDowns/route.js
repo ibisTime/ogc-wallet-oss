@@ -61,6 +61,14 @@ const ROUTES = [
     {
         path: '/guessUpsDowns/robot-accountHistory',
         component: asyncComponent(() => import('container/guessUpsDowns/robot/robot-accountWater/robot-accountHistory'))
+    },
+    {
+        path: '/guessUpsDowns/configuration',
+        component: asyncComponent(() => import('container/guessUpsDowns/guessConfiguration/guessConfiguration'))
+    },
+    {
+        path: '/guessUpsDowns/configuration/addedit',
+        component: asyncComponent(() => import('container/guessUpsDowns/guessConfiguration/guessConfiguration-addedit'))
     }
 ];
 

@@ -291,7 +291,20 @@
   border-bottom: 2px solid #1890ff;
 }
 
-.guessUpsDowns-listPage-wrapper-tab-box{
+.guessUpsDowns-listPage-wrapper .superNode-listPage-header {
+  margin-bottom: 30px;
+}
+.guessUpsDowns-listPage-wrapper .superNode-listPage-header span{
+  padding: 10px 20px 15px;
+  color: #333;
+  font-size: 16px;
+  margin-right: 30px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.guessUpsDowns-listPage-wrapper .superNode-listPage-header .set_config{
+  color: #1890ff;
+  border-color: #1890ff;
 }
 
 .gray-btn{

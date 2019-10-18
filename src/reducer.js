@@ -304,6 +304,7 @@ import {GuessUpsDownsRobot} from './redux/guessUpsDowns/robot';
 import {robotAccountWater} from './redux/guessUpsDowns/robotAccountWater';
 import {robotRecentWater} from './redux/guessUpsDowns/robotRecentWater';
 import {robotHistoryWater} from './redux/guessUpsDowns/robotHistoryWater';
+import {GuessConfiguration} from './redux/guessUpsDowns/guessConfiguration';
 
 export default combineReducers({
     user,
@@ -537,5 +538,6 @@ export default combineReducers({
     GuessUpsDownsRobot,
     robotAccountWater,
     robotRecentWater,
-    robotHistoryWater
+    robotHistoryWater,
+    GuessConfiguration
 });
