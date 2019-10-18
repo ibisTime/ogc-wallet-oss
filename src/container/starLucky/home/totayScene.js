@@ -17,7 +17,8 @@ import {
     showSucMsg,
     dateTimeFormat,
     getQueryString,
-    formatDate
+    formatDate,
+    dateFormat
 } from 'common/js/util';
 
 @listWrapper(
@@ -51,18 +52,23 @@ class TotayScene extends React.Component {
             type: 'select',
             key: 'session_status'
         }, {
-            field: 'date',
-            title: '场次日期',
-            type: 'date'
-        }, {
             field: 'startTime',
-            title: '开始时间'
+            title: '开始时间',
+            render(v, d) {
+                return v && `${dateFormat(d.date)} ${v}:00:00`;
+            }
         }, {
             field: 'endTime',
-            title: '参与结束时间'
+            title: '参与结束时间',
+            render(v, d) {
+                return v && `${dateFormat(d.date)} ${v}:00:00`;
+            }
         }, {
             field: 'openDatetime',
-            title: '开奖时间'
+            title: '开奖时间',
+            render(v, d) {
+                return v && `${dateFormat(d.date)} ${v}:00:00`;
+            }
         }, {
             field: 'fitRate',
             title: '中奖人数比例'
