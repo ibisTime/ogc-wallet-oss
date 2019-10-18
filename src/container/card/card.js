@@ -93,7 +93,7 @@ class Card extends React.Component {
     }
 
     getContent() {
-        let rightCls = 'right-layout full-right-content';
+        let rightCls = 'right-layout full-right-content superNode-wrapper';
         let props = {
         };
         if (this.props.location.pathname === '/') {
