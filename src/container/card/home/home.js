@@ -74,7 +74,7 @@ class Home extends React.Component {
         }, {
             field: 'createDatetime',
             title: '生成卡时间',
-            type: 'date'
+            type: 'datetime'
         }];
         return (
             <div className="superNodeHome-wrapper">

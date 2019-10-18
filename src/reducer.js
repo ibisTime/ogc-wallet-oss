@@ -237,7 +237,7 @@ import {storeShopLabels} from './redux/biz/store/shopLabels';
 import {BTCFinanceWithdrawWarn} from './redux/BTC-finance/withdrawWarn/withdrawWarn';
 import {rightsInterestsRules} from './redux/rightsInterests/rules/rules';
 
-// 卡卷
+// 卡券
 import {CardHome} from './redux/card/home';
 import {CardSecretKey} from './redux/card/secretKey';
 import {CardCardVolume} from './redux/card/cardVolume';
@@ -457,7 +457,7 @@ export default combineReducers({
     BTCFinanceWithdrawWarn,
     rightsInterestsRules,
     storeShopLabels,
-    // 卡卷
+    // 卡券
     CardHome,
     CardSecretKey,
     CardCardVolume,
