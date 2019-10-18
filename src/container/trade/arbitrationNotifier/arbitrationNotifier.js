@@ -25,6 +25,22 @@ import {dateTimeFormat} from 'common/js/util';
 class ArbitrationNotifier extends React.Component {
     render() {
         const fields = [{
+            field: 'type',
+            title: '类型',
+            type: 'select',
+            data: [{
+                key: '0',
+                value: '申请通知人'
+            }, {
+                key: '1',
+                value: '广播通知人'
+            }, {
+                key: '2',
+                value: '预警通知人'
+            }],
+            keyName: 'key',
+            valueName: 'value'
+        }, {
             title: '通知时间',
             render: (v, data) => {
                 return data ? data.startDate + '点-' + data.endDate + '点' : '';
@@ -40,11 +56,7 @@ class ArbitrationNotifier extends React.Component {
             fields,
             rowKey: 'id',
             deleteCode: '802891',
-            pageCode: '802895',
-            searchParams: {
-                // parentKey: 'zc_sms_notice'
-                type: 1
-            }
+            pageCode: '802895'
         });
     }
 }

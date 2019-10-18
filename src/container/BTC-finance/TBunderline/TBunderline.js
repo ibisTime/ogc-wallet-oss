@@ -21,6 +21,7 @@ import {
     showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
+import { getDictList } from 'api/dict';
 
 let currency = '';
 @listWrapper(
@@ -36,8 +37,11 @@ let currency = '';
 class TBunderline extends React.Component {
       componentDidMount() {
         let clearParams = document.getElementById('clearParams');
-        clearParams.addEventListener('click', () => {
-          currency = '';
+            clearParams.addEventListener('click', () => {
+            currency = '';
+        });
+        getDictList({ parentKey: 'withdraw_biz_type' }).then(data => {
+            console.log('withdraw_biz_type', data);
         });
       }
     render() {
@@ -111,13 +115,15 @@ class TBunderline extends React.Component {
         }, {
             title: '区块链类型',
             field: 'payCardInfo'
-        }, {
-            field: 'bizType',
-            title: '划转类型',
-            type: 'select',
-            key: 'withdraw_biz_type',
-            search: true
-        }, {
+        },
+        //     {
+        //     field: 'bizType',
+        //     title: '划转类型',
+        //     type: 'select',
+        //     key: 'withdraw_biz_type',
+        //     search: true
+        // },
+        {
             title: '提现地址',
             field: 'payCardNo'
         }, {
@@ -179,7 +185,8 @@ class TBunderline extends React.Component {
             pageCode: '802355',
             searchParams: {
                 currency,
-                status: '1'
+                status: '1',
+                bizType: 'withdraw'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {

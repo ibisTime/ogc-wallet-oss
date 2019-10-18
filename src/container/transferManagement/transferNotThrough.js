@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/BTC-finance/TBunderline/TBunderline';
+} from '@redux/transferManagement/transferNotThrough';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -25,7 +25,7 @@ import fetch from 'common/js/fetch';
 let currency = '';
 @listWrapper(
     state => ({
-        ...state.BTCFinanceTBunderline,
+        ...state.transferNotThrough,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -33,40 +33,40 @@ let currency = '';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class TBunderline extends React.Component {
-      componentDidMount() {
+class transferNotThrough extends React.Component {
+    componentDidMount() {
         let clearParams = document.getElementById('clearParams');
         clearParams.addEventListener('click', () => {
-          currency = '';
+            currency = '';
         });
-      }
+    }
     render() {
         const fields = [{
             field: 'code',
             title: '编号',
             search: true
         }, {
-          field: 'currency',
-          title: '币种类型',
-          type: 'select',
-          pageCode: '802005',
-          params: {
-            status: '0'
-          },
-          keyName: 'symbol',
-          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-          searchName: 'symbol',
-          render: (v, data) => v,
-          search: true,
-          onChange: (v) => {
-            setTimeout(() => {
-              let clearSpan = document.querySelector('.ant-select-selection__clear');
-              clearSpan.addEventListener('click', () => {
-                currency = '';
-              });
-            }, 0);
-            currency = v;
-          }
+            field: 'currency',
+            title: '币种类型',
+            type: 'select',
+            pageCode: '802005',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            render: (v, data) => v,
+            search: true,
+            onChange: (v) => {
+                setTimeout(() => {
+                    let clearSpan = document.querySelector('.ant-select-selection__clear');
+                    clearSpan.addEventListener('click', () => {
+                        currency = '';
+                    });
+                }, 0);
+                currency = v;
+            }
         }, {
             field: 'accountName',
             title: '账号',
@@ -177,7 +177,7 @@ class TBunderline extends React.Component {
             pageCode: '802355',
             searchParams: {
                 status: '2',
-                bizType: 'withdraw'
+                bizType: 'transfer'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {
@@ -226,4 +226,4 @@ class TBunderline extends React.Component {
     }
 }
 
-export default TBunderline;
+export default transferNotThrough;

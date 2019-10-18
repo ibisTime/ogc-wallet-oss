@@ -43,6 +43,7 @@ import {quantitativeAi} from './redux/quantitativeAi/quantitativeAi/quantitative
 import {quantitativeAiOrder} from './redux/quantitativeAi/quantitativeAiOrder/quantitativeAiOrder';
 import {quantitativeAiOrderIncome} from './redux/quantitativeAi/quantitativeAiOrder/quantitativeAiOrderIncome';
 import {quantitativeAiRule} from './redux/quantitativeAi/quantitativeAiRule/quantitativeAiRule';
+import {dailyReport} from './redux/flashManagement/dailyReport';
 
 /* 业务管理 */
 // 客户管理
@@ -299,6 +300,12 @@ import { timerPerformance } from './redux/timerManager/timerPerformance/timerPer
 // 散取审核
 import { userStatistics } from './redux/userStatistics/userStatistics';
 import { InUserStatistics } from './redux/userStatistics/InUserStatistics';
+// 转账管理
+import {internalTransferEx} from './redux/transferManagement/internalTransferEx';
+// 转账管理
+import {internalTransferSlt} from './redux/transferManagement/internalTransferSlt';
+// 转账管理
+import {transferNotThrough} from './redux/transferManagement/transferNotThrough';
 
 export default combineReducers({
     user,
@@ -465,7 +472,7 @@ export default combineReducers({
     OtcSurvivaLorDerOrderedit,
     OtcManageHistoricalorder,
     OtcManageComment,
-// 营销结算
+    // 营销结算
     StadySettLement,
     OtcManageHistoricalorderEdit,
     NoOrder,
@@ -525,5 +532,11 @@ export default combineReducers({
     timerMonitor,
     timerPerformance,
     userStatistics,
-    InUserStatistics
+    InUserStatistics,
+    // 闪兑管理
+    dailyReport,
+    // 内部转账管理
+    internalTransferEx,
+    internalTransferSlt,
+    transferNotThrough
 });

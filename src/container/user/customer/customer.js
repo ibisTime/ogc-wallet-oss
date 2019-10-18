@@ -352,6 +352,16 @@ class Customer extends React.Component {
                               } else {
                                   this.props.history.push(`/user/customer/identify?userId=${selectedRowKeys[0]}`);
                               }
+                          },
+                          // 修改推荐人
+                          editUserReferee: (selectedRowKeys, selectedRows) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.props.history.push(`/user/customer/referee?userId=${selectedRowKeys[0]}`);
+                              }
                           }
                       },
                       beforeSearch: (params) => {

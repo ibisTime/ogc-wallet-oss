@@ -57,7 +57,7 @@ class userStatistics extends React.Component {
             nodeTitle: [],
             nodeList: [],
             candyNodeLevels: {},
-            coinInfo: 'TOSP',
+            coinInfo: 'PSC',
             userId: this.applyUser,
             code: this.code,
             userFlow: {
@@ -78,61 +78,60 @@ class userStatistics extends React.Component {
         this.menu = (
             <Menu>
                 <Menu.Item>
-            <span onClick={e => this.coinType(['TOSP'])}>
-                TOSP
-            </span>
+                    <span onClick={e => this.coinType(['PSC'])}>
+                        PSC
+                    </span>
                 </Menu.Item>
                 <Menu.Item>
-            <span onClick={e => this.coinType(['TOS'])}>
-                TOS
-            </span>
+                    <span onClick={e => this.coinType(['BTC'])}>
+                        BTC
+                    </span>
                 </Menu.Item>
                 <Menu.Item>
-            <span onClick={e => this.coinType(['JEJU'])}>
-                JEJU
-            </span>
+                    <span onClick={e => this.coinType(['USDT'])}>
+                        USDT
+                    </span>
+                </Menu.Item>
+                <Menu.Item>
+                    <span onClick={e => this.coinType(['E-USDT'])}>
+                        E-USDT
+                    </span>
                 </Menu.Item>
             </Menu>
         );
     }
     componentDidMount() {
         // 默认显示TOSP全部的行为分布数据
-        this.sendDaysSelectList(['', 'TOSP']);
+        this.sendDaysSelectList(['', 'PSC']);
         // 流水条数统计
         flowStatistics(this.state.coinInfo, this.state.userId).then(data => {
             this.setState({
                 userFlow: data
             });
         });
-        dataDect('candy_node_level').then(data => {
+        dataDect('user_status').then(data => {
             this.setState({
-                candyNodeLevelList: data
+                userStatusList: data
             });
-            dataDect('user_status').then(data => {
+            // 散取用户详情
+            bulkCollectionUserInfo(this.state.code).then(data => {
                 this.setState({
-                    userStatusList: data
+                    userName: data.withdraw.applyUserInfo.nickname + '-' + data.withdraw.applyUserInfo.loginName,
+                    userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
+                    userStatus: findDsct(this.state.userStatusList, data.withdraw.applyUserInfo.status),
+                    userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
+                    userAmount: moneyFormat(data.withdraw.amount, '', 'ETH'),
+                    userFee: moneyFormat(data.withdraw.fee, '', 'ETH'),
+                    userActualAmount: moneyFormat(data.withdraw.actualAmount, '', 'ETH'),
+                    userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
+                    userPayCardNo: data.withdraw.payCardNo,
+                    userCurrency: data.withdraw.currency,
+                    userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', 'ETH'),
+                    userAccountNumber: data.withdraw.accountNumber
                 });
-                // 散取用户详情
-                bulkCollectionUserInfo(this.state.code).then(data => {
+                flowSelectListOrDetail(this.state.userAccountNumber, '1', 1, 2).then(data => {
                     this.setState({
-                        userName: data.withdraw.applyUserInfo.nickname + '-' + data.withdraw.applyUserInfo.loginName,
-                        userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
-                        userCandyNodeLevel: findDsct(this.state.candyNodeLevelList, data.withdraw.applyUserInfo.candyNodeLevel),
-                        userStatus: findDsct(this.state.userStatusList, data.withdraw.applyUserInfo.status),
-                        userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
-                        userAmount: moneyFormat(data.withdraw.amount, '', 'ETH'),
-                        userFee: moneyFormat(data.withdraw.fee, '', 'ETH'),
-                        userActualAmount: moneyFormat(data.withdraw.actualAmount, '', 'ETH'),
-                        userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
-                        userPayCardNo: data.withdraw.payCardNo,
-                        userCurrency: data.withdraw.currency,
-                        userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', 'ETH'),
-                        userAccountNumber: data.withdraw.accountNumber
-                    });
-                    flowSelectListOrDetail(this.state.userAccountNumber, '1', 1, 2).then(data => {
-                        this.setState({
-                            totalCount: data.totalCount
-                        });
+                        totalCount: data.totalCount
                     });
                 });
             });
@@ -295,7 +294,6 @@ class userStatistics extends React.Component {
             userName,
             coinInfo,
             userMobileOrEmail,
-            userCandyNodeLevel,
             userStatus,
             userCreateDatetime,
             userCurrency,
@@ -358,7 +356,7 @@ class userStatistics extends React.Component {
                                 </div>
                                 <span className="headerLogoTitle">申请人情况</span>
                                 <div className="applicantInfoDetail">
-                                    <span>用户姓名：{userName}（<lable style={{color: '#1791FF'}}>{userCandyNodeLevel}</lable>）</span>
+                                    <span>用户姓名：{userName}（<lable style={{color: '#1791FF'}}></lable>）</span>
                                     <br />
                                     <span>手机号/邮箱：{userMobileOrEmail} </span>
                                     <br />
@@ -511,7 +509,7 @@ class userStatistics extends React.Component {
                         {
                             userAccountNumber ? this.props.buildList({
                                 fields,
-                                pageCode: 610609,
+                                pageCode: 802327,
                                 searchParams: {
                                     accountNumber: userAccountNumber,
                                     status: '1'

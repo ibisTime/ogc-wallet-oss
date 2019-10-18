@@ -14,8 +14,21 @@ class ArbitrationNotifierAddedit extends DetailUtil {
     render() {
         const fields = [{
             field: 'type',
-            value: 1,
-            hidden: true
+            title: '类型',
+            type: 'select',
+            data: [{
+                key: '0',
+                value: '申请通知人'
+            }, {
+                key: '1',
+                value: '广播通知人'
+            }, {
+                key: '2',
+                value: '预警通知人'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            required: true
         }, {
             field: 'startDate',
             title: '开始时间',
@@ -56,17 +69,12 @@ class ArbitrationNotifierAddedit extends DetailUtil {
             view: this.view,
             addCode: '802890',
             beforeSubmit: (data) => {
-                let {pageData} = this.state;
-                // data.remark = pageData.remark;
-                // data.parentKey = 'zc_sms_notice';
-                // data.dkey = data.dvalue;
-                data.type = 1;
                 return data;
             }
         });
     }
-    }
+}
 
-    export
-    default
-    ArbitrationNotifierAddedit;
+export
+default
+ArbitrationNotifierAddedit;

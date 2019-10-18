@@ -54,12 +54,12 @@ export function bulkCollectionUserInfo(code) {
 
 // 今日已提币数量
 export function toDaysWithdrawMoneyCount(code) {
-    return fetch(610605, {code});
+    return fetch(802357, {code});
 }
 
 // 流水查询接口（今日历史组合查询）
 export function flowSelectListOrDetail(accountNumber, status, start, limit) {
-    return fetch(610609, {accountNumber, status, start, limit});
+    return fetch(802327, {accountNumber, status, start, limit});
 }
 
 // 查询用户列表

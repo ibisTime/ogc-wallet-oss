@@ -269,6 +269,11 @@ const ROUTES = [
         path: '/user/identify',
         component: asyncComponent(() => import('container/user/customer/identify'))
     },
+    // 修改推荐人
+    {
+        path: '/user/customer/referee',
+        component: asyncComponent(() => import('container/user/customer/customer-editReferee'))
+    },
     {
         path: '/user/identify/addedit',
         component: asyncComponent(() => import('container/user/customer/identify-addedit'))
@@ -988,6 +993,15 @@ const ROUTES = [
         path: '/BTC-finance/TBunderline/multiCheck',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
     },
+    // 散取通知人
+    {
+        path: '/BTC-finance/Notifier',
+        component: asyncComponent(() => import('container/trade/arbitrationNotifier/arbitrationNotifier'))
+    },
+    {
+        path: '/BTC-finance/Notifier/addedit',
+        component: asyncComponent(() => import('container/trade/arbitrationNotifier/arbitrationNotifier-addedit'))
+    },
     // 散取广播
     {
         path: '/BTC-finance/TBunderlines',
@@ -1031,7 +1045,21 @@ const ROUTES = [
         path: '/BTC-finance/broadcastfailurequery/addedit',
         component: asyncComponent(() => import('container/BTC-finance/broadcastfailurequery/TBunderline-addedit'))
     },
-
+    // 转账管理 -- 内部转账审批
+    {
+        path: '/transferMng/internalTransferEx',
+        component: asyncComponent(() => import('container/transferManagement/internalTransferEx'))
+    },
+    // 转账管理 -- 内部转账查询
+    {
+        path: '/transferMng/internalTransferSlt',
+        component: asyncComponent(() => import('container/transferManagement/internalTransferSlt'))
+    },
+    // 转账管理 -- 转账不通过查询
+    {
+        path: '/transferMng/transferNotThrough',
+        component: asyncComponent(() => import('container/transferManagement/transferNotThrough'))
+    },
     // 归集地址
     {
         path: '/BTC-finance/GJAddress',

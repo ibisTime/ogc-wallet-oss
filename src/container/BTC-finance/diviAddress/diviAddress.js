@@ -102,6 +102,16 @@ class BTCDiviAddress extends React.Component {
                           } else if (selectedRows[0].currency === 'USDT') {
                               window.open('https://omniexplorer.info/address/' + selectedRows[0].address, '_bank');
                           }
+                      },
+                      // 账户查询
+                      accountQuery: (selectedRowKeys, selectedRows) => {
+                        if (!selectedRowKeys.length) {
+                          showWarnMsg('请选择记录');
+                        } else if (selectedRowKeys.length > 1) {
+                          showWarnMsg('请选择一条记录');
+                        } else {
+                          this.props.history.push(`/user/channelDealer/accountQuery?isCDealer=1&userId=${selectedRowKeys[0]}`);
+                        }
                       }
                   }
               })

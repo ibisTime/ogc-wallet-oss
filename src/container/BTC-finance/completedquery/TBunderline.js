@@ -176,7 +176,8 @@ class TBunderline extends React.Component {
             fields,
             pageCode: '802355',
             searchParams: {
-                status: '6'
+                status: '6',
+                bizType: 'withdraw'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {

@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/BTC-finance/TBunderline/TBunderline';
+} from '@redux/transferManagement/internalTransferEx';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -21,11 +21,12 @@ import {
     showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
+import { getDictList } from 'api/dict';
 
 let currency = '';
 @listWrapper(
     state => ({
-        ...state.BTCFinanceTBunderline,
+        ...state.internalTransferEx,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -34,39 +35,42 @@ let currency = '';
     }
 )
 class TBunderline extends React.Component {
-      componentDidMount() {
+    componentDidMount() {
         let clearParams = document.getElementById('clearParams');
         clearParams.addEventListener('click', () => {
-          currency = '';
+            currency = '';
         });
-      }
+        getDictList({ parentKey: 'withdraw_biz_type' }).then(data => {
+            console.log('withdraw_biz_type', data);
+        });
+    }
     render() {
         const fields = [{
             field: 'code',
             title: '编号',
             search: true
         }, {
-          field: 'currency',
-          title: '币种类型',
-          type: 'select',
-          pageCode: '802005',
-          params: {
-            status: '0'
-          },
-          keyName: 'symbol',
-          valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-          searchName: 'symbol',
-          render: (v, data) => v,
-          search: true,
-          onChange: (v) => {
-            setTimeout(() => {
-              let clearSpan = document.querySelector('.ant-select-selection__clear');
-              clearSpan.addEventListener('click', () => {
-                currency = '';
-              });
-            }, 0);
-            currency = v;
-          }
+            field: 'currency',
+            title: '币种类型',
+            type: 'select',
+            pageCode: '802005',
+            params: {
+                status: '0'
+            },
+            keyName: 'symbol',
+            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+            searchName: 'symbol',
+            render: (v, data) => v,
+            search: true,
+            onChange: (v) => {
+                setTimeout(() => {
+                    let clearSpan = document.querySelector('.ant-select-selection__clear');
+                    clearSpan.addEventListener('click', () => {
+                        currency = '';
+                    });
+                }, 0);
+                currency = v;
+            }
         }, {
             field: 'accountName',
             title: '账号',
@@ -111,73 +115,78 @@ class TBunderline extends React.Component {
         }, {
             title: '区块链类型',
             field: 'payCardInfo'
-        }, {
-            field: 'bizType',
-            title: '划转类型',
-            type: 'select',
-            key: 'withdraw_biz_type',
-            search: true
-        }, {
-            title: '提现地址',
-            field: 'payCardNo'
-        }, {
-            field: 'applyUser',
-            title: '申请人',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            render: (v, data) => {
-                if (data.applyUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    if (data.applyUserInfo.kind === 'Q') {
-                        return data.applyUserInfo.realName + '(' + tmpl + ')';
+        },
+            //     {
+            //     field: 'bizType',
+            //     title: '划转类型',
+            //     type: 'select',
+            //     key: 'withdraw_biz_type',
+            //     search: true
+            // },
+            {
+                title: '提现地址',
+                field: 'payCardNo'
+            }, {
+                field: 'applyUser',
+                title: '申请人',
+                type: 'select',
+                pageCode: '805120',
+                keyName: 'userId',
+                valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+                searchName: 'keyword',
+                search: true,
+                render: (v, data) => {
+                    if (data.applyUserInfo) {
+                        let tmpl = data.applyUserInfo.email ? data.applyUserInfo.email : data.applyUserInfo.mobile;
+                        if (data.applyUserInfo.kind === 'Q') {
+                            return data.applyUserInfo.realName + '(' + tmpl + ')';
+                        }
+                        return data.applyUserInfo.nickname + '(' + tmpl + ')';
                     }
-                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
+                    return '';
                 }
-                return '';
-            }
-        }, {
-            field: 'applyDatetime',
-            title: '申请时间',
-            type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
-            render: dateTimeFormat,
-            search: true
-        }, {
-            title: '申请说明',
-            field: 'applyNote'
-        }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'withdraw_status',
-            search: true
-        }, {
-            field: 'approveNote',
-            title: '审核意见'
-        }, {
-            field: 'approveUser',
-            title: '审核人',
-            render: (v, data) => {
-                return data.approveUserInfo ? data.approveUserInfo.loginName : '';
-            }
-        }, {
-            field: 'approveDatetime',
-            title: '审核时间',
-            type: 'date',
-            rangedate: ['approveDateStart', 'approveDateEnd'],
-            render: dateTimeFormat,
-            search: true
-        }];
+            }, {
+                field: 'applyDatetime',
+                title: '申请时间',
+                type: 'date',
+                rangedate: ['applyDateStart', 'applyDateEnd'],
+                render: dateTimeFormat,
+                search: true
+            }, {
+                title: '申请说明',
+                field: 'applyNote'
+            },
+            // }, {
+            //     field: 'status',
+            //     title: '状态',
+            //     type: 'select',
+            //     key: 'withdraw_status',
+            //     search: true
+            // },
+            {
+                field: 'approveNote',
+                title: '审核意见'
+            }, {
+                field: 'approveUser',
+                title: '审核人',
+                render: (v, data) => {
+                    return data.approveUserInfo ? data.approveUserInfo.loginName : '';
+                }
+            }, {
+                field: 'approveDatetime',
+                title: '审核时间',
+                type: 'date',
+                rangedate: ['approveDateStart', 'approveDateEnd'],
+                render: dateTimeFormat,
+                search: true
+            }];
         return this.props.buildList({
             fields,
             pageCode: '802355',
             searchParams: {
-                status: '2',
-                bizType: 'withdraw'
+                currency,
+                status: '1',
+                bizType: 'transfer'
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {
@@ -188,7 +197,8 @@ class TBunderline extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是待审核的记录');
                     } else {
-                        this.props.history.push(`/BTC-finance/nopassquery/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                        // this.props.history.push(`/BTC-finance/TBunderline/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/BTC-finance/TBunderline/userStatistics?applyUser=${selectedRows[0].applyUser}&code=${selectedRows[0].code}`);
                     }
                 },
                 sp: (selectedRowKeys, selectedRows) => {
@@ -218,7 +228,6 @@ class TBunderline extends React.Component {
                                 }).catch(this.props.cancelFetching);
                             }
                         });
-                        // this.props.history.push(`/BTC-finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
                     }
                 }
             }

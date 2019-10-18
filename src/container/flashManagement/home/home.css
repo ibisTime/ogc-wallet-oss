@@ -1,26 +1,10 @@
-.superNode-listPage-wrapper-two {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 4px;
-    padding: 20px 0px;
+.ant-layout {
+    display: block!important;
+    /* display: flex; */
+    -ms-flex: auto;
+    /* flex: auto; */
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 0;
+    background: #f0f2f5;
 }
-.superNode-listPage-wrapper-two .tools-wrapper {
-    padding: 25px 0 20px;
-    margin: 0;
-}
-.superNode-listPage-wrapper-two .tools-wrapper .ant-btn {
-    border: 0px;
-    border-radius: 0;
-    background-color: rgba(233, 233, 233, 0.9);
-    margin-right: 20px;
-    margin-top: 0;
-}
-.superNode-listPage-wrapper-two .tools-wrapper .ant-btn span {
-    font-size: 14px;
-    font-family: PingFang-SC;
-    color: #666;
-    display: flex;
-    position: absolute;
-}
-
-

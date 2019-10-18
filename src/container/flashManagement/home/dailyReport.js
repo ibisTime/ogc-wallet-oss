@@ -8,13 +8,14 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/rules/acceptRule/acceptRule';
+} from '@redux/flashManagement/dailyReport';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat} from 'common/js/util';
+import './home.css';
 
 @listWrapper(
     state => ({
-        ...state.rulesAcceptRule,
+        ...state.dailyReport,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -44,11 +45,17 @@ class dailyReport extends React.Component {
             title: '创建时间',
             type: 'datetime'
         }];
-        return this.props.buildList({
-            fields,
-            rowKey: 'id',
-            pageCode: '620022'
-        });
+        return (
+            <div className="dailyReportTable">
+                {
+                    this.props.buildList({
+                        fields,
+                        rowKey: 'id',
+                        pageCode: '620022'
+                    })
+                }
+            </div>
+        );
     }
 }
 
