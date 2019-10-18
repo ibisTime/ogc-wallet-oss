@@ -15,7 +15,9 @@ app.use('/api', function (req, res) {
     // let url = 'http://oss.psctest.psctoken.com/api';
     
     // 涨跌幅
-    let url = 'http://120.26.6.213:1901/wu-wallet-msp/api';
+    // let url = 'http://120.26.6.213:1901/wu-wallet-msp/api';
+    // 涨跌幅测试
+    let url = 'http://api.guesstest.hichengdai.com';
 
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
