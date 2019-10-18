@@ -242,6 +242,7 @@ import {CardHome} from './redux/card/home';
 import {CardSecretKey} from './redux/card/secretKey';
 import {CardCardVolume} from './redux/card/cardVolume';
 import {CardcardLog} from './redux/card/cardLog';
+import {CardConfiguration} from './redux/card/cardConfiguration';
 
 export default combineReducers({
     user,
@@ -461,5 +462,6 @@ export default combineReducers({
     CardHome,
     CardSecretKey,
     CardCardVolume,
-    CardcardLog
+    CardcardLog,
+    CardConfiguration
 });

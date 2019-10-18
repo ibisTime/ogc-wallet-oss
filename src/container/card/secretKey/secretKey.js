@@ -135,7 +135,7 @@ class SecretKey extends React.Component {
             title: '作废时间',
             type: 'datetime'
         }];
-        return <div className="superNodeHome-wrapper">
+        return <div className="superNode-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,

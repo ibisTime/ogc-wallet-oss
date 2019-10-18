@@ -16,6 +16,14 @@ const ROUTES = [
     {
         path: '/card/cardLog',
         component: asyncComponent(() => import('container/card/cardLog/cardLog'))
+    },
+    {
+        path: '/card/configuration',
+        component: asyncComponent(() => import('container/card/cardConfiguration/cardConfiguration'))
+    },
+    {
+        path: '/card/configuration/addedit',
+        component: asyncComponent(() => import('container/card/cardConfiguration/cardConfiguration-addedit'))
     }
 ];
 

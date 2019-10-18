@@ -86,25 +86,29 @@ class CardVolume extends React.Component {
             title: '兑换时间',
             type: 'datetime'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: '610643',
-            buttons: [{
-                code: 'cardLog',
-                name: '卡券日志'
-            }],
-            btnEvent: {
-                cardLog: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/card/cardLog?code=${selectedRowKeys[0]}`);
+        return <div className="superNode-listPage-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: '610643',
+                    buttons: [{
+                        code: 'cardLog',
+                        name: '卡券日志'
+                    }],
+                    btnEvent: {
+                        cardLog: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/card/cardLog?code=${selectedRowKeys[0]}`);
+                            }
+                        }
                     }
-                }
+                })
             }
-        });
+        </div>;
     }
 }
 

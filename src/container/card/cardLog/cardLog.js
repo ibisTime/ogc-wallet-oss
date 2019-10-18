@@ -67,13 +67,24 @@ class CardLog extends React.Component {
             title: '操作时间',
             type: 'date'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: '610663',
-            searchParams: {
-                cardCode: this.code
+        return <div className="superNode-listPage-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: '610663',
+                    searchParams: {
+                        cardCode: this.code
+                    },
+                    buttons: [{
+                        code: 'goBack',
+                        name: '返回',
+                        handler() {
+                            window.history.go(-1);
+                        }
+                    }]
+                })
             }
-        });
+        </div>;
     }
 }
 

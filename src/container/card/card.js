@@ -41,12 +41,16 @@ class Card extends React.Component {
             }, {
                 code: 'cardVolume',
                 name: '卡券'
+            }, {
+                code: 'configuration',
+                name: '配置规则'
             }],
             // 菜单对应跳转url
             top2SubObj: {
                 'home': '/card',
                 'secretKey': '/card/secretKey',
-                'cardVolume': '/card/cardVolume'
+                'cardVolume': '/card/cardVolume',
+                'configuration': '/card/configuration'
             }
         };
     }

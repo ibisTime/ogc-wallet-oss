@@ -1688,6 +1688,11 @@ const ROUTES = [
     {
         path: '/integrationEcology/integrationEcology',
         component: asyncComponent(() => import('container/ecology/integrationEcology/integrationEcology/integrationEcology'))
+    },
+    // 配置修改 公共页面
+    {
+        path: '/public/publicConfiguration/addedit',
+        component: asyncComponent(() => import('container/public/configuration-addedit/configuration-addedit'))
     }
 ];
 
