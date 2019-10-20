@@ -78,6 +78,7 @@ class SecretKey extends React.Component {
                 this.setState({
                     visible: false
                 });
+                this.props.getPageData();
             }).catch(this.props.cancelFetching);
         });
     };
