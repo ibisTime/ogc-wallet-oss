@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {login} from '@redux/user';
 import './login.css';
 import loginLeft from '../../images/login-left.png';
-import loginphot from '../../images/wallt.png';
+import loginphot from '../../images/logo.png';
 
 const FormItem = Form.Item;
 
@@ -30,7 +30,7 @@ class Login extends React.Component {
                 <div className="login-wrapper">
                     <div className='login-left'><img src={loginLeft} /></div>
                     <div className="login-wrap">
-                        <div className="title"><img style={{width: '100px'}} src={loginphot} /></div>
+                        <div className="title"><img style={{width: '120px'}} src={loginphot} /></div>
                         {this.props.redirectTo ? <Redirect to={this.props.redirectTo}/> : null}
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <FormItem className="form-item">

@@ -22,7 +22,8 @@ class CategoryAddedit extends DetailUtil {
             keyName: 'dkey',
             valueName: 'dvalue',
             type: 'select',
-            readonly: this.code
+            readonly: this.code,
+            required: !this.code
         }, {
             title: '字典键',
             field: 'dkey',
