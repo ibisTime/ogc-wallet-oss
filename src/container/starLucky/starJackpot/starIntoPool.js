@@ -49,8 +49,14 @@ class StarIntoPool extends React.Component {
                     }, {
                         code: 'edit',
                         name: '修改',
-                        handler() {
-                            window.history.go(-1);
+                        handler: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/starLucky/configuration/addedit?code=${selectedRowKeys[0]}&type=type_card&cType=${selectedRows[0].ckey}`);
+                            }
                         }
                     }]
                 })
