@@ -253,6 +253,7 @@ import {starLuckyStarBonusIncome} from './redux/biz/starLucky/starBonusIncome';
 import {starLuckyStarJackpotRecord} from './redux/biz/starLucky/starJackpotRecord';
 import {starLuckyStarLegacyRecords} from './redux/biz/starLucky/starLegacyRecords';
 import {starLuckyStarRecordRecord} from './redux/biz/starLucky/starRecordRecord';
+import {starLuckyStarIntoPool} from './redux/biz/starLucky/starIntoPool';
 import {starLuckyTotayScene} from './redux/biz/starLucky/totayScene';
 
 // 归集管理
@@ -536,5 +537,6 @@ export default combineReducers({
     starLuckyStarJackpotRecord,
     starLuckyStarLegacyRecords,
     starLuckyStarRecordRecord,
-    starLuckyTotayScene
+    starLuckyTotayScene,
+    starLuckyStarIntoPool
 });

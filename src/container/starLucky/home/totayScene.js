@@ -55,19 +55,19 @@ class TotayScene extends React.Component {
             field: 'startTime',
             title: '开始时间',
             render(v, d) {
-                return v && `${dateFormat(d.date)} ${v}:00:00`;
+                return (v || v === 0) && `${dateFormat(d.date)} ${v}:00:00`;
             }
         }, {
             field: 'endTime',
             title: '参与结束时间',
             render(v, d) {
-                return v && `${dateFormat(d.date)} ${v}:00:00`;
+                return (v || v === 0) && `${dateFormat(d.date)} ${v}:00:00`;
             }
         }, {
             field: 'openDatetime',
             title: '开奖时间',
             render(v, d) {
-                return v && `${dateFormat(d.date)} ${v}:00:00`;
+                return (v || v === 0) && `${dateFormat(d.date)} ${v}:00:00`;
             }
         }, {
             field: 'fitRate',

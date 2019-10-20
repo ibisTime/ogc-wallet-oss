@@ -11,6 +11,9 @@ class StarUserAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.starId = getQueryString('starId', this.props.location.search);
+        this.starName = sessionStorage.getItem('starName') || '';
+        this.starSymbol = sessionStorage.getItem('starSymbol') || '';
         this.view = !!getQueryString('v', this.props.location.search);
     }
 
@@ -18,19 +21,15 @@ class StarUserAddedit extends DetailUtil {
         const fields = [{
             field: 'starId',
             title: '星球',
-            type: 'select',
-            pageCode: '640003',
-            keyName: 'id',
-            valueName: '{{name.DATA}}-{{symbol.DATA}}',
-            searchName: 'starId',
-            required: true
+            value: `${this.starName}-${this.starSymbol}`,
+            readonly: true
         }, {
             field: 'userId',
             title: '必中用户',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             searchName: 'keyword',
             required: true
         }];
@@ -39,7 +38,11 @@ class StarUserAddedit extends DetailUtil {
             code: this.code,
             view: this.view,
             addCode: '640010',
-            deleteCode: '640011'
+            deleteCode: '640011',
+            beforeSubmit: (params) => {
+                params.starId = this.starId;
+                return true;
+            }
         });
     }
 }

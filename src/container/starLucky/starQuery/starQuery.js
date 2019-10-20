@@ -89,7 +89,10 @@ class StarQuery extends React.Component {
             noVisible: true
         }, {
             field: 'batch',
-            title: '场次'
+            title: '场次',
+            render(v, d) {
+                return d ? `${d.symbol} ${dateFormat(d.date)} 第${d.batch}场` : '';
+            }
         }, {
             field: 'status',
             title: '状态',
@@ -99,19 +102,19 @@ class StarQuery extends React.Component {
             field: 'startTime',
             title: '开始时间',
             render(v, d) {
-                return v && `${dateFormat(d.date)} ${v}:00:00`;
+                return (v || v === 0) && `${dateFormat(d.date)} ${v}:00:00`;
             }
         }, {
             field: 'endTime',
             title: '参与结束时间',
             render(v, d) {
-                return v && `${dateFormat(d.date)} ${v}:00:00`;
+                return (v || v === 0) && `${dateFormat(d.date)} ${v}:00:00`;
             }
         }, {
             field: 'openDatetime',
             title: '开奖时间',
             render(v, d) {
-                return v && `${dateFormat(d.date)} ${v}:00:00`;
+                return (v || v === 0) && `${dateFormat(d.date)} ${v}:00:00`;
             }
         }, {
             field: 'fitRate',

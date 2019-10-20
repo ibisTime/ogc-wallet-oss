@@ -69,9 +69,6 @@ class StarLuckyStarMessage extends React.Component {
             field: 'createDatetime',
             title: '加入时间',
             type: 'datetime'
-        }, {
-            field: 'createrName',
-            title: '操作人'
         }];
         return <div className="guessUpsDowns-listPage-wrapper">
             {
@@ -83,12 +80,14 @@ class StarLuckyStarMessage extends React.Component {
                     buttons: [{
                         code: 'luckyUser',
                         name: '必中用户',
-                        handler: (selectedRowKeys) => {
+                        handler: (selectedRowKeys, rowKeys) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
+                                sessionStorage.setItem('starName', rowKeys[0].name);
+                                sessionStorage.setItem('starSymbol', rowKeys[0].symbol);
                                 this.props.history.push(`/starLucky/starLuckyUser?code=${selectedRowKeys[0]}`);
                             }
                         }

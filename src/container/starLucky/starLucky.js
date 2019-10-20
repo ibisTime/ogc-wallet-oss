@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Icon, Dropdown, Button } from 'antd';
 import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import logo from 'component/dashboard/wallt.png';
+import logo from '../../images/logo.png';
 import { loadTxUserSign, setSelToId } from '@redux/user';
 import { setMsgList, addUserMap } from '@redux/message';
 import { clearUser, getUserId, getUserName } from 'common/js/util';
@@ -67,7 +67,7 @@ class StarLucky extends React.Component {
                 <div className="logo" onClick={() => {
                     this.props.history.push('/starLucky');
                 }}>
-                    <img style ={{width: '72%', height: '40px'}} src={logo}/>
+                    <img style ={{width: '45px', height: '45px'}} src={logo}/>
                 </div>
                 <Menu
                     theme="dark"

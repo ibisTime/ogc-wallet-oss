@@ -123,6 +123,9 @@ class Home extends React.Component {
                     <div className="homeTop-right">
                         <div className="guessUpsDowns-title-wrap">
                             <p>实时参与记录</p>
+                            <samp onClick={() => {
+                                this.props.history.push(`/starLucky/starParticipate?origin=home`);
+                            }}>查看更多</samp>
                         </div>
                         <div className="homeTop-right-table">
                             {

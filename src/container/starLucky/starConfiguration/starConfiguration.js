@@ -44,6 +44,16 @@ class StarConfiguration extends React.Component {
                 return this.starName && `${this.starName}(${this.starSymbol})`;
             }
         }, {
+            field: 'starId',
+            title: '星球名称',
+            search: true,
+            type: 'select',
+            pageCode: '640003',
+            keyName: 'id',
+            valueName: '{{name.DATA}}-{{symbol.DATA}}',
+            searchName: 'starId',
+            noVisible: true
+        }, {
             field: 'remark',
             title: '配置'
         }, {

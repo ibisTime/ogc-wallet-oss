@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use('/api', function (req, res) {
-    let url = 'http://m.stardev.hichengdai.com/api';
+    // let url = 'http://m.stardev.hichengdai.com/api';
+    let url = 'http://m.startest.hichengdai.com/api';
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
     axios.post(url, param).then((response) => {

@@ -39,6 +39,10 @@ const ROUTES = [
         path: '/starLucky/starRecordRecord',
         component: asyncComponent(() => import('container/starLucky/starJackpot/starRecordRecord'))
     },
+    {
+        path: '/starLucky/starIntoPool',
+        component: asyncComponent(() => import('container/starLucky/starJackpot/starIntoPool'))
+    },
     // 星球配置
     {
         path: '/starLucky/starConfiguration',

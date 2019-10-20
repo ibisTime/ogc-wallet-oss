@@ -52,16 +52,6 @@ class StarLuckyUser extends React.Component {
             searchName: 'starId',
             noVisible: true
         }, {
-            field: 'userId',
-            title: '必中用户',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            noVisible: true
-        }, {
             field: 'userName',
             title: '必中用户'
         }, {
@@ -90,7 +80,10 @@ class StarLuckyUser extends React.Component {
                         }
                     }, {
                         code: 'add',
-                        name: '添加'
+                        name: '添加',
+                        handler: () => {
+                            this.props.history.push(`/starLucky/starLuckyUser/addedit?starId=${this.code}`);
+                        }
                     }, {
                         code: 'delete',
                         name: '移除'

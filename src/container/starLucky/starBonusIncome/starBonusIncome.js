@@ -36,14 +36,33 @@ class StarBonusIncome extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'name',
+            field: 'starName',
             title: '星球名称',
             render(v, d) {
                 return v && `${v}(${d.symbol})`;
             }
         }, {
+            field: 'starId',
+            title: '星球名称',
+            search: true,
+            type: 'select',
+            pageCode: '640003',
+            keyName: 'id',
+            valueName: '{{name.DATA}}-{{symbol.DATA}}',
+            searchName: 'starId',
+            noVisible: true
+        }, {
             field: 'userName',
             title: '用户'
+        }, {
+            field: 'userId',
+            title: '必中用户',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
+            searchName: 'keyword',
+            noVisible: true
         }, {
             field: 'type',
             title: '奖金类型',
@@ -55,9 +74,6 @@ class StarBonusIncome extends React.Component {
             render(v, d) {
                 return v && moneyFormat(v, '', d.symbol);
             }
-        }, {
-            field: 'symbol',
-            title: '币种'
         }, {
             field: 'status',
             title: '状态',

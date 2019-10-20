@@ -86,6 +86,16 @@ class StarJackpot extends React.Component {
                 return this.starName && `${this.starName}(${d.symbol})`;
             }
         }, {
+            field: 'starId',
+            title: '星球名称',
+            search: true,
+            type: 'select',
+            pageCode: '640003',
+            keyName: 'id',
+            valueName: '{{name.DATA}}-{{symbol.DATA}}',
+            searchName: 'starId',
+            noVisible: true
+        }, {
             field: 'count',
             title: '余额',
             render(v, d) {
@@ -131,6 +141,9 @@ class StarJackpot extends React.Component {
                         buttons: [{
                             code: 'goBack',
                             name: '返回'
+                        }, {
+                            code: 'intoPool',
+                            name: '进池配置'
                         }, {
                             code: 'amountOf',
                             name: '调额'
@@ -198,6 +211,9 @@ class StarJackpot extends React.Component {
                                 } else {
                                     this.props.history.push(`/starLucky/starJackpotRecord?poolId=${selectedRowKeys[0]}`);
                                 }
+                            },
+                            intoPool: () => {
+                                this.props.history.push(`/starLucky/starIntoPool`);
                             }
                         }
                     })
