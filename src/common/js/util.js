@@ -26,13 +26,13 @@ export async function setSystem() {
   await fetch(660918, {type: 'oss_config'}).then(async ossData => {
       headLogo = ossData.head_logo;
       document.title = ossData.web_name;
+      sessionStorage.setItem('SYSTEM_CODE', ossData.system_code);
       await fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
           if(data.list[0]) {
               let $favicon = document.querySelector('link[rel="icon"]');
               let link = `http://${data.list[0].cvalue}/${headLogo}`;
               loginPic = `http://${data.list[0].cvalue}/${ossData.login_pic}`;
               webIcon = `http://${data.list[0].cvalue}/${ossData.web_icon}`;
-              console.log($favicon);
               if ($favicon !== null) {
                   $favicon.href = link;
               } else {

@@ -1,4 +1,3 @@
-import { SYSTEM_CODE } from './config';
 import cookies from 'browser-cookies';
 import axios from 'axios';
 import { clearUser, showErrMsg } from './util';
@@ -8,7 +7,7 @@ const ERR_TIME_OUT = '4';
 
 export default function fetch(code, param = {}) {
   const url = '/api';
-
+  const SYSTEM_CODE = sessionStorage.getItem('SYSTEM_CODE') || '';
   const data = {
     systemCode: SYSTEM_CODE,
     companyCode: SYSTEM_CODE,
