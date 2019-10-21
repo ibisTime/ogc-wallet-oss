@@ -434,7 +434,7 @@ export default class ListComponent extends React.Component {
     }
 
     // 获取页面初始化数据
-    getPageData = (current = this.props.pagination.current, searchParam) => {
+    getPageData = (current = this.props.pagination.current, searchParam, isdoFetching = true) => {
         if (searchParam) {
             this.props.setSearchParam(searchParam);
         } else {
@@ -450,7 +450,9 @@ export default class ListComponent extends React.Component {
         if (this.options.beforeSearch) {
             searchParam = this.options.beforeSearch(searchParam);
         }
-        this.props.doFetching();
+        if(isdoFetching) {
+            this.props.doFetching();
+        }
         const {pagination} = this.props;
         let limit = pagination.pageSize;
         if(searchParam.limit) {

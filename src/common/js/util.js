@@ -20,14 +20,23 @@ export function setUser({ userId, token }) {
 }
 
 export function setSystem() {
+  fetch(660918, {type: '660918'}).then(data => {
+    console.log(data);
+  });
   fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
-    sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
+      if(data.list[0]) {
+          sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
+      }
   });
   fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
-    sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+      if(data.list[0]) {
+          sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+      }
   });
   fetch(625013, {key: 'igo_oss_url', start: 1, limit: 10}).then(data => {
-    sessionStorage.setItem('apiLoginUrl', data.list[0].value);
+      if(data.list[0]) {
+          sessionStorage.setItem('apiLoginUrl', data.list[0].value);
+      }
   });
 }
 
@@ -221,6 +230,9 @@ export function H0M0S0Date(date, days, format) {
  * @param noZero 是否去零
  */
 export function moneyFormat(money, format, coin, noComma = false, noZero = false) {
+  if(+money === 0) {
+    return 0;
+  }
     let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
     if (isNaN(money)) {
         return '-';

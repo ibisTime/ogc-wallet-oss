@@ -79,7 +79,6 @@ class SupplyAddress extends React.Component {
       field: 'balance',
       title: '余额',
       render: (v, data) => {
-        console.log(data.symbol);
         // moneyFormat(v, '', 'BTC');
         return moneyFormat(v.toString(), '', data.symbol);
       }

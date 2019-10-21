@@ -104,7 +104,8 @@ export default class DetailComp extends React.Component {
   getDetailInfo() {
     this.setCoinDate();
     let key = this.options.key || 'code';
-    let param = {[key]: this.options.code};
+    let detailParams = this.options.detailParams ? this.options.detailParams : {};
+    let param = {[key]: this.options.code, ...detailParams};
     this.options.beforeDetail && this.options.beforeDetail(param);
     return fetch(this.options.detailCode, param);
   }
@@ -380,6 +381,7 @@ export default class DetailComp extends React.Component {
       title: item.title,
       hidden: item.hidden,
       type: item.type,
+      tipEle: item.tipEle,
       field: item.field,
       label: this.getLabel(item),
       readonly: item.readonly,

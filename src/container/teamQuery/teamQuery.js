@@ -68,7 +68,6 @@ class teamQuery extends React.Component {
         this.setState({
             isShowInfo: true
         });
-        console.log(value);
         if(!treeKey) {
             if(value) {
                 groupUserInfo(value).then(data => {

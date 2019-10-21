@@ -241,6 +241,22 @@ import {OtcSurvivaLorDer} from './redux/otcmanage/survivalorder';
 import {OtcManageHistoricalorder} from './redux/otcmanage/historicalorder';
 import {OtcManageHistoricalorderEdit} from './redux/otcmanage/historicalorder-orderedit';
 import {OtcManageComment} from './redux/otcmanage/comment';
+
+// 星球抽奖
+import {starLuckyStarMessage} from './redux/biz/starLucky/starMessage';
+import {starLuckyStarLuckyUser} from './redux/biz/starLucky/starLuckyUser';
+import {starLuckyStarJackpot} from './redux/biz/starLucky/starJackpot';
+import {starLuckyStarConfiguration} from './redux/biz/starLucky/starConfiguration';
+import {starLuckyStarRules} from './redux/biz/starLucky/starRules';
+import {starLuckyStarQuery} from './redux/biz/starLucky/starQuery';
+import {starLuckyStarParticipate} from './redux/biz/starLucky/starParticipate';
+import {starLuckyStarBonusIncome} from './redux/biz/starLucky/starBonusIncome';
+import {starLuckyStarJackpotRecord} from './redux/biz/starLucky/starJackpotRecord';
+import {starLuckyStarLegacyRecords} from './redux/biz/starLucky/starLegacyRecords';
+import {starLuckyStarRecordRecord} from './redux/biz/starLucky/starRecordRecord';
+import {starLuckyStarIntoPool} from './redux/biz/starLucky/starIntoPool';
+import {starLuckyTotayScene} from './redux/biz/starLucky/totayScene';
+
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
 import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
@@ -313,6 +329,22 @@ import {legalTenderHistory} from './redux/biz/quotation/legalTenderHistory';
 import {quotationCSDHistory} from './redux/biz/quotation/quotationCDSHistory';
 import {qutationETHHistory} from './redux/biz/quotation/qutationETHHistory';
 import {bizCoin} from './redux/coinList/coinList';
+
+// 超级节点
+import {GuessUpsDownsHome} from './redux/guessUpsDowns/home';
+import {GuessUpsDownsTotayScene} from './redux/guessUpsDowns/totayScene';
+import {GuessUpsDownsQuotation} from './redux/guessUpsDowns/quotation';
+import {GuessUpsDownsQuotationShortTerm} from './redux/guessUpsDowns/quotationShortTerm';
+import {GuessUpsDownsQuotationHistory} from './redux/guessUpsDowns/quotationHistory';
+import {GuessUpsDownsScene} from './redux/guessUpsDowns/scene';
+import {GuessUpsDownsScenePage} from './redux/guessUpsDowns/scenePage';
+import {GuessUpsDownsScenePreview} from './redux/guessUpsDowns/scenePreview';
+import {GuessUpsDownsSceneRecord} from './redux/guessUpsDowns/sceneRecord';
+import {GuessUpsDownsRobot} from './redux/guessUpsDowns/robot';
+import {robotAccountWater} from './redux/guessUpsDowns/robotAccountWater';
+import {robotRecentWater} from './redux/guessUpsDowns/robotRecentWater';
+import {robotHistoryWater} from './redux/guessUpsDowns/robotHistoryWater';
+import {GuessConfiguration} from './redux/guessUpsDowns/guessConfiguration';
 
 export default combineReducers({
     user,
@@ -547,6 +579,35 @@ export default combineReducers({
     internalTransferEx,
     internalTransferSlt,
     transferNotThrough,
+    // 猜涨跌
+    GuessUpsDownsHome,
+    GuessUpsDownsTotayScene,
+    GuessUpsDownsQuotation,
+    GuessUpsDownsQuotationShortTerm,
+    GuessUpsDownsQuotationHistory,
+    GuessUpsDownsScene,
+    GuessUpsDownsScenePage,
+    GuessUpsDownsScenePreview,
+    GuessUpsDownsSceneRecord,
+    GuessUpsDownsRobot,
+    robotAccountWater,
+    robotRecentWater,
+    robotHistoryWater,
+    GuessConfiguration,
+    // 星球抽奖
+    starLuckyStarMessage,
+    starLuckyStarLuckyUser,
+    starLuckyStarJackpot,
+    starLuckyStarConfiguration,
+    starLuckyStarRules,
+    starLuckyStarQuery,
+    starLuckyStarParticipate,
+    starLuckyStarBonusIncome,
+    starLuckyStarJackpotRecord,
+    starLuckyStarLegacyRecords,
+    starLuckyStarRecordRecord,
+    starLuckyTotayScene,
+    starLuckyStarIntoPool,
     // 基础数据管理
     legalTender,
     legalTenderHistory,
