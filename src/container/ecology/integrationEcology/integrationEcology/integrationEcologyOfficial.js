@@ -16,7 +16,8 @@ class integrationEcologyOfficial extends React.Component {
             data: [],
             urlList: {
                 'dapp_super_node': '/superNode',
-                'dapp_star': '/starLucky'
+                'dapp_star': '/starLucky',
+                'dapp_guess': '/guessUpsDowns'
             }
         };
     }
@@ -40,7 +41,7 @@ class integrationEcologyOfficial extends React.Component {
         if(item.url === '2') {
             let url = window.location.protocol + '//' + window.location.host + '/flashManagement';
             window.open(url);
-        }else if(item.url === 'dapp_super_node') {
+        }else {
             let url = '';
             if(this.state.urlList[item.url]) {
                 url = window.location.protocol + '//' + window.location.host + this.state.urlList[item.url];
