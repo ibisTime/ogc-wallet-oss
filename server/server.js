@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use('/api', function (req, res) {
     // 研发
-    let url = 'http://oss.walletdev.hichengdai.com/api';
+    let url = 'http://oss.stardev.hichengdai.com/api';
     // 测试
     // let url = 'http://oss.psctest.psctoken.com/api';
     var _body = req.body;

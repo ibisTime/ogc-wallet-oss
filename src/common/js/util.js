@@ -20,6 +20,9 @@ export function setUser({ userId, token }) {
 }
 
 export function setSystem() {
+  fetch(660918, {type: '660918'}).then(data => {
+    console.log(data);
+  });
   fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
       if(data.list[0]) {
           sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);

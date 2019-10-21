@@ -6,7 +6,6 @@ import {login} from '@redux/user';
 import './login.css';
 import loginLeft from '../../images/login-left.png';
 import loginphot from '../../images/logo.png';
-import replaceLogo from 'common/js/replaceLogo';
 
 const FormItem = Form.Item;
 

@@ -1,12 +1,8 @@
 export const SYSTEM_CODE = 'CL-STAR';
-// 七牛http上传地址
-// export const UPLOAD_URL = 'http://up.qiniup.com';
 // 七牛https上传地址
 export const UPLOAD_URL = sessionStorage.getItem('qiniuUploadDomain') + '/';
 // 七牛图片前缀
-export const PIC_PREFIX = 'http://py2ljqirg.bkt.clouddn.com/';
-// 七牛图片https前缀
-// export const PIC_PREFIX = 'https://img.adorkableisland.com/';
+export const PIC_PREFIX = `http://${sessionStorage.getItem('qiniuDomain')}/`;
 export const PIC_BASEURL_L = '?imageMogr2/auto-orient';
 // 系统userid
 export const SYS_USER = 'SYS_USER';
