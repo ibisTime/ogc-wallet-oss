@@ -26,18 +26,22 @@ export async function setSystem() {
   await fetch(660918, {type: 'oss_config'}).then(async ossData => {
       headLogo = ossData.head_logo;
       document.title = ossData.web_name;
+      sessionStorage.setItem('SYSTEM_CODE', ossData.system_code);
+      sessionStorage.setItem('webName', ossData.web_name);
       await fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
           if(data.list[0]) {
               let $favicon = document.querySelector('link[rel="icon"]');
               let link = `http://${data.list[0].cvalue}/${headLogo}`;
               loginPic = `http://${data.list[0].cvalue}/${ossData.login_pic}`;
               webIcon = `http://${data.list[0].cvalue}/${ossData.web_icon}`;
-              console.log($favicon);
               if ($favicon !== null) {
+                  $favicon.rel = 'icon';
+                  $favicon.type = 'image/x-icon';
                   $favicon.href = link;
               } else {
                   $favicon = document.createElement('link');
                   $favicon.rel = 'icon';
+                  $favicon.type = 'image/x-icon';
                   $favicon.href = link;
                   document.head.appendChild($favicon);
               }
@@ -65,6 +69,7 @@ export function clearUser() {
   cookies.erase('token');
   cookies.erase('kind');
   cookies.erase('companyCode');
+  sessionStorage.clear();
 }
 
 // 获取用户编号

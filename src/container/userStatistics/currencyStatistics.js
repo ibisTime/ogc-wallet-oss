@@ -132,9 +132,9 @@ class currencyStatistics extends React.Component {
                         <strong style={{marginLeft: '4px', fontSize: '18px'}}>请选择币种：</strong>
                         <Select defaultValue="PSC" style={{ width: 120 }} onChange={this.handleChange}>
                             {
-                                coinList.map(item => {
+                                Array.isArray(coinList) ? coinList.map(item => {
                                     return (<Option value={item.key}>{item.key}</Option>);
-                                })
+                                }) : null
                             }
                         </Select>
                     </Col>

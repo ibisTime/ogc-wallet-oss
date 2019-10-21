@@ -70,6 +70,8 @@ class GuessUpsDowns extends React.Component {
             </Menu>
         );
         const logo = sessionStorage.getItem('webIcon');
+        const webName = sessionStorage.getItem('webName');
+        document.title = webName;
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
