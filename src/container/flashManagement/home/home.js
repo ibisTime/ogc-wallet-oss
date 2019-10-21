@@ -53,7 +53,7 @@ class Home extends React.Component {
         // 直接请求
         Promise.all([
             // 红利池分页查
-            fetch(620020)
+            fetch(800020)
         ]).then(([bonusPoolData]) => {
             this.setState({
                 bonusPoolData: bonusPoolData
@@ -123,7 +123,7 @@ class Home extends React.Component {
                             {
                                 this.props.buildList({
                                     fields,
-                                    pageCode: 620021,
+                                    pageCode: 800021,
                                     rowKey: 'id',
                                     noPagination: true,
                                     noSelect: true,

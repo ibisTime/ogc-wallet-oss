@@ -51,7 +51,7 @@ class dailyReport extends React.Component {
                     this.props.buildList({
                         fields,
                         rowKey: 'id',
-                        pageCode: '620022'
+                        pageCode: '800022'
                     })
                 }
             </div>
