@@ -15,7 +15,8 @@ class integrationEcologyOfficial extends React.Component {
         this.state = {
             data: [],
             urlList: {
-                'dapp_super_node': '/superNode'
+                'dapp_super_node': '/superNode',
+                'dapp_star': '/starLucky'
             }
         };
     }
