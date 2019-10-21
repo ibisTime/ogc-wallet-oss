@@ -65,6 +65,7 @@ export function clearUser() {
   cookies.erase('token');
   cookies.erase('kind');
   cookies.erase('companyCode');
+  sessionStorage.clear();
 }
 
 // 获取用户编号
