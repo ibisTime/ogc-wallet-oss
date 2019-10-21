@@ -1,19 +1,19 @@
 import React from 'react';
-import {Form} from 'antd';
+import { Form } from 'antd';
 import {
     getQueryString,
-    moneyFormat,
-    dateTimeFormat
+    moneyFormat
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
 @Form.create()
-class ReceiveQueryAddedit extends DetailUtil {
+class coinListEdit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
+        console.log(this.symbol);
         this.isDetail = !!getQueryString('isDetail', this.props.location.search);
     }
 
@@ -21,18 +21,7 @@ class ReceiveQueryAddedit extends DetailUtil {
         const fields = [{
             title: '符号',
             field: 'symbol',
-            readonly: !!this.symbol,
-            maxlength: 6,
-            minlength: 1,
             required: true
-        }, {
-            title: '类型',
-            field: 'type',
-            type: 'select',
-            data: {
-                '1': '基于ETH的token币',
-                '2': '基于WAN的token币'
-            }
         }, {
             title: '英文名称',
             field: 'ename',
@@ -48,78 +37,63 @@ class ReceiveQueryAddedit extends DetailUtil {
             single: true,
             required: true
         }, {
-            title: '单位',
-            field: 'unit',
-            readonly: !!this.symbol,
+            title: '钱包水印图标',
+            field: 'pic1',
+            type: 'img',
+            single: true,
             required: true
         }, {
-            title: '归集阀值',
-            field: 'collectStart',
-            formatter: function (v, data) {
-                return moneyFormat(data.collectStartString, '', data.symbol);
-            },
-            coinAmount: true,
-            required: true,
-            hidden: this.isDetail
+            title: '流水加钱图标',
+            field: 'pic2',
+            type: 'img',
+            single: true,
+            required: true
         }, {
-            title: '取现手续费',
-            field: 'withdrawFee',
-            formatter: function (v, data) {
-                return moneyFormat(data.withdrawFeeString, '', data.symbol);
-            },
-            coinAmount: true,
-            required: true,
-            hidden: this.isDetail
+            title: '流水减钱图标',
+            field: 'pic3',
+            type: 'img',
+            single: true,
+            required: true
         }, {
-            title: '归集阀值',
-            field: 'collectStartString',
-            required: true,
-            formatter: function (v, data) {
-                return moneyFormat(v, '', data.symbol);
-            },
-            readonly: !!this.symbol,
-            hidden: !this.isDetail
+            title: '单位',
+            field: 'unit',
+            required: true
         }, {
-            title: '取现手续费',
-            field: 'withdrawFeeString',
-            required: true,
-            formatter: function (v, data) {
-                return moneyFormat(v, '', data.symbol);
-            },
-            readonly: !!this.symbol,
-            hidden: !this.isDetail
-        }, {
-            title: '合约地址',
-            field: 'contractAddress',
-            required: true,
-            readonly: !!this.symbol
-        }, {
-            title: '合约ABI',
-            field: 'contractABI',
-            required: true,
-            readonly: !!this.symbol,
-            type: 'textarea',
-            normalArea: true
-        }, {
-            title: '序号',
-            field: 'orderNo',
-            number: true,
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'coin_type',
             required: true
         }, {
             title: '状态',
             field: 'status',
             type: 'select',
             key: 'coin_status',
-            hidden: !this.isDetail
+            required: true
+        }, {
+            title: 'UI序号',
+            field: 'orderNo',
+            required: true
+        }, {
+            title: '归集阀值',
+            field: 'collectStart',
+            required: true
+        }, {
+            title: '取现手续费',
+            field: 'withdrawFee',
+            required: true
+        }, {
+            title: '合约地址',
+            field: 'contractAddress',
+            required: true
+        }, {
+            title: '合约ABI',
+            field: 'contractABI',
+            required: true
         }, {
             title: '更新人',
             field: 'updater',
-            hidden: !this.isDetail
-        }, {
-            title: '更新时间',
-            field: 'updateDatetime',
-            type: 'datetime',
-            hidden: !this.isDetail
+            required: true
         }, {
             title: '备注',
             field: 'remark'
@@ -150,4 +124,4 @@ class ReceiveQueryAddedit extends DetailUtil {
     }
 }
 
-export default ReceiveQueryAddedit;
+export default coinListEdit;

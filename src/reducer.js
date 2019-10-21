@@ -292,6 +292,7 @@ import {IntegrationEcologyTransferAccountsQuery} from './redux/ecology/integrati
 import {IntegrationEcologyBonusPool} from './redux/ecology/integrationEcology/bonusPool/bonusPool';
 import {IntegrationEcologyBonusPoolRecord} from './redux/ecology/integrationEcology/bonusPoolRecord/bonusPoolRecord';
 import {IntegrationEcologyConfigure} from './redux/ecology/integrationEcology/configure/configure';
+import {integrationEcologyOfficial} from './redux/ecology/integrationEcology/integrationEcology/integrationEcologyOfficial';
 
 // 超级节点
 import {SuperNodeHome} from './redux/superNode/home';
@@ -322,6 +323,12 @@ import {internalTransferEx} from './redux/transferManagement/internalTransferEx'
 import {internalTransferSlt} from './redux/transferManagement/internalTransferSlt';
 // 转账管理
 import {transferNotThrough} from './redux/transferManagement/transferNotThrough';
+// 基础数据管理
+import {legalTender} from './redux/biz/quotation/legalTender';
+import {legalTenderHistory} from './redux/biz/quotation/legalTenderHistory';
+import {quotationCSDHistory} from './redux/biz/quotation/quotationCDSHistory';
+import {qutationETHHistory} from './redux/biz/quotation/qutationETHHistory';
+import {bizCoin} from './redux/coinList/coinList';
 
 // 超级节点
 import {GuessUpsDownsHome} from './redux/guessUpsDowns/home';
@@ -540,6 +547,7 @@ export default combineReducers({
     ThreePartyAppCategory,
     // 集成生态
     IntegrationEcology,
+    integrationEcologyOfficial,
     IntegrationEcologyUserQuery,
     IntegrationEcologyBonusPool,
     IntegrationEcologyTransferAccountsQuery,
@@ -599,5 +607,11 @@ export default combineReducers({
     starLuckyStarLegacyRecords,
     starLuckyStarRecordRecord,
     starLuckyTotayScene,
-    starLuckyStarIntoPool
+    starLuckyStarIntoPool,
+    // 基础数据管理
+    legalTender,
+    legalTenderHistory,
+    quotationCSDHistory,
+    qutationETHHistory,
+    bizCoin
 });
