@@ -1,4 +1,4 @@
-export const SYSTEM_CODE = 'CL-STAR';
+export const SYSTEM_CODE = 'CL-PRISM';
 // 七牛https上传地址
 export const UPLOAD_URL = sessionStorage.getItem('qiniuUploadDomain') + '/';
 // 七牛图片前缀

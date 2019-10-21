@@ -4,7 +4,7 @@ import fetch from 'common/js/fetch';
 
 // 用户量统计
 export function userAmount(date) {
-    return fetch(620000, {date});
+    return fetch(800000, {date});
 }
 
 // // 查询用户糖果节点分布数量
@@ -19,7 +19,7 @@ export function dataDect(parentKey) {
 
 // 币量分布
 export function coinDistribution(date, symbol) {
-    return fetch(620010, {date, symbol});
+    return fetch(800010, {date, symbol});
 }
 
 // 今日玖佰玖统计
