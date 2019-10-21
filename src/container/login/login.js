@@ -3,9 +3,9 @@ import {Form, Icon, Input, Button} from 'antd';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {login} from '@redux/user';
+import {setSystem} from 'common/js/util';
 import './login.css';
 import loginLeft from '../../images/login-left.png';
-import loginphot from '../../images/logo.png';
 
 const FormItem = Form.Item;
 
@@ -14,6 +14,10 @@ const FormItem = Form.Item;
     {login}
 )
 class Login extends React.Component {
+    state = {
+        ...this.state,
+        loginPic: ''
+    };
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -22,14 +26,22 @@ class Login extends React.Component {
             }
         });
     };
+    async componentDidMount() {
+        await setSystem();
+        const loginPic = sessionStorage.getItem('loginPic');
+        this.setState({
+            loginPic
+        });
+    }
     render() {
         const {getFieldDecorator} = this.props.form;
+        const {loginPic} = this.state;
         return (
             <div className="login-body">
                 <div className="login-wrapper">
                     <div className='login-left'><img src={loginLeft} /></div>
                     <div className="login-wrap">
-                        <div className="title" style={{height: '80px'}}><img style={{width: '80px'}} src={loginphot} /></div>
+                        <div className="title" style={{height: '80px'}}><img style={{width: '80px'}} src={loginPic} /></div>
                         {this.props.redirectTo ? <Redirect to={this.props.redirectTo}/> : null}
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <FormItem className="form-item">

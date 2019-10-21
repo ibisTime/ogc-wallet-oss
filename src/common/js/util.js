@@ -19,20 +19,39 @@ export function setUser({ userId, token }) {
   cookies.set('token', token);
 }
 
-export function setSystem() {
-  fetch(660918, {type: '660918'}).then(data => {
-    console.log(data);
+export async function setSystem() {
+  let headLogo = '';
+  let loginPic = '';
+  let webIcon = '';
+  await fetch(660918, {type: 'oss_config'}).then(async ossData => {
+      headLogo = ossData.head_logo;
+      document.title = ossData.web_name;
+      await fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
+          if(data.list[0]) {
+              let $favicon = document.querySelector('link[rel="icon"]');
+              let link = `http://${data.list[0].cvalue}/${headLogo}`;
+              loginPic = `http://${data.list[0].cvalue}/${ossData.login_pic}`;
+              webIcon = `http://${data.list[0].cvalue}/${ossData.web_icon}`;
+              console.log($favicon);
+              if ($favicon !== null) {
+                  $favicon.href = link;
+              } else {
+                  $favicon = document.createElement('link');
+                  $favicon.rel = 'icon';
+                  $favicon.href = link;
+                  document.head.appendChild($favicon);
+              }
+              sessionStorage.setItem('webIcon', webIcon);
+              sessionStorage.setItem('loginPic', loginPic);
+              sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
+          }
+      });
   });
-  fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
-      if(data.list[0]) {
-          sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
-      }
-  });
-  fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
-      if(data.list[0]) {
-          sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
-      }
-  });
+    fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
+        if(data.list[0]) {
+            sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+        }
+    });
   fetch(625013, {key: 'igo_oss_url', start: 1, limit: 10}).then(data => {
       if(data.list[0]) {
           sessionStorage.setItem('apiLoginUrl', data.list[0].value);

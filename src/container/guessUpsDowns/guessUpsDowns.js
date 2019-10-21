@@ -2,7 +2,6 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Icon, Dropdown, Button } from 'antd';
 import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import logo from 'component/dashboard/wallt.png';
 import { loadTxUserSign, setSelToId } from '@redux/user';
 import { setMsgList, addUserMap } from '@redux/message';
 import { clearUser, getUserId, getUserName } from 'common/js/util';
@@ -70,6 +69,7 @@ class GuessUpsDowns extends React.Component {
                 <Menu.Item><a href="#" onClick={this.logout}>退出</a></Menu.Item>
             </Menu>
         );
+        const logo = sessionStorage.getItem('webIcon');
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
