@@ -6,10 +6,10 @@ import {moneyFormat, getQueryString} from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 @connect(
-    state => state.IntegrationEcology,
+    state => state.integrationEcologyOfficial,
     {initData}
 )
-class IntegrationEcology extends React.Component {
+class integrationEcologyOfficial extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +26,7 @@ class IntegrationEcology extends React.Component {
     componentDidMount() {
         // 直接请求
         Promise.all([
-            fetch(625459, {ecoFlag: 1})
+            fetch(625459, {ecoFlag: 2})
         ]).then(([res1]) => {
             this.setState({
                 data: res1
@@ -36,12 +36,17 @@ class IntegrationEcology extends React.Component {
     }
 
     onCardClick = (item) => {
-        if(item.url === '0') {
-            let username = localStorage.getItem('username');
-            let tokenIgo = localStorage.getItem('token_igo');
-            let igoUrl = sessionStorage.getItem('apiLoginUrl');
-            // window.open(`http://oss.igotest.psctoken.com/verificationPSC?username=${username}&token=${tokenIgo}`);
-            window.open(`${igoUrl}/verificationPSC?username=${username}&token=${tokenIgo}`);
+        if(item.url === '2') {
+            let url = window.location.protocol + '//' + window.location.host + '/flashManagement';
+            window.open(url);
+        }else if(item.url === 'dapp_super_node') {
+            let url = '';
+            if(this.state.urlList[item.url]) {
+                url = window.location.protocol + '//' + window.location.host + this.state.urlList[item.url];
+            } else {
+                url = item.url;
+            }
+            window.open(url);
         }
     }
 
@@ -70,4 +75,4 @@ class IntegrationEcology extends React.Component {
     }
 }
 
-export default IntegrationEcology;
+export default integrationEcologyOfficial;

@@ -598,15 +598,14 @@ const ROUTES = [
         path: '/quotation/quotationETH',
         component: asyncComponent(() => import('container/biz/quotation/quotationETH'))
     },
+    {
+        path: '/quotation/quotationETH/edit',
+        component: asyncComponent(() => import('container/biz/quotation/quotationETH-edit'))
+    },
     // TRX行情
     {
         path: '/quotation/quotationTRX',
         component: asyncComponent(() => import('container/biz/quotation/quotationTRX'))
-    },
-    // 承兑商行情
-    {
-        path: '/quotation/quotationCDS',
-        component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
     },
     // 自配行情
     {
@@ -617,6 +616,40 @@ const ROUTES = [
     {
         path: '/quotation/quotationZP/addedit',
         component: asyncComponent(() => import('container/biz/quotation/quotationZP/quotationZP-addedit'))
+    },
+    // 基础数据管理 - 法币汇率设置
+    // 承兑商行情
+    {
+        path: '/quotation/quotationCDS',
+        component: asyncComponent(() => import('container/biz/quotation/quotationCDS'))
+    },
+    {
+        path: '/quotation/quotationCDSHistory',
+        component: asyncComponent(() => import('container/biz/quotation/quotationCDSHistory'))
+    },
+    {
+        path: '/quotation/legalTender',
+        component: asyncComponent(() => import('container/biz/quotation/legalTender/legalTender'))
+    },
+    {
+        path: '/quotation/legalTender/edit',
+        component: asyncComponent(() => import('container/biz/quotation/legalTender/legalTender-edit'))
+    },
+    {
+        path: '/quotation/legalTenderHistory',
+        component: asyncComponent(() => import('container/biz/quotation/legalTender/legalTenderHistory'))
+    },
+    {
+        path: '/quotation/coinList',
+        component: asyncComponent(() => import('container/coinList/coinList'))
+    },
+    {
+        path: '/quotation/coinList/addedit',
+        component: asyncComponent(() => import('container/biz/redPacket/receiveQuery-addedit'))
+    },
+    {
+        path: '/quotation/coinList/edit',
+        component: asyncComponent(() => import('container/coinList/coinList-edit'))
     },
     // 活动管理
     // 邀请好友
@@ -867,7 +900,6 @@ const ROUTES = [
         path: '/bizReceive/receiveQuery/addedit',
         component: asyncComponent(() => import('container/biz/redPacket/receiveQuery-addedit'))
     },
-
     // BTC财务管理
     // 查询币种
     {
@@ -1327,6 +1359,11 @@ const ROUTES = [
         path: '/integrationEcology/integrationEcology',
         component: asyncComponent(() => import('container/ecology/integrationEcology/integrationEcology/integrationEcology'))
     },
+    // 官方集成生态
+    {
+        path: '/integrationEcology/integrationEcologyOfficial',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/integrationEcology/integrationEcologyOfficial'))
+    },
     {
         path: '/integrationEcology/userQuery',
         component: asyncComponent(() => import('container/ecology/integrationEcology/userQuery/userQuery'))
@@ -1346,6 +1383,10 @@ const ROUTES = [
     {
         path: '/integrationEcology/configure',
         component: asyncComponent(() => import('container/ecology/integrationEcology/configure/configure'))
+    },
+    {
+        path: '/integrationEcology/configureOfficial',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/configure/configureOfficial'))
     },
     {
         path: '/integrationEcology/configure/addedit',

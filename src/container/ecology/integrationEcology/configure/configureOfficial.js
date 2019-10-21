@@ -22,7 +22,7 @@ import {showWarnMsg, dateTimeFormat} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Configure extends React.Component {
+class configureOfficial extends React.Component {
     render() {
         const fields = [{
             field: 'dappname',
@@ -55,10 +55,10 @@ class Configure extends React.Component {
             pageCode: 625013,
             rowKey: 'id',
             searchParams: {
-                envType: 1
+                envType: 2
             }
         });
     }
 }
 
-export default Configure;
+export default configureOfficial;
