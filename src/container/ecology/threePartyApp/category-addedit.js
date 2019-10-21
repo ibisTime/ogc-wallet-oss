@@ -20,12 +20,15 @@ class CategoryAddedit extends DetailUtil {
                 type: 0
             },
             keyName: 'dkey',
-            valueName: 'dvalue'
+            valueName: 'dvalue',
+            type: 'select',
+            readonly: this.code,
+            required: !this.code
         }, {
             title: '字典键',
             field: 'dkey',
             required: true,
-            readonly: true,
+            readonly: this.code,
             maxlength: 15
         }, {
             title: '字典值',
@@ -44,7 +47,13 @@ class CategoryAddedit extends DetailUtil {
             view: this.view,
             addCode: 630030,
             editCode: 630032,
-            detailCode: 630037
+            detailCode: 630037,
+            beforeSubmit: (params) => {
+                if(!this.code) {
+                    params.type = '1';
+                }
+                return true;
+            }
         });
     }
 }

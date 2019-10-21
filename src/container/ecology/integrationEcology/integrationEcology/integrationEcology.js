@@ -18,7 +18,8 @@ class IntegrationEcology extends React.Component {
             data: [],
             urlList: {
                 'dapp_super_node': '/superNode',
-                'dapp_guess_ups_downs': '/guessUpsDowns'
+                'dapp_guess_ups_downs': '/guessUpsDowns',
+                'dapp_star': '/starLucky'
             }
         };
     }

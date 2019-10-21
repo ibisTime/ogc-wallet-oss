@@ -1,4 +1,4 @@
-export const SYSTEM_CODE = 'CL-PRISM';
+export const SYSTEM_CODE = 'CL-STAR';
 // 七牛http上传地址
 // export const UPLOAD_URL = 'http://up.qiniup.com';
 // 七牛https上传地址
@@ -29,6 +29,18 @@ export const formItemLayout = {
         sm: {span: 16}
     }
 };
+
+export const o2mFormItemLayout = {
+    labelCol: {
+        xs: {span: 2},
+        sm: {span: 2}
+    },
+    wrapperCol: {
+        xs: {span: 20},
+        sm: {span: 20}
+    }
+};
+
 export const tailFormItemLayout = {
     wrapperCol: {
         xs: {

@@ -241,6 +241,22 @@ import {OtcSurvivaLorDer} from './redux/otcmanage/survivalorder';
 import {OtcManageHistoricalorder} from './redux/otcmanage/historicalorder';
 import {OtcManageHistoricalorderEdit} from './redux/otcmanage/historicalorder-orderedit';
 import {OtcManageComment} from './redux/otcmanage/comment';
+
+// 星球抽奖
+import {starLuckyStarMessage} from './redux/biz/starLucky/starMessage';
+import {starLuckyStarLuckyUser} from './redux/biz/starLucky/starLuckyUser';
+import {starLuckyStarJackpot} from './redux/biz/starLucky/starJackpot';
+import {starLuckyStarConfiguration} from './redux/biz/starLucky/starConfiguration';
+import {starLuckyStarRules} from './redux/biz/starLucky/starRules';
+import {starLuckyStarQuery} from './redux/biz/starLucky/starQuery';
+import {starLuckyStarParticipate} from './redux/biz/starLucky/starParticipate';
+import {starLuckyStarBonusIncome} from './redux/biz/starLucky/starBonusIncome';
+import {starLuckyStarJackpotRecord} from './redux/biz/starLucky/starJackpotRecord';
+import {starLuckyStarLegacyRecords} from './redux/biz/starLucky/starLegacyRecords';
+import {starLuckyStarRecordRecord} from './redux/biz/starLucky/starRecordRecord';
+import {starLuckyStarIntoPool} from './redux/biz/starLucky/starIntoPool';
+import {starLuckyTotayScene} from './redux/biz/starLucky/totayScene';
+
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
 import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
@@ -569,5 +585,19 @@ export default combineReducers({
     robotAccountWater,
     robotRecentWater,
     robotHistoryWater,
-    GuessConfiguration
+    GuessConfiguration,
+    // 星球抽奖
+    starLuckyStarMessage,
+    starLuckyStarLuckyUser,
+    starLuckyStarJackpot,
+    starLuckyStarConfiguration,
+    starLuckyStarRules,
+    starLuckyStarQuery,
+    starLuckyStarParticipate,
+    starLuckyStarBonusIncome,
+    starLuckyStarJackpotRecord,
+    starLuckyStarLegacyRecords,
+    starLuckyStarRecordRecord,
+    starLuckyTotayScene,
+    starLuckyStarIntoPool
 });

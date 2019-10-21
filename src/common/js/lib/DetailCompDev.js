@@ -1,14 +1,13 @@
 import React from 'react';
-import { Form, Button, Spin, Modal, Carousel, Tooltip,
-  Icon, Collapse, Row, Col } from 'antd';
+import { Form, Button, Spin, Tooltip, Icon, Collapse, Row, Col, Card } from 'antd';
 import { getDictList } from 'api/dict';
 import { getQiniuToken } from 'api/general';
 import {
-  isUndefined, showSucMsg, showErrMsg, showWarnMsg, getUserId, getUserName,
-  moneyParse, getRules, getRealValue, dateFormat, dateTimeFormat } from 'common/js/util';
+  isUndefined, showSucMsg, getUserId, moneyParse, getRules, getRealValue,
+  dateFormat, dateTimeFormat
+} from 'common/js/util';
 import fetch from 'common/js/fetch';
-import { UPLOAD_URL, PIC_PREFIX, formItemLayout, validateFieldsAndScrollOption,
-  DATE_FORMAT, MONTH_FORMAT, DATETIME_FORMAT } from 'common/js/config';
+import { formItemLayout, validateFieldsAndScrollOption, DATE_FORMAT, MONTH_FORMAT, DATETIME_FORMAT } from 'common/js/config';
 import cityData from 'common/js/lib/city';
 import CInput from 'component/cInput/cInput';
 import CNormalTextArea from 'component/cNormalTextArea/cNormalTextArea';
@@ -22,7 +21,6 @@ import CMonth from 'component/cMonth/cMonth';
 import CCitySelect from 'component/cCitySelect/cCitySelect';
 import CCheckbox from 'component/cCheckbox/cCheckbox';
 import CTreeSelect from 'component/cTreeSelect/cTreeSelect';
-import {getCoinList} from 'api/coin';
 
 const { Item: FormItem } = Form;
 const { Panel } = Collapse;
@@ -52,7 +50,9 @@ export default class DetailComp extends React.Component {
       // 7牛token
       token: '',
       // o2m选中的keys
-      selectedRowKeys: {}
+      selectedRowKeys: {},
+      // o2m下拉框中的数据
+      oSelectData: {}
     };
     this.fetchList = [];
     this.first = true;
@@ -102,35 +102,11 @@ export default class DetailComp extends React.Component {
   }
   // 获取页面详情数据
   getDetailInfo() {
-    this.setCoinDate();
     let key = this.options.key || 'code';
-    let detailParams = this.options.detailParams ? this.options.detailParams : {};
-    let param = {[key]: this.options.code, ...detailParams};
+      let detailParams = this.options.detailParams ? this.options.detailParams : {};
+      let param = {[key]: this.options.code, ...detailParams};
     this.options.beforeDetail && this.options.beforeDetail(param);
     return fetch(this.options.detailCode, param);
-  }
-  // 获取已有币种， 保存币种列表
-  setCoinDate = () => {
-      getCoinList().then(data => {
-          let coinList = [];
-          let coinData = {};
-          data.map(d => {
-              coinData[d.symbol] = {
-                  'coin': d.symbol,
-                  'unit': '1e' + d.unit,
-                  'name': d.cname,
-                  'type': d.type,
-                  'status': d.status
-              };
-              coinList.push({
-                  key: d.symbol,
-                  value: d.cname
-              });
-          });
-
-          window.sessionStorage.setItem('coinData', JSON.stringify(coinData));
-          window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
-      });
   }
   // 获取所有页面所需的数据
   getInfos(list) {
@@ -167,8 +143,17 @@ export default class DetailComp extends React.Component {
           } else {
             selectData[field.field] = data;
           }
+          if (field.type === 'o2m') {
+            pageData = {
+              ...pageData,
+              [field.field]: data
+            };
+          }
         }
       });
+      if (this.options.afterFetch) {
+          pageData = this.options.afterFetch(pageData);
+      }
       this.setState({
         pageData,
         token,
@@ -185,17 +170,15 @@ export default class DetailComp extends React.Component {
               f.onChange(initVal);
             }
           });
+          this.options.afterDetail && this.options.afterDetail();
         }
-        if(this.options._keys) {
-          getRealValue({...this.options});
-        }
-        if (this.options.afterDetail) {
-          this.options.afterDetail();
-        }
+        // if (this.options.afterDetail) {
+        //   this.options.afterDetail();
+        // }
       });
     }).catch(() => {});
   }
-  buildDetail(options) {
+  buildDetail = (options) => {
     this.options = { ...this.options, ...options };
     if (!this.first && this.options.useData !== undefined) {
       if (!this.state.pageData) {
@@ -214,6 +197,8 @@ export default class DetailComp extends React.Component {
     let pageComp;
     if (this.options.type === 'collapse') {
       pageComp = this.buildCollapseDetail();
+    } else if (this.options.type === 'card') {
+      pageComp = this.buildCardDetail();
     } else {
       pageComp = this.buildNormalDetail();
     }
@@ -224,6 +209,37 @@ export default class DetailComp extends React.Component {
     }
     this.first = false;
     return pageComp;
+  }
+  // 构建card详情页
+  buildCardDetail() {
+    this.fields = [];
+    const children = [];
+    this.options.fields.forEach((field, i) => {
+      let comp;
+      if (field.items) {
+        comp = (
+            <Card title={field.title} key={i} className={field.hidden ? 'hidden' : ''} style={{ marginBottom: 20 }}>{
+              field.items.map((fld, k) => (
+                  <Row gutter={24} key={k}>{
+                    fld.map((f, j) => {
+                      f.inline = true;
+                      f.hidden = !!field.hidden;
+                      this.fields.push(f);
+                      this.judgeFieldType(f);
+                      let props = this.getColProps(fld, j);
+                      return (
+                          <Col {...props} key={f.field}>
+                            {this.getItemByType(f.type, f)}
+                          </Col>);
+                    })}
+                  </Row>
+              ))
+            }</Card>
+        );
+        children.push(comp);
+      }
+    });
+    return this.getPageComponent(children);
   }
   // 构建collapse详情页
   buildCollapseDetail() {
@@ -237,22 +253,23 @@ export default class DetailComp extends React.Component {
           lengthList.push(String(i));
         }
         comp = (
-          <Panel header={field.title} key={i} className={field.hidden ? 'hidden' : ''}>{
-            field.items.map((fld, k) => (
-              <Row gutter={24} key={k}>{
-                fld.map((f, j) => {
-                  f.inline = true;
-                  this.fields.push(f);
-                  this.judgeFieldType(f);
-                  let props = this.getColProps(fld, j);
-                  return (
-                    <Col {...props} key={f.field}>
-                      {this.getItemByType(f.type, f)}
-                    </Col>);
-                })}
-              </Row>
-            ))
-          }</Panel>
+            <Panel header={field.title} key={i} className={field.hidden ? 'hidden' : ''}>{
+              field.items.map((fld, k) => (
+                  <Row gutter={24} key={k}>{
+                    fld.map((f, j) => {
+                      f.inline = true;
+                      f.hidden = !!field.hidden;
+                      this.fields.push(f);
+                      this.judgeFieldType(f);
+                      let props = this.getColProps(fld, j);
+                      return (
+                          <Col {...props} key={f.field}>
+                            {this.getItemByType(f.type, f)}
+                          </Col>);
+                    })}
+                  </Row>
+              ))
+            }</Panel>
         );
         children.push(comp);
       }
@@ -262,15 +279,15 @@ export default class DetailComp extends React.Component {
   // 获取collapse的属性
   getColProps(arr, idx) {
     return arr.length === 1 ? col1Props
-      : arr.length === 2
-        ? col2Props
-        : arr.length === 3
-          ? idx < 2 ? col3Props : col33Props
-          : arr.length === 4
-            ? col4Props
-            : arr.length === 5
-              ? idx < 4 ? col5Props : col55Props
-              : col1Props;
+        : arr.length === 2
+            ? col2Props
+            : arr.length === 3
+                ? idx < 2 ? col3Props : col33Props
+                : arr.length === 4
+                    ? col4Props
+                    : arr.length === 5
+                        ? idx < 4 ? col5Props : col55Props
+                        : col1Props;
   }
   // 构建普通的详情页
   buildNormalDetail() {
@@ -314,22 +331,29 @@ export default class DetailComp extends React.Component {
   // 组装页面结构
   getPageComponent = (children) => {
     return (
-      <Spin spinning={this.state.fetching}>
-        <Form className="detail-form-wrapper" onSubmit={this.handleSubmit}>
-          {
-            this.options.type === 'collapse' ? (
-              <div>
-                <Collapse defaultActiveKey={lengthList}>
-                  {children}
-                </Collapse>
-                <div style={{marginTop: 20}}>
-                  {this.getBtns(this.options.buttons)}
-                </div>
-              </div>
-            ) : children
-          }
-        </Form>
-      </Spin>
+        <Spin spinning={this.state.fetching}>
+          <Form className="detail-form-wrapper" onSubmit={this.handleSubmit}>
+            {
+              this.options.type === 'collapse' ? (
+                  <div>
+                    <Collapse id="_content_wrapper_" defaultActiveKey={lengthList}>
+                      {children}
+                    </Collapse>
+                    <div style={{marginTop: 20}}>
+                      {this.getBtns(this.options.buttons)}
+                    </div>
+                  </div>
+              ) : this.options.type === 'card' ? (
+                  <div>
+                    <div id="_content_wrapper_">{children}</div>
+                    <div style={{marginTop: 20}}>
+                      {this.getBtns(this.options.buttons)}
+                    </div>
+                  </div>
+              ) : <div>{children}</div>
+            }
+          </Form>
+        </Spin>
     );
   }
   // 根据类型获取控件
@@ -344,13 +368,13 @@ export default class DetailComp extends React.Component {
       case 'provSelect':
       case 'select':
         return item.pageCode
-          ? this.getSearchSelectItem(item, initVal, rules, getFieldDecorator)
-          : this.getSelectComp(item, initVal, rules, getFieldDecorator);
+            ? this.getSearchSelectItem(item, initVal, rules, getFieldDecorator)
+            : this.getSelectComp(item, initVal, rules, getFieldDecorator);
       case 'date':
       case 'datetime':
         return item.rangedate
-          ? this.getRangeDateItem(item, initVal, rules, getFieldDecorator, type === 'datetime')
-          : this.getDateItem(item, initVal, rules, getFieldDecorator, type === 'datetime');
+            ? this.getRangeDateItem(item, initVal, rules, getFieldDecorator, type === 'datetime')
+            : this.getDateItem(item, initVal, rules, getFieldDecorator, type === 'datetime');
       case 'month':
         return this.getMonthItem(item, initVal, rules, getFieldDecorator);
       case 'img':
@@ -359,8 +383,8 @@ export default class DetailComp extends React.Component {
         return this.getFileComp(item, initVal, rules, getFieldDecorator, false);
       case 'textarea':
         return item.normalArea
-          ? this.getNormalTextArea(item, initVal, rules, getFieldDecorator)
-          : this.getTextArea(item, initVal, rules, getFieldDecorator);
+            ? this.getNormalTextArea(item, initVal, rules, getFieldDecorator)
+            : this.getTextArea(item, initVal, rules, getFieldDecorator);
       case 'citySelect':
         return this.getCitySelect(item, initVal, rules, getFieldDecorator);
       case 'checkbox':
@@ -381,7 +405,6 @@ export default class DetailComp extends React.Component {
       title: item.title,
       hidden: item.hidden,
       type: item.type,
-      tipEle: item.tipEle,
       field: item.field,
       label: this.getLabel(item),
       readonly: item.readonly,
@@ -398,9 +421,6 @@ export default class DetailComp extends React.Component {
       initVal,
       rules,
       getFieldDecorator,
-      style: item.style,
-      autosize: item.autosize,
-      placeholder: item.placeholder,
       hidden: item.hidden,
       inline: item.inline,
       field: item.field,
@@ -445,7 +465,8 @@ export default class DetailComp extends React.Component {
       onChange: item.onChange,
       getFieldValue: this.props.form.getFieldValue,
       getFieldError: this.props.form.getFieldError,
-      list: this.state.selectData[item.field]
+      list: this.state.selectData[item.field],
+      updateSelectData: this.updateSelectData
     };
     return <CSelect key={item.field} {...props} />;
   }
@@ -471,7 +492,8 @@ export default class DetailComp extends React.Component {
       onChange: item.onChange,
       getFieldValue: this.props.form.getFieldValue,
       getFieldError: this.props.form.getFieldError,
-      isLoaded: !this.options.code || this.state.isLoaded
+      isLoaded: !this.options.code || this.state.isLoaded,
+      updateSelectData: this.updateSelectData
     };
     return <CSearchSelect key={item.field} {...props} />;
   }
@@ -623,34 +645,34 @@ export default class DetailComp extends React.Component {
   // 获取页面按钮
   getBtns(buttons) {
     return (
-      <FormItem className="cform-item-btn" key='btns' {...formItemLayout} label="&nbsp;">
-        {buttons
-          ? buttons.map((b, i) => (
-            <Button
-              style={{marginRight: 20}}
-              key={i}
-              type={b.type || ''}
-              onClick={() => b.check ? this.customSubmit(b.handler) : this.customSubmitSave(b.handler)}>
-              {b.title}
-            </Button>
-          ))
-          : this.options.view
-            ? <Button onClick={this.onCancel}>返回</Button>
-            : (
-              <div>
-                <Button type="primary" htmlType="submit">{this.options.okText || '保存'}</Button>
-                <Button style={{marginLeft: 20}}
-                        onClick={this.onCancel}>{this.options.cancelText || '返回'}</Button>
-              </div>
-            )
-        }
-      </FormItem>
+        <FormItem className="cform-item-btn" key='btns' {...formItemLayout} label="&nbsp;">
+          {buttons
+              ? buttons.map((b, i) => (
+                  <Button
+                      style={{marginRight: 20}}
+                      key={i}
+                      type={b.type || ''}
+                      onClick={() => b.check ? this.customSubmit(b.handler) : this.customSubmitSave(b.handler)}>
+                    {b.title}
+                  </Button>
+              ))
+              : this.options.view
+                  ? <Button onClick={this.onCancel}>返回</Button>
+                  : (
+                      <div>
+                        <Button type="primary" htmlType="submit">{this.options.okText || '保存'}</Button>
+                        <Button style={{marginLeft: 20}}
+                                onClick={this.onCancel}>{this.options.cancelText || '返回'}</Button>
+                      </div>
+                  )
+          }
+        </FormItem>
     );
   }
   // 获取label
   getLabel(item) {
     return (
-      <span className={item.required && ((item.type === 'textarea' && !item.normalArea) || (item.type === 'o2m')) ? 'ant-form-item-required' : ''}>
+        <span className={item.required && ((item.type === 'textarea' && !item.normalArea) || (item.type === 'o2m')) ? 'ant-form-item-required' : ''}>
         {item.title + (item.single ? '(单)' : '')}
           {item.help ? <Tooltip title={item.help}><Icon type="question-circle-o"/></Tooltip> : null}
       </span>
@@ -676,15 +698,13 @@ export default class DetailComp extends React.Component {
     areaKeys.forEach(v => values[v] = this.textareas[v].editorContent);
     let key = this.options.key || 'code';
     values[key] = isUndefined(values[key]) ? this.options.code || '' : values[key];
-    let fields = this.options.type === 'collapse' ? this.fields : this.options.fields;
+    let fields = this.options.type === 'collapse' || this.options.type === 'card' ? this.fields : this.options.fields;
     fields.forEach(v => {
       if (v.readonly) {
         return;
       }
       if (v.amount) {
         values[v.field] = moneyParse(values[v.field], v.amountRate);
-      } else if (v.coinAmount) {
-        values[v.field] = moneyParse(values[v.field], v.amountRate, v.coin);
       } else if (v.type === 'citySelect') {
         let mid = values[v.field].map(a => a === '全部' ? '' : a);
         v.cFields.forEach((f, i) => {
@@ -692,7 +712,7 @@ export default class DetailComp extends React.Component {
         });
       } else if (v.type === 'date' || v.type === 'datetime' || v.type === 'month') {
         let format = v.type === 'date' ? DATE_FORMAT : v.type ===
-          'month' ? MONTH_FORMAT : DATETIME_FORMAT;
+        'month' ? MONTH_FORMAT : DATETIME_FORMAT;
         if (v.rangedate) {
           let bDate = values[v.field] ? [...values[v.field]] : [];
           if (bDate.length) {
@@ -731,13 +751,13 @@ export default class DetailComp extends React.Component {
         values[v.field] = values[v.field] ? values[v.field].join(',') : '';
       }
     });
-    values.updater = values.updater || getUserName();
+    values.updater = values.updater || getUserId();
     return values;
   }
   // 保存并校验错误
   customSubmit = (handler) => {
     let fieldsList = [];
-    let fields = this.options.type === 'collapse' ? this.fields : this.options.fields;
+    let fields = this.options.type === 'collapse' || this.options.type === 'card' ? this.fields : this.options.fields;
     fields.forEach(v => {
       if (!v.readonly) {
         fieldsList.push(v.field);
@@ -788,5 +808,14 @@ export default class DetailComp extends React.Component {
   }
   cancelFetching = () => {
     this.setState({ fetching: false });
+  }
+  // 更新selectData的数据
+  updateSelectData = (field, data) => {
+    this.setState(prevState => ({
+      selectData: {
+        ...prevState.selectData,
+        [field]: data
+      }
+    }));
   }
 }

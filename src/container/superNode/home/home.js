@@ -61,8 +61,6 @@ class Home extends React.Component {
                 bonusPoolData: bonusPoolData.list,
                 nodeData: nodeData
             });
-            console.log('bonusPoolData', bonusPoolData);
-            console.log('nodeData', nodeData);
         }).catch(() => this.setState(
             {fetching: false}));
     }
