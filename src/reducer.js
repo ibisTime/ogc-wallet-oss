@@ -307,6 +307,22 @@ import {internalTransferSlt} from './redux/transferManagement/internalTransferSl
 // 转账管理
 import {transferNotThrough} from './redux/transferManagement/transferNotThrough';
 
+// 超级节点
+import {GuessUpsDownsHome} from './redux/guessUpsDowns/home';
+import {GuessUpsDownsTotayScene} from './redux/guessUpsDowns/totayScene';
+import {GuessUpsDownsQuotation} from './redux/guessUpsDowns/quotation';
+import {GuessUpsDownsQuotationShortTerm} from './redux/guessUpsDowns/quotationShortTerm';
+import {GuessUpsDownsQuotationHistory} from './redux/guessUpsDowns/quotationHistory';
+import {GuessUpsDownsScene} from './redux/guessUpsDowns/scene';
+import {GuessUpsDownsScenePage} from './redux/guessUpsDowns/scenePage';
+import {GuessUpsDownsScenePreview} from './redux/guessUpsDowns/scenePreview';
+import {GuessUpsDownsSceneRecord} from './redux/guessUpsDowns/sceneRecord';
+import {GuessUpsDownsRobot} from './redux/guessUpsDowns/robot';
+import {robotAccountWater} from './redux/guessUpsDowns/robotAccountWater';
+import {robotRecentWater} from './redux/guessUpsDowns/robotRecentWater';
+import {robotHistoryWater} from './redux/guessUpsDowns/robotHistoryWater';
+import {GuessConfiguration} from './redux/guessUpsDowns/guessConfiguration';
+
 export default combineReducers({
     user,
     menu,
@@ -538,5 +554,20 @@ export default combineReducers({
     // 内部转账管理
     internalTransferEx,
     internalTransferSlt,
-    transferNotThrough
+    transferNotThrough,
+    // 猜涨跌
+    GuessUpsDownsHome,
+    GuessUpsDownsTotayScene,
+    GuessUpsDownsQuotation,
+    GuessUpsDownsQuotationShortTerm,
+    GuessUpsDownsQuotationHistory,
+    GuessUpsDownsScene,
+    GuessUpsDownsScenePage,
+    GuessUpsDownsScenePreview,
+    GuessUpsDownsSceneRecord,
+    GuessUpsDownsRobot,
+    robotAccountWater,
+    robotRecentWater,
+    robotHistoryWater,
+    GuessConfiguration
 });

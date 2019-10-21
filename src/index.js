@@ -24,6 +24,9 @@ const SuperNode = asyncComponent(() => import('container/superNode/superNode'));
 // 集成生态-闪兑
 const FlashExchange = asyncComponent(() => import('container/flashManagement/flashManagement'));
 
+// 集成生态-猜涨跌
+const GuessUpsDowns = asyncComponent(() => import('container/guessUpsDowns/guessUpsDowns'));
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -33,6 +36,7 @@ ReactDOM.render(
                     <Route path='/login' component={Login}></Route>
                     <Route path='/superNode' component={SuperNode}></Route>
                     <Route path='/flashManagement' component={FlashExchange}></Route>
+                    <Route path='/guessUpsDowns' component={GuessUpsDowns}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>
