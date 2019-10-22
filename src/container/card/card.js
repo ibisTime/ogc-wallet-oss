@@ -71,7 +71,7 @@ class Card extends React.Component {
                 <div className="logo" onClick={() => {
                     this.props.history.push('/card');
                 }}>
-                    <img style ={{width: '72%', height: '40px'}} src={logo}/>
+                    <img style ={{height: '40px'}} src={logo}/>
                 </div>
                 <Menu
                     theme="dark"
