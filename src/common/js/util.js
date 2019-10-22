@@ -19,6 +19,21 @@ export function setUser({ userId, token }) {
   cookies.set('token', token);
 }
 
+export function setWebIcon(link) {
+    let $favicon = document.querySelector('link[rel="icon"]');
+    if ($favicon !== null) {
+        $favicon.rel = 'icon';
+        $favicon.type = 'image/x-icon';
+        $favicon.href = link;
+    } else {
+        $favicon = document.createElement('link');
+        $favicon.rel = 'icon';
+        $favicon.type = 'image/x-icon';
+        $favicon.href = link;
+        document.head.appendChild($favicon);
+    }
+}
+
 export async function setSystem() {
   let headLogo = '';
   let loginPic = '';
@@ -30,24 +45,14 @@ export async function setSystem() {
       sessionStorage.setItem('webName', ossData.web_name);
       await fetch(630045, {ckey: 'qiniu_domain', start: 1, limit: 10}).then(data => {
           if(data.list[0]) {
-              let $favicon = document.querySelector('link[rel="icon"]');
-              let link = `http://${data.list[0].cvalue}/${headLogo}`;
               loginPic = `http://${data.list[0].cvalue}/${ossData.login_pic}`;
               webIcon = `http://${data.list[0].cvalue}/${ossData.web_icon}`;
-              if ($favicon !== null) {
-                  $favicon.rel = 'icon';
-                  $favicon.type = 'image/x-icon';
-                  $favicon.href = link;
-              } else {
-                  $favicon = document.createElement('link');
-                  $favicon.rel = 'icon';
-                  $favicon.type = 'image/x-icon';
-                  $favicon.href = link;
-                  document.head.appendChild($favicon);
-              }
               sessionStorage.setItem('webIcon', webIcon);
               sessionStorage.setItem('loginPic', loginPic);
               sessionStorage.setItem('qiniuDomain', data.list[0].cvalue);
+              let link = `http://${data.list[0].cvalue}/${headLogo}`;
+              setWebIcon(link);
+              sessionStorage.setItem('headLogo', link);
           }
       });
   });

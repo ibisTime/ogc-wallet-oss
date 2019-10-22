@@ -4,7 +4,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadTxUserSign, setSelToId } from '@redux/user';
 import { setMsgList, addUserMap } from '@redux/message';
-import { clearUser, getUserId, getUserName } from 'common/js/util';
+import { clearUser, getUserId, getUserName, setWebIcon } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
@@ -55,6 +55,8 @@ class flashManagement extends React.Component {
     }
 
     componentDidMount() {
+        const webLogo = sessionStorage.getItem('headLogo');
+        setWebIcon(webLogo);
         this.props.addUserMap(getUserId(), {nickname: getUserName()});
     }
 
@@ -73,7 +75,7 @@ class flashManagement extends React.Component {
                 <div className="logo" onClick={() => {
                     this.props.history.push('/flashManagement');
                 }}>
-                    <img style ={{width: '72%', height: '40px'}} src={logo}/>
+                    <img style ={{height: '40px'}} src={logo}/>
                 </div>
                 <Menu
                     theme="dark"
