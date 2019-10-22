@@ -15,6 +15,7 @@ import './userStatistics.css';
 import headInfoImg from './head.png';
 import walletImg from './wallet.png';
 import handImg from './hand.png';
+import { Link } from 'react-router-dom';
 
 import {
     setTableData,
@@ -420,9 +421,9 @@ class userStatistics extends React.Component {
                         <div className="sendRmk">
                             <textarea ref={input => this.inputRmk = input} placeholder="请输入备注"></textarea>
                             <div className="box">
-                                <div className="btnGray" onClick={this.runBack}>返回</div>
-                                <div className="btnGray" style={{marginLeft: '20px', marginRight: '20px'}} onClick={this.notAdopt}>不通过</div>
-                                <div className="btnGray" style={{background: 'rgba(23,145,255,1)', color: '#FFFFFF', border: '0px'}} onClick={this.adopt}>通过</div>
+                                <Link to="#"><div className="btnGray" onClick={this.runBack}>返回</div></Link>
+                                <Link to="#"><div className="btnGray" style={{marginLeft: '20px', marginRight: '20px'}} onClick={this.notAdopt}>不通过</div></Link>
+                                <Link to="#"><div className="btnGray" style={{background: 'rgba(23,145,255,1)', color: '#FFFFFF', border: '0px'}} onClick={this.adopt}>通过</div></Link>
                             </div>
                         </div>
                     </Col>
