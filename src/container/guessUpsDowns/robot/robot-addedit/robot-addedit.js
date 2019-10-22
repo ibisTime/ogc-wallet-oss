@@ -19,9 +19,7 @@ class RobotAddedit extends DetailUtil {
             field: 'symbol',
             title: '针对币种',
             type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
-            valueName: 'key',
+            key: 'guess_coin',
             required: true
         }, {
             field: 'conditionsRate',

@@ -7,6 +7,7 @@ import {
     setSystem
 } from 'common/js/util';
 import {getRoleList} from 'api/company';
+import {getCoinList} from 'api/coin';
 // import {getPageMyNotice, getPageMyCompanysystem} from 'api/home';
 import './home.css';
 import userPhoto from '../../images/home-userPhoto.png';
@@ -22,6 +23,25 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        getCoinList().then(data => {
+            let coinList = [];
+            let coinData = {};
+            data.map(d => {
+                coinData[d.symbol] = {
+                    coin: d.symbol,
+                    unit: '1e' + d.unit,
+                    name: d.cname,
+                    type: d.type,
+                    status: d.status
+                };
+                coinList.push({
+                    key: d.symbol,
+                    value: d.cname
+                });
+            });
+            window.sessionStorage.setItem('coinData', JSON.stringify(coinData));
+            window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
+        });
         Promise.all([
             getRoleList()
             // getPageMyNotice(),

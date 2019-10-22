@@ -79,9 +79,7 @@ class Scene extends React.Component {
             field: 'symbol',
             title: '币种',
             type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
-            valueName: 'key',
+            key: 'guess_coin',
             search: true
         }, {
             field: 'recycleMins',

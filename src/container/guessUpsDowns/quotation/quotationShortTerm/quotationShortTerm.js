@@ -45,9 +45,7 @@ class QuotationShortTerm extends React.Component {
             field: 'symbol',
             title: '交易币种',
             type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
-            valueName: 'key',
+            key: 'guess_coin',
             search: true,
             noVisible: true
         }, {

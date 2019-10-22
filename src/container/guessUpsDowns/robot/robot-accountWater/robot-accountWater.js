@@ -85,9 +85,7 @@ class RobotAccountWater extends React.Component {
             field: 'currency',
             title: '币种',
             type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
-            valueName: 'value',
+            key: 'guess_coin',
             search: true
         }, {
             field: 'accountNumber',
