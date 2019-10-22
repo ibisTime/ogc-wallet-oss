@@ -2,13 +2,14 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Icon, Dropdown, Button } from 'antd';
 import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import logo from 'component/dashboard/wallt.png';
 import { loadTxUserSign, setSelToId } from '@redux/user';
 import { setMsgList, addUserMap } from '@redux/message';
-import { clearUser, getUserId, getUserName, setWebIcon } from 'common/js/util';
+import { clearUser, getUserId, getUserName } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
-import './superNode.css';
+import './card.css';
 import ROUTES from './route';
 
 const { SubMenu, Item } = Menu;
@@ -18,11 +19,11 @@ const { Header, Content, Sider } = Layout;
     state => ({ ...state.user, ...state.menu, ...state.message, loginName: state.user.loginName }),
     { setSelToId, loadTxUserSign, setMsgList, addUserMap }
 )
-class SuperNode extends React.Component {
+class Card extends React.Component {
     constructor(props) {
         super(props);
         let topMenuCode = '';
-        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/superNode') {
+        if (sessionStorage.getItem('superMenuName') && window.location.pathname !== '/card') {
             topMenuCode = sessionStorage.getItem('superMenuName');
         } else {
             topMenuCode = 'home';
@@ -35,36 +36,26 @@ class SuperNode extends React.Component {
                 code: 'home',
                 name: '首页'
             }, {
-                code: 'bonusPool',
-                name: '红利池'
+                code: 'secretKey',
+                name: '密钥对'
             }, {
-                code: 'periods',
-                name: '期数'
+                code: 'cardVolume',
+                name: '卡券'
             }, {
-                code: 'node',
-                name: '节点'
-            }, {
-                code: 'customer',
-                name: '用户'
-            }, {
-                code: 'setting',
-                name: '配置'
+                code: 'configuration',
+                name: '配置规则'
             }],
             // 菜单对应跳转url
             top2SubObj: {
-                'home': '/superNode',
-                'bonusPool': '/superNode/bonusPool',
-                'periods': '/superNode/periods',
-                'node': '/superNode/node',
-                'customer': '/superNode/customer',
-                'setting': '/superNode/setting'
+                'home': '/card',
+                'secretKey': '/card/secretKey',
+                'cardVolume': '/card/cardVolume',
+                'configuration': '/card/configuration'
             }
         };
     }
 
     componentDidMount() {
-        const webLogo = sessionStorage.getItem('headLogo');
-        setWebIcon(webLogo);
         this.props.addUserMap(getUserId(), {nickname: getUserName()});
     }
 
@@ -75,15 +66,12 @@ class SuperNode extends React.Component {
                 <Menu.Item><a href="#" onClick={this.logout}>退出</a></Menu.Item>
             </Menu>
         );
-        const logo = sessionStorage.getItem('webIcon');
-        const webName = sessionStorage.getItem('webName');
-        document.title = webName;
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
-                    this.props.history.push('/superNode');
+                    this.props.history.push('/card');
                 }}>
-                    <img style ={{height: '40px'}} src={logo}/>
+                    <img style ={{width: '72%', height: '40px'}} src={logo}/>
                 </div>
                 <Menu
                     theme="dark"
@@ -109,7 +97,7 @@ class SuperNode extends React.Component {
     }
 
     getContent() {
-        let rightCls = 'right-layout full-right-content';
+        let rightCls = 'right-layout full-right-content superNode-wrapper';
         let props = {
         };
         if (this.props.location.pathname === '/') {
@@ -261,4 +249,4 @@ class SuperNode extends React.Component {
     }
 }
 
-export default SuperNode;
+export default Card;

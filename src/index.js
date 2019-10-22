@@ -30,6 +30,9 @@ const GuessUpsDowns = asyncComponent(() => import('container/guessUpsDowns/guess
 // 集成生态-星球
 const StarLucky = asyncComponent(() => import('container/starLucky/starLucky'));
 
+// 卡卷
+const Card = asyncComponent(() => import('container/card/card'));
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -41,6 +44,7 @@ ReactDOM.render(
                     <Route path='/flashManagement' component={FlashExchange}></Route>
                     <Route path='/guessUpsDowns' component={GuessUpsDowns}></Route>
                     <Route path='/starLucky' component={StarLucky}></Route>
+                    <Route path='/card' component={Card}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>

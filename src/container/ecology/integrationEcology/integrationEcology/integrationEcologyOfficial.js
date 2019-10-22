@@ -17,7 +17,8 @@ class integrationEcologyOfficial extends React.Component {
             urlList: {
                 'dapp_super_node': '/superNode',
                 'dapp_star': '/starLucky',
-                'dapp_guess': '/guessUpsDowns'
+                'dapp_guess_ups_downs': '/guessUpsDowns',
+                'kimii_card': '/card'
             }
         };
     }
