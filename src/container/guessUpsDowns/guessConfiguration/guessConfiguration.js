@@ -54,6 +54,7 @@ class GuessConfiguration extends React.Component {
                 <span className={activeKey === 'open_time' ? 'set_config' : ''} data-key="open_time">猜涨跌时间</span>
                 <span className={activeKey === 'kline_trade' ? 'set_config' : ''} data-key="kline_trade">k线规则</span>
                 <span className={activeKey === 'betting_plat_dist' ? 'set_config' : ''} data-key="betting_plat_dist">平台抽成</span>
+                <span className={activeKey === 'betting_divide' ? 'set_config' : ''} data-key="betting_divide">团队分成</span>
                 <span className={activeKey === 'other' ? 'set_config' : ''} data-key="other">其他配置</span>
             </div>
             <div>
