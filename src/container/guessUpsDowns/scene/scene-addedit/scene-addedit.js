@@ -66,6 +66,12 @@ class SceneAddedit extends DetailUtil {
             number: true,
             required: true
         }, {
+            field: 'description',
+            title: '场次描述',
+            required: true,
+            type: 'textarea',
+            normalArea: true
+        }, {
             field: 'enableDatetime',
             title: '启用时间',
             hidden: !this.view,

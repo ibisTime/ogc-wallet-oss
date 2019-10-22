@@ -346,6 +346,13 @@ import {robotRecentWater} from './redux/guessUpsDowns/robotRecentWater';
 import {robotHistoryWater} from './redux/guessUpsDowns/robotHistoryWater';
 import {GuessConfiguration} from './redux/guessUpsDowns/guessConfiguration';
 
+// 商城管理
+import {storeShopCategory} from './redux/biz/store/shopCategory';
+import {storeShopMessage} from './redux/biz/store/shopMessage';
+import {storeShopOrder} from './redux/biz/store/shopOrder';
+import {storeShopRules} from './redux/biz/store/shopRules';
+import {storeShopLabels} from './redux/biz/store/shopLabels';
+
 export default combineReducers({
     user,
     menu,
@@ -613,5 +620,11 @@ export default combineReducers({
     legalTenderHistory,
     quotationCSDHistory,
     qutationETHHistory,
-    bizCoin
+    bizCoin,
+    // 商城管理
+    storeShopCategory,
+    storeShopMessage,
+    storeShopOrder,
+    storeShopRules,
+    storeShopLabels
 });
