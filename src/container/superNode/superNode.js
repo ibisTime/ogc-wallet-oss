@@ -83,7 +83,7 @@ class SuperNode extends React.Component {
                 <div className="logo" onClick={() => {
                     this.props.history.push('/superNode');
                 }}>
-                    <img style ={{height: '40px'}} src={logo}/>
+                    <img style ={{height: '40px', width: '80px'}} src={logo}/>
                 </div>
                 <Menu
                     theme="dark"
