@@ -56,6 +56,17 @@ class configureOfficial extends React.Component {
             rowKey: 'id',
             searchParams: {
                 envType: 2
+            },
+            btnEvent: {
+                edit: (selectedRowKeys) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/integrationEcology/configure/addedit?code=${selectedRowKeys[0]}`);
+                    }
+                }
             }
         });
     }

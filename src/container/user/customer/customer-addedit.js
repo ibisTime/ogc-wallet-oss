@@ -10,6 +10,7 @@ class CustomerAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.systemCode = sessionStorage.getItem('SYSTEM_CODE');
     }
 
     render() {
@@ -43,17 +44,20 @@ class CustomerAddedit extends DetailUtil {
                 value: '身份证'
             }],
             keyName: 'key',
-            valueName: 'value'
+            valueName: 'value',
+            hidden: this.systemCode === 'CL-STAR'
         }, {
             field: 'idNo',
             title: '证件号',
             readonly: this.view,
-            maxlength: 30
+            maxlength: 30,
+            hidden: this.systemCode === 'CL-STAR'
         }, {
             field: 'realName',
             title: '真实姓名',
             readonly: this.view,
-            maxlength: 10
+            maxlength: 10,
+            hidden: this.systemCode === 'CL-STAR'
         }, {
             field: 'userReferee',
             title: '推荐人',
@@ -74,29 +78,8 @@ class CustomerAddedit extends DetailUtil {
             title: '是否实名',
             formatter: (v, data) => {
                 return data.realName ? '是' : '否';
-            }
-        }, {
-            title: '节点用户等级',
-            field: 'nodeLevel',
-            formatter: (v, data) => {
-                let level;
-                if (v === '0') {
-                    level = '共营节点（高级）';
-                } else if (v === '1') {
-                    level = '社区节点（中级）';
-                } else if (v === '2') {
-                    level = '区域节点（初级）';
-                } else {
-                    level = '普通用户';
-                }
-                return level;
-            }
-        }, {
-            field: 'nodeAmount',
-            title: '成为节点用户HEY',
-            formatter(v) {
-                return (+v / 10000).toFixed(2);
-            }
+            },
+            hidden: this.systemCode === 'CL-STAR'
         }, {
             field: 'status',
             title: '状态',
