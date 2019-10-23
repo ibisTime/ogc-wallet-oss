@@ -7,7 +7,8 @@ import {
     moneyFormat,
     dateTimeFormat,
     getUserId,
-    getQueryString
+    getQueryString,
+    getCoinList
 } from 'common/js/util';
 
 import fetch from 'common/js/fetch';
@@ -54,11 +55,12 @@ class userStatistics extends React.Component {
         super(props);
         this.applyUser = getQueryString('applyUser', this.props.location.search);
         this.code = getQueryString('code', this.props.location.search);
+
         this.state = {
             nodeTitle: [],
             nodeList: [],
             candyNodeLevels: {},
-            coinInfo: 'PSC',
+            coinInfo: getCoinList()[0].key,
             userId: this.applyUser,
             code: this.code,
             userFlow: {
@@ -74,41 +76,27 @@ class userStatistics extends React.Component {
             isToAll: true,
             isToDay: false,
             isToThree: false,
-            isToSv: false
+            isToSv: false,
+            coinList: getCoinList()
         };
+        console.log('coinList', this.state.coinList);
         this.menu = (
             <Menu>
-                <Menu.Item>
-                    <span onClick={e => this.coinType(['PSC'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
-                        PSC
-                    </span>
-                </Menu.Item>
-                <Menu.Item>
-                    <span onClick={e => this.coinType(['BTC'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
-                        BTC
-                    </span>
-                </Menu.Item>
-                <Menu.Item>
-                    <span onClick={e => this.coinType(['ETH'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
-                        ETH
-                    </span>
-                </Menu.Item>
-                <Menu.Item>
-                    <span onClick={e => this.coinType(['USDT'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
-                        USDT
-                    </span>
-                </Menu.Item>
-                <Menu.Item>
-                    <span onClick={e => this.coinType(['E-USDT'])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
-                        E-USDT
-                    </span>
-                </Menu.Item>
+                {
+                    this.state.coinList.map(item => (
+                        <Menu.Item>
+                            <span onClick={e => this.coinType([item.key])} style={{width: '100%', display: 'block', textAlign: 'center'}}>
+                                {item.key}
+                            </span>
+                        </Menu.Item>
+                    ))
+                }
             </Menu>
         );
     }
     componentDidMount() {
-        // 默认显示TOSP全部的行为分布数据
-        this.sendDaysSelectList(['', 'PSC']);
+        // 默认显示币种全部的行为分布数据
+        this.sendDaysSelectList(['', getCoinList()[0].key]);
         // 流水条数统计
         flowStatistics(this.state.coinInfo, this.state.userId).then(data => {
             this.setState({
@@ -126,29 +114,30 @@ class userStatistics extends React.Component {
                     userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
                     userStatus: findDsct(this.state.userStatusList, data.withdraw.applyUserInfo.status),
                     userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
-                    userAmount: moneyFormat(data.withdraw.amount, '', 'ETH'),
-                    userFee: moneyFormat(data.withdraw.fee, '', 'ETH'),
-                    userActualAmount: moneyFormat(data.withdraw.actualAmount, '', 'ETH'),
+                    userAmount: moneyFormat(data.withdraw.amount, '', data.withdraw.currency),
+                    userFee: moneyFormat(data.withdraw.fee, '', data.withdraw.currency),
+                    userActualAmount: moneyFormat(data.withdraw.actualAmount, '', data.withdraw.currency),
                     userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
                     userPayCardNo: data.withdraw.payCardNo,
                     userCurrency: data.withdraw.currency,
-                    userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', 'ETH'),
+                    userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', data.withdraw.currency),
                     userAccountNumber: data.withdraw.accountNumber
                 });
+                let symbol = data.withdraw.currency;
                 flowSelectListOrDetail(this.state.userAccountNumber, '1', 1, 2).then(data => {
                     this.setState({
                         totalCount: data.totalCount
                     });
                 });
-            });
-        });
-        // 今日提币数量
-        toDaysWithdrawMoneyCount(this.state.code).then(data => {
-            this.setState({
-                toDayAmount: moneyFormat(data.amount, '', 'ETH'),
-                toDayIsWarnning: data.isWarnning,
-                lastWithdrawAmount: data.lastWithdraw ? moneyFormat(data.lastWithdraw.amount, '', 'ETH') : '0',
-                lastWithdrawApplyDatetime: data.lastWithdraw ? dateTimeFormat(data.lastWithdraw.applyDatetime) : '暂无记录'
+                // 今日提币数量
+                toDaysWithdrawMoneyCount(this.state.code).then(data => {
+                    this.setState({
+                        toDayAmount: moneyFormat(data.amount, '', symbol),
+                        toDayIsWarnning: data.isWarnning,
+                        lastWithdrawAmount: data.lastWithdraw ? moneyFormat(data.lastWithdraw.amount, '', symbol) : '0',
+                        lastWithdrawApplyDatetime: data.lastWithdraw ? dateTimeFormat(data.lastWithdraw.applyDatetime) : '暂无记录'
+                    });
+                });
             });
         });
     }
@@ -270,9 +259,10 @@ class userStatistics extends React.Component {
         param.codeList = [this.state.code];
         param.approveUser = getUserId();
         param.approveNote = inputRmk;
-        fetch(802352, param).then(() => {
+        fetch(802352, param).then(data => {
             showSucMsg('操作成功');
-            this.props.history.go(-1);
+            // this.props.history.go(-1);
+            this.props.history.push(`/BTC-finance/TBunderline`);
         });
     }
     adopt = () => {
@@ -282,13 +272,15 @@ class userStatistics extends React.Component {
         param.codeList = [this.state.code];
         param.approveUser = getUserId();
         param.approveNote = inputRmk;
-        fetch(802352, param).then(() => {
+        fetch(802352, param).then(data => {
             showSucMsg('操作成功');
-            this.props.history.go(-1);
+            // this.props.history.go(-1);
+            this.props.history.push(`/BTC-finance/TBunderline`);
         });
     }
     runBack = () => {
-        this.props.history.go(-1);
+        // this.props.history.go(-1);
+        window.history.go(-1);
     }
     selectFlowInList = () => {
         const {userAccountNumber} = this.state;
@@ -323,20 +315,20 @@ class userStatistics extends React.Component {
         }, {
             field: 'transAmountString',
             title: '变动金额',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'preAmountString',
             title: '变动前金额',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'postAmountString',
             title: '变动后金额',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'bizType',
@@ -446,7 +438,7 @@ class userStatistics extends React.Component {
                                 <div className="applicantInfoDetail">
                                     <span>余额</span>
                                     <br />
-                                    <span>{moneyFormat(userFlow.balanceAmount, '', 'ETH')}</span>
+                                    <span>{moneyFormat(userFlow.balanceAmount, '', coinInfo)}</span>
                                     <br />
                                     <span>流水总计<b> {userFlow.totalJourCount} </b>条</span>
                                     <br />

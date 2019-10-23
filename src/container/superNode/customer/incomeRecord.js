@@ -66,7 +66,7 @@ class IncomeRecord extends React.Component {
             field: 'usdtPrice',
             title: '分红价值',
             render: (v, data) => {
-                return formatMoney(v, '', '10000000') + ' USDT';
+                return formatMoney(v, '', '100000000') + ' USDT';
             }
         }, {
             field: 'status',

@@ -34,7 +34,7 @@ class currencyStatistics extends React.Component {
                 ['product', '今日存币数量', '今日提币数量', '截止今日币量']
             ];
             for(let i = 0; i < data.length; i++) {
-                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', 'ETH'), moneyFormat(data[i].todaySymbolOut, '', 'ETH'), moneyFormat(data[i].totalAmount, '', 'ETH')];
+                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', 'PSC'), moneyFormat(data[i].todaySymbolOut, '', 'PSC'), moneyFormat(data[i].totalAmount, '', 'PSC')];
             }
             sourceList.push(...nodeList);
             this.setState({
@@ -55,7 +55,7 @@ class currencyStatistics extends React.Component {
                 ['product', '今日存币数量', '今日提币数量', '截止今日币量']
             ];
             for(let i = 0; i < data.length; i++) {
-                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', 'ETH'), moneyFormat(data[i].todaySymbolOut, '', 'ETH'), moneyFormat(data[i].totalAmount, '', 'ETH')];
+                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', symbol), moneyFormat(data[i].todaySymbolOut, '', symbol), moneyFormat(data[i].totalAmount, '', symbol)];
             }
             sourceList.push(...nodeList);
             this.setState({

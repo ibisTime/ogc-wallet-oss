@@ -70,7 +70,7 @@ class BonusPoolRecordIntoPrev extends React.Component {
             },
             search: true
         }, {
-            field: 'nickname',
+            field: 'userName',
             title: '用户'
         }, {
             field: 'symbol',

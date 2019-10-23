@@ -73,9 +73,9 @@ class Home extends React.Component {
         }
         let nowAmount = moneyFormat(amount, 4, item.symbol, true, true);
         if (nowAmount / 10000 > 1) {
-            nowAmount = nowAmount / 10000 + '万';
+            nowAmount = (nowAmount / 10000);
         }
-        return nowAmount;
+        return nowAmount.toFixed(8) + '万';
     }
 
     render() {

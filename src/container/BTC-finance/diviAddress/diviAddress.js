@@ -110,7 +110,7 @@ class BTCDiviAddress extends React.Component {
                         } else if (selectedRowKeys.length > 1) {
                           showWarnMsg('请选择一条记录');
                         } else {
-                          this.props.history.push(`/user/channelDealer/accountQuery?isCDealer=1&userId=${selectedRowKeys[0]}`);
+                          this.props.history.push(`/user/channelDealer/accountQuery?isCDealer=1&userId=${selectedRows[0].userId}&isAct=1`);
                         }
                       }
                   }

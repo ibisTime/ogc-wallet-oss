@@ -49,20 +49,20 @@ class timerMonitor extends React.Component {
         }, {
             field: 'transAmountString',
             title: '变动金额',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'preAmountString',
             title: '变动前金额',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'postAmountString',
             title: '变动后金额',
-            render: (v) => {
-                return moneyFormat(v, '', 'ETH');
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'bizType',

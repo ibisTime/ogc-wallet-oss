@@ -31,11 +31,6 @@ class legalTender extends React.Component {
             title: '参照币种',
             field: 'referCurrency'
         }, {
-            title: '汇率来源',
-            field: 'origin',
-            type: 'select',
-            key: 'rate_origin'
-        }, {
             title: '汇率',
             field: 'rate'
         }, {

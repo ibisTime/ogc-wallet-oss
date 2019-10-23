@@ -79,6 +79,15 @@ class Setting extends React.Component {
             this.props.getPageData();
         });
     }
+    // 玩法介绍配置
+    setNodeConfig = () => {
+        this.setState({
+            type: 'node_config',
+            isSelect: true
+        }, () => {
+            this.props.getPageData();
+        });
+    }
     render() {
         const fields = [{
             field: 'remark',
@@ -102,6 +111,7 @@ class Setting extends React.Component {
                     <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRedeem}>赎回手续费配置</a>
                     <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRefereeRate}>推荐分红奖励配置</a>
                     <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeTaxRate}>交税比例配置</a>
+                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeConfig}>玩法介绍配置</a>
                 </div>
                 <div style={{height: '30px'}}></div>
                 {
@@ -144,6 +154,14 @@ class Setting extends React.Component {
                                             this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey + '&tp=' + type);
                                         }
                                     }else if(type === 'node_tax_rate') {
+                                        if (!selectedRowKeys.length) {
+                                            showWarnMsg('请选择记录');
+                                        } else if (selectedRowKeys.length > 1) {
+                                            showWarnMsg('请选择一条记录');
+                                        } else {
+                                            this.props.history.push('/superNode/setting/edit?code=' + selectedRows[0].id + '&ctype=' + selectedRows[0].ckey + '&tp=' + type);
+                                        }
+                                    }else if(type === 'node_config') {
                                         if (!selectedRowKeys.length) {
                                             showWarnMsg('请选择记录');
                                         } else if (selectedRowKeys.length > 1) {

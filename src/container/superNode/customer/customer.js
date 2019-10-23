@@ -37,7 +37,7 @@ class Customer extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            valueName: '{{nickname.DATA}}-{{email.DATA}}',
             search: true,
             searchName: 'keyword',
             render: (v, data) => {
@@ -65,19 +65,19 @@ class Customer extends React.Component {
             field: 'totalIncome',
             title: '总收益',
             render: (v, data) => {
-                return formatMoney(v, '', '10000000') + ' USDT';
+                return formatMoney(v, '', '100000000') + ' USDT';
             }
         }, {
             field: 'nodeIncome',
             title: '节点分红',
             render: (v, data) => {
-                return formatMoney(v, '', '10000000') + ' USDT';
+                return formatMoney(v, '', '100000000') + ' USDT';
             }
         }, {
             field: 'inviteIncome',
             title: '推荐奖励',
             render: (v, data) => {
-                return formatMoney(v, '', '10000000') + ' USDT';
+                return formatMoney(v, '', '100000000') + ' USDT';
             }
         }, {
             field: 'totalTax',

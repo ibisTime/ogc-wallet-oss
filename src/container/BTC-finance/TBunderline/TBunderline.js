@@ -40,8 +40,8 @@ class TBunderline extends React.Component {
             clearParams.addEventListener('click', () => {
             currency = '';
         });
-        getDictList({ parentKey: 'withdraw_biz_type' }).then(data => {
-            console.log('withdraw_biz_type', data);
+        getDictList({ parentKey: 'channel_type' }).then(data => {
+            console.log('channel_type', data);
         });
       }
     render() {
@@ -71,12 +71,6 @@ class TBunderline extends React.Component {
                 }, 0);
                 currency = v;
             }
-        }, {
-            field: 'bizType',
-            title: '订单类型',
-            type: 'select',
-            key: 'withdraw_biz_type',
-            search: true
         }, {
             field: 'accountName',
             title: '账号',

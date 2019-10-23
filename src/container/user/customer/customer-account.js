@@ -29,6 +29,7 @@ class CustomerAccount extends React.Component {
         super(props);
         this.userId = getQueryString('userId', this.props.location.search) || '';
         this.isCDealer = !!getQueryString('isCDealer', this.props.location.search);// 是否是渠道商管理点击进入
+        this.isAct = getQueryString('isAct', this.props.location.search);
         this.state = {
             // 窗口是否显示
             isVisible: false,
@@ -54,7 +55,7 @@ class CustomerAccount extends React.Component {
             check: false,
             handler: () => {
                 if (this.isCDealer) {
-                    this.props.history.push(`/user/channelDealer`);
+                    this.props.history.push(`/BTC-finance/diviAddress`);
                 } else {
                     this.props.history.push(`/user/customer`);
                 }

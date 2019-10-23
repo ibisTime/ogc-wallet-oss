@@ -97,7 +97,7 @@ class CustomerIdentify extends React.Component {
             title: '推荐人',
             render(v, d) {
                 if(d.user && d.user.refereeUser) {
-                    return `${d.user.refereeUser.realName ? d.user.refereeUser.realName : '用户名不存在'}-${d.user.refereeUser.mobile ? d.user.refereeUser.mobile : '手机号不存在'}`;
+                    return `${d.user.refereeUser.nickname} (${d.user.refereeUser.email})`;
                 }else {
                     return '暂无数据';
                 }

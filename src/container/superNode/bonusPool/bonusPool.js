@@ -198,7 +198,7 @@ class BonusPool extends React.Component {
                                 </Content>
                             </Layout>
                         </TabPane>
-                        <TabPane tab="上期入池记录" key="2">
+                        <TabPane tab="上期出池记录" key="2">
                             <Layout>
                                 <Content>
                                     <Switch>
