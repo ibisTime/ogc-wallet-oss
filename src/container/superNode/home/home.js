@@ -153,7 +153,7 @@ class Home extends React.Component {
                                             {item.orderNo}号节点<Tag color={nodeStatusColor[item.status]}>{nodeStatusDict[item.status]}</Tag>
                                         </div>
                                         <div className="homeContent-con">
-                                            <i className={item.status !== '2' ? '' : 'hidden'}>剩余 </i>{this.nodeNowAmount(item)}，<i>已投{item.sellRate * 100}%</i>
+                                            <i className={item.status !== '2' ? '' : 'hidden'}>剩余 </i>{this.nodeNowAmount(item)}，<i>已投{(item.sellRate * 100).toFixed(2)}%</i>
                                         </div>
                                         <div className="homeContent-progress">
                                             <Progress percent={item.sellRate * 100} showInfo={false} strokeWidth={4} strokeColor="#737DFF"/>

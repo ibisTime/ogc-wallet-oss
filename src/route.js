@@ -1082,6 +1082,10 @@ const ROUTES = [
         path: '/transferMng/internalTransferEx',
         component: asyncComponent(() => import('container/transferManagement/internalTransferEx'))
     },
+    {
+        path: '/transferMng/internalTransferEx/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-addedit'))
+    },
     // 转账管理 -- 内部转账查询
     {
         path: '/transferMng/internalTransferSlt',
@@ -1239,6 +1243,14 @@ const ROUTES = [
     {
         path: '/trading/tradMessage/addedit',
         component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-addedit'))
+    },
+    {
+        path: '/trading/tradMessage/startTimeSet',
+        component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-startTimeSet'))
+    },
+    {
+        path: '/trading/tradMessage/frequency',
+        component: asyncComponent(() => import('container/biz/trading/tradMessage/tradMessage-frequency'))
     },
     {
         path: '/cloud/millMessage',
