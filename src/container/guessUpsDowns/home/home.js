@@ -84,7 +84,10 @@ class Home extends React.Component {
             valueName: 'value'
         }, {
             field: 'betAmount',
-            title: '投注金额'
+            title: '投注金额',
+            render(v, d) {
+                return v && moneyFormat(v, '4', d.symbol);
+            }
         }, {
             field: 'betDatetime',
             title: '投注时间',
