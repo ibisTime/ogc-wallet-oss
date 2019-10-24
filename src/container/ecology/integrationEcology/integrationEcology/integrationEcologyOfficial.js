@@ -60,13 +60,12 @@ class integrationEcologyOfficial extends React.Component {
                 <Row>
                     {
                         data.length > 0 && data.map((item) => (
-                            <Col key={item.id} style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}} key='1'>
+                            <Col key={item.id} style={{marginBottom: '30px', width: '20%', float: 'left', marginRight: '30px'}} key='1'>
                                 <Card onClick={
                                     () => this.onCardClick(item)
                                 }>
-                                    <div style={{width: '100%'}}>
-                                        <div style={{fontSize: '16px', marginBottom: '10px'}}>{item.name}</div>
-                                        <div>{item.name === 'IGO' ? '活跃用户' : '用户量'}： {item.userCount}</div>
+                                    <div style={{width: '100%', textAlign: 'center'}}>
+                                        {item.name}
                                     </div>
                                 </Card>
                             </Col>

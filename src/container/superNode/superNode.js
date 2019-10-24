@@ -47,6 +47,9 @@ class SuperNode extends React.Component {
                 code: 'customer',
                 name: '用户'
             }, {
+                code: 'destruction',
+                name: '销毁池'
+            }, {
                 code: 'setting',
                 name: '配置'
             }],
@@ -57,6 +60,7 @@ class SuperNode extends React.Component {
                 'periods': '/superNode/periods',
                 'node': '/superNode/node',
                 'customer': '/superNode/customer',
+                'destruction': '/superNode/destruction',
                 'setting': '/superNode/setting'
             }
         };

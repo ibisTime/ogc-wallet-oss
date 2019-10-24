@@ -345,6 +345,8 @@ import {robotAccountWater} from './redux/guessUpsDowns/robotAccountWater';
 import {robotRecentWater} from './redux/guessUpsDowns/robotRecentWater';
 import {robotHistoryWater} from './redux/guessUpsDowns/robotHistoryWater';
 import {GuessConfiguration} from './redux/guessUpsDowns/guessConfiguration';
+import {destructionPondIn} from './redux/superNode/destructionPondIn';
+import {destructionPondOut} from './redux/superNode/destructionPondOut';
 
 // 商城管理
 import {storeShopCategory} from './redux/biz/store/shopCategory';
@@ -575,6 +577,8 @@ export default combineReducers({
     SuperNodeSetting,
     SuperNodeLeftOver,
     SuperNodeAdjustment,
+    destructionPondIn,
+    destructionPondOut,
     // 统计分析
     timerMonitor,
     timerPerformance,
