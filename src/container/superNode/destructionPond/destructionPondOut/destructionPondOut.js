@@ -29,11 +29,13 @@ class destructionPondOut extends React.Component {
             title: '入池时间',
             render: (v, data) => {
                 return dateTimeFormat(data.createDatetime);
-            },
-            search: true
+            }
         }, {
-            field: 'remark',
-            title: '业务类型',
+            field: 'createDatetime',
+            title: '时间',
+            type: 'date',
+            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
+            noVisible: true,
             search: true
         }, {
             field: 'symbol',
@@ -63,8 +65,8 @@ class destructionPondOut extends React.Component {
             rowKey: 'id',
             noSelect: true,
             searchParams: {
-                direction: '1',
-                nodePlan: '1'
+                direction: '0',
+                poolType: 'snodeDestroy'
             }
         });
     }

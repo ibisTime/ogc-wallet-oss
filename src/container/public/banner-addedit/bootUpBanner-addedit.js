@@ -5,7 +5,7 @@ import DetailUtil from 'common/js/build-detail';
 import { getDictList } from 'api/dict';
 
 @Form.create()
-class BannerAddEdit extends DetailUtil {
+class bootUpBannerAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -98,7 +98,7 @@ class BannerAddEdit extends DetailUtil {
             editCode: 630502,
             detailCode: 630507,
             beforeSubmit: (params) => {
-                params.location = 'app_home';
+                params.location = 'app_guide';
                 if (params.location === 'app_guide') {
                     params.type = '0';
                     return params;
@@ -114,4 +114,4 @@ class BannerAddEdit extends DetailUtil {
     }
 }
 
-export default BannerAddEdit;
+export default bootUpBannerAddedit;

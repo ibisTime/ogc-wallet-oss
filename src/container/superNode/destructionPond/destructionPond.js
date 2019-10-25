@@ -50,7 +50,7 @@ class destructionPond extends React.Component {
         // 直接请求
         Promise.all([
             // 分红池总额总资产折合
-            fetch(610663)
+            fetch(610673)
         ]).then(([totalAmountData]) => {
             this.setState({
                 totalAmountData
@@ -83,7 +83,7 @@ class destructionPond extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                if(isUndefined(values.adjustCount)) {
+                if(isUndefined(values)) {
                     this.setState({
                         adjustPopupFlag: true
                     });
@@ -92,18 +92,19 @@ class destructionPond extends React.Component {
                 this.setState({
                     adjustPopupFlag: false
                 });
-                this.doAdjust(values.adjustCount);
+                this.doAdjust(values);
             }
         });
     }
 
-    doAdjust = (adjustCount) => {
+    doAdjust = (values) => {
         // 直接请求
         Promise.all([
             // 调额
-            fetch(610660, {
-                adjustCount: parseFloat(adjustCount),
-                poolId: this.state.selectedData.id
+            fetch(610672, {
+                count: parseFloat(values.dtCount * Math.pow(10, 18)),
+                poolId: this.state.selectedData.id,
+                remark: values.dtRemark
             })
         ]).then(() => {
             this.setState({
@@ -118,8 +119,12 @@ class destructionPond extends React.Component {
         });
     }
 
-    // 红利池调额弹窗-保存
-    validatorAdjustCount = () => {
+    // 备注-保存
+    dtRemark = () => {
+        return true;
+    }
+    // 销毁额度-保存
+    dtCount = () => {
         return true;
     }
 
@@ -146,16 +151,16 @@ class destructionPond extends React.Component {
                 return moneyFormat(v, '', data.symbol);
             }
         }, {
-            field: 'remainCount',
+            field: 'countIn',
             title: '入池总额',
             render: (v, data) => {
-                return <span>{moneyFormat(v, '', data.symbol)}<samp className="tc_purple" onClick={() => this.onLeftOver(data.id)}>  遗留记录</samp></span>;
+                return moneyFormat(v, '', data.symbol);
             }
         }, {
-            field: 'totalAdjustCount',
+            field: 'countOut',
             title: '销毁(出池)总额',
             render: (v, data) => {
-                return <span>{moneyFormat(v, '', data.symbol)}<samp className="tc_purple" onClick={() => this.onAjt(data.id)}>  调整记录</samp></span>;
+                return moneyFormat(v, '', data.symbol);
             }
         }, {
             field: 'operation',
@@ -181,7 +186,7 @@ class destructionPond extends React.Component {
                                 noPagination: true,
                                 noSelect: true,
                                 searchParams: {
-                                    type: 'snode'
+                                    type: 'snodeDestroy'
                                 }
                             })
                         }
@@ -218,12 +223,12 @@ class destructionPond extends React.Component {
                                 <Icon type="close-circle" onClick={() => this.onAdjustCancel()}/>
                             </div>
                             <div className={adjustPopupFlag ? 'adjust-popup-content error' : 'adjust-popup-content'}>
-                                <div className="text">币种: {selectedData.symbol}</div>
-                                <div className="text">累计调额: {moneyFormat(selectedData.totalAdjustCount, '', 'ETH')}{selectedData.symbol}</div>
-                                <Form.Item label="额度">
-                                    {getFieldDecorator('adjustCount', {
+                                <div className="text">当前余额: {moneyFormat(selectedData.count, '', selectedData.symbol)} {selectedData.symbol}</div>
+                                <div className="text">累计销毁: {moneyFormat(selectedData.countOut, '', selectedData.symbol)} {selectedData.symbol}</div>
+                                <Form.Item label="销毁金额">
+                                    {getFieldDecorator('dtCount', {
                                         rules: [{
-                                            validator: this.validatorAdjustCount
+                                            validator: this.dtCount
                                         }]
                                     })(
                                         <Input
@@ -232,7 +237,18 @@ class destructionPond extends React.Component {
                                         />
                                     )}
                                 </Form.Item>
-                                <div className="warn">正数表示加额度，负数表示减额度</div>
+                                <Form.Item label="销毁备注">
+                                    {getFieldDecorator('dtRemark', {
+                                        rules: [{
+                                            validator: this.dtRemark
+                                        }]
+                                    })(
+                                        <Input
+                                            type="text"
+                                            placeholder=""
+                                        />
+                                    )}
+                                </Form.Item>
                             </div>
                             <div className="adjust-popup-button">
                                 <Button onClick={() => this.onAdjustCancel()}>返回</Button>

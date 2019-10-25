@@ -27,7 +27,7 @@ import fetch from 'common/js/fetch';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class Banner extends React.Component {
+class bootUpBanner extends React.Component {
     render() {
         const fields = [{
             title: '名称',
@@ -45,7 +45,7 @@ class Banner extends React.Component {
             pageCode: '630505',
             searchParams: {
                 typeList: ['0', '1', '2'],
-                location: 'app_home'
+                location: 'app_guide'
             },
             singleSelect: false,
             btnEvent: {
@@ -91,4 +91,4 @@ class Banner extends React.Component {
     }
 }
 
-export default Banner;
+export default bootUpBanner;

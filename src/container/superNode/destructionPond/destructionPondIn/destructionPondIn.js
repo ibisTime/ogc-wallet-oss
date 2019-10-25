@@ -29,11 +29,19 @@ class destructionPondIn extends React.Component {
             title: '入池时间',
             render: (v, data) => {
                 return dateTimeFormat(data.createDatetime);
-            },
+            }
+        }, {
+            field: 'createDatetime',
+            title: '时间',
+            type: 'date',
+            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
+            noVisible: true,
             search: true
         }, {
-            field: 'remark',
+            field: 'bizType',
             title: '业务类型',
+            type: 'select',
+            key: 'pool_biz_type',
             search: true
         }, {
             field: 'symbol',
@@ -64,7 +72,7 @@ class destructionPondIn extends React.Component {
             noSelect: true,
             searchParams: {
                 direction: '1',
-                nodePlan: '1'
+                poolType: 'snodeDestroy'
             }
         });
     }

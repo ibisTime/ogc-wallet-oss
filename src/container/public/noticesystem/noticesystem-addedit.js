@@ -25,6 +25,23 @@ class NoticesAddedit extends DetailUtil {
             maxlength: 50,
             required: true
         }, {
+            title: '针对人群',
+            field: 'target',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: 'C端用户'
+            }, {
+                key: '2',
+                value: 'B端用户'
+            }, {
+                key: '3',
+                value: '平台用户'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            required: true
+        }, {
             title: '内容',
             field: 'content',
             type: 'textarea',

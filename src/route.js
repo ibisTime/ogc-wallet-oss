@@ -146,7 +146,7 @@ const ROUTES = [
         path: '/public/noticesystem/addedit',
         component: asyncComponent(() => import('container/public/noticesystem/noticesystem-addedit'))
     },
-    // 广告位管理
+    // 广告位管理 --- banner
     {
         path: '/public/banner',
         component: asyncComponent(() => import('container/public/banner/banner'))
@@ -154,6 +154,15 @@ const ROUTES = [
     {
         path: '/public/banner/addedit',
         component: asyncComponent(() => import('container/public/banner-addedit/banner-addedit'))
+    },
+    // 广告位管理 --- 开机
+    {
+        path: '/public/bootUpBanner',
+        component: asyncComponent(() => import('container/public/banner/bootUpBanner'))
+    },
+    {
+        path: '/public/bootUpBanner/addedit',
+        component: asyncComponent(() => import('container/public/banner-addedit/bootUpBanner-addedit'))
     },
     // BUG反馈管理
     {

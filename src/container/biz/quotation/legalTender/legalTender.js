@@ -46,9 +46,6 @@ class legalTender extends React.Component {
                 startDatetime: formatDate(new Date()) + ' 00:00'
             },
             btnEvent: {
-                history: () => {
-                    this.props.history.push(`/quotation/legalTenderHistory`);
-                },
                 edit: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');

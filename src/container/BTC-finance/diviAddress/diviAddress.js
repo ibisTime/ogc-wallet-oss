@@ -70,6 +70,24 @@ class BTCDiviAddress extends React.Component {
                   pageCode: '805900',
                   singleSelect: false,
                   btnEvent: {
+                      today: (selectedRowKeys, selectedRows) => {
+                        if (!selectedRowKeys.length) {
+                          showWarnMsg('请选择记录');
+                        } else if (selectedRowKeys.length > 1) {
+                          showWarnMsg('请选择一条记录');
+                        } else {
+                          this.props.history.push(`/user/customer/ledgerQuery?code=${selectedRows[0].accountNumber}`);
+                        }
+                      },
+                      toHistory: (selectedRowKeys, selectedRows) => {
+                        if (!selectedRowKeys.length) {
+                          showWarnMsg('请选择记录');
+                        } else if (selectedRowKeys.length > 1) {
+                          showWarnMsg('请选择一条记录');
+                        } else {
+                          this.props.history.push(`/user/customer/ledgerQueryHistory?code=${selectedRows[0].accountNumber}`);
+                        }
+                      },
                       // 购买
                       flowQuery: (selectedRowKeys, selectedRows) => {
                           if (!selectedRowKeys.length) {
