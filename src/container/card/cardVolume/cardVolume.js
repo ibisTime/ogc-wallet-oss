@@ -90,7 +90,7 @@ class CardVolume extends React.Component {
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '610643',
+                    pageCode: '610743',
                     buttons: [{
                         code: 'cardLog',
                         name: '卡券日志'

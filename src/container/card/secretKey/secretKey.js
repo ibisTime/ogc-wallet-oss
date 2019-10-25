@@ -73,7 +73,7 @@ class SecretKey extends React.Component {
             }
             let param = {};
             param.publicKeyList = this.state.data;
-            fetch(610600, param).then(() => {
+            fetch(610700, param).then(() => {
                 showSucMsg('导入成功');
                 this.setState({
                     visible: false
@@ -141,7 +141,7 @@ class SecretKey extends React.Component {
                 this.props.buildList({
                     fields,
                     rowKey: 'id',
-                    pageCode: '610603',
+                    pageCode: '610703',
                     buttons: [{
                         code: 'import',
                         name: '导入'
@@ -168,7 +168,7 @@ class SecretKey extends React.Component {
                                     onOk: () => {
                                         this.props.doFetching();
                                         this.props.doFetching();
-                                        fetch(610602, {
+                                        fetch(610702, {
                                             id: selectedRowKeys[0]
                                         }).then(() => {
                                             showSucMsg('操作成功');

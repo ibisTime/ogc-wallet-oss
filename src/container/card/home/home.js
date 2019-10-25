@@ -45,12 +45,12 @@ class Home extends React.Component {
         };
     }
     componentDidMount() {
-        fetch('610609').then(data => {
+        fetch('610709').then(data => {
             this.setState({
                 secretKey: data
             });
         });
-        fetch('610652').then(data => {
+        fetch('610752').then(data => {
             this.setState({
                 cardObj: data
             });
@@ -113,7 +113,7 @@ class Home extends React.Component {
                         {
                             this.props.buildList({
                                 fields,
-                                pageCode: '610623',
+                                pageCode: '610723',
                                 noSelect: true
                             })
                         }

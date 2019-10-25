@@ -71,7 +71,7 @@ class CardLog extends React.Component {
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '610663',
+                    pageCode: '610763',
                     searchParams: {
                         cardCode: this.code
                     },
