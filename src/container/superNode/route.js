@@ -63,6 +63,10 @@ const ROUTES = [
     {
         path: '/superNode/bonusPool/leftOver',
         component: asyncComponent(() => import('container/superNode/bonusPool/leftOver/leftOver'))
+    },
+    {
+        path: '/superNode/destruction',
+        component: asyncComponent(() => import('container/superNode/destructionPond/destructionPond'))
     }
 ];
 
