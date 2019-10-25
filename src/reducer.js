@@ -355,6 +355,13 @@ import {storeShopOrder} from './redux/biz/store/shopOrder';
 import {storeShopRules} from './redux/biz/store/shopRules';
 import {storeShopLabels} from './redux/biz/store/shopLabels';
 
+// 卡卷
+import {CardHome} from './redux/card/home';
+import {CardConfiguration} from './redux/card/cardConfiguration';
+import {CardcardLog} from './redux/card/cardLog';
+import {CardCardVolume} from './redux/card/cardVolume';
+import {CardSecretKey} from './redux/card/secretKey';
+
 export default combineReducers({
     user,
     menu,
@@ -625,6 +632,12 @@ export default combineReducers({
     quotationCSDHistory,
     qutationETHHistory,
     bizCoin,
+    // 卡卷
+    CardHome,
+    CardConfiguration,
+    CardcardLog,
+    CardCardVolume,
+    CardSecretKey,
     // 商城管理
     storeShopCategory,
     storeShopMessage,
