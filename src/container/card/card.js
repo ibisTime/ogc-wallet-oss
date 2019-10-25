@@ -2,10 +2,9 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Icon, Dropdown, Button } from 'antd';
 import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import logo from 'component/dashboard/wallt.png';
 import { loadTxUserSign, setSelToId } from '@redux/user';
 import { setMsgList, addUserMap } from '@redux/message';
-import { clearUser, getUserId, getUserName } from 'common/js/util';
+import { clearUser, getUserId, getUserName, setWebIcon } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import EditPwd from 'component/edit-pwd/edit-pwd';
 import 'component/dashboard/dashboard.css';
@@ -54,8 +53,9 @@ class Card extends React.Component {
             }
         };
     }
-
     componentDidMount() {
+        const webLogo = sessionStorage.getItem('headLogo');
+        setWebIcon(webLogo);
         this.props.addUserMap(getUserId(), {nickname: getUserName()});
     }
 
@@ -66,6 +66,9 @@ class Card extends React.Component {
                 <Menu.Item><a href="#" onClick={this.logout}>退出</a></Menu.Item>
             </Menu>
         );
+        const logo = sessionStorage.getItem('webIcon');
+        const webName = sessionStorage.getItem('webName');
+        document.title = webName;
         return (
             <Header className="header">
                 <div className="logo" onClick={() => {
