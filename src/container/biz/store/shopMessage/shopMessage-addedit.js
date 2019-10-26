@@ -1,7 +1,7 @@
 import React from 'react';
-import {Form} from 'antd';
+import { Form } from 'antd';
 import DetailUtil from 'common/js/build-detail';
-import {getQueryString} from 'common/js/util';
+import {getQueryString, moneyFormat} from 'common/js/util';
 
 @Form.create()
 class ShopMessageAddedit extends DetailUtil {
@@ -17,7 +17,6 @@ class ShopMessageAddedit extends DetailUtil {
     };
     this.timer = null;
   }
-
   render() {
     const fields = [{
       field: 'code',
@@ -51,8 +50,8 @@ class ShopMessageAddedit extends DetailUtil {
         });
       },
       formatter: (v) => {
-        if (v && this.code) {
-          if (this.firstUpdate) {
+        if(v && this.code) {
+          if(this.firstUpdate) {
             this.firstUpdate = false;
             this.shopKind = v;
             this.setState({
@@ -140,18 +139,16 @@ class ShopMessageAddedit extends DetailUtil {
             return this.shopKind === '2' ? '0' : v;
           },
           onKeyUp: (v) => {
-            if (this.timer) {
+            if(this.timer) {
               clearTimeout(this.timer);
             }
             this.timer = setTimeout(() => {
               const discountTipEle = document.getElementById('discountTipEle');
               const discount = document.getElementById('discount').value;
-              if ((!isNaN(+v) && v !== '') && (!isNaN(+discount) && discount
-                  !== '')) {
-                const price = (Math.floor(+discount * +v * 100) / 100).toFixed(
-                    2);
+              if((!isNaN(+v) && v !== '') && (!isNaN(+discount) && discount !== '')) {
+                const price = (Math.floor(+discount * +v * 100) / 100).toFixed(2);
                 discountTipEle.innerText = `售价：${price} = ${v} * ${discount}`;
-              } else {
+              }else {
                 discountTipEle.innerText = '';
               }
             }, 500);
@@ -175,19 +172,16 @@ class ShopMessageAddedit extends DetailUtil {
             }
           },
           onKeyUp: (v) => {
-            if (this.timer) {
+            if(this.timer) {
               clearTimeout(this.timer);
             }
             this.timer = setTimeout(() => {
               const discountTipEle = document.getElementById('discountTipEle');
-              const originalPrice = document.getElementById(
-                  'originalPrice').value;
-              if ((!isNaN(+v) && v !== '') && (!isNaN(+originalPrice)
-                  && originalPrice !== '')) {
-                const price = (Math.floor(+originalPrice * v * 100)
-                    / 100).toFixed(2);
+              const originalPrice = document.getElementById('originalPrice').value;
+              if((!isNaN(+v) && v !== '') && (!isNaN(+originalPrice) && originalPrice !== '')) {
+                const price = (Math.floor(+originalPrice * v * 100) / 100).toFixed(2);
                 discountTipEle.innerText = `售价：${price} = ${originalPrice} * ${v}`;
-              } else {
+              }else {
                 discountTipEle.innerText = '';
               }
             }, 500);
@@ -236,7 +230,7 @@ class ShopMessageAddedit extends DetailUtil {
       editCode: '808012',
       beforeSubmit: (params) => {
         params.storeCode = 'SYS_JINMI_YOUXUAN';
-        if (this.shopKind === '2') {
+        if(this.shopKind === '2') {
           params.productSpecsList.forEach(item => {
             item.originalPrice = '0';
             item.discount = '0';
