@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from 'antd';
-import DetailUtil from 'common/js/build-detail';
+import DetailUtil from 'common/js/build-detail-o2m';
 import {getQueryString, moneyFormat} from 'common/js/util';
 
 @Form.create()
