@@ -31,7 +31,7 @@ class ShopRules extends React.Component {
             field: 'cvalue',
             title: '数值'
         }];
-        return (<div>
+        return (<div className="superNode-listPage-wrapper">
             {
                 this.props.buildList({
                     fields,
@@ -40,6 +40,10 @@ class ShopRules extends React.Component {
                     searchParams: {
                         type: 'mall'
                     },
+                    buttons: [{
+                        code: 'edit',
+                        name: '修改'
+                    }],
                     btnEvent: {
                         edit: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
@@ -47,7 +51,7 @@ class ShopRules extends React.Component {
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/bonusPools/bonusRules/addedit?code=${selectedRowKeys[0]}&ctype=${selectedRows[0].ckey}&type=mall`);
+                                this.props.history.push(`/store/storeConfiguration/addedit?code=${selectedRowKeys[0]}&ctype=${selectedRows[0].ckey}&type=mall`);
                             }
                         }
                     }

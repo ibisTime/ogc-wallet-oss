@@ -18,7 +18,8 @@ class integrationEcologyOfficial extends React.Component {
                 'dapp_super_node': '/superNode',
                 'dapp_star': '/starLucky',
                 'dapp_guess_ups_downs': '/guessUpsDowns',
-                'kimii_card': '/card'
+                'kimii_card': '/card',
+                'kimii_mall': '/store'
             }
         };
     }

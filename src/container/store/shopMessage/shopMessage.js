@@ -78,13 +78,18 @@ class ShopMessage extends React.Component {
         key: 'mall_product_status',
         search: true
     }];
-    return <div>
+    return <div className="superNode-listPage-wrapper">
         {
             this.props.buildList({
                 fields,
                 pageCode: 808025,
-                btnEvent: {
-                    edit: (selectedRowKeys, selectedRows) => {
+                buttons: [{
+                    code: 'add',
+                    name: '新增'
+                }, {
+                    code: 'edit',
+                    name: '修改',
+                    handler: (selectedRowKeys) => {
                         if (!selectedRowKeys.length) {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
@@ -92,8 +97,11 @@ class ShopMessage extends React.Component {
                         } else {
                             this.props.history.push(`/store/shopMessage/addedit?code=${selectedRowKeys[0]}`);
                         }
-                    },
-                    up: (selectedRowKeys, selectedRows) => {
+                    }
+                }, {
+                    code: 'up',
+                    name: '上架',
+                    handler: (selectedRowKeys, selectedRows) => {
                         if (!selectedRowKeys.length) {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
@@ -121,8 +129,11 @@ class ShopMessage extends React.Component {
                                 }
                             });
                         }
-                    },
-                    down: (selectedRowKeys, selectedRows) => {
+                    }
+                }, {
+                    code: 'down',
+                    name: '下架',
+                    handler: (selectedRowKeys, selectedRows) => {
                         if (!selectedRowKeys.length) {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
@@ -147,7 +158,10 @@ class ShopMessage extends React.Component {
                             });
                         }
                     }
-                }
+                }, {
+                    code: 'detail',
+                    name: '详情'
+                }]
             })
         }
     </div>;

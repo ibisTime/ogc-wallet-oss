@@ -38,15 +38,19 @@ class ShopLabels extends React.Component {
             field: 'remark',
             title: '备注'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: 630035,
-            deleteCode: 630031,
-            rowKey: 'id',
-            searchParams: {
-                parentKey: 'mall_product_tag'
+        return <div className="superNode-listPage-wrapper">
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: 630035,
+                    deleteCode: 630031,
+                    rowKey: 'id',
+                    searchParams: {
+                        parentKey: 'mall_product_tag'
+                    }
+                })
             }
-        });
+        </div>;
     }
 }
 

@@ -96,23 +96,32 @@ class ShopOrder extends React.Component {
         key: 'mall_order_status',
         search: true
     }];
-    return this.props.buildList({
-        fields,
-        pageCode: 808065,
-        btnEvent: {
-            logisticsDelivery: (selectedRowKeys, selectedRows) => {
-                if (!selectedRowKeys.length) {
-                    showWarnMsg('请选择记录');
-                } else if (selectedRowKeys.length > 1) {
-                    showWarnMsg('请选择一条记录');
-                } else if (selectedRows[0].status !== '2') {
-                    showWarnMsg('该状态下不能进行该操作');
-                } else {
-                    this.props.history.push(`/store/shopOrder-logistics?code=${selectedRowKeys[0]}`);
-                }
-            }
-        }
-    });
+      return <div className="superNode-listPage-wrapper">
+          {
+              this.props.buildList({
+                  fields,
+                  pageCode: 808065,
+                  buttons: [{
+                      code: 'logisticsDelivery',
+                      name: '物流发货',
+                      handler: (selectedRowKeys, selectedRows) => {
+                          if (!selectedRowKeys.length) {
+                              showWarnMsg('请选择记录');
+                          } else if (selectedRowKeys.length > 1) {
+                              showWarnMsg('请选择一条记录');
+                          } else if (selectedRows[0].status !== '2') {
+                              showWarnMsg('该状态下不能进行该操作');
+                          } else {
+                              this.props.history.push(`/store/shopOrder-logistics?code=${selectedRowKeys[0]}`);
+                          }
+                      }
+                  }, {
+                      code: 'detail',
+                      name: '详情'
+                  }]
+              })
+          }
+      </div>;
   }
 }
 

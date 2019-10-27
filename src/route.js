@@ -1440,56 +1440,6 @@ const ROUTES = [
     {
         path: '/userStatistics/currencyStatistics',
         component: asyncComponent(() => import('container/userStatistics/currencyStatistics'))
-    },
-    {
-        path: '/store/shopCategory',
-        component: asyncComponent(
-            () => import('container/biz/store/shopCategory/shopCategory'))
-    },
-    {
-        path: '/store/shopCategory/addedit',
-        component: asyncComponent(
-            () => import('container/biz/store/shopCategory/shopCategory-addedit'))
-    },
-    {
-        path: '/store/shopMessage',
-        component: asyncComponent(
-            () => import('container/biz/store/shopMessage/shopMessage'))
-    },
-    {
-        path: '/store/shopMessage/addedit',
-        component: asyncComponent(
-            () => import('container/biz/store/shopMessage/shopMessage-addedit'))
-    },
-    {
-        path: '/store/shopLabels',
-        component: asyncComponent(
-            () => import('container/biz/store/shopLabels/shopLabels'))
-    },
-    {
-        path: '/store/shopLabels/addedit',
-        component: asyncComponent(
-            () => import('container/biz/store/shopLabels/shopLabels-addedit'))
-    },
-    {
-        path: '/store/shopRules',
-        component: asyncComponent(
-            () => import('container/biz/store/shopRules/shopRules'))
-    },
-    {
-        path: '/store/shopOrder',
-        component: asyncComponent(
-            () => import('container/biz/store/shopOrder/shopOrder'))
-    },
-    {
-        path: '/store/shopOrder/addedit',
-        component: asyncComponent(
-            () => import('container/biz/store/shopOrder/shopOrder-addedit'))
-    },
-    {
-        path: '/store/shopOrder-logistics',
-        component: asyncComponent(
-            () => import('container/biz/store/shopOrder/shopOrder-logistics'))
     }
 ];
 

@@ -44,14 +44,22 @@ class ShopCategory extends React.Component {
         key: 'mall_category_status',
         search: true
     }];
-    return <div>
+    return <div className="superNode-listPage-wrapper">
         {
             this.props.buildList({
                 fields,
                 pageCode: 808005,
                 deleteCode: '808001',
-                btnEvent: {
-                    up: (selectedRowKeys, rows) => {
+                buttons: [{
+                    code: 'add',
+                    name: '新增'
+                }, {
+                    code: 'edit',
+                    name: '修改'
+                }, {
+                    code: 'up',
+                    name: '上架',
+                    handler: (selectedRowKeys, rows) => {
                         if (!selectedRowKeys.length) {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
@@ -75,8 +83,11 @@ class ShopCategory extends React.Component {
                                 }
                             });
                         }
-                    },
-                    down: (selectedRowKeys, rows) => {
+                    }
+                }, {
+                    code: 'down',
+                    name: '下架',
+                    handler: (selectedRowKeys, rows) => {
                         if (!selectedRowKeys.length) {
                             showWarnMsg('请选择记录');
                         } else if (selectedRowKeys.length > 1) {
@@ -101,7 +112,10 @@ class ShopCategory extends React.Component {
                             });
                         }
                     }
-                }
+                }, {
+                    code: 'delete',
+                    name: '删除'
+                }]
             })
         }
     </div>;
