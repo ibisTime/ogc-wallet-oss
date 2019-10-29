@@ -80,16 +80,10 @@ class SdRecord extends React.Component {
                         pageCode: 802930,
                         buttons: [{
                             code: 'detail',
-                            name: '详情',
-                            handler: (selectedRowKeys, selectedRows) => {
-                                if (!selectedRowKeys.length) {
-                                    showWarnMsg('请选择记录');
-                                } else if (selectedRowKeys.length > 1) {
-                                    showWarnMsg('请选择一条记录');
-                                } else {
-                                    this.props.history.push(`/flashManagement/record/detail?code=${selectedRowKeys[0]}`);
-                                }
-                            }
+                            name: '详情'
+                        }, {
+                            code: 'export',
+                            name: '导出'
                         }]
                     })
                 }

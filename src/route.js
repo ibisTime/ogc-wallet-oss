@@ -1093,17 +1093,25 @@ const ROUTES = [
     },
     {
         path: '/transferMng/internalTransferEx/addedit',
-        component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-addedit'))
+        component: asyncComponent(() => import('container/transferManagement/internalTransferEx-addedit'))
     },
     // 转账管理 -- 内部转账查询
     {
         path: '/transferMng/internalTransferSlt',
         component: asyncComponent(() => import('container/transferManagement/internalTransferSlt'))
     },
+    {
+        path: '/transferMng/internalTransferSlt/addedit',
+        component: asyncComponent(() => import('container/transferManagement/internalTransferSit-addedit'))
+    },
     // 转账管理 -- 转账不通过查询
     {
         path: '/transferMng/transferNotThrough',
         component: asyncComponent(() => import('container/transferManagement/transferNotThrough'))
+    },
+    {
+        path: '/transferMng/transferNotThrough/addedit',
+        component: asyncComponent(() => import('container/transferManagement/transferNotThrough-addedit'))
     },
     // 归集地址
     {

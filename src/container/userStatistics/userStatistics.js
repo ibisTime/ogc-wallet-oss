@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Menu, Dropdown, Icon} from 'antd';
+import {Row, Col, Menu, Dropdown, Icon, message} from 'antd';
 import {
     showSucMsg,
     showWarnMsg,
@@ -55,12 +55,13 @@ class userStatistics extends React.Component {
         super(props);
         this.applyUser = getQueryString('applyUser', this.props.location.search);
         this.code = getQueryString('code', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search);
 
         this.state = {
             nodeTitle: [],
             nodeList: [],
             candyNodeLevels: {},
-            coinInfo: getCoinList()[0].key,
+            coinInfo: this.symbol || getCoinList()[0].key,
             userId: this.applyUser,
             code: this.code,
             userFlow: {
@@ -79,7 +80,6 @@ class userStatistics extends React.Component {
             isToSv: false,
             coinList: getCoinList()
         };
-        console.log('coinList', this.state.coinList);
         this.menu = (
             <Menu>
                 {
@@ -255,28 +255,36 @@ class userStatistics extends React.Component {
     notAdopt = () => {
        const inputRmk = this.inputRmk.value;
        let param = [];
-        param.approveResult = '0';
-        param.codeList = [this.state.code];
-        param.approveUser = getUserId();
-        param.approveNote = inputRmk;
-        fetch(802352, param).then(data => {
-            showSucMsg('操作成功');
-            // this.props.history.go(-1);
-            this.props.history.push(`/BTC-finance/TBunderline`);
-        });
+       if(inputRmk) {
+           param.approveResult = '0';
+           param.codeList = [this.state.code];
+           param.approveUser = getUserId();
+           param.approveNote = inputRmk;
+           fetch(802352, param).then(data => {
+               showSucMsg('操作成功');
+               // this.props.history.go(-1);
+               this.props.history.push(`/BTC-finance/TBunderline`);
+           });
+       }else {
+           message.warning('请填写审核备注');
+       }
     }
     adopt = () => {
         const inputRmk = this.inputRmk.value;
         let param = [];
-        param.approveResult = '1';
-        param.codeList = [this.state.code];
-        param.approveUser = getUserId();
-        param.approveNote = inputRmk;
-        fetch(802352, param).then(data => {
-            showSucMsg('操作成功');
-            // this.props.history.go(-1);
-            this.props.history.push(`/BTC-finance/TBunderline`);
-        });
+        if(inputRmk) {
+            param.approveResult = '1';
+            param.codeList = [this.state.code];
+            param.approveUser = getUserId();
+            param.approveNote = inputRmk;
+            fetch(802352, param).then(data => {
+                showSucMsg('操作成功');
+                // this.props.history.go(-1);
+                this.props.history.push(`/BTC-finance/TBunderline`);
+            });
+        }else {
+            message.warning('请填写审核备注');
+        }
     }
     runBack = () => {
         // this.props.history.go(-1);
@@ -413,16 +421,30 @@ class userStatistics extends React.Component {
                         <div className="sendRmk">
                             <textarea ref={input => this.inputRmk = input} placeholder="请输入备注"></textarea>
                             <div className="box">
-                                <Link to="#"><div className="btnGray" onClick={this.runBack}>返回</div></Link>
-                                <Link to="#"><div className="btnGray" style={{marginLeft: '20px', marginRight: '20px'}} onClick={this.notAdopt}>不通过</div></Link>
-                                <Link to="#"><div className="btnGray" style={{background: 'rgba(23,145,255,1)', color: '#FFFFFF', border: '0px'}} onClick={this.adopt}>通过</div></Link>
+                                <Link to="#">
+                                    <div className="btnGray" style={{cursor: 'pointer'}} onClick={this.runBack}>返回</div>
+                                </Link>
+                                <Link to="#">
+                                    <div
+                                        className="btnGray"
+                                        style={{marginLeft: '20px', marginRight: '20px', cursor: 'pointer'}}
+                                        onClick={this.notAdopt}
+                                    >不通过</div>
+                                </Link>
+                                <Link to="#">
+                                    <div
+                                        className="btnGray"
+                                        style={{background: 'rgba(23,145,255,1)', color: '#FFFFFF', border: '0px', cursor: 'pointer'}}
+                                        onClick={this.adopt}
+                                    >通过</div>
+                                </Link>
                             </div>
                         </div>
                     </Col>
                 </Row>
                 <span className="bulkCollectionTitle">
                     <Dropdown overlay={this.menu}>
-                        <span className="ant-dropdown-link">
+                        <span className="ant-dropdown-link" style={{cursor: 'pointer'}}>
                             资产分析 <span>{coinInfo}</span><Icon type="down" />
                         </span>
                     </Dropdown>
@@ -494,7 +516,7 @@ class userStatistics extends React.Component {
                                 <span style={{color: '#999999'}}>{lastWithdrawApplyDatetime}</span>
                             </Col>
                             <Col span={8}>
-                                <span style={{color: '#1791FF'}} onClick={this.selectFlowInList}>查看已对账流水</span>
+                                <span style={{color: '#1791FF', cursor: 'pointer'}} onClick={this.selectFlowInList}>查看已对账流水</span>
                             </Col>
                             <Col span={8}>
                             </Col>

@@ -66,7 +66,9 @@ class WithdrawRuleAddedit extends DetailUtil {
             required: true
         }, {
             field: 'withdrawRule',
-            title: '提币规则文本'
+            title: '提币规则文本',
+            type: 'textarea',
+            normalArea: true
         }];
         return this.buildDetail({
             fields,

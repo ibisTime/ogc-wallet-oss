@@ -74,9 +74,21 @@ class Customer extends React.Component {
     };
     render() {
         const fields = [{
+            title: '用户',
+            field: 'userId',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            search: true,
+            render: (v, data) => {
+                return data.nickname + '(' + data.loginName + ')';
+            },
+            noVisible: true
+        }, {
             field: 'nickname',
             title: '昵称',
-            search: true,
             render: (v, data) => {
                 return `${v}(${data.email})`;
             }

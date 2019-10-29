@@ -42,12 +42,8 @@ class transferNotThrough extends React.Component {
     }
     render() {
         const fields = [{
-            field: 'code',
-            title: '编号',
-            search: true
-        }, {
             field: 'currency',
-            title: '币种类型',
+            title: '币种',
             type: 'select',
             pageCode: '802005',
             params: {
@@ -56,7 +52,7 @@ class transferNotThrough extends React.Component {
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
-            render: (v, data) => v,
+            render: (v) => v,
             search: true,
             onChange: (v) => {
                 setTimeout(() => {
@@ -69,7 +65,13 @@ class transferNotThrough extends React.Component {
             }
         }, {
             field: 'accountName',
-            title: '账号',
+            title: '发起账号',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            search: true,
             render: (v, data) => {
                 if (data.applyUserInfo) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
@@ -79,18 +81,10 @@ class transferNotThrough extends React.Component {
             }
         }, {
             field: 'amount',
-            title: '提现总费用',
+            title: '转账总额',
             render: (v, data) => {
                 if(data.amount) {
                     return moneyFormat(data.amount, '', data.currency);
-                }
-            }
-        }, {
-            field: 'actualAmount',
-            title: '实际到账金额',
-            render: (v, data) => {
-                if(v) {
-                    return moneyFormat(v, '', data.currency);
                 }
             }
         }, {
@@ -103,34 +97,16 @@ class transferNotThrough extends React.Component {
                 }
             }
         }, {
-            field: 'channelType',
-            title: '渠道',
-            type: 'select',
-            key: 'channel_type',
-            search: true
+            title: '实到数量',
+            field: 'actualAmount',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.currency);
+            }
         }, {
-            title: '区块链类型',
-            field: 'payCardInfo'
-        }, {
-            field: 'bizType',
-            title: '划转类型',
-            type: 'select',
-            key: 'withdraw_biz_type',
-            search: true
-        }, {
-            title: '提现地址',
-            field: 'payCardNo'
-        }, {
-            field: 'applyUser',
-            title: '申请人',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
+            field: 'toUserInfo',
+            title: '接收账号',
             render: (v, data) => {
-                if (data.applyUserInfo) {
+                if (data.toUserInfo) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
                     if (data.applyUserInfo.kind === 'Q') {
                         return data.applyUserInfo.realName + '(' + tmpl + ')';
@@ -139,25 +115,6 @@ class transferNotThrough extends React.Component {
                 }
                 return '';
             }
-        }, {
-            field: 'applyDatetime',
-            title: '申请时间',
-            type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
-            render: dateTimeFormat,
-            search: true
-        }, {
-            title: '申请说明',
-            field: 'applyNote'
-        }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'withdraw_status',
-            search: true
-        }, {
-            field: 'approveNote',
-            title: '审核意见'
         }, {
             field: 'approveUser',
             title: '审核人',
@@ -171,6 +128,9 @@ class transferNotThrough extends React.Component {
             rangedate: ['approveDateStart', 'approveDateEnd'],
             render: dateTimeFormat,
             search: true
+        }, {
+            field: 'approveNote',
+            title: '审核意见'
         }];
         return this.props.buildList({
             fields,

@@ -18,7 +18,7 @@ const ROUTES = [
         component: asyncComponent(() => import('container/flashManagement/record/record'))
     },
     {
-        path: '/flashManagement/record/detail',
+        path: '/flashManagement/record/addedit',
         component: asyncComponent(() => import('container/flashManagement/record/record-addedit'))
     },
     {

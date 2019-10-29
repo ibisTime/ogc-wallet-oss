@@ -163,7 +163,7 @@ class TBunderline extends React.Component {
                         showWarnMsg('不是待审核的记录');
                     } else {
                         // this.props.history.push(`/BTC-finance/TBunderline/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
-                        this.props.history.push(`/BTC-finance/TBunderline/userStatistics?applyUser=${selectedRows[0].applyUser}&code=${selectedRows[0].code}`);
+                        this.props.history.push(`/BTC-finance/TBunderline/userStatistics?applyUser=${selectedRows[0].applyUser}&code=${selectedRows[0].code}&symbol=${selectedRows[0].currency}`);
                     }
                 },
                 sp: (selectedRowKeys, selectedRows) => {

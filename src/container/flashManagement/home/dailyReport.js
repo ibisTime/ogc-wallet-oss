@@ -43,15 +43,21 @@ class dailyReport extends React.Component {
         }, {
             field: 'createDate',
             title: '创建时间',
-            type: 'datetime'
+            type: 'datetime',
+            rangedate: ['createDateStart', 'createDateEnd'],
+            search: true
         }];
         return (
-            <div className="dailyReportTable">
+            <div className="superNode-listPage-wrapper">
                 {
                     this.props.buildList({
                         fields,
                         rowKey: 'id',
-                        pageCode: '800022'
+                        pageCode: '800022',
+                        buttons: [{
+                            code: 'export',
+                            name: '导出'
+                        }]
                     })
                 }
             </div>
