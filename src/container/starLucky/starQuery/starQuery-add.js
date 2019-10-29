@@ -12,6 +12,7 @@ class starQueryAdd extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.isNot = getQueryString('isNot', this.props.location.search);
     }
 
     render() {
@@ -22,7 +23,8 @@ class starQueryAdd extends DetailUtil {
             type: 'select',
             pageCode: '640003',
             keyName: 'id',
-            valueName: '{{name.DATA}}-{{symbol.DATA}}'
+            valueName: '{{name.DATA}}-{{symbol.DATA}}',
+            hidden: this.isNot === '1'
         }, {
             field: 'startTime',
             title: '开始时间(0-24)'
@@ -45,7 +47,11 @@ class starQueryAdd extends DetailUtil {
             view: this.view,
             addCode: '640032',
             editCode: '640033',
-            detailCode: '640034'
+            detailCode: '640034',
+            beforeSubmit(params) {
+                params.id = this.code;
+                return params;
+            }
         });
     }
 }
