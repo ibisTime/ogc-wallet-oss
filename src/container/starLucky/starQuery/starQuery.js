@@ -39,7 +39,7 @@ class StarQuery extends React.Component {
             code: 'add',
             name: '新增',
             handler: (selectedRowKeys) => {
-                this.props.history.push(`/starLucky/starQuery/add`);
+                this.props.history.push(`/starLucky/starQuery/addedit`);
             }
         }, {
             code: 'edit',
@@ -50,7 +50,7 @@ class StarQuery extends React.Component {
                 } else if (selectedRowKeys.length > 1) {
                     showWarnMsg('请选择一条记录');
                 } else {
-                    this.props.history.push(`/starLucky/starQuery/edit?code=${selectedRowKeys[0]}&isNot=1`);
+                    this.props.history.push(`/starLucky/starQuery/addedit?code=${selectedRowKeys[0]}`);
                 }
             }
         }, {

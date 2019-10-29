@@ -72,14 +72,6 @@ const ROUTES = [
     },
     {
         path: '/starLucky/starQuery/addedit',
-        component: asyncComponent(() => import('container/starLucky/starQuery/starQuery-addedit'))
-    },
-    {
-        path: '/starLucky/starQuery/add',
-        component: asyncComponent(() => import('container/starLucky/starQuery/starQuery-add'))
-    },
-    {
-        path: '/starLucky/starQuery/edit',
         component: asyncComponent(() => import('container/starLucky/starQuery/starQuery-add'))
     },
     // 参与记录查询

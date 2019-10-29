@@ -12,7 +12,6 @@ class starQueryAdd extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-        this.isNot = getQueryString('isNot', this.props.location.search);
     }
 
     render() {
@@ -24,7 +23,12 @@ class starQueryAdd extends DetailUtil {
             pageCode: '640003',
             keyName: 'id',
             valueName: '{{name.DATA}}-{{symbol.DATA}}',
-            hidden: this.isNot === '1'
+            hidden: !!this.code
+        }, {
+            field: 'starName',
+            title: '星球名称',
+            readonly: !!this.code,
+            hidden: !this.code
         }, {
             field: 'startTime',
             title: '开始时间(0-24)'
@@ -43,6 +47,7 @@ class starQueryAdd extends DetailUtil {
         }];
         return this.buildDetail({
             fields,
+            key: 'id',
             code: this.code,
             view: this.view,
             addCode: '640032',
