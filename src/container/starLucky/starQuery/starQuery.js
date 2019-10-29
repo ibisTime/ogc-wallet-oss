@@ -36,6 +36,24 @@ class StarQuery extends React.Component {
         this.code = getQueryString('code', this.props.location.search);
         this.origin = getQueryString('origin', this.props.location.search);
         this.buttons = [{
+            code: 'add',
+            name: '新增',
+            handler: (selectedRowKeys) => {
+                this.props.history.push(`/starLucky/starQuery/add`);
+            }
+        }, {
+            code: 'edit',
+            name: '修改',
+            handler: (selectedRowKeys) => {
+                if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                } else {
+                    this.props.history.push(`/starLucky/starQuery/edit?code=${selectedRowKeys[0]}`);
+                }
+            }
+        }, {
             code: 'starParticipate',
             name: '参与记录',
             handler: (selectedRowKeys) => {

@@ -1048,6 +1048,8 @@ export function moneyFormatTo18(money, format, coin, isRe = false, isTosp) {
  */
 
 export function findDsct(array, value) {
+  console.log('array', array);
+  console.log('value', value);
   return array.find(item => item.dkey === value).dvalue;
 }
 

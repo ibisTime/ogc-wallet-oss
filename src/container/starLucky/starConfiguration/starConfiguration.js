@@ -16,8 +16,10 @@ import {
     showWarnMsg,
     showSucMsg,
     dateTimeFormat,
-    getQueryString
+    getQueryString,
+    findDsct
 } from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -35,6 +37,7 @@ class StarConfiguration extends React.Component {
         this.code = getQueryString('code', this.props.location.search);
         this.starName = sessionStorage.getItem('starName') || '';
         this.starSymbol = sessionStorage.getItem('starSymbol') || '';
+        this.type = getQueryString('type', this.props.location.search);
     }
     render() {
         const fields = [{
@@ -78,6 +81,22 @@ class StarConfiguration extends React.Component {
                     }, {
                         code: 'edit',
                         name: '修改'
+                    }, {
+                        code: 'goPlay',
+                        name: '玩法介绍',
+                        handler: (selectedRowKeys, selectedRows) => {
+                            fetch(630045, {type: 'star', start: 1, limit: 100}).then(data => {
+                                let arr = [];
+                                for(let i = 0; i < data.list.length; i++) {
+                                    arr.push({
+                                        dkey: data.list[i].ckey,
+                                        dvalue: data.list[i].id
+                                    });
+                                }
+                                let id = findDsct(arr, 'star_instruction_textarea');
+                                this.props.history.push(`/starLucky/configuration/addedit?code=${id}&type=type_card&cType=star_instruction_textarea`);
+                            });
+                        }
                     }]
                 })
             }
