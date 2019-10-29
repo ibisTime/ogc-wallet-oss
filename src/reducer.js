@@ -157,6 +157,7 @@ import {bizProductsProfit} from './redux/biz/financial/productsProfit';
 // 红包管理
 import {bizReceiveQuery} from './redux/biz/redPacket/receiveQuery';
 import {bizRedPacketQuery} from './redux/biz/redPacket/redPacketQuery';
+import {bizInformation} from './redux/biz/information/information';
 /* BTC财务管理 */
 // 查询地址
 import {BTCFinancePlatformAccount} from './redux/BTC-finance/platformAccount/platformAccount';
@@ -374,6 +375,7 @@ export default combineReducers({
     // 红包管理
     bizReceiveQuery,
     bizRedPacketQuery,
+    bizInformation,
     /* BTC 财务管理 */
     // 查询币种
     addressQuery,

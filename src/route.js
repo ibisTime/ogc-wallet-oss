@@ -1550,6 +1550,17 @@ const ROUTES = [
         component: asyncComponent(
             () => import('container/biz/quantitativeAi/quantitativeAiRule/quantitativeAiRule-addedit'))
     },
+    // 资讯管理
+    {
+        path: '/biz/information',
+        component: asyncComponent(
+            () => import('container/biz/information/information/information'))
+    },
+    {
+        path: '/biz/information/addedit',
+        component: asyncComponent(
+            () => import('container/biz/information/information/information-addedit'))
+    },
     {
         path: '/applicationAnalysis/dropsWater',
         component: asyncComponent(
