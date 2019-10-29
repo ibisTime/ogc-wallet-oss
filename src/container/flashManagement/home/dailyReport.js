@@ -41,11 +41,18 @@ class dailyReport extends React.Component {
             field: 'countIn',
             title: '兑入数量'
         }, {
+            field: 'createDate1',
+            title: '创建时间',
+            render(v, d) {
+                return d && dateTimeFormat(d.createDate);
+            }
+        }, {
             field: 'createDate',
             title: '创建时间',
-            type: 'datetime',
+            type: 'date',
             rangedate: ['createDateStart', 'createDateEnd'],
-            search: true
+            search: true,
+            noVisible: true
         }];
         return (
             <div className="superNode-listPage-wrapper">
