@@ -34,19 +34,6 @@ class BuyBackRecord extends React.Component {
             field: 'planName',
             title: '期数'
         }, {
-            field: 'userId',
-            title: '用户',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            // render: (v, data) => {
-            //     return data.user.mobile ? data.nickname + '-' + data.user.mobile : data.nickname + '-' + data.user.email;
-            // }
-            noVisible: true
-        }, {
             field: 'userName',
             title: '用户'
         }, {

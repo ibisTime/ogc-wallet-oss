@@ -127,7 +127,7 @@ class Home extends React.Component {
                                     noPagination: true,
                                     noSelect: true,
                                     searchParams: {
-                                        limit: 4
+                                        limit: 5
                                     }
                                 })
                             }

@@ -47,7 +47,7 @@ class dailyActList extends React.Component {
                     this.props.buildList({
                         fields,
                         rowKey: 'id',
-                        pageCode: '620021',
+                        pageCode: '800021',
                         buttons: [{
                             code: 'back',
                             name: '返回',

@@ -81,9 +81,6 @@ class VoteDistribution extends React.Component {
             valueName: '{{nickname.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             search: true,
-            // render: (v, data) => {
-            //     return data.user.mobile ? data.nickname + '-' + data.user.mobile : data.nickname + '-' + data.user.email;
-            // }
             noVisible: true
         }, {
             field: 'userName',

@@ -34,16 +34,6 @@ class VoteRecord extends React.Component {
             field: 'planName',
             title: '期数'
         }, {
-            field: 'userId',
-            title: '用户',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            noVisible: true
-        }, {
             field: 'userName',
             title: '用户'
         }, {
