@@ -21,10 +21,13 @@ class CustomerEditReferee extends DetailUtil {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}({{email.DATA}})',
+            valueName: '{{nickname.DATA}}({{loginName.DATA}})',
             searchName: 'keyword',
             search: true,
-            required: true
+            required: true,
+            params: {
+                limit: 1000
+            }
         }];
         return this.buildDetail({
             fields,
