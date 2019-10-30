@@ -95,7 +95,7 @@ class MillRulesEdit extends DetailUtil {
                 title: '数值',
                 field: 'cvalue',
                 required: true,
-                max: +sessionStorage.getItem('closeTimeValue') || ''
+                max: (+sessionStorage.getItem('closeTimeValue') - 1) || ''
             });
         }else {
             fields.push({
