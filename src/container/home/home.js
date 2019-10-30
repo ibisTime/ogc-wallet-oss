@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {message} from 'antd';
 import {
     getUserName,
     getRoleCode,
@@ -44,6 +45,7 @@ class Home extends React.Component {
             window.sessionStorage.setItem('coinData', JSON.stringify(coinData));
             window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
         });
+        const hasMsg = message.loading('');
         Promise.all([
             getRoleList(),
             getPageMyNotice()
@@ -55,6 +57,7 @@ class Home extends React.Component {
                 noticeData: noticeData.list,
                 companysystemData: companysystemData ? companysystemData.list : []
             });
+            hasMsg();
         }).catch(() => this.setState({fetching: false}));
         setSystem();
     }
