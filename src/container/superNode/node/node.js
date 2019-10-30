@@ -104,8 +104,7 @@ class Node extends React.Component {
             key: 'snode_status'
         }, {
             field: 'nodeDate',
-            title: '生成时间',
-            type: 'datetime'
+            title: '生成时间'
         }, {
             field: 'openDatetime',
             title: '开启时间',

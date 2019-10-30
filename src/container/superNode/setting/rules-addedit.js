@@ -90,7 +90,14 @@ class MillRulesEdit extends DetailUtil {
                 valueName: 'value',
                 required: true
             });
-        } else {
+        } else if(this.type === 'close_time') {
+            fields.push({
+                title: '数值',
+                field: 'cvalue',
+                required: true,
+                max: +sessionStorage.getItem('closeTimeValue') || ''
+            });
+        }else {
             fields.push({
                 title: '数值',
                 field: 'cvalue',

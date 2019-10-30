@@ -99,6 +99,9 @@ class Setting extends React.Component {
                 if(data.type === 'node_plan' && data.ckey === 'is_auto_create') {
                     return v === '0' ? '否' : '是';
                 }
+                if(data.ckey === 'divide_cycle') {
+                    sessionStorage.setItem('closeTimeValue', v);
+                }
                 return v;
             }
         }];
@@ -106,17 +109,18 @@ class Setting extends React.Component {
         return (
             <div className="superNode-listPage-wrapper">
                 <div className="superNode-listPage-wrapper-tab-box">
-                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRate}>分红比例配置</a>
-                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodePlan}>节点周期配置</a>
-                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRedeem}>赎回手续费配置</a>
-                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeRefereeRate}>推荐分红奖励配置</a>
-                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeTaxRate}>交税比例配置</a>
-                    <a className="superNode-listPage-wrapper-tab" onClick={this.setNodeConfig}>玩法介绍配置</a>
+                    <a className={type === 'node_rate' ? 'superNode-listPage-wrapper-tab superNode-listPage-wrapper-tab-set' : 'superNode-listPage-wrapper-tab'} onClick={this.setNodeRate}>分红比例配置</a>
+                    <a className={type === 'node_plan' ? 'superNode-listPage-wrapper-tab superNode-listPage-wrapper-tab-set' : 'superNode-listPage-wrapper-tab'} onClick={this.setNodePlan}>节点周期配置</a>
+                    <a className={type === 'node_redeem' ? 'superNode-listPage-wrapper-tab superNode-listPage-wrapper-tab-set' : 'superNode-listPage-wrapper-tab'} onClick={this.setNodeRedeem}>赎回手续费配置</a>
+                    <a className={type === 'node_referee_rate' ? 'superNode-listPage-wrapper-tab superNode-listPage-wrapper-tab-set' : 'superNode-listPage-wrapper-tab'} onClick={this.setNodeRefereeRate}>推荐分红奖励配置</a>
+                    <a className={type === 'node_tax_rate' ? 'superNode-listPage-wrapper-tab superNode-listPage-wrapper-tab-set' : 'superNode-listPage-wrapper-tab'} onClick={this.setNodeTaxRate}>交税比例配置</a>
+                    <a className={type === 'node_config' ? 'superNode-listPage-wrapper-tab superNode-listPage-wrapper-tab-set' : 'superNode-listPage-wrapper-tab'} onClick={this.setNodeConfig}>玩法介绍配置</a>
                 </div>
                 <div style={{height: '30px'}}></div>
                 {
                     this.props.buildList({
                         fields,
+                        rowKey: 'id',
                         pageCode: 630045,
                         noSelect: !isSelect,
                         searchParams: {

@@ -44,12 +44,16 @@ class leftOver extends React.Component {
                 return moneyFormat(v, '', data.symbol);
             }
         }, {
+            field: 'remark',
+            title: '业务类型'
+        }, {
             field: 'createDatetime',
             type: 'date',
             title: '创建时间'
         }];
         return this.props.buildList({
             fields,
+            rowKey: 'id',
             pageCode: 806010,
             searchParams: {
                 poolId: this.poolId

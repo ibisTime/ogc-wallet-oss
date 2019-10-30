@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/flashManagement/dailyReport';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat} from 'common/js/util';
+import {showWarnMsg, dateFormat} from 'common/js/util';
 import './home.css';
 
 @listWrapper(
@@ -44,7 +44,7 @@ class dailyReport extends React.Component {
             field: 'createDate1',
             title: '创建时间',
             render(v, d) {
-                return d && dateTimeFormat(d.createDate);
+                return d && dateFormat(d.createDate);
             }
         }, {
             field: 'createDate',

@@ -39,12 +39,9 @@ class VoteRecord extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            valueName: '{{nickname.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             search: true,
-            // render: (v, data) => {
-            //     return data.user.mobile ? data.nickname + '-' + data.user.mobile : data.nickname + '-' + data.user.email;
-            // }
             noVisible: true
         }, {
             field: 'userName',

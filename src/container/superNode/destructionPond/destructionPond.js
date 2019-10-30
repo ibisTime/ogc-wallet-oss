@@ -42,7 +42,8 @@ class destructionPond extends React.Component {
             adjustPopupShow: false,
             totalAmountData: {},
             selectedData: {},
-            adjustPopupFlag: false
+            adjustPopupFlag: false,
+            setTab: '1'
         };
     }
 
@@ -138,7 +139,7 @@ class destructionPond extends React.Component {
     }
 
     render() {
-        const {totalAmountData, adjustPopupShow, selectedData, adjustPopupFlag} = this.state;
+        const {totalAmountData, adjustPopupShow, selectedData, adjustPopupFlag, setTab} = this.state;
         const { getFieldDecorator } = this.props.form;
 
         const fields = [{
@@ -193,22 +194,22 @@ class destructionPond extends React.Component {
                     </div>
                 </div>
                 <div className="superNodeBonusPool-section">
-                    <Tabs defaultActiveKey="1">
+                    <Tabs defaultActiveKey="1" onChange={(activeKey) => {
+                        this.setState({
+                            setTab: activeKey
+                        });
+                    }}>
                         <TabPane tab="入池记录" key="1">
                             <Layout>
                                 <Content>
-                                    <Switch>
-                                        <Route path='/superNode/destruction' exact component={DestructionPondIn}></Route>
-                                    </Switch>
+                                    <DestructionPondIn setTab={setTab}/>
                                 </Content>
                             </Layout>
                         </TabPane>
                         <TabPane tab="销毁(出池)记录" key="2">
                             <Layout>
                                 <Content>
-                                    <Switch>
-                                        <Route path='/superNode/destruction' exact component={DestructionPondOut}></Route>
-                                    </Switch>
+                                    <DestructionPondOut setTab={setTab}/>
                                 </Content>
                             </Layout>
                         </TabPane>
