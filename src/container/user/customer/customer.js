@@ -90,7 +90,7 @@ class Customer extends React.Component {
             field: 'nickname',
             title: '昵称',
             render: (v, data) => {
-                return `${v}(${data.email})`;
+                return `${v}(${data.loginName})`;
             }
         }, {
             field: 'inviteCode',

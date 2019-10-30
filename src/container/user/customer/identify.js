@@ -56,7 +56,7 @@ class CustomerIdentify extends React.Component {
         const fields = [{
             field: 'userId',
             title: '用户名',
-            render: (v, d) => d && d.user ? d.user.email : '',
+            render: (v, d) => d && d.user ? d.user.loginName ? d.user.loginName : d.user.email : '',
             type: 'select',
             pageCode: 805120,
             keyName: 'userId',
