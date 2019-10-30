@@ -8,9 +8,11 @@ import {
 } from 'common/js/util';
 import {getRoleList} from 'api/company';
 import {getCoinList} from 'api/coin';
-// import {getPageMyNotice, getPageMyCompanysystem} from 'api/home';
+import {getPageMyNotice, getPageMyCompanysystem} from 'api/home';
 import './home.css';
 import userPhoto from '../../images/home-userPhoto.png';
+import iconLi from '../../images/home-icon-li.png';
+import noData from '../../images/noData.png';
 
 class Home extends React.Component {
     constructor(props) {
@@ -43,12 +45,16 @@ class Home extends React.Component {
             window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
         });
         Promise.all([
-            getRoleList()
-            // getPageMyNotice(),
+            getRoleList(),
+            getPageMyNotice()
             // getPageMyCompanysystem()
         ]).then(([roleData, noticeData, companysystemData]) => {
             this.getUserRole(roleData);
-            this.setState({roleData: roleData, noticeData: noticeData.list, companysystemData: companysystemData.list});
+            this.setState({
+                roleData: roleData,
+                noticeData: noticeData.list,
+                companysystemData: companysystemData ? companysystemData.list : []
+            });
         }).catch(() => this.setState({fetching: false}));
         setSystem();
     }
@@ -64,6 +70,7 @@ class Home extends React.Component {
     }
 
     render() {
+        const {noticeData} = this.state;
         return (
             <div className="home-wrap">
                 <div className="top-wrap">
@@ -78,24 +85,24 @@ class Home extends React.Component {
                             <div className="user-role">{this.state.role}</div>
                         </div>
                     </div>
-                    {/* <div className="card top-right notice-wrap">
+                    <div className="card top-right notice-wrap">
                         <div className="card-top">
                             <div className="title">公司公告</div>
                         </div>
                         <div className="card-content">
-                            { this.state.noticeData && this.state.noticeData.length >= 1 ? this.state.noticeData.map(d => (
-                                <div className="content-item" key={d.notice.code}>
-                                    <Link to={'/home/noticeDetail?code=' + d.notice.code}>
+                            { noticeData && noticeData.length > 0 ? noticeData.map(d => (
+                                <div className="content-item" key={d.code}>
+                                    <Link to={'/public/noticesystem/addedit?v=1&code=' + d.code}>
                                         <img className="icon" src={iconLi}/>
-                                        <p className="txt">{d.notice.title}</p>
-                                        <samp className="date">{dateFormat(d.notice.updateDatetime)}</samp>
+                                        <p className="txt">{d.title}</p>
+                                        <samp className="date">{dateFormat(d.updateDatetime)}</samp>
                                     </Link>
                                 </div>
                             )) : <div className="noData"><img src={noData}/>
                             <p>暂无公司公告</p>
                             </div>}
                         </div>
-                    </div> */}
+                    </div>
                 </div>
                 {/* <div className="below-wrap">
                     <div className="card companysystem-wrap">

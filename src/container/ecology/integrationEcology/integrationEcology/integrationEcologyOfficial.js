@@ -61,7 +61,7 @@ class integrationEcologyOfficial extends React.Component {
                 <Row>
                     {
                         data.length > 0 && data.map((item) => (
-                            <Col key={item.id} style={{marginBottom: '30px', width: '20%', float: 'left', marginRight: '30px'}} key='1'>
+                            <Col key={item.id} style={{marginBottom: '30px', width: '20%', float: 'left', marginRight: '30px', userSelect: 'none'}} key='1'>
                                 <Card onClick={
                                     () => this.onCardClick(item)
                                 }>
