@@ -13,7 +13,6 @@ app.use('/api', function (req, res) {
     let url = 'http://oss.walletdev.hichengdai.com/api';
     // 测试
     // let url = 'http://oss.wallettest.hichengdai.com/api';
-    // let url = 'http://oss.wallettest.hichengdai.com/api';
     // psc
     
     var _body = req.body;

@@ -465,6 +465,9 @@ export default class ListComponent extends React.Component {
         }).then(data => {
             this.props.cancelFetching();
             if (data instanceof Array) {
+                if(this.options.maxLen && data.length > this.options.maxLen) {
+                    data.length = this.options.maxLen;
+                }
                 this.props.setTableData(data);
             } else {
                 this.props.setTableData(data.list);

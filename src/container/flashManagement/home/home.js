@@ -126,9 +126,7 @@ class Home extends React.Component {
                                     rowKey: 'id',
                                     noPagination: true,
                                     noSelect: true,
-                                    searchParams: {
-                                        limit: 5
-                                    }
+                                    maxLen: 5
                                 })
                             }
                         </div>
