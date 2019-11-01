@@ -36,6 +36,9 @@ const Card = asyncComponent(() => import('container/card/card'));
 // 商城
 const Store = asyncComponent(() => import('container/store/store'));
 
+// vpn 下载
+const VpnDown = asyncComponent(() => import('container/vpnDown/vpnDown'));
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -49,6 +52,7 @@ ReactDOM.render(
                     <Route path='/starLucky' component={StarLucky}></Route>
                     <Route path='/card' component={Card}></Route>
                     <Route path='/store' component={Store}></Route>
+                    <Route path='/down' component={VpnDown}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>

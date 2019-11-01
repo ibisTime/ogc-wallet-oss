@@ -19,7 +19,8 @@ class integrationEcologyOfficial extends React.Component {
                 'dapp_star': '/starLucky',
                 'dapp_guess_ups_downs': '/guessUpsDowns',
                 'kimii_card': '/card',
-                'kimii_mall': '/store'
+                'kimii_mall': '/store',
+                'down': '/down'
             }
         };
     }

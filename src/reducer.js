@@ -27,6 +27,7 @@ import {publicLhlcxy} from './redux/public/lhlcxy';
 import {biztodayprofit} from './redux/biz/financial/todayprofit';
 import {AppManagent} from './redux/managent/appmanagent';
 import {Alerts} from './redux/managent/alerts';
+import {ManagentIndustry} from './redux/managent/industry';
 import {DappManagent} from './redux/managent/dappmanagent';
 import {DappTrateGy} from './redux/managent/dapptrategy';
 import {tradingSdRecord} from './redux/trading/sdRecord/sdRecord';
@@ -362,6 +363,9 @@ import {CardcardLog} from './redux/card/cardLog';
 import {CardCardVolume} from './redux/card/cardVolume';
 import {CardSecretKey} from './redux/card/secretKey';
 
+// vpn 下载
+import {vpnDownHome} from './redux/vpnDown/home';
+
 export default combineReducers({
     user,
     menu,
@@ -536,6 +540,7 @@ export default combineReducers({
     quanTitativeCategory,
     AppManagent,
     Alerts,
+    ManagentIndustry,
     DappTrateGy,
     DappManagent,
     TAG,
@@ -643,5 +648,7 @@ export default combineReducers({
     storeShopMessage,
     storeShopOrder,
     storeShopRules,
-    storeShopLabels
+    storeShopLabels,
+    // vpn 下载
+    vpnDownHome
 });

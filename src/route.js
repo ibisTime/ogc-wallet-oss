@@ -1208,6 +1208,14 @@ const ROUTES = [
         path: '/managent/alerts/addedit',
         component: asyncComponent(() => import('container/managent/alerts/alerts-addedit'))
     },
+    {
+        path: '/managent/industry',
+        component: asyncComponent(() => import('container/managent/industry/industry'))
+    },
+    {
+        path: '/managent/industry/addedit',
+        component: asyncComponent(() => import('container/managent/industry/industry-addedit'))
+    },
 // 业务管理--DAPP应用
     {
         path: '/managent/dappmanagent',
