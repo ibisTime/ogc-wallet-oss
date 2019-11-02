@@ -47,7 +47,7 @@ class MillOrderDetail extends DetailUtil {
         }, {
             field: 'incomeActualStr',
             title: '已获取收益',
-            formatter: function (v) {
+            formatter: function (v, data) {
                 if(v) {
                     return `${moneyFormat(v.toString(), '', data.minerSymbol)} (${data.minerSymbol})`;
                 }else {
