@@ -49,7 +49,7 @@ class MillOrderDetail extends DetailUtil {
             title: '已获取收益',
             formatter: function (v) {
                 if(v) {
-                    return moneyFormat(v.toString(), '', 'WIS') + ' (' + 'WIS' + ')';
+                    return `${moneyFormat(v.toString(), '', data.minerSymbol)} (${data.minerSymbol})`;
                 }else {
                     return '0';
                 }

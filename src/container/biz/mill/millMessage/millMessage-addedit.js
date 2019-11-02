@@ -40,7 +40,7 @@ class MillMessageAddedit extends DetailUtil {
             required: true
         }, {
             field: 'dailyOutput',
-            title: '日收益（WIS）',
+            title: '日收益（AIDA）',
             required: true
         }, {
             field: 'orderNo',
