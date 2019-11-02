@@ -66,6 +66,12 @@ class MillMessage extends React.Component {
             field: 'dailyOutput',
             title: '日收益'
         }, {
+            field: 'stockTotal',
+            title: '总库存'
+        }, {
+            field: 'stockOut',
+            title: '售出总量'
+        }, {
             field: 'status',
             title: '状态',
             key: 'exchange_symbol_pair_statis',
