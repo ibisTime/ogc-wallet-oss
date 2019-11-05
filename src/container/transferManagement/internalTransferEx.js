@@ -78,7 +78,7 @@ class TBunderline extends React.Component {
             render: (v, data) => {
                 if (data.applyUserInfo) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
+                    return (data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.nickname) + '(' + tmpl + ')';
                 }
                 return '';
             },
@@ -111,8 +111,8 @@ class TBunderline extends React.Component {
             title: '接收账号',
             render: (v, data) => {
                 if (data.toUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
+                    let tmpl = data.toUserInfo.mobile ? data.toUserInfo.mobile : data.toUserInfo.email;
+                    return data.toUserInfo.nickname + '(' + tmpl + ')';
                 }
                 return '';
             }

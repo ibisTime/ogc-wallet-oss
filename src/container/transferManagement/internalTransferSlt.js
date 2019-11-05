@@ -75,7 +75,7 @@ class internalTransferSlt extends React.Component {
             render: (v, data) => {
                 if (data.applyUserInfo) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    return data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.nickname + '(' + tmpl + ')';
+                    return (data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.nickname) + '(' + tmpl + ')';
                 }
                 return '';
             }
@@ -109,11 +109,11 @@ class internalTransferSlt extends React.Component {
             title: '接收账号',
             render: (v, data) => {
                 if (data.toUserInfo) {
-                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
-                    if (data.applyUserInfo.kind === 'Q') {
-                        return data.applyUserInfo.realName + '(' + tmpl + ')';
+                    let tmpl = data.toUserInfo.mobile ? data.toUserInfo.mobile : data.toUserInfo.email;
+                    if (data.toUserInfo.kind === 'Q') {
+                        return data.toUserInfo.realName + '(' + tmpl + ')';
                     }
-                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
+                    return data.toUserInfo.nickname + '(' + tmpl + ')';
                 }
                 return '';
             }
