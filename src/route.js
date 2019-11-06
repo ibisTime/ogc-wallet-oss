@@ -1448,6 +1448,23 @@ const ROUTES = [
     {
         path: '/userStatistics/currencyStatistics',
         component: asyncComponent(() => import('container/userStatistics/currencyStatistics'))
+    },
+    // 规则通用-addedit
+    {
+        path: '/configuration/configuration-addedit',
+        component: asyncComponent(() => import('container/public/configuration/configuration-addedit'))
+    },
+    {
+        path: '/marketingManagement/registerToSend',
+        component: asyncComponent(() => import('container/marketingManagement/marketingActivities/registerToSend/registerToSend'))
+    },
+    {
+        path: '/marketingManagement/invitedToSend',
+        component: asyncComponent(() => import('container/marketingManagement/marketingActivities/invitedToSend/invitedToSend'))
+    },
+    {
+        path: '/marketingManagement/prepaidPhoneToSend',
+        component: asyncComponent(() => import('container/marketingManagement/marketingActivities/prepaidPhoneToSend/prepaidPhoneToSend'))
     }
 ];
 

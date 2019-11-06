@@ -362,6 +362,11 @@ import {CardcardLog} from './redux/card/cardLog';
 import {CardCardVolume} from './redux/card/cardVolume';
 import {CardSecretKey} from './redux/card/secretKey';
 
+// 营销管理
+import {marketRegisterToSend} from './redux/marketingManagement/marketingActivities/registerToSend';
+import {marketInvitedToSend} from './redux/marketingManagement/marketingActivities/invitedToSend';
+import {marketPrepaidPhoneToSend} from './redux/marketingManagement/marketingActivities/prepaidPhoneToSend';
+
 export default combineReducers({
     user,
     menu,
@@ -643,5 +648,9 @@ export default combineReducers({
     storeShopMessage,
     storeShopOrder,
     storeShopRules,
-    storeShopLabels
+    storeShopLabels,
+    // 营销管理
+    marketRegisterToSend,
+    marketInvitedToSend,
+    marketPrepaidPhoneToSend
 });
