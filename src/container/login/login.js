@@ -28,7 +28,7 @@ class Login extends React.Component {
     };
     async componentDidMount() {
         await setSystem();
-        const loginPic = sessionStorage.getItem('loginPic');
+        const loginPic = localStorage.getItem('loginPic');
         this.setState({
             loginPic
         });

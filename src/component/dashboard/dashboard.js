@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
         <Menu.Item><a href="#" onClick={this.logout}>退出</a></Menu.Item>
       </Menu>
     );
-    const logo = sessionStorage.getItem('webIcon');
+    const logo = localStorage.getItem('webIcon');
     return (
       <Header className="header">
           <div className="logo" onClick={() => {

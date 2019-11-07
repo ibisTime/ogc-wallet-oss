@@ -7,7 +7,7 @@ const ERR_TIME_OUT = '4';
 
 export default function fetch(code, param = {}) {
   const url = '/api';
-  const SYSTEM_CODE = sessionStorage.getItem('SYSTEM_CODE') || '';
+  const SYSTEM_CODE = localStorage.getItem('SYSTEM_CODE') || '';
   const data = {
     systemCode: SYSTEM_CODE,
     companyCode: SYSTEM_CODE,

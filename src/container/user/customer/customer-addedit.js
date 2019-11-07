@@ -10,7 +10,7 @@ class CustomerAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-        this.systemCode = sessionStorage.getItem('SYSTEM_CODE');
+        this.systemCode = localStorage.getItem('SYSTEM_CODE');
     }
 
     render() {
