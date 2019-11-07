@@ -12,7 +12,7 @@ import {
 } from '@redux/menu';
 import { loadTxUserSign, setSelToId } from '@redux/user';
 import { setMsgList, addUserMap } from '@redux/message';
-import { clearUser, getUserId, getUserName, setSystem } from 'common/js/util';
+import { clearUser, getUserId, getUserName, setSystem, setWebIcon } from 'common/js/util';
 import { addMsg } from 'common/js/im/message';
 import fetch from 'common/js/fetch';
 import asyncComponent from '../async-component/async-component';
@@ -39,6 +39,12 @@ class Dashboard extends React.Component {
   async componentDidMount() {
     // this.getUserSign();
     await setSystem();
+    const webName = localStorage.getItem('webName');
+      const webLogo = localStorage.getItem('headLogo');
+    if(webName) {
+        document.title = webName;
+        setWebIcon(webLogo);
+    }
     this.props.getMenuList(this.props.location.pathname);
     this.props.addUserMap(getUserId(), {nickname: getUserName()});
   }
