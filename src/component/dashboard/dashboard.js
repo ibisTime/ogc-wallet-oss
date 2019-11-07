@@ -36,11 +36,11 @@ class Dashboard extends React.Component {
       editPwdVisible: false
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     // this.getUserSign();
+    await setSystem();
     this.props.getMenuList(this.props.location.pathname);
     this.props.addUserMap(getUserId(), {nickname: getUserName()});
-    setSystem();
   }
   handleTopMenuClick = (e) => {
     if (e.key && e.key !== 'user') {
@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
         <Menu.Item><a href="#" onClick={this.logout}>退出</a></Menu.Item>
       </Menu>
     );
-    const logo = sessionStorage.getItem('webIcon');
+    const logo = localStorage.getItem('webIcon');
     return (
       <Header className="header">
           <div className="logo" onClick={() => {

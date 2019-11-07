@@ -48,7 +48,8 @@ class IndustryAddedit extends DetailUtil {
             field: 'origin',
             title: '来源',
             required: true,
-            key: 'industry_origin'
+            key: 'industry_origin',
+            type: 'select'
         }, {
             field: 'isAnonymous',
             title: '是否匿名',

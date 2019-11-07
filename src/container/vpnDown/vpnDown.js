@@ -43,7 +43,7 @@ class VpnDown extends React.Component {
     }
 
     componentDidMount() {
-        const webLogo = sessionStorage.getItem('headLogo');
+        const webLogo = localStorage.getItem('headLogo');
         setWebIcon(webLogo);
         this.props.addUserMap(getUserId(), {nickname: getUserName()});
     }
@@ -55,8 +55,8 @@ class VpnDown extends React.Component {
                 <Menu.Item><a href="#" onClick={this.logout}>退出</a></Menu.Item>
             </Menu>
         );
-        const logo = sessionStorage.getItem('webIcon');
-        const webName = sessionStorage.getItem('webName');
+        const logo = localStorage.getItem('webIcon');
+        const webName = localStorage.getItem('webName');
         document.title = webName;
         return (
             <Header className="header">
