@@ -36,11 +36,11 @@ class Dashboard extends React.Component {
       editPwdVisible: false
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     // this.getUserSign();
+    await setSystem();
     this.props.getMenuList(this.props.location.pathname);
     this.props.addUserMap(getUserId(), {nickname: getUserName()});
-    setSystem();
   }
   handleTopMenuClick = (e) => {
     if (e.key && e.key !== 'user') {
