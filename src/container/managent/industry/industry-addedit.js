@@ -82,7 +82,8 @@ class IndustryAddedit extends DetailUtil {
             }],
             keyName: 'key',
             valueName: 'value',
-            search: true
+            hidden: !this.code,
+            readonly: this.code
         }, {
             field: 'isTop',
             title: '是否置顶',
