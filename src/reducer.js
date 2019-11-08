@@ -457,9 +457,9 @@ export default combineReducers({
     storeShopMessage,
     storeShopOrder,
     storeShopRules,
+    storeShopLabels,
     BTCFinanceWithdrawWarn,
     rightsInterestsRules,
-    storeShopLabels,
     // 卡券
     CardHome,
     CardSecretKey,
