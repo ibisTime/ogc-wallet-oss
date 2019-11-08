@@ -96,6 +96,9 @@ class Home extends React.Component {
             keyName: 'key',
             valueName: 'value',
             search: true
+        }, {
+            field: 'orderNo',
+            title: '排序'
         }];
         return (
             <div className="guessUpsDowns-listPage-wrapper">

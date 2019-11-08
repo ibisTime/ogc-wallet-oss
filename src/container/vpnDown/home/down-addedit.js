@@ -82,6 +82,11 @@ class DownAddedit extends DetailUtil {
             hidden: !this.code,
             readonly: this.code
         }, {
+            field: 'orderNo',
+            title: '排序',
+            required: true,
+            'Z+': true
+        }, {
             field: 'createDatetime',
             title: '创建时间',
             type: 'datetime',
