@@ -60,7 +60,7 @@ export async function setSystem() {
       });
       fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
           if(data.list[0]) {
-              sessionStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+              localStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
           }
       });
   }
