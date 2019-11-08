@@ -148,7 +148,7 @@ class IndustryAddedit extends DetailUtil {
             fields,
             code: this.code,
             view: this.view,
-            addCode: 628200,
+            addCode: 628202,
             editCode: 628201,
             detailCode: 628213
         });

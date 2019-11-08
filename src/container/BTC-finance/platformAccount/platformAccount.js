@@ -100,7 +100,6 @@ class PlatformAccount extends React.Component {
     render() {
         const unsettledLoan = this.props.unsettledLoan || {};
         const unsettedList = Object.values(unsettledLoan);
-        console.log('unsettedList', unsettedList);
         const {data} = this.state;
         return (
             <div>

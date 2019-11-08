@@ -42,7 +42,6 @@ class IntegrationEcology extends React.Component {
             let username = localStorage.getItem('username');
             let tokenIgo = localStorage.getItem('token_igo');
             let igoUrl = sessionStorage.getItem('apiLoginUrl');
-            // window.open(`http://oss.igotest.psctoken.com/verificationPSC?username=${username}&token=${tokenIgo}`);
             window.open(`${igoUrl}/verificationPSC?username=${username}&token=${tokenIgo}`);
         }
     }
