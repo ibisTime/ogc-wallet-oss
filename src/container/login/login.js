@@ -3,7 +3,7 @@ import {Form, Icon, Input, Button} from 'antd';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {login} from '@redux/user';
-import {setSystem} from 'common/js/util';
+import {setSystem, setWebIcon} from 'common/js/util';
 import './login.css';
 import loginLeft from '../../images/login-left.png';
 
@@ -29,6 +29,12 @@ class Login extends React.Component {
     async componentDidMount() {
         await setSystem();
         const loginPic = localStorage.getItem('loginPic');
+        const webLogo = localStorage.getItem('headLogo');
+        const webName = localStorage.getItem('webName');
+        if(webName) {
+            document.title = webName;
+            setWebIcon(webLogo);
+        }
         this.setState({
             loginPic
         });
