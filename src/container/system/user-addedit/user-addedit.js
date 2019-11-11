@@ -13,10 +13,14 @@ class UserAddedit extends DetailUtil {
 
     render() {
         const fields = [{
-            title: '登录名(手机号)',
+            title: '登录名',
+            field: 'loginName',
+            required: true,
+            readonly: this.code
+        }, {
+            title: '手机号',
             field: 'mobile',
             mobile: true,
-            required: true,
             readonly: this.code
         }, {
             title: '真实姓名',

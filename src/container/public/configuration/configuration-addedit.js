@@ -42,7 +42,7 @@ class ConfigurationAddedit extends DetailUtil {
                 required: true,
                 type: 'date'
             });
-        } if (this.cData.ctype.match(this.cData.ckey.cDateTime)) {
+        } else if (this.cData.ctype.match(this.cData.ckey.cDateTime)) {
             fields.push({
                 title: '数值',
                 field: 'cvalue',

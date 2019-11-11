@@ -37,7 +37,7 @@ class PrepaidPhoneToSend extends React.Component {
             rowKey: 'id',
             pageCode: '630045',
             searchParams: {
-                type: 'simu_order_rule'
+                type: 'charge_market'
             },
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {
@@ -46,7 +46,7 @@ class PrepaidPhoneToSend extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/configuration/configuration-addedit?code=${selectedRows[0].code}&ctype=${selectedRows[0].ckey}&type=simu_order_rule`);
+                        this.props.history.push(`/configuration/configuration-addedit?code=${selectedRows[0].id}&ctype=${selectedRows[0].ckey}&type=charge_market`);
                     }
                 }
             }
