@@ -9,9 +9,11 @@ import {
     cancelFetching,
     setSearchData
 } from '@redux/cloud/millOrder/millOrder';
+import {Modal} from 'antd';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg, moneyFormat } from 'common/js/util';
+import { showWarnMsg, moneyFormat, showSucMsg } from 'common/js/util';
 import { Link } from 'react-router-dom';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -133,6 +135,7 @@ class MillOrder extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: '610104',
+            singleSelect: false,
             btnEvent: {
                 benefitPlan: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
@@ -141,6 +144,27 @@ class MillOrder extends React.Component {
                         showWarnMsg('请选择一条记录');
                     } else {
                         this.props.history.push(`/cloud/millOrderIncome?machineOrderCode=${selectedRowKeys[0]}`);
+                    }
+                },
+                speedUp: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定加速？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                fetch(610109, {codeList: selectedRowKeys}).then(() => {
+                                    showSucMsg('操作成功');
+                                    this.props.cancelFetching();
+                                    setTimeout(() => {
+                                        this.props.getPageData();
+                                    }, 1000);
+                                }).catch(this.props.cancelFetching);
+                            }
+                        });
                     }
                 }
             }
