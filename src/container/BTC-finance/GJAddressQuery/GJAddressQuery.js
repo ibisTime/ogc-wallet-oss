@@ -77,7 +77,7 @@ class GJAddressQuery extends React.Component {
             field: 'txFee',
             render: (v, data) => {
                 // console.log(data.currency);
-                return moneyFormat(data.txFee, '', data.currency);
+                return moneyFormat(data.txFee, '', data.minerSymbol);
             }
         }, {
             field: 'confirmDatetime',
