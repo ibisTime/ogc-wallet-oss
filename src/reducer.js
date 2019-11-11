@@ -15,6 +15,7 @@ import {publicContact} from './redux/public/contact';
 import {publicPrivacy} from './redux/public/privacy';
 import {publicMachineProtocol} from './redux/public/machineProtocol';
 import {publicRegister} from './redux/public/register';
+import {publicGiftCard} from './redux/public/giftCard';
 import {publicBuyADS} from './redux/public/buyADS';
 import {publicSellETH} from './redux/public/sellETH';
 import {publicTransactionRemind} from './redux/public/TransactionRemind';
@@ -385,6 +386,7 @@ export default combineReducers({
     publicPrivacy,
     publicMachineProtocol,
     publicRegister,
+    publicGiftCard,
     publicBuyADS,
     publicSellETH,
     publicTransactionRemind,

@@ -96,6 +96,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/quantitativecategory/quantitativecategory-addedit'))
     },
     {
+        path: '/public/giftCard',
+        component: asyncComponent(() => import('container/public/giftCard/giftCard'))
+    },
+    {
         path: '/public/contact',
         component: asyncComponent(() => import('container/public/contact/contact'))
     },
@@ -1456,6 +1460,10 @@ const ROUTES = [
     {
         path: '/userStatistics/currencyStatistics',
         component: asyncComponent(() => import('container/userStatistics/currencyStatistics'))
+    },
+    {
+        path: '/configuration/configuration-addedit',
+        component: asyncComponent(() => import('container/public/configuration/configuration-addedit'))
     }
 ];
 
