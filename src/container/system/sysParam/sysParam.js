@@ -10,6 +10,7 @@ import {
     setSearchData
 } from '@redux/system/sysParam';
 import {listWrapper} from 'common/js/build-list';
+import {showWarnMsg} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -38,7 +39,20 @@ class SysParam extends React.Component {
         return this.props.buildList({
             fields,
             pageCode: 630045,
-            rowKey: 'id'
+            rowKey: 'id',
+            buttons: [{
+                code: 'edit',
+                name: '修改',
+                handler: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/system/sysPara/addedit?code=${selectedRowKeys[0]}&cType=${selectedRows[0].ckey}`);
+                    }
+                }
+            }]
         });
     }
 }

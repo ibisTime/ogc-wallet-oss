@@ -9,6 +9,17 @@ class SysParamAddEdit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.cData = {
+            ctype: getQueryString('ctype'),
+            ckey: {
+                cDate: /_date/,
+                cDateTime: /_datetime/,
+                cSymbol: /_symbol/,
+                cActivity: /_notice/,
+                cSelect: /_select/,
+                cTextarea: /_textarea/
+            }
+        };
     }
 
     render() {
@@ -23,15 +34,54 @@ class SysParamAddEdit extends DetailUtil {
                 return (d && d.remark) || '';
             },
             readonly: true
-        }, {
-            title: '参数值',
-            field: 'cvalue'
-        }, {
+        }];
+        if (this.cData.ctype.match(this.cData.ckey.cDate)) {
+            fields.push({
+                title: '参数值',
+                field: 'cvalue',
+                required: true,
+                type: 'date'
+            });
+        } else if (this.cData.ctype.match(this.cData.ckey.cDateTime)) {
+            fields.push({
+                title: '参数值',
+                field: 'cvalue',
+                required: true,
+                type: 'datetime'
+            });
+        } else if (this.cData.ctype.match(this.cData.ckey.cTextarea) || this.cData.ctype.match(this.cData.ckey.cActivity)) {
+            fields.push({
+                title: '参数值',
+                field: 'cvalue',
+                required: true,
+                type: 'textarea'
+            });
+        } else if (this.cData.ctype.match(this.cData.ckey.cSymbol) || this.cData.ctype.match(this.cData.ckey.cSelect)) {
+            fields.push({
+                title: '参数值',
+                field: 'cvalue',
+                required: true,
+                type: 'select',
+                listCode: '802007',
+                params: {
+                    status: '0'
+                },
+                keyName: 'symbol',
+                valueName: '{{symbol.DATA}}-{{cname.DATA}}'
+            });
+        } else {
+            fields.push({
+                title: '参数值',
+                field: 'cvalue',
+                required: true
+            });
+        }
+        fields.push({
             title: '最近修改时间',
             field: 'updateDatetime',
             type: 'datetime',
             readonly: true
-        }];
+        });
         return this.buildDetail({
             fields,
             key: 'id',
