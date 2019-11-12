@@ -33,9 +33,6 @@ const StarLucky = asyncComponent(() => import('container/starLucky/starLucky'));
 // 卡卷
 const Card = asyncComponent(() => import('container/card/card'));
 
-// 商城
-const Store = asyncComponent(() => import('container/store/store'));
-
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
@@ -48,7 +45,6 @@ ReactDOM.render(
                     <Route path='/guessUpsDowns' component={GuessUpsDowns}></Route>
                     <Route path='/starLucky' component={StarLucky}></Route>
                     <Route path='/card' component={Card}></Route>
-                    <Route path='/store' component={Store}></Route>
                     <Route component={Dashboard}></Route>
                 </Switch>
                 <BackTop/>
