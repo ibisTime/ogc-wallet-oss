@@ -91,8 +91,7 @@ class ShopOrderAddedit extends DetailUtil {
                 field: 'discount'
             }, {
                 title: '价格(USDT)',
-                field: 'specsPrice',
-                amount: true
+                field: 'specsPrice'
             }, {
                 title: '运费(USDT)',
                 field: 'postFee',

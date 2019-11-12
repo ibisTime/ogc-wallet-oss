@@ -123,10 +123,6 @@ class CloudMillOrderDetail extends DetailUtil {
             field: 'continueEndTime',
             title: '连存结束时间',
             type: 'datetime'
-        }, {
-            field: 'speedEndTime',
-            title: '加速后到期时间',
-            type: 'datetime'
         }];
         return this.buildDetail({
             fields,

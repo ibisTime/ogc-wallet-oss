@@ -116,6 +116,10 @@ class MillOrder extends React.Component {
             type: 'select',
             search: true
         }, {
+            field: 'speedEndTime',
+            title: '加速后到期时间',
+            type: 'datetime'
+        }, {
             field: 'continueFlag',
             title: '是否被连存',
             key: 'machine_order_continue_flag',
