@@ -96,6 +96,11 @@ class Customer extends React.Component {
             field: 'inviteCode',
             title: '邀请码'
         }, {
+            field: 'mobile',
+            title: '手机号',
+            noVisible: true,
+            search: true
+        }, {
             field: 'userReferee',
             title: '推荐人',
             type: 'select',
