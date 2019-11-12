@@ -106,36 +106,37 @@ class userStatistics extends React.Component {
         dataDect('user_status').then(data => {
             this.setState({
                 userStatusList: data
-            });
-            // 散取用户详情
-            bulkCollectionUserInfo(this.state.code).then(data => {
-                this.setState({
-                    userName: data.withdraw.applyUserInfo.nickname + '(' + data.withdraw.applyUserInfo.loginName + ')',
-                    userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
-                    userStatus: findDsct(this.state.userStatusList, data.withdraw.applyUserInfo.status),
-                    userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
-                    userAmount: moneyFormat(data.withdraw.amount, '', data.withdraw.currency),
-                    userFee: moneyFormat(data.withdraw.fee, '', data.withdraw.currency),
-                    userActualAmount: moneyFormat(data.withdraw.actualAmount, '', data.withdraw.currency),
-                    userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
-                    userPayCardNo: data.withdraw.payCardNo,
-                    userCurrency: data.withdraw.currency,
-                    userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', data.withdraw.currency),
-                    userAccountNumber: data.withdraw.accountNumber
-                });
-                let symbol = data.withdraw.currency;
-                flowSelectListOrDetail(this.state.userAccountNumber, '1', 1, 2).then(data => {
+            }, () => {
+                // 散取用户详情
+                bulkCollectionUserInfo(this.state.code).then(data => {
                     this.setState({
-                        totalCount: data.totalCount
+                        userName: data.withdraw.applyUserInfo.nickname + '(' + data.withdraw.applyUserInfo.loginName + ')',
+                        userMobileOrEmail: data.withdraw.applyUserInfo.loginName,
+                        userStatus: findDsct(this.state.userStatusList, data.withdraw.applyUserInfo.status),
+                        userCreateDatetime: dateTimeFormat(data.withdraw.applyUserInfo.createDatetime),
+                        userAmount: moneyFormat(data.withdraw.amount, '', data.withdraw.currency),
+                        userFee: moneyFormat(data.withdraw.fee, '', data.withdraw.currency),
+                        userActualAmount: moneyFormat(data.withdraw.actualAmount, '', data.withdraw.currency),
+                        userApplyDatetime: dateTimeFormat(data.withdraw.applyDatetime),
+                        userPayCardNo: data.withdraw.payCardNo,
+                        userCurrency: data.withdraw.currency,
+                        userBalanceAmount: moneyFormat(data.withdraw.balanceAmount, '', data.withdraw.currency),
+                        userAccountNumber: data.withdraw.accountNumber
                     });
-                });
-                // 今日提币数量
-                toDaysWithdrawMoneyCount(this.state.code).then(data => {
-                    this.setState({
-                        toDayAmount: moneyFormat(data.amount, '', symbol),
-                        toDayIsWarnning: data.isWarnning,
-                        lastWithdrawAmount: data.lastWithdraw ? moneyFormat(data.lastWithdraw.amount, '', symbol) : '0',
-                        lastWithdrawApplyDatetime: data.lastWithdraw ? dateTimeFormat(data.lastWithdraw.applyDatetime) : '暂无记录'
+                    let symbol = data.withdraw.currency;
+                    flowSelectListOrDetail(this.state.userAccountNumber, '1', 1, 2).then(data => {
+                        this.setState({
+                            totalCount: data.totalCount
+                        });
+                    });
+                    // 今日提币数量
+                    toDaysWithdrawMoneyCount(this.state.code).then(data => {
+                        this.setState({
+                            toDayAmount: moneyFormat(data.amount, '', symbol),
+                            toDayIsWarnning: data.isWarnning,
+                            lastWithdrawAmount: data.lastWithdraw ? moneyFormat(data.lastWithdraw.amount, '', symbol) : '0',
+                            lastWithdrawApplyDatetime: data.lastWithdraw ? dateTimeFormat(data.lastWithdraw.applyDatetime) : '暂无记录'
+                        });
                     });
                 });
             });
@@ -162,22 +163,23 @@ class userStatistics extends React.Component {
         dataDect('property_distribute').then(data => {
             this.setState({
                 candyNodeLevels: data
-            });
-            behaviorDistribution(e[0], e[1], this.state.userId).then(data => {
-                let nodeList = [];
-                let nodeTitle = [];
-                for(let i = 0; i < data.detailList.length; i++) {
-                    nodeTitle[i] = findDsct(this.state.candyNodeLevels, data.detailList[i].type);
-                    nodeList.push(
-                        {
-                            value: data.detailList[i].amount,
-                            name: findDsct(this.state.candyNodeLevels, data.detailList[i].type)
-                        }
-                    );
-                }
-                this.setState({
-                    nodeTitle: [...nodeTitle],
-                    nodeList: [...nodeList]
+            }, () => {
+                behaviorDistribution(e[0], e[1], this.state.userId).then(data => {
+                    let nodeList = [];
+                    let nodeTitle = [];
+                    for(let i = 0; i < data.detailList.length; i++) {
+                        nodeTitle[i] = findDsct(this.state.candyNodeLevels, data.detailList[i].type);
+                        nodeList.push(
+                            {
+                                value: data.detailList[i].amount,
+                                name: findDsct(this.state.candyNodeLevels, data.detailList[i].type)
+                            }
+                        );
+                    }
+                    this.setState({
+                        nodeTitle: [...nodeTitle],
+                        nodeList: [...nodeList]
+                    });
                 });
             });
         });
