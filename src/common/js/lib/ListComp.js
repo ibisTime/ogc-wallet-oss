@@ -476,7 +476,8 @@ export default class ListComponent extends React.Component {
                 this.props.setPagination({
                     ...pagination,
                     current,
-                    total: data.totalCount
+                    total: data.totalCount,
+                    showQuickJumper: true
                 });
             }
         }).catch(this.props.cancelFetching);
