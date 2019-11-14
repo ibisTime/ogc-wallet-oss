@@ -95,7 +95,7 @@ class Home extends React.Component {
                         <div className="card-content">
                             { noticeData && noticeData.length > 0 ? noticeData.map(d => (
                                 <div className="content-item" key={d.code}>
-                                    <Link to={'/public/noticesystem/addedit?v=1&code=' + d.code}>
+                                    <Link to={'/public/noticeDetail?code=' + d.code}>
                                         <img className="icon" src={iconLi}/>
                                         <p className="txt">{d.title}</p>
                                         <samp className="date">{dateFormat(d.updateDatetime)}</samp>

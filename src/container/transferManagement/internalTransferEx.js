@@ -68,7 +68,7 @@ class TBunderline extends React.Component {
                 currency = v;
             }
         }, {
-            field: 'accountName',
+            field: 'applyUser',
             title: '发起账号',
             type: 'select',
             pageCode: '805120',

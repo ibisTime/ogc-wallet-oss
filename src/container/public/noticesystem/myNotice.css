@@ -1,0 +1,55 @@
+.notice-List-wrap {
+    padding: 0 20px;
+}
+.listContent {
+    font-size: 0;
+
+}
+.listContentItem {
+    color: rgba(0, 0, 0, 0.45);
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.listContentItem span {
+    line-height: 20px;
+}
+.listContentItem p {
+    margin-top: 4px;
+    margin-bottom: 0;
+    line-height: 22px;
+}
+.notice-item{
+    padding: 12px 20px;
+}
+.notice-item:hover{
+    background-color: rgba(210, 210, 210, 0.1);
+    cursor: default;
+}
+.detail-wrap {
+    width: 100%;
+    padding: 0 20px;
+}
+
+.detail-wrap .title {
+    text-align: center;
+    font-size: 18px;
+}
+
+.detail-wrap .datetime {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+    padding: 15px 0 0;
+}
+
+.detail-wrap .content {
+    margin: 30px 0 70px;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 0 100px;
+}
+
+.detail-wrap .button {
+    text-align: center;
+}

@@ -100,7 +100,6 @@ class PlatformAccount extends React.Component {
     render() {
         const unsettledLoan = this.props.unsettledLoan || {};
         const unsettedList = Object.values(unsettledLoan);
-        console.log('unsettedList', unsettedList);
         const {data} = this.state;
         return (
             <div>
@@ -112,7 +111,7 @@ class PlatformAccount extends React.Component {
                 <Row>
                     {
                         unsettedList.length > 0 && unsettedList.map((item) => (
-                          <Col style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}} key={item.userId}>
+                          <Col style={{marginBottom: '30px', width: '30%', float: 'left', marginRight: '30px'}} key={item.accountNumber}>
                               <Card title={item.accountName} extra={
                                   moneyFormat(item.amount.toString(), '', item.currency)
                               }>{<div style={{width: '100%', textAlign: 'center'}}>

@@ -136,6 +136,10 @@ const ROUTES = [
         path: '/public/notice/addedit',
         component: asyncComponent(() => import('container/public/notice/notice-addedit'))
     },
+    {
+        path: '/public/noticeDetail',
+        component: asyncComponent(() => import('container/public/noticesystem/notice-detail'))
+    },
     // 内部公告
     {
         path: '/public/noticesystem',
