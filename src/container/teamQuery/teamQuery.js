@@ -65,67 +65,69 @@ class teamQuery extends React.Component {
     };
     findUserInfo = () => {
         const {treeKey, value} = this.state;
-        this.setState({
-            isShowInfo: true
-        });
-        if(!treeKey) {
-            if(value) {
-                groupUserInfo(value).then(data => {
-                    this.setState({
-                        teamUserInfo: data
+        if(value) {
+            this.setState({
+                isShowInfo: true
+            });
+            if(!treeKey) {
+                if(value) {
+                    groupUserInfo(value).then(data => {
+                        this.setState({
+                            teamUserInfo: data
+                        });
                     });
-                });
-                this.setState({
-                    treeDataProps: ''
-                });
-                const key = value;
+                    this.setState({
+                        treeDataProps: ''
+                    });
+                    const key = value;
+                    const hasMsg = message.loading('');
+                    teamQueryList(key).then(data => {
+                        if(JSON.stringify(data) !== '{}') {
+                            const treeDataProps = data.map((item, index) => {
+                                let obj = {
+                                    title: `${item.loginName},下级${item.refereeCount ? item.refereeCount : 0}人`,
+                                    key: item.userId
+                                };
+                                if(+item.refereeCount > 0) {
+                                    obj.children = [{title: '', key: index}];
+                                }
+                                return obj;
+                            });
+                            this.setState({
+                                treeDataProps
+                            });
+                            hasMsg();
+                        }
+                        // else {
+                        //     showWarnMsg('该账号暂无关联推荐人');
+                        // }
+                    });
+                }else{
+                    showWarnMsg('用户账户不能为空!');
+                }
+            }else {
+                const key = treeKey;
+                const {treeDataProps} = this.state;
                 const hasMsg = message.loading('');
                 teamQueryList(key).then(data => {
-                    if(JSON.stringify(data) !== '{}') {
-                        const treeDataProps = data.map((item, index) => {
-                            let obj = {
-                                title: `${item.loginName},下级${item.refereeCount ? item.refereeCount : 0}人`,
-                                key: item.userId
-                            };
-                            if(+item.refereeCount > 0) {
-                                obj.children = [{title: '', key: index}];
-                            }
-                            return obj;
-                        });
-                        this.setState({
-                            treeDataProps
-                        });
-                        hasMsg();
-                    }
-                    // else {
-                    //     showWarnMsg('该账号暂无关联推荐人');
-                    // }
-                });
-            }else{
-                showWarnMsg('用户账户不能为空!');
-            }
-        }else {
-            const key = treeKey;
-            const {treeDataProps} = this.state;
-            const hasMsg = message.loading('');
-            teamQueryList(key).then(data => {
-                const treeData = Array.isArray(data) && data.map((item, index) => {
-                    let obj = {
-                        title: `${item.loginName},下级${item.refereeCount ? item.refereeCount : 0}人`,
-                        key: item.userId
-                    };
-                    if(+item.refereeCount > 0) {
-                        obj.children = [{title: '', key: item.userId + index}];
-                    }
-                    return obj;
-                });
-                if(treeData && treeData.length) {
-                    this.setState({
-                        treeDataProps: findKey(key, treeDataProps, treeData)
+                    const treeData = Array.isArray(data) && data.map((item, index) => {
+                        let obj = {
+                            title: `${item.loginName},下级${item.refereeCount ? item.refereeCount : 0}人`,
+                            key: item.userId
+                        };
+                        if(+item.refereeCount > 0) {
+                            obj.children = [{title: '', key: item.userId + index}];
+                        }
+                        return obj;
                     });
-                }
-                hasMsg();
-            });
+                    if(treeData && treeData.length) {
+                        this.setState({
+                            treeDataProps: findKey(key, treeDataProps, treeData)
+                        });
+                    }
+                    hasMsg();
+                });
+            }
         }
         function findKey(key, data, treeData) {
             if(Array.isArray(data)) {

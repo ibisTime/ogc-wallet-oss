@@ -20,21 +20,19 @@ class currencyStatistics extends React.Component {
         super(props);
         this.state = {
             nodeList: [],
-            coinList: []
+            coinList: getCoinList()
         };
     }
     componentDidMount() {
-        this.setState({
-            coinList: getCoinList()
-        });
         // TOSP TOS ETH
-        coinDistribution(mtDate(dateFormat(new Date()), 15), 'PSC').then(data => {
+        const {coinList} = this.state;
+        coinDistribution(mtDate(dateFormat(new Date()), 15), coinList[0].key).then(data => {
             let nodeList = [];
             let sourceList = [
                 ['product', '今日存币数量', '今日提币数量', '截止今日币量']
             ];
             for(let i = 0; i < data.length; i++) {
-                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', 'PSC'), moneyFormat(data[i].todaySymbolOut, '', 'PSC'), moneyFormat(data[i].totalAmount, '', 'PSC')];
+                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', coinList[0].key), moneyFormat(data[i].todaySymbolOut, '', coinList[0].key), moneyFormat(data[i].totalAmount, '', coinList[0].key)];
             }
             sourceList.push(...nodeList);
             this.setState({
@@ -130,7 +128,7 @@ class currencyStatistics extends React.Component {
                 <Row>
                     <Col span={24}>
                         <strong style={{marginLeft: '4px', fontSize: '18px'}}>请选择币种：</strong>
-                        <Select defaultValue="PSC" style={{ width: 120 }} onChange={this.handleChange}>
+                        <Select defaultValue={coinList[0].key} style={{ width: 120 }} onChange={this.handleChange}>
                             {
                                 Array.isArray(coinList) ? coinList.map(item => {
                                     return (<Option value={item.key}>{item.key}</Option>);
