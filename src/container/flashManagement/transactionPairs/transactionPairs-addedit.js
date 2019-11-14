@@ -98,8 +98,8 @@ class transactionPairsAddedit extends DetailUtil {
                                 message.warning('兑出币种不可与兑入币种一样');
                                 return false;
                             }else {
-                                params.min = moneyParse(params.min, '', params.symbolOut);
-                                params.max = moneyParse(params.max, '', params.symbolOut);
+                                params.min = params.min ? moneyParse(params.min, '', params.symbolOut) : '';
+                                params.max = params.max ? moneyParse(params.max, '', params.symbolOut) : '';
                                 return true;
                             }
                         }

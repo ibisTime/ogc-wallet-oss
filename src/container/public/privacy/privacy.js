@@ -37,7 +37,18 @@ class Privacy extends React.Component {
             rowKey: 'id',
             pageCode: '630045',
             searchParams: {
-                type: 'privacy'
+                type: 'privacy_protocol'
+            },
+            btnEvent: {
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/configuration/configuration-addedit?code=${selectedRows[0].id}&ctype=${selectedRows[0].ckey}&type=privacy_protocol`);
+                    }
+                }
             }
         });
     }
