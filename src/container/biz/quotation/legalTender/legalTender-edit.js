@@ -29,7 +29,6 @@ class legalTenderEdit extends DetailUtil {
                 }, 2000);
             }
         });
-        console.log(this.dailyLimit);
     }
     coinMaketValue = () => {
         this.rate = event.target.value;

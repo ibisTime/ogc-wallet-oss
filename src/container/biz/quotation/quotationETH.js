@@ -57,7 +57,6 @@ class QuotationETH extends React.Component {
             },
             btnEvent: {
                 today: () => {
-                    console.log('123');
                     this.props.history.push(`/quotation/quotationETH`);
                 },
                 edit: (selectedRowKeys, selectedRows) => {
