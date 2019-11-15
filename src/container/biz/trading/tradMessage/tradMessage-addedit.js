@@ -96,7 +96,11 @@ class TradMessageAddedit extends DetailUtil {
           return false;
         }else {
           params.min = moneyParse(params.min, '', params.symbolOut);
-          params.max = moneyParse(params.max, '', params.symbolOut);
+            if(params.max) {
+                params.max = moneyParse(params.max, '', params.symbolOut);
+            }else {
+                delete params.max;
+            }
           return true;
         }
       }
