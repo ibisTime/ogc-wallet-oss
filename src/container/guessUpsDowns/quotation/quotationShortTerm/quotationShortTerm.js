@@ -31,6 +31,28 @@ function fixed8(val) {
     }
 )
 class QuotationShortTerm extends React.Component {
+    isGetPage = true;
+    timer = null;
+    shouldComponentUpdate(nextProps) {
+        if(nextProps.setTab !== this.props.setTab && nextProps.setTab === '1') {
+            if(this.isGetPage) {
+                this.isGetPage = false;
+                this.props.getPageData();
+                if(this.timer) {
+                    clearTimeout(this.timer);
+                }
+                this.timer = setTimeout(() => {
+                    this.isGetPage = true;
+                }, 1000);
+            }
+        }
+        return true;
+    }
+    componentWillUnmount() {
+        if(this.timer) {
+            clearTimeout(this.timer);
+        }
+    }
     render() {
         const fields = [{
             field: 'fromPlat',

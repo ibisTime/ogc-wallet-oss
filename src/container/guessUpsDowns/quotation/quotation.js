@@ -37,13 +37,21 @@ const { Content } = Layout;
 class Quotation extends React.Component {
     constructor(props) {
         super(props);
-        this.activeKey = sessionStorage.getItem('activeKey') || '1';
+        const activeKey = sessionStorage.getItem('activeKey') || '1';
+        this.activeKey = activeKey;
+        this.state = {
+            setTab: activeKey
+        };
     }
     changeTabs = (key) => {
         sessionStorage.setItem('activeKey', key);
+        this.setState({
+            setTab: key
+        });
     };
 
     render() {
+        const {setTab} = this.state;
         return (
             <div className="guessUpsDownsBonusPool-wrapper">
                 <div className="guessUpsDownsBonusPool-section">
@@ -51,18 +59,14 @@ class Quotation extends React.Component {
                         <TabPane tab="近期行情" key="1">
                             <Layout>
                                 <Content>
-                                    <Switch>
-                                        <Route path='/guessUpsDowns/quotation' exact component={QuotationShortTerm}></Route>
-                                    </Switch>
+                                    <QuotationShortTerm setTab={setTab}/>
                                 </Content>
                             </Layout>
                         </TabPane>
                         <TabPane tab="历史行情" key="2">
                             <Layout>
                                 <Content>
-                                    <Switch>
-                                        <Route path='/guessUpsDowns/quotation' exact component={QuotationHistory}></Route>
-                                    </Switch>
+                                    <QuotationHistory setTab={setTab}/>
                                 </Content>
                             </Layout>
                         </TabPane>
