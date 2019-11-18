@@ -80,7 +80,14 @@ class Scene extends React.Component {
             title: '币种',
             type: 'select',
             key: 'guess_coin',
-            search: true
+            search: true,
+            noVisible: true
+        }, {
+            field: 'symbol01',
+            title: '币种',
+            render(v, d) {
+                return d && d.symbol;
+            }
         }, {
             field: 'recycleMins',
             title: '周期（分）'

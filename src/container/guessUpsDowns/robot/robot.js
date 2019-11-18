@@ -99,7 +99,14 @@ class Robot extends React.Component {
             title: '针对币种',
             type: 'select',
             key: 'guess_coin',
-            search: true
+            search: true,
+            noVisible: true
+        }, {
+            field: 'symbol01',
+            title: '针对币种',
+            render(v, d) {
+                return d && d.symbol;
+            }
         }, {
             field: 'balanceAmount',
             title: '账户余额',
@@ -216,7 +223,7 @@ class Robot extends React.Component {
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/guessUpsDowns/scene-record?code=${selectedRowKeys[0]}`);
+                                    this.props.history.push(`/guessUpsDowns/scene-record?code=${selectedRowKeys[0]}&isRobot=1`);
                                 }
                             }
                         }, {

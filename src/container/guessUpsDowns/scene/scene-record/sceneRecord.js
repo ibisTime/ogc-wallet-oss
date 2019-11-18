@@ -24,6 +24,7 @@ import {showWarnMsg, dateTimeFormat, moneyFormat, showSucMsg, getQueryString} fr
 )
 class SceneRecord extends React.Component {
     code = getQueryString('code', this.props.location.search);
+    keyCode = getQueryString('isRobot', this.props.location.search) ? 'userId' : 'rewardCode';
     render() {
         const fields = [{
             field: 'userId',
@@ -90,7 +91,7 @@ class SceneRecord extends React.Component {
                         fields,
                         pageCode: 620017,
                         searchParams: {
-                            userId: this.code
+                            [this.keyCode]: this.code
                         },
                         buttons: [{
                             code: 'goBack',

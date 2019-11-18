@@ -20,7 +20,12 @@ class SceneAddedit extends DetailUtil {
             title: '币种',
             type: 'select',
             key: 'guess_coin',
-            required: true
+            required: true,
+            hidden: this.view
+        }, {
+            field: 'symbol',
+            title: '币种',
+            hidden: !this.view
         }, {
             field: 'recycleMins',
             title: '周期分钟数',

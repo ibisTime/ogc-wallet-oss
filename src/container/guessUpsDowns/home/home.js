@@ -15,6 +15,7 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat, moneyFormat, formatImg} from 'common/js/util';
 import asyncComponent from 'component/async-component/async-component';
+import {getSystormParam} from 'api/dict';
 import fetch from 'common/js/fetch';
 
 const { Content } = Layout;
@@ -35,19 +36,27 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bonusPoolData: []
+            bonusPoolData: [],
+            symbol: ''
         };
         this.realTimer = null;
     }
     componentDidMount() {
-        // 直接请求
-        fetch(620036).then(data => {
+        // guess_coin
+        fetch('630036', {parentKey: 'guess_coin'}).then(data => {
+            const symbol = data[0].dvalue;
             this.setState({
-                bonusPoolData: {
-                    inAmount: moneyFormat(data.inAmount, '4', 'BTC'),
-                    outAmount: moneyFormat(data.outAmount, '4', 'BTC'),
-                    amount: moneyFormat(data.amount, '4', 'BTC')
-                }
+                symbol
+            });
+            // 直接请求
+            fetch(620036, {symbol}).then(data => {
+                this.setState({
+                    bonusPoolData: {
+                        inAmount: moneyFormat(data.inAmount, '4', symbol),
+                        outAmount: moneyFormat(data.outAmount, '4', symbol),
+                        amount: moneyFormat(data.amount, '4', symbol)
+                    }
+                });
             });
         });
         if(this.realTimer) {
@@ -93,12 +102,12 @@ class Home extends React.Component {
             title: '投注时间',
             type: 'datetime'
         }];
-        const {bonusPoolData} = this.state;
+        const {bonusPoolData, symbol} = this.state;
         return (
             <div className="guessUpsDownsHome-wrapper">
                 <div className="homeTop">
                     <div className="homeTop-left">
-                        <div className="homeTop-left-tit">平台BTC盈亏池</div>
+                        <div className="homeTop-left-tit">平台{symbol}盈亏池</div>
                         <div className="homeTop-left-item-wrap">
                             <div className="homeTop-left-item" key='1'>
                                 <div className="item-con">
