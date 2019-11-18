@@ -111,8 +111,7 @@ class TBunderline extends React.Component {
             field: 'bizType',
             title: '划转类型',
             type: 'select',
-            key: 'withdraw_biz_type',
-            search: true
+            key: 'withdraw_biz_type'
         }, {
             title: '提现地址',
             field: 'payCardNo'

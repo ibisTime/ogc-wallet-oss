@@ -81,7 +81,7 @@ class SceneRecord extends React.Component {
                         fields,
                         pageCode: 620017,
                         searchParams: {
-                            rewardCode: this.code
+                            userId: this.code
                         },
                         buttons: [{
                             code: 'goBack',

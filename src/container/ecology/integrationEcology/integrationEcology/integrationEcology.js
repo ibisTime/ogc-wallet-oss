@@ -38,7 +38,7 @@ class IntegrationEcology extends React.Component {
     }
 
     onCardClick = (item) => {
-        if(item.url === '0') {
+        if(item.url === 'dapp_igo') {
             let username = localStorage.getItem('username');
             let tokenIgo = localStorage.getItem('token_igo');
             let igoUrl = sessionStorage.getItem('apiLoginUrl');
