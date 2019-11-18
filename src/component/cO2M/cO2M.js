@@ -395,15 +395,17 @@ export default class CO2M extends React.Component {
             this.addRender(f, (val) => this.renderSelect(val, f));
         } else if (f.type === 'img') {
             if(f.single) {
-                obj.render = (value) => value ? <img style={{maxWidth: 25, maxHeight: 25}} src={PIC_PREFIX + value}/> : '';
+                const PIC = `http://${localStorage.getItem('qiniuDomain')}/`;
+                obj.render = (value) => value ? <img style={{maxWidth: 25, maxHeight: 25}} src={PIC + value}/> : '';
             } else {
                 obj.render = (value) => {
                     if (value) {
                         let imgStr = value.split('||');
+                        const PIC = `http://${localStorage.getItem('qiniuDomain')}/`;
                         return (
                             <div>{
                                 imgStr.map(pic => (
-                                    <img key={pic} style={{maxWidth: 25, maxHeight: 25, marginRight: 10}} src={PIC_PREFIX + pic}/>
+                                    <img key={pic} style={{maxWidth: 25, maxHeight: 25, marginRight: 10}} src={PIC + pic}/>
                                 ))
                             }</div>);
                     }

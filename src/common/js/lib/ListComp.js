@@ -164,7 +164,8 @@ export default class ListComponent extends React.Component {
             }
             this.addRender(f, (val) => this.renderSelect(val, f));
         } else if (f.type === 'img') {
-            obj.render = (value) => value ? <img style={{maxWidth: 40, maxHeight: 40}} src={PIC_PREFIX + value}/> : '';
+            const PIC = `http://${localStorage.getItem('qiniuDomain')}/`;
+            obj.render = (value) => value ? <img style={{maxWidth: 40, maxHeight: 40}} src={PIC + value}/> : '';
         }
         if (f.amount) {
             obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, d)}</span>;

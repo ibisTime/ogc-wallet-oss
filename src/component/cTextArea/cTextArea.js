@@ -25,7 +25,8 @@ export default class CTextArea extends React.Component {
       _this.editor.customConfig.showLinkImg = false;
       _this.editor.customConfig.uploadImgHooks = {
         customInsert: (insertLinkImg, result) => {
-          insertLinkImg(PIC_PREFIX + result.key);
+            const PIC = `http://${localStorage.getItem('qiniuDomain')}/`;
+          insertLinkImg(PIC + result.key);
         },
         before: (formdata, xhr, editor, file) => {
           formdata.append('token', _this.props.token);

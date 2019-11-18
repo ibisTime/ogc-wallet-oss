@@ -68,9 +68,9 @@ module.exports = {
     // },
     entry: {
         'polyfills': require.resolve('./polyfills'),
+        'index': paths.appIndexJs,
         'common_detail': paths.comDetailJs,
-        'common_list': paths.comListJs,
-        'index': paths.appIndexJs
+        'common_list': paths.comListJs
     },
     output: {
         // The build folder.

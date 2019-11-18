@@ -19,8 +19,15 @@ export default class CUpload extends React.Component {
     this.state = {
       previewImage: '',
       previewVisible: false,
-      previewId: ''
+      previewId: '',
+        PIC: ''
     };
+  }
+  componentDidMount() {
+      const url = `http://${localStorage.getItem('qiniuDomain')}/`;
+      this.setState({
+          PIC: url
+      });
   }
   shouldComponentUpdate(nextProps, nextState) {
     return this.isPropsChange(nextProps) || this.isStateChange(nextState);
@@ -69,9 +76,9 @@ export default class CUpload extends React.Component {
   }
   // state是否改变
   isStateChange(nextState) {
-    const { previewImage, previewVisible, previewId } = this.state;
+    const { previewImage, previewVisible, previewId, PIC } = this.state;
     return nextState.previewImage !== previewImage || nextState.previewVisible !== previewVisible ||
-      nextState.previewId !== previewId;
+      nextState.previewId !== previewId || nextState.PIC !== PIC;
   }
   // 预览图片
   handlePreview = (file, previewId) => {
@@ -86,7 +93,7 @@ export default class CUpload extends React.Component {
         this.carousel.goTo(index);
       }, 0);
     });
-    this.imgUrl = PIC_PREFIX + file.key + '?attname=' + file.key + '.jpg';
+    this.imgUrl = this.state.PIC + file.key + '?attname=' + file.key + '.jpg';
   }
   // 隐藏图片
   handleCancel = () => this.setState({previewVisible: false})
@@ -188,7 +195,7 @@ export default class CUpload extends React.Component {
   render() {
     const { field, isLoaded, getFieldDecorator, token, rules, readonly, single,
       isImg, onChange, accept, getFieldValue, label, hidden, initVal, inline } = this.props;
-    const { previewVisible, previewId } = this.state;
+    const { previewVisible, previewId, PIC } = this.state;
     const initValue = this.getFileInitVal(initVal, isImg);
     let layoutProps = inline ? {} : formItemLayout;
     return (
@@ -220,10 +227,10 @@ export default class CUpload extends React.Component {
             <div className="previewImg-wrap">
               <Carousel dots={true} ref={(carousel => this.carousel = carousel)} afterChange={(a) => {
                 let url = getFieldValue(previewId).split('||')[a];
-                this.imgUrl = PIC_PREFIX + url + '?attname=' + url + '.jpg';
+                this.imgUrl = this.state.PIC + url + '?attname=' + url + '.jpg';
               }}>{
                 previewId && getFieldValue(previewId).split('||').map(v => {
-                  let url = PIC_PREFIX + v + PIC_BASEURL_L;
+                  let url = this.state.PIC + v + PIC_BASEURL_L;
                   return (<div className='img-wrap' key={v}><img alt="图片" style={{width: '100%'}} src={url}/></div>);
                 })
               }</Carousel>

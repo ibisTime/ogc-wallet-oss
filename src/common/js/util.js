@@ -57,11 +57,11 @@ export async function setSystem() {
                     localStorage.setItem('headLogo', link);
                 }
             });
-        });
-        fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
-            if (data.list[0]) {
-                localStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
-            }
+            await fetch(630045, {ckey: 'qiniu_upload_domain', start: 1, limit: 10}).then(data => {
+                if (data.list[0]) {
+                    localStorage.setItem('qiniuUploadDomain', data.list[0].cvalue);
+                }
+            });
         });
     }
     const mallOssUrl = sessionStorage.getItem('mallOssUrl');
@@ -445,7 +445,8 @@ export function formatFile(urls, suffix = '') {
             suffix = url.substr(index);
             url = url.substr(0, index);
         }
-        url = PIC_PREFIX + url + suffix;
+        const PIC = `http://${localStorage.getItem('qiniuDomain')}/`;
+        url = PIC + url + suffix;
     }
     return url;
 }

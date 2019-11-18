@@ -40,9 +40,9 @@ module.exports = {
   entry: {
     'polyfills':require.resolve('./polyfills'),
     'webpackHotDevClient': require.resolve('react-dev-utils/webpackHotDevClient'),
+    'index': paths.appIndexJs,
     'common_detail': paths.comDetailJs,
-    'common_list': paths.comListJs,
-    'index': paths.appIndexJs
+    'common_list': paths.comListJs
   },
   output: {
     // Add /* filename */ comments to generated require()s in the output.
