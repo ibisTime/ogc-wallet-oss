@@ -59,17 +59,26 @@ class SceneRecord extends React.Component {
             valueName: 'value'
         }, {
             field: 'betAmount',
-            title: '投注金额'
+            title: '投注金额',
+            render(v, d) {
+                return v && moneyFormat(v, '4', d.symbol);
+            }
         }, {
             field: 'betDatetime',
             title: '投注时间',
             type: 'datetime'
         }, {
             field: 'winAmount',
-            title: '赚取金额'
+            title: '赚取金额',
+            render(v, d) {
+                return v && moneyFormat(v, '4', d.symbol);
+            }
         }, {
             field: 'fee',
-            title: '手续费'
+            title: '手续费',
+            render(v, d) {
+                return v && moneyFormat(v, '4', d.symbol);
+            }
         }, {
             field: 'feeRate',
             title: '手续费率'
