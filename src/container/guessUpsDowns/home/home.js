@@ -43,13 +43,13 @@ class Home extends React.Component {
     }
     componentDidMount() {
         // guess_coin
-        fetch('630036', {parentKey: 'guess_coin'}).then(data => {
-            const symbol = data[0].dvalue;
+        fetch('630048', {type: 'guess_symbol'}).then(data => {
+            const symbol = data.guess_symbol;
             this.setState({
                 symbol
             });
             // 直接请求
-            fetch(620036, {symbol}).then(data => {
+            fetch(620036).then(data => {
                 this.setState({
                     bonusPoolData: {
                         inAmount: moneyFormat(data.inAmount, '4', symbol),

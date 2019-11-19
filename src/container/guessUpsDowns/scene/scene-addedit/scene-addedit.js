@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'antd';
 import { getQueryString, moneyParse, getCoinList } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
+import fetch from 'common/js/fetch';
 
 @Form.create()
 class SceneAddedit extends DetailUtil {
@@ -9,6 +10,17 @@ class SceneAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.state = {
+            ...this.state,
+            symbol: ''
+        };
+    }
+    componentDidMount() {
+        fetch('630048', {type: 'guess_symbol'}).then(data => {
+            this.setState({
+                symbol: data.guess_symbol
+            });
+        });
     }
     render() {
         const fields = [{
@@ -18,14 +30,8 @@ class SceneAddedit extends DetailUtil {
         }, {
             field: 'symbol',
             title: '币种',
-            type: 'select',
-            key: 'guess_coin',
-            required: true,
-            hidden: this.view
-        }, {
-            field: 'symbol',
-            title: '币种',
-            hidden: !this.view
+            value: this.state.symbol,
+            readonly: true
         }, {
             field: 'recycleMins',
             title: '周期分钟数',
@@ -106,7 +112,11 @@ class SceneAddedit extends DetailUtil {
             view: this.view,
             detailCode: 620006,
             addCode: 620001,
-            editCode: 620002
+            editCode: 620002,
+            beforeSubmit: (params) => {
+                params.symbol = this.state.symbol;
+                return params;
+            }
         });
     }
 }

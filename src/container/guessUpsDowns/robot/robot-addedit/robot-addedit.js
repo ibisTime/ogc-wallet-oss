@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'antd';
 import { getQueryString, getCoinList } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
+import fetch from 'common/js/fetch';
 
 @Form.create()
 class RobotAddedit extends DetailUtil {
@@ -9,17 +10,27 @@ class RobotAddedit extends DetailUtil {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.state = {
+            ...this.state,
+            symbol: ''
+        };
+    }
+    componentDidMount() {
+        fetch('630048', {type: 'guess_symbol'}).then(data => {
+            this.setState({
+                symbol: data.guess_symbol
+            });
+        });
     }
     render() {
         const fields = [{
-            field: 'name',
-            title: '机器人名称',
-            required: true
-        }, {
             field: 'symbol',
             title: '针对币种',
-            type: 'select',
-            key: 'guess_coin',
+            readonly: true,
+            value: this.state.symbol
+        }, {
+            field: 'name',
+            title: '机器人名称',
             required: true
         }, {
             field: 'conditionsRate',
@@ -49,7 +60,11 @@ class RobotAddedit extends DetailUtil {
             view: this.view,
             detailCode: 620024,
             addCode: 620020,
-            editCode: 620021
+            editCode: 620021,
+            beforeSubmit: (params) => {
+                params.symbol = this.state.symbol;
+                return params;
+            }
         });
     }
 }
