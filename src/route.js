@@ -237,6 +237,10 @@ const ROUTES = [
         path: '/public/rateExplain/addedit',
         component: asyncComponent(() => import('container/public/rateExplain/rateExplain-addedit'))
     },
+    {
+        path: '/public/helpCenter',
+        component: asyncComponent(() => import('container/public/helpCenter/helpCenter'))
+    },
 
     // 业务管理
     // 客户管理

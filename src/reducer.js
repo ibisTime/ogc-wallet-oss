@@ -24,6 +24,7 @@ import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
 import {publicLhlcxy} from './redux/public/lhlcxy';
+import {publicHelpCenter} from './redux/public/helpCenter';
 import {biztodayprofit} from './redux/biz/financial/todayprofit';
 import {AppManagent} from './redux/managent/appmanagent';
 import {Alerts} from './redux/managent/alerts';
@@ -396,6 +397,7 @@ export default combineReducers({
     publicLegalDeclaration,
     publicRateExplain,
     publicLhlcxy,
+    publicHelpCenter,
     // 会员查询
     userCustomer,
     userCustomerAccount,
