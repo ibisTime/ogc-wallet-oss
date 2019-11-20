@@ -48,6 +48,15 @@ class Privacy extends React.Component {
                     } else {
                         this.props.history.push(`/configuration/configuration-addedit?code=${selectedRows[0].id}&ctype=${selectedRows[0].ckey}&type=privacy_protocol`);
                     }
+                },
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/public/privacy/detail?v=1&code=${selectedRowKeys[0]}`);
+                    }
                 }
             }
         });

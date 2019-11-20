@@ -1459,6 +1459,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/configuration/configuration-addedit'))
     },
     {
+        path: '/public/privacy/detail',
+        component: asyncComponent(() => import('container/public/configuration/privacyProtocol-detail'))
+    },
+    {
         path: '/marketingManagement/registerToSend',
         component: asyncComponent(() => import('container/marketingManagement/marketingActivities/registerToSend/registerToSend'))
     },
