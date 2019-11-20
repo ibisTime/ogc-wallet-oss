@@ -95,15 +95,9 @@ class Robot extends React.Component {
             field: 'name',
             title: '机器人'
         }, {
-            field: 'symbol',
-            title: '针对币种',
-            type: 'select',
-            key: 'guess_coin',
-            search: true,
-            noVisible: true
-        }, {
             field: 'symbol01',
             title: '针对币种',
+            search: true,
             render(v, d) {
                 return d && d.symbol;
             }

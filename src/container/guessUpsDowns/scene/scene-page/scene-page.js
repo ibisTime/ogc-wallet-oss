@@ -70,7 +70,7 @@ class ScenePage extends React.Component {
                 {
                     this.props.buildList({
                         fields,
-                        pageCode: 620013,
+                        pageCode: 620028,
                         searchParams: {
                             'rewardTermCode': this.code
                         },

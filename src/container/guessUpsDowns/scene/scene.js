@@ -76,15 +76,9 @@ class Scene extends React.Component {
             field: 'name',
             title: '名称'
         }, {
-            field: 'symbol',
-            title: '币种',
-            type: 'select',
-            key: 'guess_coin',
-            search: true,
-            noVisible: true
-        }, {
             field: 'symbol01',
             title: '币种',
+            search: true,
             render(v, d) {
                 return d && d.symbol;
             }

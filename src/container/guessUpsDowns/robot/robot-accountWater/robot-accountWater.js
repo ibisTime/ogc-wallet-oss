@@ -83,10 +83,8 @@ class RobotAccountWater extends React.Component {
             noVisible: !!this.userId
         }, {
             field: 'currency',
-            title: '币种',
-            type: 'select',
-            key: 'guess_coin',
-            search: true
+            search: true,
+            title: '币种'
         }, {
             field: 'accountNumber',
             title: '账号'

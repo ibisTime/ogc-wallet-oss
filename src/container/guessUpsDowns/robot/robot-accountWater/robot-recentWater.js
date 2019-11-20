@@ -55,10 +55,8 @@ class RobotRecentWater extends React.Component {
             search: true
         }, {
             field: 'currency',
-            title: '币种',
-            type: 'select',
-            key: 'guess_coin',
-            search: !this.isPlat
+            search: !this.isPlat,
+            title: '币种'
         }, {
             field: 'bizType',
             title: '业务类型',

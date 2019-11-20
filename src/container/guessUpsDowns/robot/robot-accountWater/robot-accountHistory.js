@@ -58,8 +58,6 @@ class RobotHistoryWater extends React.Component {
         }, {
             field: 'currency',
             title: '币种',
-            type: 'select',
-            key: 'guess_coin',
             search: !this.isPlat
         }, {
             field: 'bizType',
