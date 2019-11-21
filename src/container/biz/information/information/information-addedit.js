@@ -12,11 +12,58 @@ class InformationAddedit extends DetailUtil {
         this.index = 0;
         this.symbolIn = '';
         this.symbolOut = '';
+        this.firstType = '';
+        this.firstGrade = '';
+    }
+    componentDidMount() {
+        setTimeout(() => {
+            this.index++;
+        }, 500);
     }
     render() {
         let fields = [{
             field: 'title',
             title: '标题',
+            required: true
+        }, {
+            field: 'type',
+            title: '分类',
+            listCode: '629008',
+            type: 'select',
+            keyName: 'code',
+            valueName: 'name',
+            params: {
+                status: '1'
+            },
+            formatter: (v, d) => {
+                if(!this.firstType) {
+                    this.firstType = d.type;
+                }
+                return d && d.typeName;
+            },
+            onChange: (v) => {
+                if(this.index > 0) {
+                    this.firstType = v;
+                }
+            }
+        }, {
+            field: 'gradeCode',
+            title: '所需等级',
+            listCode: '805407',
+            type: 'select',
+            keyName: 'code',
+            valueName: 'name',
+            formatter: (v, d) => {
+                if(!this.firstGrade) {
+                    this.firstGrade = d.gradeCode;
+                }
+                return d && d.gradeName;
+            },
+            onChange: (v) => {
+                if(this.index > 0) {
+                    this.firstGrade = v;
+                }
+            },
             required: true
         }, {
             field: 'advPic',
@@ -79,13 +126,15 @@ class InformationAddedit extends DetailUtil {
             addCode: '629020',
             editCode: '629022',
             detailCode: '629025',
-            beforeSubmit(params) {
+            beforeSubmit: (params) => {
                 if(!params.readCount) {
                     delete params.readCount;
                 }
                 if(!params.isTop) {
                     delete params.isTop;
                 }
+                params.type = this.firstType;
+                params.gradeCode = this.firstGrade;
                 return true;
             }
         });

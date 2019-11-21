@@ -67,3 +67,8 @@ export function millCancelNode(id) {
         id
     });
 }
+
+// 查询用户列表
+export function findUserList(start, limit, loginName) {
+    return fetch(805120, {start, limit, loginName});
+}

@@ -25,6 +25,7 @@ import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicRateExplain} from './redux/public/rateExplain';
 import {publicLhlcxy} from './redux/public/lhlcxy';
 import {biztodayprofit} from './redux/biz/financial/todayprofit';
+import {bizClassification} from './redux/biz/classification/classification';
 import {AppManagent} from './redux/managent/appmanagent';
 import {Alerts} from './redux/managent/alerts';
 import {DappManagent} from './redux/managent/dappmanagent';
@@ -365,6 +366,7 @@ export default combineReducers({
     bizProductsCan,
     bizProductsWill,
     biztodayprofit,
+    bizClassification,
     bizProductsBearing,
     bizProductsRaiseSuccess,
     bizProductsRepay,

@@ -1,0 +1,32 @@
+.result_head{
+  display: flex;
+  align-items: center;
+  height: 50px;
+  font-size: 17px;
+  font-weight: 500;
+  justify-content: space-between;
+}
+.result_head li{
+  text-align: center;
+}
+.result_box{
+  display: flex;
+  font-size: 16px;
+}
+.box_left{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box_right{
+  flex: 5;
+}
+.box_right li{
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.box_right>li>p{
+  text-align: center;
+}

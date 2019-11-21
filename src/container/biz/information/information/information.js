@@ -33,6 +33,31 @@ class Information extends React.Component {
             title: '标题',
             search: true
         }, {
+            field: 'type',
+            title: '分类',
+            search: true,
+            listCode: '629008',
+            type: 'select',
+            keyName: 'code',
+            valueName: 'name',
+            params: {
+                status: '1'
+            },
+            render(v, d) {
+                return d.typeName;
+            }
+        }, {
+            field: 'gradeCode',
+            title: '所需等级',
+            search: true,
+            listCode: '805407',
+            type: 'select',
+            keyName: 'code',
+            valueName: 'name',
+            render(v, d) {
+                return d.gradeName;
+            }
+        }, {
             field: 'status',
             title: '状态',
             search: true,

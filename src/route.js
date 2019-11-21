@@ -586,6 +586,16 @@ const ROUTES = [
         component: asyncComponent(
             () => import('container/trade/underWayOrder/underWayOrder-addedit'))
     },
+    {
+        path: '/biz/classification',
+        component: asyncComponent(
+            () => import('container/biz/classification/classification'))
+    },
+    {
+        path: '/biz/classification/addedit',
+        component: asyncComponent(
+            () => import('container/biz/classification/classification-addedit'))
+    },
     // 已结束订单
     {
         path: '/trade/finishOrder',
@@ -1704,6 +1714,11 @@ const ROUTES = [
     {
         path: '/public/publicConfiguration/addedit',
         component: asyncComponent(() => import('container/public/configuration-addedit/configuration-addedit'))
+    },
+    // 业绩查询
+    {
+        path: '/user/queryResults',
+        component: asyncComponent(() => import('container/user/customer/queryResults'))
     }
 ];
 
