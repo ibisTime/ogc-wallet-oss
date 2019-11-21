@@ -69,6 +69,9 @@ class BTCDiviAddress extends React.Component {
                   rowKey: 'accountNumber',
                   pageCode: '805900',
                   singleSelect: false,
+                  searchParams: {
+                    type: 'C'
+                  },
                   btnEvent: {
                       today: (selectedRowKeys, selectedRows) => {
                         if (!selectedRowKeys.length) {

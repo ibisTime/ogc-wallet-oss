@@ -155,8 +155,7 @@ class Customer extends React.Component {
                       pageCode: '805120',
                       singleSelect: false,
                       searchParams: {
-                          limit: 20,
-                          type: 'C'
+                          limit: 20
                       },
                       btnEvent: {
                           active: (selectedRowKeys, selectedRows) => {
