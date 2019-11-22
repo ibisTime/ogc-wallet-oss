@@ -159,9 +159,6 @@ class Customer extends React.Component {
                       fields,
                       rowKey: 'id',
                       pageCode: '805353',
-                      searchParam: {
-                          limit: 20
-                      },
                       btnEvent: {
                           // 新增节点用户
                           addNode: () => {
