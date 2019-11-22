@@ -126,8 +126,12 @@ class queryResults extends React.Component {
         }).catch(hasMsg);
     };
     resetQuery = () => {
-        const clearIcon = document.querySelector('.ant-calendar-picker-clear');
-        clearIcon.click();
+        const clearIcon = document.querySelectorAll('.ant-calendar-picker-clear');
+        if(clearIcon) {
+            for(let i = 0; i < clearIcon.length; i++) {
+                clearIcon[i].click();
+            }
+        }
         this.setState({
             value: ''
         });
