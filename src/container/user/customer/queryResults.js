@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {Row, Col, Input, Button, message, Select, DatePicker, Table} from 'antd';
 import {
@@ -88,11 +89,15 @@ class queryResults extends React.Component {
     handLevelRef = ele => {
         this.levelRef = ele;
     };
-    onDateChange = (date, dateString) => {
-        const dateStart = dateString[0];
-        const dateEnd = dateString[1];
+    onDateStartChange = (date, dateString) => {
+        const dateStart = dateString;
         this.setState({
-            dateStart,
+            dateStart
+        });
+    };
+    onDateEndChange = (date, dateString) => {
+        const dateEnd = dateString;
+        this.setState({
             dateEnd
         });
     };
@@ -134,13 +139,13 @@ class queryResults extends React.Component {
         return(
             <div>
                 <Row>
-                    <Col span={6}>
+                    <Col span={8}>
                         <strong>用户(必填)：</strong>
                         <Select
                             showSearch
                             value={this.state.value}
                             placeholder='请输入关键字搜索'
-                            style={{width: '180px'}}
+                            style={{width: '220px'}}
                             defaultActiveFirstOption={false}
                             showArrow={false}
                             filterOption={false}
@@ -151,24 +156,34 @@ class queryResults extends React.Component {
                             {options}
                         </Select>
                     </Col>
-                    <Col span={6}>
+                    <Col span={8}>
                         <strong>层数(必填)：</strong>
-                        <Input style={{width: '180px'}} placeholder="请输入层数" ref={this.handLevelRef}/>
+                        <Input style={{width: '220px'}} placeholder="请输入层数" ref={this.handLevelRef}/>
                     </Col>
                     <Col span={8}>
-                        <strong>时间：</strong>
-                        <RangePicker
-                            onChange={this.onDateChange}
+                        <strong>开始时间：</strong>
+                        <DatePicker
+                            style={{width: '220px'}}
+                            onChange={this.onDateStartChange}
+                        />
+                    </Col>
+                </Row>
+                <Row style={{marginTop: '15px'}}>
+                    <Col span={8}>
+                        <strong>结束时间：</strong>
+                        <DatePicker
+                            style={{width: '220px'}}
+                            onChange={this.onDateEndChange}
                         />
                     </Col>
                     <Col span={4}>
-                        <Button style={{marginLeft: '20px'}} onClick={this.submitQuery} type="primary">确认</Button>
+                        <Button onClick={this.submitQuery} type="primary">确认</Button>
                         <Button style={{marginLeft: '10px'}} onClick={this.resetQuery}>重置</Button>
                     </Col>
                 </Row>
-                <Row>
+                <Row style={{display: dataSource.length > 0 ? 'block' : 'none'}}>
                     <Col span={24} style={{marginTop: '20px', overflow: 'hidden'}}>
-                        <Table dataSource={dataSource} columns={columns} />
+                        <Table dataSource={dataSource} columns={columns}/>
                     </Col>
                 </Row>
             </div>
