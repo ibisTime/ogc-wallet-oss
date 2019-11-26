@@ -1466,6 +1466,7 @@ const ROUTES = [
         path: '/public/privacy/detail',
         component: asyncComponent(() => import('container/public/configuration/privacyProtocol-detail'))
     },
+    // 营销管理
     {
         path: '/marketingManagement/registerToSend',
         component: asyncComponent(() => import('container/marketingManagement/marketingActivities/registerToSend/registerToSend'))
@@ -1477,6 +1478,14 @@ const ROUTES = [
     {
         path: '/marketingManagement/prepaidPhoneToSend',
         component: asyncComponent(() => import('container/marketingManagement/marketingActivities/prepaidPhoneToSend/prepaidPhoneToSend'))
+    },
+    {
+        path: '/marketingManagement/rightsManagement',
+        component: asyncComponent(() => import('container/marketingManagement/regularActivities/rightsManagement/rightsManagement'))
+    },
+    {
+        path: '/marketingManagement/rightsManagement/addedit',
+        component: asyncComponent(() => import('container/marketingManagement/regularActivities/rightsManagement/rightsManagement-addedit'))
     }
 ];
 

@@ -367,6 +367,7 @@ import {CardSecretKey} from './redux/card/secretKey';
 import {marketRegisterToSend} from './redux/marketingManagement/marketingActivities/registerToSend';
 import {marketInvitedToSend} from './redux/marketingManagement/marketingActivities/invitedToSend';
 import {marketPrepaidPhoneToSend} from './redux/marketingManagement/marketingActivities/prepaidPhoneToSend';
+import {marketRightsManagement} from './redux/marketingManagement/regularActivities/rightsManagement';
 
 export default combineReducers({
     user,
@@ -654,5 +655,6 @@ export default combineReducers({
     // 营销管理
     marketRegisterToSend,
     marketInvitedToSend,
-    marketPrepaidPhoneToSend
+    marketPrepaidPhoneToSend,
+    marketRightsManagement
 });

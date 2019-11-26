@@ -264,8 +264,7 @@ class userStatistics extends React.Component {
            param.approveNote = inputRmk;
            fetch(802352, param).then(data => {
                showSucMsg('操作成功');
-               // this.props.history.go(-1);
-               this.props.history.push(`/BTC-finance/TBunderline`);
+               window.history.go(-1);
            });
        }else {
            message.warning('请填写审核备注');
@@ -281,8 +280,7 @@ class userStatistics extends React.Component {
             param.approveNote = inputRmk;
             fetch(802352, param).then(data => {
                 showSucMsg('操作成功');
-                // this.props.history.go(-1);
-                this.props.history.push(`/BTC-finance/TBunderline`);
+                window.history.go(-1);
             });
         }else {
             message.warning('请填写审核备注');

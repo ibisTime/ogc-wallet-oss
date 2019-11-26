@@ -71,8 +71,6 @@ class RoleMenu extends React.Component {
     }
     onCheck = (checkedKeys, event) => {
         const { treeData } = this.state;
-        console.log('treeData', treeData);
-        console.log('checkedKeys', checkedKeys);
         this.checkNode = '';
         let key = event.node.props.eventKey;
         this.findCheckItem(treeData, key);
