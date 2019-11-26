@@ -88,10 +88,17 @@ class RightsManagement extends React.Component {
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             searchName: 'keyword',
-            search: true
+            search: true,
+            noVisible: true
+        }, {
+            title: '用户',
+            field: 'userName',
+            render(v, d) {
+                return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
+            }
         }, {
             title: '币种',
-            field: 'symbol',
+            field: 'currency',
             type: 'select',
             pageCode: '802005',
             params: {
@@ -100,7 +107,14 @@ class RightsManagement extends React.Component {
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
-            search: true
+            search: true,
+            noVisible: true
+        }, {
+            title: '币种',
+            field: 'currency1',
+            render(v, d) {
+                return d && d.currency;
+            }
         }, {
             title: '权益总量',
             field: 'totalAmount'
@@ -116,7 +130,9 @@ class RightsManagement extends React.Component {
         }, {
             title: '状态',
             field: 'status',
-            search: true
+            search: true,
+            key: 'right_status',
+            type: 'select'
         }];
         const {getFieldDecorator} = this.props.form;
         return <div>
@@ -126,18 +142,25 @@ class RightsManagement extends React.Component {
                     pageCode: '670015',
                     singleSelect: false,
                     btnEvent: {
-                        edit: (selectedRowKeys, selectedRows) => {
+                        releasePlan: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
+                                sessionStorage.setItem('userName', selectedRows[0].userInfo.nickname + '-' + selectedRows[0].userInfo.loginName);
+                                this.props.history.push(`/marketingManagement/releasePlan?rightCode=${selectedRowKeys[0]}`);
                             }
                         },
                         batchReview: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else {
+                                const isOk = selectedRows.filter(item => item.status !== '0').length > 0;
+                                if(isOk) {
+                                    showWarnMsg('存在不可审核权益，请重新选择');
+                                    return;
+                                }
                                 this.setState({
                                     visible: true,
                                     codeList: selectedRowKeys

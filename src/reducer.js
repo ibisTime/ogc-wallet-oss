@@ -368,6 +368,7 @@ import {marketRegisterToSend} from './redux/marketingManagement/marketingActivit
 import {marketInvitedToSend} from './redux/marketingManagement/marketingActivities/invitedToSend';
 import {marketPrepaidPhoneToSend} from './redux/marketingManagement/marketingActivities/prepaidPhoneToSend';
 import {marketRightsManagement} from './redux/marketingManagement/regularActivities/rightsManagement';
+import {marketReleasePlan} from './redux/marketingManagement/regularActivities/releasePlan';
 
 export default combineReducers({
     user,
@@ -656,5 +657,6 @@ export default combineReducers({
     marketRegisterToSend,
     marketInvitedToSend,
     marketPrepaidPhoneToSend,
-    marketRightsManagement
+    marketRightsManagement,
+    marketReleasePlan
 });

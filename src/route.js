@@ -1486,6 +1486,10 @@ const ROUTES = [
     {
         path: '/marketingManagement/rightsManagement/addedit',
         component: asyncComponent(() => import('container/marketingManagement/regularActivities/rightsManagement/rightsManagement-addedit'))
+    },
+    {
+        path: '/marketingManagement/releasePlan',
+        component: asyncComponent(() => import('container/marketingManagement/regularActivities/rightsManagement/releasePlan'))
     }
 ];
 

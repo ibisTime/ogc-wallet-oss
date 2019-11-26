@@ -19,10 +19,18 @@ class RightsManagementAddedit extends DetailUtil {
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             searchName: 'keyword',
-            required: true
+            required: true,
+            hidden: this.code
+        }, {
+            title: '用户',
+            field: 'userName',
+            hidden: !this.code,
+            formatter(v, d) {
+                return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
+            }
         }, {
             title: '币种',
-            field: 'symbol',
+            field: 'currency',
             type: 'select',
             pageCode: '802005',
             params: {
@@ -31,19 +39,26 @@ class RightsManagementAddedit extends DetailUtil {
             keyName: 'symbol',
             valueName: '{{symbol.DATA}}-{{cname.DATA}}',
             searchName: 'symbol',
-            required: true
+            required: true,
+            hidden: this.code
+        }, {
+            title: '币种',
+            field: 'currency',
+            hidden: !this.code
         }, {
             title: '状态',
             field: 'status',
             required: true,
+            key: 'right_status',
+            type: 'select',
             hidden: !this.code
         }, {
             title: '权益总量',
             field: 'totalAmount',
             required: true
         }, {
-            title: '权益总量',
-            field: 'totalAmount3',
+            title: '已释放数量',
+            field: 'releasedAmount',
             hidden: !this.code
         }, {
             title: '每次释放数量',
@@ -60,11 +75,13 @@ class RightsManagementAddedit extends DetailUtil {
             required: true
         }, {
             title: '来源',
-            field: 'totalAmount1',
-            hidden: !this.code
+            field: 'source',
+            hidden: !this.code,
+            type: 'select',
+            key: 'right_source'
         }, {
             title: '关联订单号',
-            field: 'totalAmount2',
+            field: 'refNo',
             hidden: !this.code
         }, {
             title: '权益说明',
@@ -76,6 +93,19 @@ class RightsManagementAddedit extends DetailUtil {
             field: 'rule',
             type: 'textarea',
             normalArea: true
+        }, {
+            title: '审核人',
+            field: 'approveUserName',
+            hidden: !this.code
+        }, {
+            title: '审核时间',
+            field: 'approveDatetime',
+            type: 'datetime',
+            hidden: !this.code
+        }, {
+            title: '审核备注',
+            field: 'approveNote',
+            hidden: !this.code
         }];
         return this.buildDetail({
             fields,
