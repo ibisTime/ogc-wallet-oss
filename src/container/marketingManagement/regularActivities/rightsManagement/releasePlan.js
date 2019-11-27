@@ -43,7 +43,7 @@ class ReleasePlan extends React.Component {
             title: '用户',
             field: 'userName',
             render() {
-                return sessionStorage.getItem('userName') || '-';
+                return sessionStorage.getItem('USER_NAME') || '-';
             }
         }, {
             title: '币种',

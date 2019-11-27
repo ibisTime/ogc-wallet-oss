@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal, Input, message, Form, Select} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -8,10 +9,16 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketingManagement/regularActivities/rightsManagement';
-import {Modal, Input, message, Form, Select} from 'antd';
+} from '@redux/BTC-finance/lockout/lockout';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg, moneyFormat } from 'common/js/util';
+import {
+    moneyFormat,
+    getCoinList,
+    dateTimeFormat,
+    showWarnMsg,
+    showSucMsg,
+    getCoinType
+} from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 const {Option} = Select;
@@ -29,7 +36,7 @@ const formItemLayout = {
 
 @listWrapper(
     state => ({
-        ...state.marketRightsManagement,
+        ...state.BTCFinanceLockout,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -37,11 +44,11 @@ const formItemLayout = {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class RightsManagement extends React.Component {
+class Lockout extends React.Component {
     state = {
         ...this.state,
         visible: false,
-        codeList: []
+        seleObj: {}
     };
     isHandleOk = true;
     handleOk = () => {
@@ -50,11 +57,13 @@ class RightsManagement extends React.Component {
             this.props.form.validateFields((err, values) => {
                 if (!err) {
                     const hasMsg = message.loading('');
-                    const { approveResult, approveNote } = values;
-                    fetch('670001', {
-                        codeList: this.state.codeList,
-                        approveResult,
-                        approveNote: approveNote || ''
+                    const { amountM, applyNote } = values;
+                    fetch('806040', {
+                        type: '2',
+                        userId: this.state.seleObj.userId,
+                        currency: this.state.seleObj.currency,
+                        amount: amountM,
+                        applyNote: applyNote || ''
                     }).then(() => {
                         hasMsg();
                         this.isHandleOk = true;
@@ -85,7 +94,7 @@ class RightsManagement extends React.Component {
     render() {
         const fields = [{
             field: 'userId',
-            title: '用户',
+            title: '针对用户',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -94,10 +103,10 @@ class RightsManagement extends React.Component {
             search: true,
             noVisible: true
         }, {
-            title: '用户',
+            title: '针对用户',
             field: 'userName',
             render(v, d) {
-                return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
+                return d && d.nickname + '-' + d.loginName;
             }
         }, {
             title: '币种',
@@ -119,55 +128,65 @@ class RightsManagement extends React.Component {
                 return d && d.currency;
             }
         }, {
-            title: '权益总量',
-            field: 'totalAmount'
+            title: '锁仓总额',
+            field: 'lockAmount'
         }, {
-            title: '已释放数量',
-            field: 'singleAmount'
+            title: '锁仓次数',
+            field: 'lockCount'
         }, {
-            title: '权益说明',
-            field: 'note'
+            title: '已解锁数量',
+            field: 'releaseAmount'
         }, {
-            title: '规则说明',
-            field: 'rule'
+            title: '解锁次数',
+            field: 'releaseCount'
         }, {
-            title: '状态',
-            field: 'status',
-            search: true,
-            key: 'right_status',
-            type: 'select'
+            title: '未接锁数量',
+            field: 'remainAmount'
         }];
         const {getFieldDecorator} = this.props.form;
         return <div>
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '670015',
-                    singleSelect: false,
+                    rowKey: 'accountNumber',
+                    pageCode: '806048',
                     btnEvent: {
-                        releasePlan: (selectedRowKeys, selectedRows) => {
+                        lockUp: () => {
+                            this.props.history.push(`/BTC-finance/lockout/addedit`);
+                        },
+                        unlock: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                sessionStorage.setItem('USER_NAME', selectedRows[0].userInfo.nickname + '-' + selectedRows[0].userInfo.loginName);
-                                this.props.history.push(`/marketingManagement/releasePlan?rightCode=${selectedRowKeys[0]}`);
-                            }
-                        },
-                        batchReview: (selectedRowKeys, selectedRows) => {
-                            if (!selectedRowKeys.length) {
-                                showWarnMsg('请选择记录');
-                            } else {
-                                const isOk = selectedRows.filter(item => item.status !== '0').length > 0;
-                                if(isOk) {
-                                    showWarnMsg('存在不可审核权益，请重新选择');
-                                    return;
-                                }
                                 this.setState({
                                     visible: true,
-                                    codeList: selectedRowKeys
+                                    seleObj: {
+                                        userId: selectedRows[0].userId,
+                                        currency: selectedRows[0].currency
+                                    }
                                 });
+                            }
+                        },
+                        lockupRecord: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                sessionStorage.setItem('USER_NAME', selectedRows[0].nickname + '-' + selectedRows[0].loginName);
+                                this.props.history.push(`/BTC-finance/lockUp?userId=${selectedRows[0].userId}&currency=${selectedRows[0].currency}`);
+                            }
+                        },
+                        unlockRecord: (selectedRowKeys, selectedRows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                sessionStorage.setItem('USER_NAME', selectedRows[0].nickname + '-' + selectedRows[0].loginName);
+                                this.props.history.push(`/BTC-finance/lockRelease?userId=${selectedRows[0].userId}&currency=${selectedRows[0].currency}`);
                             }
                         }
                     }
@@ -175,7 +194,7 @@ class RightsManagement extends React.Component {
             }
             <Modal
                 width={600}
-                title="批量审核"
+                title="解锁"
                 visible={this.state.visible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
@@ -183,24 +202,18 @@ class RightsManagement extends React.Component {
                 cancelText="取消"
             >
                 <Form {...formItemLayout} onSubmit={this.handleOk}>
-                    <Form.Item label="审核结果">
-                        {getFieldDecorator('approveResult', {
+                    <Form.Item label="金额">
+                        {getFieldDecorator('amountM', {
                             rules: [
                                 {
                                     required: true,
                                     message: ' '
                                 }
                             ]
-                        })(<Select
-                            style={{ width: '100%' }}
-                            placeholder="请选择"
-                        >
-                            <Option key="1" value="1">通过</Option>
-                            <Option key="0" value="0">不通过</Option>
-                        </Select>)}
+                        })(<Input placeholder="请输入金额" type="number"/>)}
                     </Form.Item>
-                    <Form.Item label="审核说明">
-                        {getFieldDecorator('approveNote')(<TextArea placeholder="请输入审核说明"/>)}
+                    <Form.Item label="申请说明">
+                        {getFieldDecorator('applyNote')(<TextArea placeholder="请输入审核说明"/>)}
                     </Form.Item>
                 </Form>
             </Modal>
@@ -208,4 +221,4 @@ class RightsManagement extends React.Component {
     }
 }
 
-export default RightsManagement;
+export default Lockout;

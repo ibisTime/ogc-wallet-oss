@@ -287,65 +287,65 @@ class Customer extends React.Component {
                               }
                           },
                           // 空投
-                          ktOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '空投',
-                                      visible: true,
-                                      amountType: '0',
-                                      direction: '1',
-                                      userIdList: list
-                                  });
-                              }
-                          },
-                          // 减钱
-                          jqOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '减钱',
-                                      visible: true,
-                                      amountType: '0',
-                                      direction: '0',
-                                      userIdList: list
-                                  });
-                              }
-                          },
-                          // 锁仓
-                          scOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '锁仓',
-                                      visible: true,
-                                      amountType: '1',
-                                      direction: '1',
-                                      userIdList: list
-                                  });
-                              }
-                          },
-                          // 释放
-                          sfOption: (selectedRowKeys, selectedRows) => {
-                              if (!selectedRowKeys.length) {
-                                  showWarnMsg('请选择记录');
-                              } else {
-                                  let list = selectedRows.map(item => item.userId);
-                                  this.setState({
-                                      title: '释放',
-                                      visible: true,
-                                      amountType: '1',
-                                      direction: '0',
-                                      userIdList: list
-                                  });
-                              }
-                          },
+                          // ktOption: (selectedRowKeys, selectedRows) => {
+                          //     if (!selectedRowKeys.length) {
+                          //         showWarnMsg('请选择记录');
+                          //     } else {
+                          //         let list = selectedRows.map(item => item.userId);
+                          //         this.setState({
+                          //             title: '空投',
+                          //             visible: true,
+                          //             amountType: '0',
+                          //             direction: '1',
+                          //             userIdList: list
+                          //         });
+                          //     }
+                          // },
+                          // // 减钱
+                          // jqOption: (selectedRowKeys, selectedRows) => {
+                          //     if (!selectedRowKeys.length) {
+                          //         showWarnMsg('请选择记录');
+                          //     } else {
+                          //         let list = selectedRows.map(item => item.userId);
+                          //         this.setState({
+                          //             title: '减钱',
+                          //             visible: true,
+                          //             amountType: '0',
+                          //             direction: '0',
+                          //             userIdList: list
+                          //         });
+                          //     }
+                          // },
+                          // // 锁仓
+                          // scOption: (selectedRowKeys, selectedRows) => {
+                          //     if (!selectedRowKeys.length) {
+                          //         showWarnMsg('请选择记录');
+                          //     } else {
+                          //         let list = selectedRows.map(item => item.userId);
+                          //         this.setState({
+                          //             title: '锁仓',
+                          //             visible: true,
+                          //             amountType: '1',
+                          //             direction: '1',
+                          //             userIdList: list
+                          //         });
+                          //     }
+                          // },
+                          // // 释放
+                          // sfOption: (selectedRowKeys, selectedRows) => {
+                          //     if (!selectedRowKeys.length) {
+                          //         showWarnMsg('请选择记录');
+                          //     } else {
+                          //         let list = selectedRows.map(item => item.userId);
+                          //         this.setState({
+                          //             title: '释放',
+                          //             visible: true,
+                          //             amountType: '1',
+                          //             direction: '0',
+                          //             userIdList: list
+                          //         });
+                          //     }
+                          // },
                           // 实名设置
                           editIdentify: (selectedRowKeys, selectedRows) => {
                               if (!selectedRowKeys.length) {

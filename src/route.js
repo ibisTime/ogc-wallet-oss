@@ -1488,8 +1488,104 @@ const ROUTES = [
         component: asyncComponent(() => import('container/marketingManagement/regularActivities/rightsManagement/rightsManagement-addedit'))
     },
     {
+        path: '/marketingManagement/dropManagement',
+        component: asyncComponent(() => import('container/marketingManagement/marketingActivities/dropManagement/dropManagement'))
+    },
+    {
+        path: '/marketingManagement/dropManagement/addedit',
+        component: asyncComponent(() => import('container/marketingManagement/marketingActivities/dropManagement/dropManagement-addedit'))
+    },
+    {
         path: '/marketingManagement/releasePlan',
         component: asyncComponent(() => import('container/marketingManagement/regularActivities/rightsManagement/releasePlan'))
+    },
+    {
+        path: '/BTC-finance/loseMoney',
+        component: asyncComponent(() => import('container/BTC-finance/loseMoney/loseMoney'))
+    },
+    {
+        path: '/BTC-finance/loseMoney/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/loseMoney/loseMoney-addedit'))
+    },
+    {
+        path: '/BTC-finance/lockout',
+        component: asyncComponent(() => import('container/BTC-finance/lockout/lockout'))
+    },
+    {
+        path: '/BTC-finance/lockout/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/lockout/lockout-addedit'))
+    },
+    {
+        path: '/BTC-finance/lockUp',
+        component: asyncComponent(() => import('container/BTC-finance/lockout/lockUp/lockUp'))
+    },
+    {
+        path: '/BTC-finance/lockUp/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/lockout/lockUp/lockUp-addedit'))
+    },
+    {
+        path: '/BTC-finance/lockRelease',
+        component: asyncComponent(() => import('container/BTC-finance/lockout/lockRelease/lockRelease'))
+    },
+    {
+        path: '/BTC-finance/lockRelease/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/lockout/lockRelease/lockRelease-addedit'))
+    },
+    {
+        path: '/news/category',
+        component: asyncComponent(() => import('container/biz/news/category/category'))
+    },
+    {
+        path: '/news/category/addedit',
+        component: asyncComponent(() => import('container/biz/news/category/category-addedit'))
+    },
+    {
+        path: '/news/news',
+        component: asyncComponent(() => import('container/biz/news/news/news'))
+    },
+    {
+        path: '/news/news/addedit',
+        component: asyncComponent(() => import('container/biz/news/news/news-addedit'))
+    },
+    {
+        path: '/news/jinseNews',
+        component: asyncComponent(() => import('container/biz/news/jinseNews/jinseNews'))
+    },
+    {
+        path: '/news/jinseNews/addedit',
+        component: asyncComponent(() => import('container/biz/news/jinseNews/jinseNews-addedit'))
+    },
+    {
+        path: '/welfare/pendingOrder',
+        component: asyncComponent(() => import('container/marketingManagement/welfare/pendingOrder/pendingOrder'))
+    },
+    {
+        path: '/welfare/pendingOrder/addedit',
+        component: asyncComponent(() => import('container/marketingManagement/welfare/pendingOrder/pendingOrder-addedit'))
+    },
+    {
+        path: '/welfare/approvalOrder',
+        component: asyncComponent(() => import('container/marketingManagement/welfare/approvalOrder/approvalOrder'))
+    },
+    {
+        path: '/welfare/approvalOrder/addedit',
+        component: asyncComponent(() => import('container/marketingManagement/welfare/approvalOrder/approvalOrder-addedit'))
+    },
+    {
+        path: '/welfare/notOrder',
+        component: asyncComponent(() => import('container/marketingManagement/welfare/notOrder/notOrder'))
+    },
+    {
+        path: '/welfare/notOrder/addedit',
+        component: asyncComponent(() => import('container/marketingManagement/welfare/notOrder/notOrder-addedit'))
+    },
+    {
+        path: '/marketingDesign/rewardSubsidiary',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/rewardSubsidiary/rewardSubsidiary'))
+    },
+    {
+        path: '/marketingDesign/rewardSubsidiary/addedit',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/rewardSubsidiary/rewardSubsidiary-addedit'))
     }
 ];
 

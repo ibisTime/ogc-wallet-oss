@@ -898,8 +898,18 @@ function getRangeDateVal(rangedate, keys, result, format, fn, pageData, readonly
 function getRealCheckboxVal(result) {
     let arr = [];
     if (result) {
-        arr = result.split('||');
-        arr = arr.map(item => +item);
+        if(result.indexOf('||') !== -1) {
+            arr = result.split('||');
+        }else {
+            arr = result.split(',');
+        }
+        arr = arr.map(item => {
+            if(isNaN(+item)) {
+                return item;
+            }else {
+                return +item;
+            }
+        });
         return arr;
     } else {
         return [];

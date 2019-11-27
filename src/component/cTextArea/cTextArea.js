@@ -82,7 +82,7 @@ export default class CTextArea extends React.Component {
     };
   }
   render() {
-    const { label, field, rules, readonly, hidden, initVal, inline } = this.props;
+    const { label, field, rules, readonly, hidden, initVal, inline, tipEle } = this.props;
     let layoutProps = inline ? {} : formItemLayout;
     const { areaState } = this.state;
     return (
@@ -91,6 +91,9 @@ export default class CTextArea extends React.Component {
           readonly ? <div className="readonly-text" dangerouslySetInnerHTML={{__html: initVal}}></div>
             : <div ref={area => this.area = area}></div>
         }
+          {
+              tipEle ? <div id={tipEle.id} style={tipEle.style}>{tipEle.content || ''}</div> : null
+          }
       </FormItem>
     );
   }

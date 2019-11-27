@@ -216,6 +216,12 @@ import {BTCFinanceOfflineRechargeQuery} from './redux/BTC-finance/offlineRecharg
 // 提币地址
 import {BTCFinanceTBAddress} from './redux/BTC-finance/TBAddress/TBAddress';
 
+import {BTCFinanceLoseMoney} from './redux/BTC-finance/loseMoney/loseMoney';
+
+import {BTCFinanceLockout} from './redux/BTC-finance/lockout/lockout';
+import {BTCFinanceLockUp} from './redux/BTC-finance/lockout/lockUp';
+import {BTCFinanceLockRelease} from './redux/BTC-finance/lockout/lockRelease';
+
 // 线下提币
 import {BTCFinanceTBunderline} from './redux/BTC-finance/TBunderline/TBunderline';
 import {BTCFinanceTBunderlineAddEdit} from './redux/BTC-finance/TBunderline/TBunderline-addedit';
@@ -365,10 +371,20 @@ import {CardSecretKey} from './redux/card/secretKey';
 
 // 营销管理
 import {marketRegisterToSend} from './redux/marketingManagement/marketingActivities/registerToSend';
+import {marketInvitedDrop} from './redux/marketingManagement/marketingActivities/dropManagement';
 import {marketInvitedToSend} from './redux/marketingManagement/marketingActivities/invitedToSend';
 import {marketPrepaidPhoneToSend} from './redux/marketingManagement/marketingActivities/prepaidPhoneToSend';
 import {marketRightsManagement} from './redux/marketingManagement/regularActivities/rightsManagement';
 import {marketReleasePlan} from './redux/marketingManagement/regularActivities/releasePlan';
+import {marketInvitedPendingOrder} from './redux/marketingManagement/welfare/pendingOrder';
+import {marketInvitedApprovalOrder} from './redux/marketingManagement/welfare/approvalOrder';
+import {marketInvitedNotOrder} from './redux/marketingManagement/welfare/notOrder';
+import {marketInvitedRewardSubsidiary} from './redux/marketingManagement/marketingDesign/rewardSubsidiary';
+
+// 资讯管理
+import {bizJinseNews} from './redux/biz/news/jinseNews';
+import {bizNews} from './redux/biz/news/news';
+import {bizCategory} from './redux/biz/news/category';
 
 export default combineReducers({
     user,
@@ -655,8 +671,25 @@ export default combineReducers({
     storeShopLabels,
     // 营销管理
     marketRegisterToSend,
+    marketInvitedDrop,
     marketInvitedToSend,
     marketPrepaidPhoneToSend,
     marketRightsManagement,
-    marketReleasePlan
+    marketReleasePlan,
+    marketInvitedPendingOrder,
+    marketInvitedApprovalOrder,
+    marketInvitedNotOrder,
+    marketInvitedRewardSubsidiary,
+    // 减币管理
+    BTCFinanceLoseMoney,
+    // 锁仓解仓管理
+    BTCFinanceLockout,
+    // 锁仓记录
+    BTCFinanceLockUp,
+    // 解仓记录
+    BTCFinanceLockRelease,
+    // 资讯管理
+    bizJinseNews,
+    bizNews,
+    bizCategory
 });

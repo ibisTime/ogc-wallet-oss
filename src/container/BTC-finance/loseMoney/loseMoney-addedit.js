@@ -1,14 +1,15 @@
 import React from 'react';
-import {Form} from 'antd';
+import { Form } from 'antd';
 import DetailUtil from 'common/js/build-detail';
-import {getQueryString, getUserId} from 'common/js/util';
+import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
 
 @Form.create()
-class RightsManagementAddedit extends DetailUtil {
+class LoseMoneyAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.type = getQueryString('type', this.props.location.search) || '0';
     }
     render() {
         const fields = [{
@@ -27,7 +28,8 @@ class RightsManagementAddedit extends DetailUtil {
             hidden: !this.code,
             formatter(v, d) {
                 return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
-            }
+            },
+            readonly: true
         }, {
             title: '币种',
             field: 'currency',
@@ -46,78 +48,68 @@ class RightsManagementAddedit extends DetailUtil {
             field: 'currency1',
             hidden: !this.code,
             formatter(v, d) {
-                return d && d.currency;
-            }
+              return d && d.currency;
+            },
+            readonly: true
+        }, {
+            title: '数量',
+            field: 'amount',
+            required: true,
+            number: true
         }, {
             title: '状态',
             field: 'status',
             required: true,
-            key: 'right_status',
+            key: 'account_adjust_status',
             type: 'select',
-            hidden: !this.code
-        }, {
-            title: '权益总量',
-            field: 'totalAmount',
-            required: true
-        }, {
-            title: '已释放数量',
-            field: 'releasedAmount',
-            hidden: !this.code
-        }, {
-            title: '每次释放数量',
-            field: 'singleAmount',
-            required: true
-        }, {
-            title: '开始时间',
-            field: 'startDatetime',
-            type: 'datetime',
-            required: true
-        }, {
-            title: '释放周期(小时)',
-            field: 'cycle',
-            required: true
-        }, {
-            title: '来源',
-            field: 'source',
             hidden: !this.code,
-            type: 'select',
-            key: 'right_source'
+            readonly: true
         }, {
-            title: '关联订单号',
-            field: 'refNo',
-            hidden: !this.code
+            title: '申请人',
+            field: 'applyUserName',
+            hidden: !this.code,
+            readonly: true
         }, {
-            title: '权益说明',
-            field: 'note',
+            title: '申请时间',
+            field: 'applyDatetime',
+            type: 'datetime',
+            hidden: !this.code,
+            readonly: true
+        }, {
+            title: '申请说明',
+            field: 'applyNote',
             type: 'textarea',
-            normalArea: true
-        }, {
-            title: '规则说明',
-            field: 'rule',
-            type: 'textarea',
+            required: true,
             normalArea: true
         }, {
             title: '审核人',
             field: 'approveUserName',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '审核时间',
             field: 'approveDatetime',
             type: 'datetime',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '审核备注',
             field: 'approveNote',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }];
         return this.buildDetail({
             fields,
             code: this.code,
             view: this.view,
-            addCode: '670000',
-            detailCode: '670016'
+            addCode: '806030',
+            detailCode: '806036',
+            beforeSubmit: (params) => {
+              params.type = this.type;
+              return params;
+            }
         });
     }
 }
 
-export default RightsManagementAddedit;
+export default LoseMoneyAddedit;

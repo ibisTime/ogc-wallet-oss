@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal, Input, message, Form, Select} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -8,10 +9,16 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketingManagement/regularActivities/rightsManagement';
-import {Modal, Input, message, Form, Select} from 'antd';
+} from '@redux/marketingManagement/welfare/pendingOrder';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg, moneyFormat } from 'common/js/util';
+import {
+    moneyFormat,
+    getCoinList,
+    dateTimeFormat,
+    showWarnMsg,
+    showSucMsg,
+    getCoinType
+} from 'common/js/util';
 import fetch from 'common/js/fetch';
 
 const {Option} = Select;
@@ -29,7 +36,7 @@ const formItemLayout = {
 
 @listWrapper(
     state => ({
-        ...state.marketRightsManagement,
+        ...state.marketInvitedPendingOrder,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -37,7 +44,7 @@ const formItemLayout = {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class RightsManagement extends React.Component {
+class PendingOrder extends React.Component {
     state = {
         ...this.state,
         visible: false,
@@ -51,7 +58,7 @@ class RightsManagement extends React.Component {
                 if (!err) {
                     const hasMsg = message.loading('');
                     const { approveResult, approveNote } = values;
-                    fetch('670001', {
+                    fetch('806051', {
                         codeList: this.state.codeList,
                         approveResult,
                         approveNote: approveNote || ''
@@ -79,13 +86,35 @@ class RightsManagement extends React.Component {
             visible: false
         });
     };
-    componentDidMount() {
-        sessionStorage.removeItem('USER_NAME');
-    }
     render() {
         const fields = [{
+            field: 'type',
+            title: '活动类型',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '注册送'
+            }, {
+                key: '2',
+                value: '邀请送'
+            }, {
+                key: '3',
+                value: '充值送'
+            }, {
+                key: '4',
+                value: '空投'
+            }],
+            keyName: 'key',
+            valueName: 'value'
+        }, {
+            title: '针对用户',
+            field: 'userName',
+            render(v, d) {
+                return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
+            }
+        }, {
             field: 'userId',
-            title: '用户',
+            title: '针对用户',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -94,13 +123,7 @@ class RightsManagement extends React.Component {
             search: true,
             noVisible: true
         }, {
-            title: '用户',
-            field: 'userName',
-            render(v, d) {
-                return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
-            }
-        }, {
-            title: '币种',
+            title: '活动币种',
             field: 'currency',
             type: 'select',
             pageCode: '802005',
@@ -113,57 +136,33 @@ class RightsManagement extends React.Component {
             search: true,
             noVisible: true
         }, {
-            title: '币种',
+            title: '活动币种',
             field: 'currency1',
             render(v, d) {
                 return d && d.currency;
             }
         }, {
-            title: '权益总量',
-            field: 'totalAmount'
+            title: '申请划转数量',
+            field: 'amount'
         }, {
-            title: '已释放数量',
-            field: 'singleAmount'
-        }, {
-            title: '权益说明',
-            field: 'note'
-        }, {
-            title: '规则说明',
-            field: 'rule'
-        }, {
-            title: '状态',
-            field: 'status',
-            search: true,
-            key: 'right_status',
-            type: 'select'
+            title: '发放说明',
+            field: 'bizNote'
         }];
         const {getFieldDecorator} = this.props.form;
         return <div>
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '670015',
+                    pageCode: '806055',
                     singleSelect: false,
+                    searchParams: {
+                        status: '1'
+                    },
                     btnEvent: {
-                        releasePlan: (selectedRowKeys, selectedRows) => {
-                            if (!selectedRowKeys.length) {
-                                showWarnMsg('请选择记录');
-                            } else if (selectedRowKeys.length > 1) {
-                                showWarnMsg('请选择一条记录');
-                            } else {
-                                sessionStorage.setItem('USER_NAME', selectedRows[0].userInfo.nickname + '-' + selectedRows[0].userInfo.loginName);
-                                this.props.history.push(`/marketingManagement/releasePlan?rightCode=${selectedRowKeys[0]}`);
-                            }
-                        },
-                        batchReview: (selectedRowKeys, selectedRows) => {
+                        batchReview: (selectedRowKeys) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else {
-                                const isOk = selectedRows.filter(item => item.status !== '0').length > 0;
-                                if(isOk) {
-                                    showWarnMsg('存在不可审核权益，请重新选择');
-                                    return;
-                                }
                                 this.setState({
                                     visible: true,
                                     codeList: selectedRowKeys
@@ -208,4 +207,4 @@ class RightsManagement extends React.Component {
     }
 }
 
-export default RightsManagement;
+export default PendingOrder;
