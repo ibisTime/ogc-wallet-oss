@@ -123,7 +123,7 @@ class RightsManagement extends React.Component {
             field: 'totalAmount'
         }, {
             title: '已释放数量',
-            field: 'singleAmount'
+            field: 'releasedAmount'
         }, {
             title: '权益说明',
             field: 'note'

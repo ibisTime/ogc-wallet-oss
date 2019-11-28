@@ -380,9 +380,19 @@ import {marketInvitedPendingOrder} from './redux/marketingManagement/welfare/pen
 import {marketInvitedApprovalOrder} from './redux/marketingManagement/welfare/approvalOrder';
 import {marketInvitedNotOrder} from './redux/marketingManagement/welfare/notOrder';
 import {marketInvitedRewardSubsidiary} from './redux/marketingManagement/marketingDesign/rewardSubsidiary';
+import {marketInvitedUserRewards} from './redux/marketingManagement/marketingDesign/userRewards';
+import {marketInvitedDailyReport} from './redux/marketingManagement/marketingDesign/dailyReport';
+import {marketInvitedUserRewardsSubsidiary} from './redux/marketingManagement/marketingDesign/userRewardsSubsidiary';
+import {marketInvitedTotalPool} from './redux/marketingManagement/marketingDesign/totalPool';
+import {marketInvitedJackpotRecord} from './redux/marketingManagement/marketingDesign/jackpotRecord';
+import {marketInvitedLegacyRecords} from './redux/marketingManagement/marketingDesign/legacyRecords';
+import {marketInvitedRecordRecords} from './redux/marketingManagement/marketingDesign/recordRecord';
+import {marketInvitedPoolDailyReport} from './redux/marketingManagement/marketingDesign/poolDailyReport';
+import {marketInvitedOutInRecord} from './redux/marketingManagement/marketingDesign/outInRecord';
 
 // 资讯管理
 import {bizJinseNews} from './redux/biz/news/jinseNews';
+import {bizJinseNewsFlash} from './redux/biz/news/jinseNewsFlash';
 import {bizNews} from './redux/biz/news/news';
 import {bizCategory} from './redux/biz/news/category';
 
@@ -680,6 +690,15 @@ export default combineReducers({
     marketInvitedApprovalOrder,
     marketInvitedNotOrder,
     marketInvitedRewardSubsidiary,
+    marketInvitedUserRewards,
+    marketInvitedDailyReport,
+    marketInvitedUserRewardsSubsidiary,
+    marketInvitedTotalPool,
+    marketInvitedJackpotRecord,
+    marketInvitedLegacyRecords,
+    marketInvitedRecordRecords,
+    marketInvitedPoolDailyReport,
+    marketInvitedOutInRecord,
     // 减币管理
     BTCFinanceLoseMoney,
     // 锁仓解仓管理
@@ -690,6 +709,7 @@ export default combineReducers({
     BTCFinanceLockRelease,
     // 资讯管理
     bizJinseNews,
+    bizJinseNewsFlash,
     bizNews,
     bizCategory
 });

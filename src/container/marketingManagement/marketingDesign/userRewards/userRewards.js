@@ -1,5 +1,4 @@
 import React from 'react';
-import {Modal, Input, message, Form, Select} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -9,7 +8,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketingManagement/welfare/notOrder';
+} from '@redux/marketingManagement/marketingDesign/userRewards';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -22,7 +21,7 @@ import {
 
 @listWrapper(
     state => ({
-        ...state.marketInvitedNotOrder,
+        ...state.marketInvitedUserRewards,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -30,36 +29,17 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class NotOrder extends React.Component {
+class UserRewards extends React.Component {
     render() {
         const fields = [{
-            field: 'type',
-            title: '活动类型',
-            type: 'select',
-            data: [{
-                key: '1',
-                value: '注册送'
-            }, {
-                key: '2',
-                value: '邀请送'
-            }, {
-                key: '3',
-                value: '充值送'
-            }, {
-                key: '4',
-                value: '空投'
-            }],
-            keyName: 'key',
-            valueName: 'value'
-        }, {
-            title: '针对用户',
+            title: '用户',
             field: 'userName',
             render(v, d) {
                 return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
             }
         }, {
             field: 'userId',
-            title: '针对用户',
+            title: '用户',
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
@@ -68,7 +48,7 @@ class NotOrder extends React.Component {
             search: true,
             noVisible: true
         }, {
-            title: '活动币种',
+            title: '币种',
             field: 'currency',
             type: 'select',
             pageCode: '802005',
@@ -81,33 +61,34 @@ class NotOrder extends React.Component {
             search: true,
             noVisible: true
         }, {
-            title: '活动币种',
+            title: '币种',
             field: 'currency1',
             render(v, d) {
                 return d && d.currency;
             }
         }, {
-            title: '申请划转数量',
-            field: 'amount'
+            title: '奖励累计总量',
+            field: 'totalAmount'
         }, {
-            title: '发放说明',
-            field: 'bizNote'
-        }, {
-            title: '审核人',
-            field: 'approveUserName'
-        }, {
-            title: '审核时间',
-            field: 'approveDatetime',
-            type: 'datetime'
+            title: '奖励余额',
+            field: 'remainAmount'
         }];
         return <div>
             {
                 this.props.buildList({
                     fields,
-                    pageCode: '806055',
-                    singleSelect: false,
-                    searchParams: {
-                        status: '3'
+                    rowKey: 'userId',
+                    pageCode: '806052',
+                    btnEvent: {
+                        rewardSubsidiary: (selectedRowKeys) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else if (selectedRowKeys.length > 1) {
+                                showWarnMsg('请选择一条记录');
+                            } else {
+                                this.props.history.push(`/marketingDesign/userRewardsSubsidiary?userId=${selectedRowKeys[0]}`);
+                            }
+                        }
                     }
                 })
             }
@@ -115,4 +96,4 @@ class NotOrder extends React.Component {
     }
 }
 
-export default NotOrder;
+export default UserRewards;

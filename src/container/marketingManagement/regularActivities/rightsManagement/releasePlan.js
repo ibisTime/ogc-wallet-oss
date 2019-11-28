@@ -30,34 +30,34 @@ class ReleasePlan extends React.Component {
     rightCode = getQueryString('rightCode');
     render() {
         const fields = [{
-            field: 'userId',
-            title: '用户',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            noVisible: true
-        }, {
+        //     field: 'userId',
+        //     title: '用户',
+        //     type: 'select',
+        //     pageCode: '805120',
+        //     keyName: 'userId',
+        //     valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
+        //     searchName: 'keyword',
+        //     search: true,
+        //     noVisible: true
+        // }, {
             title: '用户',
             field: 'userName',
             render() {
                 return sessionStorage.getItem('USER_NAME') || '-';
             }
-        }, {
-            title: '币种',
-            field: 'currency',
-            type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            search: true,
-            noVisible: true
+        // }, {
+        //     title: '币种',
+        //     field: 'currency',
+        //     type: 'select',
+        //     pageCode: '802005',
+        //     params: {
+        //         status: '0'
+        //     },
+        //     keyName: 'symbol',
+        //     valueName: '{{symbol.DATA}}-{{cname.DATA}}',
+        //     searchName: 'symbol',
+        //     search: true,
+        //     noVisible: true
         }, {
             title: '币种',
             field: 'currency1',

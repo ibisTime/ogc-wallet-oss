@@ -60,7 +60,12 @@ class AlertsAddedit extends DetailUtil {
             key: 'flash_status',
             hidden: !this.view
         }, {
-            field: 'updaterName',
+            field: 'showDatetime',
+            title: '发布时间',
+            type: 'datetime',
+            hidden: !this.view
+        }, {
+            field: 'updater',
             title: '最近修改人',
             hidden: !this.view
         }, {
@@ -68,16 +73,10 @@ class AlertsAddedit extends DetailUtil {
             title: '最近修改时间',
             type: 'datetime',
             hidden: !this.view
-        }, {
-            field: 'showDatetime',
-            title: '发布时间',
-            type: 'datetime',
-            hidden: !this.view
         }];
         return this.buildDetail({
             fields,
             code: this.code,
-            key: 'id',
             view: this.view,
             addCode: 628090,
             editCode: 628091,

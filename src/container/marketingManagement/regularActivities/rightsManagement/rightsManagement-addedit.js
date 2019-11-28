@@ -64,16 +64,17 @@ class RightsManagementAddedit extends DetailUtil {
             field: 'releasedAmount',
             hidden: !this.code
         }, {
-            title: '每次释放数量',
-            field: 'singleAmount',
-            required: true
+            title: '释放次数',
+            field: 'releaseCount',
+            required: true,
+            number: true
         }, {
             title: '开始时间',
             field: 'startDatetime',
-            type: 'datetime',
+            type: 'date',
             required: true
         }, {
-            title: '释放周期(小时)',
+            title: '释放周期(天)',
             field: 'cycle',
             required: true
         }, {

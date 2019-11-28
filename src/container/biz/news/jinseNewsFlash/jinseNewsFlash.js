@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/news/jinseNews';
+} from '@redux/biz/news/jinseNewsFlash';
 import {listWrapper} from 'common/js/build-list';
 import {
     showSucMsg,
@@ -34,7 +34,7 @@ const formItemLayout = {
 
 @listWrapper(
     state => ({
-        ...state.bizJinseNews,
+        ...state.bizJinseNewsFlash,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -42,12 +42,11 @@ const formItemLayout = {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class JinseNews extends React.Component {
+class JinseNewsFlash extends React.Component {
     state = {
         ...this.state,
         visible: false,
-        codeList: [],
-        typeList: []
+        codeList: []
     };
     isHandleOk = true;
     handleOk = () => {
@@ -62,7 +61,7 @@ class JinseNews extends React.Component {
                         idList: this.state.codeList,
                         type: typeNew
                     };
-                    fetch('628100', obj).then(() => {
+                    fetch('628010', obj).then(() => {
                         hasMsg();
                         this.isHandleOk = true;
                         message.success('操作成功', 1.5);
@@ -86,27 +85,25 @@ class JinseNews extends React.Component {
             visible: false
         });
     };
-    componentDidMount() {
-        fetch('628007', {status: '1'}).then(data => {
-            if(Array.isArray(data)) {
-                const list = data.map(item => ({
-                    code: item.code,
-                    name: item.name
-                }));
-                this.setState({
-                    typeList: list
-                });
-            }
-        });
-    }
     render() {
         const fields = [{
+            field: 'content',
             title: '标题',
-            field: 'title',
-            search: true
-        }, {
-            title: '作者',
-            field: 'auther'
+            render(v) {
+                if(v) {
+                    const f = v.indexOf('】');
+                    const l = v.indexOf('【');
+                    if(f !== -1 && l !== -1) {
+                        return v.substring(l + 1, f);
+                    }else {
+                        if(v.length > 15) {
+                            return v.substring(0, 15) + '...';
+                        }else {
+                            return v;
+                        }
+                    }
+                }
+            }
         }, {
             title: '抓取时间',
             field: 'crawlDatetime',
@@ -125,13 +122,12 @@ class JinseNews extends React.Component {
             type: 'datetime'
         }];
         const {getFieldDecorator} = this.props.form;
-        const {typeList} = this.state;
         return <div>
             {
                 this.props.buildList({
                     fields,
                     rowKey: 'id',
-                    pageCode: 628105,
+                    pageCode: 628015,
                     singleSelect: false,
                     btnEvent: {
                         choose: (selectedRowKeys) => {
@@ -149,7 +145,7 @@ class JinseNews extends React.Component {
             }
             <Modal
                 width={600}
-                title="挑选资讯"
+                title="挑选快讯"
                 visible={this.state.visible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
@@ -157,7 +153,7 @@ class JinseNews extends React.Component {
                 cancelText="取消"
             >
                 <Form {...formItemLayout} onSubmit={this.handleOk}>
-                    <Form.Item label="挑选资讯">
+                    <Form.Item label="挑选快讯">
                         {getFieldDecorator('typeNew', {
                             rules: [
                                 {
@@ -170,11 +166,8 @@ class JinseNews extends React.Component {
                             placeholder="请选择"
                             onChange={this.approveChange}
                         >
-                            {
-                                typeList.map(item => (
-                                    <Option key={item.code} value={item.code}>{item.name}</Option>
-                                ))
-                            }
+                            <Option key='1' value='1'>热门</Option>
+                            <Option key='0' value='0'>普通</Option>
                         </Select>)}
                     </Form.Item>
                 </Form>
@@ -183,4 +176,4 @@ class JinseNews extends React.Component {
     }
 }
 
-export default JinseNews;
+export default JinseNewsFlash;

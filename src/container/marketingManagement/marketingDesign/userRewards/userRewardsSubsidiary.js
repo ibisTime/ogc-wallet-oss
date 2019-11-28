@@ -8,7 +8,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/marketingManagement/marketingDesign/rewardSubsidiary';
+} from '@redux/marketingManagement/marketingDesign/userRewardsSubsidiary';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -22,7 +22,7 @@ import {
 
 @listWrapper(
     state => ({
-        ...state.marketInvitedRewardSubsidiary,
+        ...state.marketInvitedUserRewardsSubsidiary,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -30,7 +30,32 @@ import {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class RewardSubsidiary extends React.Component {
+class UserRewardsSubsidiary extends React.Component {
+    USERID = getQueryString('userId');
+    buttons = [
+        {
+            code: 'goBack',
+            name: '返回',
+            handler: () => {
+                this.props.history.go(-1);
+            }
+        }, {
+            code: 'detail',
+            name: '详情',
+            handler: (selectedRowKeys, selectedRows) => {
+                if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                } else {
+                    this.props.history.push(`/marketingDesign/rewardSubsidiary/addedit?v=1&code=${selectedRowKeys[0]}`);
+                }
+            }
+        }, {
+            code: 'export',
+            name: '导出'
+        }
+    ];
     render() {
         const fields = [{
             title: '用户',
@@ -117,11 +142,19 @@ class RewardSubsidiary extends React.Component {
             keyName: 'key',
             valueName: 'value'
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: '806055'
-        });
+        return <div>
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: '806055',
+                    searchParams: {
+                        userId: this.USERID
+                    },
+                    buttons: this.buttons
+                })
+            }
+        </div>;
     }
 }
 
-export default RewardSubsidiary;
+export default UserRewardsSubsidiary;

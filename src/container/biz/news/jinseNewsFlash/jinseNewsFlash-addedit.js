@@ -4,7 +4,7 @@ import DetailUtil from 'common/js/build-detail';
 import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
 
 @Form.create()
-class JinseNewsAddedit extends DetailUtil {
+class JinseNewsFlashAddedit extends DetailUtil {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -12,16 +12,6 @@ class JinseNewsAddedit extends DetailUtil {
     }
     render() {
         const fields = [{
-            title: '标题',
-            field: 'title'
-        }, {
-            title: '作者',
-            field: 'auther'
-        }, {
-            title: '广告图',
-            field: 'advPic',
-            type: 'img'
-        }, {
             title: '内容',
             field: 'content'
         }, {
@@ -44,9 +34,9 @@ class JinseNewsAddedit extends DetailUtil {
             key: 'id',
             code: this.code,
             view: this.view,
-            detailCode: '628016'
+            detailCode: '628106'
         });
     }
 }
 
-export default JinseNewsAddedit;
+export default JinseNewsFlashAddedit;

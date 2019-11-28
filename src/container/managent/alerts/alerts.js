@@ -1,5 +1,6 @@
 import React from 'react';
-import {Modal, message, Select} from 'antd';
+import {Modal, message, Select, DatePicker, Form} from 'antd';
+import moment from 'moment';
 import {
     setTableData,
     setPagination,
@@ -19,6 +20,16 @@ import {
 import fetch from 'common/js/fetch';
 
 const {Option} = Select;
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+    }
+};
 
 @listWrapper(
     state => ({
@@ -37,9 +48,43 @@ class Alerts extends React.Component {
         selectedCode: '',
         visible: false
     };
-    changeSymbol = (v) => {
+    isHandleOk = true;
+    handleOk = () => {
+        if(this.isHandleOk) {
+            this.isHandleOk = false;
+            this.props.form.validateFields((err, values) => {
+                if (!err) {
+                    const hasMsg = message.loading('');
+                    const { showDatetime01, isTop01 } = values;
+                    fetch(628092, {
+                        code: this.state.selectedCode,
+                        isTop: isTop01,
+                        showDatetime: moment(showDatetime01).format('YYYY-MM-DD HH:mm:ss'),
+                        type: '0',
+                        updater: getUserName()
+                    }).then(() => {
+                        hasMsg();
+                        this.props.getPageData();
+                        showSucMsg('操作成功');
+                        this.setState({
+                            visible: false
+                        });
+                    }).catch(() => {
+                        hasMsg();
+                        this.props.cancelFetching();
+                        this.setState({
+                            visible: false
+                        });
+                    });
+                }else {
+                    this.isHandleOk = true;
+                }
+            });
+        }
+    };
+    handleCancel = () => {
         this.setState({
-            isTop: v
+            visible: false
         });
     };
     render() {
@@ -88,24 +133,25 @@ class Alerts extends React.Component {
             search: true,
             key: 'flash_status'
         }, {
-            field: 'updaterName',
-            title: '最近修改人'
-        }, {
-            field: 'updateDatetime',
-            title: '最近修改时间',
-            type: 'datetime'
-        }, {
             field: 'showDatetime',
             title: '发布时间',
             type: 'datetime',
             rangedate: ['showDatetimeStart', 'showDatetimeEnd'],
             search: true
+        }, {
+            field: 'updater',
+            title: '最近修改人'
+        }, {
+            field: 'updateDatetime',
+            title: '最近修改时间',
+            type: 'datetime'
         }];
+        const {getFieldDecorator} = this.props.form;
         return <div>
             {
                 this.props.buildList({
                     fields,
-                    rowKey: 'id',
+                    rowKey: 'code',
                     pageCode: '628095',
                     searchParams: {
                         type: '0'
@@ -120,7 +166,7 @@ class Alerts extends React.Component {
                                 showWarnMsg('该状态下不能进行该操作');
                             } else {
                                 fetch(628098, {
-                                    id: selectedRows[0].id
+                                    code: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();
                                     showSucMsg('操作成功');
@@ -139,7 +185,7 @@ class Alerts extends React.Component {
                             } else {
                                 this.setState({
                                     visible: true,
-                                    selectedCode: selectedRows[0].id
+                                    selectedCode: selectedRowKeys[0]
                                 });
                             }
                         },
@@ -158,7 +204,8 @@ class Alerts extends React.Component {
                                     onOk: () => {
                                         this.props.doFetching();
                                         return fetch(628093, {
-                                            id: selectedRows[0].id
+                                            code: selectedRowKeys[0],
+                                            updater: getUserName()
                                         }).then(() => {
                                             this.props.getPageData();
                                             showSucMsg('操作成功');
@@ -177,54 +224,54 @@ class Alerts extends React.Component {
                             } else if (selectedRows[0].status === '1') {
                                 showWarnMsg('该状态不能进行修改操作');
                             } else {
-                                this.props.history.push(`/managent/alerts/addedit?code=${selectedRows[0].id}`);
+                                this.props.history.push(`/news/newsFlash/addedit?code=${selectedRowKeys[0]}`);
                             }
                         }
                     }
                 })
             }
             <Modal
-              title={`上架`}
-              visible={this.state.visible}
-              okText={'确定'}
-              cancelText={'取消'}
-              onOk={() => {
-                  if (!this.state.isTop && this.state.isTop !== 0) {
-                      message.warning('请选择', 1.5);
-                      return;
-                  }
-                  this.props.doFetching();
-                  return fetch(628092, {
-                      id: this.state.selectedCode,
-                      isTop: this.state.isTop,
-                      type: '0'
-                  }).then(() => {
-                      this.props.getPageData();
-                      showSucMsg('操作成功');
-                      this.setState({
-                          visible: false
-                      });
-                  }).catch(() => {
-                      this.props.cancelFetching();
-                      this.setState({
-                          visible: false
-                      });
-                  });
-              }}
-              onCancel={() => {
-                  this.setState({
-                      isTop: '',
-                      visible: false
-                  });
-              }}
+                width={600}
+                title="批量审核"
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                okText="确定"
+                cancelText="取消"
             >
-                <div style={{marginBottom: '20px'}}>
-                    <label style={{width: '100px', display: 'inline-block', textAlign: 'right'}}>是否置顶：</label>
-                    <Select style={{width: '60%'}} placeholder="请选择" value={this.state.isTop} onChange={this.changeSymbol}>
-                        <Option value={1}>是</Option>
-                        <Option value={0}>否</Option>
-                    </Select>
-                </div>
+                <Form {...formItemLayout} onSubmit={this.handleOk}>
+                    <Form.Item label="是否置顶">
+                        {getFieldDecorator('isTop01', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: ' '
+                                }
+                            ]
+                        })(<Select
+                            style={{ width: '100%' }}
+                            placeholder="请选择"
+                        >
+                            <Option value={1}>是</Option>
+                            <Option value={0}>否</Option>
+                        </Select>)}
+                    </Form.Item>
+                    <Form.Item label="发布时间">
+                        {
+                            getFieldDecorator('showDatetime01', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: ' '
+                                    }
+                                ]
+                            })(
+                                <DatePicker
+                                    showTime placeholder="请选择"
+                                />
+                            )}
+                    </Form.Item>
+                </Form>
             </Modal>
         </div>;
     }

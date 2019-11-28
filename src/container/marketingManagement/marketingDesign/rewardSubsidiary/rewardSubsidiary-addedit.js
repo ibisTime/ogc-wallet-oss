@@ -33,18 +33,41 @@ class RewardSubsidiaryAddedit extends DetailUtil {
         }, {
             title: '针对用户',
             field: 'userName',
-            render(v, d) {
+            formatter(v, d) {
                 return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
             }
         }, {
             title: '活动币种',
             field: 'currency'
         }, {
-            title: '申请划转数量',
+            title: '奖励数量',
             field: 'amount'
+        }, {
+            title: '发放时间',
+            field: 'approveDatetime',
+            type: 'datetime'
         }, {
             title: '发放说明',
             field: 'bizNote'
+        }, {
+            title: '状态',
+            field: 'status',
+            type: 'select',
+            data: [{
+                key: '0',
+                value: '待领取'
+            }, {
+                key: '1',
+                value: '待审核'
+            }, {
+                key: '2',
+                value: '已发放'
+            }, {
+                key: '3',
+                value: '审核失败'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
             title: '审核人',
             field: 'approveUserName',

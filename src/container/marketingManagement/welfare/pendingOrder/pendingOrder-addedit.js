@@ -33,7 +33,7 @@ class PendingOrderAddedit extends DetailUtil {
         }, {
             title: '针对用户',
             field: 'userName',
-            render(v, d) {
+            formatter(v, d) {
                 return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
             }
         }, {
@@ -45,22 +45,6 @@ class PendingOrderAddedit extends DetailUtil {
         }, {
             title: '发放说明',
             field: 'bizNote'
-        }, {
-            title: '审核人',
-            field: 'approveUserName',
-            hidden: !this.code,
-            readonly: true
-        }, {
-            title: '审核时间',
-            field: 'approveDatetime',
-            type: 'datetime',
-            hidden: !this.code,
-            readonly: true
-        }, {
-            title: '审核备注',
-            field: 'approveNote',
-            hidden: !this.code,
-            readonly: true
         }];
         return this.buildDetail({
             fields,

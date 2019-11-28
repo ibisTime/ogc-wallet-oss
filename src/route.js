@@ -1209,11 +1209,11 @@ const ROUTES = [
     },
     // 业务管理--快讯管理
     {
-        path: '/managent/alerts',
+        path: '/news/newsFlash',
         component: asyncComponent(() => import('container/managent/alerts/alerts'))
     },
     {
-        path: '/managent/alerts/addedit',
+        path: '/news/newsFlash/addedit',
         component: asyncComponent(() => import('container/managent/alerts/alerts-addedit'))
     },
 // 业务管理--DAPP应用
@@ -1548,6 +1548,14 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/news/news/news-addedit'))
     },
     {
+        path: '/news/jinseNewsFlash',
+        component: asyncComponent(() => import('container/biz/news/jinseNewsFlash/jinseNewsFlash'))
+    },
+    {
+        path: '/news/jinseNewsFlash/addedit',
+        component: asyncComponent(() => import('container/biz/news/jinseNewsFlash/jinseNewsFlash-addedit'))
+    },
+    {
         path: '/news/jinseNews',
         component: asyncComponent(() => import('container/biz/news/jinseNews/jinseNews'))
     },
@@ -1586,6 +1594,46 @@ const ROUTES = [
     {
         path: '/marketingDesign/rewardSubsidiary/addedit',
         component: asyncComponent(() => import('container/marketingManagement/marketingDesign/rewardSubsidiary/rewardSubsidiary-addedit'))
+    },
+    {
+        path: '/marketingDesign/userRewards',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/userRewards/userRewards'))
+    },
+    {
+        path: '/marketingDesign/dailyReport',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/dailyReport/dailyReport'))
+    },
+    {
+        path: '/marketingDesign/userRewardsSubsidiary',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/userRewards/userRewardsSubsidiary'))
+    },
+    {
+        path: '/marketingDesign/totalPool',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/totalPool/totalPool'))
+    },
+    {
+        path: '/marketingDesign/jackpotRecord',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/totalPool/jackpotRecord'))
+    },
+    {
+        path: '/marketingDesign/legacyRecords',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/totalPool/legacyRecords'))
+    },
+    {
+        path: '/marketingDesign/recordRecord',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/totalPool/recordRecord'))
+    },
+    {
+        path: '/marketingDesign/outInRecord',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/dailyReport/outInRecord'))
+    },
+    {
+        path: '/marketingDesign/totalPool/addedit',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/totalPool/totalPool-addedit'))
+    },
+    {
+        path: '/marketingDesign/poolDailyReport',
+        component: asyncComponent(() => import('container/marketingManagement/marketingDesign/totalPool/poolDailyReport'))
     }
 ];
 
