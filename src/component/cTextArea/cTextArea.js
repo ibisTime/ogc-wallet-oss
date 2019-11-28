@@ -92,7 +92,7 @@ export default class CTextArea extends React.Component {
             : <div ref={area => this.area = area}></div>
         }
           {
-              tipEle ? <div id={tipEle.id} style={tipEle.style}>{tipEle.content || ''}</div> : null
+              (tipEle && !readonly) ? <div id={tipEle.id} style={tipEle.style}>{tipEle.content || ''}</div> : null
           }
       </FormItem>
     );

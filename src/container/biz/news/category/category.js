@@ -37,14 +37,14 @@ class Category extends React.Component {
             field: 'name',
             search: true
         }, {
+            title: '顺序',
+            field: 'orderNo'
+        }, {
             title: '状态',
             field: 'status',
             type: 'select',
             key: 'category_status',
             search: true
-        }, {
-            title: '顺序',
-            field: 'orderNo'
         }, {
             title: '更新人',
             field: 'updater'

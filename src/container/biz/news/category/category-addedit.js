@@ -18,7 +18,8 @@ class CategoryAddedit extends DetailUtil {
         }, {
             title: '顺序',
             field: 'orderNo',
-            required: true
+            required: true,
+            number: true
         }];
         return this.buildDetail({
             fields,

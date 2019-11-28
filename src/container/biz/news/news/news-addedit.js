@@ -20,14 +20,10 @@ class NewsAddedit extends DetailUtil {
         }, {
             title: '类型',
             field: 'typeList',
-            type: 'checkbox',
+            type: 'select',
             listCode: '628007',
             keyName: 'code',
             valueName: 'name',
-            required: true
-        }, {
-            title: '关键字(以英文逗号分隔)',
-            field: 'keywords',
             required: true
         }, {
             title: '来源',
@@ -41,13 +37,6 @@ class NewsAddedit extends DetailUtil {
             type: 'img',
             required: true
         }, {
-            title: '摘要',
-            field: 'summary',
-            type: 'textarea',
-            required: true,
-            normalArea: true,
-            maxlength: 180
-        }, {
             title: '内容',
             field: 'content',
             type: 'textarea',
@@ -57,7 +46,7 @@ class NewsAddedit extends DetailUtil {
                 style: {
                     color: '#f5222d'
                 },
-                content: '注：内容不能低于600个字, 每300个字之后，要有一张图片'
+                content: '建议：内容最好不能低于600个字, 每300个字之后，最好有一张图片'
             }
         }];
         return this.buildDetail({
@@ -69,7 +58,7 @@ class NewsAddedit extends DetailUtil {
             detailCode: '628196',
             beforeSubmit: (params) => {
                 if(typeof params.typeList === 'string') {
-                    params.typeList = params.typeList.split(',');
+                    params.typeList = [params.typeList];
                 }
                 return params;
             }

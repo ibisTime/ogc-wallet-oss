@@ -131,6 +131,19 @@ class News extends React.Component {
             title: '作者',
             field: 'auther'
         }, {
+            title: '是否置顶',
+            field: 'isTop',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '是'
+            }, {
+                key: '0',
+                value: '否'
+            }],
+            keyName: 'key',
+            valueName: 'value'
+        }, {
             title: '状态',
             field: 'status',
             type: 'select',
@@ -146,19 +159,6 @@ class News extends React.Component {
             type: 'datetime',
             rangedate: ['startDateStart', 'endDateEnd'],
             search: true
-        }, {
-            title: '是否置顶',
-            field: 'isTop',
-            type: 'select',
-            data: [{
-                key: '1',
-                value: '是'
-            }, {
-                key: '0',
-                value: '否'
-            }],
-            keyName: 'key',
-            valueName: 'value'
         }];
         const {getFieldDecorator} = this.props.form;
         const {isResult} = this.state;

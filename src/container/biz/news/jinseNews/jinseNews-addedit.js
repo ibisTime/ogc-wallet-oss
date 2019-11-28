@@ -23,7 +23,8 @@ class JinseNewsAddedit extends DetailUtil {
             type: 'img'
         }, {
             title: '内容',
-            field: 'content'
+            field: 'content',
+            type: 'textarea'
         }, {
             title: '抓取时间',
             field: 'crawlDatetime',
@@ -44,7 +45,7 @@ class JinseNewsAddedit extends DetailUtil {
             key: 'id',
             code: this.code,
             view: this.view,
-            detailCode: '628016'
+            detailCode: '628106'
         });
     }
 }

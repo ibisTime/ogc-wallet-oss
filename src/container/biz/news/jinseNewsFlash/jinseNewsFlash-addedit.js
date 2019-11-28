@@ -34,7 +34,7 @@ class JinseNewsFlashAddedit extends DetailUtil {
             key: 'id',
             code: this.code,
             view: this.view,
-            detailCode: '628106'
+            detailCode: '628016'
         });
     }
 }
