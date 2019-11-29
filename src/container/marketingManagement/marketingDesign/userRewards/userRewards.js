@@ -77,7 +77,7 @@ class UserRewards extends React.Component {
             {
                 this.props.buildList({
                     fields,
-                    rowKey: 'userId',
+                    rowKey: 'accountNumber',
                     pageCode: '806052',
                     btnEvent: {
                         rewardSubsidiary: (selectedRowKeys, rows) => {
@@ -86,7 +86,7 @@ class UserRewards extends React.Component {
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/marketingDesign/userRewardsSubsidiary?userId=${selectedRowKeys[0]}&symbol=${rows[0].currency}`);
+                                this.props.history.push(`/marketingDesign/userRewardsSubsidiary?userId=${rows[0].userId}&symbol=${rows[0].currency}`);
                             }
                         }
                     }

@@ -109,6 +109,18 @@ class TotalPool extends React.Component {
                 return v && moneyFormat(v, '', d.symbol);
             }
         }, {
+            field: 'frozenAmount',
+            title: '冻结金额',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
+        }, {
+            field: 'availableAmount',
+            title: '可用金额',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
+        }, {
             field: 'totalAdjustCount',
             title: '调整总额',
             render(v, d) {
@@ -163,7 +175,7 @@ class TotalPool extends React.Component {
                                 } else if (selectedRowKeys.length > 1) {
                                     showWarnMsg('请选择一条记录');
                                 } else {
-                                    this.props.history.push(`/marketingDesign/poolDailyReport?currency=${selectedRows[0].symbol}`);
+                                    this.props.history.push(`/marketingDesign/poolDailyReport?currency=${selectedRows[0].symbol}&type=${selectedRows[0].type}`);
                                 }
                             },
                             amountOf: (selectedRowKeys) => { // 调额

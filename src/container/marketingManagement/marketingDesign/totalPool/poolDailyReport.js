@@ -17,7 +17,8 @@ import {
     showWarnMsg,
     showSucMsg,
     getCoinType,
-    getQueryString
+    getQueryString,
+    dateFormat
 } from 'common/js/util';
 
 @listWrapper(
@@ -32,6 +33,7 @@ import {
 )
 class PoolDailyReport extends React.Component {
     currency = getQueryString('currency');
+    type = getQueryString('type');
     render() {
         const fields = [{
             title: '日期',
@@ -43,19 +45,6 @@ class PoolDailyReport extends React.Component {
             field: 'type',
             type: 'select',
             key: 'pool_market_type'
-        }, {
-            title: '币种',
-            field: 'currency',
-            type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            search: true,
-            noVisible: true
         }, {
             title: '币种',
             field: 'currency1',
@@ -73,7 +62,8 @@ class PoolDailyReport extends React.Component {
                     rowKey: 'id',
                     pageCode: '806065',
                     searchParams: {
-                        currency: this.currency
+                        currency: this.currency,
+                        type: this.type
                     },
                     buttons: [{
                         code: 'goBack',
@@ -84,13 +74,13 @@ class PoolDailyReport extends React.Component {
                     }, {
                         code: 'subsidiary',
                         name: '发放明细',
-                        handler: (selectedRowKeys) => {
+                        handler: (selectedRowKeys, rows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/marketingDesign/outInRecord?poolId=${selectedRowKeys[0]}`);
+                                this.props.history.push(`/marketingDesign/outInRecord?poolId=${rows[0].poolId}&date=${dateFormat(rows[0].createDate)}`);
                             }
                         }
                     }, {

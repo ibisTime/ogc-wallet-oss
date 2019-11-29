@@ -38,6 +38,9 @@ class IntegrationEcology extends React.Component {
     }
 
     onCardClick = (item) => {
+        // let username = localStorage.getItem('username');
+        // let tokenIgo = localStorage.getItem('token_igo');
+        // window.open(`${item.url}/verificationPSC?username=${username}&token=${tokenIgo}`);
         if(item.url === 'dapp_igo') {
             let username = localStorage.getItem('username');
             let tokenIgo = localStorage.getItem('token_igo');

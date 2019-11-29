@@ -147,6 +147,7 @@ function createMenus(newList, result) {
     newList.forEach((v, index) => {
         v.url = getRealUrl(v.url);
         let pCode = v.parentCode;
+        // console.log(pCode);
         if (result.top2SubObj[pCode]) {
             if (!result.top2SubObj[pCode].find(i => i.code === v.code)) {
                 result.top2SubObj[pCode].push(v);

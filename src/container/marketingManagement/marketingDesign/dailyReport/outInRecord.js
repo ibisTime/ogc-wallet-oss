@@ -37,6 +37,7 @@ class OutInRecord extends React.Component {
             name: '导出'
         }];
         this.poolId = getQueryString('poolId', this.props.location.search);
+        this.date = getQueryString('date', this.props.location.search);
     }
     render() {
         const fields = [{
@@ -57,13 +58,6 @@ class OutInRecord extends React.Component {
             render: (v, data) => {
                 return dateTimeFormat(data.createDatetime);
             }
-        }, {
-            field: 'createDatetime',
-            title: '时间',
-            type: 'date',
-            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
-            noVisible: true,
-            search: true
         }];
         return <div className="guessUpsDowns-listPage-wrapper">
             {
@@ -73,7 +67,9 @@ class OutInRecord extends React.Component {
                     pageCode: 806020,
                     buttons: this.buttons,
                     searchParams: {
-                        poolId: this.poolId
+                        poolId: this.poolId,
+                        createDatetimeStart: this.date,
+                        createDatetimeEnd: this.date
                     }
                 })
             }

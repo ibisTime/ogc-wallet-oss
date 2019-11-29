@@ -16,7 +16,8 @@ import {
     dateTimeFormat,
     showWarnMsg,
     showSucMsg,
-    getCoinType
+    getCoinType,
+    dateFormat
 } from 'common/js/util';
 
 @listWrapper(
@@ -71,13 +72,13 @@ class DailyReport extends React.Component {
                     rowKey: 'id',
                     pageCode: '806065',
                     btnEvent: {
-                        subsidiary: (selectedRowKeys) => {
+                        subsidiary: (selectedRowKeys, rows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/marketingDesign/outInRecord?poolId=${selectedRowKeys[0]}`);
+                                this.props.history.push(`/marketingDesign/outInRecord?poolId=${rows[0].poolId}&date=${dateFormat(rows[0].createDate)}`);
                             }
                         }
                     }
