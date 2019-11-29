@@ -78,13 +78,18 @@ class BannerAddEdit extends DetailUtil {
             keyName: 'id',
             valueName: 'name',
             // hidden: ishidden || this.view,
-            hidden: this.state.dkey !== '2',
+            hidden: this.state.dkey !== '2' || this.view,
             required: this.state.dkey === '2',
             formatter: (v, d) => {
                 if(d.type === '2' && d.url) {
                     return d.url;
                 }
             }
+        }, {
+            title: '应用',
+            field: 'appName',
+            hidden: !this.view,
+            readonly: true
         }, {
             title: '备注',
             field: 'remark',

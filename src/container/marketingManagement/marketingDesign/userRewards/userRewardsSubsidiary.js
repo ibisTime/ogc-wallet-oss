@@ -32,6 +32,7 @@ import {
 )
 class UserRewardsSubsidiary extends React.Component {
     USERID = getQueryString('userId');
+    SYMBOL = getQueryString('symbol');
     buttons = [
         {
             code: 'goBack',
@@ -64,16 +65,6 @@ class UserRewardsSubsidiary extends React.Component {
                 return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
             }
         }, {
-            field: 'userId',
-            title: '用户',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            noVisible: true
-        }, {
             field: 'type',
             title: '活动类型',
             type: 'select',
@@ -93,19 +84,6 @@ class UserRewardsSubsidiary extends React.Component {
             keyName: 'key',
             valueName: 'value',
             search: true
-        }, {
-            title: '活动币种',
-            field: 'currency',
-            type: 'select',
-            pageCode: '802005',
-            params: {
-                status: '0'
-            },
-            keyName: 'symbol',
-            valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-            searchName: 'symbol',
-            search: true,
-            noVisible: true
         }, {
             title: '活动币种',
             field: 'currency1',
@@ -148,7 +126,8 @@ class UserRewardsSubsidiary extends React.Component {
                     fields,
                     pageCode: '806055',
                     searchParams: {
-                        userId: this.USERID
+                        userId: this.USERID,
+                        currency: this.SYMBOL
                     },
                     buttons: this.buttons
                 })

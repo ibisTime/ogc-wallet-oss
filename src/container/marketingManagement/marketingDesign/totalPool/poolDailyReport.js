@@ -40,7 +40,9 @@ class PoolDailyReport extends React.Component {
             search: true
         }, {
             title: '营销活动',
-            field: 'type'
+            field: 'type',
+            type: 'select',
+            key: 'pool_market_type'
         }, {
             title: '币种',
             field: 'currency',
@@ -62,13 +64,13 @@ class PoolDailyReport extends React.Component {
             }
         }, {
             title: '发放总额',
-            field: 'totalAmount'
+            field: 'amount'
         }];
         return <div>
             {
                 this.props.buildList({
                     fields,
-                    rowKey: 'userId',
+                    rowKey: 'id',
                     pageCode: '806065',
                     searchParams: {
                         currency: this.currency
@@ -88,7 +90,7 @@ class PoolDailyReport extends React.Component {
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/marketingDesign/rewardSubsidiary?userId=${selectedRowKeys[0]}`);
+                                this.props.history.push(`/marketingDesign/outInRecord?poolId=${selectedRowKeys[0]}`);
                             }
                         }
                     }, {

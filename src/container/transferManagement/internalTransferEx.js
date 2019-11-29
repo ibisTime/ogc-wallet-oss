@@ -34,14 +34,11 @@ let currency = '';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class TBunderline extends React.Component {
+class InternalTransferEx extends React.Component {
     componentDidMount() {
         let clearParams = document.getElementById('clearParams');
         clearParams.addEventListener('click', () => {
             currency = '';
-        });
-        getDictList({ parentKey: 'withdraw_biz_type' }).then(data => {
-            console.log('withdraw_biz_type', data);
         });
     }
     render() {
@@ -146,8 +143,7 @@ class TBunderline extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是待审核的记录');
                     } else {
-                        // this.props.history.push(`/BTC-finance/TBunderline/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
-                        this.props.history.push(`/BTC-finance/TBunderline/userStatistics?applyUser=${selectedRows[0].applyUser}&code=${selectedRows[0].code}&symbol=${selectedRows[0].currency}`);
+                        this.props.history.push(`/BTC-finance/TBunderline/userStatistics?applyUser=${selectedRows[0].applyUser}&code=${selectedRows[0].code}&symbol=${selectedRows[0].currency}&origin=internalTransferEx`);
                     }
                 },
                 sp: (selectedRowKeys, selectedRows) => {
@@ -184,4 +180,4 @@ class TBunderline extends React.Component {
     }
 }
 
-export default TBunderline;
+export default InternalTransferEx;

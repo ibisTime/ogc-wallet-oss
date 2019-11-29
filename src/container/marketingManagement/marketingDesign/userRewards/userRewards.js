@@ -80,13 +80,13 @@ class UserRewards extends React.Component {
                     rowKey: 'userId',
                     pageCode: '806052',
                     btnEvent: {
-                        rewardSubsidiary: (selectedRowKeys) => {
+                        rewardSubsidiary: (selectedRowKeys, rows) => {
                             if (!selectedRowKeys.length) {
                                 showWarnMsg('请选择记录');
                             } else if (selectedRowKeys.length > 1) {
                                 showWarnMsg('请选择一条记录');
                             } else {
-                                this.props.history.push(`/marketingDesign/userRewardsSubsidiary?userId=${selectedRowKeys[0]}`);
+                                this.props.history.push(`/marketingDesign/userRewardsSubsidiary?userId=${selectedRowKeys[0]}&symbol=${rows[0].currency}`);
                             }
                         }
                     }

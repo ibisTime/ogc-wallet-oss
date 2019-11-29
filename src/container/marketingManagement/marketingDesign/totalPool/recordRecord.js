@@ -45,10 +45,8 @@ class RecordRecord extends React.Component {
             field: 'symbol',
             title: '币种'
         }, {
-            field: 'bizType',
-            title: '业务类型',
-            type: 'select',
-            key: 'pool_biz_type'
+            field: 'remark',
+            title: '业务类型'
         }, {
             field: 'count',
             title: '数额',
@@ -68,9 +66,6 @@ class RecordRecord extends React.Component {
             rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
             noVisible: true,
             search: true
-        }, {
-            field: 'remark',
-            title: '说明'
         }];
         return <div className="guessUpsDowns-listPage-wrapper">
             {

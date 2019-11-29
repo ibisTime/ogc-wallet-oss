@@ -38,7 +38,9 @@ class DailyReport extends React.Component {
             search: true
         }, {
             title: '营销活动',
-            field: 'type'
+            field: 'type',
+            type: 'select',
+            key: 'pool_market_type'
         }, {
             title: '币种',
             field: 'currency',
@@ -60,7 +62,7 @@ class DailyReport extends React.Component {
             }
         }, {
             title: '发放总额',
-            field: 'totalAmount'
+            field: 'amount'
         }];
         return <div>
             {

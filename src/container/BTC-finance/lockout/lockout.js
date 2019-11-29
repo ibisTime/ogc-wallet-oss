@@ -140,7 +140,7 @@ class Lockout extends React.Component {
             title: '解锁次数',
             field: 'releaseCount'
         }, {
-            title: '未接锁数量',
+            title: '未解锁数量',
             field: 'remainAmount'
         }];
         const {getFieldDecorator} = this.props.form;

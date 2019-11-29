@@ -56,6 +56,7 @@ class userStatistics extends React.Component {
         this.applyUser = getQueryString('applyUser', this.props.location.search);
         this.code = getQueryString('code', this.props.location.search);
         this.symbol = getQueryString('symbol', this.props.location.search);
+        this.origin = getQueryString('origin', this.props.location.search);
 
         this.state = {
             nodeTitle: [],
@@ -264,7 +265,13 @@ class userStatistics extends React.Component {
            param.approveNote = inputRmk;
            fetch(802352, param).then(data => {
                showSucMsg('操作成功');
-               window.history.go(-1);
+               setTimeout(() => {
+                   if(this.origin === 'internalTransferEx') {
+                       this.props.history.push('/transferMng/internalTransferEx');
+                   }else {
+                       this.props.history.push('/BTC-finance/TBunderline');
+                   }
+               }, 2000);
            });
        }else {
            message.warning('请填写审核备注');
@@ -278,9 +285,15 @@ class userStatistics extends React.Component {
             param.codeList = [this.state.code];
             param.approveUser = getUserId();
             param.approveNote = inputRmk;
-            fetch(802352, param).then(data => {
+            fetch(802352, param).then(() => {
                 showSucMsg('操作成功');
-                window.history.go(-1);
+                setTimeout(() => {
+                    if(this.origin === 'internalTransferEx') {
+                        this.props.history.push('/transferMng/internalTransferEx');
+                    }else {
+                        this.props.history.push('/BTC-finance/TBunderline');
+                    }
+                }, 2000);
             });
         }else {
             message.warning('请填写审核备注');
