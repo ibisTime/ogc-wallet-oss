@@ -319,7 +319,11 @@ export default class ListComponent extends React.Component {
                     result[v.field] = params[v.field] ? params[v.field].format(format) : params[v.field];
                 }
             } else {
-                result[v.field] = params[v.field];
+                if(v.searchName && v.key) {
+                    result[v.searchName] = params[v.field];
+                }else {
+                    result[v.field] = params[v.field];
+                }
             }
         });
         return result;
@@ -538,13 +542,13 @@ export default class ListComponent extends React.Component {
             if (v.type === 'select' && v.pageCode) {
               children.push(this.getItemByType(v.type, v));
             } else {
-              children.push(
-                  <FormItem key={v.field} label={v.title}>
-                      {getFieldDecorator(`${v.field}`, {initialValue: this.props.searchParam[v.field]})(
-                          this.getItemByType(v.type, v)
-                      )}
-                  </FormItem>
-              );
+                children.push(
+                    <FormItem key={v.field} label={v.title}>
+                        {getFieldDecorator(`${v.field}`, {initialValue: this.props.searchParam[v.field]})(
+                            this.getItemByType(v.type, v)
+                        )}
+                    </FormItem>
+                );
             }
         });
         children.push(
