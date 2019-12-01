@@ -80,6 +80,14 @@ export async function setSystem() {
             }
         });
     }
+    const minerOssUrl = sessionStorage.getItem('minerOssUrl');
+    if (!minerOssUrl) {
+        fetch(625013, {key: 'miner_oss_url', start: 1, limit: 10}).then(data => {
+            if (data.list[0]) {
+                sessionStorage.setItem('minerOssUrl', data.list[0].value);
+            }
+        });
+    }
 }
 
 // 删除用户登录信息
