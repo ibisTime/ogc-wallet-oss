@@ -27,7 +27,8 @@ class RightsManagementAddedit extends DetailUtil {
             hidden: !this.code,
             formatter(v, d) {
                 return d.userInfo && d.userInfo.nickname + '-' + d.userInfo.loginName;
-            }
+            },
+            readonly: true
         }, {
             title: '币种',
             field: 'currency',
@@ -47,14 +48,16 @@ class RightsManagementAddedit extends DetailUtil {
             hidden: !this.code,
             formatter(v, d) {
                 return d && d.currency;
-            }
+            },
+            readonly: true
         }, {
             title: '状态',
             field: 'status',
             required: true,
             key: 'right_status',
             type: 'select',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '权益总量',
             field: 'totalAmount',
@@ -62,7 +65,8 @@ class RightsManagementAddedit extends DetailUtil {
         }, {
             title: '已释放数量',
             field: 'releasedAmount',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '释放次数',
             field: 'releaseCount',
@@ -82,11 +86,13 @@ class RightsManagementAddedit extends DetailUtil {
             field: 'source',
             hidden: !this.code,
             type: 'select',
-            key: 'right_source'
+            key: 'right_source',
+            readonly: true
         }, {
             title: '关联订单号',
             field: 'refNo',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '权益说明',
             field: 'note',
@@ -96,20 +102,25 @@ class RightsManagementAddedit extends DetailUtil {
             title: '规则说明',
             field: 'rule',
             type: 'textarea',
-            normalArea: true
+            normalArea: true,
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '审核人',
             field: 'approveUserName',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '审核时间',
             field: 'approveDatetime',
             type: 'datetime',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }, {
             title: '审核备注',
             field: 'approveNote',
-            hidden: !this.code
+            hidden: !this.code,
+            readonly: true
         }];
         return this.buildDetail({
             fields,

@@ -396,6 +396,9 @@ import {bizJinseNewsFlash} from './redux/biz/news/jinseNewsFlash';
 import {bizNews} from './redux/biz/news/news';
 import {bizCategory} from './redux/biz/news/category';
 
+// 行情管理-币种管理
+import {bizQuotationCoin} from './redux/biz/news-quotation/coin';
+
 export default combineReducers({
     user,
     menu,
@@ -711,5 +714,6 @@ export default combineReducers({
     bizJinseNews,
     bizJinseNewsFlash,
     bizNews,
-    bizCategory
+    bizCategory,
+    bizQuotationCoin
 });

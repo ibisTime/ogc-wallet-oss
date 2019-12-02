@@ -1634,6 +1634,14 @@ const ROUTES = [
     {
         path: '/marketingDesign/poolDailyReport',
         component: asyncComponent(() => import('container/marketingManagement/marketingDesign/totalPool/poolDailyReport'))
+    },
+    {
+        path: '/quotation/coin',
+        component: asyncComponent(() => import('container/biz/news-quotation/coin/coin'))
+    },
+    {
+        path: '/quotation/coin/addedit',
+        component: asyncComponent(() => import('container/biz/news-quotation/coin/coin-addedit'))
     }
 ];
 

@@ -65,10 +65,8 @@ class timerMonitor extends React.Component {
                 return moneyFormat(v, '', data.currency);
             }
         }, {
-            field: 'bizType',
-            title: '业务类型',
-            type: 'select',
-            key: 'jour_biz_type_user'
+            field: 'bizNote',
+            title: '业务类型'
         }, {
             field: 'refNo',
             title: '关联订单号'

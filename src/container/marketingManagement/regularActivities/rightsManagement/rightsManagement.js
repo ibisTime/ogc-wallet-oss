@@ -122,6 +122,10 @@ class RightsManagement extends React.Component {
             title: '权益总量',
             field: 'totalAmount'
         }, {
+            title: '开始时间',
+            field: 'startDatetime',
+            type: 'date'
+        }, {
             title: '已释放数量',
             field: 'releasedAmount'
         }, {

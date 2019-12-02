@@ -107,10 +107,13 @@ class Alerts extends React.Component {
                 }
             }
         }, {
+            title: '标题',
+            field: 'keywords',
+            search: true,
+            noVisible: true
+        }, {
             title: '来源',
             field: 'source',
-            type: 'select',
-            key: 'flash_source',
             search: true
         }, {
             field: 'isTop',

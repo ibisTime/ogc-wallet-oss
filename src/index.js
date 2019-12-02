@@ -5,7 +5,8 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {BackTop} from 'antd';
+import {BackTop, ConfigProvider} from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 import asyncComponent from 'component/async-component/async-component';
 import reducers from './reducer';
 import AuthRoute from 'component/authroute/authroute';
@@ -34,22 +35,24 @@ const StarLucky = asyncComponent(() => import('container/starLucky/starLucky'));
 const Card = asyncComponent(() => import('container/card/card'));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <div style={{height: '100%'}}>
-                <AuthRoute></AuthRoute>
-                <Switch>
-                    <Route path='/login' component={Login}></Route>
-                    <Route path='/superNode' component={SuperNode}></Route>
-                    <Route path='/flashManagement' component={FlashExchange}></Route>
-                    <Route path='/guessUpsDowns' component={GuessUpsDowns}></Route>
-                    <Route path='/starLucky' component={StarLucky}></Route>
-                    <Route path='/card' component={Card}></Route>
-                    <Route component={Dashboard}></Route>
-                </Switch>
-                <BackTop/>
-            </div>
-        </BrowserRouter>
-    </Provider>,
+    <ConfigProvider locale={zhCN}>
+        <Provider store={store}>
+            <BrowserRouter>
+                <div style={{height: '100%'}}>
+                    <AuthRoute></AuthRoute>
+                    <Switch>
+                        <Route path='/login' component={Login}></Route>
+                        <Route path='/superNode' component={SuperNode}></Route>
+                        <Route path='/flashManagement' component={FlashExchange}></Route>
+                        <Route path='/guessUpsDowns' component={GuessUpsDowns}></Route>
+                        <Route path='/starLucky' component={StarLucky}></Route>
+                        <Route path='/card' component={Card}></Route>
+                        <Route component={Dashboard}></Route>
+                    </Switch>
+                    <BackTop/>
+                </div>
+            </BrowserRouter>
+        </Provider>
+    </ConfigProvider>,
     document.getElementById('root')
 );
