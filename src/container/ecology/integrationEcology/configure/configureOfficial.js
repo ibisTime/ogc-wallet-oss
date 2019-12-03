@@ -34,12 +34,15 @@ class configureOfficial extends React.Component {
             field: 'dappId',
             title: '应用',
             type: 'select',
-            pageCode: '625455',
+            listCode: '625459',
             keyName: 'id',
             valueName: '{{name.DATA}}',
             searchName: 'name',
             noVisible: true,
-            search: true
+            search: true,
+            params: {
+                ecoFlag: 2
+            }
         }, {
             field: 'name',
             title: '名称'
