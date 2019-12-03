@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/ecology/integrationEcology/configure/configure';
+} from '@redux/ecology/integrationEcology/configure/configureOfficial';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.IntegrationEcologyConfigure,
+        ...state.IntegrationEcologyConfigureOfficial,
         parentCode: state.menu.subMenuCode
     }),
     {
