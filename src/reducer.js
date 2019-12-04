@@ -331,6 +331,7 @@ import {internalTransferEx} from './redux/transferManagement/internalTransferEx'
 import {internalTransferSlt} from './redux/transferManagement/internalTransferSlt';
 // 转账管理
 import {transferNotThrough} from './redux/transferManagement/transferNotThrough';
+import {TransferTransferRules} from './redux/transferManagement/transferRules';
 // 基础数据管理
 import {legalTender} from './redux/biz/quotation/legalTender';
 import {legalTenderHistory} from './redux/biz/quotation/legalTenderHistory';
@@ -637,6 +638,7 @@ export default combineReducers({
     internalTransferEx,
     internalTransferSlt,
     transferNotThrough,
+    TransferTransferRules,
     // 猜涨跌
     GuessUpsDownsHome,
     GuessUpsDownsTotayScene,

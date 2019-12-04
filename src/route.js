@@ -1642,6 +1642,15 @@ const ROUTES = [
     {
         path: '/quotation/coin/addedit',
         component: asyncComponent(() => import('container/biz/news-quotation/coin/coin-addedit'))
+    },
+    // 转账管理 -- 转账规则
+    {
+        path: '/transferMng/transferRules',
+        component: asyncComponent(() => import('container/transferManagement/transferRules/transferRules'))
+    },
+    {
+        path: '/transferMng/transferRules/addedit',
+        component: asyncComponent(() => import('container/transferManagement/transferRules/transferRules-addedit'))
     }
 ];
 
