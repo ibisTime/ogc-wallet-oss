@@ -9,9 +9,23 @@ import {
     cancelFetching,
     setSearchData
 } from '@redux/marketingManagement/regularActivities/releasePlan';
+import {Modal, message, Form, DatePicker} from 'antd';
+import moment from 'moment';
 import {listWrapper} from 'common/js/build-list';
-import { showWarnMsg, moneyFormat, getQueryString } from 'common/js/util';
+import { showWarnMsg, moneyFormat, getQueryString, showSucMsg } from 'common/js/util';
 import { Link } from 'react-router-dom';
+import fetch from 'common/js/fetch';
+
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+    }
+};
 
 @listWrapper(
     state => ({
@@ -25,39 +39,58 @@ import { Link } from 'react-router-dom';
 )
 class ReleasePlan extends React.Component {
     state = {
-        ...this.state
+        ...this.state,
+        visible: false,
+        codeList: []
     };
     rightCode = getQueryString('rightCode');
+    isHandleOk = true;
+    handleOk = () => {
+        if(this.isHandleOk) {
+            this.isHandleOk = false;
+            this.props.form.validateFields((err, values) => {
+                if (!err) {
+                    const hasMsg = message.loading('');
+                    const { releaseDatetime01 } = values;
+                    fetch(670021, {
+                        codeList: this.state.codeList,
+                        releaseDatetime: moment(releaseDatetime01).format('YYYY-MM-DD HH:mm:ss')
+                    }).then(() => {
+                        hasMsg();
+                        this.props.getPageData();
+                        this.props.form.resetFields();
+                        this.isHandleOk = true;
+                        showSucMsg('操作成功');
+                        this.setState({
+                            visible: false
+                        });
+                    }).catch(() => {
+                        hasMsg();
+                        this.isHandleOk = true;
+                        this.props.form.resetFields();
+                        this.props.cancelFetching();
+                        this.setState({
+                            visible: false
+                        });
+                    });
+                }else {
+                    this.isHandleOk = true;
+                }
+            });
+        }
+    };
+    handleCancel = () => {
+        this.setState({
+            visible: false
+        });
+    };
     render() {
         const fields = [{
-        //     field: 'userId',
-        //     title: '用户',
-        //     type: 'select',
-        //     pageCode: '805120',
-        //     keyName: 'userId',
-        //     valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
-        //     searchName: 'keyword',
-        //     search: true,
-        //     noVisible: true
-        // }, {
             title: '用户',
             field: 'userName',
             render() {
                 return sessionStorage.getItem('USER_NAME') || '-';
             }
-        // }, {
-        //     title: '币种',
-        //     field: 'currency',
-        //     type: 'select',
-        //     pageCode: '802005',
-        //     params: {
-        //         status: '0'
-        //     },
-        //     keyName: 'symbol',
-        //     valueName: '{{symbol.DATA}}-{{cname.DATA}}',
-        //     searchName: 'symbol',
-        //     search: true,
-        //     noVisible: true
         }, {
             title: '币种',
             field: 'currency1',
@@ -84,23 +117,72 @@ class ReleasePlan extends React.Component {
             key: 'right_plan_status',
             search: true
         }];
-        return this.props.buildList({
-            fields,
-            pageCode: '670025',
-            searchParams: {
-                rightCode: this.rightCode
-            },
-            buttons: [{
-                code: 'goBack',
-                name: '返回',
-                handler: () => {
-                    this.props.history.go(-1);
-                }
-            }, {
-                code: 'export',
-                name: '导出'
-            }]
-        });
+        const {getFieldDecorator} = this.props.form;
+        return <div>
+            {
+                this.props.buildList({
+                    fields,
+                    pageCode: '670025',
+                    searchParams: {
+                        rightCode: this.rightCode
+                    },
+                    singleSelect: false,
+                    buttons: [{
+                        code: 'goBack',
+                        name: '返回',
+                        handler: () => {
+                            this.props.history.go(-1);
+                        }
+                    }, {
+                        code: 'updateDate',
+                        name: '修改发放时间',
+                        handler: (selectedRowKeys, rows) => {
+                            if (!selectedRowKeys.length) {
+                                showWarnMsg('请选择记录');
+                            } else {
+                                const isVis = rows.filter(item => item.status === '1').length > 0;
+                                if(isVis) {
+                                    showWarnMsg('存在不可修改发放时间订单，请重新选择');
+                                    return;
+                                }
+                                this.setState({
+                                    codeList: selectedRowKeys,
+                                    visible: true
+                                });
+                            }
+                        }
+                    }, {
+                        code: 'export',
+                        name: '导出'
+                    }]
+                })
+            }
+            <Modal
+                width={600}
+                title="批量修改发放时间"
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                okText="确定"
+                cancelText="取消"
+            >
+                <Form {...formItemLayout} onSubmit={this.handleOk}>
+                    <Form.Item label="发放时间">
+                        {
+                            getFieldDecorator('releaseDatetime01', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: ' '
+                                    }
+                                ]
+                            })(
+                                <DatePicker showTime/>
+                            )}
+                    </Form.Item>
+                </Form>
+            </Modal>
+        </div>;
     }
 }
 
