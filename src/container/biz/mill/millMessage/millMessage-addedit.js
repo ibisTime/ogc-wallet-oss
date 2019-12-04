@@ -32,7 +32,7 @@ class MillMessageAddedit extends DetailUtil {
             required: true
         }, {
             field: 'price',
-            title: '单价（USDT币本位）',
+            title: '单价（E-USDT币本位）',
             required: true
         }, {
             field: 'daysLimit',
