@@ -1516,6 +1516,16 @@ const ROUTES = [
             () => import('container/biz/mill/millUser/userNode'))
     },
     {
+        path: '/mill/millUser/millCardManager',
+        component: asyncComponent(
+            () => import('container/biz/mill/millCardManager/millCardManager'))
+    },
+    {
+        path: '/mill/millUser/millCardManager/addedit',
+        component: asyncComponent(
+            () => import('container/biz/mill/millCardManager/millCardManager-addedit'))
+    },
+    {
         path: '/public/community/association',
         component: asyncComponent(
             () => import('container/public/community/association'))
