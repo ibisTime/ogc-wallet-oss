@@ -1651,6 +1651,15 @@ const ROUTES = [
     {
         path: '/transferMng/transferRules/addedit',
         component: asyncComponent(() => import('container/transferManagement/transferRules/transferRules-addedit'))
+    },
+    // 友情链接 -- 链接管理
+    {
+        path: '/biz/linkManagement',
+        component: asyncComponent(() => import('container/biz/linkManagement/linkManagement/linkManagement'))
+    },
+    {
+        path: '/biz/linkManagement/addedit',
+        component: asyncComponent(() => import('container/biz/linkManagement/linkManagement/linkManagement-addedit'))
     }
 ];
 

@@ -338,6 +338,7 @@ import {legalTenderHistory} from './redux/biz/quotation/legalTenderHistory';
 import {quotationCSDHistory} from './redux/biz/quotation/quotationCDSHistory';
 import {qutationETHHistory} from './redux/biz/quotation/qutationETHHistory';
 import {bizCoin} from './redux/coinList/coinList';
+import {bizLinkManagement} from './redux/biz/linkManagement/linkManagement';
 
 // 超级节点
 import {GuessUpsDownsHome} from './redux/guessUpsDowns/home';
@@ -719,5 +720,7 @@ export default combineReducers({
     bizJinseNewsFlash,
     bizNews,
     bizCategory,
-    bizQuotationCoin
+    bizQuotationCoin,
+    // 友情链接
+    bizLinkManagement
 });
