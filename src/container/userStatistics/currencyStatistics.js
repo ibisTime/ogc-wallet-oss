@@ -29,10 +29,15 @@ class currencyStatistics extends React.Component {
         coinDistribution(mtDate(dateFormat(new Date()), 15), coinList[0].key).then(data => {
             let nodeList = [];
             let sourceList = [
-                ['product', '今日存币数量', '今日提币数量', '截止今日币量']
+                ['product', '今日存币数量', '今日提币数量', '今日归集数量', '截止今日币量']
             ];
             for(let i = 0; i < data.length; i++) {
-                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', coinList[0].key), moneyFormat(data[i].todaySymbolOut, '', coinList[0].key), moneyFormat(data[i].totalAmount, '', coinList[0].key)];
+                nodeList[i] = [
+                    data[i].date, moneyFormat(data[i].todaySymbolIn, '', coinList[0].key),
+                    moneyFormat(data[i].todaySymbolOut, '', coinList[0].key),
+                    moneyFormat(data[i].todayCollect, '', coinList[0].key),
+                    moneyFormat(data[i].totalAmount, '', coinList[0].key)
+                ];
             }
             sourceList.push(...nodeList);
             this.setState({
@@ -50,10 +55,15 @@ class currencyStatistics extends React.Component {
             });
             let nodeList = [];
             let sourceList = [
-                ['product', '今日存币数量', '今日提币数量', '截止今日币量']
+                ['product', '今日存币数量', '今日提币数量', '今日归集数量', '截止今日币量']
             ];
             for(let i = 0; i < data.length; i++) {
-                nodeList[i] = [data[i].date, moneyFormat(data[i].todaySymbolIn, '', symbol), moneyFormat(data[i].todaySymbolOut, '', symbol), moneyFormat(data[i].totalAmount, '', symbol)];
+                nodeList[i] = [
+                    data[i].date, moneyFormat(data[i].todaySymbolIn, '', symbol),
+                    moneyFormat(data[i].todaySymbolOut, '', symbol),
+                    moneyFormat(data[i].todayCollect, '', symbol),
+                    moneyFormat(data[i].totalAmount, '', symbol)
+                ];
             }
             sourceList.push(...nodeList);
             this.setState({
@@ -83,7 +93,7 @@ class currencyStatistics extends React.Component {
                 containLabel: true
             },
             tooltip: {},
-            color: ['#5C89FF', '#7C6AF2', '#C95FF2'],
+            color: ['#5C89FF', '#7C6AF2', '#FF5A2A', '#C95FF2'],
             dataset: {
                 source: nodeList
             },
@@ -111,6 +121,15 @@ class currencyStatistics extends React.Component {
                 {
                     type: 'bar',
                     barWidth: 32,
+                    itemStyle: {
+                        normal: {
+                            fontColor: '14px'
+                        }
+                    }
+                },
+                {
+                    type: 'bar',
+                    barWidth: 24,
                     itemStyle: {
                         normal: {
                             fontColor: '14px'

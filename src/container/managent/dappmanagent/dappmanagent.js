@@ -31,12 +31,6 @@ import fetch from 'common/js/fetch';
 class DappManagent extends React.Component {
     render() {
         const fields = [{
-            field: 'category',
-            type: 'select',
-            search: true,
-            key: 'dopen_app_category',
-            title: '应用分类'
-        }, {
             field: 'name',
             title: '应用名称',
             search: true
@@ -54,12 +48,6 @@ class DappManagent extends React.Component {
             keyName: 'key',
             valueName: 'value'
         }, {
-            field: 'action',
-            title: '类型',
-            search: true,
-            key: 'dopen_app_action',
-            type: 'select'
-        }, {
             title: '状态',
             field: 'status',
             type: 'select',
@@ -73,6 +61,9 @@ class DappManagent extends React.Component {
             keyName: 'key',
             valueName: 'value',
             search: true
+        }, {
+            field: 'orderNo',
+            title: '顺序'
         }, {
             field: 'createDatetime',
             title: '创建时间',

@@ -12,332 +12,68 @@ class AppmanagentAddedit extends DetailUtil {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.buttons = [];
-        this.isHideTickets = true;
-        if(!this.code) {
-            this.buttons = [{
-                title: '保存',
-                    handler: (param) => {
-                    if (param.action === '1') {
-                        let data = {
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625650, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    } else if (param.action === '2') {
-                        let data = {
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop,
-                            url: param.url
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625651, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    } else if (param.action === '3') {
-                        param.dappId = this.dappId;
-                        let label = param.label.split(',');
-                        param.label = label.join('||');
-                        let data = {
-                            label: param.label,
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            picIcon: param.picIcon,
-                            picScreenshot: param.picScreenshot,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop,
-                            url: param.url,
-                            desc: param.desc,
-                            company: param.company
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625652, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    } else if (param.action === '4') {
-                        let data = {
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            picIcon: param.picIcon,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop,
-                            url: param.url,
-                            company: param.company
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625653, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    }
-                },
-                check: true,
-                type: 'primary'
-            }, {
-                title: '返回',
-                handler: (param) => {
-                    this.props.history.go(-1);
-                }
-            }];
-        }else if (this.code && !this.view) {
-            this.buttons = [{
-                title: '保存',
-                handler: (param) => {
-                    if (this.action === '1') {
-                        let data = {
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625660, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    } else if (this.action === '2') {
-                        let data = {
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop,
-                            url: param.url
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625661, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    } else if (this.action === '3') {
-                        param.dappId = this.dappId;
-                        let label = param.label.split(',');
-                        param.label = label.join('||');
-                        let data = {
-                            label: param.label,
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            picIcon: param.picIcon,
-                            picScreenshot: param.picScreenshot,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop,
-                            url: param.url,
-                            desc: param.desc,
-                            company: param.company
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625662, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    } else if (this.action === '4') {
-                        let data = {
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop,
-                            url: param.url1
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625663, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    } else if (this.action === '9') {
-                        let data = {
-                            name: param.name,
-                            id: param.id,
-                            picList: param.picList,
-                            category: param.category,
-                            language: param.language,
-                            location: param.location,
-                            orderNo: param.orderNo,
-                            isTop: param.isTop,
-                            url: param.url
-                        };
-                        if(param.ticketsFlag === '1') {
-                            data.ticketsPrice = param.ticketsPrice;
-                            data.ticketsSymbol = param.ticketsSymbol;
-                        }
-                        data.ticketsFlag = param.ticketsFlag;
-                        fetch(625661, data).then(() => {
-                            showSucMsg('操作成功');
-                            setTimeout(() => {
-                                this.props.history.go(-1);
-                            }, 1000);
-                        }).catch(this.props.cancelFetching);
-                    }
-                },
-                check: true,
-                type: 'primary'
-            }, {
-                title: '返回',
-                handler: (param) => {
-                    this.props.history.go(-1);
-                }
-            }];
-        }else if(this.view) {
-            this.buttons = [{
-                title: '返回',
-                handler: () => {
-                    this.props.history.go(-1);
-                }
-            }];
-        }
+        this.state = {
+            ...this.state,
+            isHideTickets: true
+        };
+        this.isFirst = true;
     }
     render() {
         const fields = [{
-            title: '类型',
-            type: 'select',
-            key: 'dopen_app_action',
-            required: true,
-            readonly: this.code,
-            field: 'action',
-            onChange: (v) => {
-                this.setState({dkey: v});
-                if (v === '1') {
-                    this.setState({ category: true, name: true, picList: true });
-                } else if (v === '2') {
-                    this.setState({ category: true, name: true, picList: true, url: true });
-                }
-            }
-        }, {
+        //     title: '类型',
+        //     type: 'select',
+        //     key: 'dopen_app_action',
+        //     required: true,
+        //     readonly: this.code,
+        //     field: 'action',
+        //     onChange: (v) => {
+        //         this.setState({dkey: v});
+        //         if (v === '1') {
+        //             this.setState({ category: true, name: true, picList: true });
+        //         } else if (v === '2') {
+        //             this.setState({ category: true, name: true, picList: true, url: true });
+        //         }
+        //     }
+        // }, {
             field: 'id',
             title: '应用ID',
             hidden: true,
-            integer: true,
-            required: true
-        }, {
-            field: 'category',
-            type: 'select',
-            search: true,
-            key: 'dopen_app_category',
-            title: '应用分类',
-            required: true
+            integer: true
+        // }, {
+        //     field: 'category',
+        //     type: 'select',
+        //     search: true,
+        //     key: 'dopen_app_category',
+        //     title: '应用分类',
+        //     required: true
         }, {
             field: 'name',
             title: '应用名称',
-            search: true,
             required: true
-        }, {
-            field: 'company',
-            title: '应用所属厂商',
-            required: true,
-            hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4'
-        }, {
-            field: 'label',
-            type: 'checkbox',
-            listCode: '625476',
-            keyName: 'id',
-            valueName: 'name',
-            hidden: this.state.dkey !== '3',
-            required: !(this.state.dkey !== '3'),
-            title: '应用标签',
-            params: {type: 0},
-            formatter(v, d) {
-                return v;
-            }
-        }, {
-            field: 'location',
-            type: 'select',
-            required: true,
-            key: 'dopen_app_location',
-            title: '位置'
-        }, {
-            field: 'picIcon',
-            title: '图标',
-            type: 'img',
-            single: true,
-            hidden: this.state.dkey !== '3',
-            required: !(this.state.dkey !== '3')
+        // }, {
+        //     field: 'company',
+        //     title: '应用所属厂商',
+        //     required: true,
+        //     hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4'
+        // }, {
+        //     field: 'label',
+        //     type: 'checkbox',
+        //     listCode: '625476',
+        //     keyName: 'id',
+        //     valueName: 'name',
+        //     hidden: this.state.dkey !== '3',
+        //     required: !(this.state.dkey !== '3'),
+        //     title: '应用标签',
+        //     params: {type: 0},
+        //     formatter(v, d) {
+        //         return v;
+        //     }
+        // }, {
+        //     field: 'location',
+        //     type: 'select',
+        //     required: true,
+        //     key: 'dopen_app_location',
+        //     title: '位置'
         }, {
             field: 'picList',
             title: '列表展示图',
@@ -345,28 +81,8 @@ class AppmanagentAddedit extends DetailUtil {
             single: true,
             required: true
         }, {
-            field: 'picScreenshot',
-            title: '详情截图',
-            type: 'img',
-            hidden: this.state.dkey !== '3',
-            required: !(this.state.dkey !== '3')
-        }, {
             title: 'url地址',
-            field: 'url',
-            hidden: this.state.dkey === '1' || this.state.dkey === '4',
-            required: !(this.state.dkey === '1' || this.state.dkey === '4')
-        }, {
-            title: 'url地址',
-            field: 'url1',
-            type: 'select',
-            key: 'dopen_app_inner_module',
-            hidden: this.state.dkey !== '4',
-            required: !(this.state.dkey !== '4'),
-            formatter(v, d) {
-                if(d.url) {
-                    return d.url;
-                }
-            }
+            field: 'url'
         }, {
             field: 'orderNo',
             title: '次序',
@@ -388,21 +104,34 @@ class AppmanagentAddedit extends DetailUtil {
             required: true,
             onChange: (v) => {
                 if(v === '1') {
-                    this.isHideTickets = false;
+                    this.setState({
+                        isHideTickets: false
+                    });
                 }else {
-                    this.isHideTickets = true;
+                    this.setState({
+                        isHideTickets: true
+                    });
                 }
+            },
+            formatter: (v) => {
+                if(v === '1' && this.isFirst) {
+                    this.isFirst = false;
+                    this.setState({
+                        isHideTickets: false
+                    });
+                }
+                return v;
             }
         }, {
             field: 'ticketsPrice',
             title: '门票价格',
-            hidden: this.isHideTickets,
-            required: !this.isHideTickets
+            hidden: this.state.isHideTickets,
+            required: !this.state.isHideTickets
         }, {
             field: 'ticketsSymbol',
             title: '门票币种',
-            hidden: this.isHideTickets,
-            required: !this.isHideTickets,
+            hidden: this.state.isHideTickets,
+            required: !this.state.isHideTickets,
             type: 'select',
             listCode: '802007',
             params: {
@@ -431,10 +160,8 @@ class AppmanagentAddedit extends DetailUtil {
             value: 'ZH_CN'
         }, {
             field: 'desc',
-            required: !(this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4'),
             type: 'textarea',
             normalArea: true,
-            hidden: this.state.dkey === '1' || this.state.dkey === '2' || this.state.dkey === '4',
             title: '应用详情描述'
         }, {
             title: '状态',
@@ -462,10 +189,14 @@ class AppmanagentAddedit extends DetailUtil {
             code: this.code,
             view: this.view,
             detailCode: 625457,
-            // addCode: 625450,
-            deleteCode: 625451,
-            // editCode: 625452,
-            buttons: this.buttons
+            addCode: 625653,
+            editCode: 625663,
+            beforeSubmit: (params) => {
+                if(params.ticketsFlag === '0') {
+                    params.ticketsPrice = '0';
+                }
+                return true;
+            }
         });
     }
 }
