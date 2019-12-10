@@ -54,7 +54,7 @@ class ReleasePlan extends React.Component {
                     const { releaseDatetime01 } = values;
                     fetch(670021, {
                         codeList: this.state.codeList,
-                        releaseDatetime: moment(releaseDatetime01).format('YYYY-MM-DD HH:mm:ss')
+                        releaseDatetime: moment(releaseDatetime01).format('YYYY-MM-DD')
                     }).then(() => {
                         hasMsg();
                         this.props.getPageData();
@@ -103,7 +103,7 @@ class ReleasePlan extends React.Component {
         }, {
             title: '发放时间',
             field: 'releaseDatetime',
-            type: 'datetime'
+            type: 'date'
         }, {
             title: '发放说明',
             field: 'note',
@@ -177,7 +177,7 @@ class ReleasePlan extends React.Component {
                                     }
                                 ]
                             })(
-                                <DatePicker showTime/>
+                                <DatePicker/>
                             )}
                     </Form.Item>
                 </Form>
