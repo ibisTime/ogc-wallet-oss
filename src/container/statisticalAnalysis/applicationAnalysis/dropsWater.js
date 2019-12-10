@@ -161,21 +161,21 @@ class DropsWater extends React.Component {
             title: '今日存活矿机数'
         }, {
             field: 'minerCount',
-            title: '今日矿机收益总量(AIDA)',
+            title: '今日矿机收益总量(DYJ)',
             render(v) {
-                return (v || v === 0) && moneyFormat(v, '', 'AIDA');
+                return (v || v === 0) && moneyFormat(v, '', 'DYJ');
             }
         }, {
             field: 'inviteCount',
-            title: '今日层级收益总量(AIDA)',
+            title: '今日层级收益总量(DYJ)',
             render(v) {
-                return (v || v === 0) && moneyFormat(v, '', 'AIDA');
+                return (v || v === 0) && moneyFormat(v, '', 'DYJ');
             }
         }, {
             field: 'nodeCount',
-            title: '今日节点收益总量(AIDA)',
+            title: '今日节点收益总量(DYJ)',
             render(v) {
-                return (v || v === 0) && moneyFormat(v, '', 'AIDA');
+                return (v || v === 0) && moneyFormat(v, '', 'DYJ');
             }
         }];
         return(
