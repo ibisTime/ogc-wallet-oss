@@ -17,6 +17,7 @@ import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, dateTimeFormat, moneyFormat, formatImg, formatMoney, isUndefined, moneyParse} from 'common/js/util';
 import asyncComponent from 'component/async-component/async-component';
 import fetch from 'common/js/fetch';
+import '../superNode.css';
 
 const BonusPoolRecordIntoNow = asyncComponent(() => import('./bonusPoolRecordIntoNow/bonusPoolRecordIntoNow'));
 const BonusPoolRecordIntoPrev = asyncComponent(() => import('./bonusPoolRecordIntoPrev/bonusPoolRecordIntoPrev'));
@@ -40,7 +41,10 @@ class BonusPool extends React.Component {
         this.state = {
             // 调整弹窗是否显示
             adjustPopupShow: false,
-            totalAmountData: {},
+            totalAmountData: {
+                totalUsdtPrice: 0,
+                totalCnyPrice: 0
+            },
             selectedData: {},
             adjustPopupFlag: false
         };
@@ -149,7 +153,7 @@ class BonusPool extends React.Component {
             field: 'remainCount',
             title: '上期遗留资产',
             render: (v, data) => {
-                return <span>{moneyFormat(v, '', data.symbol)}<samp className="tc_purple" onClick={() => this.onLeftOver(data.id)}>  遗留记录</samp></span>;
+                return <span>{moneyFormat(v, '', data.symbol)}<samp className="tc_purple" onClick={() => this.onLeftOver(data.id)}>  遗留记录</samp ></span>;
             }
         }, {
             field: 'totalAdjustCount',
@@ -166,79 +170,81 @@ class BonusPool extends React.Component {
         }];
 
         return (
-            <div className="superNodeBonusPool-wrapper">
-                <div className="superNodeBonusPool-section" style={{marginBottom: '30px'}}>
-                    <div className="superNodeBonusPool-property">
-                        <samp>总资产折合</samp>
-                        <p>{(totalAmountData.totalUsdtPrice / Math.pow(10, 8)).toFixed(4)} USDT<i>={(parseFloat(totalAmountData.totalCnyPrice).toFixed(2))}CNY</i></p>
+            <div className="superNode-wrapper">
+                <div className="superNodeBonusPool-wrapper">
+                    <div className="superNodeBonusPool-section">
+                        <div className="superNodeBonusPool-property">
+                            <samp>总资产折合</samp>
+                            <p>{(totalAmountData.totalUsdtPrice / Math.pow(10, 8)).toFixed(4)} USDT<i>={(parseFloat(totalAmountData.totalCnyPrice).toFixed(2))}CNY</i></p>
+                        </div>
+                        <div className="superNodeBonusPool-property-tab">
+                            {
+                                this.props.buildList({
+                                    fields,
+                                    pageCode: 610661,
+                                    rowKey: 'id',
+                                    noPagination: true,
+                                    noSelect: true,
+                                    searchParams: {
+                                        type: 'snode'
+                                    }
+                                })
+                            }
+                        </div>
                     </div>
-                    <div className="superNodeBonusPool-property-tab">
-                        {
-                            this.props.buildList({
-                                fields,
-                                pageCode: 610661,
-                                rowKey: 'id',
-                                noPagination: true,
-                                noSelect: true,
-                                searchParams: {
-                                    type: 'snode'
-                                }
-                            })
-                        }
+                    <div className="superNodeBonusPool-section" style={{marginTop: '40px'}}>
+                        <Tabs defaultActiveKey="1">
+                            <TabPane tab="本期入池记录" key="1">
+                                <Layout>
+                                    <Content>
+                                        <Switch>
+                                            <Route path='/superNode/bonusPool' exact component={BonusPoolRecordIntoNow}></Route>
+                                        </Switch>
+                                    </Content>
+                                </Layout>
+                            </TabPane>
+                            <TabPane tab="上期出池记录" key="2">
+                                <Layout>
+                                    <Content>
+                                        <Switch>
+                                            <Route path='/superNode/bonusPool' exact component={BonusPoolRecordIntoPrev}></Route>
+                                        </Switch>
+                                    </Content>
+                                </Layout>
+                            </TabPane>
+                        </Tabs>
                     </div>
-                </div>
-                <div className="superNodeBonusPool-section">
-                    <Tabs defaultActiveKey="1">
-                        <TabPane tab="本期入池记录" key="1">
-                            <Layout>
-                                <Content>
-                                    <Switch>
-                                        <Route path='/superNode/bonusPool' exact component={BonusPoolRecordIntoNow}></Route>
-                                    </Switch>
-                                </Content>
-                            </Layout>
-                        </TabPane>
-                        <TabPane tab="上期出池记录" key="2">
-                            <Layout>
-                                <Content>
-                                    <Switch>
-                                        <Route path='/superNode/bonusPool' exact component={BonusPoolRecordIntoPrev}></Route>
-                                    </Switch>
-                                </Content>
-                            </Layout>
-                        </TabPane>
-                    </Tabs>
-                </div>
-                <div className={adjustPopupShow ? 'adjust-popup' : 'adjust-popup hidden'}>
-                    <div className="adjust-popup-mask"></div>
-                    <div className="adjust-popup-wrap">
-                        <Form onSubmit={this.onAdjustSubmit} className="login-form">
-                            <div className="adjust-popup-title">
-                                <p>调整</p>
-                                <Icon type="close-circle" onClick={() => this.onAdjustCancel()}/>
-                            </div>
-                            <div className={adjustPopupFlag ? 'adjust-popup-content error' : 'adjust-popup-content'}>
-                                <div className="text">币种: {selectedData.symbol}</div>
-                                <div className="text">累计调额: {moneyFormat(selectedData.totalAdjustCount, '', 'ETH')}{selectedData.symbol}</div>
-                                <Form.Item label="额度">
-                                    {getFieldDecorator('adjustCount', {
-                                        rules: [{
-                                            validator: this.validatorAdjustCount
-                                        }]
-                                    })(
-                                        <Input
-                                            type="text"
-                                            placeholder=""
-                                        />
-                                    )}
-                                </Form.Item>
-                                <div className="warn">正数表示加额度，负数表示减额度</div>
-                            </div>
-                            <div className="adjust-popup-button">
-                                <Button onClick={() => this.onAdjustCancel()}>返回</Button>
-                                <Button className={{marginLeft: '82px'}} type="primary" htmlType="submit">保存</Button>
-                            </div>
-                        </Form>
+                    <div className={adjustPopupShow ? 'adjust-popup' : 'adjust-popup hidden'}>
+                        <div className="adjust-popup-mask"></div>
+                        <div className="adjust-popup-wrap">
+                            <Form onSubmit={this.onAdjustSubmit} className="login-form">
+                                <div className="adjust-popup-title">
+                                    <p>调整</p>
+                                    <Icon type="close-circle" onClick={() => this.onAdjustCancel()}/>
+                                </div>
+                                <div className={adjustPopupFlag ? 'adjust-popup-content error' : 'adjust-popup-content'}>
+                                    <div className="text">币种: {selectedData.symbol}</div>
+                                    <div className="text">累计调额: {moneyFormat(selectedData.totalAdjustCount, '', 'ETH')}{selectedData.symbol}</div>
+                                    <Form.Item label="额度">
+                                        {getFieldDecorator('adjustCount', {
+                                            rules: [{
+                                                validator: this.validatorAdjustCount
+                                            }]
+                                        })(
+                                            <Input
+                                                type="text"
+                                                placeholder=""
+                                            />
+                                        )}
+                                    </Form.Item>
+                                    <div className="warn">正数表示加额度，负数表示减额度</div>
+                                </div>
+                                <div className="adjust-popup-button">
+                                    <Button onClick={() => this.onAdjustCancel()}>返回</Button>
+                                    <Button className={{marginLeft: '82px'}} type="primary" htmlType="submit">保存</Button>
+                                </div>
+                            </Form>
+                        </div>
                     </div>
                 </div>
             </div>

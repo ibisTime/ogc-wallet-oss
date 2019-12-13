@@ -1660,6 +1660,86 @@ const ROUTES = [
     {
         path: '/biz/linkManagement/addedit',
         component: asyncComponent(() => import('container/biz/linkManagement/linkManagement/linkManagement-addedit'))
+    },
+    // 分红池
+    {
+        path: '/superNode/bonusPool',
+        component: asyncComponent(() => import('container/superNode/bonusPool/bonusPool'))
+    },
+    {
+        path: '/superNode/periods',
+        component: asyncComponent(() => import('container/superNode/periods/periods'))
+    },
+    {
+        path: '/superNode/node',
+        component: asyncComponent(() => import('container/superNode/node/node'))
+    },
+    {
+        path: '/superNode/customer',
+        component: asyncComponent(() => import('container/superNode/customer/customer'))
+    },
+    {
+        path: '/superNode/nperCustomer',
+        component: asyncComponent(() => import('container/superNode/customer/nperCustomer'))
+    },
+    // 投票分布
+    {
+        path: '/superNode/voteDistribution',
+        component: asyncComponent(() => import('container/superNode/node/voteDistribution'))
+    },
+    // 投票记录
+    {
+        path: '/superNode/voteRecord',
+        component: asyncComponent(() => import('container/superNode/node/voteRecord'))
+    },
+    // 回购记录
+    {
+        path: '/superNode/buyBackRecord',
+        component: asyncComponent(() => import('container/superNode/node/buyBackRecord'))
+    },
+    // 收益记录
+    {
+        path: '/superNode/incomeRecord',
+        component: asyncComponent(() => import('container/superNode/customer/incomeRecord'))
+    },
+    // 配置
+    {
+        path: '/superNode/setting',
+        component: asyncComponent(() => import('container/superNode/setting/setting'))
+    },
+    {
+        path: '/superNode/setting/nodeRateEdit',
+        component: asyncComponent(() => import('container/superNode/setting/nodeRateEdit'))
+    },
+    {
+        path: '/superNode/setting/edit',
+        component: asyncComponent(() => import('container/superNode/setting/rules-addedit'))
+    },
+    // 调整
+    {
+        path: '/superNode/bonusPool/adjustment',
+        component: asyncComponent(() => import('container/superNode/bonusPool/adjustment/adjustment'))
+    },
+    // 遗留
+    {
+        path: '/superNode/bonusPool/leftOver',
+        component: asyncComponent(() => import('container/superNode/bonusPool/leftOver/leftOver'))
+    },
+    {
+        path: '/superNode/destruction',
+        component: asyncComponent(() => import('container/superNode/destructionPond/destructionPond'))
+    },
+    {
+        path: '/superNode/shareOutBonus',
+        component: asyncComponent(() => import('container/superNode/shareOutBonus/shareOutBonus'))
+    },
+    {
+        path: '/superNode/shareCustomer',
+        component: asyncComponent(() => import('container/superNode/shareOutBonus/shareCustomer'))
+    },
+    {
+        path: '/superNode/revenueBreakdown',
+        component: asyncComponent(() => import('container/superNode/shareOutBonus/revenueBreakdown'))
     }
 ];
 

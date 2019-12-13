@@ -26,6 +26,49 @@ class Customer extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.buttons = [{
+            code: 'goBack',
+            name: '返回',
+            handler: () => {
+                this.props.history.go(-1);
+            }
+        }, {
+            code: 'incomeRecord',
+            name: '收益记录',
+            handler: (selectedRowKeys, selectedRows) => {
+                if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                } else {
+                    this.props.history.push(`/superNode/incomeRecord?userId=${selectedRows[0].userId}`);
+                }
+            }
+        }, {
+            code: 'voteRecord',
+            name: '投票记录',
+            handler: (selectedRowKeys, selectedRows) => {
+                if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                } else {
+                    this.props.history.push(`/superNode/voteRecord?userId=${selectedRows[0].userId}`);
+                }
+            }
+        }, {
+            code: 'buyBackRecord',
+            name: '赎回记录',
+            handler: (selectedRowKeys, selectedRows) => {
+                if (!selectedRowKeys.length) {
+                    showWarnMsg('请选择记录');
+                } else if (selectedRowKeys.length > 1) {
+                    showWarnMsg('请选择一条记录');
+                } else {
+                    this.props.history.push(`/superNode/buyBackRecord?userId=${selectedRows[0].userId}`);
+                }
+            }
+        }];
     }
     render() {
         const fields = [{
@@ -101,7 +144,11 @@ class Customer extends React.Component {
                 {
                     this.props.buildList({
                         fields,
-                        pageCode: 610640
+                        pageCode: 610640,
+                        searchParams: {
+                            nodePlanCode: this.code
+                        },
+                        buttons: this.buttons
                     })
                 }
             </div>

@@ -20,7 +20,8 @@ const Login = asyncComponent(() => import('container/login/login'));
 const Dashboard = asyncComponent(() => import('component/dashboard/dashboard'));
 
 // 集成生态-超级节点
-const SuperNode = asyncComponent(() => import('container/superNode/superNode'));
+// const SuperNode = asyncComponent(() => import('container/superNode/superNode'));
+// <Route path='/superNode' component={SuperNode}/>
 
 // 集成生态-闪兑
 const FlashExchange = asyncComponent(() => import('container/flashManagement/flashManagement'));
@@ -39,15 +40,17 @@ ReactDOM.render(
         <Provider store={store}>
             <BrowserRouter>
                 <div style={{height: '100%'}}>
-                    <AuthRoute></AuthRoute>
+                    <AuthRoute/>
                     <Switch>
-                        <Route path='/login' component={Login}></Route>
-                        <Route path='/superNode' component={SuperNode}></Route>
-                        <Route path='/flashManagement' component={FlashExchange}></Route>
-                        <Route path='/guessUpsDowns' component={GuessUpsDowns}></Route>
-                        <Route path='/starLucky' component={StarLucky}></Route>
-                        <Route path='/card' component={Card}></Route>
-                        <Route component={Dashboard}></Route>
+                        <Route
+                            path='/login'
+                            component={Login}
+                        />
+                        <Route path='/flashManagement' component={FlashExchange}/>
+                        <Route path='/guessUpsDowns' component={GuessUpsDowns}/>
+                        <Route path='/starLucky' component={StarLucky}/>
+                        <Route path='/card' component={Card}/>
+                        <Route component={Dashboard}/>
                     </Switch>
                     <BackTop/>
                 </div>

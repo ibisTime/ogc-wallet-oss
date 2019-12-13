@@ -3,7 +3,7 @@ import {Form, Icon, Input, Button} from 'antd';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {login} from '@redux/user';
-import {setSystem} from 'common/js/util';
+import {setSystem, clearUser} from 'common/js/util';
 import './login.css';
 import loginLeft from '../../images/login-left.png';
 
@@ -27,6 +27,7 @@ class Login extends React.Component {
         });
     };
     async componentDidMount() {
+        clearUser();
         await setSystem();
         const loginPic = localStorage.getItem('loginPic');
         this.setState({

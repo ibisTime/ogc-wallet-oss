@@ -317,6 +317,9 @@ import {SuperNodeIncomeRecord} from './redux/superNode/incomeRecord';
 import {SuperNodeSetting} from './redux/superNode/setting';
 import {SuperNodeLeftOver} from './redux/superNode/leftOver';
 import {SuperNodeAdjustment} from './redux/superNode/adjustment';
+import {SuperNodeShareOutBonus} from './redux/superNode/shareOutBonus';
+import {SuperNodeShareCustomer} from './redux/superNode/shareCustomer';
+import {SuperNodeRevenueBreakdown} from './redux/superNode/revenueBreakdown';
 
 // 统计分析-- 监控管理 - triggers监控
 import { timerMonitor } from './redux/timerManager/timerMonitor/timerMonitor';
@@ -626,6 +629,9 @@ export default combineReducers({
     SuperNodeSetting,
     SuperNodeLeftOver,
     SuperNodeAdjustment,
+    SuperNodeShareOutBonus,
+    SuperNodeShareCustomer,
+    SuperNodeRevenueBreakdown,
     destructionPondIn,
     destructionPondOut,
     // 统计分析

@@ -266,7 +266,7 @@ module.exports = {
         // in `package.json`, in which case it will be the pathname of that URL.
         new webpack.optimize.CommonsChunkPlugin({
             name: ['common_list', 'common_detail'],
-            filename: '[name].js'
+            filename: '[name].[chunkhash:8].js'
         }),
         new InterpolateHtmlPlugin(env.raw),
         // Generates an `index.html` file with the <script> injected.
