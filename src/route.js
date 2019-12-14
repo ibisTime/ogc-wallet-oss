@@ -1729,6 +1729,75 @@ const ROUTES = [
     {
         path: '/user/queryResults',
         component: asyncComponent(() => import('container/user/customer/queryResults'))
+    },
+    // 抢车位
+    {
+        path: '/parkingSpace/sessionManagement',
+        component: asyncComponent(() => import('container/parkingSpace/sessionManagement/sessionManagement/sessionManagement'))
+    },
+    {
+        path: '/parkingSpace/sessionManagement/addedit',
+        component: asyncComponent(() => import('container/parkingSpace/sessionManagement/sessionManagement/sessionManagement-addedit'))
+    },
+    {
+        path: '/parkingSpace/coinRecords',
+        component: asyncComponent(() => import('container/parkingSpace/sessionManagement/coinRecords/coinRecords'))
+    },
+    {
+        path: '/parkingSpace/coinRecords/addedit',
+        component: asyncComponent(() => import('container/parkingSpace/sessionManagement/coinRecords/coinRecords-addedit'))
+    },
+    {
+        path: '/parkingSpace/userSpace',
+        component: asyncComponent(() => import('container/parkingSpace/sessionManagement/userSpace/userSpace'))
+    },
+    {
+        path: '/parkingSpace/userSpace/addedit',
+        component: asyncComponent(() => import('container/parkingSpace/sessionManagement/userSpace/userSpace-addedit'))
+    },
+    {
+        path: '/parkingSpace/vehicleManagement',
+        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/vehicleManagement/vehicleManagement'))
+    },
+    {
+        path: '/parkingSpace/vehicleManagement/addedit',
+        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/vehicleManagement/vehicleManagement-addedit'))
+    },
+    {
+        path: '/parkingSpace/buyRecord',
+        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/buyRecord/buyRecord'))
+    },
+    {
+        path: '/parkingSpace/userVehicle',
+        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/userVehicle/userVehicle'))
+    },
+    {
+        path: '/parkingSpace/userVehicle',
+        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/userVehicle/userVehicle'))
+    },
+    {
+        path: '/parkingSpace/chengguanUser',
+        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/chengguanUser/chengguanUser'))
+    },
+    {
+        path: '/parkingSpace/parkingRecord',
+        component: asyncComponent(() => import('container/parkingSpace/parkingRecord/parkingRecord/parkingRecord'))
+    },
+    {
+        path: '/parkingSpace/noahCarRecord',
+        component: asyncComponent(() => import('container/parkingSpace/parkingRecord/noahCarRecord/noahCarRecord'))
+    },
+    {
+        path: '/parkingSpace/stickRecord',
+        component: asyncComponent(() => import('container/parkingSpace/parkingRecord/stickRecord/stickRecord'))
+    },
+    {
+        path: '/parkingSpace/assemblyRecord',
+        component: asyncComponent(() => import('container/parkingSpace/parkingRecord/assemblyRecord/assemblyRecord'))
+    },
+    {
+        path: '/parkingSpace/returnsQuery',
+        component: asyncComponent(() => import('container/parkingSpace/returnsQuery/returnsQuery/returnsQuery'))
     }
 ];
 

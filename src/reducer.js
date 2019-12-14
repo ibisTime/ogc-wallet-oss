@@ -247,6 +247,20 @@ import {CardCardVolume} from './redux/card/cardVolume';
 import {CardcardLog} from './redux/card/cardLog';
 import {CardConfiguration} from './redux/card/cardConfiguration';
 
+// 抢车位
+import {parkingSpaceSessionManagement} from './redux/parkingSpace/sessionManagement/sessionManagement';
+import {parkingSpaceCoinRecords} from './redux/parkingSpace/sessionManagement/coinRecords';
+import {parkingSpaceUserSpace} from './redux/parkingSpace/sessionManagement/userSpace';
+import {parkingSpaceVehicleManagement} from './redux/parkingSpace/vehicleManagement/vehicleManagement';
+import {parkingSpaceUserVehicle} from './redux/parkingSpace/vehicleManagement/userVehicle';
+import {parkingSpaceBuyRecord} from './redux/parkingSpace/vehicleManagement/buyRecord';
+import {parkingSpaceChengguanUser} from './redux/parkingSpace/vehicleManagement/chengguanUser';
+import {parkingSpaceParkingRecord} from './redux/parkingSpace/parkingRecord/parkingRecord';
+import {parkingSpaceNoahCarRecord} from './redux/parkingSpace/parkingRecord/noahCarRecord';
+import {parkingSpaceStickRecord} from './redux/parkingSpace/parkingRecord/stickRecord';
+import {parkingSpaceAssemblyRecord} from './redux/parkingSpace/parkingRecord/assemblyRecord';
+import {parkingSpaceReturnsQuery} from './redux/parkingSpace/returnsQuery/returnsQuery';
+
 export default combineReducers({
     user,
     menu,
@@ -469,5 +483,18 @@ export default combineReducers({
     CardSecretKey,
     CardCardVolume,
     CardcardLog,
-    CardConfiguration
+    CardConfiguration,
+    // 抢车位
+    parkingSpaceSessionManagement,
+    parkingSpaceCoinRecords,
+    parkingSpaceUserSpace,
+    parkingSpaceVehicleManagement,
+    parkingSpaceUserVehicle,
+    parkingSpaceBuyRecord,
+    parkingSpaceChengguanUser,
+    parkingSpaceParkingRecord,
+    parkingSpaceNoahCarRecord,
+    parkingSpaceStickRecord,
+    parkingSpaceAssemblyRecord,
+    parkingSpaceReturnsQuery
 });
