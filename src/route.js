@@ -1806,6 +1806,10 @@ const ROUTES = [
     {
         path: '/parkingSpace/userSpaceStatistical/addedit',
         component: asyncComponent(() => import('container/parkingSpace/userSpaceStatistical/userSpaceStatistical/userSpaceStatistical-addedit'))
+    },
+    {
+        path: '/parkingSpace/configuration',
+        component: asyncComponent(() => import('container/parkingSpace/configuration/configuration'))
     }
 ];
 

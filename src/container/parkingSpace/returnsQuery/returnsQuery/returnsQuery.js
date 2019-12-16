@@ -18,7 +18,6 @@ import {
     getCoinList,
     getUserId
 } from 'common/js/util';
-import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -33,157 +32,64 @@ import fetch from 'common/js/fetch';
 class ReturnsQuery extends React.Component {
     render() {
         const fields = [{
-            title: '下单人(手机号/邮箱)',
-            field: 'buyUser',
-            render(v, data) {
-                if (data.user) {
-                    return data.user.loginName + `(${data.user.realName ? data.user.realName : '-'})`;
-                }
-                return '-';
-            },
+            field: 'userId',
+            title: '用户',
             type: 'select',
             pageCode: '805120',
+            params: {
+                kind: 'C'
+            },
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
-            search: true
+            search: true,
+            render(v, d) {
+                return v && d.user ? `${d.user.nickname}-${d.user.loginName}` : '-';
+            }
         }, {
-            field: 'receiveBank',
-            title: '收款方式'
-        }, {
-            field: 'receiveCardNo',
-            title: '卡号'
-        }, {
-            field: 'tradeCoin',
-            title: '币种',
+            title: '收益类型',
+            field: 'type',
+            key: 'car_income_type',
             type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
-            valueName: 'value',
             search: true
         }, {
-            title: '单价',
-            field: 'tradePrice'
+            title: '收益子类型',
+            field: 'subType',
+            key: 'car_income_sub_type',
+            type: 'select',
+            search: true
         }, {
-            title: '数量',
-            field: 'count',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin);
-            }
-        }, {
-            title: '总金额',
-            field: 'tradeAmount'
-        }, {
-            title: '手续费',
-            field: 'fee',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin);
-            }
-        }, {
-            title: '状态',
+            title: '收益状态',
             field: 'status',
+            key: 'car_income_status',
             type: 'select',
-            data: [{
-                key: '0',
-                value: '待支付'
-            }, {
-                key: '1',
-                value: '已支付'
-            }],
-            keyName: 'key',
-            valueName: 'value',
             search: true
         }, {
-            field: 'createDatetime',
-            title: '下单时间',
+            title: '收益数量',
+            field: 'incomeCount',
+            render(v, d) {
+                return v && `${v}(${d.symbol})`;
+            }
+        }, {
+            title: '收益时间',
+            field: 'incomeTime',
             type: 'datetime'
         }, {
-            title: '附言',
-            field: 'postscript'
+            title: '结算数量',
+            field: 'settleCount'
         }, {
-            title: '备注',
-            field: 'remark'
+            title: '结算时间',
+            field: 'settleTime',
+            type: 'datetime'
+        }, {
+            title: '创建时间',
+            field: 'createTime',
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,
-            pageCode: 625285,
-            searchParams: {
-                type: '0',
-                statusList: ['0', '1']
-            },
-            singleSelect: false,
-            btnEvent: {
-                sale: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else {
-                        let codeList = [];
-                        for (let i = 0, len = selectedRows.length; i < len; i++) {
-                            if (selectedRows[i].status !== '1') {
-                                showWarnMsg(selectedRows[i].code + '不是已支付的订单');
-                                codeList = [];
-                                return;
-                            }
-                            codeList.push(selectedRows[i].code);
-                        }
-                        if (codeList.length > 0) {
-                            Modal.confirm({
-                                okText: '确认',
-                                cancelText: '取消',
-                                content: `确定到账？此操作将会释放币`,
-                                onOk: () => {
-                                    this.props.doFetching();
-                                    return fetch(625274, {
-                                        codeList: codeList,
-                                        result: '1',
-                                        userId: getUserId()
-                                    }).then(() => {
-                                        this.props.getPageData();
-                                        showSucMsg('操作成功');
-                                    }).catch(() => {
-                                        this.props.cancelFetching();
-                                    });
-                                }
-                            });
-                        }
-                    }
-                },
-                noSale: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else {
-                        let codeList = [];
-                        for (let i = 0, len = selectedRows.length; i < len; i++) {
-                            if (selectedRows[i].status !== '1') {
-                                showWarnMsg(selectedRows[i].code + '不是已支付的订单');
-                                codeList = [];
-                                return;
-                            }
-                            codeList.push(selectedRows[i].code);
-                        }
-                        if (codeList.length > 0) {
-                            Modal.confirm({
-                                okText: '确认',
-                                cancelText: '取消',
-                                content: `确定未到账？平台将会取消订单`,
-                                onOk: () => {
-                                    this.props.doFetching();
-                                    return fetch(625274, {
-                                        codeList: codeList,
-                                        result: '0',
-                                        userId: getUserId()
-                                    }).then(() => {
-                                        this.props.getPageData();
-                                        showSucMsg('操作成功');
-                                    }).catch(() => {
-                                        this.props.cancelFetching();
-                                    });
-                                }
-                            });
-                        }
-                    }
-                }
-            }
+            rowKey: 'id',
+            pageCode: 200203
         });
     }
 }

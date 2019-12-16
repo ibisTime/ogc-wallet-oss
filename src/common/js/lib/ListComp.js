@@ -148,7 +148,7 @@ export default class ListComponent extends React.Component {
                 }));
             }
             if (!f.data) {
-                f.data = this.props.searchData[f.field];
+                f.data = this.props.searchData[f.field.toString()];
                 this.first && this.getSelectData(f);
             } else if (!this.props.searchData[f.field]) {
                 this.props.setSearchData({data: f.data, key: f.field});

@@ -48,7 +48,13 @@ class ParkingRecord extends React.Component {
             searchName: 'keyword',
             search: true,
             render(v, d) {
-                return v && d.user ? `${d.user.nickname}-${d.user.loginName}` : '-';
+                return v && d.carUser ? `${d.carUser.nickname}-${d.carUser.loginName}` : '-';
+            }
+        }, {
+            field: 'carName',
+            title: '车名称',
+            render(v, d) {
+                return d && d.car.name;
             }
         }, {
             field: 'parkCode',
@@ -66,11 +72,14 @@ class ParkingRecord extends React.Component {
             searchName: 'keyword',
             search: true,
             render(v, d) {
-                return v && d.user ? `${d.user.nickname}-${d.user.loginName}` : '-';
+                return v && d.parkUser ? `${d.parkUser.nickname}-${d.parkUser.loginName}` : '-';
             }
         }, {
-            field: 'status',
-            title: '状态'
+            field: 'parkOrderNo',
+            title: '车位号',
+            render(v, d) {
+                return d && d.park.orderNo;
+            }
         }, {
             title: '创建时间',
             field: 'createDatetime',
