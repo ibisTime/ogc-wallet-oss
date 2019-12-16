@@ -1798,6 +1798,14 @@ const ROUTES = [
     {
         path: '/parkingSpace/returnsQuery',
         component: asyncComponent(() => import('container/parkingSpace/returnsQuery/returnsQuery/returnsQuery'))
+    },
+    {
+        path: '/parkingSpace/userSpaceStatistical',
+        component: asyncComponent(() => import('container/parkingSpace/userSpaceStatistical/userSpaceStatistical/userSpaceStatistical'))
+    },
+    {
+        path: '/parkingSpace/userSpaceStatistical/addedit',
+        component: asyncComponent(() => import('container/parkingSpace/userSpaceStatistical/userSpaceStatistical/userSpaceStatistical-addedit'))
     }
 ];
 
