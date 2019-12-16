@@ -317,7 +317,11 @@ export default class ListComponent extends React.Component {
                     result[v.field] = params[v.field] ? params[v.field].format(format) : params[v.field];
                 }
             } else {
-                result[v.field] = params[v.field];
+                if(v.searchName) {
+                    result[v.searchName] = params[v.field];
+                }else {
+                    result[v.field] = params[v.field];
+                }
             }
         });
         return result;

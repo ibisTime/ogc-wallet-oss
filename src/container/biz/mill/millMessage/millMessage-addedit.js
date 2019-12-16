@@ -43,6 +43,10 @@ class MillMessageAddedit extends DetailUtil {
             title: '日收益（DYJ）',
             required: true
         }, {
+            field: 'stockTotal',
+            title: '总库存',
+            required: true
+        }, {
             field: 'orderNo',
             title: '显示顺序',
             required: true,

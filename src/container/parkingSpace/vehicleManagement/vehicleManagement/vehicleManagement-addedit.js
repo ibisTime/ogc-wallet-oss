@@ -25,9 +25,8 @@ class VehicleManagementAddedit extends DetailUtil {
         }, {
             field: 'level',
             title: '车辆等级',
-            type: 'select',
-            key: 'car_park_level_limit',
-            required: true
+            required: true,
+            number: true
         }, {
             field: 'symbolPrice',
             title: '标价币种',

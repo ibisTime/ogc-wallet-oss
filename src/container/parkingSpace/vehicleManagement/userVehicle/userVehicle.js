@@ -75,9 +75,10 @@ class UserVehicle extends React.Component {
         }, {
             field: 'level',
             title: '车辆等级',
-            key: 'car_park_level_limit',
-            type: 'select',
-            search: true
+            search: true,
+            render(v) {
+                return `${v}级`;
+            }
         }, {
             field: 'status',
             title: '车辆状态',

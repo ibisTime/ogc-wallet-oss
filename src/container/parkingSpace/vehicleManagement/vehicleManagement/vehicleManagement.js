@@ -40,12 +40,12 @@ class VehicleManagement extends React.Component {
             title: '产品图片',
             type: 'img'
         }, {
-            field: 'levelStr',
+            field: 'level',
             title: '车辆等级',
-            key: 'car_park_level_limit',
-            type: 'select',
-            searchName: 'level',
-            search: true
+            search: true,
+            render(v) {
+                return `${v}级`;
+            }
         }, {
             field: 'symbolPrice',
             title: '标价币种',

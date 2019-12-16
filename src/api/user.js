@@ -69,6 +69,6 @@ export function millCancelNode(id) {
 }
 
 // 查询用户列表
-export function findUserList(start, limit, loginName) {
-    return fetch(805120, {start, limit, loginName});
+export function findUserList(start, limit, mobile) {
+    return fetch(805120, {start, limit, mobile});
 }
