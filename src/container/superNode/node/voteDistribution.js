@@ -124,6 +124,12 @@ class VoteDistribution extends React.Component {
                             nodeCode: this.code
                         },
                         buttons: [{
+                            code: 'goBack',
+                            name: '返回',
+                            handler: (selectedRowKeys, selectedRows) => {
+                                this.props.history.push(`/superNode/node`);
+                            }
+                        }, {
                             code: 'voteRecord',
                             name: '投票记录',
                             handler: (selectedRowKeys, selectedRows) => {
@@ -146,12 +152,6 @@ class VoteDistribution extends React.Component {
                                 } else {
                                     this.props.history.push(`/superNode/buyBackRecord?code=${selectedRowKeys[0]}`);
                                 }
-                            }
-                        }, {
-                            code: 'goBack',
-                            name: '返回',
-                            handler: (selectedRowKeys, selectedRows) => {
-                                this.props.history.push(`/superNode/node`);
                             }
                         }]
                     })

@@ -54,7 +54,7 @@ class BonusPool extends React.Component {
         // 直接请求
         Promise.all([
             // 分红池总额总资产折合
-            fetch(610663)
+            fetch(610813)
         ]).then(([totalAmountData]) => {
             this.setState({
                 totalAmountData
@@ -181,7 +181,7 @@ class BonusPool extends React.Component {
                             {
                                 this.props.buildList({
                                     fields,
-                                    pageCode: 610661,
+                                    pageCode: 610811,
                                     rowKey: 'id',
                                     noPagination: true,
                                     noSelect: true,

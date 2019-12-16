@@ -55,6 +55,7 @@ import {userCustomerEntrustQuery} from './redux/user/customer/customer-entrustQu
 import {userCustomerLedgerQuery} from './redux/user/customer/customer-ledgerQuery';
 import {userCustomerAccountSummary} from './redux/user/customer/customer-accountSummary';
 import {userCustomerIdentify} from './redux/user/customer/identify';
+import {userTokenManagement} from './redux/user/tokenManagement/tokenManagement';
 
 // 渠道商管理
 // 渠道商管理
@@ -320,6 +321,7 @@ import {SuperNodeAdjustment} from './redux/superNode/adjustment';
 import {SuperNodeShareOutBonus} from './redux/superNode/shareOutBonus';
 import {SuperNodeShareCustomer} from './redux/superNode/shareCustomer';
 import {SuperNodeRevenueBreakdown} from './redux/superNode/revenueBreakdown';
+import {SuperNodeDividendRecord} from './redux/superNode/dividendRecord';
 
 // 统计分析-- 监控管理 - triggers监控
 import { timerMonitor } from './redux/timerManager/timerMonitor/timerMonitor';
@@ -382,6 +384,7 @@ import {marketInvitedToSend} from './redux/marketingManagement/marketingActiviti
 import {marketPrepaidPhoneToSend} from './redux/marketingManagement/marketingActivities/prepaidPhoneToSend';
 import {marketRightsManagement} from './redux/marketingManagement/regularActivities/rightsManagement';
 import {marketReleasePlan} from './redux/marketingManagement/regularActivities/releasePlan';
+import {marketMarkReleasePlan} from './redux/marketingManagement/markReleasePlan/markReleasePlan';
 import {marketInvitedPendingOrder} from './redux/marketingManagement/welfare/pendingOrder';
 import {marketInvitedApprovalOrder} from './redux/marketingManagement/welfare/approvalOrder';
 import {marketInvitedNotOrder} from './redux/marketingManagement/welfare/notOrder';
@@ -442,6 +445,7 @@ export default combineReducers({
     userCustomerLedgerQuery,
     userCustomerAccountSummary,
     userCustomerIdentify,
+    userTokenManagement,
     // 黑名单管理
     userCustomerBlackList,
     // kyc审核
@@ -632,6 +636,7 @@ export default combineReducers({
     SuperNodeShareOutBonus,
     SuperNodeShareCustomer,
     SuperNodeRevenueBreakdown,
+    SuperNodeDividendRecord,
     destructionPondIn,
     destructionPondOut,
     // 统计分析
@@ -700,6 +705,7 @@ export default combineReducers({
     marketPrepaidPhoneToSend,
     marketRightsManagement,
     marketReleasePlan,
+    marketMarkReleasePlan,
     marketInvitedPendingOrder,
     marketInvitedApprovalOrder,
     marketInvitedNotOrder,

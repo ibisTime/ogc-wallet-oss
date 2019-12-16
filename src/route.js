@@ -313,6 +313,14 @@ const ROUTES = [
         path: '/user/kycCheck/addedit',
         component: asyncComponent(() => import('container/user/kycCheck/kycCheck-addedit'))
     },
+    {
+        path: '/user/tokenManagement',
+        component: asyncComponent(() => import('container/user/tokenManagement/tokenManagement'))
+    },
+    {
+        path: '/user/tokenManagement/addedit',
+        component: asyncComponent(() => import('container/user/tokenManagement/tokenManagement-addedit'))
+    },
     // 资料审核
     {
         path: '/user/dataCheck',
@@ -1488,6 +1496,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/marketingManagement/regularActivities/rightsManagement/rightsManagement-addedit'))
     },
     {
+        path: '/marketingManagement/markReleasePlan',
+        component: asyncComponent(() => import('container/marketingManagement/markReleasePlan/markReleasePlan'))
+    },
+    {
         path: '/marketingManagement/dropManagement',
         component: asyncComponent(() => import('container/marketingManagement/marketingActivities/dropManagement/dropManagement'))
     },
@@ -1665,6 +1677,10 @@ const ROUTES = [
     {
         path: '/superNode/bonusPool',
         component: asyncComponent(() => import('container/superNode/bonusPool/bonusPool'))
+    },
+    {
+        path: '/superNode/dividendRecord',
+        component: asyncComponent(() => import('container/superNode/dividendRecord/dividendRecord'))
     },
     {
         path: '/superNode/periods',

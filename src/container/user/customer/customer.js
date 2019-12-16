@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, message, Select, Input} from 'antd';
+import {Modal, message, Select, Input, Form} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -16,6 +16,16 @@ import {activateUser, setQ, cancelNode} from 'api/user';
 import fetch from 'common/js/fetch';
 
 const {Option} = Select;
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 }
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+    }
+};
 
 @listWrapper(
   state => ({
@@ -40,12 +50,26 @@ class Customer extends React.Component {
         title: '',
         machineOrderNumStart: sessionStorage.getItem('machineOrderNumStart') || '',
         machineOrderNumEnd: sessionStorage.getItem('machineOrderNumEnd') || '',
-        symbolData: []
+        symbolData: [],
+        levelVisible: false,
+        seleUserId: '',
+        levelList: []
     };
+    isHandleOk = true;
     componentDidMount() {
         fetch('802013').then(data => {
             this.setState({
                 symbolData: data
+            });
+        });
+        fetch('625815').then(data => {
+            const levelList = data.map(item => ({
+                code: item.code,
+                level: item.level,
+                name: `L${item.level}-${item.name}`
+            }));
+            this.setState({
+                levelList
             });
         });
     }
@@ -72,6 +96,40 @@ class Customer extends React.Component {
             symbol: value
         });
     };
+    handleLevelOk = () => {
+        if(this.isHandleOk) {
+            this.isHandleOk = false;
+            this.props.form.validateFields((err, values) => {
+                if (!err) {
+                    const hasMsg = message.loading('');
+                    const { level01 } = values;
+                    fetch('625811', {
+                        level: level01,
+                        userId: this.state.seleUserId
+                    }).then(() => {
+                        this.isHandleOk = true;
+                        hasMsg();
+                        message.success('操作成功', 1.5);
+                        this.props.getPageData();
+                        this.props.form.resetFields();
+                        this.setState({
+                            levelVisible: false
+                        });
+                    }).catch(() => {
+                        this.isHandleOk = true;
+                        hasMsg();
+                    });
+                }else {
+                    this.isHandleOk = true;
+                }
+            });
+        }
+    };
+    handleLevelCancel = () => {
+        this.setState({
+            levelVisible: false
+        });
+    };
     render() {
         const fields = [{
             title: '用户',
@@ -91,6 +149,16 @@ class Customer extends React.Component {
             title: '昵称',
             render: (v, data) => {
                 return `${v}(${data.loginName})`;
+            }
+        }, {
+            field: 'level',
+            title: '用户等级',
+            type: 'select',
+            listCode: '625815',
+            keyName: 'level',
+            valueName: 'L{{level.DATA}}-{{name.DATA}}',
+            render(v, d) {
+                return v && `L${v}`;
             }
         }, {
             field: 'inviteCode',
@@ -145,7 +213,8 @@ class Customer extends React.Component {
                 field: 'remark',
                 title: '备注'
             }];
-        const {symbol, amountType, direction, userIdList, title, symbolData} = this.state;
+        const {symbol, amountType, direction, userIdList, title, symbolData, levelList} = this.state;
+        const {getFieldDecorator} = this.props.form;
         return (
           <div>
               {
@@ -286,66 +355,6 @@ class Customer extends React.Component {
                                   });
                               }
                           },
-                          // 空投
-                          // ktOption: (selectedRowKeys, selectedRows) => {
-                          //     if (!selectedRowKeys.length) {
-                          //         showWarnMsg('请选择记录');
-                          //     } else {
-                          //         let list = selectedRows.map(item => item.userId);
-                          //         this.setState({
-                          //             title: '空投',
-                          //             visible: true,
-                          //             amountType: '0',
-                          //             direction: '1',
-                          //             userIdList: list
-                          //         });
-                          //     }
-                          // },
-                          // // 减钱
-                          // jqOption: (selectedRowKeys, selectedRows) => {
-                          //     if (!selectedRowKeys.length) {
-                          //         showWarnMsg('请选择记录');
-                          //     } else {
-                          //         let list = selectedRows.map(item => item.userId);
-                          //         this.setState({
-                          //             title: '减钱',
-                          //             visible: true,
-                          //             amountType: '0',
-                          //             direction: '0',
-                          //             userIdList: list
-                          //         });
-                          //     }
-                          // },
-                          // // 锁仓
-                          // scOption: (selectedRowKeys, selectedRows) => {
-                          //     if (!selectedRowKeys.length) {
-                          //         showWarnMsg('请选择记录');
-                          //     } else {
-                          //         let list = selectedRows.map(item => item.userId);
-                          //         this.setState({
-                          //             title: '锁仓',
-                          //             visible: true,
-                          //             amountType: '1',
-                          //             direction: '1',
-                          //             userIdList: list
-                          //         });
-                          //     }
-                          // },
-                          // // 释放
-                          // sfOption: (selectedRowKeys, selectedRows) => {
-                          //     if (!selectedRowKeys.length) {
-                          //         showWarnMsg('请选择记录');
-                          //     } else {
-                          //         let list = selectedRows.map(item => item.userId);
-                          //         this.setState({
-                          //             title: '释放',
-                          //             visible: true,
-                          //             amountType: '1',
-                          //             direction: '0',
-                          //             userIdList: list
-                          //         });
-                          //     }
-                          // },
                           // 实名设置
                           editIdentify: (selectedRowKeys, selectedRows) => {
                               if (!selectedRowKeys.length) {
@@ -364,6 +373,21 @@ class Customer extends React.Component {
                                   showWarnMsg('请选择一条记录');
                               } else {
                                   this.props.history.push(`/user/customer/referee?userId=${selectedRowKeys[0]}`);
+                              }
+                          },
+                          editLevel: (selectedRowKeys, selectedRows) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.props.form.setFieldsValue({
+                                      level01: selectedRows[0].level
+                                  });
+                                  this.setState({
+                                      levelVisible: true,
+                                      seleUserId: selectedRowKeys[0]
+                                  });
                               }
                           }
                       },
@@ -442,6 +466,37 @@ class Customer extends React.Component {
                         style={{width: '60%'}}
                       />
                   </div>
+              </Modal>
+              <Modal
+                  width={600}
+                  title="修改用户等级"
+                  visible={this.state.levelVisible}
+                  onOk={this.handleLevelOk}
+                  onCancel={this.handleLevelCancel}
+                  okText="确定"
+                  cancelText="取消"
+              >
+                  <Form {...formItemLayout} onSubmit={this.handleLevelOk}>
+                      <Form.Item label="选择等级">
+                          {getFieldDecorator('level01', {
+                              rules: [
+                                  {
+                                      required: true,
+                                      message: ' '
+                                  }
+                              ]
+                          })(<Select
+                              style={{ width: '100%' }}
+                              placeholder="请选择"
+                          >
+                              {
+                                  Array.isArray(levelList) && levelList.map(item => (
+                                      <Option key={item.level}>{item.name}</Option>
+                                  ))
+                              }
+                          </Select>)}
+                      </Form.Item>
+                  </Form>
               </Modal>
           </div>
         );
