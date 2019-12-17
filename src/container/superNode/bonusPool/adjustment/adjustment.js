@@ -38,10 +38,6 @@ class adjustment extends React.Component {
             field: 'symbol',
             title: '币种'
         }, {
-            field: 'bizType',
-            title: '记录类型',
-            key: 'remain_record_type'
-        }, {
             field: 'count',
             title: '数量',
             render: (v, data) => {
@@ -54,7 +50,7 @@ class adjustment extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 806000,
+            pageCode: 610800,
             searchParams: {
                 poolId: this.poolId
             },

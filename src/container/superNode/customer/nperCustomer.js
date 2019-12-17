@@ -30,7 +30,7 @@ class Customer extends React.Component {
             code: 'goBack',
             name: '返回',
             handler: () => {
-                this.props.history.go(-1);
+                this.props.history.push('/superNode/periods');
             }
         }, {
             code: 'incomeRecord',
@@ -132,10 +132,9 @@ class Customer extends React.Component {
             field: 'batch',
             title: '期数',
             type: 'select',
-            pageCode: '610601',
+            listCode: '610642',
             keyName: 'batch',
-            valueName: '{{batch.DATA}}',
-            searchName: 'batch',
+            valueName: '{{planName.DATA}}',
             search: true,
             noVisible: true
         }];

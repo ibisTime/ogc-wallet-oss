@@ -13,6 +13,7 @@ import {listWrapper} from 'common/js/build-list';
 import { Link } from 'react-router-dom';
 import {showWarnMsg, showSucMsg, dateTimeFormat, moneyFormat, formatMoney, getQueryString} from 'common/js/util';
 import fetch from 'common/js/fetch';
+import '../superNode.css';
 
 @listWrapper(
     state => ({

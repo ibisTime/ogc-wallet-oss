@@ -53,10 +53,9 @@ class IncomeRecord extends React.Component {
             field: 'batch',
             title: '期数',
             type: 'select',
-            pageCode: '610601',
+            listCode: '610642',
             keyName: 'batch',
-            valueName: '{{batch.DATA}}',
-            searchName: 'batch',
+            valueName: '{{planName.DATA}}',
             search: true,
             noVisible: true
         }, {

@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/superNode/revenueBreakdown';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, getQueryString} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -23,25 +23,23 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
     }
 )
 class RevenueBreakdown extends React.Component {
+    code = getQueryString('code');
+    nodePlanBatch = getQueryString('nodePlanBatch');
+    divideBatch = getQueryString('divideBatch');
+    orderNo = getQueryString('orderNo');
     render() {
         const fields = [{
             field: 'divideBatch',
             title: '期数+分红批次',
-            value: '1231期数+分红批次'
+            render: () => {
+                return `第${this.nodePlanBatch}期节点计划，第${this.divideBatch}次分红`;
+            }
         }, {
-            field: 'snodeCode',
+            field: 'orderNo',
             title: '节点',
-            value: '节点'
-        }, {
-            field: 'userId',
-            title: '用户',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
-            search: true,
-            searchName: 'keyword',
-            noVisible: true
+            render: () => {
+                return `第${this.orderNo}号节点`;
+            }
         }, {
             field: 'userName',
             title: '用户'
@@ -52,16 +50,20 @@ class RevenueBreakdown extends React.Component {
             field: 'type',
             title: '类型',
             type: 'select',
-            key: 'snode_income_type'
+            key: 'snode_income_type',
+            search: true
         }, {
-            field: 'userDivideAmount',
-            title: '收益数量'
+            field: 'income',
+            title: '收益数量',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
         }, {
-            field: 'userDivideAmount1',
-            title: '税金'
-        }, {
-            field: 'userDivideAmount2',
-            title: '获得分红'
+            field: 'tax',
+            title: '税金',
+            render(v, d) {
+                return v && moneyFormat(v, '', d.symbol);
+            }
         }, {
             field: 'status',
             title: '结算状态',
@@ -72,14 +74,17 @@ class RevenueBreakdown extends React.Component {
             title: '生产时间',
             type: 'datetime'
         }, {
-            field: 'createDatetime1',
-            title: '领取时间',
+            field: 'settleTime',
+            title: '结算时间',
             type: 'datetime'
         }];
         return this.props.buildList({
             fields,
             pageCode: 610680,
             rowKey: 'id',
+            searchParams: {
+                userId: this.code
+            },
             buttons: [{
                 code: 'goBack',
                 name: '返回',

@@ -37,7 +37,7 @@ class Customer extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             search: true,
             searchName: 'keyword',
             render: (v, data) => {
@@ -86,13 +86,12 @@ class Customer extends React.Component {
                 return moneyFormat(v, '', 'PSC') + ' PSC';
             }
         }, {
-            field: 'batch',
+            field: 'nodePlanCode',
             title: '期数',
             type: 'select',
-            pageCode: '610601',
-            keyName: 'batch',
-            valueName: '{{batch.DATA}}',
-            searchName: 'batch',
+            listCode: '610642',
+            keyName: 'code',
+            valueName: '{{planName.DATA}}',
             search: true,
             noVisible: true
         }];

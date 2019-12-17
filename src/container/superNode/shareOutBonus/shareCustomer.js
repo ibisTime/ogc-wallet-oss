@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/superNode/shareCustomer';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat, moneyFormat, getQueryString} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -23,25 +23,23 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
     }
 )
 class ShareCustomer extends React.Component {
+    code = getQueryString('code');
+    nodePlanBatch = getQueryString('nodePlanBatch');
+    divideBatch = getQueryString('divideBatch');
+    orderNo = getQueryString('orderNo');
     render() {
         const fields = [{
             field: 'divideBatch',
             title: '期数+分红批次',
-            value: '1231期数+分红批次'
+            render: () => {
+                return `第${this.nodePlanBatch}期节点计划，第${this.divideBatch}次分红`;
+            }
         }, {
-            field: 'snodeCode',
+            field: 'orderNo',
             title: '节点',
-            value: '节点'
-        }, {
-            field: 'userId',
-            title: '用户',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
-            search: true,
-            searchName: 'keyword',
-            noVisible: true
+            render: () => {
+                return `第${this.orderNo}号节点`;
+            }
         }, {
             field: 'userName',
             title: '用户'
@@ -66,6 +64,9 @@ class ShareCustomer extends React.Component {
             fields,
             pageCode: 610695,
             rowKey: 'id',
+            searchParams: {
+                snodeDivideCode: this.code
+            },
             buttons: [{
                 code: 'goBack',
                 name: '返回',
@@ -75,13 +76,13 @@ class ShareCustomer extends React.Component {
             }, {
                 code: 'symx',
                 name: '收益明细',
-                handler: (selectedRowKeys) => {
+                handler: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/superNode/revenueBreakdown?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/superNode/revenueBreakdown?code=${selectedRows[0].userId}&nodePlanBatch=${this.nodePlanBatch}&divideBatch=${this.divideBatch}&orderNo=${this.orderNo}`);
                     }
                 }
             }]

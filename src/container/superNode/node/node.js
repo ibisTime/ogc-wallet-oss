@@ -88,10 +88,9 @@ class Node extends React.Component {
             field: 'batch',
             title: '期数',
             type: 'select',
-            pageCode: '610601',
+            listCode: '610642',
             keyName: 'batch',
-            valueName: '{{batch.DATA}}',
-            searchName: 'batch',
+            valueName: '{{planName.DATA}}',
             search: true,
             noVisible: true
         }, {
@@ -127,6 +126,12 @@ class Node extends React.Component {
                             nodePlanCode: this.code
                         },
                         buttons: [{
+                            code: 'goBack',
+                            name: '返回',
+                            handler: () => {
+                                this.props.history.push('/superNode/periods');
+                            }
+                        }, {
                             code: 'voteDistribution',
                             name: '节点投票分布',
                             handler: (selectedRowKeys, selectedRows) => {

@@ -26,18 +26,17 @@ class ShareOutBonus extends React.Component {
     render() {
         const fields = [{
             field: 'divideBatch',
-            title: '期数+分红批次'
-            // render(v, d) {
-            //     return v + d.batch;
-            // }
+            title: '期数+分红批次',
+            render(v, d) {
+                return `第${d.nodePlanBatch}期节点计划，第${d.divideBatch}次分红`;
+            }
         }, {
             field: 'batch',
             title: '期数',
             type: 'select',
-            pageCode: '610601',
+            listCode: '610642',
             keyName: 'batch',
-            valueName: '第{{batch.DATA}}期',
-            searchName: 'batch',
+            valueName: '{{planName.DATA}}',
             search: true,
             noVisible: true
         }, {
@@ -53,7 +52,15 @@ class ShareOutBonus extends React.Component {
             type: 'select',
             keyName: 'code',
             valueName: '{{nodePlanName.DATA}}-{{orderNo.DATA}}号节点',
-            search: true
+            searchName: 'orderNo',
+            search: true,
+            noVisible: true
+        }, {
+            field: 'orderNo',
+            title: '节点',
+            render(v, d) {
+                return v && `第${v}号节点`;
+            }
         }, {
             field: 'snodeAmount',
             title: '起购数额',
@@ -71,7 +78,10 @@ class ShareOutBonus extends React.Component {
             title: '币种'
         }, {
             field: 'snodeTotalWeights',
-            title: '成员总权重'
+            title: '成员总权重',
+            render: (v, d) => {
+                return v && moneyFormat(v, '', d.symbol);
+            }
         }, {
             field: 'createDatetime',
             title: '生成时间',
@@ -88,7 +98,7 @@ class ShareOutBonus extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/superNode/shareCustomer?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/superNode/shareCustomer?code=${selectedRowKeys[0]}&nodePlanBatch=${selectedRows[0].nodePlanBatch}&divideBatch=${selectedRows[0].divideBatch}&orderNo=${selectedRows[0].orderNo}`);
                     }
                 }
             }

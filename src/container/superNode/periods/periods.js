@@ -25,22 +25,18 @@ import {showWarnMsg, dateTimeFormat, moneyFormat} from 'common/js/util';
 class Periods extends React.Component {
     render() {
         const fields = [{
-            field: 'planName',
-            title: '期数名称'
-        }, {
-            field: 'batch1',
-            title: '批次',
-            render: (v, data) => {
-                return data.batch;
+            field: 'divideBatch',
+            title: '期数+批次',
+            render(v, d) {
+                return `${d.planName}，第${d.batch}批次`;
             }
         }, {
             field: 'batch',
             title: '期数',
             type: 'select',
-            pageCode: '610601',
+            listCode: '610642',
             keyName: 'batch',
-            valueName: '{{batch.DATA}}',
-            searchName: 'batch',
+            valueName: '{{planName.DATA}}',
             search: true,
             noVisible: true
         }, {
