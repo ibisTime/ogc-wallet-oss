@@ -98,6 +98,11 @@ class CustomerAddedit extends DetailUtil {
                 return (+v / 10000).toFixed(2);
             }
         }, {
+            field: 'carLevel',
+            title: '抢车位等级',
+            type: 'select',
+            key: 'user_car_level'
+        }, {
             field: 'status',
             title: '状态',
             type: 'select',

@@ -266,64 +266,69 @@ class Customer extends React.Component {
                 }
                 return level;
             }
-        },
-            {
-                field: 'status',
-                title: '状态',
-                type: 'select',
-                key: 'user_status',
-                search: true
-            }, {
-                field: 'isRealname',
-                title: '是否实名',
-                render: (v, data) => {
-                    return data.realName ? '是' : '否';
-                }
-            }, {
-                field: 'machineOrderNum',
-                title: '存活水滴数'
-            }, {
-                field: 'machineOrder',
-                title: '存活水滴数',
-                search: true,
-                type: 'interval',
-                intervalParams: {
-                    start: this.machineStart,
-                    end: this.machineEnd,
-                    reset: this.machineReset
-                },
-                startEnd: ['machineOrderNumStart', 'machineOrderNumEnd'],
-                noVisible: true
-            }, {
-                field: 'realName',
-                title: '真实姓名',
-                render: (v, data) => {
-                    return data.realName ? data.realName : '-';
-                }
-            }, {
-                //     field: 'tradeRate',
-                //     title: '广告费率'
-                // }, {
-                field: 'createDatetime',
-                title: '注册时间',
-                type: 'date',
-                rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
-                render: dateTimeFormat,
-                search: true
-            }, {
-                field: 'registerType',
-                title: '注册方式',
-                type: 'select',
-                key: 'user_register_type',
-                search: true
-            }, {
-                field: 'lastLogin',
-                title: '最后登录时间',
-                type: 'datetime'
-            }, {
-                field: 'remark',
-                title: '备注'
-            }];
+        }, {
+            field: 'carLevel',
+            title: '抢车位等级',
+            type: 'select',
+            key: 'user_car_level',
+            search: true
+        }, {
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'user_status',
+            search: true
+        }, {
+            field: 'isRealname',
+            title: '是否实名',
+            render: (v, data) => {
+                return data.realName ? '是' : '否';
+            }
+        }, {
+            field: 'machineOrderNum',
+            title: '存活水滴数'
+        }, {
+            field: 'machineOrder',
+            title: '存活水滴数',
+            search: true,
+            type: 'interval',
+            intervalParams: {
+                start: this.machineStart,
+                end: this.machineEnd,
+                reset: this.machineReset
+            },
+            startEnd: ['machineOrderNumStart', 'machineOrderNumEnd'],
+            noVisible: true
+        }, {
+            field: 'realName',
+            title: '真实姓名',
+            render: (v, data) => {
+                return data.realName ? data.realName : '-';
+            }
+        }, {
+            //     field: 'tradeRate',
+            //     title: '广告费率'
+            // }, {
+            field: 'createDatetime',
+            title: '注册时间',
+            type: 'date',
+            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
+            render: dateTimeFormat,
+            search: true
+        }, {
+            field: 'registerType',
+            title: '注册方式',
+            type: 'select',
+            key: 'user_register_type',
+            search: true
+        }, {
+            field: 'lastLogin',
+            title: '最后登录时间',
+            type: 'datetime'
+        }, {
+            field: 'remark',
+            title: '备注'
+        }];
         const {symbol, amountType, direction, userIdList, title, symbolData, refereesData} = this.state;
         const options = refereesData.map(item => <Option key={item.userId}>{item.nickname}-{item.mobile}</Option>);
         const {getFieldDecorator} = this.props.form;
