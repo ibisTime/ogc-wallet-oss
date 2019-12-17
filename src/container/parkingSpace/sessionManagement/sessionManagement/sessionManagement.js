@@ -49,7 +49,7 @@ class SessionManagement extends React.Component {
             title: '参与人数',
             field: 'buyCount'
         }, {
-            title: '总投币数量(USDT)',
+            title: '总投币数量',
             field: 'totalAmount'
         }, {
             title: '成交均价',
@@ -97,6 +97,32 @@ class SessionManagement extends React.Component {
                             onOk: () => {
                                 this.props.doFetching();
                                 return fetch(200069, {
+                                    code: selectedRowKeys[0]
+                                }).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
+                },
+                putOn: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '2') {
+                        showWarnMsg('该状态下不能进行该操作');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `是否投放？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return fetch(200070, {
                                     code: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();

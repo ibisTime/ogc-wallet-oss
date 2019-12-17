@@ -63,7 +63,7 @@ class CoinRecords extends React.Component {
             title: '标价币种行情'
         }, {
             field: 'totalPrice',
-            title: '出价(E-USDT)'
+            title: '出价'
         }, {
             title: '支付币种',
             field: 'symbolPay',
