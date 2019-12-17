@@ -1772,8 +1772,8 @@ const ROUTES = [
         component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/userVehicle/userVehicle'))
     },
     {
-        path: '/parkingSpace/userVehicle',
-        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/userVehicle/userVehicle'))
+        path: '/parkingSpace/userVehicle/addedit',
+        component: asyncComponent(() => import('container/parkingSpace/vehicleManagement/userVehicle/userVehicle-addedit'))
     },
     {
         path: '/parkingSpace/chengguanUser',

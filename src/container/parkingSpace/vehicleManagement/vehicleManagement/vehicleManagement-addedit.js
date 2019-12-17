@@ -40,7 +40,7 @@ class VehicleManagementAddedit extends DetailUtil {
             title: '购买单价',
             required: true
         }, {
-            title: '保养费(针对购买价格%)',
+            title: '保养费(针对购买价格)',
             field: 'maintainRate',
             required: true
         }, {
@@ -56,7 +56,7 @@ class VehicleManagementAddedit extends DetailUtil {
             field: 'daysLimit',
             required: true
         }, {
-            title: '收益率(针对购买价格%)',
+            title: '收益率(针对购买价格0-1)',
             field: 'incomeRate',
             required: true
         }, {
