@@ -18,7 +18,6 @@ import {
     getCoinList,
     getUserId
 } from 'common/js/util';
-import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -53,7 +52,7 @@ class NoahCarRecord extends React.Component {
         }, {
             title: '挪车日期',
             field: 'moveDate',
-            type: 'datetime'
+            type: 'date'
         }, {
             title: '创建时间',
             field: 'createDatetime',
