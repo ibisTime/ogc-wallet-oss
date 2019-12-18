@@ -47,7 +47,6 @@ class Banner extends React.Component {
                 typeList: ['0', '1', '2'],
                 location: 'app_home'
             },
-            singleSelect: false,
             btnEvent: {
                 edit: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

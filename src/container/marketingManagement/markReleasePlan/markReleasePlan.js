@@ -87,8 +87,8 @@ class MarkReleasePlan extends React.Component {
         const fields = [{
             title: '用户',
             field: 'userName',
-            render() {
-                return sessionStorage.getItem('USER_NAME') || '-';
+            render(v, d) {
+                return d && d.user ? `${d.user.loginName}` : '-';
             }
         }, {
             title: '币种',

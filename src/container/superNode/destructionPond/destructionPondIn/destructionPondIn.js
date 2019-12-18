@@ -60,6 +60,9 @@ class destructionPondIn extends React.Component {
             noVisible: true,
             search: true
         }, {
+            field: 'dappName',
+            title: '应用'
+        }, {
             field: 'bizType',
             title: '业务类型',
             type: 'select',
