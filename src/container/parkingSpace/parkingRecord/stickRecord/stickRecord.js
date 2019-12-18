@@ -51,21 +51,17 @@ class StickRecord extends React.Component {
             field: 'carCode',
             title: '车编号'
         }, {
-            field: 'stickDate',
-            title: '贴条日期',
-            type: 'datetime'
-        }, {
-            title: '创建时间',
+            title: '贴条时间',
             field: 'createDatetime',
             type: 'datetime'
         }, {
-            title: '停车时间起',
+            title: '贴条时间起',
             field: 'dateStart',
             type: 'datetime',
             search: true,
             noVisible: true
         }, {
-            title: '停车时间止',
+            title: '贴条时间止',
             field: 'dateEnd',
             type: 'datetime',
             search: true,

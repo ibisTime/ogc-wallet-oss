@@ -51,17 +51,17 @@ class AssemblyRecord extends React.Component {
             field: 'carCode',
             title: '组装后的车编号'
         }, {
-            title: '创建时间',
+            title: '组装时间',
             field: 'createDatetime',
             type: 'datetime'
         }, {
-            title: '停车时间起',
+            title: '组装时间起',
             field: 'dateStart',
             type: 'datetime',
             search: true,
             noVisible: true
         }, {
-            title: '停车时间止',
+            title: '组装时间止',
             field: 'dateEnd',
             type: 'datetime',
             search: true,
