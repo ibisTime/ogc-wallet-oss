@@ -63,7 +63,7 @@ class ShareOutBonus extends React.Component {
             }
         }, {
             field: 'snodeAmount',
-            title: '起购数额',
+            title: '节点投票数',
             render: (v, d) => {
                 return v && moneyFormat(v, '', d.symbol);
             }

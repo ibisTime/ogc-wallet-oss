@@ -61,8 +61,7 @@ class TransferAccountsQuery extends React.Component {
             field: 'dkey',
             title: '方向',
             render: (v, data) => {
-                let direction = String(data.amount).indexOf('-') > -1 ? '转出' : '转入';
-                return direction;
+                return data && String(data.amount).indexOf('-') > -1 ? 'DAPP转到钱包' : '钱包转到DAPP';
             }
         }, {
             field: 'amount',
@@ -83,7 +82,7 @@ class TransferAccountsQuery extends React.Component {
                 return data.account.currency;
             }
         }, {
-            field: 'now',
+            field: 'createDatetime',
             title: '到账时间',
             type: 'datetime'
         }, {
