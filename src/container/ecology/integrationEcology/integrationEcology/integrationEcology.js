@@ -59,6 +59,12 @@ class IntegrationEcology extends React.Component {
             let minerOssUrl = sessionStorage.getItem('minerOssUrl');
             window.open(`${minerOssUrl}/verificationPSC?username=${username}&token=${tokenIgo}`);
         }
+        if(item.url === 'dapp_gravity') {
+            let username = localStorage.getItem('username');
+            let tokenIgo = localStorage.getItem('token_igo');
+            let minerOssUrl = sessionStorage.getItem('gravitationalOssUrl');
+            window.open(`${minerOssUrl}/verificationPSC?username=${username}&token=${tokenIgo}`);
+        }
     }
 
     render() {

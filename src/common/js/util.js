@@ -88,6 +88,14 @@ export async function setSystem() {
             }
         });
     }
+    const gravitationalOssUrl = sessionStorage.getItem('gravitationalOssUrl');
+    if (!gravitationalOssUrl) {
+        fetch(625013, {key: 'gravity_oss_url', start: 1, limit: 10}).then(data => {
+            if (data.list[0]) {
+                sessionStorage.setItem('gravitationalOssUrl', data.list[0].value);
+            }
+        });
+    }
 }
 
 // 删除用户登录信息
