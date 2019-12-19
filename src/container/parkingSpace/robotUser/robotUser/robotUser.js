@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/parkingSpace/sessionManagement/userSpace';
+} from '@redux/parkingSpace/robotUser/robotUser';
 import {listWrapper} from 'common/js/build-list';
 import {
     showSucMsg,
@@ -25,17 +25,18 @@ const {Option} = Select;
 
 const formItemLayout = {
     labelCol: {
-        xs: { span: 24 },
-        sm: { span: 4 }
+        xs: {span: 24},
+        sm: {span: 4}
     },
     wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
+        xs: {span: 24},
+        sm: {span: 16}
     }
 };
 
 let timeout;
 let currentValue;
+
 function fetchUser(value, callback) {
     if (timeout) {
         clearTimeout(timeout);
@@ -60,7 +61,7 @@ function fetchUser(value, callback) {
 
 @listWrapper(
     state => ({
-        ...state.parkingSpaceUserSpace,
+        ...state.parkingSpaceRobotUser,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -68,7 +69,7 @@ function fetchUser(value, callback) {
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class UserSpace extends React.Component {
+class RobotUser extends React.Component {
     isHandleOk = true;
     state = {
         ...this.state,
@@ -77,17 +78,17 @@ class UserSpace extends React.Component {
         userIdVal: ''
     };
     handleOk = () => {
-        if(this.isHandleOk) {
+        if (this.isHandleOk) {
             this.isHandleOk = false;
             this.props.form.validateFields((err, values) => {
                 if (!err) {
                     const hasMsg = message.loading('');
-                    const { userId01 } = values;
-                    fetch('200119', {
+                    const {userId01} = values;
+                    fetch('200210', {
                         userId: userId01
                     }).then(() => {
                         this.isHandleOk = true;
-                        fetchUser('', data => this.setState({ datas: data }));
+                        fetchUser('', data => this.setState({datas: data}));
                         hasMsg();
                         message.success('操作成功', 1.5);
                         this.props.getPageData();
@@ -97,10 +98,10 @@ class UserSpace extends React.Component {
                         });
                     }).catch(() => {
                         this.isHandleOk = true;
-                        fetchUser('', data => this.setState({ datas: data }));
+                        fetchUser('', data => this.setState({datas: data}));
                         hasMsg();
                     });
-                }else {
+                } else {
                     this.isHandleOk = true;
                 }
             });
@@ -113,9 +114,9 @@ class UserSpace extends React.Component {
     };
     handleSearch = value => {
         if (value) {
-            fetchUser(value, data => this.setState({ datas: data }));
+            fetchUser(value, data => this.setState({datas: data}));
         } else {
-            this.setState({ datas: [] });
+            this.setState({datas: []});
         }
     };
     handleChange = value => {
@@ -125,11 +126,8 @@ class UserSpace extends React.Component {
     };
     render() {
         const fields = [{
-            field: 'parkOrderCode',
-            title: '关联编号'
-        }, {
             field: 'userId',
-            title: '购买用户',
+            title: '机器人用户',
             type: 'select',
             pageCode: '805120',
             params: {
@@ -143,52 +141,28 @@ class UserSpace extends React.Component {
                 return v && d.user ? `${d.user.nickname}-${d.user.loginName}` : '';
             }
         }, {
-            field: 'orderNo',
-            title: '车位编号'
-        }, {
-            field: 'carCode',
-            title: '停放车辆编号'
-        }, {
-            field: 'parkCar',
-            title: '停放车辆信息',
-            render(v) {
-                return v && v.name;
-            }
-        }, {
-            field: 'source',
-            title: '来源',
-            key: 'car_park_source',
-            type: 'select',
-            search: true
-        }, {
-            title: '状态',
-            field: 'status',
-            type: 'select',
-            key: 'car_park_status',
-            search: true
-        }, {
             field: 'createDatetime',
             title: '创建时间',
             type: 'datetime'
         }];
-        const {datas, userIdVal, visible} = this.state;
+        const {datas, visible} = this.state;
         const {getFieldDecorator} = this.props.form;
         const options = datas.map(d => <Option key={d.userId}>{d.text}</Option>);
         return <div>
             {
                 this.props.buildList({
                     fields,
-                    pageCode: 200103,
+                    pageCode: 200211,
                     btnEvent: {
-                        ktOption: () => {
-                            fetchUser('', data => this.setState({ datas: data, visible: true }));
+                        addRobot: () => {
+                            fetchUser('', data => this.setState({datas: data, visible: true}));
                         }
                     }
                 })
             }
             <Modal
                 width={600}
-                title="空投"
+                title="新增机器人"
                 visible={visible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
@@ -224,4 +198,4 @@ class UserSpace extends React.Component {
     }
 }
 
-export default UserSpace;
+export default RobotUser;

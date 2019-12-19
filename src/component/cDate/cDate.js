@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker, Form } from 'antd';
 import { noop, isUndefined } from 'common/js/util';
-import { formItemLayout, DATETIME_FORMAT, DATE_FORMAT } from 'common/js/config';
+import { formItemLayout, DATETIME_FORMAT, DATE_FORMAT, DATETIME_FORMAT_MIN } from 'common/js/config';
 import locale from 'common/js/lib/date-locale';
 
 const FormItem = Form.Item;
@@ -49,13 +49,13 @@ export default class CDate extends React.Component {
     });
     return flag;
   }
-  getDateProps(onChange, isTime, disabledDate) {
+  getDateProps(onChange, isTime, disabledDate, isMinutes) {
     let props = {
       locale,
       style: { maxWidth: 400 },
       allowClear: false,
       placeholder: isTime ? '选择时间' : '选择日期',
-      format: isTime ? DATETIME_FORMAT : DATE_FORMAT,
+      format: isMinutes ? isTime ? DATETIME_FORMAT_MIN : DATETIME_FORMAT : DATE_FORMAT,
       showTime: isTime
     };
     if (onChange) {
@@ -68,7 +68,7 @@ export default class CDate extends React.Component {
   }
   render() {
     const { label, field, rules, readonly, hidden, getFieldDecorator,
-      isTime, initVal, inline, onChange, disabledDate } = this.props;
+      isTime, initVal, inline, onChange, disabledDate, isMinutes } = this.props;
     let layoutProps = inline ? {} : formItemLayout;
     return (
       <FormItem key={field} {...layoutProps} className={hidden ? 'hidden' : ''} label={label}>
@@ -78,7 +78,7 @@ export default class CDate extends React.Component {
                 rules,
                 initialValue: initVal || null
             })(
-            <DatePicker {...this.getDateProps(onChange, isTime, disabledDate)}/>)
+            <DatePicker {...this.getDateProps(onChange, isTime, disabledDate, isMinutes)}/>)
         }
       </FormItem>
     );

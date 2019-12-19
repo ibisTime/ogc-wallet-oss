@@ -1810,6 +1810,10 @@ const ROUTES = [
     {
         path: '/parkingSpace/configuration',
         component: asyncComponent(() => import('container/parkingSpace/configuration/configuration'))
+    },
+    {
+        path: '/parkingSpace/robotUser',
+        component: asyncComponent(() => import('container/parkingSpace/robotUser/robotUser/robotUser'))
     }
 ];
 

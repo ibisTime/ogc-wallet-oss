@@ -262,6 +262,7 @@ import {parkingSpaceAssemblyRecord} from './redux/parkingSpace/parkingRecord/ass
 import {parkingSpaceReturnsQuery} from './redux/parkingSpace/returnsQuery/returnsQuery';
 import {parkingSpaceUserSpaceStatistical} from './redux/parkingSpace/userSpaceStatistical/userSpaceStatistical';
 import {parkingSpaceConfiguration} from './redux/parkingSpace/configuration/configuration';
+import {parkingSpaceRobotUser} from './redux/parkingSpace/robotUser/robotUser';
 
 export default combineReducers({
     user,
@@ -500,5 +501,6 @@ export default combineReducers({
     parkingSpaceAssemblyRecord,
     parkingSpaceReturnsQuery,
     parkingSpaceUserSpaceStatistical,
-    parkingSpaceConfiguration
+    parkingSpaceConfiguration,
+    parkingSpaceRobotUser
 });

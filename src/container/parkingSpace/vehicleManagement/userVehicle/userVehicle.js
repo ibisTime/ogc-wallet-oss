@@ -47,7 +47,7 @@ function fetchUser(value, callback) {
             data.list.forEach(r => {
                 datas.push({
                     value: r.mobile,
-                    text: r.mobile,
+                    text: `${r.nickname}-${r.mobile}`,
                     userId: r.userId
                 });
             });

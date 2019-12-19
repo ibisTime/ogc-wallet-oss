@@ -508,6 +508,7 @@ export default class DetailComp extends React.Component {
       rules,
       initVal,
       isTime,
+      isMinutes: item.isMinutes,
       getFieldDecorator,
       hidden: item.hidden,
       inline: item.inline,

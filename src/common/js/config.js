@@ -65,3 +65,4 @@ export const validateFieldsAndScrollOption = {
 export const DATE_FORMAT = 'YYYY-MM-DD';
 export const MONTH_FORMAT = 'YYYY-MM';
 export const DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+export const DATETIME_FORMAT_MIN = 'YYYY-MM-DD HH:mm';
