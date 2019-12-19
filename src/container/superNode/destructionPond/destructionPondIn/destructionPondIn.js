@@ -92,7 +92,7 @@ class destructionPondIn extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 610670,
+            pageCode: 806020,
             rowKey: 'id',
             noSelect: true,
             searchParams: {

@@ -54,7 +54,7 @@ class DividendRecord extends React.Component {
                 this.props.buildList({
                     fields,
                     pageCode: '610841',
-                    params: {
+                    searchParams: {
                         apiCode: '610840'
                     }
                 })

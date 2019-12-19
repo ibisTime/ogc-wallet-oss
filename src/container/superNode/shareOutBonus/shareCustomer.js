@@ -45,7 +45,10 @@ class ShareCustomer extends React.Component {
             title: '用户'
         }, {
             field: 'userWeights',
-            title: '个人权重'
+            title: '个人权重',
+            render: (v, d) => {
+                return v && moneyFormat(v, '', d.symbol);
+            }
         }, {
             field: 'symbol',
             title: '币种'
@@ -82,7 +85,7 @@ class ShareCustomer extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/superNode/revenueBreakdown?code=${selectedRows[0].userId}&nodePlanBatch=${this.nodePlanBatch}&divideBatch=${this.divideBatch}&orderNo=${this.orderNo}`);
+                        this.props.history.push(`/superNode/revenueBreakdown?code=${selectedRows[0].id}&nodePlanBatch=${this.nodePlanBatch}&divideBatch=${this.divideBatch}&orderNo=${this.orderNo}`);
                     }
                 }
             }]

@@ -80,7 +80,7 @@ class Customer extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{loginName.DATA}}',
             search: true,
             searchName: 'keyword',
             render: (v, data) => {

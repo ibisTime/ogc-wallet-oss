@@ -1437,6 +1437,10 @@ const ROUTES = [
         path: '/integrationEcology/configure/addedit',
         component: asyncComponent(() => import('container/ecology/integrationEcology/configure/configure-addedit'))
     },
+    {
+        path: '/integrationEcology/apiDocument',
+        component: asyncComponent(() => import('container/ecology/integrationEcology/apiDocument/apiDocument'))
+    },
     // 团队查询
     {
         path: '/teamQuery/teamQueryInfo',

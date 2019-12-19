@@ -83,7 +83,7 @@ class RevenueBreakdown extends React.Component {
             pageCode: 610680,
             rowKey: 'id',
             searchParams: {
-                userId: this.code
+                refCode: this.code
             },
             buttons: [{
                 code: 'goBack',
