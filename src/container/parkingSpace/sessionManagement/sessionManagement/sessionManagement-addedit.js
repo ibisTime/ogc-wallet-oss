@@ -85,7 +85,7 @@ class SessionManagementAddedit extends DetailUtil {
             field: 'note',
             required: true,
             type: 'textarea',
-            normalArea: true
+            normalArea: false
         }, {
             title: '实际车位投放数量',
             field: 'quantityActual',
