@@ -33,7 +33,7 @@ export default class CTextArea extends React.Component {
           formdata.append('key', file.name + '_' + new Date().getTime());
         }
       };
-      _this.editor.customConfig.uploadImgServer = UPLOAD_URL === 'null/' ? sessionStorage.getItem('qiniuUploadDomain') + '/' : UPLOAD_URL;
+      _this.editor.customConfig.uploadImgServer = localStorage.getItem('qiniuUploadDomain') + '/';
       _this.editor.customConfig.onchange = html => {
         let areaState;
         if (!html) {
