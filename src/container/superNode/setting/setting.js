@@ -103,6 +103,9 @@ class Setting extends React.Component {
                 if(data.ckey === 'divide_cycle') {
                     sessionStorage.setItem('closeTimeValue', v);
                 }
+                if(data && data.ckey.match(/_textarea$/)) {
+                    return v.substr(0, 40) + '...';
+                }
                 return v;
             }
         }];
