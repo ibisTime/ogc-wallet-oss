@@ -466,9 +466,21 @@ export default class ListComponent extends React.Component {
         }).then(data => {
             this.props.cancelFetching();
             if (data instanceof Array) {
-                this.props.setTableData(data);
+                const list = data.map(item => {
+                    if(item.ckey && item.ckey.match(/_textarea$/)) {
+                        item.cvalue = item.cvalue.substr(0, 50) + '...';
+                    }
+                    return item;
+                });
+                this.props.setTableData(list);
             } else {
-                this.props.setTableData(data.list);
+                const list = data.list.map(item => {
+                    if(item.ckey && item.ckey.match(/_textarea$/)) {
+                        item.cvalue = item.cvalue.substr(0, 50) + '...';
+                    }
+                    return item;
+                });
+                this.props.setTableData(list);
             }
             this.props.setPagination({
                 ...pagination,
