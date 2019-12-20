@@ -31,6 +31,16 @@ class SessionManagementAddedit extends DetailUtil {
             valueName: 'key',
             required: true
         }, {
+            field: 'maxPrice',
+            title: '最高价',
+            number: true,
+            required: true
+        }, {
+            field: 'minPrice',
+            title: '最低价',
+            number: true,
+            required: true
+        }, {
             field: 'quantityExpect',
             title: '预计车位投放数量',
             required: true,

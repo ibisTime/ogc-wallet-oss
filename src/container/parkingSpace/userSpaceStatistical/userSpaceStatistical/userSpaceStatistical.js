@@ -50,7 +50,7 @@ class UserSpaceStatistical extends React.Component {
             field: 'level',
             title: '统计层数'
         }, {
-            title: '名下车位数',
+            title: '伞下用户车位数',
             field: 'totalQuantity'
         }, {
             title: '直推用户车位满位人数',

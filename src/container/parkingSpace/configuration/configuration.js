@@ -29,7 +29,13 @@ class Configuration extends React.Component {
             title: '说明'
         }, {
             field: 'cvalue',
-            title: '数值'
+            title: '数值',
+            render(v, d) {
+                if(d && d.ckey.match(/_textarea$/)) {
+                    return v.substr(0, 20) + '...';
+                }
+                return v;
+            }
         }];
         return (<div>
             {
