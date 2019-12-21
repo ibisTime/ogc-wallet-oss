@@ -113,7 +113,7 @@ class SessionManagement extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '2') {
+                    } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('该状态下不能进行该操作');
                     } else {
                         Modal.confirm({
