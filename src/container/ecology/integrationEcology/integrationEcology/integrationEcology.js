@@ -68,7 +68,6 @@ class IntegrationEcology extends React.Component {
                                 }>
                                     <div style={{width: '100%'}}>
                                         <div style={{fontSize: '16px', marginBottom: '10px'}}>{item.name}</div>
-                                        <div>{item.name === 'IGO' ? '活跃用户' : '用户量'}： {item.userCount}</div>
                                     </div>
                                 </Card>
                             </Col>

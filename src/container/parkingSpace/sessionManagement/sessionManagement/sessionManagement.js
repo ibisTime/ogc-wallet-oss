@@ -40,20 +40,22 @@ class SessionManagement extends React.Component {
             field: 'symbolPrice',
             title: '标价币种'
         }, {
+            field: 'startDatetime',
+            title: '开始时间',
+            type: 'date'
+        }, {
+            field: 'endDatetime',
+            title: '结束时间',
+            type: 'date'
+        }, {
             field: 'quantityExpect',
             title: '预计车位投放数量'
-        }, {
-            title: '实际车位投放数量',
-            field: 'quantityActual'
         }, {
             title: '参与人数',
             field: 'buyCount'
         }, {
             title: '总投币数量',
             field: 'totalAmount'
-        }, {
-            title: '成交均价',
-            field: 'priceAvg'
         }, {
             title: '状态',
             field: 'status',
@@ -65,17 +67,15 @@ class SessionManagement extends React.Component {
             title: '预计投放时间',
             type: 'datetime'
         }, {
+            title: '实际车位投放数量',
+            field: 'quantityActual'
+        }, {
             field: 'releaseDatetimeActual',
             title: '实际投放时间',
             type: 'datetime'
         }, {
-            field: 'nextStartDatetime',
-            title: '预计下轮开始时间',
-            type: 'datetime'
-        }, {
-            field: 'nextEndDatetime',
-            title: '预计下轮结束时间',
-            type: 'datetime'
+            title: '成交均价',
+            field: 'priceAvg'
         }];
         return this.props.buildList({
             fields,

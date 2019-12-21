@@ -38,12 +38,12 @@ class SessionManagementAddedit extends DetailUtil {
         }, {
             field: 'startDatetime',
             title: '开始时间',
-            type: 'datetime',
+            type: 'date',
             required: true
         }, {
             field: 'endDatetime',
             title: '结束时间',
-            type: 'datetime',
+            type: 'date',
             required: true
         }, {
             field: 'releaseDatetimeExpect',
@@ -59,12 +59,12 @@ class SessionManagementAddedit extends DetailUtil {
         }, {
             field: 'nextStartDatetime',
             title: '预计下轮开始时间',
-            type: 'datetime',
+            type: 'date',
             required: true
         }, {
             field: 'nextEndDatetime',
             title: '预计下轮结束时间',
-            type: 'datetime',
+            type: 'date',
             required: true
         }, {
             title: '规则说明',

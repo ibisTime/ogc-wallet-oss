@@ -17,7 +17,7 @@ class UserSpaceStatisticalAddedit extends DetailUtil {
             title: '用户'
         }, {
             field: 'level',
-            title: '等级'
+            title: '统计层数'
         }, {
             title: '名下车位数',
             field: 'totalQuantity'

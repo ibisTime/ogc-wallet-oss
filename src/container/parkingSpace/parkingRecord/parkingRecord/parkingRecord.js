@@ -81,7 +81,7 @@ class ParkingRecord extends React.Component {
                 return d && d.park.orderNo;
             }
         }, {
-            title: '创建时间',
+            title: '停车时间',
             field: 'createDatetime',
             type: 'datetime'
         }, {
