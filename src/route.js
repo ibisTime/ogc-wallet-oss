@@ -404,6 +404,14 @@ const ROUTES = [
         path: '/user/channelDealerSettleHistory',
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory-commissions'))
     },
+    {
+        path: '/user/userToken',
+        component: asyncComponent(() => import('container/user/userToken/userToken'))
+    },
+    {
+        path: '/user/tokenRecord',
+        component: asyncComponent(() => import('container/user/userToken/tokenRecord'))
+    },
 
     // 系统管理--系统设置--OTC标签设置
     {
