@@ -42,11 +42,11 @@ class SessionManagement extends React.Component {
         }, {
             field: 'startDatetime',
             title: '开始时间',
-            type: 'date'
+            type: 'datetime'
         }, {
             field: 'endDatetime',
             title: '结束时间',
-            type: 'date'
+            type: 'datetime'
         }, {
             field: 'quantityExpect',
             title: '预计车位投放数量'
