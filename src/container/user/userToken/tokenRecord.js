@@ -28,18 +28,6 @@ class TokenRecord extends React.Component {
     render() {
         const fields = [{
             title: '转让人',
-            field: 'toUser',
-            type: 'select',
-            pageCode: '805120',
-            keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'keyword',
-            search: true,
-            render(v, d) {
-                return d && d.toUserName;
-            }
-        }, {
-            title: '授让人',
             field: 'fromUser',
             type: 'select',
             pageCode: '805120',
@@ -49,6 +37,18 @@ class TokenRecord extends React.Component {
             search: true,
             render(v, d) {
                 return d && d.fromUserName;
+            }
+        }, {
+            title: '受让人',
+            field: 'toUser',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            search: true,
+            render(v, d) {
+                return d && d.toUserName;
             }
         }, {
             field: 'keyLevel',
