@@ -55,7 +55,7 @@ export default class CDate extends React.Component {
       style: { maxWidth: 400 },
       allowClear: false,
       placeholder: isTime ? '选择时间' : '选择日期',
-      format: isMinutes ? isTime ? DATETIME_FORMAT_MIN : DATETIME_FORMAT : DATE_FORMAT,
+      format: isTime ? isMinutes ? DATETIME_FORMAT_MIN : DATETIME_FORMAT : DATE_FORMAT,
       showTime: isTime
     };
     if (onChange) {
