@@ -24,7 +24,8 @@ const Dashboard = asyncComponent(() => import('component/dashboard/dashboard'));
 // <Route path='/superNode' component={SuperNode}/>
 
 // 集成生态-闪兑
-const FlashExchange = asyncComponent(() => import('container/flashManagement/flashManagement'));
+// const FlashExchange = asyncComponent(() => import('container/flashManagement/flashManagement'));
+// <Route path='/flashManagement' component={FlashExchange}/>
 
 // 集成生态-猜涨跌
 const GuessUpsDowns = asyncComponent(() => import('container/guessUpsDowns/guessUpsDowns'));
@@ -33,8 +34,8 @@ const GuessUpsDowns = asyncComponent(() => import('container/guessUpsDowns/guess
 const StarLucky = asyncComponent(() => import('container/starLucky/starLucky'));
 
 // 卡卷
-const Card = asyncComponent(() => import('container/card/card'));
-
+// const Card = asyncComponent(() => import('container/card/card'));
+// <Route path='/card' component={Card}/>
 ReactDOM.render(
     <ConfigProvider locale={zhCN}>
         <Provider store={store}>
@@ -46,10 +47,8 @@ ReactDOM.render(
                             path='/login'
                             component={Login}
                         />
-                        <Route path='/flashManagement' component={FlashExchange}/>
                         <Route path='/guessUpsDowns' component={GuessUpsDowns}/>
                         <Route path='/starLucky' component={StarLucky}/>
-                        <Route path='/card' component={Card}/>
                         <Route component={Dashboard}/>
                     </Switch>
                     <BackTop/>

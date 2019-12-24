@@ -13,10 +13,7 @@ import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, getCoinList} from 'common/js/util';
 import {Layout} from 'antd';
 import { Switch, Route } from 'react-router-dom';
-import asyncComponent from 'component/async-component/async-component';
 
-const entryLogTop = asyncComponent(() => import('./settle'));
-const { Content } = Layout;
 @listWrapper(
     state => ({
         ...state.quotationQuotationCDS,
@@ -31,7 +28,7 @@ class quotationCDS extends React.Component {
     componentDidMount() {
         let pHtml = document.createElement('p');
         pHtml.innerHTML = '行情更新间隔时间为10s';
-        pHtml.style.margin = '0';
+        pHtml.style.margin = '20px 0';
         let dHtml = document.querySelector('.tools-wrapper');
         dHtml.insertBefore(pHtml, dHtml.childNodes[0]);
     }
@@ -42,7 +39,7 @@ class quotationCDS extends React.Component {
             type: 'select',
             data: getCoinList(),
             keyName: 'key',
-            valueName: 'value',
+            valueName: '{{key.DATA}}-{{value.DATA}}',
             search: true
         }, {
             title: '类型',
@@ -79,28 +76,11 @@ class quotationCDS extends React.Component {
             field: 'updateDatetime',
             type: 'datetime'
         }];
-        return (
-            <div>
-                <div>
-                    <Layout>
-                        <Content>
-                            <Switch>
-                                <Route path='/flashManagement/quotation' exact component={entryLogTop}></Route>
-                            </Switch>
-                        </Content>
-                    </Layout>
-                </div>
-                <div className="superNode-listPage-wrapper" style={{marginTop: '30px'}}>
-                    {
-                        this.props.buildList({
-                            fields,
-                            rowKey: 'id',
-                            pageCode: '650202'
-                        })
-                    }
-                </div>
-            </div>
-        );
+        return this.props.buildList({
+            fields,
+            rowKey: 'id',
+            pageCode: '650202'
+        });
     }
 }
 

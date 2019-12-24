@@ -142,13 +142,6 @@ class SecretKey extends React.Component {
                     fields,
                     rowKey: 'id',
                     pageCode: '610703',
-                    buttons: [{
-                        code: 'import',
-                        name: '导入'
-                    }, {
-                        code: 'invalid',
-                        name: '作废'
-                    }],
                     btnEvent: {
                         import: () => {
                             this.setState({

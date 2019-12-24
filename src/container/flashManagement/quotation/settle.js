@@ -31,31 +31,25 @@ class settle extends React.Component {
             field: 'cvalue',
             title: '数值'
         }];
-        return (<div className="superNode-listPage-wrapper">
-            {
-                this.props.buildList({
-                    fields,
-                    rowKey: 'id',
-                    pageCode: '630045',
-                    searchParams: {
-                        type: 'accept_rule'
-                    },
-                    buttons: [{
-                        code: 'edit',
-                        name: '修改',
-                        handler: (selectedRowKeys, selectedRows) => {
-                            if (!selectedRowKeys.length) {
-                                showWarnMsg('请选择记录');
-                            } else if (selectedRowKeys.length > 1) {
-                                showWarnMsg('请选择一条记录');
-                            } else {
-                                this.props.history.push(`/flashManagement/settle/addedit?code=${selectedRowKeys[0]}&ckey=${selectedRows[0].ckey}`);
-                            }
-                        }
-                    }]
-                })
+        return this.props.buildList({
+            fields,
+            rowKey: 'id',
+            pageCode: '630045',
+            searchParams: {
+                type: 'accept_rule'
+            },
+            btnEvent: {
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/flashManagement/configuration/addedit?code=${selectedRowKeys[0]}&ckey=${selectedRows[0].ckey}`);
+                    }
+                }
             }
-        </div>);
+        });
     }
 }
 

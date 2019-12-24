@@ -1677,7 +1677,7 @@ const ROUTES = [
         path: '/biz/linkManagement/addedit',
         component: asyncComponent(() => import('container/biz/linkManagement/linkManagement/linkManagement-addedit'))
     },
-    // 分红池
+    // 超级节点--分红池
     {
         path: '/superNode/bonusPool',
         component: asyncComponent(() => import('container/superNode/bonusPool/bonusPool'))
@@ -1760,6 +1760,68 @@ const ROUTES = [
     {
         path: '/superNode/revenueBreakdown',
         component: asyncComponent(() => import('container/superNode/shareOutBonus/revenueBreakdown'))
+    },
+    // 闪兑
+    {
+        path: '/flashManagement/statistical',
+        component: asyncComponent(() => import('container/flashManagement/home/home'))
+    },
+    {
+        path: '/flashManagement/transactionPairs',
+        component: asyncComponent(() => import('container/flashManagement/transactionPairs/transactionPairs'))
+    },
+    {
+        path: '/flashManagement/transactionPairs/addedit',
+        component: asyncComponent(() => import('container/flashManagement/transactionPairs/transactionPairs-addedit'))
+    },
+    {
+        path: '/flashManagement/record',
+        component: asyncComponent(() => import('container/flashManagement/record/record'))
+    },
+    {
+        path: '/flashManagement/record/addedit',
+        component: asyncComponent(() => import('container/flashManagement/record/record-addedit'))
+    },
+    {
+        path: '/flashManagement/quotation',
+        component: asyncComponent(() => import('container/flashManagement/quotation/quotation'))
+    },
+    {
+        path: '/flashManagement/configuration',
+        component: asyncComponent(() => import('container/flashManagement/quotation/settle'))
+    },
+    {
+        path: '/flashManagement/configuration/addedit',
+        component: asyncComponent(() => import('container/flashManagement/quotation/settle-addedit'))
+    },
+    {
+        path: '/flashManagement/dailyActList',
+        component: asyncComponent(() => import('container/flashManagement/home/dailyActList'))
+    },
+    // 卡劵
+    {
+        path: '/card/statistical',
+        component: asyncComponent(() => import('container/card/home/home'))
+    },
+    {
+        path: '/card/secretKey',
+        component: asyncComponent(() => import('container/card/secretKey/secretKey'))
+    },
+    {
+        path: '/card/cardVolume',
+        component: asyncComponent(() => import('container/card/cardVolume/cardVolume'))
+    },
+    {
+        path: '/card/cardLog',
+        component: asyncComponent(() => import('container/card/cardLog/cardLog'))
+    },
+    {
+        path: '/card/configuration',
+        component: asyncComponent(() => import('container/card/cardConfiguration/cardConfiguration'))
+    },
+    {
+        path: '/card/configuration/addedit',
+        component: asyncComponent(() => import('container/card/cardConfiguration/cardConfiguration-addedit'))
     }
 ];
 

@@ -20,9 +20,7 @@ import {
     getUserId,
     showSucMsg
 } from 'common/js/util';
-import fetch from 'common/js/fetch';
 
-let currency = '';
 @listWrapper(
     state => ({
         ...state.CardCardVolume,
@@ -91,10 +89,6 @@ class CardVolume extends React.Component {
                 this.props.buildList({
                     fields,
                     pageCode: '610743',
-                    buttons: [{
-                        code: 'cardLog',
-                        name: '卡券日志'
-                    }],
                     btnEvent: {
                         cardLog: (selectedRowKeys, selectedRows) => {
                             if (!selectedRowKeys.length) {

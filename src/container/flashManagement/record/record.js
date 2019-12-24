@@ -72,23 +72,17 @@ class SdRecord extends React.Component {
             field: 'feeRate',
             title: '手续费率(%)'
         }];
-        return (
-            <div className="superNode-listPage-wrapper">
-                {
-                    this.props.buildList({
-                        fields,
-                        pageCode: 802930,
-                        buttons: [{
-                            code: 'detail',
-                            name: '详情'
-                        }, {
-                            code: 'export',
-                            name: '导出'
-                        }]
-                    })
-                }
-            </div>
-        );
+        return this.props.buildList({
+            fields,
+            pageCode: 802930,
+            buttons: [{
+                code: 'detail',
+                name: '详情'
+            }, {
+                code: 'export',
+                name: '导出'
+            }]
+        });
     }
 }
 

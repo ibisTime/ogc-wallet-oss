@@ -14,10 +14,6 @@ import {showWarnMsg, dateTimeFormat, moneyFormat, formatImg} from 'common/js/uti
 import fetch from 'common/js/fetch';
 import {Layout} from 'antd';
 import { Switch, Route } from 'react-router-dom';
-import asyncComponent from 'component/async-component/async-component';
-
-const entryLogTop = asyncComponent(() => import('./dailyReport'));
-const { Content } = Layout;
 
 @listWrapper(
     state => ({
@@ -94,57 +90,32 @@ class Home extends React.Component {
             title: '兑入数量'
         }];
         return (
-            <div className="superNodeHome-wrapper">
-                <div className="homeTop">
-                    <div className="homeTop-left">
-                        <div className="homeTop-left-tit">币种统计</div>
-                        <div className="homeTop-left-item-wrap">
-                            {
-                                bonusPoolData.map((item) => (
-                                    <div style={{height: '50px'}}>
-                                        <strong style={{marginRight: '20px', fontSize: '16px'}}>{item.symbol}</strong>
-                                        <span style={{marginRight: '20px'}}>兑入:{item.countIn}</span>
-                                        <span style={{marginRight: '20px'}}>兑出:{item.countOut}</span>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <div className="homeTop-left-bottom"></div>
-                    </div>
-                    <div className="homeTop-right">
-                        <div className="superNode-title-wrap">
-                            <p>交易对统计</p>
-                            <samp onClick={() => {
-                                this.props.history.push(`/flashManagement/dailyActList`);
-                            }}>查看更多</samp>
-                        </div>
-                        <div className="homeTop-right-table">
-                            {
-                                this.props.buildList({
-                                    fields,
-                                    pageCode: 800021,
-                                    rowKey: 'id',
-                                    noPagination: true,
-                                    noSelect: true,
-                                    maxLen: 5
-                                })
-                            }
-                        </div>
-                    </div>
+            <div>
+                <div style={{marginBottom: '30px', fontSize: '18px', fontWeight: 500}}>币种统计</div>
+                <div style={{display: 'flex', flexWrap: 'wrap', paddingLeft: '50px', marginBottom: '20px'}}>
+                    {
+                        bonusPoolData.map((item) => (
+                            <div style={{height: '50px', width: '40%'}}>
+                                <strong style={{marginRight: '20px', fontSize: '16px'}}>{item.symbol}</strong>
+                                <span style={{marginRight: '20px'}}>兑入:{item.countIn}</span>
+                                <span style={{marginRight: '20px'}}>兑出:{item.countOut}</span>
+                            </div>
+                        ))
+                    }
                 </div>
-                <div className="homeContent">
-                    <div className="superNode-title-wrap">
-                        <p>交易对兑换报表</p>
-                    </div>
-                    <div>
-                        <Layout>
-                            <Content>
-                                <Switch>
-                                    <Route path='/flashManagement' exact component={entryLogTop}></Route>
-                                </Switch>
-                            </Content>
-                        </Layout>
-                    </div>
+                <div style={{backgroundColor: '#e6e6e6', height: '10px'}}/>
+                <div style={{marginTop: '30px', fontSize: '18px', fontWeight: 500}}>
+                    <p>交易对统计</p>
+                </div>
+                <div>
+                    {
+                        this.props.buildList({
+                            fields,
+                            pageCode: 800021,
+                            rowKey: 'id',
+                            noSelect: true
+                        })
+                    }
                 </div>
             </div>
         );
