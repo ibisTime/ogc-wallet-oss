@@ -44,6 +44,10 @@ class VehicleManagementAddedit extends DetailUtil {
             field: 'maintainRate',
             required: true
         }, {
+            title: '可保养次数',
+            field: 'maintainCount',
+            required: true
+        }, {
             title: '收益币种',
             field: 'symbolIncome',
             type: 'select',

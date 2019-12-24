@@ -61,8 +61,17 @@ class VehicleManagement extends React.Component {
             title: '收益币种',
             field: 'symbolIncome'
         }, {
+            title: '收益率',
+            field: 'incomeRate'
+        }, {
             title: '寿命（天）',
             field: 'daysLimit'
+        }, {
+            title: '保养费',
+            field: 'maintainRate'
+        }, {
+            title: '可保养次数',
+            field: 'maintainCount'
         }, {
             title: '状态',
             field: 'status',
