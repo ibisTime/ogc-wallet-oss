@@ -34,11 +34,11 @@ import {tradingSdRecord} from './redux/trading/sdRecord/sdRecord';
 import {cloudMillMessage} from './redux/cloud/millMessage/millMessage';
 import {cloudMillOrder} from './redux/cloud/millOrder/millOrder';
 import {cloudMillOrderIncome} from './redux/cloud/millOrder/millOrderIncome';
-import {cloudRules} from './redux/cloud/rules/rules';
 import {millMessage} from './redux/mill/millMessage/millMessage';
 import {millOrder} from './redux/mill/millOrder/millOrder';
 import {millOrderIncome} from './redux/mill/millOrder/millOrderIncome';
 import {millRules} from './redux/mill/rules/rules';
+import {cloudRules} from './redux/cloud/rules/rules';
 import {millUser} from './redux/mill/millUser/millUser';
 import {quantitativeAi} from './redux/quantitativeAi/quantitativeAi/quantitativeAi';
 import {quantitativeAiOrder} from './redux/quantitativeAi/quantitativeAiOrder/quantitativeAiOrder';
@@ -158,12 +158,11 @@ import {activityGoldenMile} from './redux/activity/goldenMile/goldenMile';
 import {activityBednReward} from './redux/activity/bednReward/bednReward';
 
 // 业务规则
-// 广告费规则
-import {rulesAdvertisingFee} from './redux/rules/advertisingFee/advertisingFee';
 
 // 提币手续费规则
 import {BTCFinanceWithdrawRule} from './redux/BTC-finance/withdrawRule/withdrawRule';
-
+// 广告费规则
+import {rulesAdvertisingFee} from './redux/rules/advertisingFee/advertisingFee';
 // 承兑商手续费规则
 import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
 
@@ -580,8 +579,8 @@ export default combineReducers({
     OtcManageHistoricalorder,
     OtcManageComment,
     // 营销结算
-    StadySettLement,
     OtcManageHistoricalorderEdit,
+    StadySettLement,
     NoOrder,
     StayOrder,
     AlreadySettlement,
