@@ -99,10 +99,12 @@ class UserToken extends React.Component {
     changeUserHandleOk = () => {
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const { userId01, level01 } = values;
+                const { userId01, level01, count } = values;
+                console.log(values);
                 this.formFn(625820, {
                     keyConfigCode: level01,
-                    userId: userId01
+                    userId: userId01,
+                    count: parseInt(count)
                 }, 'visible');
             }
         });
@@ -134,6 +136,9 @@ class UserToken extends React.Component {
             valueName: 'L{{level.DATA}}-{{name.DATA}}',
             search: true
         }, {
+            field: 'transferCount',
+            title: '流转次数'
+        }, {
             field: 'createrName',
             title: '发放人'
         }, {
@@ -150,6 +155,7 @@ class UserToken extends React.Component {
                     this.props.buildList({
                         fields,
                         pageCode: '625822',
+                        singleSelect: false,
                         btnEvent: {
                             // 发放令牌
                             opToken: () => {
@@ -160,17 +166,16 @@ class UserToken extends React.Component {
                             clearToken: (selectedRowKeys, selectedRows) => {
                                 if (!selectedRowKeys.length) {
                                     showWarnMsg('请选择记录');
-                                } else if (selectedRowKeys.length > 1) {
-                                    showWarnMsg('请选择一条记录');
                                 } else {
                                     Modal.confirm({
                                         okText: '确认',
                                         cancelText: '取消',
                                         content: `确定销毁该令牌？`,
                                         onOk: () => {
+                                            console.log(selectedRowKeys);
                                             this.props.doFetching();
                                             return fetch(625821, {
-                                                code: selectedRowKeys[0]
+                                                codeList: selectedRowKeys
                                             }).then(() => {
                                                 this.props.getPageData();
                                                 showSucMsg('操作成功');
@@ -238,6 +243,19 @@ class UserToken extends React.Component {
                                     ))
                                 }
                             </Select>)}
+                        </Form.Item>
+                        <Form.Item label="数量">
+                            {getFieldDecorator('count', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: ' '
+                                    }
+                                ]
+                            })(<Input
+                                style={{ width: '100%' }}
+                                placeholder="请输入数量"
+                            />)}
                         </Form.Item>
                     </Form>
                 </Modal>
