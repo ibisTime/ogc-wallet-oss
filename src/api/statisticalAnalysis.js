@@ -7,10 +7,10 @@ export function userAmount(date) {
     return fetch(800000, {date});
 }
 
-// // 查询用户糖果节点分布数量
-// export function userDistribution() {
-//     return fetch(610601);
-// }
+// 查询用户糖果节点分布数量
+export function userDistribution() {
+    return fetch(625818);
+}
 
 // 数据字典
 export function dataDect(parentKey) {

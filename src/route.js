@@ -1232,7 +1232,7 @@ const ROUTES = [
         path: '/news/newsFlash/addedit',
         component: asyncComponent(() => import('container/managent/alerts/alerts-addedit'))
     },
-// 业务管理--DAPP应用
+    // 业务管理--DAPP应用
     {
         path: '/managent/dappmanagent',
         component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent'))
@@ -1241,6 +1241,15 @@ const ROUTES = [
     {
         path: '/managent/dappmanagent/addedit',
         component: asyncComponent(() => import('container/managent/dappmanagent/dappmanagent-addedit'))
+    },
+    // 划转规则
+    {
+        path: '/managent/rulesOfTransfer',
+        component: asyncComponent(() => import('container/managent/rulesOfTransfer/rulesOfTransfer'))
+    },
+    {
+        path: '/managent/rulesOfTransfer/addedit',
+        component: asyncComponent(() => import('container/managent/rulesOfTransfer/rulesOfTransfer-edit'))
     },
     // 业务管理--DAPP应用攻略
     {
@@ -1476,6 +1485,11 @@ const ROUTES = [
     {
         path: '/userStatistics/currencyStatistics',
         component: asyncComponent(() => import('container/userStatistics/currencyStatistics'))
+    },
+    // 用户等级分布
+    {
+        path: '/userStatistics/userLevel',
+        component: asyncComponent(() => import('container/userStatistics/userLevel'))
     },
     // 规则通用-addedit
     {

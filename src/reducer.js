@@ -408,6 +408,8 @@ import {bizCategory} from './redux/biz/news/category';
 
 // 行情管理-币种管理
 import {bizQuotationCoin} from './redux/biz/news-quotation/coin';
+// 划转规则
+import {rulesOfTransfer} from './redux/managent/rulesOfTransfer/rulesOfTransfer';
 
 export default combineReducers({
     user,
@@ -737,5 +739,6 @@ export default combineReducers({
     bizCategory,
     bizQuotationCoin,
     // 友情链接
-    bizLinkManagement
+    bizLinkManagement,
+    rulesOfTransfer
 });
