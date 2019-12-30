@@ -27,7 +27,9 @@ class rulesOfTransfer extends React.Component {
         const fields = [{
             field: 'name',
             title: '应用名称',
-            _keys: ['openDapp', 'name']
+            render(v, d) {
+                return d.openDapp.name;
+            }
         }, {
             field: 'symbol',
             title: '币种'
@@ -44,7 +46,7 @@ class rulesOfTransfer extends React.Component {
             field: 'withdrawLimit',
             title: '每人每日划转上限'
         }, {
-            field: 'withdrawFee',
+            field: 'withdrawFeeType',
             title: '手续费类型',
             type: 'select',
             key: 'withdraw_fee_type'

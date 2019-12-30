@@ -15,7 +15,7 @@ app.use('/api', function (req, res) {
     // let url = 'http://oss.wallettest.hichengdai.com/api';
     // psc
     // let url = 'http://oss.psctest.psctoken.com/api';
-    
+
     var _body = req.body;
     var param = 'code=' + _body.code + '&json=' + encodeURIComponent(_body.json);
     axios.post(url, param).then((response) => {
