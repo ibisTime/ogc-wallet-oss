@@ -33,10 +33,10 @@ class currencyStatistics extends React.Component {
             ];
             for(let i = 0; i < data.length; i++) {
                 nodeList[i] = [
-                    data[i].date, moneyFormat(data[i].todaySymbolIn, '', coinList[0].key),
-                    moneyFormat(data[i].todaySymbolOut, '', coinList[0].key),
-                    moneyFormat(data[i].todayCollect, '', coinList[0].key),
-                    moneyFormat(data[i].totalAmount, '', coinList[0].key)
+                    data[i].date, moneyFormat(data[i].todaySymbolIn, '', coinList[0].key, true),
+                    moneyFormat(data[i].todaySymbolOut, '', coinList[0].key, true),
+                    moneyFormat(data[i].todayCollect, '', coinList[0].key, true),
+                    moneyFormat(data[i].totalAmount, '', coinList[0].key, true)
                 ];
             }
             sourceList.push(...nodeList);
@@ -59,10 +59,10 @@ class currencyStatistics extends React.Component {
             ];
             for(let i = 0; i < data.length; i++) {
                 nodeList[i] = [
-                    data[i].date, moneyFormat(data[i].todaySymbolIn, '', symbol),
-                    moneyFormat(data[i].todaySymbolOut, '', symbol),
-                    moneyFormat(data[i].todayCollect, '', symbol),
-                    moneyFormat(data[i].totalAmount, '', symbol)
+                    data[i].date, moneyFormat(data[i].todaySymbolIn, '', symbol, true),
+                    moneyFormat(data[i].todaySymbolOut, '', symbol, true),
+                    moneyFormat(data[i].todayCollect, '', symbol, true),
+                    moneyFormat(data[i].totalAmount, '', symbol, true)
                 ];
             }
             sourceList.push(...nodeList);
