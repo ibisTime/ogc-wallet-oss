@@ -61,8 +61,15 @@ class TransferAccountsQuery extends React.Component {
             field: 'dkey',
             title: '方向',
             render: (v, data) => {
-                return data && String(data.amount).indexOf('-') > -1 ? 'DAPP转到钱包' : '钱包转到DAPP';
+                return data && String(data.amount).indexOf('-') > -1 ? '钱包转到DAPP' : 'DAPP转到钱包';
             }
+        }, {
+            field: 'direction',
+            title: '方向',
+            type: 'select',
+            key: 'dapp_transfer_direction',
+            search: true,
+            noVisible: true
         }, {
             field: 'amount',
             title: '转账数量',
