@@ -70,7 +70,11 @@ class SdRecord extends React.Component {
         carList: [],
         userIdVal: '',
         symbol: '',
-        amount: ''
+        amount: '',
+        realTime: '',
+        usdtRealTime: '',
+        ogcRealTime: '',
+        fee: ''
     };
     handleOk = () => {
         if(this.isHandleOk) {
@@ -105,6 +109,8 @@ class SdRecord extends React.Component {
     handleCancel = () => {
         this.setState({
             visible: false
+        }, () => {
+            this.props.getPageData();
         });
     };
     handleSearch = value => {
@@ -124,8 +130,47 @@ class SdRecord extends React.Component {
         this.props.form.setFieldsValue({
             carProductCode: value
         });
+        const {value1} = this.state;
+        if(value1 !== '') {
+            this.props.form.validateFields((err, values) => {
+                const { carProductCode } = values;
+                if (!err) {
+                    fetch('802922', {exchangeSymbolPairId: carProductCode.split('|')[0], countTotal: value1}).then(data => {
+                        this.setState({
+                            realTime: 1 + carProductCode.split('|')[1] + '≈' + data.exchangeRate + carProductCode.split('|')[2],
+                            usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
+                            ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
+                            fee: data.fee + carProductCode.split('|')[1]
+                        });
+                    });
+                }
+            });
+        }
         this.getAccountBalance();
     };
+    IptChange = () => {
+        if(event.target.value !== '') {
+            this.setState({value1: event.target.value}, () => {
+                this.getSymbolInfo();
+            });
+        }
+    }
+    getSymbolInfo = () => {
+        this.props.form.validateFields((err, values) => {
+            const { carProductCode } = values;
+            const {value1} = this.state;
+            if (!err) {
+                fetch('802922', {exchangeSymbolPairId: carProductCode.split('|')[0], countTotal: value1}).then(data => {
+                   this.setState({
+                       realTime: 1 + carProductCode.split('|')[1] + '≈' + data.exchangeRate + carProductCode.split('|')[2],
+                       usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
+                       ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
+                       fee: data.fee + carProductCode.split('|')[1]
+                   });
+                });
+            }
+        });
+    }
     componentDidMount() {
         fetch('802910', {start: 1, limit: 20}).then(data => {
             this.setState({
@@ -201,7 +246,7 @@ class SdRecord extends React.Component {
             key: 'exchange_operator_type',
             search: true
         }];
-        const {datas, userIdVal, carList, visible, symbol, amount} = this.state;
+        const {datas, userIdVal, carList, visible, symbol, amount, realTime, usdtRealTime, ogcRealTime, fee} = this.state;
         const {getFieldDecorator} = this.props.form;
         const options = datas.map(d => <Option key={d.userId}>{d.text}</Option>);
         return (
@@ -270,7 +315,7 @@ class SdRecord extends React.Component {
                             >
                                 {
                                     Array.isArray(carList) && carList.map(item => (
-                                        <Option key={`${item.id}|${item.symbolOut}`}>{item.symbolOut}-{item.symbolIn}</Option>
+                                        <Option key={`${item.id}|${item.symbolOut}|${item.symbolIn}`}>{item.symbolOut}-{item.symbolIn}</Option>
                                     ))
                                 }
                             </Select>)}
@@ -278,14 +323,12 @@ class SdRecord extends React.Component {
                         <Form {...formItemLayout} onSubmit={this.handleOk}>
                             <Form.Item label="兑出数量">
                                 {getFieldDecorator('count01', {
-                                    rules: [
-                                        {
-                                            message: ' '
-                                        }
-                                    ]
-                                })(<Input placeholder="请输入数量"/>)}
+                                })(<Input onChange={event => this.IptChange(event)} placeholder="请输入数量"/>)}
                             </Form.Item>
-                            <p style={{paddingLeft: '40px'}}>{symbol}余额:{amount}</p>
+                            <p style={{paddingLeft: '40px'}}>{symbol}余额：{amount}</p>
+                            <p style={{paddingLeft: '40px'}}>实时汇率：{realTime}</p>
+                            <p style={{paddingLeft: '40px'}}>币种行情：{usdtRealTime} | {ogcRealTime}</p>
+                            <p style={{paddingLeft: '40px'}}>手续费：{fee}</p>
                         </Form>
                     </Form>
                 </Modal>
