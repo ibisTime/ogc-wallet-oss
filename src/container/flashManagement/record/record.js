@@ -38,10 +38,11 @@ function fetchUser(value, callback) {
     function fake() {
         const datas = [];
         findUserList(1, 15, value).then(data => {
+            console.log(data);
             data.list.forEach(r => {
                 datas.push({
-                    value: r.mobile,
-                    text: `${r.nickname}-${r.mobile}`,
+                    value: r.loginName,
+                    text: `${r.nickname}-${r.loginName ? r.loginName : ''}`,
                     userId: r.userId
                 });
             });
@@ -70,7 +71,7 @@ class SdRecord extends React.Component {
         carList: [],
         userIdVal: '',
         symbol: '',
-        amount: '',
+        amount: 0,
         realTime: '',
         usdtRealTime: '',
         ogcRealTime: '',
@@ -99,7 +100,7 @@ class SdRecord extends React.Component {
                         this.setState({
                             userIdVal: '',
                             symbol: '',
-                            amount: '',
+                            amount: 0,
                             realTime: '',
                             usdtRealTime: '',
                             ogcRealTime: '',
@@ -124,7 +125,7 @@ class SdRecord extends React.Component {
             this.setState({
                 userIdVal: '',
                 symbol: '',
-                amount: '',
+                amount: 0,
                 realTime: '',
                 usdtRealTime: '',
                 ogcRealTime: '',
@@ -163,7 +164,7 @@ class SdRecord extends React.Component {
                             usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
                             ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
                             fee: data.fee + carProductCode.split('|')[1],
-                            countIn: data.countIn + carProductCode.split('|')[2]
+                            countIn: parseFloat(data.countIn).toFixed(8) + carProductCode.split('|')[2]
                         });
                     });
                 }
@@ -189,14 +190,14 @@ class SdRecord extends React.Component {
                        usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
                        ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
                        fee: data.fee + carProductCode.split('|')[1],
-                       countIn: data.countIn + carProductCode.split('|')[2]
+                       countIn: parseFloat(data.countIn).toFixed(8) + carProductCode.split('|')[2]
                    });
                 });
             }
         });
     }
     componentDidMount() {
-        fetch('802910', {start: 1, limit: 20}).then(data => {
+        fetch('802910', {start: 1, limit: 20, status: '1'}).then(data => {
             this.setState({
                 carList: data.list
             });
@@ -210,6 +211,8 @@ class SdRecord extends React.Component {
                     this.setState({
                         amount: moneyFormat(parseFloat(data.accountList[0].amount - data.accountList[0].frozenAmount).toFixed(8), '', carProductCode.split('|')[1]),
                         symbol: carProductCode.split('|')[1]
+                    }, () => {
+                        console.log(this.state.amount);
                     });
                 });
             }
