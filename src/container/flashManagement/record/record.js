@@ -198,7 +198,8 @@ class SdRecord extends React.Component {
             field: 'operatorType',
             title: '操作人类型',
             type: 'select',
-            key: 'exchange_operator_type'
+            key: 'exchange_operator_type',
+            search: true
         }];
         const {datas, userIdVal, carList, visible, symbol, amount} = this.state;
         const {getFieldDecorator} = this.props.form;
@@ -275,7 +276,7 @@ class SdRecord extends React.Component {
                             </Select>)}
                         </Form.Item>
                         <Form {...formItemLayout} onSubmit={this.handleOk}>
-                            <Form.Item label="数量">
+                            <Form.Item label="兑出数量">
                                 {getFieldDecorator('count01', {
                                     rules: [
                                         {
