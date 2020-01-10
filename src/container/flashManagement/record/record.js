@@ -74,7 +74,8 @@ class SdRecord extends React.Component {
         realTime: '',
         usdtRealTime: '',
         ogcRealTime: '',
-        fee: ''
+        fee: '',
+        countIn: ''
     };
     handleOk = () => {
         if(this.isHandleOk) {
@@ -92,10 +93,20 @@ class SdRecord extends React.Component {
                         hasMsg();
                         message.success('操作成功', 1.5);
                         this.props.getPageData();
-                        this.props.form.resetFields();
                         this.setState({
                             visible: false
                         });
+                        this.setState({
+                            userIdVal: '',
+                            symbol: '',
+                            amount: '',
+                            realTime: '',
+                            usdtRealTime: '',
+                            ogcRealTime: '',
+                            fee: '',
+                            countIn: ''
+                        });
+                        this.props.form.resetFields();
                     }).catch(() => {
                         this.isHandleOk = true;
                         hasMsg();
@@ -110,6 +121,17 @@ class SdRecord extends React.Component {
         this.setState({
             visible: false
         }, () => {
+            this.setState({
+                userIdVal: '',
+                symbol: '',
+                amount: '',
+                realTime: '',
+                usdtRealTime: '',
+                ogcRealTime: '',
+                fee: '',
+                countIn: ''
+            });
+            this.props.form.resetFields();
             this.props.getPageData();
         });
     };
@@ -140,7 +162,8 @@ class SdRecord extends React.Component {
                             realTime: 1 + carProductCode.split('|')[1] + '≈' + data.exchangeRate + carProductCode.split('|')[2],
                             usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
                             ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
-                            fee: data.fee + carProductCode.split('|')[1]
+                            fee: data.fee + carProductCode.split('|')[1],
+                            countIn: data.countIn + carProductCode.split('|')[2]
                         });
                     });
                 }
@@ -165,7 +188,8 @@ class SdRecord extends React.Component {
                        realTime: 1 + carProductCode.split('|')[1] + '≈' + data.exchangeRate + carProductCode.split('|')[2],
                        usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
                        ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
-                       fee: data.fee + carProductCode.split('|')[1]
+                       fee: data.fee + carProductCode.split('|')[1],
+                       countIn: data.countIn + carProductCode.split('|')[2]
                    });
                 });
             }
@@ -246,7 +270,7 @@ class SdRecord extends React.Component {
             key: 'exchange_operator_type',
             search: true
         }];
-        const {datas, userIdVal, carList, visible, symbol, amount, realTime, usdtRealTime, ogcRealTime, fee} = this.state;
+        const {datas, userIdVal, carList, visible, symbol, amount, realTime, usdtRealTime, ogcRealTime, fee, countIn} = this.state;
         const {getFieldDecorator} = this.props.form;
         const options = datas.map(d => <Option key={d.userId}>{d.text}</Option>);
         return (
@@ -328,6 +352,7 @@ class SdRecord extends React.Component {
                             <p style={{paddingLeft: '40px'}}>{symbol}余额：{amount}</p>
                             <p style={{paddingLeft: '40px'}}>实时汇率：{realTime}</p>
                             <p style={{paddingLeft: '40px'}}>币种行情：{usdtRealTime} | {ogcRealTime}</p>
+                            <p style={{paddingLeft: '40px'}}>兑入数量：{countIn}</p>
                             <p style={{paddingLeft: '40px'}}>手续费：{fee}</p>
                         </Form>
                     </Form>
