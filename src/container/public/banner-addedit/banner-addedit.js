@@ -41,9 +41,16 @@ class BannerAddEdit extends DetailUtil {
             help: '数字越小，排序越靠前',
             required: true
         }, {
-            title: 'banner图片',
+            title: '中文banner图片',
             field: 'pic',
             type: 'img',
+            help: '1200*300',
+            required: true,
+            single: true
+        }, {
+            title: '英文banner图片',
+            field: 'pic',
+            type: 'enName',
             help: '1200*300',
             required: true,
             single: true

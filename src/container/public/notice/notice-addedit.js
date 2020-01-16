@@ -25,6 +25,11 @@ class NoticesAddedit extends DetailUtil {
             maxlength: 50,
             required: true
         }, {
+            title: '语言',
+            field: 'lang',
+            type: 'select',
+            key: 'sms_lang'
+        }, {
             title: '内容',
             field: 'content',
             type: 'textarea',

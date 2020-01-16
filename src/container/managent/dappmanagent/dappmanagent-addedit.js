@@ -75,6 +75,10 @@ class AppmanagentAddedit extends DetailUtil {
         //     key: 'dopen_app_location',
         //     title: '位置'
         }, {
+            field: 'enName',
+            title: '英文名称',
+            required: true
+        }, {
             field: 'picList',
             title: '列表展示图',
             type: 'img',

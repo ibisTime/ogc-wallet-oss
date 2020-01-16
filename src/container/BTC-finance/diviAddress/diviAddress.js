@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, message, Input, Select} from 'antd';
+import {Modal, Input, message, Select, Form} from 'antd';
 import {
   setTableData,
   setPagination,
@@ -12,6 +12,20 @@ import {
 } from '@redux/BTC-finance/diviAddress/diviAddress';
 import {listWrapper} from 'common/js/build-list';
 import {moneyFormat, getCoinList, dateTimeFormat, showWarnMsg} from 'common/js/util';
+import fetch from 'common/js/fetch';
+
+const {Option} = Select;
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 4 }
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 }
+  }
+};
 
 @listWrapper(
   state => ({
@@ -24,6 +38,128 @@ import {moneyFormat, getCoinList, dateTimeFormat, showWarnMsg} from 'common/js/u
   }
 )
 class BTCDiviAddress extends React.Component {
+  isHandleOk = true;
+  state = {
+    ...this.state,
+    visible: false,
+    carList: [],
+    userIdVal: '',
+    symbol: '',
+    realTime: '',
+    usdtRealTime: '',
+    ogcRealTime: '',
+    fee: '',
+    countIn: '',
+    userList: []
+  };
+  handleOk = () => {
+    const {userList} = this.state;
+    if(this.isHandleOk) {
+      this.isHandleOk = false;
+      this.props.form.validateFields((err, values) => {
+        if (!err) {
+          const hasMsg = message.loading('');
+          const { carProductCode } = values;
+          fetch('802923', {
+            exchangeSymbolPairId: carProductCode.split('|')[0],
+            data: userList
+          }).then(() => {
+            this.isHandleOk = true;
+            hasMsg();
+            message.success('操作成功', 1.5);
+            this.props.getPageData();
+            this.setState({
+              visible: false
+            });
+            this.setState({
+              userIdVal: '',
+              symbol: '',
+              realTime: '',
+              usdtRealTime: '',
+              ogcRealTime: '',
+              fee: '',
+              countIn: '',
+              userList: []
+            });
+            this.props.form.resetFields();
+          }).catch(() => {
+            this.isHandleOk = true;
+            hasMsg();
+          });
+        }else {
+          this.isHandleOk = true;
+        }
+      });
+    }
+  };
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    }, () => {
+      this.setState({
+        userIdVal: '',
+        symbol: '',
+        realTime: '',
+        usdtRealTime: '',
+        ogcRealTime: '',
+        countIn: '',
+        userList: []
+      });
+      this.props.form.resetFields();
+      this.props.getPageData();
+    });
+  };
+  handleChange2 = value => {
+    this.props.form.setFieldsValue({
+      carProductCode: value
+    });
+    const {value1} = this.state;
+    if(value1 !== '') {
+      this.props.form.validateFields((err, values) => {
+        const { carProductCode } = values;
+        if (!err) {
+          fetch('802922', {exchangeSymbolPairId: carProductCode.split('|')[0], countTotal: value1}).then(data => {
+            this.setState({
+              realTime: 1 + carProductCode.split('|')[1] + '≈' + data.exchangeRate + carProductCode.split('|')[2],
+              usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
+              ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
+              countIn: parseFloat(data.countIn).toFixed(8) + carProductCode.split('|')[2]
+            });
+          });
+        }
+      });
+    }
+  };
+  IptChange = () => {
+    if(event.target.value !== '') {
+      this.setState({value1: event.target.value}, () => {
+        this.getSymbolInfo();
+      });
+    }
+  }
+  getSymbolInfo = () => {
+    this.props.form.validateFields((err, values) => {
+      const { carProductCode } = values;
+      const {value1} = this.state;
+      if (!err) {
+        fetch('802922', {exchangeSymbolPairId: carProductCode.split('|')[0], countTotal: value1}).then(data => {
+          this.setState({
+            realTime: 1 + carProductCode.split('|')[1] + '≈' + data.exchangeRate + carProductCode.split('|')[2],
+            usdtRealTime: 1 + carProductCode.split('|')[1] + '≈' + data.symbolOutMarket + 'CNY',
+            ogcRealTime: 1 + carProductCode.split('|')[2] + '≈' + data.symbolInMarket + 'CNY',
+            countIn: parseFloat(data.countIn).toFixed(8) + carProductCode.split('|')[2]
+          });
+        });
+      }
+    });
+  }
+  componentDidMount() {
+    fetch('802910', {start: 1, limit: 20, status: '1'}).then(data => {
+      this.setState({
+        carList: data.list
+      });
+    });
+  }
   render() {
     const fields = [{
       title: '用户',
@@ -61,6 +197,8 @@ class BTCDiviAddress extends React.Component {
       title: '地址',
       search: true
     }];
+    const {carList, visible, realTime, usdtRealTime, ogcRealTime, countIn} = this.state;
+    const {getFieldDecorator} = this.props.form;
     return (
       <div>
           {
@@ -133,10 +271,63 @@ class BTCDiviAddress extends React.Component {
                         } else {
                           this.props.history.push(`/user/channelDealer/accountQuery?isCDealer=1&userId=${selectedRows[0].userId}&isAct=1`);
                         }
+                      },
+                    batchOperation: (selectedRowKeys, selectedRows) => {
+                      if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                      }else {
+                        let arr = [];
+                        for(let i = 0; i < selectedRows.length; i++) {
+                          arr.push({
+                            userId: selectedRows[i].userId,
+                            countTotal: parseFloat(selectedRows[i].amount - selectedRows[i].frozenAmount).toFixed(8),
+                            symbol: selectedRows[i].currency
+                          });
+                        }
+                        this.setState({
+                          visible: true,
+                          userList: arr
+                        });
                       }
+                    }
                   }
               })
           }
+        <Modal
+            width={600}
+            title="闪兑"
+            visible={visible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            okText="确定"
+            cancelText="取消"
+        >
+          <Form {...formItemLayout} onSubmit={this.handleOk}>
+            <Form.Item label="交易对">
+              {getFieldDecorator('carProductCode', {
+                rules: [
+                  {
+                    message: ' '
+                  }
+                ]
+              })(<Select
+                  style={{ width: '100%' }}
+                  placeholder="请选择"
+                  onChange={this.handleChange2}
+              >
+                {
+                  Array.isArray(carList) && carList.map(item => (
+                      <Option key={`${item.id}|${item.symbolOut}|${item.symbolIn}`}>{item.symbolOut}-{item.symbolIn}</Option>
+                  ))
+                }
+              </Select>)}
+            </Form.Item>
+            <Form {...formItemLayout} onSubmit={this.handleOk}>
+              <p style={{paddingLeft: '40px'}}>实时汇率：{realTime}</p>
+              <p style={{paddingLeft: '40px'}}>币种行情：{usdtRealTime} | {ogcRealTime}</p>
+            </Form>
+          </Form>
+        </Modal>
       </div>
     );
   }

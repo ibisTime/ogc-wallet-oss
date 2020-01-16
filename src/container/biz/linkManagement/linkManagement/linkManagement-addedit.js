@@ -20,6 +20,10 @@ class CloudMessageAddedit extends DetailUtil {
             title: '名称',
             required: true
         }, {
+            field: 'enName',
+            title: '英文名称',
+            search: true
+        }, {
             field: 'category',
             title: '类型',
             type: 'select',
@@ -93,7 +97,12 @@ class CloudMessageAddedit extends DetailUtil {
             hidden: !this.code
         }, {
             field: 'desc',
-            title: '描述',
+            title: '中文描述',
+            type: 'textarea',
+            normalArea: true
+        }, {
+            field: 'enDesc',
+            title: '英文描述',
             type: 'textarea',
             normalArea: true
         }];
