@@ -28,7 +28,8 @@ class NoticesAddedit extends DetailUtil {
             title: '语言',
             field: 'lang',
             type: 'select',
-            key: 'sms_lang'
+            key: 'sms_lang',
+            required: true
         }, {
             title: '内容',
             field: 'content',

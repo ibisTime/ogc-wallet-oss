@@ -26,6 +26,12 @@ class NewsAddedit extends DetailUtil {
             valueName: 'name',
             required: true
         }, {
+            title: '语言',
+            field: 'language',
+            type: 'select',
+            key: 'sms_lang',
+            required: true
+        }, {
             title: '来源',
             field: 'source'
         }, {

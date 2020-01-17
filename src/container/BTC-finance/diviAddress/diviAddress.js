@@ -171,7 +171,7 @@ class BTCDiviAddress extends React.Component {
       searchName: 'keyword',
       search: true,
       render: (v, data) => {
-        return data.nickname ? data.nickname : '-' + '(' + data.loginName ? data.loginName : '-' + ')';
+        return data.nickname ? data.nickname + '(' + data.loginName + ')' : '';
       }
     }, {
       field: 'currency',
