@@ -49,7 +49,7 @@ class BannerAddEdit extends DetailUtil {
             single: true
         }, {
             title: '英文banner图片',
-            field: 'enName',
+            field: 'enPic',
             type: 'img',
             help: '1200*300',
             required: true,

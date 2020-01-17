@@ -24,7 +24,12 @@ class NewsAddedit extends DetailUtil {
             listCode: '628007',
             keyName: 'code',
             valueName: 'name',
-            required: true
+            required: true,
+            hidden: this.view
+        }, {
+            title: '类型',
+            field: 'typeName',
+            hidden: !this.view
         }, {
             title: '语言',
             field: 'language',
