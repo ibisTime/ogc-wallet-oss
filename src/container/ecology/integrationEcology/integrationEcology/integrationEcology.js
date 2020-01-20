@@ -41,6 +41,7 @@ class IntegrationEcology extends React.Component {
         // let username = localStorage.getItem('username');
         // let tokenIgo = localStorage.getItem('token_igo');
         // window.open(`${item.url}/verificationPSC?username=${username}&token=${tokenIgo}`);
+        console.log(item);
         if(item.url === 'dapp_igo') {
             let username = localStorage.getItem('username');
             let tokenIgo = localStorage.getItem('token_igo');
@@ -60,6 +61,12 @@ class IntegrationEcology extends React.Component {
             window.open(`${minerOssUrl}/verificationPSC?username=${username}&token=${tokenIgo}`);
         }
         if(item.url === 'dapp_gravity') {
+            let username = localStorage.getItem('username');
+            let tokenIgo = localStorage.getItem('token_igo');
+            let minerOssUrl = sessionStorage.getItem('gravitationalOssUrl');
+            window.open(`${minerOssUrl}/verificationPSC?username=${username}&token=${tokenIgo}`);
+        }
+        if(item.url === 'DAPP_TBB') {
             let username = localStorage.getItem('username');
             let tokenIgo = localStorage.getItem('token_igo');
             let minerOssUrl = sessionStorage.getItem('gravitationalOssUrl');
