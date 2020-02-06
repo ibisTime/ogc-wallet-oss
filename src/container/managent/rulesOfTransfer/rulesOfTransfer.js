@@ -25,12 +25,6 @@ import { showWarnMsg } from 'common/js/util';
 class rulesOfTransfer extends React.Component {
     render() {
         const fields = [{
-            field: 'name',
-            title: '应用名称',
-            render(v, d) {
-                return d.openDapp.name;
-            }
-        }, {
             field: 'symbol',
             title: '币种'
         }, {
