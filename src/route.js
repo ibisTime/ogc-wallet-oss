@@ -281,6 +281,10 @@ const ROUTES = [
         path: '/user/customer/ledgerQueryHistory',
         component: asyncComponent(() => import('container/user/customer/customer-ledgerQueryHistory'))
     },
+    {
+        path: '/user/customer/importUser',
+        component: asyncComponent(() => import('container/user/customer/importUser'))
+    },
     // 实名认证
     {
         path: '/user/identify',

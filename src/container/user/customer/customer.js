@@ -389,6 +389,9 @@ class Customer extends React.Component {
                                       seleUserId: selectedRowKeys[0]
                                   });
                               }
+                          },
+                          import: () => {
+                              this.props.history.push('/user/customer/importUser');
                           }
                       },
                       beforeSearch: (params) => {
