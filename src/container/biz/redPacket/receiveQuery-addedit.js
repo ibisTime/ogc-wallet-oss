@@ -3,7 +3,8 @@ import {Form} from 'antd';
 import {
     getQueryString,
     moneyFormat,
-    dateTimeFormat
+    dateTimeFormat,
+    getUserName
 } from 'common/js/util';
 import DetailUtil from 'common/js/build-detail';
 
@@ -29,10 +30,12 @@ class ReceiveQueryAddedit extends DetailUtil {
             title: '类型',
             field: 'type',
             type: 'select',
-            data: {
-                '1': '基于ETH的token币',
-                '2': '基于WAN的token币'
-            }
+            data: [{
+                'key': '0T',
+                'value': '基于ETH的token币'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
             title: '英文名称',
             field: 'ename',
@@ -144,6 +147,7 @@ class ReceiveQueryAddedit extends DetailUtil {
                 if (this.symbol) {
                     data.symbol = this.symbol;
                 }
+                data.updater = getUserName();
                 return data;
             }
         });
