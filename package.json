@@ -55,7 +55,7 @@
     "server": "nodemon server/server.js",
     "dev": "node scripts/start.js",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "build": "node --max_old_space_size=8096 scripts/build.js",
+    "build": "node --max_old_space_size=12096 scripts/build.js",
     "build:dll": "webpack --config ./config/webpack.config.dll.js",
     "test": "node scripts/test.js"
   },
