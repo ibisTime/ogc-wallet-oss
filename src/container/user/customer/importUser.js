@@ -65,7 +65,7 @@ class ImportUser extends React.Component {
                 return message.warning('导入的文件内容为空');
             }
             const hasMsg = message.loading('', 10);
-            fetch(805047, {
+            fetch(625904, {
                 dataList: data
             }).then(() => {
                 hasMsg();
