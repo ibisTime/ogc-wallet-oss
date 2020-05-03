@@ -19,6 +19,7 @@ import {
     getUserName
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
+import { getDictList } from 'api/dict';
 
 const {Option} = Select;
 const formItemLayout = {
@@ -47,7 +48,8 @@ class JinseNews extends React.Component {
         ...this.state,
         visible: false,
         codeList: [],
-        typeList: []
+        typeList: [],
+        languageList: []
     };
     isHandleOk = true;
     handleOk = () => {
@@ -56,11 +58,12 @@ class JinseNews extends React.Component {
             this.props.form.validateFields((err, values) => {
                 if (!err) {
                     const hasMsg = message.loading('');
-                    const { typeNew } = values;
+                    const { typeNew, language } = values;
                     let obj = {
                         updater: getUserName(),
                         idList: this.state.codeList,
-                        type: typeNew
+                        type: typeNew,
+                        language
                     };
                     fetch('628100', obj).then(() => {
                         hasMsg();
@@ -98,6 +101,20 @@ class JinseNews extends React.Component {
                 });
             }
         });
+        getDictList({parentKey: 'language'}).then(data => {
+            let arr = [];
+            if(Array.isArray(data)) {
+                data.map(item => {
+                   arr.push({
+                       code: item.dkey,
+                       name: item.dvalue
+                   });
+                });
+                this.setState({
+                    languageList: arr
+                });
+            }
+        });
     }
     render() {
         const fields = [{
@@ -125,7 +142,7 @@ class JinseNews extends React.Component {
             type: 'datetime'
         }];
         const {getFieldDecorator} = this.props.form;
-        const {typeList} = this.state;
+        const {typeList, languageList} = this.state;
         return <div>
             {
                 this.props.buildList({
@@ -172,6 +189,26 @@ class JinseNews extends React.Component {
                         >
                             {
                                 typeList.map(item => (
+                                    <Option key={item.code} value={item.code}>{item.name}</Option>
+                                ))
+                            }
+                        </Select>)}
+                    </Form.Item>
+                    <Form.Item label="语言">
+                        {getFieldDecorator('language', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: ' '
+                                }
+                            ]
+                        })(<Select
+                            style={{ width: '100%' }}
+                            placeholder="请选择"
+                            onChange={this.approveChange}
+                        >
+                            {
+                                languageList.map(item => (
                                     <Option key={item.code} value={item.code}>{item.name}</Option>
                                 ))
                             }
