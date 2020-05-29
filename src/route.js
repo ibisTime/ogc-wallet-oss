@@ -1467,6 +1467,11 @@ const ROUTES = [
         path: '/teamQuery/teamQueryInfo',
         component: asyncComponent(() => import('container/teamQuery/teamQuery'))
     },
+    // 接入查询
+    {
+        path: '/accessQuery/accessQueryInfo',
+        component: asyncComponent(() => import('container/teamQuery/accessQuery'))
+    },
     // 定时器
     {
         path: '/timerManager/timerMonitor',

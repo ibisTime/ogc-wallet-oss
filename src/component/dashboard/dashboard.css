@@ -53,3 +53,21 @@
   margin: 0px;
   min-height: 280px;
 }
+
+.out-in{
+  position: fixed;
+  top: 40%;
+  left: 200px;
+  height: 100px;
+  line-height: 100px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  width: 16px;
+  background: #e8e8e8;
+  z-index: 1000;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+}

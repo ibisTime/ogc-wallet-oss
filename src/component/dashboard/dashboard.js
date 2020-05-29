@@ -33,7 +33,8 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editPwdVisible: false
+      editPwdVisible: false,
+      collapsed: false
     };
   }
   async componentDidMount() {
@@ -297,7 +298,20 @@ class Dashboard extends React.Component {
       MsgTime: webim.Tool.formatTimeStamp(msgTime)
     });
   }
-
+  toggleCollapsed = () => {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+    if(!this.state.collapsed) {
+      document.getElementsByClassName('dashboard-layout')[0].style.marginLeft = '0px';
+      document.getElementsByClassName('right-layout')[0].style.marginLeft = '0px';
+      document.getElementById('outIn').style.left = '0px';
+    }else {
+      document.getElementsByClassName('dashboard-layout')[0].style.marginLeft = '100px';
+      document.getElementsByClassName('right-layout')[0].style.marginLeft = '100px';
+      document.getElementById('outIn').style.left = '200px';
+    }
+  };
   getUserSign() {
     let userId = getUserId();
     fetch(805087, { userId: userId }).then((data) => {
@@ -319,6 +333,9 @@ class Dashboard extends React.Component {
       <Layout className="dashboard-layout" style={{minHeight: '100%'}}>
         {this.getHeader()}
         <Layout>
+          <div style={this.props.subMenuList.length > 0 ? {} : {display: 'none'}} onClick={this.toggleCollapsed} className="out-in" id="outIn">
+            {this.state.collapsed ? '>' : '<'}
+          </div>
           <Sider
             trigger={null}
             className={`left-slider ${innerCls}`}

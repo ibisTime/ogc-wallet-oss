@@ -190,6 +190,30 @@ class Customer extends React.Component {
             },
             required: true
         }, {
+            field: 'activeCode',
+            title: '激活码'
+        }, {
+            field: 'userActive',
+            title: '激活人',
+            type: 'select',
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{email.DATA}}-{{mobile.DATA}}',
+            searchName: 'keyword',
+            search: true,
+            render: (v, data) => {
+                if (data.activeUser) {
+                    let tmpl = data.activeUser.mobile ? data.activeUser.mobile : data.activeUser.email;
+                    if (data.activeUser.kind === 'Q') {
+                        let name = data.activeUser.realName ? data.activeUser.realName : data.activeUser.nickname;
+                        return name + '(' + tmpl + ')';
+                    }
+                    return (data.activeUser.nickname ? data.activeUser.nickname : '暂无数据') + '(' + tmpl + ')';
+                }
+                return '';
+            },
+            required: true
+        }, {
                 field: 'status',
                 title: '状态',
                 type: 'select',

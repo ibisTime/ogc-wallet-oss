@@ -38,7 +38,7 @@ function fetch(value, callback) {
     timeout = setTimeout(fake, 300);
 }
 
-class teamQuery extends React.Component {
+class accessQuery extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,7 +71,7 @@ class teamQuery extends React.Component {
             });
             if(!treeKey) {
                 if(value) {
-                    groupUserInfo(value, '0').then(data => {
+                    groupUserInfo(value, '1').then(data => {
                         this.setState({
                             teamUserInfo: data
                         });
@@ -81,7 +81,7 @@ class teamQuery extends React.Component {
                     });
                     const key = value;
                     const hasMsg = message.loading('');
-                    teamQueryList(key, '0').then(data => {
+                    teamQueryList(key, '1').then(data => {
                         if(JSON.stringify(data) !== '{}') {
                             const treeDataProps = data.map((item, index) => {
                                 let obj = {
@@ -109,7 +109,7 @@ class teamQuery extends React.Component {
                 const key = treeKey;
                 const {treeDataProps} = this.state;
                 const hasMsg = message.loading('');
-                teamQueryList(key, '0').then(data => {
+                teamQueryList(key, '1').then(data => {
                     const treeData = Array.isArray(data) && data.map((item, index) => {
                         let obj = {
                             title: `${item.loginName},下级${item.refereeCount ? item.refereeCount : 0}人`,
@@ -206,4 +206,4 @@ class teamQuery extends React.Component {
     }
 }
 
-export default teamQuery;
+export default accessQuery;

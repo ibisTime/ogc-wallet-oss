@@ -33,8 +33,8 @@ export function historyStatistics() {
 }
 
 // 团队查询
-export function teamQueryList(userId) {
-    return fetch(610608, {userId});
+export function teamQueryList(userId, type) {
+    return fetch(610608, {userId, type});
 }
 
 // 行为分布
@@ -68,8 +68,8 @@ export function findUserList(start, limit, loginName) {
 }
 
 // 团队本人查询
-export function groupUserInfo(userId) {
-    return fetch(610609, {userId, start: 1, limit: 1000});
+export function groupUserInfo(userId, type) {
+    return fetch(610609, {userId, type});
 }
 
 // 产品收益统计
