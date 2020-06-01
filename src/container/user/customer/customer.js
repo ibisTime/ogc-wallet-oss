@@ -53,7 +53,9 @@ class Customer extends React.Component {
         symbolData: [],
         levelVisible: false,
         seleUserId: '',
-        levelList: []
+        levelList: [],
+        activationVisible: false,
+        initialValue: ''
     };
     isHandleOk = true;
     componentDidMount() {
@@ -129,6 +131,49 @@ class Customer extends React.Component {
         this.setState({
             levelVisible: false
         });
+    };
+    handleActivationVisibleOk = () => {
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const hasMsg = message.loading('');
+                const { activationCode } = values;
+                fetch('805078', {
+                    activeCode: activationCode,
+                    userId: this.state.seleUserId
+                }).then(() => {
+                    hasMsg();
+                    message.success('操作成功', 1.5);
+                    this.props.getPageData();
+                    this.props.form.resetFields();
+                    this.setState({
+                        activationVisible: false
+                    });
+                    this.props.form.setFields({'activationCode': ''});
+                });
+            }else {
+                const hasMsg = message.loading('');
+                const { activationCode } = values;
+                fetch('805078', {
+                    activeCode: activationCode,
+                    userId: this.state.seleUserId
+                }).then(() => {
+                    hasMsg();
+                    message.success('操作成功', 1.5);
+                    this.props.getPageData();
+                    this.props.form.resetFields();
+                    this.setState({
+                        activationVisible: false
+                    });
+                    this.props.form.setFields({'activationCode': ''});
+                });
+            }
+        });
+    }
+    handleActivationVisibleCancel = () => {
+        this.setState({
+            activationVisible: false
+        });
+        this.props.form.setFields({'activationCode': ''});
     };
     render() {
         const fields = [{
@@ -213,6 +258,21 @@ class Customer extends React.Component {
                 return '';
             },
             required: true
+        }, {
+            field: 'activeFlag',
+            title: '是否激活',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '是'
+            }, {
+                key: '0',
+                value: '否'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true,
+            noVisible: true
         }, {
                 field: 'status',
                 title: '状态',
@@ -416,6 +476,19 @@ class Customer extends React.Component {
                           },
                           import: () => {
                               this.props.history.push('/user/customer/importUser');
+                          },
+                          // 激活
+                          activation: (selectedRowKeys, selectedRows) => {
+                              if (!selectedRowKeys.length) {
+                                  showWarnMsg('请选择记录');
+                              } else if (selectedRowKeys.length > 1) {
+                                  showWarnMsg('请选择一条记录');
+                              } else {
+                                  this.setState({
+                                      activationVisible: true,
+                                      seleUserId: selectedRowKeys[0]
+                                  });
+                              }
                           }
                       },
                       beforeSearch: (params) => {
@@ -522,6 +595,21 @@ class Customer extends React.Component {
                                   ))
                               }
                           </Select>)}
+                      </Form.Item>
+                  </Form>
+              </Modal>
+              <Modal
+                  width={600}
+                  title="激活"
+                  visible={this.state.activationVisible}
+                  onOk={this.handleActivationVisibleOk}
+                  onCancel={this.handleActivationVisibleCancel}
+                  okText="确定"
+                  cancelText="取消"
+              >
+                  <Form {...formItemLayout} onSubmit={this.handleActivationVisibleOk}>
+                      <Form.Item label="激活码">
+                          {getFieldDecorator('activationCode', {initialValue: this.state.initialValue})(<Input placeholder="请输入激活码" type="text"/>)}
                       </Form.Item>
                   </Form>
               </Modal>
