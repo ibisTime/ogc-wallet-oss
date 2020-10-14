@@ -19,7 +19,6 @@ class PurchaseAddedit extends DetailUtil {
         this.view = !!getQueryString('v', this.props.location.search);
         this.totalAmount = 0;
         this.singleAmount = 0;
-        this.spotTradeFlag = '';
         this.symbolList = [];
         this.state = {
             ...this.state,
@@ -27,7 +26,7 @@ class PurchaseAddedit extends DetailUtil {
         };
     }
     getSymbolList = (callbackFn) => {
-        fetch(802013, {spotTradeFlag: this.spotTradeFlag}).then(data => {
+        fetch(802013).then(data => {
             this.symbolList = data;
             callbackFn && callbackFn('symbol', data);
         });
@@ -51,20 +50,11 @@ class PurchaseAddedit extends DetailUtil {
             title: '申购类型',
             type: 'select',
             key: 'purchase_product_type',
-            required: true,
-            onChange: (v, l, updateSelectData, setFieldsValue) => {
-                if(v) {
-                    this.spotTradeFlag = v === '0' ? '1' : '2';
-                    this.getSymbolList(updateSelectData);
-                    setFieldsValue && setFieldsValue({
-                        symbol: ''
-                    });
-                }
-            }
+            required: true
         }, {
             field: 'symbol',
             title: '币种名称',
-            data: this.symbolList,
+            listCode: '802013',
             type: 'select',
             keyName: 'symbol',
             valueName: 'symbol',
