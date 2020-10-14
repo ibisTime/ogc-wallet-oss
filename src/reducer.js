@@ -411,6 +411,11 @@ import {bizQuotationCoin} from './redux/biz/news-quotation/coin';
 // 划转规则
 import {rulesOfTransfer} from './redux/managent/rulesOfTransfer/rulesOfTransfer';
 
+// 申购管理
+import {purchasePurchase} from './redux/business/purchase/purchase';
+import {purchasePurchaseRecord} from './redux/business/purchase/purchaseRecord';
+import {purchaseRecordTwo} from './redux/business/purchase/purchaseRecordTwo';
+
 export default combineReducers({
     user,
     menu,
@@ -740,5 +745,8 @@ export default combineReducers({
     bizQuotationCoin,
     // 友情链接
     bizLinkManagement,
-    rulesOfTransfer
+    rulesOfTransfer,
+    purchasePurchase,
+    purchasePurchaseRecord,
+    purchaseRecordTwo
 });

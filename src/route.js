@@ -1853,6 +1853,24 @@ const ROUTES = [
     {
         path: '/card/configuration/addedit',
         component: asyncComponent(() => import('container/card/cardConfiguration/cardConfiguration-addedit'))
+    },
+    // 申购管理
+    {
+        path: '/purchase/purchase',
+        component: asyncComponent(() => import('container/business/purchase/purchase/purchase'))
+    },
+    {
+        path: '/purchase/purchase/addedit',
+        component: asyncComponent(() => import('container/business/purchase/purchase/purchase-addedit'))
+    },
+    // 申购记录
+    {
+        path: '/purchase/purchaseRecord',
+        component: asyncComponent(() => import('container/business/purchase/purchaseRecord/purchaseRecord'))
+    },
+    {
+        path: '/purchase/purchaseRecordTwo',
+        component: asyncComponent(() => import('container/business/purchase/purchaseRecord/purchaseRecordTwo'))
     }
 ];
 
